@@ -1,76 +1,81 @@
 import 'package:decimal/decimal.dart';
+import 'package:matex_financial/financial.dart';
+import 'package:matex_core/core.dart';
 
-/// Adds VAT to a price.
-///
-/// This function takes a [price] that does not include VAT and a [vatRate]
-/// representing the VAT rate as a percentage. It returns the price with
-/// the VAT added.
-///
-/// The calculation is performed using the `decimal` package to avoid
-/// rounding errors when working with decimal numbers.
-///
-/// Example:
-///
-/// ```dart
-/// final priceWithVAT = addVAT(100, 20);
-/// print(priceWithVAT); // 120.0
-/// ```
-double addVAT(double price, double vatRate) {
-  final decimalPrice = Decimal.parse(price.toString());
-  final decimalVatRate = Decimal.parse(vatRate.toString());
-  final rationalVatRatePercent = decimalVatRate / Decimal.fromInt(100);
-  final decimalVatRatePercent =
-      rationalVatRatePercent.toDecimal(scaleOnInfinitePrecision: 32);
-  final result = decimalPrice * (Decimal.one + decimalVatRatePercent);
+class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
+    MatexVatCalculatorResults> {
+  MatexVatCalculator({required super.defaultState, required super.state});
 
-  return result.toDouble();
-}
+  set priceBeforeVat(double? value) {
+    updateState(state.copyWith(priceBeforeVat: value));
+  }
 
-/// Removes the VAT from a price.
-///
-/// This function takes a [priceWithVAT] that includes VAT and a [vatRate]
-/// representing the VAT rate as a percentage. It returns the price before
-/// VAT was added.
-///
-/// The calculation is performed using the `decimal` package to avoid
-/// rounding errors when working with decimal numbers.
-///
-/// Example:
-///
-/// ```dart
-/// final priceBeforeVAT = removeVAT(120, 20);
-/// print(priceBeforeVAT); // 100.0
-/// ```
-double removeVAT(double priceWithVAT, double vatRate) {
-  final decimalPriceWithVAT = Decimal.parse(priceWithVAT.toString());
-  final decimalVatRate = Decimal.parse(vatRate.toString());
-  final result = decimalPriceWithVAT /
-      (Decimal.one +
-          (decimalVatRate / Decimal.fromInt(100))
-              .toDecimal(scaleOnInfinitePrecision: 32));
+  set federalVatRate(double? value) {
+    updateState(state.copyWith(federalVatRate: value));
+  }
 
-  return result.toDouble();
-}
+  set regionalVatRate(double? value) {
+    updateState(state.copyWith(regionalVatRate: value));
+  }
 
-/// Calculates the amount of VAT between two prices.
-///
-/// This function takes a [priceWithVAT] that includes VAT and
-/// a [priceWithoutVAT] that does not include VAT.
-/// It returns the amount of VAT between the two prices.
-///
-/// The calculation is performed using the `decimal` package to avoid
-/// rounding errors when working with decimal numbers.
-///
-/// Example:
-///
-/// ```dart
-/// final vatAmount = getVATAmount(120, 100);
-/// print(vatAmount); // 20.0
-/// ```
-double getVATAmount(double priceWithVAT, double priceWithoutVAT) {
-  final decimalPriceWithVAT = Decimal.parse(priceWithVAT.toString());
-  final decimalPriceWithoutVAT = Decimal.parse(priceWithoutVAT.toString());
-  final result = decimalPriceWithVAT - decimalPriceWithoutVAT;
+  set vatRate(double? value) {
+    updateState(state.copyWith(vatRate: value));
+  }
 
-  return result.toDouble();
+  set discountAmount(double? value) {
+    updateState(state.copyWith(discountAmount: value));
+  }
+
+  set discountPercentage(double? value) {
+    updateState(state.copyWith(discountPercentage: value));
+  }
+
+  set tipRate(double? value) {
+    updateState(state.copyWith(tipRate: value));
+  }
+
+  @override
+  MatexVatCalculatorResults value() {
+    const d = Decimal.parse;
+    final price = d((state.priceBeforeVat ?? 0.0).toString());
+    final federalVatRate = d((state.federalVatRate ?? 0.0).toString());
+    final regionalVatRate = d((state.regionalVatRate ?? 0.0).toString());
+    final vatRate = d((state.vatRate ?? 0.0).toString());
+    final customVatRate = d((state.customVatRate ?? 0.0).toString());
+    final discountAmount = d((state.discountAmount ?? 0.0).toString());
+    final discountPercentage = d((state.discountPercentage ?? 0.0).toString());
+    final tipPercentage = d((state.tipRate ?? 0.0).toString());
+    final discountedPrice = applyDiscount(price.toDouble(),
+        discountAmount.toDouble(), discountPercentage.toDouble());
+    final totalVatRate =
+        federalVatRate + regionalVatRate + vatRate + customVatRate;
+    final vatAmount = getVATAmount(discountedPrice, totalVatRate.toDouble());
+    final totalPrice = discountedPrice + vatAmount;
+    final tipAmount = getTipAmount(discountedPrice, tipPercentage.toDouble());
+    final grandTotal = totalPrice + tipAmount;
+
+    return MatexVatCalculatorResults(
+      totalTaxes: vatAmount.toDouble(),
+      total: totalPrice.toDouble(),
+      tipAmount: tipAmount.toDouble(),
+      grandTotal: grandTotal.toDouble(),
+      subTotal: discountedPrice.toDouble(),
+      federalVatAmount: getVATAmount(
+        discountedPrice,
+        federalVatRate.toDouble(),
+      ),
+      regionalVatAmount: getVATAmount(
+        discountedPrice,
+        regionalVatRate.toDouble(),
+      ),
+      vatAmount: getVATAmount(
+        discountedPrice,
+        vatRate.toDouble(),
+      ),
+      customVatAmount: getVATAmount(
+        discountedPrice,
+        customVatRate.toDouble(),
+      ),
+    );
+  }
 }
