@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:financial/financial.dart';
+import 'package:matex_financial/financial.dart';
 
 void main() {
   test('calculateTip calculates tip on price before VAT', () {

@@ -1,3 +1,3 @@
 # matex_financial
 
-Set of helpers, calculators for the financial industry.
+An assortment of helpful tools and calculators specifically designed for use within the financial sector.

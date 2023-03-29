@@ -54,8 +54,9 @@ double removeVAT(double priceWithVAT, double vatRate) {
 
 /// Calculates the amount of VAT between two prices.
 ///
-/// This function takes a [priceWithVAT] that includes VAT and a [priceWithoutVAT]
-/// that does not include VAT. It returns the amount of VAT between the two prices.
+/// This function takes a [priceWithVAT] that includes VAT and
+/// a [priceWithoutVAT] that does not include VAT.
+/// It returns the amount of VAT between the two prices.
 ///
 /// The calculation is performed using the `decimal` package to avoid
 /// rounding errors when working with decimal numbers.
