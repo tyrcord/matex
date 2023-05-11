@@ -4,34 +4,47 @@ import 'package:matex_core/core.dart';
 
 class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     MatexVatCalculatorResults> {
-  MatexVatCalculator({required super.defaultState, required super.state});
+  MatexVatCalculator({
+    super.defaultState,
+    super.state,
+  });
+
+  @override
+  MatexVatCalculatorState initializeState() => const MatexVatCalculatorState();
+
+  @override
+  MatexVatCalculatorState initializeDefaultState() => initializeState();
 
   set priceBeforeVat(double? value) {
-    updateState(state.copyWith(priceBeforeVat: value));
+    setState(state.copyWith(priceBeforeVat: value));
   }
 
   set federalVatRate(double? value) {
-    updateState(state.copyWith(federalVatRate: value));
+    setState(state.copyWith(federalVatRate: value));
   }
 
   set regionalVatRate(double? value) {
-    updateState(state.copyWith(regionalVatRate: value));
+    setState(state.copyWith(regionalVatRate: value));
   }
 
   set vatRate(double? value) {
-    updateState(state.copyWith(vatRate: value));
+    setState(state.copyWith(vatRate: value));
   }
 
   set discountAmount(double? value) {
-    updateState(state.copyWith(discountAmount: value));
+    setState(state.copyWith(discountAmount: value));
   }
 
   set discountPercentage(double? value) {
-    updateState(state.copyWith(discountPercentage: value));
+    setState(state.copyWith(discountPercentage: value));
   }
 
   set tipRate(double? value) {
-    updateState(state.copyWith(tipRate: value));
+    setState(state.copyWith(tipRate: value));
+  }
+
+  set customVatRate(double? value) {
+    setState(state.copyWith(customVatRate: value));
   }
 
   @override

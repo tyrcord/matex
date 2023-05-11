@@ -1,24 +1,24 @@
 import 'package:matex_core/core.dart';
 
 class MatexVatCalculatorState extends MatexCalculatorState {
+  final double? discountPercentage;
   final double? regionalVatRate;
+  final double? federalVatRate;
   final double? discountAmount;
   final double? priceBeforeVat;
-  final double? federalVatRate;
-  final double? discountPercentage;
+  final double? customVatRate;
   final double? tipRate;
   final double? vatRate;
-  final double? customVatRate;
 
   const MatexVatCalculatorState({
-    this.priceBeforeVat,
-    this.federalVatRate,
-    this.regionalVatRate,
-    this.vatRate,
-    this.customVatRate,
-    this.discountAmount,
     this.discountPercentage,
+    this.regionalVatRate,
+    this.federalVatRate,
+    this.priceBeforeVat,
+    this.discountAmount,
+    this.customVatRate,
     this.tipRate,
+    this.vatRate,
   });
 
   @override

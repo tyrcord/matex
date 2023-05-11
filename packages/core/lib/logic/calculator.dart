@@ -3,9 +3,9 @@ import 'package:matex_core/core.dart';
 
 abstract class MatexCalculator<S extends MatexCalculatorState, R> {
   @protected
-  S state;
+  late S state;
   @protected
-  S defaultState;
+  late S defaultState;
   @protected
   R? result;
   @protected
@@ -19,15 +19,30 @@ abstract class MatexCalculator<S extends MatexCalculatorState, R> {
   bool get isDirty => state != defaultState;
 
   MatexCalculator({
-    required this.defaultState,
-    required this.state,
+    S? state,
+    S? defaultState,
     this.validators,
-  });
+  }) {
+    if (state != null) {
+      this.state = state;
+    } else {
+      this.state = initializeState();
+    }
+
+    if (defaultState != null) {
+      this.defaultState = defaultState;
+    } else {
+      this.defaultState = initializeDefaultState();
+    }
+  }
+
+  S initializeDefaultState() => throw UnimplementedError();
+
+  S initializeState() => throw UnimplementedError();
 
   R value();
 
-  @protected
-  void updateState(S newState) {
+  void setState(S newState) {
     state = newState;
     checkValidity();
   }
