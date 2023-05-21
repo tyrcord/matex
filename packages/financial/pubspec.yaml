@@ -4,8 +4,8 @@ version: 0.0.2
 repository: https://github.com/tyrcord/matex/tree/main/packages/financial
 
 environment:
-  sdk: '>=2.19.4 <3.0.0'
-  flutter: ">=1.17.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
 
 dependencies:
   flutter:
@@ -13,10 +13,10 @@ dependencies:
   decimal: ^2.3.2
   tmodel_dart: ">=0.5.0 <1.0.0"
   matex_core: ">=0.0.2 <1.0.0"
-  fastyle_calculator: ">=1.0.0 <2.0.0"
+  fastyle_calculator: ">=1.7.1 <2.0.0"
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  dart_code_metrics: ^5.5.1
+  flutter_lints: ^2.0.1
+  dart_code_metrics: ^5.7.4
