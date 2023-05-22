@@ -47,8 +47,11 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     setState(state.copyWith(customVatRate: value));
   }
 
+  //TODO: add tip amount
+
   @override
   MatexVatCalculatorResults value() {
+    //TODO: add tip amount
     const d = Decimal.parse;
     final price = d((state.priceBeforeVat ?? 0.0).toString());
     final federalVatRate = d((state.federalVatRate ?? 0.0).toString());
@@ -66,6 +69,8 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     final totalPrice = discountedPrice + vatAmount;
     final tipAmount = getTipAmount(discountedPrice, tipPercentage.toDouble());
     final grandTotal = totalPrice + tipAmount;
+
+    // TODO: remove zero values
 
     return MatexVatCalculatorResults(
       totalTaxes: vatAmount.toDouble(),

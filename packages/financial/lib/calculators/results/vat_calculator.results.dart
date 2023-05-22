@@ -1,5 +1,6 @@
 import 'package:tmodel_dart/tmodel_dart.dart';
 
+// TODO: add total discount amount and rate
 class MatexVatCalculatorResults extends TModel {
   final double? totalTaxes;
   final double? total;
@@ -10,6 +11,7 @@ class MatexVatCalculatorResults extends TModel {
   final double? regionalVatAmount;
   final double? vatAmount;
   final double? customVatAmount;
+  final double? tipRate;
 
   const MatexVatCalculatorResults({
     this.totalTaxes,
@@ -21,6 +23,7 @@ class MatexVatCalculatorResults extends TModel {
     this.regionalVatAmount,
     this.vatAmount,
     this.customVatAmount,
+    this.tipRate,
   });
 
   @override
@@ -35,6 +38,7 @@ class MatexVatCalculatorResults extends TModel {
       regionalVatAmount: regionalVatAmount,
       vatAmount: vatAmount,
       customVatAmount: customVatAmount,
+      tipRate: tipRate,
     );
   }
 
@@ -49,6 +53,7 @@ class MatexVatCalculatorResults extends TModel {
     double? regionalVatAmount,
     double? vatAmount,
     double? customVatAmount,
+    double? tipRate,
   }) {
     return MatexVatCalculatorResults(
       totalTaxes: totalTaxes ?? this.totalTaxes,
@@ -60,6 +65,7 @@ class MatexVatCalculatorResults extends TModel {
       regionalVatAmount: regionalVatAmount ?? this.regionalVatAmount,
       vatAmount: vatAmount ?? this.vatAmount,
       customVatAmount: customVatAmount ?? this.customVatAmount,
+      tipRate: tipRate ?? this.tipRate,
     );
   }
 
@@ -75,6 +81,7 @@ class MatexVatCalculatorResults extends TModel {
       regionalVatAmount: model.regionalVatAmount,
       vatAmount: model.vatAmount,
       customVatAmount: model.customVatAmount,
+      tipRate: model.tipRate,
     );
   }
 
@@ -89,5 +96,6 @@ class MatexVatCalculatorResults extends TModel {
         regionalVatAmount,
         vatAmount,
         customVatAmount,
+        tipRate,
       ];
 }

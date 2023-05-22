@@ -6,12 +6,16 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
   final String? total;
   final String? tipAmount;
   final String? grandTotal;
+  final String? tipRate;
+  final String? subTotal;
 
   const MatexVatCalculatorBlocResults({
     this.totalTaxes,
     this.total,
     this.tipAmount,
     this.grandTotal,
+    this.tipRate,
+    this.subTotal,
   });
 
   factory MatexVatCalculatorBlocResults.fromCalculatorResults(
@@ -22,6 +26,8 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       total: results.total?.toString(),
       tipAmount: results.tipAmount?.toString(),
       grandTotal: results.grandTotal?.toString(),
+      tipRate: results.tipRate?.toString(),
+      subTotal: results.subTotal?.toString(),
     );
   }
 
@@ -32,6 +38,8 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       total: total,
       tipAmount: tipAmount,
       grandTotal: grandTotal,
+      tipRate: tipRate,
+      subTotal: subTotal,
     );
   }
 
@@ -41,12 +49,16 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     String? total,
     String? tipAmount,
     String? grandTotal,
+    String? tipRate,
+    String? subTotal,
   }) {
     return MatexVatCalculatorBlocResults(
       totalTaxes: totalTaxes ?? this.totalTaxes,
       total: total ?? this.total,
       tipAmount: tipAmount ?? this.tipAmount,
       grandTotal: grandTotal ?? this.grandTotal,
+      tipRate: tipRate ?? this.tipRate,
+      subTotal: subTotal ?? this.subTotal,
     );
   }
 
@@ -58,6 +70,8 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       total: model.total,
       tipAmount: model.tipAmount,
       grandTotal: model.grandTotal,
+      tipRate: model.tipRate,
+      subTotal: model.subTotal,
     );
   }
 
@@ -67,5 +81,7 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
         total,
         tipAmount,
         grandTotal,
+        tipRate,
+        subTotal,
       ];
 }

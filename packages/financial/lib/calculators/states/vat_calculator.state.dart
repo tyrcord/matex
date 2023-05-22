@@ -1,5 +1,7 @@
 import 'package:matex_core/core.dart';
 
+//TODO: add tip amount
+
 class MatexVatCalculatorState extends MatexCalculatorState {
   final double? discountPercentage;
   final double? regionalVatRate;

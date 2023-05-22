@@ -48,6 +48,14 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       return document.copyWith(discountPercentage: value?.toString());
     } else if (key == 'tipRate') {
       return document.copyWith(tipRate: value?.toString());
+    } else if (key == 'discountRate') {
+      return document.copyWith(discountRate: value?.toString());
+    } else if (key == 'tipAmount') {
+      return document.copyWith(tipAmount: value?.toString());
+    } else if (key == 'tipFieldType') {
+      return document.copyWith(tipFieldType: value?.toString());
+    } else if (key == 'discountFieldType') {
+      return document.copyWith(discountFieldType: value?.toString());
     }
 
     return document;
@@ -76,6 +84,8 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       } else if (key == 'tipRate') {
         return patchTipRate(value);
       }
+
+      // todo: tip amount
     }
 
     return currentState;

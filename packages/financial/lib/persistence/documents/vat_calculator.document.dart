@@ -11,6 +11,10 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
   final String? customVatRate;
   final String? tipRate;
   final String? vatRate;
+  final String? discountRate;
+  final String? tipAmount;
+  final String? tipFieldType;
+  final String? discountFieldType;
 
   static MatexVatCalculatorBlocDocument fromJson(
     Map<String, dynamic> json,
@@ -24,6 +28,10 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
       customVatRate: json['customVatRate'] as String?,
       tipRate: json['tipRate'] as String?,
       vatRate: json['vatRate'] as String?,
+      discountRate: json['discountRate'] as String?,
+      tipAmount: json['tipAmount'] as String?,
+      tipFieldType: json['tipFieldType'] as String?,
+      discountFieldType: json['discountFieldType'] as String?,
     );
   }
 
@@ -36,6 +44,10 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
     this.customVatRate,
     this.tipRate,
     this.vatRate,
+    this.discountRate,
+    this.tipAmount,
+    this.tipFieldType,
+    this.discountFieldType,
   });
 
   @override
@@ -48,6 +60,10 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
       customVatRate: customVatRate,
       tipRate: tipRate,
       vatRate: vatRate,
+      discountRate: discountRate,
+      tipAmount: tipAmount,
+      tipFieldType: tipFieldType,
+      discountFieldType: discountFieldType,
     );
   }
 
@@ -61,6 +77,10 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
     String? customVatRate,
     String? tipRate,
     String? vatRate,
+    String? discountRate,
+    String? tipAmount,
+    String? tipFieldType,
+    String? discountFieldType,
   }) {
     return MatexVatCalculatorBlocDocument(
       discountPercentage: discountPercentage ?? this.discountPercentage,
@@ -71,6 +91,10 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
       customVatRate: customVatRate ?? this.customVatRate,
       tipRate: tipRate ?? this.tipRate,
       vatRate: vatRate ?? this.vatRate,
+      discountRate: discountRate ?? this.discountRate,
+      tipAmount: tipAmount ?? this.tipAmount,
+      tipFieldType: tipFieldType ?? this.tipFieldType,
+      discountFieldType: discountFieldType ?? this.discountFieldType,
     );
   }
 
@@ -87,6 +111,10 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
       customVatRate: model.customVatRate,
       tipRate: model.tipRate,
       vatRate: model.vatRate,
+      discountRate: model.discountRate,
+      tipAmount: model.tipAmount,
+      tipFieldType: model.tipFieldType,
+      discountFieldType: model.discountFieldType,
     );
   }
 
@@ -111,6 +139,10 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
       customVatRate: customVatRate,
       vatRate: vatPercentage,
       tipRate: tipRate,
+      discountRate: discountRate,
+      tipAmount: tipAmount,
+      tipFieldType: tipFieldType,
+      discountFieldType: discountFieldType,
     );
   }
 
@@ -125,6 +157,10 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
       'customVatRate': customVatRate,
       'tipRate': tipRate,
       'vatRate': vatRate,
+      'discountRate': discountRate,
+      'tipAmount': tipAmount,
+      'tipFieldType': tipFieldType,
+      'discountFieldType': discountFieldType,
     };
   }
 
@@ -138,5 +174,9 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
         customVatRate,
         tipRate,
         vatRate,
+        discountRate,
+        tipAmount,
+        tipFieldType,
+        discountFieldType,
       ];
 }
