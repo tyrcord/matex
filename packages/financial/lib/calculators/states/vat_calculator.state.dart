@@ -3,7 +3,7 @@ import 'package:matex_core/core.dart';
 //TODO: add tip amount
 
 class MatexVatCalculatorState extends MatexCalculatorState {
-  final double? discountPercentage;
+  final double? discountRate;
   final double? regionalVatRate;
   final double? federalVatRate;
   final double? discountAmount;
@@ -13,7 +13,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
   final double? vatRate;
 
   const MatexVatCalculatorState({
-    this.discountPercentage,
+    this.discountRate,
     this.regionalVatRate,
     this.federalVatRate,
     this.priceBeforeVat,
@@ -24,18 +24,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
   });
 
   @override
-  MatexVatCalculatorState clone() {
-    return MatexVatCalculatorState(
-      priceBeforeVat: priceBeforeVat,
-      federalVatRate: federalVatRate,
-      regionalVatRate: regionalVatRate,
-      vatRate: vatRate,
-      customVatRate: customVatRate,
-      discountAmount: discountAmount,
-      discountPercentage: discountPercentage,
-      tipRate: tipRate,
-    );
-  }
+  MatexVatCalculatorState clone() => copyWith();
 
   @override
   MatexVatCalculatorState copyWith({
@@ -45,7 +34,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
     double? vatRate,
     double? customVatRate,
     double? discountAmount,
-    double? discountPercentage,
+    double? discountRate,
     double? tipRate,
   }) {
     return MatexVatCalculatorState(
@@ -55,7 +44,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
       vatRate: vatRate ?? this.vatRate,
       customVatRate: customVatRate ?? this.customVatRate,
       discountAmount: discountAmount ?? this.discountAmount,
-      discountPercentage: discountPercentage ?? this.discountPercentage,
+      discountRate: discountRate ?? this.discountRate,
       tipRate: tipRate ?? this.tipRate,
     );
   }
@@ -69,7 +58,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
       vatRate: model.vatRate,
       customVatRate: model.customVatRate,
       discountAmount: model.discountAmount,
-      discountPercentage: model.discountPercentage,
+      discountRate: model.discountRate,
       tipRate: model.tipRate,
     );
   }
@@ -82,7 +71,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
         vatRate,
         customVatRate,
         discountAmount,
-        discountPercentage,
+        discountRate,
         tipRate,
       ];
 }

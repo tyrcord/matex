@@ -1,6 +1,5 @@
 import 'package:tmodel_dart/tmodel_dart.dart';
 
-// TODO: add total discount amount and rate
 class MatexVatCalculatorResults extends TModel {
   final double? totalTaxes;
   final double? total;
@@ -12,6 +11,8 @@ class MatexVatCalculatorResults extends TModel {
   final double? vatAmount;
   final double? customVatAmount;
   final double? tipRate;
+  final String? discountAmount;
+  final String? discountRate;
 
   const MatexVatCalculatorResults({
     this.totalTaxes,
@@ -24,23 +25,12 @@ class MatexVatCalculatorResults extends TModel {
     this.vatAmount,
     this.customVatAmount,
     this.tipRate,
+    this.discountAmount,
+    this.discountRate,
   });
 
   @override
-  MatexVatCalculatorResults clone() {
-    return MatexVatCalculatorResults(
-      totalTaxes: totalTaxes,
-      total: total,
-      tipAmount: tipAmount,
-      grandTotal: grandTotal,
-      subTotal: subTotal,
-      federalVatAmount: federalVatAmount,
-      regionalVatAmount: regionalVatAmount,
-      vatAmount: vatAmount,
-      customVatAmount: customVatAmount,
-      tipRate: tipRate,
-    );
-  }
+  MatexVatCalculatorResults clone() => copyWith();
 
   @override
   MatexVatCalculatorResults copyWith({
@@ -54,6 +44,8 @@ class MatexVatCalculatorResults extends TModel {
     double? vatAmount,
     double? customVatAmount,
     double? tipRate,
+    String? discountAmount,
+    String? discountRate,
   }) {
     return MatexVatCalculatorResults(
       totalTaxes: totalTaxes ?? this.totalTaxes,
@@ -66,6 +58,8 @@ class MatexVatCalculatorResults extends TModel {
       vatAmount: vatAmount ?? this.vatAmount,
       customVatAmount: customVatAmount ?? this.customVatAmount,
       tipRate: tipRate ?? this.tipRate,
+      discountAmount: discountAmount ?? this.discountAmount,
+      discountRate: discountRate ?? this.discountRate,
     );
   }
 
@@ -82,6 +76,8 @@ class MatexVatCalculatorResults extends TModel {
       vatAmount: model.vatAmount,
       customVatAmount: model.customVatAmount,
       tipRate: model.tipRate,
+      discountAmount: model.discountAmount,
+      discountRate: model.discountRate,
     );
   }
 
@@ -97,5 +93,7 @@ class MatexVatCalculatorResults extends TModel {
         vatAmount,
         customVatAmount,
         tipRate,
+        discountAmount,
+        discountRate,
       ];
 }

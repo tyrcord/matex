@@ -3,7 +3,6 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
-  final String? discountPercentage;
   final String? regionalVatRate;
   final String? federalVatRate;
   final String? discountAmount;
@@ -20,7 +19,6 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
     Map<String, dynamic> json,
   ) {
     return MatexVatCalculatorBlocDocument(
-      discountPercentage: json['discountPercentage'] as String?,
       regionalVatRate: json['regionalVatRate'] as String?,
       federalVatRate: json['federalVatRate'] as String?,
       discountAmount: json['discountAmount'] as String?,
@@ -36,7 +34,6 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
   }
 
   const MatexVatCalculatorBlocDocument({
-    this.discountPercentage,
     this.regionalVatRate,
     this.federalVatRate,
     this.discountAmount,
@@ -51,25 +48,10 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
   });
 
   @override
-  MatexVatCalculatorBlocDocument clone() {
-    return MatexVatCalculatorBlocDocument(
-      regionalVatRate: regionalVatRate,
-      federalVatRate: federalVatRate,
-      discountAmount: discountAmount,
-      priceBeforeVat: priceBeforeVat,
-      customVatRate: customVatRate,
-      tipRate: tipRate,
-      vatRate: vatRate,
-      discountRate: discountRate,
-      tipAmount: tipAmount,
-      tipFieldType: tipFieldType,
-      discountFieldType: discountFieldType,
-    );
-  }
+  MatexVatCalculatorBlocDocument clone() => copyWith();
 
   @override
   MatexVatCalculatorBlocDocument copyWith({
-    String? discountPercentage,
     String? regionalVatRate,
     String? federalVatRate,
     String? discountAmount,
@@ -83,7 +65,6 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
     String? discountFieldType,
   }) {
     return MatexVatCalculatorBlocDocument(
-      discountPercentage: discountPercentage ?? this.discountPercentage,
       federalVatRate: federalVatRate ?? this.federalVatRate,
       regionalVatRate: regionalVatRate ?? this.regionalVatRate,
       discountAmount: discountAmount ?? this.discountAmount,
@@ -103,7 +84,6 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
     covariant MatexVatCalculatorBlocDocument model,
   ) {
     return copyWith(
-      discountPercentage: model.discountPercentage,
       regionalVatRate: model.regionalVatRate,
       federalVatRate: model.federalVatRate,
       discountAmount: model.discountAmount,
@@ -131,7 +111,6 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
     }
 
     return MatexVatCalculatorBlocFields(
-      discountPercentage: discountPercentage,
       regionalVatRate: regionalVatRate,
       federalVatRate: federalVatRate,
       discountAmount: discountAmount,
@@ -149,7 +128,6 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
   @override
   Map<String, dynamic> toJson() {
     return {
-      'discountPercentage': discountPercentage,
       'regionalVatRate': regionalVatRate,
       'federalVatRate': federalVatRate,
       'discountAmount': discountAmount,
@@ -166,7 +144,6 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
 
   @override
   List<Object?> get props => [
-        discountPercentage,
         regionalVatRate,
         federalVatRate,
         discountAmount,

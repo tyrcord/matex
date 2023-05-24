@@ -1,7 +1,6 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexVatCalculatorBlocFields extends FastCalculatorFields {
-  final String? discountPercentage;
   final String? regionalVatRate;
   final String? federalVatRate;
   final String? discountAmount;
@@ -15,7 +14,6 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields {
   final String? discountFieldType;
 
   const MatexVatCalculatorBlocFields({
-    this.discountPercentage,
     this.regionalVatRate,
     this.federalVatRate,
     this.discountAmount,
@@ -30,26 +28,10 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields {
   });
 
   @override
-  MatexVatCalculatorBlocFields clone() {
-    return MatexVatCalculatorBlocFields(
-      discountPercentage: discountPercentage,
-      regionalVatRate: regionalVatRate,
-      federalVatRate: federalVatRate,
-      discountAmount: discountAmount,
-      priceBeforeVat: priceBeforeVat,
-      customVatRate: customVatRate,
-      tipRate: tipRate,
-      vatRate: vatRate,
-      discountRate: discountRate,
-      tipAmount: tipAmount,
-      tipFieldType: tipFieldType,
-      discountFieldType: discountFieldType,
-    );
-  }
+  MatexVatCalculatorBlocFields clone() => copyWith();
 
   @override
   MatexVatCalculatorBlocFields copyWith({
-    String? discountPercentage,
     String? regionalVatRate,
     String? federalVatRate,
     String? discountAmount,
@@ -63,7 +45,6 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields {
     String? discountFieldType,
   }) {
     return MatexVatCalculatorBlocFields(
-      discountPercentage: discountPercentage ?? this.discountPercentage,
       federalVatRate: federalVatRate ?? this.federalVatRate,
       regionalVatRate: regionalVatRate ?? this.regionalVatRate,
       discountAmount: discountAmount ?? this.discountAmount,
@@ -83,7 +64,6 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields {
     covariant MatexVatCalculatorBlocFields model,
   ) {
     return copyWith(
-      discountPercentage: model.discountPercentage,
       regionalVatRate: model.regionalVatRate,
       federalVatRate: model.federalVatRate,
       discountAmount: model.discountAmount,
@@ -100,7 +80,6 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields {
 
   @override
   List<Object?> get props => [
-        discountPercentage,
         regionalVatRate,
         federalVatRate,
         discountAmount,

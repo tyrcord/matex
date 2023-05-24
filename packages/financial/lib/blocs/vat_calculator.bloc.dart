@@ -1,4 +1,5 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:matex_core/core.dart';
 import 'package:decimal/decimal.dart';
@@ -44,18 +45,20 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       return document.copyWith(regionalVatRate: value?.toString());
     } else if (key == 'discountAmount') {
       return document.copyWith(discountAmount: value?.toString());
-    } else if (key == 'discountPercentage') {
-      return document.copyWith(discountPercentage: value?.toString());
     } else if (key == 'tipRate') {
       return document.copyWith(tipRate: value?.toString());
     } else if (key == 'discountRate') {
       return document.copyWith(discountRate: value?.toString());
     } else if (key == 'tipAmount') {
       return document.copyWith(tipAmount: value?.toString());
-    } else if (key == 'tipFieldType') {
-      return document.copyWith(tipFieldType: value?.toString());
-    } else if (key == 'discountFieldType') {
-      return document.copyWith(discountFieldType: value?.toString());
+    } else if (value is Enum) {
+      value = describeEnum(value);
+
+      if (key == 'tipFieldType') {
+        return document.copyWith(tipFieldType: value?.toString());
+      } else if (key == 'discountFieldType') {
+        return document.copyWith(discountFieldType: value?.toString());
+      }
     }
 
     return document;
@@ -79,13 +82,28 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
         return patchRegionalVatRate(value);
       } else if (key == 'discountAmount') {
         return patchDiscountAmount(value);
-      } else if (key == 'discountPercentage') {
-        return patchDiscountPercentage(value);
+      } else if (key == 'discountRate') {
+        return patchDiscountRate(value);
       } else if (key == 'tipRate') {
         return patchTipRate(value);
       }
-
       // todo: tip amount
+    } else if (value is Enum) {
+      value = describeEnum(value);
+
+      if (key == 'tipFieldType') {
+        final fields = currentState.fields.copyWith(
+          tipFieldType: value.toString(),
+        );
+
+        return currentState.copyWith(fields: fields);
+      } else if (key == 'discountFieldType') {
+        final fields = currentState.fields.copyWith(
+          discountFieldType: value.toString(),
+        );
+
+        return currentState.copyWith(fields: fields);
+      }
     }
 
     return currentState;
@@ -192,12 +210,12 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexVatCalculatorBlocState patchDiscountPercentage(String value) {
-    final fields = currentState.fields.copyWith(discountPercentage: value);
+  MatexVatCalculatorBlocState patchDiscountRate(String value) {
+    final fields = currentState.fields.copyWith(discountRate: value);
     final dValue = Decimal.tryParse(value);
 
     if (dValue != null) {
-      calculator.discountPercentage = dValue.toDouble();
+      calculator.discountRate = dValue.toDouble();
     }
 
     return currentState.copyWith(fields: fields);

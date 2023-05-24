@@ -35,8 +35,8 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     setState(state.copyWith(discountAmount: value));
   }
 
-  set discountPercentage(double? value) {
-    setState(state.copyWith(discountPercentage: value));
+  set discountRate(double? value) {
+    setState(state.copyWith(discountRate: value));
   }
 
   set tipRate(double? value) {
@@ -59,10 +59,10 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     final vatRate = d((state.vatRate ?? 0.0).toString());
     final customVatRate = d((state.customVatRate ?? 0.0).toString());
     final discountAmount = d((state.discountAmount ?? 0.0).toString());
-    final discountPercentage = d((state.discountPercentage ?? 0.0).toString());
+    final discountRate = d((state.discountRate ?? 0.0).toString());
     final tipPercentage = d((state.tipRate ?? 0.0).toString());
-    final discountedPrice = applyDiscount(price.toDouble(),
-        discountAmount.toDouble(), discountPercentage.toDouble());
+    final discountedPrice = applyDiscount(
+        price.toDouble(), discountAmount.toDouble(), discountRate.toDouble());
     final totalVatRate =
         federalVatRate + regionalVatRate + vatRate + customVatRate;
     final vatAmount = getVATAmount(discountedPrice, totalVatRate.toDouble());

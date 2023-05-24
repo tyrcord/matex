@@ -8,6 +8,8 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
   final String? grandTotal;
   final String? tipRate;
   final String? subTotal;
+  final String? discountAmount;
+  final String? discountRate;
 
   const MatexVatCalculatorBlocResults({
     this.totalTaxes,
@@ -16,6 +18,8 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     this.grandTotal,
     this.tipRate,
     this.subTotal,
+    this.discountAmount,
+    this.discountRate,
   });
 
   factory MatexVatCalculatorBlocResults.fromCalculatorResults(
@@ -28,20 +32,13 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       grandTotal: results.grandTotal?.toString(),
       tipRate: results.tipRate?.toString(),
       subTotal: results.subTotal?.toString(),
+      discountAmount: results.discountAmount?.toString(),
+      discountRate: results.discountRate?.toString(),
     );
   }
 
   @override
-  MatexVatCalculatorBlocResults clone() {
-    return MatexVatCalculatorBlocResults(
-      totalTaxes: totalTaxes,
-      total: total,
-      tipAmount: tipAmount,
-      grandTotal: grandTotal,
-      tipRate: tipRate,
-      subTotal: subTotal,
-    );
-  }
+  MatexVatCalculatorBlocResults clone() => copyWith();
 
   @override
   MatexVatCalculatorBlocResults copyWith({
@@ -51,6 +48,8 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     String? grandTotal,
     String? tipRate,
     String? subTotal,
+    String? discountAmount,
+    String? discountRate,
   }) {
     return MatexVatCalculatorBlocResults(
       totalTaxes: totalTaxes ?? this.totalTaxes,
@@ -59,12 +58,15 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       grandTotal: grandTotal ?? this.grandTotal,
       tipRate: tipRate ?? this.tipRate,
       subTotal: subTotal ?? this.subTotal,
+      discountAmount: discountAmount ?? this.discountAmount,
+      discountRate: discountRate ?? this.discountRate,
     );
   }
 
   @override
   MatexVatCalculatorBlocResults merge(
-      covariant MatexVatCalculatorBlocResults model) {
+    covariant MatexVatCalculatorBlocResults model,
+  ) {
     return copyWith(
       totalTaxes: model.totalTaxes,
       total: model.total,
@@ -72,6 +74,8 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       grandTotal: model.grandTotal,
       tipRate: model.tipRate,
       subTotal: model.subTotal,
+      discountAmount: model.discountAmount,
+      discountRate: model.discountRate,
     );
   }
 
@@ -83,5 +87,7 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
         grandTotal,
         tipRate,
         subTotal,
+        discountAmount,
+        discountRate,
       ];
 }

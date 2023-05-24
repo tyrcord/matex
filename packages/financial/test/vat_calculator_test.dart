@@ -79,7 +79,7 @@ void main() {
           defaultState: const MatexVatCalculatorState(),
           state: const MatexVatCalculatorState(
             priceBeforeVat: 100,
-            discountPercentage: 0.1,
+            discountRate: 0.1,
           ));
 
       final result = calculator.value();
@@ -185,14 +185,14 @@ void main() {
     expect(result.grandTotal, 108.0);
   });
 
-  test('vatRate, priceBeforeVat, tipRate, and discountPercentage', () {
+  test('vatRate, priceBeforeVat, tipRate, and discountRate', () {
     final calculator = MatexVatCalculator(
       defaultState: const MatexVatCalculatorState(),
       state: const MatexVatCalculatorState(
         priceBeforeVat: 100,
         vatRate: 0.1,
         tipRate: 0.1,
-        discountPercentage: 0.1,
+        discountRate: 0.1,
       ),
     );
     final result = calculator.value();
@@ -204,8 +204,8 @@ void main() {
   });
 
   test(
-      'federalVatRate, regionalVatRate, priceBeforeVat, tipRate, and discountPercentage',
-      () {
+      'federalVatRate, regionalVatRate, priceBeforeVat, tipRate,'
+      ' and discountRate', () {
     final calculator = MatexVatCalculator(
       defaultState: const MatexVatCalculatorState(),
       state: const MatexVatCalculatorState(
@@ -213,7 +213,7 @@ void main() {
         federalVatRate: 0.05,
         regionalVatRate: 0.07,
         tipRate: 0.1,
-        discountPercentage: 0.1,
+        discountRate: 0.1,
       ),
     );
     final result = calculator.value();
@@ -228,8 +228,8 @@ void main() {
   });
 
   test(
-      'federalVatRate, regionalVatRate, customVatRate, priceBeforeVat, tipRate, and discountPercentage',
-      () {
+      'federalVatRate, regionalVatRate, customVatRate, priceBeforeVat, tipRate,'
+      ' and discountRate', () {
     final calculator = MatexVatCalculator(
       defaultState: const MatexVatCalculatorState(),
       state: const MatexVatCalculatorState(
@@ -237,7 +237,7 @@ void main() {
         federalVatRate: 0.05,
         regionalVatRate: 0.07,
         tipRate: 0.1,
-        discountPercentage: 0.1,
+        discountRate: 0.1,
         customVatRate: 0.25,
       ),
     );
