@@ -47,53 +47,93 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     setState(state.copyWith(customVatRate: value));
   }
 
-  //TODO: add tip amount
+  set tipAmount(double? value) {
+    setState(state.copyWith(tipAmount: value));
+  }
 
   @override
   MatexVatCalculatorResults value() {
-    //TODO: add tip amount
+    // TODO: more specs
     const d = Decimal.parse;
-    final price = d((state.priceBeforeVat ?? 0.0).toString());
-    final federalVatRate = d((state.federalVatRate ?? 0.0).toString());
-    final regionalVatRate = d((state.regionalVatRate ?? 0.0).toString());
-    final vatRate = d((state.vatRate ?? 0.0).toString());
-    final customVatRate = d((state.customVatRate ?? 0.0).toString());
-    final discountAmount = d((state.discountAmount ?? 0.0).toString());
-    final discountRate = d((state.discountRate ?? 0.0).toString());
-    final tipPercentage = d((state.tipRate ?? 0.0).toString());
-    final discountedPrice = applyDiscount(
-        price.toDouble(), discountAmount.toDouble(), discountRate.toDouble());
-    final totalVatRate =
-        federalVatRate + regionalVatRate + vatRate + customVatRate;
-    final vatAmount = getVATAmount(discountedPrice, totalVatRate.toDouble());
-    final totalPrice = discountedPrice + vatAmount;
-    final tipAmount = getTipAmount(discountedPrice, tipPercentage.toDouble());
-    final grandTotal = totalPrice + tipAmount;
+    final price = state.priceBeforeVat ?? 0.0;
+    final dFederalVatRate = d((state.federalVatRate ?? 0.0).toString());
+    final dRegionalVatRate = d((state.regionalVatRate ?? 0.0).toString());
+    final dVatRate = d((state.vatRate ?? 0.0).toString());
+    final dCustomVatRate = d((state.customVatRate ?? 0.0).toString());
 
-    // TODO: remove zero values
+    final dTotalVatRate =
+        dFederalVatRate + dRegionalVatRate + dVatRate + dCustomVatRate;
+
+    final discountedPrice = applyDiscount(
+      price,
+      discountAmount: state.discountAmount,
+      discountRate: state.discountRate,
+    );
+
+    final vatAmount = getVATAmount(discountedPrice, dTotalVatRate.toDouble());
+    final totalPrice = discountedPrice + vatAmount;
+
+    final (discountAmount, discountRate) = getDiscountAmountAndRate(
+      price,
+      discountedPrice,
+    );
+
+    final (tipAmount, tipRate) = getTipAmountAndRate(
+      discountedPrice,
+      tipAmount: state.tipAmount,
+      tipRate: state.tipRate,
+    );
 
     return MatexVatCalculatorResults(
-      totalTaxes: vatAmount.toDouble(),
-      total: totalPrice.toDouble(),
-      tipAmount: tipAmount.toDouble(),
-      grandTotal: grandTotal.toDouble(),
-      subTotal: discountedPrice.toDouble(),
+      tipAmount: tipAmount,
+      tipRate: tipRate,
+      discountAmount: discountAmount,
+      discountRate: discountRate,
+      totalTaxes: vatAmount,
+      subTotal: discountAmount > 0 ? discountedPrice : 0,
+      total: totalPrice,
+      grandTotal: tipAmount > 0 ? totalPrice + tipAmount : 0,
       federalVatAmount: getVATAmount(
         discountedPrice,
-        federalVatRate.toDouble(),
+        dFederalVatRate.toDouble(),
       ),
       regionalVatAmount: getVATAmount(
         discountedPrice,
-        regionalVatRate.toDouble(),
+        dRegionalVatRate.toDouble(),
       ),
       vatAmount: getVATAmount(
         discountedPrice,
-        vatRate.toDouble(),
+        dVatRate.toDouble(),
       ),
       customVatAmount: getVATAmount(
         discountedPrice,
-        customVatRate.toDouble(),
+        dCustomVatRate.toDouble(),
       ),
     );
+  }
+
+  (double tipAmount, double tipRate) getTipAmountAndRate(
+    double price, {
+    double? tipAmount,
+    double? tipRate,
+  }) {
+    tipAmount ??= 0.0;
+    tipRate ??= 0.0;
+
+    if (tipAmount > 0) {
+      return (tipAmount, getTipRate(price, tipAmount));
+    }
+
+    return (getTipAmount(price, tipRate), tipRate * 100);
+  }
+
+  (double discountAmount, double discountRate) getDiscountAmountAndRate(
+    double price,
+    double dicountedPrice,
+  ) {
+    final discountAmount = price - dicountedPrice;
+    final discountRate = price > 0 ? (discountAmount / price) * 100 : 0.0;
+
+    return (discountAmount, discountRate);
   }
 }

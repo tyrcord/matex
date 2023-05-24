@@ -1,4 +1,3 @@
-import 'package:decimal/decimal.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
@@ -100,23 +99,13 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
 
   @override
   MatexVatCalculatorBlocFields toFields() {
-    var vatPercentage = vatRate;
-
-    if (vatPercentage is String) {
-      final dVatRate = Decimal.tryParse(vatPercentage);
-
-      if (dVatRate != null) {
-        vatPercentage = (dVatRate / Decimal.fromInt(100)).toString();
-      }
-    }
-
     return MatexVatCalculatorBlocFields(
       regionalVatRate: regionalVatRate,
       federalVatRate: federalVatRate,
       discountAmount: discountAmount,
       priceBeforeVat: priceBeforeVat,
       customVatRate: customVatRate,
-      vatRate: vatPercentage,
+      vatRate: vatRate,
       tipRate: tipRate,
       discountRate: discountRate,
       tipAmount: tipAmount,

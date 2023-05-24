@@ -22,9 +22,10 @@ void main() {
       final result = calculator.value();
 
       expect(result.totalTaxes, 0.0);
-      expect(result.total, 100.0);
       expect(result.tipAmount, 0.0);
-      expect(result.grandTotal, 100.0);
+      expect(result.grandTotal, 0.0);
+      expect(result.subTotal, 0.0);
+      expect(result.total, 100.0);
     });
 
     test('federal VAT rate', () {
@@ -39,7 +40,7 @@ void main() {
       expect(result.totalTaxes, 10.0);
       expect(result.total, 110.0);
       expect(result.tipAmount, 0.0);
-      expect(result.grandTotal, 110.0);
+      expect(result.grandTotal, 0.0);
     });
 
     test('regional VAT rate', () {
@@ -55,7 +56,7 @@ void main() {
       expect(result.totalTaxes, 5.0);
       expect(result.total, 105.0);
       expect(result.tipAmount, 0.0);
-      expect(result.grandTotal, 105.0);
+      expect(result.grandTotal, 0.0);
     });
 
     test('discount amount', () {
@@ -69,12 +70,13 @@ void main() {
       final result = calculator.value();
 
       expect(result.totalTaxes, 0.0);
-      expect(result.total, 90.0);
       expect(result.tipAmount, 0.0);
-      expect(result.grandTotal, 90.0);
+      expect(result.subTotal, 90.0);
+      expect(result.total, 90.0);
+      expect(result.grandTotal, 0.0);
     });
 
-    test('discount percentage', () {
+    test('discount rate', () {
       final calculator = MatexVatCalculator(
           defaultState: const MatexVatCalculatorState(),
           state: const MatexVatCalculatorState(
@@ -87,7 +89,7 @@ void main() {
       expect(result.totalTaxes, 0.0);
       expect(result.total, 90.0);
       expect(result.tipAmount, 0.0);
-      expect(result.grandTotal, 90.0);
+      expect(result.grandTotal, 0.0);
     });
 
     test('tip rate', () {
@@ -122,7 +124,7 @@ void main() {
 
       // Assert
       expect(result.total, equals(115));
-      expect(result.grandTotal, equals(115));
+      expect(result.grandTotal, equals(0));
       expect(result.totalTaxes, equals(15));
       expect(result.federalVatAmount, equals(5));
       expect(result.regionalVatAmount, equals(10));
@@ -162,7 +164,7 @@ void main() {
       final result = calculator.value();
 
       expect(result.total, equals(135));
-      expect(result.grandTotal, equals(135));
+      expect(result.grandTotal, equals(0));
       expect(result.totalTaxes, equals(35));
     });
   });

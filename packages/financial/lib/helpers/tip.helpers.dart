@@ -26,7 +26,7 @@ double calculateTip(double price, double tipRate) {
 /// Calculates the tip amount for a given price and tip percentage.
 ///
 /// The [price] argument specifies the total price of the bill.
-/// The [ripRate] argument specifies the percentage of the bill
+/// The [tipRate] argument specifies the percentage of the bill
 /// to be added as a tip.
 ///
 /// This function uses the [Decimal] type from the `decimal` package
@@ -39,9 +39,27 @@ double calculateTip(double price, double tipRate) {
 /// double tipAmount = getTipAmount(100.0, 0.15);
 /// print(tipAmount); // 15.0
 /// ```
-double getTipAmount(double price, double ripRate) {
+double getTipAmount(double price, double tipRate) {
   Decimal dPrice = Decimal.parse(price.toString());
-  Decimal dTipPercentage = Decimal.parse(ripRate.toString());
+  Decimal dTipRate = Decimal.parse(tipRate.toString());
 
-  return (dPrice * dTipPercentage).toDouble();
+  return (dPrice * dTipRate).toDouble();
+}
+
+/// Calculates the tip rate based on the price and tip amount.
+///
+/// The [price] parameter is the total price of the bill.
+/// The [tipAmount] parameter is the amount of tip to be given.
+///
+/// Returns the tip rate as a percentage.
+double getTipRate(double price, double tipAmount) {
+  final decimalPrice = Decimal.parse(price.toString());
+  final decimalTipAmount = Decimal.parse(tipAmount.toString());
+  final result = decimalPrice > Decimal.zero
+      ? (decimalTipAmount / decimalPrice).toDecimal(
+          scaleOnInfinitePrecision: 32,
+        )
+      : Decimal.zero;
+
+  return result.toDouble() * 100;
 }

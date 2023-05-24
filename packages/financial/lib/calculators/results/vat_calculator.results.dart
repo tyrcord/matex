@@ -11,8 +11,8 @@ class MatexVatCalculatorResults extends TModel {
   final double? vatAmount;
   final double? customVatAmount;
   final double? tipRate;
-  final String? discountAmount;
-  final String? discountRate;
+  final double? discountAmount;
+  final double? discountRate;
 
   const MatexVatCalculatorResults({
     this.totalTaxes,
@@ -44,8 +44,8 @@ class MatexVatCalculatorResults extends TModel {
     double? vatAmount,
     double? customVatAmount,
     double? tipRate,
-    String? discountAmount,
-    String? discountRate,
+    double? discountAmount,
+    double? discountRate,
   }) {
     return MatexVatCalculatorResults(
       totalTaxes: totalTaxes ?? this.totalTaxes,

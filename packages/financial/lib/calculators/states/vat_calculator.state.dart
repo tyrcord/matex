@@ -1,7 +1,5 @@
 import 'package:matex_core/core.dart';
 
-//TODO: add tip amount
-
 class MatexVatCalculatorState extends MatexCalculatorState {
   final double? discountRate;
   final double? regionalVatRate;
@@ -11,6 +9,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
   final double? customVatRate;
   final double? tipRate;
   final double? vatRate;
+  final double? tipAmount;
 
   const MatexVatCalculatorState({
     this.discountRate,
@@ -21,6 +20,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
     this.customVatRate,
     this.tipRate,
     this.vatRate,
+    this.tipAmount,
   });
 
   @override
@@ -36,6 +36,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
     double? discountAmount,
     double? discountRate,
     double? tipRate,
+    double? tipAmount,
   }) {
     return MatexVatCalculatorState(
       priceBeforeVat: priceBeforeVat ?? this.priceBeforeVat,
@@ -46,6 +47,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
       discountAmount: discountAmount ?? this.discountAmount,
       discountRate: discountRate ?? this.discountRate,
       tipRate: tipRate ?? this.tipRate,
+      tipAmount: tipAmount ?? this.tipAmount,
     );
   }
 
@@ -60,6 +62,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
       discountAmount: model.discountAmount,
       discountRate: model.discountRate,
       tipRate: model.tipRate,
+      tipAmount: model.tipAmount,
     );
   }
 
@@ -73,5 +76,6 @@ class MatexVatCalculatorState extends MatexCalculatorState {
         discountAmount,
         discountRate,
         tipRate,
+        tipAmount,
       ];
 }

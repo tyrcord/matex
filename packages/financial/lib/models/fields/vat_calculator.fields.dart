@@ -10,8 +10,8 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields {
   final String? vatRate;
   final String? discountRate;
   final String? tipAmount;
-  final String? tipFieldType;
-  final String? discountFieldType;
+  final String tipFieldType;
+  final String discountFieldType;
 
   const MatexVatCalculatorBlocFields({
     this.regionalVatRate,
@@ -23,9 +23,10 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields {
     this.vatRate,
     this.discountRate,
     this.tipAmount,
-    this.tipFieldType,
-    this.discountFieldType,
-  });
+    String? tipFieldType,
+    String? discountFieldType,
+  })  : tipFieldType = tipFieldType ?? 'percent',
+        discountFieldType = discountFieldType ?? 'amount';
 
   @override
   MatexVatCalculatorBlocFields clone() => copyWith();
