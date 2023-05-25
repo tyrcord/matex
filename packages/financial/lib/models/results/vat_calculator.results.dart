@@ -2,14 +2,22 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexVatCalculatorBlocResults extends FastCalculatorResults {
-  final String? totalTaxes;
-  final String? total;
-  final String? tipAmount;
-  final String? grandTotal;
-  final String? tipRate;
-  final String? subTotal;
-  final String? discountAmount;
-  final String? discountRate;
+  final double? totalTaxes;
+  final double? total;
+  final double? tipAmount;
+  final double? grandTotal;
+  final double? tipRate;
+  final double? subTotal;
+  final double? discountAmount;
+  final double? discountRate;
+  final String? formattedTotalTaxes;
+  final String? formattedTotal;
+  final String? formattedTipAmount;
+  final String? formattedGrandTotal;
+  final String? formattedTipRate;
+  final String? formattedSubTotal;
+  final String? formattedDiscountAmount;
+  final String? formattedDiscountRate;
 
   const MatexVatCalculatorBlocResults({
     this.totalTaxes,
@@ -20,20 +28,36 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     this.subTotal,
     this.discountAmount,
     this.discountRate,
+    this.formattedTotalTaxes,
+    this.formattedTotal,
+    this.formattedTipAmount,
+    this.formattedGrandTotal,
+    this.formattedTipRate,
+    this.formattedSubTotal,
+    this.formattedDiscountAmount,
+    this.formattedDiscountRate,
   });
 
   factory MatexVatCalculatorBlocResults.fromCalculatorResults(
     MatexVatCalculatorResults results,
   ) {
     return MatexVatCalculatorBlocResults(
-      totalTaxes: results.totalTaxes?.toString(),
-      total: results.total?.toString(),
-      tipAmount: results.tipAmount?.toString(),
-      grandTotal: results.grandTotal?.toString(),
-      tipRate: results.tipRate?.toString(),
-      subTotal: results.subTotal?.toString(),
-      discountAmount: results.discountAmount?.toString(),
-      discountRate: results.discountRate?.toString(),
+      totalTaxes: results.totalTaxes,
+      total: results.total,
+      tipAmount: results.tipAmount,
+      grandTotal: results.grandTotal,
+      tipRate: results.tipRate,
+      subTotal: results.subTotal,
+      discountAmount: results.discountAmount,
+      discountRate: results.discountRate,
+      formattedTotalTaxes: results.totalTaxes?.toString(),
+      formattedTotal: results.total?.toString(),
+      formattedTipAmount: results.tipAmount?.toString(),
+      formattedGrandTotal: results.grandTotal?.toString(),
+      formattedTipRate: results.tipRate?.toString(),
+      formattedSubTotal: results.subTotal?.toString(),
+      formattedDiscountAmount: results.discountAmount?.toString(),
+      formattedDiscountRate: results.discountRate?.toString(),
     );
   }
 
@@ -42,14 +66,22 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
 
   @override
   MatexVatCalculatorBlocResults copyWith({
-    String? totalTaxes,
-    String? total,
-    String? tipAmount,
-    String? grandTotal,
-    String? tipRate,
-    String? subTotal,
-    String? discountAmount,
-    String? discountRate,
+    double? totalTaxes,
+    double? total,
+    double? tipAmount,
+    double? grandTotal,
+    double? tipRate,
+    double? subTotal,
+    double? discountAmount,
+    double? discountRate,
+    String? formattedTotalTaxes,
+    String? formattedTotal,
+    String? formattedTipAmount,
+    String? formattedGrandTotal,
+    String? formattedTipRate,
+    String? formattedSubTotal,
+    String? formattedDiscountAmount,
+    String? formattedDiscountRate,
   }) {
     return MatexVatCalculatorBlocResults(
       totalTaxes: totalTaxes ?? this.totalTaxes,
@@ -60,6 +92,16 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       subTotal: subTotal ?? this.subTotal,
       discountAmount: discountAmount ?? this.discountAmount,
       discountRate: discountRate ?? this.discountRate,
+      formattedTotalTaxes: formattedTotalTaxes ?? this.formattedTotalTaxes,
+      formattedTotal: formattedTotal ?? this.formattedTotal,
+      formattedTipAmount: formattedTipAmount ?? this.formattedTipAmount,
+      formattedGrandTotal: formattedGrandTotal ?? this.formattedGrandTotal,
+      formattedTipRate: formattedTipRate ?? this.formattedTipRate,
+      formattedSubTotal: formattedSubTotal ?? this.formattedSubTotal,
+      formattedDiscountAmount:
+          formattedDiscountAmount ?? this.formattedDiscountAmount,
+      formattedDiscountRate:
+          formattedDiscountRate ?? this.formattedDiscountRate,
     );
   }
 
@@ -76,6 +118,14 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       subTotal: model.subTotal,
       discountAmount: model.discountAmount,
       discountRate: model.discountRate,
+      formattedTotalTaxes: model.formattedTotalTaxes,
+      formattedTotal: model.formattedTotal,
+      formattedTipAmount: model.formattedTipAmount,
+      formattedGrandTotal: model.formattedGrandTotal,
+      formattedTipRate: model.formattedTipRate,
+      formattedSubTotal: model.formattedSubTotal,
+      formattedDiscountAmount: model.formattedDiscountAmount,
+      formattedDiscountRate: model.formattedDiscountRate,
     );
   }
 
@@ -89,5 +139,13 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
         subTotal,
         discountAmount,
         discountRate,
+        formattedTotalTaxes,
+        formattedTotal,
+        formattedTipAmount,
+        formattedGrandTotal,
+        formattedTipRate,
+        formattedSubTotal,
+        formattedDiscountAmount,
+        formattedDiscountRate,
       ];
 }

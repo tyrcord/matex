@@ -1,6 +1,7 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:flutter/foundation.dart';
 import 'package:matex_financial/financial.dart';
+import 'package:flutter/foundation.dart';
+import 'package:t_helpers/helpers.dart';
 import 'package:matex_core/core.dart';
 import 'package:decimal/decimal.dart';
 
@@ -24,9 +25,25 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<MatexVatCalculatorBlocResults> compute() async {
     final results = calculator.value();
-    // TODO: format results
 
-    return MatexVatCalculatorBlocResults.fromCalculatorResults(results);
+    return MatexVatCalculatorBlocResults(
+      totalTaxes: results.totalTaxes,
+      total: results.total,
+      tipAmount: results.tipAmount,
+      grandTotal: results.grandTotal,
+      tipRate: results.tipRate,
+      subTotal: results.subTotal,
+      discountAmount: results.discountAmount,
+      discountRate: results.discountRate,
+      formattedTotalTaxes: localizeCurrency(value: results.totalTaxes),
+      formattedTotal: localizeCurrency(value: results.total),
+      formattedTipAmount: localizeCurrency(value: results.tipAmount),
+      formattedGrandTotal: localizeCurrency(value: results.grandTotal),
+      formattedTipRate: localizePercentage(value: results.tipRate),
+      formattedSubTotal: localizeCurrency(value: results.subTotal),
+      formattedDiscountAmount: localizeCurrency(value: results.discountAmount),
+      formattedDiscountRate: localizePercentage(value: results.discountRate),
+    );
   }
 
   @override
@@ -90,7 +107,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value != null && value is String) {
+    if (value is String) {
       if (key == MatexVatCalculatorBlocKey.priceBeforeVat) {
         return patchPriceBeforeVat(value);
       } else if (key == MatexVatCalculatorBlocKey.customVatRate) {
@@ -127,7 +144,6 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   Future<void> resetCalculator(MatexVatCalculatorBlocDocument document) async {
     var dParse = Decimal.tryParse;
     var dZero = Decimal.zero;
-    var dHundred = Decimal.fromInt(100);
     var vatRate = dParse(document.vatRate ?? '0') ?? dZero;
     var customVatRate = dParse(document.customVatRate ?? '0') ?? dZero;
     var tipRate = dParse(document.tipRate ?? '0') ?? dZero;
@@ -167,136 +183,91 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchPriceBeforeVat(String value) {
-    final dValue = Decimal.tryParse(value);
+    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final fields = currentState.fields.copyWith(priceBeforeVat: value);
+    calculator.priceBeforeVat = dValue.toDouble();
 
-    if (dValue != null) {
-      final fields = currentState.fields.copyWith(priceBeforeVat: value);
-      calculator.priceBeforeVat = dValue.toDouble();
-
-      return currentState.copyWith(fields: fields);
-    }
-
-    return currentState;
+    return currentState.copyWith(fields: fields);
   }
 
   MatexVatCalculatorBlocState patchCustomVatRate(String value) {
-    final dValue = Decimal.tryParse(value);
+    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final fields = currentState.fields.copyWith(customVatRate: value);
+    calculator.customVatRate = (dValue / dHundred).toDouble();
 
-    if (dValue != null) {
-      final fields = currentState.fields.copyWith(customVatRate: value);
-      calculator.customVatRate = (dValue / Decimal.fromInt(100)).toDouble();
-
-      return currentState.copyWith(fields: fields);
-    }
-
-    return currentState;
+    return currentState.copyWith(fields: fields);
   }
 
   MatexVatCalculatorBlocState patchVatRate(String value) {
-    final dValue = Decimal.tryParse(value);
+    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final fields = currentState.fields.copyWith(vatRate: value);
+    calculator.vatRate = (dValue / dHundred).toDouble();
 
-    if (dValue != null) {
-      final fields = currentState.fields.copyWith(vatRate: value);
-      calculator.vatRate = (dValue / Decimal.fromInt(100)).toDouble();
-
-      return currentState.copyWith(fields: fields);
-    }
-
-    return currentState;
+    return currentState.copyWith(fields: fields);
   }
 
   MatexVatCalculatorBlocState patchFederalVatRate(String value) {
-    final dValue = Decimal.tryParse(value);
+    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final fields = currentState.fields.copyWith(federalVatRate: value);
+    calculator.federalVatRate = (dValue / dHundred).toDouble();
 
-    if (dValue != null) {
-      final fields = currentState.fields.copyWith(federalVatRate: value);
-      calculator.federalVatRate = (dValue / Decimal.fromInt(100)).toDouble();
-
-      return currentState.copyWith(fields: fields);
-    }
-
-    return currentState;
+    return currentState.copyWith(fields: fields);
   }
 
   MatexVatCalculatorBlocState patchRegionalVatRate(String value) {
-    final dValue = Decimal.tryParse(value);
+    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final fields = currentState.fields.copyWith(regionalVatRate: value);
+    calculator.regionalVatRate = (dValue / dHundred).toDouble();
 
-    if (dValue != null) {
-      final fields = currentState.fields.copyWith(regionalVatRate: value);
-      calculator.regionalVatRate = (dValue / Decimal.fromInt(100)).toDouble();
-
-      return currentState.copyWith(fields: fields);
-    }
-
-    return currentState;
+    return currentState.copyWith(fields: fields);
   }
 
   MatexVatCalculatorBlocState patchDiscountAmount(String value) {
-    final dValue = Decimal.tryParse(value);
+    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final fields = currentState.fields.copyWith(
+      discountAmount: value,
+      discountRate: '',
+    );
 
-    if (dValue != null) {
-      final fields = currentState.fields.copyWith(
-        discountAmount: value,
-        discountRate: '',
-      );
+    calculator.discountAmount = dValue.toDouble();
 
-      calculator.discountAmount = dValue.toDouble();
-
-      return currentState.copyWith(fields: fields);
-    }
-
-    return currentState;
+    return currentState.copyWith(fields: fields);
   }
 
   MatexVatCalculatorBlocState patchDiscountRate(String value) {
-    final dValue = Decimal.tryParse(value);
+    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final fields = currentState.fields.copyWith(
+      discountRate: value,
+      discountAmount: '',
+    );
 
-    if (dValue != null) {
-      final fields = currentState.fields.copyWith(
-        discountRate: value,
-        discountAmount: '',
-      );
+    calculator.discountRate = (dValue / dHundred).toDouble();
 
-      calculator.discountRate = (dValue / Decimal.fromInt(100)).toDouble();
-
-      return currentState.copyWith(fields: fields);
-    }
-
-    return currentState;
+    return currentState.copyWith(fields: fields);
   }
 
   MatexVatCalculatorBlocState patchTipRate(String value) {
-    final dValue = Decimal.tryParse(value);
+    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final fields = currentState.fields.copyWith(
+      tipRate: value,
+      tipAmount: '',
+    );
 
-    if (dValue != null) {
-      final fields = currentState.fields.copyWith(
-        tipRate: value,
-        tipAmount: '',
-      );
+    calculator.tipRate = (dValue / dHundred).toDouble();
 
-      calculator.tipRate = (dValue / Decimal.fromInt(100)).toDouble();
-
-      return currentState.copyWith(fields: fields);
-    }
-
-    return currentState;
+    return currentState.copyWith(fields: fields);
   }
 
   MatexVatCalculatorBlocState patchTipAmount(String value) {
-    final dValue = Decimal.tryParse(value);
+    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final fields = currentState.fields.copyWith(
+      tipAmount: value,
+      tipRate: '',
+    );
 
-    if (dValue != null) {
-      final fields = currentState.fields.copyWith(
-        tipAmount: value,
-        tipRate: '',
-      );
+    calculator.tipAmount = dValue.toDouble();
 
-      calculator.tipAmount = dValue.toDouble();
-
-      return currentState.copyWith(fields: fields);
-    }
-
-    return currentState;
+    return currentState.copyWith(fields: fields);
   }
 
   Future<MatexVatCalculatorBlocState?> patchTipFieldType(dynamic value) async {

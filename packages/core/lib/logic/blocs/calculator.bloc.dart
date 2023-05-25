@@ -1,7 +1,8 @@
-import 'package:decimal/decimal.dart';
 import 'package:fastyle_calculator/logic/logic.dart';
 import 'package:flutter/foundation.dart';
+import 'package:decimal/decimal.dart';
 import 'package:matex_core/core.dart';
+import 'package:t_helpers/helpers.dart';
 
 /// An abstract class that defines the structure of a calculator bloc that uses
 /// the `matex_core` library.
@@ -123,5 +124,62 @@ abstract class MatexCalculatorBloc<
     }
 
     return null;
+  }
+
+  @protected
+  String getUserLocaleLanguageTag() {
+    // TODO
+    return 'en_US';
+  }
+
+  @protected
+  String getUserCurrencySymbol() {
+    // TODO
+    return 'USD';
+  }
+
+  @protected
+  String localizePercentage({
+    num? value,
+    String? locale,
+    int minimumFractionDigits = 0,
+    int? maximumFractionDigits = 2,
+  }) {
+    return formatPercentage(
+      minimumFractionDigits: minimumFractionDigits,
+      maximumFractionDigits: maximumFractionDigits,
+      locale: locale ?? getUserLocaleLanguageTag(),
+      value: value,
+    );
+  }
+
+  String localizeNumber({
+    num? value,
+    String? locale,
+    int? minimumFractionDigits = 0,
+    int? maximumFractionDigits = 2,
+  }) {
+    return formatDecimal(
+      minimumFractionDigits: minimumFractionDigits,
+      maximumFractionDigits: maximumFractionDigits,
+      locale: locale ?? getUserLocaleLanguageTag(),
+      value: value,
+    );
+  }
+
+  String localizeCurrency({
+    num? value,
+    String? symbol,
+    String? locale,
+    int? minimumFractionDigits = 0,
+    int? maximumFractionDigits = 2,
+  }) {
+    return formatCurrency(
+      minimumFractionDigits: minimumFractionDigits,
+      maximumFractionDigits: maximumFractionDigits,
+      locale: locale ?? getUserLocaleLanguageTag(),
+      symbol: symbol ?? getUserCurrencySymbol(),
+      value: value,
+    );
   }
 }
