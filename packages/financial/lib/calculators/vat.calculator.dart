@@ -32,23 +32,23 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
   }
 
   set discountAmount(double? value) {
-    setState(state.copyWith(discountAmount: value));
+    setState(state.copyWith(discountAmount: value, discountRate: 0));
   }
 
   set discountRate(double? value) {
-    setState(state.copyWith(discountRate: value));
+    setState(state.copyWith(discountRate: value, discountAmount: 0));
   }
 
   set tipRate(double? value) {
-    setState(state.copyWith(tipRate: value));
+    setState(state.copyWith(tipRate: value, tipAmount: 0));
+  }
+
+  set tipAmount(double? value) {
+    setState(state.copyWith(tipAmount: value, tipRate: 0));
   }
 
   set customVatRate(double? value) {
     setState(state.copyWith(customVatRate: value));
-  }
-
-  set tipAmount(double? value) {
-    setState(state.copyWith(tipAmount: value));
   }
 
   @override
