@@ -1,6 +1,5 @@
 library matex_core;
 
-export './calculator.dart';
-export './calculator.state.dart';
-export './calculator.validator.dart';
-export './calculator.bloc.dart';
+export './calculators/calculators.dart';
+export './persistence/persistence.dart';
+export './blocs/blocs.dart';
