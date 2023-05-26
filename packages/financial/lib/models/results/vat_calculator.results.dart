@@ -10,6 +10,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
   final double? subTotal;
   final double? discountAmount;
   final double? discountRate;
+  final double? customVatAmount;
+  final double? federalVatAmount;
+  final double? regionalVatAmount;
+  final double? vatAmount;
   final String? formattedTotalTaxes;
   final String? formattedTotal;
   final String? formattedTipAmount;
@@ -18,6 +22,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
   final String? formattedSubTotal;
   final String? formattedDiscountAmount;
   final String? formattedDiscountRate;
+  final String? formattedCustomVatAmount;
+  final String? formattedFederalVatAmount;
+  final String? formattedRegionalVatAmount;
+  final String? formattedVatAmount;
 
   const MatexVatCalculatorBlocResults({
     this.totalTaxes,
@@ -28,6 +36,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     this.subTotal,
     this.discountAmount,
     this.discountRate,
+    this.customVatAmount,
+    this.federalVatAmount,
+    this.regionalVatAmount,
+    this.vatAmount,
     this.formattedTotalTaxes,
     this.formattedTotal,
     this.formattedTipAmount,
@@ -36,6 +48,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     this.formattedSubTotal,
     this.formattedDiscountAmount,
     this.formattedDiscountRate,
+    this.formattedCustomVatAmount,
+    this.formattedFederalVatAmount,
+    this.formattedRegionalVatAmount,
+    this.formattedVatAmount,
   });
 
   factory MatexVatCalculatorBlocResults.fromCalculatorResults(
@@ -50,6 +66,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       subTotal: results.subTotal,
       discountAmount: results.discountAmount,
       discountRate: results.discountRate,
+      customVatAmount: results.customVatAmount,
+      federalVatAmount: results.federalVatAmount,
+      regionalVatAmount: results.regionalVatAmount,
+      vatAmount: results.vatAmount,
       formattedTotalTaxes: results.totalTaxes?.toString(),
       formattedTotal: results.total?.toString(),
       formattedTipAmount: results.tipAmount?.toString(),
@@ -58,6 +78,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       formattedSubTotal: results.subTotal?.toString(),
       formattedDiscountAmount: results.discountAmount?.toString(),
       formattedDiscountRate: results.discountRate?.toString(),
+      formattedCustomVatAmount: results.customVatAmount?.toString(),
+      formattedFederalVatAmount: results.federalVatAmount?.toString(),
+      formattedRegionalVatAmount: results.regionalVatAmount?.toString(),
+      formattedVatAmount: results.vatAmount?.toString(),
     );
   }
 
@@ -74,6 +98,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     double? subTotal,
     double? discountAmount,
     double? discountRate,
+    double? customVatAmount,
+    double? federalVatAmount,
+    double? regionalVatAmount,
+    double? vatAmount,
     String? formattedTotalTaxes,
     String? formattedTotal,
     String? formattedTipAmount,
@@ -82,6 +110,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     String? formattedSubTotal,
     String? formattedDiscountAmount,
     String? formattedDiscountRate,
+    String? formattedCustomVatAmount,
+    String? formattedFederalVatAmount,
+    String? formattedRegionalVatAmount,
+    String? formattedVatAmount,
   }) {
     return MatexVatCalculatorBlocResults(
       totalTaxes: totalTaxes ?? this.totalTaxes,
@@ -92,6 +124,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       subTotal: subTotal ?? this.subTotal,
       discountAmount: discountAmount ?? this.discountAmount,
       discountRate: discountRate ?? this.discountRate,
+      customVatAmount: customVatAmount ?? this.customVatAmount,
+      federalVatAmount: federalVatAmount ?? this.federalVatAmount,
+      regionalVatAmount: regionalVatAmount ?? this.regionalVatAmount,
+      vatAmount: vatAmount ?? this.vatAmount,
       formattedTotalTaxes: formattedTotalTaxes ?? this.formattedTotalTaxes,
       formattedTotal: formattedTotal ?? this.formattedTotal,
       formattedTipAmount: formattedTipAmount ?? this.formattedTipAmount,
@@ -102,6 +138,13 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
           formattedDiscountAmount ?? this.formattedDiscountAmount,
       formattedDiscountRate:
           formattedDiscountRate ?? this.formattedDiscountRate,
+      formattedCustomVatAmount:
+          formattedCustomVatAmount ?? this.formattedCustomVatAmount,
+      formattedFederalVatAmount:
+          formattedFederalVatAmount ?? this.formattedFederalVatAmount,
+      formattedRegionalVatAmount:
+          formattedRegionalVatAmount ?? this.formattedRegionalVatAmount,
+      formattedVatAmount: formattedVatAmount ?? this.formattedVatAmount,
     );
   }
 
@@ -118,6 +161,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       subTotal: model.subTotal,
       discountAmount: model.discountAmount,
       discountRate: model.discountRate,
+      customVatAmount: model.customVatAmount,
+      federalVatAmount: model.federalVatAmount,
+      regionalVatAmount: model.regionalVatAmount,
+      vatAmount: model.vatAmount,
       formattedTotalTaxes: model.formattedTotalTaxes,
       formattedTotal: model.formattedTotal,
       formattedTipAmount: model.formattedTipAmount,
@@ -126,6 +173,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       formattedSubTotal: model.formattedSubTotal,
       formattedDiscountAmount: model.formattedDiscountAmount,
       formattedDiscountRate: model.formattedDiscountRate,
+      formattedCustomVatAmount: model.formattedCustomVatAmount,
+      formattedFederalVatAmount: model.formattedFederalVatAmount,
+      formattedRegionalVatAmount: model.formattedRegionalVatAmount,
+      formattedVatAmount: model.formattedVatAmount,
     );
   }
 
@@ -139,6 +190,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
         subTotal,
         discountAmount,
         discountRate,
+        customVatAmount,
+        federalVatAmount,
+        regionalVatAmount,
+        vatAmount,
         formattedTotalTaxes,
         formattedTotal,
         formattedTipAmount,
@@ -147,5 +202,9 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
         formattedSubTotal,
         formattedDiscountAmount,
         formattedDiscountRate,
+        formattedCustomVatAmount,
+        formattedFederalVatAmount,
+        formattedRegionalVatAmount,
+        formattedVatAmount,
       ];
 }

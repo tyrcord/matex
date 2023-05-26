@@ -35,6 +35,10 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       subTotal: results.subTotal,
       discountAmount: results.discountAmount,
       discountRate: results.discountRate,
+      customVatAmount: results.customVatAmount,
+      federalVatAmount: results.federalVatAmount,
+      regionalVatAmount: results.regionalVatAmount,
+      vatAmount: results.vatAmount,
       formattedTotalTaxes: localizeCurrency(value: results.totalTaxes),
       formattedTotal: localizeCurrency(value: results.total),
       formattedTipAmount: localizeCurrency(value: results.tipAmount),
@@ -43,6 +47,18 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       formattedSubTotal: localizeCurrency(value: results.subTotal),
       formattedDiscountAmount: localizeCurrency(value: results.discountAmount),
       formattedDiscountRate: localizePercentage(value: results.discountRate),
+      formattedCustomVatAmount: localizeCurrency(
+        value: results.customVatAmount,
+      ),
+      formattedFederalVatAmount: localizeCurrency(
+        value: results.federalVatAmount,
+      ),
+      formattedRegionalVatAmount: localizeCurrency(
+        value: results.regionalVatAmount,
+      ),
+      formattedVatAmount: localizeCurrency(
+        value: results.vatAmount,
+      ),
     );
   }
 

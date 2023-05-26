@@ -70,8 +70,8 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
       discountRate: state.discountRate,
     );
 
-    final vatAmount = getVATAmount(discountedPrice, dTotalVatRate.toDouble());
-    final totalPrice = discountedPrice + vatAmount;
+    final totalTaxes = getVATAmount(discountedPrice, dTotalVatRate.toDouble());
+    final totalPrice = discountedPrice + totalTaxes;
 
     final (discountAmount, discountRate) = getDiscountAmountAndRate(
       price,
@@ -89,7 +89,7 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
       tipRate: tipRate,
       discountAmount: discountAmount,
       discountRate: discountRate,
-      totalTaxes: vatAmount,
+      totalTaxes: totalTaxes,
       subTotal: discountAmount > 0 ? discountedPrice : 0,
       total: totalPrice,
       grandTotal: tipAmount > 0 ? totalPrice + tipAmount : 0,
