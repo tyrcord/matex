@@ -142,6 +142,10 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
         return patchTipRate(value);
       } else if (key == MatexVatCalculatorBlocKey.tipAmount) {
         return patchTipAmount(value);
+      } else if (key == MatexVatCalculatorBlocKey.tipFieldType) {
+        return patchTipFieldType(value);
+      } else if (key == MatexVatCalculatorBlocKey.discountFieldType) {
+        return patchDiscountFieldType(value);
       }
     } else if (value is Enum) {
       value = describeEnum(value);
