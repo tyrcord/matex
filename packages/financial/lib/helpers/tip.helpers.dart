@@ -61,5 +61,5 @@ double getTipRate(double price, double tipAmount) {
         )
       : Decimal.zero;
 
-  return result.toDouble() * 100;
+  return result.toDouble();
 }

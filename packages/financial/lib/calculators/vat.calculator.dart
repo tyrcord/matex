@@ -53,7 +53,6 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
 
   @override
   MatexVatCalculatorResults value() {
-    // TODO: more specs
     const d = Decimal.parse;
     final price = state.priceBeforeVat ?? 0.0;
     final dFederalVatRate = d((state.federalVatRate ?? 0.0).toString());
@@ -124,7 +123,7 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
       return (tipAmount, getTipRate(price, tipAmount));
     }
 
-    return (getTipAmount(price, tipRate), tipRate * 100);
+    return (getTipAmount(price, tipRate), tipRate);
   }
 
   (double discountAmount, double discountRate) getDiscountAmountAndRate(
@@ -132,7 +131,7 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     double dicountedPrice,
   ) {
     final discountAmount = price - dicountedPrice;
-    final discountRate = price > 0 ? (discountAmount / price) * 100 : 0.0;
+    final discountRate = price > 0 ? (discountAmount / price) : 0.0;
 
     return (discountAmount, discountRate);
   }
