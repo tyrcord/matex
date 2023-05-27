@@ -22,8 +22,8 @@ void main() {
   test('getTipRate returns the correct tip rate', () {
     expect(getTipRate(0, 0), equals(0.0));
     expect(getTipRate(100, 0), equals(0.0));
-    expect(getTipRate(100, 15), equals(15.0));
-    expect(getTipRate(50, 10), equals(20.0));
-    expect(getTipRate(75, 7.5), equals(10.0));
+    expect(getTipRate(100, 15), equals(0.15));
+    expect(getTipRate(50, 10), equals(0.20));
+    expect(getTipRate(75, 7.5), equals(0.10));
   });
 }
