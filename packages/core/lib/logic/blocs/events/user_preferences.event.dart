@@ -1,5 +1,8 @@
-import 'package:matex_core/core.dart';
+// Package imports:
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_core/core.dart';
 
 /// Enum representing the different types of events that can be handled by the
 /// [MatexUserPreferencesBloc].

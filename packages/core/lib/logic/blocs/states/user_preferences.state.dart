@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:matex_core/core.dart';
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_core/core.dart';
 
 /// The state of the MatexUserPreferencesBloc.
 class MatexUserPreferencesBlocState extends BlocState {

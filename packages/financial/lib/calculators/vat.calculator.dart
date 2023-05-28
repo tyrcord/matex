@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:decimal/decimal.dart';
-import 'package:matex_financial/financial.dart';
 import 'package:matex_core/core.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     MatexVatCalculatorResults> {

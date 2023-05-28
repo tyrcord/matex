@@ -1,9 +1,14 @@
-import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:matex_financial/financial.dart';
+// Flutter imports:
 import 'package:flutter/foundation.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:matex_core/core.dart';
+
+// Package imports:
 import 'package:decimal/decimal.dart';
+import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:matex_core/core.dart';
+import 'package:t_helpers/helpers.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 const _kDefaultVatBlocState = MatexVatCalculatorBlocState(
   fields: MatexVatCalculatorBlocFields(),

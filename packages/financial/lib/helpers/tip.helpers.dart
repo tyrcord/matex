@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:decimal/decimal.dart';
 
 /// Calculates the tip on a price before VAT.

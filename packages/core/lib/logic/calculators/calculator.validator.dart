@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:matex_core/core.dart';
 
 /// Defines a function type that takes a [MatexCalculatorState] object and

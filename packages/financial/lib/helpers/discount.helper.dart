@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:decimal/decimal.dart';
 
 /// Applies a discount to a given price.

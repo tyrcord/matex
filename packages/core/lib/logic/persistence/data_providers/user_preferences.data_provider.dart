@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:matex_core/core.dart';
 import 'package:tstore/tstore.dart';
+
+// Project imports:
+import 'package:matex_core/core.dart';
 
 /// A data provider class for user preferences.
 class MatexUserPreferencesDataProvider extends TDataProvider {

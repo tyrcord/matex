@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/foundation.dart';
+
+// Project imports:
 import 'package:matex_core/core.dart';
 
 /// An abstract class representing a calculator with a state of type [S] and a

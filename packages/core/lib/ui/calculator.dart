@@ -1,5 +1,10 @@
-import 'package:fastyle_calculator/fastyle_calculator.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:fastyle_calculator/fastyle_calculator.dart';
+
+// Project imports:
 import 'package:matex_core/core.dart';
 
 class MatexCalculatorWidget<B extends MatexCalculatorBloc,

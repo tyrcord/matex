@@ -1,8 +1,13 @@
-import 'package:fastyle_calculator/logic/logic.dart';
+// Flutter imports:
 import 'package:flutter/foundation.dart';
+
+// Package imports:
 import 'package:decimal/decimal.dart';
-import 'package:matex_core/core.dart';
+import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:t_helpers/helpers.dart';
+
+// Project imports:
+import 'package:matex_core/core.dart';
 
 /// An abstract class that defines the structure of a calculator bloc that uses
 /// the `matex_core` library.

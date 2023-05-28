@@ -1,7 +1,12 @@
+// Flutter imports:
 import 'package:flutter/foundation.dart';
-import 'package:matex_core/core.dart';
-import 'package:tstore/tstore.dart';
+
+// Package imports:
 import 'package:tbloc/tbloc.dart';
+import 'package:tstore/tstore.dart';
+
+// Project imports:
+import 'package:matex_core/core.dart';
 
 /// A bloc that manages user preferences for the Matex app.
 class MatexUserPreferencesBloc extends BidirectionalBloc<

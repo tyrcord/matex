@@ -1,9 +1,12 @@
+// Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tstore/tstore.dart';
+
+// Project imports:
 import 'package:matex_financial/blocs/keys/keys.dart';
 import 'package:matex_financial/blocs/vat_calculator.bloc.dart';
-import 'package:tstore/tstore.dart';
 
 void main() {
   setUpTStoreTesting();
