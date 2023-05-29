@@ -6,6 +6,9 @@ import 'package:decimal/decimal.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -319,5 +322,33 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     calculator.discountAmount = 0;
 
     return currentState.copyWith(fields: fields);
+  }
+
+  @override
+  Future<Uint8List> toPdf() async {
+    // TODO: implement toPdf
+    final font = await PdfGoogleFonts.barlowSemiCondensedMedium();
+    final pdf = pw.Document();
+    final results = currentState.results;
+    final fields = currentState.fields;
+    final style = pw.TextStyle(font: font);
+
+    pdf.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (context) {
+          return pw.Column(children: [
+            pw.Text('Price before VAT', style: style),
+            pw.Text('${fields.priceBeforeVat}', style: style),
+            pw.Text('Total Taxes', style: style),
+            pw.Text('${results.formattedTotalTaxes}', style: style),
+            pw.Text('Total', style: style),
+            pw.Text('${results.formattedTotal}', style: style),
+          ]); // Center
+        },
+      ),
+    );
+
+    return pdf.save();
   }
 }

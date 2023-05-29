@@ -4,7 +4,9 @@ import 'package:flutter/foundation.dart';
 // Package imports:
 import 'package:decimal/decimal.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:flutter/material.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:share_plus/share_plus.dart';
 
 // Project imports:
 import 'package:matex_core/core.dart';
@@ -114,6 +116,29 @@ abstract class MatexCalculatorBloc<
   @override
   Future<void> handleComputeError(dynamic error) async {
     //TODO: handle compute error
+  }
+
+  @override
+  Future<void> shareCalculatorState(BuildContext context) async {
+    if (calculator.isValid) {
+      final pdfBytes = await toPdf();
+      final file = XFile.fromData(
+        pdfBytes,
+        mimeType: 'application/pdf',
+      );
+
+      // ignore: use_build_context_synchronously
+      final box = context.findRenderObject() as RenderBox?;
+
+      Share.shareXFiles(
+        [file],
+        sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+      );
+    }
+  }
+
+  Future<Uint8List> toPdf() async {
+    throw UnimplementedError('toPdf() is not implemented');
   }
 
   /// Parses a string to a double.
