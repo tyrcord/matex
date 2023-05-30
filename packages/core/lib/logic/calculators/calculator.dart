@@ -67,6 +67,8 @@ abstract class MatexCalculator<S extends MatexCalculatorState, R> {
     checkValidity();
   }
 
+  S getState() => state.clone() as S;
+
   @protected
   bool checkValidity() {
     var validity = true;
