@@ -60,6 +60,10 @@ void main() {
       expect(result.effectiveRisk, closeTo(100, 1e-3));
       expect(result.toleratedRisk, closeTo(100, 1e-3));
       expect(result.stopLossAmount, closeTo(0.2, 1e-3));
+      expect(result.entryPriceWithSlippage, closeTo(100, 0.01));
+      expect(result.stopLossPriceWithSlippage, closeTo(95, 0.01));
+      expect(result.stopLossPercentWithSlippage, closeTo(0.05, 0.001));
+      expect(result.stopLossPercent, closeTo(0.05, 0.01));
     });
 
     test('Calculates correct results when entryFees is set', () {
@@ -125,6 +129,32 @@ void main() {
       expect(result.effectiveRisk, closeTo(97.30, 1e-3));
       expect(result.toleratedRisk, closeTo(100, 1e-3));
       expect(result.stopLossAmount, closeTo(0.1414, 1e-3));
+      expect(result.entryPriceWithSlippage, closeTo(101, 1e-3));
+      expect(result.stopLossPriceWithSlippage, closeTo(94.05, 1e-3));
+      expect(result.stopLossPercentWithSlippage, closeTo(0.0688, 1e-3));
+      expect(result.stopLossPercent, closeTo(0.05, 1e-3));
+    });
+
+    test('Calculates correct results when slippage and fess are set', () {
+      calculator.accountSize = 10000;
+      calculator.entryPrice = 100;
+      calculator.stopLossPrice = 95;
+      calculator.riskPercent = 1;
+      calculator.slippagePercent = 1;
+      calculator.entryFees = 1;
+      calculator.exitFees = 1;
+
+      final result = calculator.value();
+
+      expect(result.shares, 11);
+      expect(result.positionAmount, closeTo(1111, 1e-3));
+      expect(result.effectiveRisk, closeTo(97.91, 0.01));
+      expect(result.toleratedRisk, closeTo(100, 0.01));
+      expect(result.stopLossAmount, closeTo(0.1111, 0.01));
+      expect(result.entryPriceWithSlippage, closeTo(101, 0.01));
+      expect(result.stopLossPriceWithSlippage, closeTo(94.05, 0.01));
+      expect(result.stopLossPercentWithSlippage, closeTo(0.0688, 0.001));
+      expect(result.stopLossPercent, closeTo(0.05, 0.01));
     });
 
     test('Calculates correct results when reward/risk is set', () {
@@ -144,6 +174,24 @@ void main() {
       expect(result.stopLossAmount, closeTo(0.1414, 1e-3));
       expect(result.takeProfitAmount, closeTo(194.6, 1e-3));
       expect(result.takeProfitPrice, closeTo(114.90, 1e-3));
+    });
+
+    test('should calculate riskPercent from stopLossAmount and accountSize',
+        () {
+      final calculator = MatexStockPositionSizeCalculator();
+
+      calculator.accountSize = 10000;
+      calculator.entryPrice = 100;
+      calculator.stopLossPrice = 95;
+      calculator.stopLossAmount = 200;
+
+      final result = calculator.value();
+
+      expect(result.shares, 40);
+      expect(result.positionAmount, closeTo(4000, 1e-3));
+      expect(result.effectiveRisk, closeTo(200.00, 1e-3));
+      expect(result.toleratedRisk, closeTo(200, 1e-3));
+      expect(result.stopLossAmount, closeTo(0.4, 1e-3));
     });
 
     test('Calculating position size should return correct results', () {
