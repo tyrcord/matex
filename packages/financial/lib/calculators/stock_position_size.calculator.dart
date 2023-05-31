@@ -1,5 +1,7 @@
+import 'package:decimal/decimal.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
+import 'package:t_helpers/helpers.dart';
 
 class MatexStockPositionSizeCalculator extends MatexCalculator<
     MatexStockPositionSizeCalculatorState,
@@ -55,26 +57,123 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
 
   @override
   MatexStockPositionSizeCalculatorResults value() {
-    final slippage = state.slippagePercent ?? 0.0;
-    final entryPrice = state.entryPrice ?? 0.0;
-    final riskPercent = state.riskPercent ?? 0.0;
-    final accountBalance = state.accountSize ?? 0.0;
-    final entryFees = state.entryFees ?? 0.0;
-    final exitFees = state.exitFees ?? 0.0;
-    final stopLossPrice = state.stopLossPrice ?? 0.0;
-    final rewardRisk = state.rewardRisk ?? 0.0;
-    final slippageRate = slippage / 100;
+    final slippage = toDecimal(state.slippagePercent ?? 0.0)!;
+    final entryPrice = toDecimal((state.entryPrice ?? 0.0))!;
+    final riskPercent = toDecimal((state.riskPercent ?? 0.0))!;
+    final accountBalance = toDecimal((state.accountSize ?? 0.0))!;
+    final entryFees = toDecimal((state.entryFees ?? 0.0))!;
+    final exitFees = toDecimal((state.exitFees ?? 0.0))!;
+    final stopLossPrice = toDecimal((state.stopLossPrice ?? 0.0))!;
+    final rewardRisk = toDecimal((state.rewardRisk ?? 0.0))!;
+    final slippageRate = calculateSlippageRate(slippage);
 
-    // Adjust for slippage
-    final adjustedEntryPrice = entryPrice * (1 + slippageRate);
-    final adjustedStopLossPrice = stopLossPrice * (1 - slippageRate);
+    final adjustedEntryPrice = adjustEntryPriceForSlippage(
+      entryPrice,
+      slippageRate,
+    );
+    final adjustedStopLossPrice = adjustStopLossPriceForSlippage(
+      stopLossPrice,
+      slippageRate,
+    );
 
-    // Adjust for entry and exit fees
-    final adjustedEntryPriceWithFees =
-        adjustedEntryPrice * (1 + entryFees / 100);
-    final adjustedStopLossPriceWithFees =
-        adjustedStopLossPrice * (1 - exitFees / 100);
+    final adjustedEntryPriceWithFees = adjustEntryPriceForFees(
+      adjustedEntryPrice,
+      entryFees,
+    );
 
+    final adjustedStopLossPriceWithFees = adjustStopLossPriceForFees(
+      adjustedStopLossPrice,
+      exitFees,
+    );
+
+    final shares = calculateShares(
+      stopLossPrice.toDouble(),
+      entryPrice.toDouble(),
+      accountBalance.toDouble(),
+      entryFees.toDouble(),
+      exitFees.toDouble(),
+      riskPercent.toDouble(),
+      slippage.toDouble(),
+    );
+
+    final positionAmount = calculatePositionAmount(shares, adjustedEntryPrice);
+
+    final effectiveRisk = calculateEffectiveRisk(
+      shares,
+      adjustedEntryPriceWithFees,
+      adjustedStopLossPriceWithFees,
+    );
+
+    final takeProfitPrice = calculateTakeProfitPrice(
+      adjustedEntryPrice,
+      effectiveRisk,
+      shares,
+      rewardRisk,
+    );
+
+    return MatexStockPositionSizeCalculatorResults(
+      toleratedRisk: calculateToleratedRisk(
+        accountBalance,
+        riskPercent,
+      ).toDouble(),
+      stopLossAmount: calculateStopLossAmount(
+        positionAmount,
+        accountBalance,
+      ).toDouble(),
+      takeProfitAmount: calculateTakeProfitAmount(
+        effectiveRisk,
+        rewardRisk,
+      ).toDouble(),
+      takeProfitPrice: takeProfitPrice.toDouble(),
+      positionAmount: positionAmount.toDouble(),
+      effectiveRisk: effectiveRisk.toDouble(),
+      shares: shares.toDouble(),
+    );
+  }
+
+  Decimal calculateSlippageRate(Decimal slippage) {
+    return decimalFromRational(slippage / dHundred);
+  }
+
+  // Adjust for slippage
+  // final adjustedEntryPrice = entryPrice * (1 + slippageRate);
+  // final adjustedStopLossPrice = stopLossPrice * (1 - slippageRate);
+
+  // Adjust for entry and exit fees
+  // final adjustedEntryPriceWithFees =
+  //     adjustedEntryPrice * (1 + entryFees / 100);
+  // final adjustedStopLossPriceWithFees =
+  //     adjustedStopLossPrice * (1 - exitFees / 100);
+
+  Decimal adjustEntryPriceForSlippage(Decimal price, Decimal slippageRate) {
+    return price * (dOne + slippageRate);
+  }
+
+  Decimal adjustStopLossPriceForSlippage(Decimal price, Decimal slippageRate) {
+    return price * (dOne - slippageRate);
+  }
+
+  Decimal adjustEntryPriceForFees(Decimal price, Decimal fees) {
+    final feesRate = decimalFromRational(fees / dHundred);
+
+    return price * (dOne + feesRate);
+  }
+
+  Decimal adjustStopLossPriceForFees(Decimal price, Decimal fees) {
+    final feesRate = decimalFromRational(fees / dHundred);
+
+    return price * (dOne - feesRate);
+  }
+
+  Decimal calculateShares(
+    double stopLossPrice,
+    double entryPrice,
+    double accountBalance,
+    double entryFees,
+    double exitFees,
+    double riskPercent,
+    double slippage,
+  ) {
     final shares = getShareAmount(
       stopLossPrice: stopLossPrice,
       entryPrice: entryPrice,
@@ -85,23 +184,47 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       slippage: slippage,
     );
 
-    final positionAmount = shares * adjustedEntryPrice;
+    return decimalFromDouble(shares)!;
+  }
 
-    final effectiveRisk = shares * adjustedEntryPriceWithFees -
-        shares * adjustedStopLossPriceWithFees;
+  Decimal calculatePositionAmount(Decimal shares, Decimal adjustedEntryPrice) {
+    return shares * adjustedEntryPrice;
+  }
 
-    // Calculate take profit price
-    final takeProfitPrice =
-        adjustedEntryPrice + (effectiveRisk / shares) * rewardRisk;
+  Decimal calculateEffectiveRisk(
+    Decimal shares,
+    Decimal entryPriceWithFees,
+    Decimal stopLossPriceWithFees,
+  ) {
+    //   final effectiveRisk = shares * adjustedEntryPriceWithFees - shares * adjustedStopLossPriceWithFees;
+    return shares * entryPriceWithFees - shares * stopLossPriceWithFees;
+  }
 
-    return MatexStockPositionSizeCalculatorResults(
-      toleratedRisk: accountBalance * (riskPercent / 100),
-      involvedCapital: positionAmount / accountBalance,
-      takeProfitAmount: effectiveRisk * rewardRisk,
-      positionAmount: positionAmount,
-      effectiveRisk: effectiveRisk,
-      takeProfitPrice: takeProfitPrice,
-      shares: shares,
-    );
+  Decimal calculateTakeProfitPrice(
+    Decimal adjustedEntryPrice,
+    Decimal effectiveRisk,
+    Decimal shares,
+    Decimal rewardRisk,
+  ) {
+    final riskPerShare = decimalFromRational(effectiveRisk / shares);
+
+    return adjustedEntryPrice + riskPerShare * rewardRisk;
+  }
+
+  Decimal calculateToleratedRisk(Decimal accountBalance, Decimal riskPercent) {
+    final riskRate = decimalFromRational(riskPercent / dHundred);
+
+    return accountBalance * riskRate;
+  }
+
+  Decimal calculateStopLossAmount(
+    Decimal positionAmount,
+    Decimal accountBalance,
+  ) {
+    return decimalFromRational(positionAmount / accountBalance);
+  }
+
+  Decimal calculateTakeProfitAmount(Decimal effectiveRisk, Decimal rewardRisk) {
+    return effectiveRisk * rewardRisk;
   }
 }

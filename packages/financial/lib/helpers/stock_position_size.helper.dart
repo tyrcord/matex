@@ -1,3 +1,6 @@
+import 'package:decimal/decimal.dart';
+import 'package:t_helpers/helpers.dart';
+
 double getShareAmount({
   required double accountBalance,
   required double risk,
@@ -8,50 +11,62 @@ double getShareAmount({
   double slippage = 0.0,
   bool fractionalStocks = false,
 }) {
-  if (accountBalance <= 0 ||
-      risk <= 0 ||
-      entryPrice <= 0 ||
-      stopLossPrice <= 0) {
-    return 0;
+  final dAccountBalance = toDecimal(accountBalance)!;
+  final dRisk = toDecimal(risk)!;
+  final dEntryPrice = toDecimal(entryPrice)!;
+  final dStopLossPrice = toDecimal(stopLossPrice)!;
+  final dEntryFees = toDecimal(entryFees)!;
+  final dExitFees = toDecimal(exitFees)!;
+  final dSlippage = toDecimal(slippage)!;
+
+  if (dAccountBalance <= Decimal.zero ||
+      dRisk <= Decimal.zero ||
+      dEntryPrice <= Decimal.zero ||
+      dStopLossPrice <= Decimal.zero) {
+    return 0.0;
   }
 
   // Calculate the maximum amount to risk based on the account balance and
   // risk percentage
-  double maxRiskAmount = accountBalance * (risk / 100);
+  final dRiskRate = decimalFromRational(dRisk / dHundred);
+  final maxRiskAmount = dAccountBalance * dRiskRate;
 
   // Adjust for slippage
-  double adjustedEntryPrice = entryPrice * (1 + slippage / 100);
-  double adjustedStopLossPrice = stopLossPrice * (1 - slippage / 100);
+  final dSlippageRate = decimalFromRational(dSlippage / dHundred);
+  Decimal adjustedEntryPrice = dEntryPrice * (dOne + dSlippageRate);
+  Decimal adjustedStopLossPrice = dStopLossPrice * (dOne - dSlippageRate);
 
   // Calculate the difference between the adjusted entry price and
   // adjusted stop loss
-  double priceDifference = adjustedEntryPrice - adjustedStopLossPrice;
+  Decimal priceDifference = adjustedEntryPrice - adjustedStopLossPrice;
 
-  if (priceDifference <= 0) {
-    return 0;
+  if (priceDifference <= Decimal.zero) {
+    return 0.0;
   }
 
   // Calculate the position size
-  double positionSize = maxRiskAmount / priceDifference;
+  Decimal positionSize = decimalFromRational(maxRiskAmount / priceDifference);
 
   // Adjust for entry and exit fees
-  adjustedEntryPrice = adjustedEntryPrice * (1 + entryFees / 100);
-  adjustedStopLossPrice = adjustedStopLossPrice * (1 - exitFees / 100);
+  final dEntryFeesRate = decimalFromRational(dEntryFees / dHundred);
+  final dExitFeesRate = decimalFromRational(dExitFees / dHundred);
+  adjustedEntryPrice = adjustedEntryPrice * (dOne + dEntryFeesRate);
+  adjustedStopLossPrice = adjustedStopLossPrice * (dOne - dExitFeesRate);
 
   // Recalculate price difference considering worst case scenario and
   // update positionSize
   priceDifference = adjustedEntryPrice - adjustedStopLossPrice;
 
-  if (priceDifference <= 0) {
-    return 0;
+  if (priceDifference <= Decimal.zero) {
+    return 0.0;
   }
 
-  positionSize = maxRiskAmount / priceDifference;
+  positionSize = decimalFromRational(maxRiskAmount / priceDifference);
 
   // Adjust the position size for fractional stocks if enabled
   if (!fractionalStocks) {
-    positionSize = positionSize.floor().toDouble();
+    positionSize = Decimal.parse(positionSize.floor().toString());
   }
 
-  return positionSize;
+  return positionSize.toDouble();
 }
