@@ -5,7 +5,7 @@ void main() {
   group('getShareAmount', () {
     test('should calculate position size correctly', () {
       const accountBalance = 10000.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 50.0;
       const stopLossPrice = 45.0;
 
@@ -21,7 +21,7 @@ void main() {
 
     test('should return 0 if account balance is 0', () {
       const accountBalance = 0.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 50.0;
       const stopLossPrice = 45.0;
 
@@ -53,7 +53,7 @@ void main() {
 
     test('should return 0 if entry price is 0', () {
       const accountBalance = 10000.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 0.0;
       const stopLossPrice = 45.0;
 
@@ -69,7 +69,7 @@ void main() {
 
     test('should return 0 if stop loss price is 0', () {
       const accountBalance = 10000.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 50.0;
       const stopLossPrice = 0.0;
 
@@ -85,7 +85,7 @@ void main() {
 
     test('should return 0 if price difference is 0', () {
       const accountBalance = 10000.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 50.0;
       const stopLossPrice = 50.0;
 
@@ -103,7 +103,7 @@ void main() {
         'should adjust position size for fractional stocks when '
         'fractionalStocks is false', () {
       const accountBalance = 10000.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 52.0;
       const stopLossPrice = 45.0;
       const fractionalStocks = false;
@@ -123,7 +123,7 @@ void main() {
         'should adjust position size for fractional stocks when'
         ' fractionalStocks is true', () {
       const accountBalance = 10000.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 52.0;
       const stopLossPrice = 45.0;
       const fractionalStocks = true;
@@ -141,10 +141,10 @@ void main() {
 
     test('should adjust position size for fees', () {
       const accountBalance = 10000.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 50.0;
       const stopLossPrice = 45.0;
-      const fees = 1.0;
+      const fees = 0.01;
 
       final positionSize = getShareAmount(
         accountBalance: accountBalance,
@@ -160,10 +160,10 @@ void main() {
 
     test('should adjust stop loss price for slippage', () {
       const accountBalance = 10000.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 50.0;
       const stopLossPrice = 45.0;
-      const slippage = 0.5;
+      const slippage = 0.005;
 
       final positionSize = getShareAmount(
         accountBalance: accountBalance,
@@ -178,7 +178,7 @@ void main() {
 
     test('should return 0 if account balance is negative', () {
       const accountBalance = -10000.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 50.0;
       const stopLossPrice = 45.0;
 
@@ -194,7 +194,7 @@ void main() {
 
     test('should handle large account balance and risk percentage', () {
       const accountBalance = 1e9; // 1 billion
-      const risk = 10.0;
+      const risk = 0.1;
       const entryPrice = 100.0;
       const stopLossPrice = 90.0;
 
@@ -210,7 +210,7 @@ void main() {
 
     test('should handle extremely small price difference', () {
       const accountBalance = 10000.0;
-      const risk = 2.0;
+      const risk = 0.02;
       const entryPrice = 1000.0;
       const stopLossPrice = 999.999;
 
@@ -226,7 +226,7 @@ void main() {
 
     test('should handle negative risk percentage', () {
       const accountBalance = 10000.0;
-      const risk = -2.0;
+      const risk = -0.02;
       const entryPrice = 50.0;
       const stopLossPrice = 45.0;
 

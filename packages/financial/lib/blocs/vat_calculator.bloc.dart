@@ -170,14 +170,12 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
 
   @override
   Future<void> resetCalculator(MatexVatCalculatorBlocDocument document) async {
-    var dParse = Decimal.tryParse;
-    var dZero = Decimal.zero;
-    var vatRate = dParse(document.vatRate ?? '0') ?? dZero;
-    var customVatRate = dParse(document.customVatRate ?? '0') ?? dZero;
-    var tipRate = dParse(document.tipRate ?? '0') ?? dZero;
-    var discountRate = dParse(document.discountRate ?? '0') ?? dZero;
-    var federalVatRate = dParse(document.federalVatRate ?? '0') ?? dZero;
-    var regionalVatRate = dParse(document.regionalVatRate ?? '0') ?? dZero;
+    var vatRate = toDecimal(document.vatRate) ?? dZero;
+    var customVatRate = toDecimal(document.customVatRate) ?? dZero;
+    var tipRate = toDecimal(document.tipRate) ?? dZero;
+    var discountRate = toDecimal(document.discountRate) ?? dZero;
+    var federalVatRate = toDecimal(document.federalVatRate) ?? dZero;
+    var regionalVatRate = toDecimal(document.regionalVatRate) ?? dZero;
 
     calculator.setState(MatexVatCalculatorState(
       priceBeforeVat: parseStringToDouble(document.priceBeforeVat),
@@ -211,7 +209,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchPriceBeforeVat(String value) {
-    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(priceBeforeVat: value);
     calculator.priceBeforeVat = dValue.toDouble();
 
@@ -219,7 +217,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchCustomVatRate(String value) {
-    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(customVatRate: value);
     calculator.customVatRate = (dValue / dHundred).toDouble();
 
@@ -227,7 +225,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchVatRate(String value) {
-    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(vatRate: value);
     calculator.vatRate = (dValue / dHundred).toDouble();
 
@@ -235,7 +233,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchFederalVatRate(String value) {
-    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(federalVatRate: value);
     calculator.federalVatRate = (dValue / dHundred).toDouble();
 
@@ -243,7 +241,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchRegionalVatRate(String value) {
-    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(regionalVatRate: value);
     calculator.regionalVatRate = (dValue / dHundred).toDouble();
 
@@ -251,7 +249,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchDiscountAmount(String value) {
-    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(
       discountAmount: value,
       discountRate: '',
@@ -263,7 +261,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchDiscountRate(String value) {
-    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(
       discountRate: value,
       discountAmount: '',
@@ -275,7 +273,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchTipRate(String value) {
-    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(
       tipRate: value,
       tipAmount: '',
@@ -287,7 +285,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchTipAmount(String value) {
-    final dValue = Decimal.tryParse(value) ?? Decimal.zero;
+    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(
       tipAmount: value,
       tipRate: '',

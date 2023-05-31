@@ -28,13 +28,11 @@ double getShareAmount({
 
   // Calculate the maximum amount to risk based on the account balance and
   // risk percentage
-  final dRiskRate = decimalFromRational(dRisk / dHundred);
-  final maxRiskAmount = dAccountBalance * dRiskRate;
+  final maxRiskAmount = dAccountBalance * dRisk;
 
   // Adjust for slippage
-  final dSlippageRate = decimalFromRational(dSlippage / dHundred);
-  Decimal adjustedEntryPrice = dEntryPrice * (dOne + dSlippageRate);
-  Decimal adjustedStopLossPrice = dStopLossPrice * (dOne - dSlippageRate);
+  Decimal adjustedEntryPrice = dEntryPrice * (dOne + dSlippage);
+  Decimal adjustedStopLossPrice = dStopLossPrice * (dOne - dSlippage);
 
   // Calculate the difference between the adjusted entry price and
   // adjusted stop loss
@@ -48,10 +46,8 @@ double getShareAmount({
   Decimal positionSize = decimalFromRational(maxRiskAmount / priceDifference);
 
   // Adjust for entry and exit fees
-  final dEntryFeesRate = decimalFromRational(dEntryFees / dHundred);
-  final dExitFeesRate = decimalFromRational(dExitFees / dHundred);
-  adjustedEntryPrice = adjustedEntryPrice * (dOne + dEntryFeesRate);
-  adjustedStopLossPrice = adjustedStopLossPrice * (dOne - dExitFeesRate);
+  adjustedEntryPrice = adjustedEntryPrice * (dOne + dEntryFees);
+  adjustedStopLossPrice = adjustedStopLossPrice * (dOne - dExitFees);
 
   // Recalculate price difference considering worst case scenario and
   // update positionSize

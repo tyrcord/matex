@@ -27,3 +27,7 @@ dev_dependencies:
   tstore: ">=0.8.8+1 <1.0.0"
   fastyle_forms: ">=0.0.5 <1.0.0"
   import_sorter: ^4.6.0
+
+dependency_overrides:
+  t_helpers:
+    path: /Users/thibaultzanini/Dev/tyrcord/librairies/dart/t/packages/helpers

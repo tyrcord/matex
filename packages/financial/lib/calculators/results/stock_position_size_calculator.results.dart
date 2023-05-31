@@ -3,7 +3,7 @@ import 'package:tmodel_dart/tmodel_dart.dart';
 class MatexStockPositionSizeCalculatorResults extends TModel {
   final double? shares;
   final double? positionAmount;
-  final double? stopLossAmount;
+  final double? involvedCapital;
   final double? takeProfitAmount;
   final double? takeProfitPrice;
   final double? toleratedRisk;
@@ -16,7 +16,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
   const MatexStockPositionSizeCalculatorResults({
     this.shares,
     this.positionAmount,
-    this.stopLossAmount,
+    this.involvedCapital,
     this.takeProfitAmount,
     this.takeProfitPrice,
     this.toleratedRisk,
@@ -34,7 +34,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
   MatexStockPositionSizeCalculatorResults copyWith({
     double? shares,
     double? positionAmount,
-    double? stopLossAmount,
+    double? involvedCapital,
     double? takeProfitAmount,
     double? takeProfitPrice,
     double? toleratedRisk,
@@ -47,7 +47,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     return MatexStockPositionSizeCalculatorResults(
       shares: shares ?? this.shares,
       positionAmount: positionAmount ?? this.positionAmount,
-      stopLossAmount: stopLossAmount ?? this.stopLossAmount,
+      involvedCapital: involvedCapital ?? this.involvedCapital,
       takeProfitAmount: takeProfitAmount ?? this.takeProfitAmount,
       takeProfitPrice: takeProfitPrice ?? this.takeProfitPrice,
       toleratedRisk: toleratedRisk ?? this.toleratedRisk,
@@ -69,7 +69,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     return copyWith(
       shares: model.shares,
       positionAmount: model.positionAmount,
-      stopLossAmount: model.stopLossAmount,
+      involvedCapital: model.involvedCapital,
       takeProfitAmount: model.takeProfitAmount,
       takeProfitPrice: model.takeProfitPrice,
       toleratedRisk: model.toleratedRisk,
@@ -85,7 +85,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
   List<Object?> get props => [
         shares,
         positionAmount,
-        stopLossAmount,
+        involvedCapital,
         takeProfitAmount,
         takeProfitPrice,
         toleratedRisk,

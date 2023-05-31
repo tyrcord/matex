@@ -65,10 +65,9 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     if (state.riskPercent != null) {
       riskPercent = toDecimal((state.riskPercent ?? 0.0))!;
     } else if (stopLossAmount != dZero && accountBalance != dZero) {
-      final stopLossAmountRatio = decimalFromRational(
+      riskPercent = decimalFromRational(
         stopLossAmount / accountBalance,
       );
-      riskPercent = stopLossAmountRatio * dHundred;
     } else {
       throw Exception(
         'Either riskPercent should be provided or both stopLossAmount and '
@@ -82,15 +81,14 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     final exitFees = toDecimal((state.exitFees ?? 0.0))!;
     final stopLossPrice = toDecimal((state.stopLossPrice ?? 0.0))!;
     final rewardRisk = toDecimal((state.rewardRisk ?? 0.0))!;
-    final slippageRate = calculateSlippageRate(slippage);
 
     final adjustedEntryPrice = adjustEntryPriceForSlippage(
       entryPrice,
-      slippageRate,
+      slippage,
     );
     final adjustedStopLossPrice = adjustStopLossPriceForSlippage(
       stopLossPrice,
-      slippageRate,
+      slippage,
     );
 
     final adjustedEntryPriceWithFees = adjustEntryPriceForFees(
@@ -147,7 +145,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
         accountBalance,
         riskPercent,
       ).toDouble(),
-      stopLossAmount: calculateStopLossAmount(
+      involvedCapital: calculateStopLossAmount(
         positionAmount,
         accountBalance,
       ).toDouble(),
@@ -156,10 +154,6 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
         rewardRisk,
       ).toDouble(),
     );
-  }
-
-  Decimal calculateSlippageRate(Decimal slippage) {
-    return decimalFromRational(slippage / dHundred);
   }
 
   Decimal adjustEntryPriceForSlippage(Decimal price, Decimal slippageRate) {
@@ -171,15 +165,11 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
   }
 
   Decimal adjustEntryPriceForFees(Decimal price, Decimal fees) {
-    final feesRate = decimalFromRational(fees / dHundred);
-
-    return price * (dOne + feesRate);
+    return price * (dOne + fees);
   }
 
   Decimal adjustStopLossPriceForFees(Decimal price, Decimal fees) {
-    final feesRate = decimalFromRational(fees / dHundred);
-
-    return price * (dOne - feesRate);
+    return price * (dOne - fees);
   }
 
   Decimal calculateShares(
@@ -228,9 +218,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
   }
 
   Decimal calculateToleratedRisk(Decimal accountBalance, Decimal riskPercent) {
-    final riskRate = decimalFromRational(riskPercent / dHundred);
-
-    return accountBalance * riskRate;
+    return accountBalance * riskPercent;
   }
 
   Decimal calculateStopLossAmount(
