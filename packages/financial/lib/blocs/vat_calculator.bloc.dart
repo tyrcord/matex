@@ -2,7 +2,6 @@
 import 'package:flutter/foundation.dart';
 
 // Package imports:
-import 'package:decimal/decimal.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
@@ -110,13 +109,13 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
 
       if (key == MatexVatCalculatorBlocKey.tipFieldType) {
         return document.copyWith(
-          tipFieldType: value?.toString(),
+          tipFieldType: value.toString(),
           tipAmount: '',
           tipRate: '',
         );
       } else if (key == MatexVatCalculatorBlocKey.discountFieldType) {
         return document.copyWith(
-          discountFieldType: value?.toString(),
+          discountFieldType: value.toString(),
           discountAmount: '',
           discountRate: '',
         );
@@ -255,6 +254,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       discountRate: '',
     );
 
+    // also reset discount rate
     calculator.discountAmount = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
@@ -267,6 +267,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       discountAmount: '',
     );
 
+    // also reset discount amount
     calculator.discountRate = (dValue / dHundred).toDouble();
 
     return currentState.copyWith(fields: fields);
@@ -279,6 +280,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       tipAmount: '',
     );
 
+    // also reset tip amount
     calculator.tipRate = (dValue / dHundred).toDouble();
 
     return currentState.copyWith(fields: fields);
@@ -291,32 +293,33 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       tipRate: '',
     );
 
+    // also reset tip rate
     calculator.tipAmount = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  Future<MatexVatCalculatorBlocState?> patchTipFieldType(dynamic value) async {
+  MatexVatCalculatorBlocState patchTipFieldType(dynamic value) {
     final fields = currentState.fields.copyWith(
       tipFieldType: value.toString(),
       tipAmount: '',
       tipRate: '',
     );
 
+    // also reset tip rate
     calculator.tipAmount = 0;
 
     return currentState.copyWith(fields: fields);
   }
 
-  Future<MatexVatCalculatorBlocState?> patchDiscountFieldType(
-    String value,
-  ) async {
+  MatexVatCalculatorBlocState patchDiscountFieldType(String value) {
     final fields = currentState.fields.copyWith(
       discountFieldType: value.toString(),
       discountAmount: '',
       discountRate: '',
     );
 
+    // also reset discount rate
     calculator.discountAmount = 0;
 
     return currentState.copyWith(fields: fields);

@@ -12,6 +12,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
   final String? rewardRisk;
   final String? entryFees;
   final String? exitFees;
+  final String? riskFieldType;
 
   const MatexStockPositionSizeCalculatorBlocDocument({
     this.accountSize,
@@ -23,6 +24,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
     this.rewardRisk,
     this.entryFees,
     this.exitFees,
+    this.riskFieldType,
   });
 
   @override
@@ -39,6 +41,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
     String? rewardRisk,
     String? entryFees,
     String? exitFees,
+    String? riskFieldType,
   }) {
     return MatexStockPositionSizeCalculatorBlocDocument(
       accountSize: accountSize ?? this.accountSize,
@@ -50,6 +53,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       rewardRisk: rewardRisk ?? this.rewardRisk,
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
+      riskFieldType: riskFieldType ?? this.riskFieldType,
     );
   }
 
@@ -67,6 +71,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       rewardRisk: model.rewardRisk,
       entryFees: model.entryFees,
       exitFees: model.exitFees,
+      riskFieldType: model.riskFieldType,
     );
   }
 
@@ -82,6 +87,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       'rewardRisk': rewardRisk,
       'entryFees': entryFees,
       'exitFees': exitFees,
+      'riskFieldType': riskFieldType,
     };
   }
 
@@ -97,6 +103,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       rewardRisk: rewardRisk,
       entryFees: entryFees,
       exitFees: exitFees,
+      riskFieldType: riskFieldType,
     );
   }
 
@@ -113,6 +120,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       rewardRisk: json['rewardRisk'] as String?,
       entryFees: json['entryFees'] as String?,
       exitFees: json['exitFees'] as String?,
+      riskFieldType: json['riskFieldType'] as String?,
     );
   }
 
@@ -127,5 +135,6 @@ class MatexStockPositionSizeCalculatorBlocDocument
         rewardRisk,
         entryFees,
         exitFees,
+        riskFieldType,
       ];
 }

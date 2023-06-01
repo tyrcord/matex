@@ -1,4 +1,5 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
@@ -37,6 +38,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       toleratedRisk: results.toleratedRisk,
       effectiveRisk: results.effectiveRisk,
       stopLossPercent: results.stopLossPercent,
+      riskPercent: results.riskPercent,
       stopLossPercentWithSlippage: results.stopLossPercentWithSlippage,
       stopLossPriceWithSlippage: results.stopLossPriceWithSlippage,
       entryPriceWithSlippage: results.entryPriceWithSlippage,
@@ -44,6 +46,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       formattedPositionAmount: localizeCurrency(value: results.positionAmount),
       formattedToleratedRisk: localizeCurrency(value: results.toleratedRisk),
       formattedEffectiveRisk: localizeCurrency(value: results.effectiveRisk),
+      formattedRiskPercent: localizePercentage(value: results.riskPercent),
       formattedInvolvedCapital: localizePercentage(
         value: results.involvedCapital,
       ),
@@ -73,24 +76,40 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (key == MatexStockPositionSizeCalculatorBlocKey.accountSize) {
-      return document.copyWith(accountSize: value?.toString());
-    } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryPrice) {
-      return document.copyWith(entryPrice: value?.toString());
-    } else if (key == MatexStockPositionSizeCalculatorBlocKey.stopLossPrice) {
-      return document.copyWith(stopLossPrice: value?.toString());
-    } else if (key == MatexStockPositionSizeCalculatorBlocKey.stopLossAmount) {
-      return document.copyWith(stopLossAmount: value?.toString());
-    } else if (key == MatexStockPositionSizeCalculatorBlocKey.slippagePercent) {
-      return document.copyWith(slippagePercent: value?.toString());
-    } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskPercent) {
-      return document.copyWith(riskPercent: value?.toString());
-    } else if (key == MatexStockPositionSizeCalculatorBlocKey.rewardRisk) {
-      return document.copyWith(rewardRisk: value?.toString());
-    } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryFees) {
-      return document.copyWith(entryFees: value?.toString());
-    } else if (key == MatexStockPositionSizeCalculatorBlocKey.exitFees) {
-      return document.copyWith(exitFees: value?.toString());
+    if (value is String) {
+      if (key == MatexStockPositionSizeCalculatorBlocKey.accountSize) {
+        return document.copyWith(accountSize: value.toString());
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryPrice) {
+        return document.copyWith(entryPrice: value.toString());
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.stopLossPrice) {
+        return document.copyWith(stopLossPrice: value.toString());
+      } else if (key ==
+          MatexStockPositionSizeCalculatorBlocKey.stopLossAmount) {
+        return document.copyWith(stopLossAmount: value.toString());
+      } else if (key ==
+          MatexStockPositionSizeCalculatorBlocKey.slippagePercent) {
+        return document.copyWith(slippagePercent: value.toString());
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskPercent) {
+        return document.copyWith(riskPercent: value.toString());
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.rewardRisk) {
+        return document.copyWith(rewardRisk: value.toString());
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryFees) {
+        return document.copyWith(entryFees: value.toString());
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.exitFees) {
+        return document.copyWith(exitFees: value.toString());
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
+        return document.copyWith(riskFieldType: value.toString());
+      }
+    } else if (value is Enum) {
+      value = describeEnum(value);
+
+      if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
+        return document.copyWith(
+          riskFieldType: value.toString(),
+          stopLossAmount: '',
+          riskPercent: '',
+        );
+      }
     }
 
     return null;
@@ -122,6 +141,12 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         return patchEntryFees(value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.exitFees) {
         return patchExitFees(value);
+      }
+    } else if (value is Enum) {
+      value = describeEnum(value);
+
+      if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
+        return patchRiskFieldType(value);
       }
     }
 
@@ -193,26 +218,10 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchStopLossAmount(String value) {
-    final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(stopLossAmount: value);
-    calculator.stopLossAmount = dValue.toDouble();
-
-    return currentState.copyWith(fields: fields);
-  }
-
   MatexStockPositionSizeCalculatorBlocState patchSlippagePercent(String value) {
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(slippagePercent: value);
     calculator.slippagePercent = (dValue / dHundred).toDouble();
-
-    return currentState.copyWith(fields: fields);
-  }
-
-  MatexStockPositionSizeCalculatorBlocState patchRiskPercent(String value) {
-    final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(riskPercent: value);
-    calculator.riskPercent = (dValue / dHundred).toDouble();
 
     return currentState.copyWith(fields: fields);
   }
@@ -237,6 +246,47 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(exitFees: value);
     calculator.exitFees = (dValue / dHundred).toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexStockPositionSizeCalculatorBlocState patchRiskPercent(String value) {
+    final dValue = toDecimal(value) ?? dZero;
+    final fields = currentState.fields.copyWith(
+      riskPercent: value,
+      stopLossAmount: '',
+    );
+
+    // also reset stop loss amount
+    calculator.riskPercent = (dValue / dHundred).toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexStockPositionSizeCalculatorBlocState patchStopLossAmount(String value) {
+    final dValue = toDecimal(value) ?? dZero;
+    final fields = currentState.fields.copyWith(
+      stopLossAmount: value,
+      riskPercent: '',
+    );
+
+    // also reset risk percent
+    calculator.stopLossAmount = dValue.toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexStockPositionSizeCalculatorBlocState patchRiskFieldType(
+    String value,
+  ) {
+    final fields = currentState.fields.copyWith(
+      riskFieldType: value.toString(),
+      stopLossAmount: '',
+      riskPercent: '',
+    );
+
+    // also reset stop loss amount
+    calculator.riskPercent = 0;
 
     return currentState.copyWith(fields: fields);
   }

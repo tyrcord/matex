@@ -10,6 +10,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
   final String? rewardRisk;
   final String? entryFees;
   final String? exitFees;
+  final String? riskFieldType;
 
   const MatexStockPositionSizeCalculatorBlocFields({
     this.accountSize,
@@ -21,7 +22,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
     this.rewardRisk,
     this.entryFees,
     this.exitFees,
-  });
+    String? riskFieldType,
+  }) : riskFieldType = riskFieldType ?? 'percent';
 
   @override
   MatexStockPositionSizeCalculatorBlocFields clone() => copyWith();
@@ -37,6 +39,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
     String? rewardRisk,
     String? entryFees,
     String? exitFees,
+    String? riskFieldType,
   }) {
     return MatexStockPositionSizeCalculatorBlocFields(
       accountSize: accountSize ?? this.accountSize,
@@ -48,6 +51,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
       rewardRisk: rewardRisk ?? this.rewardRisk,
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
+      riskFieldType: riskFieldType ?? this.riskFieldType,
     );
   }
 
@@ -65,6 +69,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
       rewardRisk: model.rewardRisk,
       entryFees: model.entryFees,
       exitFees: model.exitFees,
+      riskFieldType: model.riskFieldType,
     );
   }
 
@@ -79,5 +84,6 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
         rewardRisk,
         entryFees,
         exitFees,
+        riskFieldType,
       ];
 }

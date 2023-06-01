@@ -31,10 +31,6 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     setState(state.copyWith(stopLossPrice: value));
   }
 
-  set stopLossAmount(double? value) {
-    setState(state.copyWith(stopLossAmount: value));
-  }
-
   set entryFees(double? value) {
     setState(state.copyWith(entryFees: value));
   }
@@ -47,8 +43,12 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     setState(state.copyWith(slippagePercent: value));
   }
 
+  set stopLossAmount(double? value) {
+    setState(state.copyWith(stopLossAmount: value, riskPercent: 0));
+  }
+
   set riskPercent(double? value) {
-    setState(state.copyWith(riskPercent: value));
+    setState(state.copyWith(riskPercent: value, stopLossAmount: 0));
   }
 
   set rewardRisk(double? value) {
@@ -62,7 +62,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     final accountBalance = toDecimal((state.accountSize ?? 0.0))!;
     final stopLossAmount = toDecimal(state.stopLossAmount ?? 0)!;
 
-    if (state.riskPercent != null) {
+    if (state.riskPercent != null && state.riskPercent != 0) {
       riskPercent = toDecimal((state.riskPercent ?? 0.0))!;
     } else if (stopLossAmount != dZero && accountBalance != dZero) {
       riskPercent = decimalFromRational(
@@ -132,6 +132,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       takeProfitPrice: takeProfitPrice.toDouble(),
       positionAmount: positionAmount.toDouble(),
       effectiveRisk: effectiveRisk.toDouble(),
+      riskPercent: riskPercent.toDouble(),
       shares: shares.toDouble(),
       stopLossPercentWithSlippage: calculatePercentageDecrease(
         adjustedEntryPrice.toDouble(),

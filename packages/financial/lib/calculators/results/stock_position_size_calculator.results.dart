@@ -12,6 +12,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
   final double? stopLossPercentWithSlippage;
   final double? stopLossPriceWithSlippage;
   final double? entryPriceWithSlippage;
+  final double? riskPercent;
 
   const MatexStockPositionSizeCalculatorResults({
     this.shares,
@@ -25,6 +26,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     this.stopLossPercentWithSlippage,
     this.stopLossPriceWithSlippage,
     this.entryPriceWithSlippage,
+    this.riskPercent,
   });
 
   @override
@@ -43,6 +45,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     double? stopLossPercentWithSlippage,
     double? stopLossPriceWithSlippage,
     double? entryPriceWithSlippage,
+    double? riskPercent,
   }) {
     return MatexStockPositionSizeCalculatorResults(
       shares: shares ?? this.shares,
@@ -59,6 +62,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
           stopLossPriceWithSlippage ?? this.stopLossPriceWithSlippage,
       entryPriceWithSlippage:
           entryPriceWithSlippage ?? this.entryPriceWithSlippage,
+      riskPercent: riskPercent ?? this.riskPercent,
     );
   }
 
@@ -78,6 +82,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
       stopLossPercentWithSlippage: model.stopLossPercentWithSlippage,
       stopLossPriceWithSlippage: model.stopLossPriceWithSlippage,
       entryPriceWithSlippage: model.entryPriceWithSlippage,
+      riskPercent: model.riskPercent,
     );
   }
 
@@ -94,5 +99,6 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
         stopLossPercentWithSlippage,
         stopLossPriceWithSlippage,
         entryPriceWithSlippage,
+        riskPercent,
       ];
 }

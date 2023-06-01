@@ -39,7 +39,7 @@ void main() {
       expect(state.accountSize, 10000.0);
       expect(state.entryPrice, 50.0);
       expect(state.stopLossPrice, 45.0);
-      expect(state.stopLossAmount, 500.0);
+      expect(state.stopLossAmount, 0.0);
       expect(state.slippagePercent, 0.01);
       expect(state.riskPercent, 0.02);
       expect(state.rewardRisk, 3.0);

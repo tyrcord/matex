@@ -8,4 +8,5 @@ class MatexStockPositionSizeCalculatorBlocKey {
   static const String rewardRisk = 'rewardRisk';
   static const String entryFees = 'entryFees';
   static const String exitFees = 'exitFees';
+  static const String riskFieldType = 'riskFieldType';
 }

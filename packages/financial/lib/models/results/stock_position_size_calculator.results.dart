@@ -14,6 +14,7 @@ class MatexStockPositionSizeCalculatorBlocResults
   final double? stopLossPercentWithSlippage;
   final double? stopLossPriceWithSlippage;
   final double? entryPriceWithSlippage;
+  final double? riskPercent;
   final String? formattedShares;
   final String? formattedPositionAmount;
   final String? formattedInvolvedCapital;
@@ -25,6 +26,7 @@ class MatexStockPositionSizeCalculatorBlocResults
   final String? formattedStopLossPercentWithSlippage;
   final String? formattedStopLossPriceWithSlippage;
   final String? formattedEntryPriceWithSlippage;
+  final String? formattedRiskPercent;
 
   const MatexStockPositionSizeCalculatorBlocResults({
     this.shares,
@@ -38,6 +40,7 @@ class MatexStockPositionSizeCalculatorBlocResults
     this.stopLossPercentWithSlippage,
     this.stopLossPriceWithSlippage,
     this.entryPriceWithSlippage,
+    this.riskPercent,
     this.formattedShares,
     this.formattedPositionAmount,
     this.formattedInvolvedCapital,
@@ -49,6 +52,7 @@ class MatexStockPositionSizeCalculatorBlocResults
     this.formattedStopLossPercentWithSlippage,
     this.formattedStopLossPriceWithSlippage,
     this.formattedEntryPriceWithSlippage,
+    this.formattedRiskPercent,
   });
 
   factory MatexStockPositionSizeCalculatorBlocResults.fromCalculatorResults(
@@ -66,6 +70,7 @@ class MatexStockPositionSizeCalculatorBlocResults
       stopLossPercentWithSlippage: results.stopLossPercentWithSlippage,
       stopLossPriceWithSlippage: results.stopLossPriceWithSlippage,
       entryPriceWithSlippage: results.entryPriceWithSlippage,
+      riskPercent: results.riskPercent,
       formattedShares: results.shares?.toString(),
       formattedPositionAmount: results.positionAmount?.toString(),
       formattedInvolvedCapital: results.involvedCapital?.toString(),
@@ -80,6 +85,7 @@ class MatexStockPositionSizeCalculatorBlocResults
           results.stopLossPriceWithSlippage?.toString(),
       formattedEntryPriceWithSlippage:
           results.entryPriceWithSlippage?.toString(),
+      formattedRiskPercent: results.riskPercent?.toString(),
     );
   }
 
@@ -99,6 +105,7 @@ class MatexStockPositionSizeCalculatorBlocResults
     double? stopLossPercentWithSlippage,
     double? stopLossPriceWithSlippage,
     double? entryPriceWithSlippage,
+    double? riskPercent,
     String? formattedShares,
     String? formattedPositionAmount,
     String? formattedInvolvedCapital,
@@ -110,6 +117,7 @@ class MatexStockPositionSizeCalculatorBlocResults
     String? formattedStopLossPercentWithSlippage,
     String? formattedStopLossPriceWithSlippage,
     String? formattedEntryPriceWithSlippage,
+    String? formattedRiskPercent,
   }) {
     return MatexStockPositionSizeCalculatorBlocResults(
       shares: shares ?? this.shares,
@@ -126,6 +134,7 @@ class MatexStockPositionSizeCalculatorBlocResults
           stopLossPriceWithSlippage ?? this.stopLossPriceWithSlippage,
       entryPriceWithSlippage:
           entryPriceWithSlippage ?? this.entryPriceWithSlippage,
+      riskPercent: riskPercent ?? this.riskPercent,
       formattedShares: formattedShares ?? this.formattedShares,
       formattedPositionAmount:
           formattedPositionAmount ?? this.formattedPositionAmount,
@@ -148,6 +157,7 @@ class MatexStockPositionSizeCalculatorBlocResults
           this.formattedStopLossPriceWithSlippage,
       formattedEntryPriceWithSlippage: formattedEntryPriceWithSlippage ??
           this.formattedEntryPriceWithSlippage,
+      formattedRiskPercent: formattedRiskPercent ?? this.formattedRiskPercent,
     );
   }
 
@@ -167,6 +177,7 @@ class MatexStockPositionSizeCalculatorBlocResults
       stopLossPercentWithSlippage: model.stopLossPercentWithSlippage,
       stopLossPriceWithSlippage: model.stopLossPriceWithSlippage,
       entryPriceWithSlippage: model.entryPriceWithSlippage,
+      riskPercent: model.riskPercent,
       formattedShares: model.formattedShares,
       formattedPositionAmount: model.formattedPositionAmount,
       formattedInvolvedCapital: model.formattedInvolvedCapital,
@@ -180,6 +191,7 @@ class MatexStockPositionSizeCalculatorBlocResults
       formattedStopLossPriceWithSlippage:
           model.formattedStopLossPriceWithSlippage,
       formattedEntryPriceWithSlippage: model.formattedEntryPriceWithSlippage,
+      formattedRiskPercent: model.formattedRiskPercent,
     );
   }
 
@@ -196,6 +208,7 @@ class MatexStockPositionSizeCalculatorBlocResults
         stopLossPercentWithSlippage,
         stopLossPriceWithSlippage,
         entryPriceWithSlippage,
+        riskPercent,
         formattedShares,
         formattedPositionAmount,
         formattedInvolvedCapital,
@@ -207,5 +220,6 @@ class MatexStockPositionSizeCalculatorBlocResults
         formattedStopLossPercentWithSlippage,
         formattedStopLossPriceWithSlippage,
         formattedEntryPriceWithSlippage,
+        formattedRiskPercent,
       ];
 }
