@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:flutter/material.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:pdf/pdf.dart';
@@ -326,7 +327,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
-  Future<Uint8List> toPdf() async {
+  Future<Uint8List> toPdf(BuildContext context) async {
     // TODO: implement toPdf
     final font = await PdfGoogleFonts.barlowSemiCondensedMedium();
     final pdf = pw.Document();

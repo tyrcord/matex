@@ -121,7 +121,7 @@ abstract class MatexCalculatorBloc<
   @override
   Future<void> shareCalculatorState(BuildContext context) async {
     if (calculator.isValid) {
-      final pdfBytes = await toPdf();
+      final pdfBytes = await toPdf(context);
       final file = XFile.fromData(
         pdfBytes,
         mimeType: 'application/pdf',
@@ -137,7 +137,7 @@ abstract class MatexCalculatorBloc<
     }
   }
 
-  Future<Uint8List> toPdf() async {
+  Future<Uint8List> toPdf(BuildContext context) async {
     throw UnimplementedError('toPdf() is not implemented');
   }
 

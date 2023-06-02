@@ -1,8 +1,11 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:fastyle_dart/fastyle_dart.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:fastyle_forms/fastyle_forms.dart';
 
 const _kDefaultStockPositionSizeBlocState =
     MatexStockPositionSizeCalculatorBlocState(
@@ -289,5 +292,165 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     calculator.riskPercent = 0;
 
     return currentState.copyWith(fields: fields);
+  }
+
+  @override
+  Future<Uint8List> toPdf(BuildContext context) async {
+    final inputs = _buildInputReportEntries(context);
+    final results = _buildResultReportEntries(context);
+
+    final reporter = FastPdfCalculatorReporter();
+
+    return reporter.report(
+      title: 'Stock Position Size Calculation',
+      disclaimerText:
+          'Participating in financial markets involves risks that may lead to '
+          'financial losses. Please do not make trading or investment '
+          'decisions based solely on this information.',
+      inputs: inputs,
+      results: results,
+    );
+  }
+
+  List<FastReportEntry> _buildInputReportEntries(BuildContext context) {
+    final fields = currentState.fields;
+
+    final accountBalance = double.tryParse(fields.accountSize ?? '') ?? 0;
+    final stopLossAmount = double.tryParse(fields.stopLossAmount ?? '') ?? 0;
+    final risk = double.tryParse(fields.riskPercent ?? '') ?? 0;
+    final entryPrice = double.tryParse(fields.entryPrice ?? '') ?? 0;
+    final stopLossPrice = double.tryParse(fields.stopLossPrice ?? '') ?? 0;
+    final rewardRisk = double.tryParse(fields.rewardRisk ?? '') ?? 0;
+    final entryFees = double.tryParse(fields.entryFees ?? '') ?? 0;
+    final exitFees = double.tryParse(fields.exitFees ?? '') ?? 0;
+    final slippage = double.tryParse(fields.slippagePercent ?? '') ?? 0;
+
+    return [
+      FastReportEntry(
+        name: 'Account Balance',
+        value: localizeCurrency(value: accountBalance),
+      ),
+      if (fields.riskFieldType == FastAmountSwitchFieldType.amount.name)
+        FastReportEntry(
+          name: 'Stop Loss Amount',
+          value: localizeCurrency(value: stopLossAmount),
+        )
+      else
+        FastReportEntry(
+          name: 'Risk',
+          value: '${localizeNumber(value: risk)}%',
+        ),
+      FastReportEntry(
+        name: 'Entry Price',
+        value: localizeCurrency(value: entryPrice),
+      ),
+      FastReportEntry(
+        name: 'Stop Loss Price',
+        value: localizeCurrency(value: stopLossPrice),
+      ),
+      FastReportEntry(
+        name: 'Reward/Risk Ratio',
+        value: '${localizeNumber(value: rewardRisk)}:1',
+      ),
+      if (fields.entryFees != null && fields.entryFees!.isNotEmpty)
+        FastReportEntry(
+          name: 'Entry Fees',
+          value: '${localizeNumber(value: entryFees)}%',
+        ),
+      if (fields.exitFees != null && fields.exitFees!.isNotEmpty)
+        FastReportEntry(
+          name: 'Exit Fees',
+          value: '${localizeNumber(value: exitFees)}%',
+        ),
+      if (fields.slippagePercent != null && fields.slippagePercent!.isNotEmpty)
+        FastReportEntry(
+          name: 'Slippage',
+          value: '${localizeNumber(value: slippage)}%',
+        ),
+    ];
+  }
+
+  List<FastReportEntry> _buildResultReportEntries(BuildContext context) {
+    final results = currentState.results;
+    final palette = ThemeHelper.getPaletteColors(context);
+
+    return [
+      FastReportEntry(
+        name: 'Shares',
+        value: results.formattedShares.toString(),
+        color: palette.blueGray.mid,
+      ),
+      if (results.positionAmount != null && results.positionAmount != 0)
+        FastReportEntry(
+          name: 'Position Amount',
+          value: results.formattedPositionAmount!,
+          color: palette.orange.mid,
+        ),
+      if (results.takeProfitAmount != null && results.takeProfitAmount != 0)
+        FastReportEntry(
+          name: 'Take Profit Amount',
+          value: results.formattedTakeProfitAmount!,
+          color: palette.green.mid,
+        ),
+      if (results.takeProfitPrice != null && results.takeProfitPrice != 0)
+        FastReportEntry(
+          name: 'Take Profit Price',
+          value: results.formattedTakeProfitPrice!,
+        ),
+      if (results.toleratedRisk != null && results.toleratedRisk != 0)
+        FastReportEntry(
+          name: 'Tolerated Risk',
+          value: results.formattedToleratedRisk!,
+        ),
+      if (results.effectiveRisk != null &&
+          results.effectiveRisk != 0 &&
+          results.effectiveRisk != results.toleratedRisk)
+        FastReportEntry(
+          name: 'Effective Risk',
+          value: results.formattedEffectiveRisk!,
+          color: palette.red.mid,
+        ),
+      if (results.riskPercent != null &&
+          results.riskPercent != 0 &&
+          currentState.fields.riskFieldType ==
+              FastAmountSwitchFieldType.percent.name)
+        FastReportEntry(
+          name: 'Risk Percent',
+          value: results.formattedRiskPercent!,
+        ),
+      if (results.involvedCapital != null && results.involvedCapital != 0)
+        FastReportEntry(
+          name: 'Involved Capital',
+          value: results.formattedInvolvedCapital!,
+        ),
+      if (results.entryPriceWithSlippage != null &&
+          results.entryPriceWithSlippage != 0 &&
+          currentState.fields.slippagePercent != null &&
+          currentState.fields.slippagePercent!.isNotEmpty)
+        FastReportEntry(
+          name: 'Entry Price with Slippage',
+          value: results.formattedEntryPriceWithSlippage!,
+        ),
+      if (results.stopLossPriceWithSlippage != null &&
+          results.stopLossPriceWithSlippage != 0 &&
+          currentState.fields.slippagePercent != null &&
+          currentState.fields.slippagePercent!.isNotEmpty)
+        FastReportEntry(
+          name: 'Stop Loss Price with Slippage',
+          value: results.formattedStopLossPriceWithSlippage!,
+        ),
+      if (results.stopLossPercent != null && results.stopLossPercent != 0)
+        FastReportEntry(
+          name: 'Stop Loss Percent',
+          value: results.formattedStopLossPercent!,
+        ),
+      if (results.stopLossPercentWithSlippage != null &&
+          results.stopLossPercentWithSlippage != 0 &&
+          results.stopLossPercent != results.stopLossPercentWithSlippage)
+        FastReportEntry(
+          name: 'Stop Loss Percent with Slippage',
+          value: results.formattedStopLossPercentWithSlippage!,
+        ),
+    ];
   }
 }
