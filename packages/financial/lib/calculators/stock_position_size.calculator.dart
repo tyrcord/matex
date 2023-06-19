@@ -86,6 +86,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       entryPrice,
       slippage,
     );
+
     final adjustedStopLossPrice = adjustStopLossPriceForSlippage(
       stopLossPrice,
       slippage,
@@ -96,7 +97,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       entryFees,
     );
 
-    final adjustedStopLossPriceWithFees = adjustStopLossPriceForFees(
+    final adjustedStopLossPriceWithFees = adjustExitPriceForFees(
       adjustedStopLossPrice,
       exitFees,
     );
@@ -126,10 +127,38 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       rewardRisk,
     );
 
+    final adjustedTakeProfitPrice = adjustExitPriceForFees(
+      takeProfitPrice,
+      exitFees,
+    );
+
+    final takeProfitAmount = calculateTakeProfitAmount(
+      effectiveRisk,
+      rewardRisk,
+    );
+
+    // Calculate the total fees based on adjusted prices
+    final entryFeeAmount =
+        shares * (adjustedEntryPriceWithFees - adjustedEntryPrice);
+    final stopLossFeeAmount =
+        shares * (adjustedStopLossPrice - adjustedStopLossPriceWithFees);
+    final takeProfitFeeAmount =
+        shares * (takeProfitPrice - adjustedTakeProfitPrice);
+
+    final totalFeesForLossPosition = entryFeeAmount + stopLossFeeAmount;
+    final totalFeesForProfitPosition = entryFeeAmount + takeProfitFeeAmount;
+    final adjustedTakeProfitAmount = takeProfitAmount - takeProfitFeeAmount;
+
     return MatexStockPositionSizeCalculatorResults(
       stopLossPriceWithSlippage: adjustedStopLossPrice.toDouble(),
       entryPriceWithSlippage: adjustedEntryPrice.toDouble(),
+      takeProfitAmount: adjustedTakeProfitAmount.toDouble(),
       takeProfitPrice: takeProfitPrice.toDouble(),
+      entryFeeAmount: entryFeeAmount.toDouble(),
+      stopLossFeeAmount: stopLossFeeAmount.toDouble(),
+      takeProfitFeeAmount: takeProfitFeeAmount.toDouble(),
+      totalFeesForLossPosition: totalFeesForLossPosition.toDouble(),
+      totalFeesForProfitPosition: totalFeesForProfitPosition.toDouble(),
       positionAmount: positionAmount.toDouble(),
       effectiveRisk: effectiveRisk.toDouble(),
       riskPercent: riskPercent.toDouble(),
@@ -150,10 +179,6 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
         positionAmount,
         accountBalance,
       ).toDouble(),
-      takeProfitAmount: calculateTakeProfitAmount(
-        effectiveRisk,
-        rewardRisk,
-      ).toDouble(),
     );
   }
 
@@ -169,7 +194,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     return price * (dOne + fees);
   }
 
-  Decimal adjustStopLossPriceForFees(Decimal price, Decimal fees) {
+  Decimal adjustExitPriceForFees(Decimal price, Decimal fees) {
     return price * (dOne - fees);
   }
 

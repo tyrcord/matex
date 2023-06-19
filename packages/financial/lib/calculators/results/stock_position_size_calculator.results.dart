@@ -13,6 +13,11 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
   final double? stopLossPriceWithSlippage;
   final double? entryPriceWithSlippage;
   final double? riskPercent;
+  final double? totalFeesForLossPosition;
+  final double? entryFeeAmount;
+  final double? stopLossFeeAmount;
+  final double? takeProfitFeeAmount;
+  final double? totalFeesForProfitPosition;
 
   const MatexStockPositionSizeCalculatorResults({
     this.shares,
@@ -27,12 +32,16 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     this.stopLossPriceWithSlippage,
     this.entryPriceWithSlippage,
     this.riskPercent,
+    this.totalFeesForLossPosition,
+    this.entryFeeAmount,
+    this.stopLossFeeAmount,
+    this.takeProfitFeeAmount,
+    this.totalFeesForProfitPosition,
   });
 
   @override
   MatexStockPositionSizeCalculatorResults clone() => copyWith();
 
-  @override
   MatexStockPositionSizeCalculatorResults copyWith({
     double? shares,
     double? positionAmount,
@@ -46,6 +55,11 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     double? stopLossPriceWithSlippage,
     double? entryPriceWithSlippage,
     double? riskPercent,
+    double? totalFeesForLossPosition,
+    double? entryFeeAmount,
+    double? stopLossFeeAmount,
+    double? takeProfitFeeAmount,
+    double? totalFeesForProfitPosition,
   }) {
     return MatexStockPositionSizeCalculatorResults(
       shares: shares ?? this.shares,
@@ -63,6 +77,13 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
       entryPriceWithSlippage:
           entryPriceWithSlippage ?? this.entryPriceWithSlippage,
       riskPercent: riskPercent ?? this.riskPercent,
+      totalFeesForLossPosition:
+          totalFeesForLossPosition ?? this.totalFeesForLossPosition,
+      entryFeeAmount: entryFeeAmount ?? this.entryFeeAmount,
+      stopLossFeeAmount: stopLossFeeAmount ?? this.stopLossFeeAmount,
+      takeProfitFeeAmount: takeProfitFeeAmount ?? this.takeProfitFeeAmount,
+      totalFeesForProfitPosition:
+          totalFeesForProfitPosition ?? this.totalFeesForProfitPosition,
     );
   }
 
@@ -83,6 +104,11 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
       stopLossPriceWithSlippage: model.stopLossPriceWithSlippage,
       entryPriceWithSlippage: model.entryPriceWithSlippage,
       riskPercent: model.riskPercent,
+      totalFeesForLossPosition: model.totalFeesForLossPosition,
+      entryFeeAmount: model.entryFeeAmount,
+      stopLossFeeAmount: model.stopLossFeeAmount,
+      takeProfitFeeAmount: model.takeProfitFeeAmount,
+      totalFeesForProfitPosition: model.totalFeesForProfitPosition,
     );
   }
 
@@ -100,5 +126,10 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
         stopLossPriceWithSlippage,
         entryPriceWithSlippage,
         riskPercent,
+        totalFeesForLossPosition,
+        entryFeeAmount,
+        stopLossFeeAmount,
+        takeProfitFeeAmount,
+        totalFeesForProfitPosition,
       ];
 }

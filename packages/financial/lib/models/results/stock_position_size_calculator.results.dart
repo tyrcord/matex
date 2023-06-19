@@ -15,6 +15,10 @@ class MatexStockPositionSizeCalculatorBlocResults
   final double? stopLossPriceWithSlippage;
   final double? entryPriceWithSlippage;
   final double? riskPercent;
+  final double? totalFeesForLossPosition;
+  final double? entryFeeAmount;
+  final double? stopLossFeeAmount;
+  final double? takeProfitFeeAmount;
   final String? formattedShares;
   final String? formattedPositionAmount;
   final String? formattedInvolvedCapital;
@@ -27,6 +31,12 @@ class MatexStockPositionSizeCalculatorBlocResults
   final String? formattedStopLossPriceWithSlippage;
   final String? formattedEntryPriceWithSlippage;
   final String? formattedRiskPercent;
+  final String? formattedTotalFeesForLossPosition;
+  final String? formattedEntryFeeAmount;
+  final String? formattedStopLossFeeAmount;
+  final String? formattedTakeProfitFeeAmount;
+  final double? totalFeesForProfitPosition;
+  final String? formattedTotalFeesForProfitPosition;
 
   const MatexStockPositionSizeCalculatorBlocResults({
     this.shares,
@@ -41,6 +51,10 @@ class MatexStockPositionSizeCalculatorBlocResults
     this.stopLossPriceWithSlippage,
     this.entryPriceWithSlippage,
     this.riskPercent,
+    this.totalFeesForLossPosition,
+    this.entryFeeAmount,
+    this.stopLossFeeAmount,
+    this.takeProfitFeeAmount,
     this.formattedShares,
     this.formattedPositionAmount,
     this.formattedInvolvedCapital,
@@ -53,6 +67,12 @@ class MatexStockPositionSizeCalculatorBlocResults
     this.formattedStopLossPriceWithSlippage,
     this.formattedEntryPriceWithSlippage,
     this.formattedRiskPercent,
+    this.formattedTotalFeesForLossPosition,
+    this.formattedEntryFeeAmount,
+    this.formattedStopLossFeeAmount,
+    this.formattedTakeProfitFeeAmount,
+    this.totalFeesForProfitPosition,
+    this.formattedTotalFeesForProfitPosition,
   });
 
   factory MatexStockPositionSizeCalculatorBlocResults.fromCalculatorResults(
@@ -71,6 +91,10 @@ class MatexStockPositionSizeCalculatorBlocResults
       stopLossPriceWithSlippage: results.stopLossPriceWithSlippage,
       entryPriceWithSlippage: results.entryPriceWithSlippage,
       riskPercent: results.riskPercent,
+      totalFeesForLossPosition: results.totalFeesForLossPosition,
+      entryFeeAmount: results.entryFeeAmount,
+      stopLossFeeAmount: results.stopLossFeeAmount,
+      takeProfitFeeAmount: results.takeProfitFeeAmount,
       formattedShares: results.shares?.toString(),
       formattedPositionAmount: results.positionAmount?.toString(),
       formattedInvolvedCapital: results.involvedCapital?.toString(),
@@ -86,6 +110,13 @@ class MatexStockPositionSizeCalculatorBlocResults
       formattedEntryPriceWithSlippage:
           results.entryPriceWithSlippage?.toString(),
       formattedRiskPercent: results.riskPercent?.toString(),
+      formattedTotalFeesForLossPosition:
+          results.totalFeesForLossPosition?.toString(),
+      formattedEntryFeeAmount: results.entryFeeAmount?.toString(),
+      formattedStopLossFeeAmount: results.stopLossFeeAmount?.toString(),
+      formattedTakeProfitFeeAmount: results.takeProfitFeeAmount?.toString(),
+      totalFeesForProfitPosition: null,
+      formattedTotalFeesForProfitPosition: null,
     );
   }
 
@@ -106,6 +137,10 @@ class MatexStockPositionSizeCalculatorBlocResults
     double? stopLossPriceWithSlippage,
     double? entryPriceWithSlippage,
     double? riskPercent,
+    double? totalFeesForLossPosition,
+    double? entryFeeAmount,
+    double? stopLossFeeAmount,
+    double? takeProfitFeeAmount,
     String? formattedShares,
     String? formattedPositionAmount,
     String? formattedInvolvedCapital,
@@ -118,6 +153,12 @@ class MatexStockPositionSizeCalculatorBlocResults
     String? formattedStopLossPriceWithSlippage,
     String? formattedEntryPriceWithSlippage,
     String? formattedRiskPercent,
+    String? formattedTotalFeesForLossPosition,
+    String? formattedEntryFeeAmount,
+    String? formattedStopLossFeeAmount,
+    String? formattedTakeProfitFeeAmount,
+    double? totalFeesForProfitPosition,
+    String? formattedTotalFeesForProfitPosition,
   }) {
     return MatexStockPositionSizeCalculatorBlocResults(
       shares: shares ?? this.shares,
@@ -135,6 +176,11 @@ class MatexStockPositionSizeCalculatorBlocResults
       entryPriceWithSlippage:
           entryPriceWithSlippage ?? this.entryPriceWithSlippage,
       riskPercent: riskPercent ?? this.riskPercent,
+      totalFeesForLossPosition:
+          totalFeesForLossPosition ?? this.totalFeesForLossPosition,
+      entryFeeAmount: entryFeeAmount ?? this.entryFeeAmount,
+      stopLossFeeAmount: stopLossFeeAmount ?? this.stopLossFeeAmount,
+      takeProfitFeeAmount: takeProfitFeeAmount ?? this.takeProfitFeeAmount,
       formattedShares: formattedShares ?? this.formattedShares,
       formattedPositionAmount:
           formattedPositionAmount ?? this.formattedPositionAmount,
@@ -158,6 +204,19 @@ class MatexStockPositionSizeCalculatorBlocResults
       formattedEntryPriceWithSlippage: formattedEntryPriceWithSlippage ??
           this.formattedEntryPriceWithSlippage,
       formattedRiskPercent: formattedRiskPercent ?? this.formattedRiskPercent,
+      formattedTotalFeesForLossPosition: formattedTotalFeesForLossPosition ??
+          this.formattedTotalFeesForLossPosition,
+      formattedEntryFeeAmount:
+          formattedEntryFeeAmount ?? this.formattedEntryFeeAmount,
+      formattedStopLossFeeAmount:
+          formattedStopLossFeeAmount ?? this.formattedStopLossFeeAmount,
+      formattedTakeProfitFeeAmount:
+          formattedTakeProfitFeeAmount ?? this.formattedTakeProfitFeeAmount,
+      totalFeesForProfitPosition:
+          totalFeesForProfitPosition ?? this.totalFeesForProfitPosition,
+      formattedTotalFeesForProfitPosition:
+          formattedTotalFeesForProfitPosition ??
+              this.formattedTotalFeesForProfitPosition,
     );
   }
 
@@ -178,6 +237,10 @@ class MatexStockPositionSizeCalculatorBlocResults
       stopLossPriceWithSlippage: model.stopLossPriceWithSlippage,
       entryPriceWithSlippage: model.entryPriceWithSlippage,
       riskPercent: model.riskPercent,
+      totalFeesForLossPosition: model.totalFeesForLossPosition,
+      entryFeeAmount: model.entryFeeAmount,
+      stopLossFeeAmount: model.stopLossFeeAmount,
+      takeProfitFeeAmount: model.takeProfitFeeAmount,
       formattedShares: model.formattedShares,
       formattedPositionAmount: model.formattedPositionAmount,
       formattedInvolvedCapital: model.formattedInvolvedCapital,
@@ -192,6 +255,14 @@ class MatexStockPositionSizeCalculatorBlocResults
           model.formattedStopLossPriceWithSlippage,
       formattedEntryPriceWithSlippage: model.formattedEntryPriceWithSlippage,
       formattedRiskPercent: model.formattedRiskPercent,
+      formattedTotalFeesForLossPosition:
+          model.formattedTotalFeesForLossPosition,
+      formattedEntryFeeAmount: model.formattedEntryFeeAmount,
+      formattedStopLossFeeAmount: model.formattedStopLossFeeAmount,
+      formattedTakeProfitFeeAmount: model.formattedTakeProfitFeeAmount,
+      totalFeesForProfitPosition: model.totalFeesForProfitPosition,
+      formattedTotalFeesForProfitPosition:
+          model.formattedTotalFeesForProfitPosition,
     );
   }
 
@@ -209,6 +280,10 @@ class MatexStockPositionSizeCalculatorBlocResults
         stopLossPriceWithSlippage,
         entryPriceWithSlippage,
         riskPercent,
+        totalFeesForLossPosition,
+        entryFeeAmount,
+        stopLossFeeAmount,
+        takeProfitFeeAmount,
         formattedShares,
         formattedPositionAmount,
         formattedInvolvedCapital,
@@ -221,5 +296,11 @@ class MatexStockPositionSizeCalculatorBlocResults
         formattedStopLossPriceWithSlippage,
         formattedEntryPriceWithSlippage,
         formattedRiskPercent,
+        formattedTotalFeesForLossPosition,
+        formattedEntryFeeAmount,
+        formattedStopLossFeeAmount,
+        formattedTakeProfitFeeAmount,
+        totalFeesForProfitPosition,
+        formattedTotalFeesForProfitPosition,
       ];
 }
