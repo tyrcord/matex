@@ -26,6 +26,9 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
   final Widget? backButton;
   final Widget? shareIcon;
   final Widget? clearIcon;
+  final bool showInfoIcon;
+  final Widget? infoIcon;
+  final VoidCallback? onInfo;
   final B calculatorBloc;
   final Widget? leading;
 
@@ -37,6 +40,7 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
     this.requestFullApp = false,
     this.showRefreshIcon = true,
     this.showClearIcon = true,
+    this.showInfoIcon = true,
     this.calculatorActions,
     this.resultsTitleText,
     this.fieldsTitleText,
@@ -49,7 +53,9 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
     this.backButton,
     this.shareIcon,
     this.clearIcon,
+    this.infoIcon,
     this.leading,
+    this.onInfo,
   });
 
   @override
@@ -94,6 +100,9 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
       backButton: widget.backButton,
       shareIcon: widget.shareIcon,
       clearIcon: widget.clearIcon,
+      showInfoIcon: widget.showInfoIcon,
+      infoIcon: widget.infoIcon,
+      onInfo: widget.onInfo,
       leading: widget.leading,
     );
   }
