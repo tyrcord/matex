@@ -172,8 +172,8 @@ abstract class MatexCalculatorBloc<
   String localizePercentage({
     num? value,
     String? locale,
-    int minimumFractionDigits = 0,
-    int? maximumFractionDigits = 2,
+    int? minimumFractionDigits,
+    int? maximumFractionDigits,
   }) {
     return formatPercentage(
       minimumFractionDigits: minimumFractionDigits,
@@ -186,8 +186,8 @@ abstract class MatexCalculatorBloc<
   String localizeNumber({
     num? value,
     String? locale,
-    int? minimumFractionDigits = 0,
-    int? maximumFractionDigits = 2,
+    int? minimumFractionDigits,
+    int? maximumFractionDigits,
   }) {
     return formatDecimal(
       minimumFractionDigits: minimumFractionDigits,
@@ -201,8 +201,8 @@ abstract class MatexCalculatorBloc<
     num? value,
     String? symbol,
     String? locale,
-    int? minimumFractionDigits = 0,
-    int? maximumFractionDigits = 2,
+    int? minimumFractionDigits,
+    int? maximumFractionDigits,
   }) {
     return formatCurrency(
       minimumFractionDigits: minimumFractionDigits,
