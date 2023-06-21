@@ -335,142 +335,6 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     );
   }
 
-  List<FastReportCategoryEntry> _buildCategoryEntries(BuildContext context) {
-    final results = currentState.results;
-    final fields = currentState.fields;
-    final palette = ThemeHelper.getPaletteColors(context);
-
-    final entryPrice = results.entryPriceWithSlippage;
-    final entryFeeAmount = results.entryFeeAmount;
-    final slippagePercent = fields.slippagePercent;
-    final dSlippagePercent = toDecimal(slippagePercent);
-
-    return [
-      FastReportCategoryEntry(
-        name: 'Risk',
-        entries: [
-          if (results.involvedCapital != null && results.involvedCapital != 0)
-            FastReportEntry(
-              name: 'Involved Capital',
-              value: results.formattedInvolvedCapital!,
-            ),
-          if (results.riskPercent != null &&
-              results.riskPercent != 0 &&
-              currentState.fields.riskFieldType ==
-                  FastAmountSwitchFieldType.percent.name)
-            FastReportEntry(
-              name: 'Risk Percent',
-              value: results.formattedRiskPercent!,
-            ),
-          if (results.toleratedRisk != null && results.toleratedRisk != 0)
-            FastReportEntry(
-              name: 'Tolerated Risk',
-              value: results.formattedToleratedRisk!,
-            ),
-          if (results.effectiveRisk != null &&
-              results.effectiveRisk != 0 &&
-              results.effectiveRisk != results.toleratedRisk)
-            FastReportEntry(
-              name: 'Effective Risk',
-              value: results.formattedEffectiveRisk!,
-              color: palette.red.mid,
-            ),
-        ],
-      ),
-      if ((entryFeeAmount != null && entryFeeAmount > 0.0) ||
-          (entryPrice != null &&
-              entryPrice > 0.0 &&
-              dSlippagePercent != null &&
-              dSlippagePercent != dZero))
-        FastReportCategoryEntry(
-          name: 'Entry',
-          entries: [
-            if (results.entryPriceWithSlippage != null &&
-                results.entryPriceWithSlippage != 0 &&
-                currentState.fields.slippagePercent != null &&
-                currentState.fields.slippagePercent!.isNotEmpty)
-              FastReportEntry(
-                name: 'Entry Price with Slippage',
-                value: results.formattedEntryPriceWithSlippage!,
-              ),
-            if (results.formattedEntryFeeAmount != null &&
-                results.formattedEntryFeeAmount!.isNotEmpty)
-              FastReportEntry(
-                name: 'Entry Fee Amount',
-                value: results.formattedEntryFeeAmount!,
-              ),
-          ],
-        ),
-      FastReportCategoryEntry(
-        name: 'Stop Loss',
-        entries: [
-          if (results.stopLossPriceWithSlippage != null &&
-              results.stopLossPriceWithSlippage != 0 &&
-              currentState.fields.slippagePercent != null &&
-              currentState.fields.slippagePercent!.isNotEmpty)
-            FastReportEntry(
-              name: 'Stop Loss Price with Slippage',
-              value: results.formattedStopLossPriceWithSlippage!,
-            ),
-          if (results.stopLossPercent != null && results.stopLossPercent != 0)
-            FastReportEntry(
-              name: 'Stop Loss Percent',
-              value: results.formattedStopLossPercent!,
-            ),
-          if (results.stopLossPercentWithSlippage != null &&
-              results.stopLossPercentWithSlippage != 0 &&
-              results.stopLossPercent != results.stopLossPercentWithSlippage)
-            FastReportEntry(
-              name: 'Stop Loss Percent with Slippage',
-              value: results.formattedStopLossPercentWithSlippage!,
-            ),
-          if (results.stopLossFeeAmount != null &&
-              results.stopLossFeeAmount != 0)
-            FastReportEntry(
-              name: 'Stop Loss Fee Amount',
-              value: results.formattedStopLossFeeAmount!,
-            ),
-          if (results.totalFeesForLossPosition != null &&
-              results.totalFeesForLossPosition != 0)
-            FastReportEntry(
-              name: 'Total Fees for Loss Position',
-              value: results.formattedTotalFeesForLossPosition!,
-              color: palette.orange.mid,
-            ),
-        ],
-      ),
-      FastReportCategoryEntry(
-        name: 'Take Profit',
-        entries: [
-          if (results.takeProfitAmount != null && results.takeProfitAmount != 0)
-            FastReportEntry(
-              name: 'Take Profit Amount',
-              value: results.formattedTakeProfitAmount!,
-              color: palette.green.mid,
-            ),
-          if (results.takeProfitPrice != null && results.takeProfitPrice != 0)
-            FastReportEntry(
-              name: 'Take Profit Price',
-              value: results.formattedTakeProfitPrice!,
-            ),
-          if (results.takeProfitFeeAmount != null &&
-              results.takeProfitFeeAmount != 0)
-            FastReportEntry(
-              name: 'Take Profit Fee Amount',
-              value: results.formattedTakeProfitFeeAmount!,
-            ),
-          if (results.totalFeesForProfitPosition != null &&
-              results.totalFeesForProfitPosition != 0)
-            FastReportEntry(
-              name: 'Total Fees for Profit Position',
-              value: results.formattedTotalFeesForProfitPosition!,
-              color: palette.orange.mid,
-            ),
-        ],
-      ),
-    ];
-  }
-
   List<FastReportEntry> _buildInputReportEntries(BuildContext context) {
     final fields = currentState.fields;
 
@@ -546,5 +410,296 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
           color: palette.blueGray.mid,
         ),
     ];
+  }
+
+  /// Builds a list of [FastReportCategoryEntry] objects based on the current
+  /// state and context.
+  ///
+  /// The function retrieves the necessary data from the [currentState] and
+  /// [fields] objects and initializes the [palette] using the
+  /// [ThemeHelper.getPaletteColors] method. It constructs a list of
+  /// [FastReportCategoryEntry] objects representing different categories in the
+  /// report, based on certain conditions and data.
+  ///
+  /// Returns a list of [FastReportCategoryEntry] objects.
+  List<FastReportCategoryEntry> _buildCategoryEntries(BuildContext context) {
+    final results = currentState.results;
+    final fields = currentState.fields;
+    final palette = ThemeHelper.getPaletteColors(context);
+
+    return [
+      if (_shouldAddRiskCategory(results))
+        _buildRiskCategory(results, fields, palette),
+      if (_shouldAddEntryCategory(results, fields))
+        _buildEntryCategory(results, fields),
+      if (_shouldAddStopLossCategory(results))
+        _buildStopLossCategory(results, fields, palette),
+      if (_shouldAddTakeProfitCategory(results))
+        _buildTakeProfitCategory(results, fields, palette),
+    ];
+  }
+
+  bool _shouldAddRiskCategory(
+    MatexStockPositionSizeCalculatorBlocResults results,
+  ) {
+    final effectiveRisk = results.effectiveRisk;
+
+    return effectiveRisk != null && effectiveRisk != 0;
+  }
+
+  /// Builds the "Risk" category of the report.
+  ///
+  /// The function takes [results], [fields], and [palette] as parameters and
+  /// constructs a [FastReportCategoryEntry] object representing the "Risk"
+  /// category. The category contains entries such as "Involved Capital", "Risk
+  /// Percent", "Tolerated Risk", and "Effective Risk", based on certain
+  /// conditions and values.
+  ///
+  /// Returns a [FastReportCategoryEntry] object representing the "Risk"
+  /// category.
+  FastReportCategoryEntry _buildRiskCategory(
+    MatexStockPositionSizeCalculatorBlocResults results,
+    MatexStockPositionSizeCalculatorBlocFields fields,
+    FastPaletteColors palette,
+  ) {
+    final entries = <FastReportEntry>[];
+
+    if (results.involvedCapital != null && results.involvedCapital != 0) {
+      entries.add(FastReportEntry(
+        name: 'Involved Capital',
+        value: results.formattedInvolvedCapital!,
+      ));
+    }
+
+    if (results.riskPercent != null &&
+        results.riskPercent != 0 &&
+        fields.riskFieldType != FastAmountSwitchFieldType.percent.name) {
+      entries.add(FastReportEntry(
+        name: 'Risk Percent',
+        value: results.formattedRiskPercent!,
+      ));
+    }
+
+    if (results.toleratedRisk != null && results.toleratedRisk != 0) {
+      entries.add(FastReportEntry(
+        name: 'Tolerated Risk',
+        value: results.formattedToleratedRisk!,
+      ));
+    }
+
+    if (results.effectiveRisk != null &&
+        results.effectiveRisk != 0 &&
+        results.effectiveRisk != results.toleratedRisk) {
+      entries.add(FastReportEntry(
+        name: 'Effective Risk',
+        value: results.formattedEffectiveRisk!,
+        color: palette.red.mid,
+      ));
+    }
+
+    return FastReportCategoryEntry(
+      name: 'Risk',
+      entries: entries,
+    );
+  }
+
+  /// Checks if the "Entry" category should be added to the report.
+  ///
+  /// The function takes [results] and [fields] as parameters and checks if the
+  /// "Entry" category should be added based on certain conditions and values.
+  ///
+  /// Returns a boolean value indicating whether the "Entry" category should be
+  /// added.
+  bool _shouldAddEntryCategory(
+    MatexStockPositionSizeCalculatorBlocResults results,
+    MatexStockPositionSizeCalculatorBlocFields fields,
+  ) {
+    final entryPrice = results.entryPriceWithSlippage;
+    final entryFeeAmount = results.entryFeeAmount;
+    final slippagePercent = fields.slippagePercent;
+    final dSlippagePercent = toDecimal(slippagePercent);
+
+    return (entryFeeAmount != null && entryFeeAmount > 0) ||
+        (entryPrice != null &&
+            entryPrice > 0 &&
+            dSlippagePercent != null &&
+            dSlippagePercent != dZero);
+  }
+
+  /// Builds the "Entry" category of the report.
+  ///
+  /// The function takes [results] and [fields] as parameters and constructs a
+  /// [FastReportCategoryEntry] object representing the "Entry" category. The
+  /// category contains entries such as "Entry Price with Slippage" and
+  /// "Entry Fee Amount", based on certain conditions and values.
+  ///
+  /// Returns a [FastReportCategoryEntry] object representing the "Entry"
+  /// category.
+  FastReportCategoryEntry _buildEntryCategory(
+    MatexStockPositionSizeCalculatorBlocResults results,
+    MatexStockPositionSizeCalculatorBlocFields fields,
+  ) {
+    final entries = <FastReportEntry>[];
+
+    if (results.entryPriceWithSlippage != null &&
+        results.entryPriceWithSlippage != 0 &&
+        fields.slippagePercent != null &&
+        fields.slippagePercent!.isNotEmpty) {
+      entries.add(FastReportEntry(
+        name: 'Entry Price with Slippage',
+        value: results.formattedEntryPriceWithSlippage!,
+      ));
+    }
+
+    if (results.entryFeeAmount != null && results.entryFeeAmount != 0) {
+      entries.add(FastReportEntry(
+        name: 'Entry Fee Amount',
+        value: results.formattedEntryFeeAmount!,
+      ));
+    }
+
+    return FastReportCategoryEntry(
+      name: 'Entry',
+      entries: entries,
+    );
+  }
+
+  bool _shouldAddStopLossCategory(
+    MatexStockPositionSizeCalculatorBlocResults results,
+  ) {
+    final stopLossPrice = results.stopLossPriceWithSlippage;
+
+    return stopLossPrice != null && stopLossPrice != 0;
+  }
+
+  /// Builds the "Stop Loss" category of the report.
+  ///
+  /// The function takes [results], [fields], and [palette] as parameters and
+  /// constructs a [FastReportCategoryEntry] object representing the "Stop Loss"
+  /// category. The category contains entries such as "Stop Loss Price with
+  /// Slippage", "Stop Loss Percent", "Stop Loss Percent with Slippage", "Stop
+  /// Loss Fee Amount", and "Total Fees for Loss Position", based on certain
+  /// conditions and values.
+  ///
+  /// Returns a [FastReportCategoryEntry] object representing the "Stop Loss"
+  /// category.
+  FastReportCategoryEntry _buildStopLossCategory(
+    MatexStockPositionSizeCalculatorBlocResults results,
+    MatexStockPositionSizeCalculatorBlocFields fields,
+    FastPaletteColors palette,
+  ) {
+    final entries = <FastReportEntry>[];
+
+    if (results.stopLossPriceWithSlippage != null &&
+        results.stopLossPriceWithSlippage != 0 &&
+        fields.slippagePercent != null &&
+        fields.slippagePercent!.isNotEmpty) {
+      entries.add(FastReportEntry(
+        name: 'Stop Loss Price with Slippage',
+        value: results.formattedStopLossPriceWithSlippage!,
+      ));
+    }
+
+    if (results.stopLossPercent != null && results.stopLossPercent != 0) {
+      entries.add(FastReportEntry(
+        name: 'Stop Loss Percent',
+        value: results.formattedStopLossPercent!,
+      ));
+    }
+
+    if (results.stopLossPercentWithSlippage != null &&
+        results.stopLossPercentWithSlippage != 0 &&
+        results.stopLossPercent != results.stopLossPercentWithSlippage) {
+      entries.add(FastReportEntry(
+        name: 'Stop Loss Percent with Slippage',
+        value: results.formattedStopLossPercentWithSlippage!,
+      ));
+    }
+
+    if (results.stopLossFeeAmount != null && results.stopLossFeeAmount != 0) {
+      entries.add(FastReportEntry(
+        name: 'Stop Loss Fee Amount',
+        value: results.formattedStopLossFeeAmount!,
+      ));
+    }
+
+    if (results.totalFeesForLossPosition != null &&
+        results.totalFeesForLossPosition != 0 &&
+        results.totalFeesForLossPosition != results.stopLossFeeAmount) {
+      entries.add(FastReportEntry(
+        name: 'Total Fees for Loss Position',
+        value: results.formattedTotalFeesForLossPosition!,
+        color: palette.orange.mid,
+      ));
+    }
+
+    return FastReportCategoryEntry(
+      name: 'Stop Loss',
+      entries: entries,
+    );
+  }
+
+  bool _shouldAddTakeProfitCategory(
+    MatexStockPositionSizeCalculatorBlocResults results,
+  ) {
+    final takeProfitPrice = results.takeProfitPrice;
+
+    return takeProfitPrice != null && takeProfitPrice != 0;
+  }
+
+  /// Builds the "Take Profit" category of the report.
+  ///
+  /// The function takes [results], [fields], and [palette] as parameters and
+  /// constructs a [FastReportCategoryEntry] object representing the "Take Profit"
+  /// category. The category contains entries such as "Take Profit Amount", "Take
+  /// Profit Price", "Take Profit Fee Amount", and "Total Fees for Profit
+  /// Position", based on certain conditions and values.
+  ///
+  /// Returns a [FastReportCategoryEntry] object representing the "Take Profit"
+  /// category.
+  FastReportCategoryEntry _buildTakeProfitCategory(
+    MatexStockPositionSizeCalculatorBlocResults results,
+    MatexStockPositionSizeCalculatorBlocFields fields,
+    FastPaletteColors palette,
+  ) {
+    final entries = <FastReportEntry>[];
+
+    if (results.takeProfitAmount != null && results.takeProfitAmount != 0) {
+      entries.add(FastReportEntry(
+        name: 'Take Profit Amount',
+        value: results.formattedTakeProfitAmount!,
+        color: palette.green.mid,
+      ));
+    }
+
+    if (results.takeProfitPrice != null && results.takeProfitPrice != 0) {
+      entries.add(FastReportEntry(
+        name: 'Take Profit Price',
+        value: results.formattedTakeProfitPrice!,
+      ));
+    }
+
+    if (results.takeProfitFeeAmount != null &&
+        results.takeProfitFeeAmount != 0) {
+      entries.add(FastReportEntry(
+        name: 'Take Profit Fee Amount',
+        value: results.formattedTakeProfitFeeAmount!,
+      ));
+    }
+
+    if (results.totalFeesForProfitPosition != null &&
+        results.totalFeesForProfitPosition != 0 &&
+        results.takeProfitFeeAmount != results.totalFeesForProfitPosition) {
+      entries.add(FastReportEntry(
+        name: 'Total Fees for Profit Position',
+        value: results.formattedTotalFeesForProfitPosition!,
+        color: palette.orange.mid,
+      ));
+    }
+
+    return FastReportCategoryEntry(
+      name: 'Take Profit',
+      entries: entries,
+    );
   }
 }
