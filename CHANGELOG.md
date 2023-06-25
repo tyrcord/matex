@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-06-25
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.4`](#matex_core---v004)
+ - [`matex_financial` - `v0.0.4`](#matex_financial---v004)
+
+---
+
+#### `matex_core` - `v0.0.4`
+
+ - **FIX**: remove defaults min and max fraction digits.
+ - **FEAT**: update dependencies.
+ - **FEAT**(core): add default info button.
+
+#### `matex_financial` - `v0.0.4`
+
+ - **FIX**: wrong dependency requirement.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: better pdf for stock position.
+ - **FEAT**(StockPositionSizeCalculator): add missing results.
+
+
 ## 2023-06-02
 
 ### Changes

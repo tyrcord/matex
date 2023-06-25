@@ -1,3 +1,9 @@
+## 0.0.4
+
+ - **FIX**: remove defaults min and max fraction digits.
+ - **FEAT**: update dependencies.
+ - **FEAT**(core): add default info button.
+
 ## 0.0.3
 
  - **FEAT**: generate stock position size pdf report.

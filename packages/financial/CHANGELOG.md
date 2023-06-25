@@ -1,3 +1,11 @@
+## 0.0.4
+
+ - **FIX**: wrong dependency requirement.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: better pdf for stock position.
+ - **FEAT**(StockPositionSizeCalculator): add missing results.
+
 ## 0.0.3
 
  - **FIX**: bunch of fixes.
