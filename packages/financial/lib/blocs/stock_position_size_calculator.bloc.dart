@@ -480,7 +480,9 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       ));
     }
 
-    if (results.toleratedRisk != null && results.toleratedRisk != 0) {
+    if (results.toleratedRisk != null &&
+        results.toleratedRisk != 0 &&
+        fields.riskFieldType != FastAmountSwitchFieldType.amount.name) {
       entries.add(FastReportEntry(
         name: 'Tolerated Risk',
         value: results.formattedToleratedRisk!,
