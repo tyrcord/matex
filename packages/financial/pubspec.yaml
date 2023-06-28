@@ -19,7 +19,10 @@ dependencies:
   cross_file: ^0.3.3+4
   printing: ^5.11.0
   fastyle_forms: ">=0.0.5 <1.0.0"
-  fastyle_dart: ^1.2.3
+  fastyle_dart: ^1.2.4
+  fastyle_financial: ^0.0.2
+  matex_dart: ^0.11.1
+  tbloc: ">=0.20.5 <1.0.0"
 
 dev_dependencies:
   flutter_test:
