@@ -1,3 +1,7 @@
+## 0.0.5+1
+
+ - **FIX**: missing export.
+
 ## 0.0.5
 
  - **FEAT**: add instruments ui.

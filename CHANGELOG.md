@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_financial` - `v0.0.5+1`](#matex_financial---v0051)
+
+---
+
+#### `matex_financial` - `v0.0.5+1`
+
+ - **FIX**: missing export.
+
+
+## 2023-06-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_financial` - `v0.0.5`](#matex_financial---v005)
 
 ---
