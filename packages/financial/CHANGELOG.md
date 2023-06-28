@@ -1,3 +1,7 @@
+## 0.0.6
+
+ - **FEAT**: rename MatexInstrumentBloc to MatexCurrencyBloc.
+
 ## 0.0.5+1
 
  - **FIX**: missing export.

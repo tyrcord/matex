@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_financial` - `v0.0.6`](#matex_financial---v006)
+
+---
+
+#### `matex_financial` - `v0.0.6`
+
+ - **FEAT**: rename MatexInstrumentBloc to MatexCurrencyBloc.
+
+
+## 2023-06-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_financial` - `v0.0.5+1`](#matex_financial---v0051)
 
 ---
