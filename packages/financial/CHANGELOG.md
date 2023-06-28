@@ -1,3 +1,7 @@
+## 0.0.5
+
+ - **FEAT**: add instruments ui.
+
 ## 0.0.4
 
  - **FIX**: wrong dependency requirement.
