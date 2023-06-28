@@ -3,44 +3,44 @@ import 'package:matex_financial/financial.dart';
 import 'package:tbloc/tbloc.dart';
 
 /// A BLoC (Business Logic Component) class for managing financial instruments.
-class MatexInstrumentBloc extends BidirectionalBloc<MatexInstrumentBlocEvent,
-    MatexInstrumentBlocState> {
-  static MatexInstrumentBloc? _singleton;
+class MatexCurrencyBloc
+    extends BidirectionalBloc<MatexCurrencyBlocEvent, MatexCurrencyBlocState> {
+  static MatexCurrencyBloc? _singleton;
 
   final _instrumentProvider = MatexInstrumentProvider();
 
   /// Private constructor for enforcing the singleton pattern.
-  MatexInstrumentBloc._({MatexInstrumentBlocState? initialState})
-      : super(initialState: initialState ?? const MatexInstrumentBlocState());
+  MatexCurrencyBloc._({MatexCurrencyBlocState? initialState})
+      : super(initialState: initialState ?? const MatexCurrencyBlocState());
 
   /// Factory constructor for creating or retrieving the singleton instance
-  /// of [MatexInstrumentBloc].
-  factory MatexInstrumentBloc() {
-    _singleton ??= MatexInstrumentBloc._();
+  /// of [MatexCurrencyBloc].
+  factory MatexCurrencyBloc() {
+    _singleton ??= MatexCurrencyBloc._();
 
     return _singleton!;
   }
 
   @override
-  Stream<MatexInstrumentBlocState> mapEventToState(event) async* {
+  Stream<MatexCurrencyBlocState> mapEventToState(event) async* {
     final payload = event.payload;
     final type = event.type;
 
-    if (type == MatexInstrumentBlocEventType.init) {
+    if (type == MatexCurrencyBlocEventType.init) {
       yield* handleInitEvent();
-    } else if (type == MatexInstrumentBlocEventType.initialized) {
+    } else if (type == MatexCurrencyBlocEventType.initialized) {
       yield* handleInitializedEvent(payload);
     } else {
-      assert(false, 'MatexInstrumentBloc is not initialized yet.');
+      assert(false, 'MatexCurrencyBloc is not initialized yet.');
     }
   }
 
   /// Handles the initialization event by fetching instrument metadata and
   /// filtering currencies.
-  Stream<MatexInstrumentBlocState> handleInitEvent() async* {
+  Stream<MatexCurrencyBlocState> handleInitEvent() async* {
     if (canInitialize) {
       isInitializing = true;
-      yield const MatexInstrumentBlocState(isInitializing: true);
+      yield const MatexCurrencyBlocState(isInitializing: true);
 
       final instrumentsMetadata = await _instrumentProvider.list();
       final instrumentsMetadataList = instrumentsMetadata.values;
@@ -51,12 +51,12 @@ class MatexInstrumentBloc extends BidirectionalBloc<MatexInstrumentBlocEvent,
         },
       ).toList();
 
-      addEvent(MatexInstrumentBlocEvent.initialized(currencies));
+      addEvent(MatexCurrencyBlocEvent.initialized(currencies));
     }
   }
 
   /// Handles the initialized event by updating the state.
-  Stream<MatexInstrumentBlocState> handleInitializedEvent(
+  Stream<MatexCurrencyBlocState> handleInitializedEvent(
     List<MatexInstrumentMetadata>? currencies,
   ) async* {
     if (isInitializing) {

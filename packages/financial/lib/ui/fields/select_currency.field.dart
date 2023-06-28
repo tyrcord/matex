@@ -6,7 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:matex_dart/matex_dart.dart';
 import 'package:tbloc/tbloc.dart';
 
-class MatexSelectInstrumentField extends StatefulWidget {
+class MatexSelectCurrencyField extends StatefulWidget {
   /// A callback function that takes a [MatexInstrumentMetadata] object and
   /// returns a string label for the item.
   final String Function(MatexInstrumentMetadata)? itemLabelBuilder;
@@ -42,7 +42,7 @@ class MatexSelectInstrumentField extends StatefulWidget {
   /// A callback function that builds the flag icon for each item.
   final Widget Function(MatexInstrumentMetadata)? flagIconBuilder;
 
-  const MatexSelectInstrumentField({
+  const MatexSelectCurrencyField({
     super.key,
     this.onSelectionChanged,
     this.itemLabelBuilder,
@@ -58,20 +58,19 @@ class MatexSelectInstrumentField extends StatefulWidget {
   });
 
   @override
-  State<MatexSelectInstrumentField> createState() =>
-      _MatexSelectInstrumentFieldState();
+  State<MatexSelectCurrencyField> createState() =>
+      _MatexSelectCurrencyFieldState();
 }
 
-class _MatexSelectInstrumentFieldState
-    extends State<MatexSelectInstrumentField> {
-  late MatexInstrumentBloc _instrumentBloc;
+class _MatexSelectCurrencyFieldState extends State<MatexSelectCurrencyField> {
+  late MatexCurrencyBloc _currencyBloc;
 
   @override
   void initState() {
     super.initState();
 
     // Initialize the calculator bloc.
-    _instrumentBloc = MatexInstrumentBloc();
+    _currencyBloc = MatexCurrencyBloc();
 
     // Show the splash ad after the first frame is rendered.
     SchedulerBinding.instance.addPostFrameCallback(_loadFinancialInstruments);
@@ -80,9 +79,9 @@ class _MatexSelectInstrumentFieldState
   @override
   Widget build(BuildContext context) {
     return BlocBuilderWidget(
-      bloc: _instrumentBloc,
+      bloc: _currencyBloc,
       builder: (context, instrumentBlocState) {
-        return FastSelectInstrumentField(
+        return FastSelectCurrencyField(
           onSelectionChanged: widget.onSelectionChanged,
           searchTitleText: widget.searchTitleText,
           captionText: widget.captionText,
@@ -101,6 +100,6 @@ class _MatexSelectInstrumentFieldState
   }
 
   _loadFinancialInstruments(_) {
-    _instrumentBloc.addEvent(const MatexInstrumentBlocEvent.init());
+    _currencyBloc.addEvent(const MatexCurrencyBlocEvent.init());
   }
 }

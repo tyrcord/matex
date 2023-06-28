@@ -1,1 +1,1 @@
-export 'instrument.event.dart';
+export 'currency.event.dart';
