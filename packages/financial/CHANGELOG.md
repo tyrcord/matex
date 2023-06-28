@@ -1,3 +1,7 @@
+## 0.0.7
+
+ - **FEAT**: update fastyle_financial dependency.
+
 ## 0.0.6
 
  - **FEAT**: rename MatexInstrumentBloc to MatexCurrencyBloc.
