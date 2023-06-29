@@ -42,6 +42,9 @@ class MatexSelectCurrencyField extends StatefulWidget {
   /// A callback function that builds the flag icon for each item.
   final Widget Function(MatexInstrumentMetadata)? flagIconBuilder;
 
+  /// Specifies whether the selection can be cleared.
+  final bool? canClearSelection;
+
   const MatexSelectCurrencyField({
     super.key,
     this.onSelectionChanged,
@@ -55,6 +58,7 @@ class MatexSelectCurrencyField extends StatefulWidget {
     this.isEnabled,
     this.flagIconWidth,
     this.labelText,
+    this.canClearSelection,
   });
 
   @override
@@ -79,6 +83,7 @@ class _MatexSelectCurrencyFieldState extends State<MatexSelectCurrencyField> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilderWidget(
+      buildWhen: (previous, next) => previous.currencies != next.currencies,
       bloc: _currencyBloc,
       builder: (context, instrumentBlocState) {
         return FastSelectCurrencyField(
@@ -93,6 +98,7 @@ class _MatexSelectCurrencyFieldState extends State<MatexSelectCurrencyField> {
           flagIconWidth: widget.flagIconWidth,
           placeholderText: widget.placeholderText,
           searchPlaceholderText: widget.searchPlaceholderText,
+          canClearSelection: widget.canClearSelection,
           selection: widget.selection,
         );
       },
