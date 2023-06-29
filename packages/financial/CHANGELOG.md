@@ -1,3 +1,7 @@
+## 0.0.8
+
+ - **FEAT**: allow to clear the selection.
+
 ## 0.0.7
 
  - **FEAT**: update fastyle_financial dependency.
