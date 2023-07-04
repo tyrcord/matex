@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:decimal/decimal.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -118,6 +119,17 @@ abstract class MatexCalculatorBloc<
     //TODO: handle compute error
   }
 
+  /// Loads the metadata of the calculator.
+  @override
+  @mustCallSuper
+  Future<Map<String, dynamic>> loadMetadata() async {
+    return <String, dynamic>{
+      'userCurrencySymbol': getUserCurrencySymbol(),
+      'userCurrencyCode': getUserCurrencyCode(),
+      'userLocaleCode': getUserLocaleCode(),
+    };
+  }
+
   @override
   Future<void> shareCalculatorState(BuildContext context) async {
     if (calculator.isValid) {
@@ -157,15 +169,23 @@ abstract class MatexCalculatorBloc<
   }
 
   @protected
-  String getUserLocaleLanguageTag() {
-    // TODO
-    return 'en_US';
+  String getUserLocaleCode() {
+    return appSettingsBloc.currentState.localeCode;
+  }
+
+  @protected
+  String getUserCurrencyCode() {
+    return userSettingsBloc.currentState.primaryCurrencyCode;
   }
 
   @protected
   String getUserCurrencySymbol() {
-    // TODO
-    return 'USD';
+    final format = NumberFormat.simpleCurrency(
+      locale: getUserLocaleCode(),
+      name: getUserCurrencyCode(),
+    );
+
+    return format.currencySymbol;
   }
 
   @protected
@@ -178,7 +198,7 @@ abstract class MatexCalculatorBloc<
     return formatPercentage(
       minimumFractionDigits: minimumFractionDigits,
       maximumFractionDigits: maximumFractionDigits,
-      locale: locale ?? getUserLocaleLanguageTag(),
+      locale: locale ?? getUserLocaleCode(),
       value: value,
     );
   }
@@ -192,7 +212,7 @@ abstract class MatexCalculatorBloc<
     return formatDecimal(
       minimumFractionDigits: minimumFractionDigits,
       maximumFractionDigits: maximumFractionDigits,
-      locale: locale ?? getUserLocaleLanguageTag(),
+      locale: locale ?? getUserLocaleCode(),
       value: value,
     );
   }
@@ -207,8 +227,8 @@ abstract class MatexCalculatorBloc<
     return formatCurrency(
       minimumFractionDigits: minimumFractionDigits,
       maximumFractionDigits: maximumFractionDigits,
-      locale: locale ?? getUserLocaleLanguageTag(),
-      symbol: symbol ?? getUserCurrencySymbol(),
+      locale: locale ?? getUserLocaleCode(),
+      symbol: symbol ?? getUserCurrencyCode(),
       value: value,
     );
   }
