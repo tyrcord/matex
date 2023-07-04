@@ -1,3 +1,8 @@
+## 0.0.5
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: add metadata to blocs.
+
 ## 0.0.4
 
  - **FIX**: remove defaults min and max fraction digits.
