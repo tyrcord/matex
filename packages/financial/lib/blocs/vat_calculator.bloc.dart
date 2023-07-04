@@ -13,9 +13,9 @@ import 'package:printing/printing.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-const _kDefaultVatBlocState = MatexVatCalculatorBlocState(
-  fields: MatexVatCalculatorBlocFields(),
-  results: MatexVatCalculatorBlocResults(),
+final _kDefaultVatBlocState = MatexVatCalculatorBlocState(
+  fields: const MatexVatCalculatorBlocFields(),
+  results: const MatexVatCalculatorBlocResults(),
 );
 
 class MatexVatCalculatorBloc extends MatexCalculatorBloc<
@@ -25,8 +25,11 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     MatexVatCalculatorBlocDocument,
     MatexVatCalculatorBlocResults> {
   MatexVatCalculatorBloc({
-    super.initialState = _kDefaultVatBlocState,
-  }) : super(dataProvider: MatexVatCalculatorDataProvider()) {
+    MatexVatCalculatorBlocState? initialState,
+  }) : super(
+          dataProvider: MatexVatCalculatorDataProvider(),
+          initialState: initialState ?? _kDefaultVatBlocState,
+        ) {
     calculator = MatexVatCalculator();
   }
 

@@ -42,6 +42,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
   @override
   MatexStockPositionSizeCalculatorResults clone() => copyWith();
 
+  @override
   MatexStockPositionSizeCalculatorResults copyWith({
     double? shares,
     double? positionAmount,

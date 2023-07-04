@@ -10,7 +10,7 @@ class MatexCurrencyBlocState extends BlocState {
   /// Creates a new `MatexInstrumentBlocState`.
   ///
   /// [currencies] is an optional parameter that defaults to an empty list.
-  const MatexCurrencyBlocState({
+  MatexCurrencyBlocState({
     List<MatexInstrumentMetadata>? currencies,
     super.isInitializing = false,
     super.isInitialized = false,

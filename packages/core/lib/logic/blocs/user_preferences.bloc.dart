@@ -32,7 +32,7 @@ class MatexUserPreferencesBloc extends BidirectionalBloc<
   MatexUserPreferencesBloc._({
     MatexUserPreferencesBlocState? initialState,
   }) : super(
-          initialState: initialState ?? const MatexUserPreferencesBlocState(),
+          initialState: initialState ?? MatexUserPreferencesBlocState(),
         ) {
     dataProvider = MatexUserPreferencesDataProvider();
   }

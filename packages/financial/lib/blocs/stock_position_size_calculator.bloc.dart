@@ -7,10 +7,10 @@ import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
 
-const _kDefaultStockPositionSizeBlocState =
+final _kDefaultStockPositionSizeBlocState =
     MatexStockPositionSizeCalculatorBlocState(
-  fields: MatexStockPositionSizeCalculatorBlocFields(),
-  results: MatexStockPositionSizeCalculatorBlocResults(),
+  fields: const MatexStockPositionSizeCalculatorBlocFields(),
+  results: const MatexStockPositionSizeCalculatorBlocResults(),
 );
 
 class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
@@ -20,11 +20,13 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     MatexStockPositionSizeCalculatorBlocDocument,
     MatexStockPositionSizeCalculatorBlocResults> {
   MatexStockPositionSizeCalculatorBloc({
-    super.initialState = _kDefaultStockPositionSizeBlocState,
+    MatexStockPositionSizeCalculatorBlocState? initialState,
     MatexStockPositionSizeCalculatorDataProvider? dataProvider,
   }) : super(
-            dataProvider: dataProvider ??
-                MatexStockPositionSizeCalculatorDataProvider()) {
+          initialState: initialState ?? _kDefaultStockPositionSizeBlocState,
+          dataProvider:
+              dataProvider ?? MatexStockPositionSizeCalculatorDataProvider(),
+        ) {
     calculator = MatexStockPositionSizeCalculator();
   }
 

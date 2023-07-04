@@ -11,7 +11,7 @@ class MatexUserPreferencesBlocState extends BlocState {
   final List<MatexUserPreferenceEntity>? userPreferences;
 
   /// Creates a new instance of the [MatexUserPreferencesBlocState].
-  const MatexUserPreferencesBlocState({
+  MatexUserPreferencesBlocState({
     bool isInitialized = false,
     bool isInitializing = false,
     this.userPreferences,

@@ -11,7 +11,7 @@ class MatexCurrencyBloc
 
   /// Private constructor for enforcing the singleton pattern.
   MatexCurrencyBloc._({MatexCurrencyBlocState? initialState})
-      : super(initialState: initialState ?? const MatexCurrencyBlocState());
+      : super(initialState: initialState ?? MatexCurrencyBlocState());
 
   /// Factory constructor for creating or retrieving the singleton instance
   /// of [MatexCurrencyBloc].
@@ -40,7 +40,7 @@ class MatexCurrencyBloc
   Stream<MatexCurrencyBlocState> handleInitEvent() async* {
     if (canInitialize) {
       isInitializing = true;
-      yield const MatexCurrencyBlocState(isInitializing: true);
+      yield MatexCurrencyBlocState(isInitializing: true);
 
       final instrumentsMetadata = await _instrumentProvider.list();
       final instrumentsMetadataList = instrumentsMetadata.values;
