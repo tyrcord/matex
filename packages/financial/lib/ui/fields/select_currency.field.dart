@@ -8,8 +8,8 @@ import 'package:tbloc/tbloc.dart';
 
 class MatexSelectCurrencyField extends StatefulWidget {
   /// A callback function that takes a [MatexInstrumentMetadata] object and
-  /// returns a string label for the item.
-  final String Function(MatexInstrumentMetadata)? itemLabelBuilder;
+  /// returns a string description for the item.
+  final String Function(MatexInstrumentMetadata)? itemDescriptionBuilder;
 
   /// A callback function that will be called when the selection changes.
   /// It takes a [FastItem<String>] object representing the selected item.
@@ -48,7 +48,7 @@ class MatexSelectCurrencyField extends StatefulWidget {
   const MatexSelectCurrencyField({
     super.key,
     this.onSelectionChanged,
-    this.itemLabelBuilder,
+    this.itemDescriptionBuilder,
     this.placeholderText,
     this.flagIconBuilder,
     this.captionText,
@@ -92,7 +92,7 @@ class _MatexSelectCurrencyFieldState extends State<MatexSelectCurrencyField> {
           captionText: widget.captionText,
           labelText: widget.labelText,
           isEnabled: widget.isEnabled,
-          itemLabelBuilder: widget.itemLabelBuilder,
+          itemDescriptionBuilder: widget.itemDescriptionBuilder,
           currencies: instrumentBlocState.currencies,
           flagIconBuilder: widget.flagIconBuilder,
           flagIconWidth: widget.flagIconWidth,
