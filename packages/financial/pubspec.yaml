@@ -1,6 +1,6 @@
 name: matex_financial
 description: An assortment of helpful tools and calculators specifically designed for use within the financial sector.
-version: 0.0.9
+version: 0.0.10
 repository: https://github.com/tyrcord/matex/tree/main/packages/financial
 
 environment:
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   decimal: ^2.3.2
   tmodel_dart: ">=0.5.0 <1.0.0"
-  matex_core: ^0.0.5
+  matex_core: ^0.0.6
   fastyle_calculator: ">=1.13.0 <2.0.0"
   t_helpers: ">=0.0.19 <1.0.0"
   pdf: ^3.10.4
