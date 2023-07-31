@@ -15,6 +15,28 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_financial` - `v0.0.12`](#matex_financial---v0012)
+
+---
+
+#### `matex_financial` - `v0.0.12`
+
+ - **FIX**: wrong import.
+ - **FEAT**: update dependencies.
+
+
+## 2023-07-31
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_core` - `v0.0.7`](#matex_core---v007)
  - [`matex_financial` - `v0.0.11`](#matex_financial---v0011)
 
