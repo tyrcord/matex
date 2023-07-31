@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fastyle_dart/fastyle_dart.dart';
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:fastyle_financial/fastyle_financial.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:flutter/scheduler.dart';
