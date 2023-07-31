@@ -654,10 +654,10 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   /// Builds the "Take Profit" category of the report.
   ///
   /// The function takes [results], [fields], and [palette] as parameters and
-  /// constructs a [FastReportCategoryEntry] object representing the "Take Profit"
-  /// category. The category contains entries such as "Take Profit Amount", "Take
-  /// Profit Price", "Take Profit Fee Amount", and "Total Fees for Profit
-  /// Position", based on certain conditions and values.
+  /// constructs a [FastReportCategoryEntry] object representing the
+  /// "Take Profit" category. The category contains entries such as
+  /// "Take Profit Amount", "Take Profit Price", "Take Profit Fee Amount", and
+  /// "Total Fees for Profit Position", based on certain conditions and values.
   ///
   /// Returns a [FastReportCategoryEntry] object representing the "Take Profit"
   /// category.

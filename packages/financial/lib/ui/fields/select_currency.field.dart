@@ -105,7 +105,7 @@ class _MatexSelectCurrencyFieldState extends State<MatexSelectCurrencyField> {
     );
   }
 
-  _loadFinancialInstruments(_) {
+  void _loadFinancialInstruments(_) {
     _currencyBloc.addEvent(const MatexCurrencyBlocEvent.init());
   }
 }
