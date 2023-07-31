@@ -1,5 +1,5 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_dart/fastyle_dart.dart';
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:matex_core/core.dart';
