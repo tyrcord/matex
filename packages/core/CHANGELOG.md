@@ -1,3 +1,7 @@
+## 0.0.8+1
+
+ - **FIX**: dependency requirements.
+
 ## 0.0.8
 
  - **FIX**: minor issue.

@@ -15,6 +15,32 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_core` - `v0.0.8+1`](#matex_core---v0081)
+ - [`matex_financial` - `v0.0.13+1`](#matex_financial---v00131)
+
+---
+
+#### `matex_core` - `v0.0.8+1`
+
+ - **FIX**: dependency requirements.
+
+#### `matex_financial` - `v0.0.13+1`
+
+ - **FIX**: dependency requirements.
+
+
+## 2023-08-07
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_core` - `v0.0.8`](#matex_core---v008)
  - [`matex_financial` - `v0.0.13`](#matex_financial---v0013)
 
