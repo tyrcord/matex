@@ -1,3 +1,8 @@
+## 0.0.8
+
+ - **FIX**: minor issue.
+ - **FEAT**: update dependencies.
+
 ## 0.0.7
 
  - **FEAT**: update dependencies.

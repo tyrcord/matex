@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-08-07
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.8`](#matex_core---v008)
+ - [`matex_financial` - `v0.0.13`](#matex_financial---v0013)
+
+---
+
+#### `matex_core` - `v0.0.8`
+
+ - **FIX**: minor issue.
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.13`
+
+ - **FEAT**: update dependencies.
+
+
 ## 2023-07-31
 
 ### Changes
