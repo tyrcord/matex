@@ -175,7 +175,7 @@ abstract class MatexCalculatorBloc<
 
   @protected
   String getUserCurrencyCode() {
-    return userSettingsBloc.currentState.primaryCurrencyCode;
+    return userSettingsBloc.currentState.primaryCurrencyCode.toUpperCase();
   }
 
   @protected
