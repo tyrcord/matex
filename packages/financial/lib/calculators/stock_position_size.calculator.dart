@@ -9,7 +9,11 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
   MatexStockPositionSizeCalculator({
     MatexStockPositionSizeCalculatorState? defaultState,
     MatexStockPositionSizeCalculatorState? state,
-  }) : super(defaultState: defaultState, state: state);
+  }) : super(
+          validators: stockPositionSizeValidators,
+          defaultState: defaultState,
+          state: state,
+        );
 
   @override
   MatexStockPositionSizeCalculatorState initializeState() =>

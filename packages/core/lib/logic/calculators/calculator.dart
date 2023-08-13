@@ -17,7 +17,7 @@ abstract class MatexCalculator<S extends MatexCalculatorState, R> {
   bool isStateValid = true;
 
   @protected
-  List<MatexCalculatorValidator>? validators;
+  List<MatexCalculatorValidator<S>>? validators;
 
   /// Returns true if the current state is valid.
   bool get isValid => isStateValid;
