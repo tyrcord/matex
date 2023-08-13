@@ -1,4 +1,7 @@
 // Flutter imports:
+import 'dart:async';
+
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/foundation.dart';
 
 // Package imports:
@@ -133,20 +136,35 @@ abstract class MatexCalculatorBloc<
   @override
   Future<void> shareCalculatorState(BuildContext context) async {
     if (calculator.isValid) {
-      final pdfBytes = await toPdf(context);
-      final file = XFile.fromData(
-        pdfBytes,
-        mimeType: 'application/pdf',
-      );
+      XFile? file;
 
-      // ignore: use_build_context_synchronously
-      final box = context.findRenderObject() as RenderBox?;
+      showExportPdfDialog(
+        context: context,
+        onCreateOperation: () async {
+          file = await toPdfFile(context);
 
-      Share.shareXFiles(
-        [file],
-        sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+          return true;
+        },
+        onValid: (FastOperationStatus status) {
+          if (status == FastOperationStatus.operationSucceeded &&
+              context.mounted &&
+              file != null) {
+            final box = context.findRenderObject() as RenderBox?;
+
+            Share.shareXFiles(
+              [file!],
+              sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+            );
+          }
+        },
       );
     }
+  }
+
+  Future<XFile> toPdfFile(BuildContext context) async {
+    final pdfBytes = await toPdf(context);
+
+    return XFile.fromData(pdfBytes, mimeType: 'application/pdf');
   }
 
   Future<Uint8List> toPdf(BuildContext context) async {
