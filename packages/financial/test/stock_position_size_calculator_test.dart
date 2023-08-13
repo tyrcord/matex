@@ -18,7 +18,7 @@ void main() {
       expect(defaultState.stopLossAmount, isNull);
       expect(defaultState.slippagePercent, isNull);
       expect(defaultState.riskPercent, isNull);
-      expect(defaultState.rewardRisk, isNull);
+      expect(defaultState.riskReward, isNull);
       expect(defaultState.entryFees, isNull);
       expect(defaultState.exitFees, isNull);
     });
@@ -30,7 +30,7 @@ void main() {
       calculator.stopLossAmount = 500.0;
       calculator.slippagePercent = 0.01;
       calculator.riskPercent = 0.02;
-      calculator.rewardRisk = 3.0;
+      calculator.riskReward = 3.0;
       calculator.entryFees = 0.001;
       calculator.exitFees = 0.002;
 
@@ -42,7 +42,7 @@ void main() {
       expect(state.stopLossAmount, 0.0);
       expect(state.slippagePercent, 0.01);
       expect(state.riskPercent, 0.02);
-      expect(state.rewardRisk, 3.0);
+      expect(state.riskReward, 3.0);
       expect(state.entryFees, 0.001);
       expect(state.exitFees, 0.002);
     });
@@ -163,7 +163,7 @@ void main() {
       calculator.stopLossPrice = 95;
       calculator.riskPercent = 0.01;
       calculator.slippagePercent = 0.01;
-      calculator.rewardRisk = 2;
+      calculator.riskReward = 2;
 
       final result = calculator.value();
 
@@ -200,7 +200,7 @@ void main() {
       calculator.stopLossPrice = 45.0;
       calculator.slippagePercent = 0.01;
       calculator.riskPercent = 0.02;
-      calculator.rewardRisk = 3.0;
+      calculator.riskReward = 3.0;
       calculator.entryFees = 0.01;
       calculator.exitFees = 0.01;
 

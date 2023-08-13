@@ -114,8 +114,8 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWith(slippagePercent: value.toString());
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskPercent) {
         return document.copyWith(riskPercent: value.toString());
-      } else if (key == MatexStockPositionSizeCalculatorBlocKey.rewardRisk) {
-        return document.copyWith(rewardRisk: value.toString());
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskReward) {
+        return document.copyWith(riskReward: value.toString());
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryFees) {
         return document.copyWith(entryFees: value.toString());
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.exitFees) {
@@ -158,8 +158,8 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         return patchSlippagePercent(value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskPercent) {
         return patchRiskPercent(value);
-      } else if (key == MatexStockPositionSizeCalculatorBlocKey.rewardRisk) {
-        return patchRewardRisk(value);
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskReward) {
+        return patchRiskReward(value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryFees) {
         return patchEntryFees(value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.exitFees) {
@@ -190,7 +190,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       stopLossPrice: parseStringToDouble(document.stopLossPrice),
       accountSize: parseStringToDouble(document.accountSize),
       entryPrice: parseStringToDouble(document.entryPrice),
-      rewardRisk: parseStringToDouble(document.rewardRisk),
+      riskReward: parseStringToDouble(document.riskReward),
       slippagePercent: (slippagePercent / dHundred).toDouble(),
       riskPercent: (riskPercent / dHundred).toDouble(),
       entryFees: (entryFees / dHundred).toDouble(),
@@ -252,10 +252,10 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchRewardRisk(String value) {
+  MatexStockPositionSizeCalculatorBlocState patchRiskReward(String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(rewardRisk: value);
-    calculator.rewardRisk = dValue.toDouble();
+    final fields = currentState.fields.copyWith(riskReward: value);
+    calculator.riskReward = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
@@ -345,7 +345,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     final risk = double.tryParse(fields.riskPercent ?? '') ?? 0;
     final entryPrice = double.tryParse(fields.entryPrice ?? '') ?? 0;
     final stopLossPrice = double.tryParse(fields.stopLossPrice ?? '') ?? 0;
-    final rewardRisk = double.tryParse(fields.rewardRisk ?? '') ?? 0;
+    final riskReward = double.tryParse(fields.riskReward ?? '') ?? 0;
     final entryFees = double.tryParse(fields.entryFees ?? '') ?? 0;
     final exitFees = double.tryParse(fields.exitFees ?? '') ?? 0;
     final slippage = double.tryParse(fields.slippagePercent ?? '') ?? 0;
@@ -375,7 +375,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       ),
       FastReportEntry(
         name: 'Reward/Risk Ratio',
-        value: '${localizeNumber(value: rewardRisk)}:1',
+        value: '${localizeNumber(value: riskReward)}:1',
       ),
       if (fields.entryFees != null && fields.entryFees!.isNotEmpty)
         FastReportEntry(

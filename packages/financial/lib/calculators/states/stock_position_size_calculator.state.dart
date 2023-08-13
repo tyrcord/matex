@@ -8,7 +8,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
   final double? stopLossAmount;
   final double? slippagePercent;
   final double? riskPercent;
-  final double? rewardRisk;
+  final double? riskReward;
   final double? entryFees;
   final double? exitFees;
 
@@ -19,7 +19,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
     this.stopLossAmount,
     this.slippagePercent,
     this.riskPercent,
-    this.rewardRisk,
+    this.riskReward,
     this.entryFees,
     this.exitFees,
   });
@@ -35,7 +35,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
     double? stopLossAmount,
     double? slippagePercent,
     double? riskPercent,
-    double? rewardRisk,
+    double? riskReward,
     double? entryFees,
     double? exitFees,
   }) {
@@ -46,7 +46,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
       stopLossAmount: stopLossAmount ?? this.stopLossAmount,
       slippagePercent: slippagePercent ?? this.slippagePercent,
       riskPercent: riskPercent ?? this.riskPercent,
-      rewardRisk: rewardRisk ?? this.rewardRisk,
+      riskReward: riskReward ?? this.riskReward,
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
     );
@@ -63,7 +63,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
       stopLossAmount: model.stopLossAmount,
       slippagePercent: model.slippagePercent,
       riskPercent: model.riskPercent,
-      rewardRisk: model.rewardRisk,
+      riskReward: model.riskReward,
       entryFees: model.entryFees,
       exitFees: model.exitFees,
     );
@@ -77,7 +77,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
         stopLossAmount,
         slippagePercent,
         riskPercent,
-        rewardRisk,
+        riskReward,
         entryFees,
         exitFees,
       ];

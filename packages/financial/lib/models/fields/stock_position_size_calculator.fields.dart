@@ -7,7 +7,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
   final String? stopLossAmount;
   final String? slippagePercent;
   final String? riskPercent;
-  final String? rewardRisk;
+  final String? riskReward;
   final String? entryFees;
   final String? exitFees;
   final String? riskFieldType;
@@ -19,7 +19,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
     this.stopLossAmount,
     this.slippagePercent,
     this.riskPercent,
-    this.rewardRisk,
+    this.riskReward,
     this.entryFees,
     this.exitFees,
     String? riskFieldType,
@@ -36,7 +36,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
     String? stopLossAmount,
     String? slippagePercent,
     String? riskPercent,
-    String? rewardRisk,
+    String? riskReward,
     String? entryFees,
     String? exitFees,
     String? riskFieldType,
@@ -48,7 +48,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
       stopLossAmount: stopLossAmount ?? this.stopLossAmount,
       slippagePercent: slippagePercent ?? this.slippagePercent,
       riskPercent: riskPercent ?? this.riskPercent,
-      rewardRisk: rewardRisk ?? this.rewardRisk,
+      riskReward: riskReward ?? this.riskReward,
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
       riskFieldType: riskFieldType ?? this.riskFieldType,
@@ -66,7 +66,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
       stopLossAmount: model.stopLossAmount,
       slippagePercent: model.slippagePercent,
       riskPercent: model.riskPercent,
-      rewardRisk: model.rewardRisk,
+      riskReward: model.riskReward,
       entryFees: model.entryFees,
       exitFees: model.exitFees,
       riskFieldType: model.riskFieldType,
@@ -81,7 +81,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
         stopLossAmount,
         slippagePercent,
         riskPercent,
-        rewardRisk,
+        riskReward,
         entryFees,
         exitFees,
         riskFieldType,

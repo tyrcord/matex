@@ -9,7 +9,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
   final String? stopLossAmount;
   final String? slippagePercent;
   final String? riskPercent;
-  final String? rewardRisk;
+  final String? riskReward;
   final String? entryFees;
   final String? exitFees;
   final String? riskFieldType;
@@ -21,7 +21,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
     this.stopLossAmount,
     this.slippagePercent,
     this.riskPercent,
-    this.rewardRisk,
+    this.riskReward,
     this.entryFees,
     this.exitFees,
     this.riskFieldType,
@@ -38,7 +38,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
     String? stopLossAmount,
     String? slippagePercent,
     String? riskPercent,
-    String? rewardRisk,
+    String? riskReward,
     String? entryFees,
     String? exitFees,
     String? riskFieldType,
@@ -50,7 +50,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       stopLossAmount: stopLossAmount ?? this.stopLossAmount,
       slippagePercent: slippagePercent ?? this.slippagePercent,
       riskPercent: riskPercent ?? this.riskPercent,
-      rewardRisk: rewardRisk ?? this.rewardRisk,
+      riskReward: riskReward ?? this.riskReward,
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
       riskFieldType: riskFieldType ?? this.riskFieldType,
@@ -68,7 +68,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       stopLossAmount: model.stopLossAmount,
       slippagePercent: model.slippagePercent,
       riskPercent: model.riskPercent,
-      rewardRisk: model.rewardRisk,
+      riskReward: model.riskReward,
       entryFees: model.entryFees,
       exitFees: model.exitFees,
       riskFieldType: model.riskFieldType,
@@ -84,7 +84,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       'stopLossAmount': stopLossAmount,
       'slippagePercent': slippagePercent,
       'riskPercent': riskPercent,
-      'rewardRisk': rewardRisk,
+      'riskReward': riskReward,
       'entryFees': entryFees,
       'exitFees': exitFees,
       'riskFieldType': riskFieldType,
@@ -100,7 +100,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       stopLossAmount: stopLossAmount,
       slippagePercent: slippagePercent,
       riskPercent: riskPercent,
-      rewardRisk: rewardRisk,
+      riskReward: riskReward,
       entryFees: entryFees,
       exitFees: exitFees,
       riskFieldType: riskFieldType,
@@ -117,7 +117,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       stopLossAmount: json['stopLossAmount'] as String?,
       slippagePercent: json['slippagePercent'] as String?,
       riskPercent: json['riskPercent'] as String?,
-      rewardRisk: json['rewardRisk'] as String?,
+      riskReward: json['riskReward'] as String?,
       entryFees: json['entryFees'] as String?,
       exitFees: json['exitFees'] as String?,
       riskFieldType: json['riskFieldType'] as String?,
@@ -132,7 +132,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
         stopLossAmount,
         slippagePercent,
         riskPercent,
-        rewardRisk,
+        riskReward,
         entryFees,
         exitFees,
         riskFieldType,

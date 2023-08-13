@@ -55,8 +55,8 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     setState(state.copyWith(riskPercent: value, stopLossAmount: 0));
   }
 
-  set rewardRisk(double? value) {
-    setState(state.copyWith(rewardRisk: value));
+  set riskReward(double? value) {
+    setState(state.copyWith(riskReward: value));
   }
 
   @override
@@ -84,7 +84,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     final entryFees = toDecimal((state.entryFees ?? 0.0))!;
     final exitFees = toDecimal((state.exitFees ?? 0.0))!;
     final stopLossPrice = toDecimal((state.stopLossPrice ?? 0.0))!;
-    final rewardRisk = toDecimal((state.rewardRisk ?? 0.0))!;
+    final riskReward = toDecimal((state.riskReward ?? 0.0))!;
 
     final adjustedEntryPrice = adjustEntryPriceForSlippage(
       entryPrice,
@@ -128,7 +128,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       adjustedEntryPrice,
       effectiveRisk,
       shares,
-      rewardRisk,
+      riskReward,
     );
 
     final adjustedTakeProfitPrice = adjustExitPriceForFees(
@@ -138,7 +138,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
 
     final takeProfitAmount = calculateTakeProfitAmount(
       effectiveRisk,
-      rewardRisk,
+      riskReward,
     );
 
     // Calculate the total fees based on adjusted prices
@@ -242,11 +242,11 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     Decimal adjustedEntryPrice,
     Decimal effectiveRisk,
     Decimal shares,
-    Decimal rewardRisk,
+    Decimal riskReward,
   ) {
     final riskPerShare = decimalFromRational(effectiveRisk / shares);
 
-    return adjustedEntryPrice + riskPerShare * rewardRisk;
+    return adjustedEntryPrice + riskPerShare * riskReward;
   }
 
   Decimal calculateToleratedRisk(Decimal accountBalance, Decimal riskPercent) {
@@ -260,7 +260,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     return decimalFromRational(positionAmount / accountBalance);
   }
 
-  Decimal calculateTakeProfitAmount(Decimal effectiveRisk, Decimal rewardRisk) {
-    return effectiveRisk * rewardRisk;
+  Decimal calculateTakeProfitAmount(Decimal effectiveRisk, Decimal riskReward) {
+    return effectiveRisk * riskReward;
   }
 }
