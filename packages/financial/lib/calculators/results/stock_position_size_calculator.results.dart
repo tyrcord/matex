@@ -5,7 +5,9 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
   final double? positionAmount;
   final double? involvedCapital;
   final double? takeProfitAmount;
+  final double? takeProfitAmountWithSlippage;
   final double? takeProfitPrice;
+  final double? takeProfitPriceWithSlippage;
   final double? toleratedRisk;
   final double? effectiveRisk;
   final double? stopLossPercent;
@@ -37,6 +39,8 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     this.stopLossFeeAmount,
     this.takeProfitFeeAmount,
     this.totalFeesForProfitPosition,
+    this.takeProfitAmountWithSlippage,
+    this.takeProfitPriceWithSlippage,
   });
 
   @override
@@ -61,6 +65,8 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     double? stopLossFeeAmount,
     double? takeProfitFeeAmount,
     double? totalFeesForProfitPosition,
+    double? takeProfitAmountWithSlippage,
+    double? takeProfitPriceWithSlippage,
   }) {
     return MatexStockPositionSizeCalculatorResults(
       shares: shares ?? this.shares,
@@ -85,6 +91,10 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
       takeProfitFeeAmount: takeProfitFeeAmount ?? this.takeProfitFeeAmount,
       totalFeesForProfitPosition:
           totalFeesForProfitPosition ?? this.totalFeesForProfitPosition,
+      takeProfitAmountWithSlippage:
+          takeProfitAmountWithSlippage ?? this.takeProfitAmountWithSlippage,
+      takeProfitPriceWithSlippage:
+          takeProfitPriceWithSlippage ?? this.takeProfitPriceWithSlippage,
     );
   }
 
@@ -110,6 +120,8 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
       stopLossFeeAmount: model.stopLossFeeAmount,
       takeProfitFeeAmount: model.takeProfitFeeAmount,
       totalFeesForProfitPosition: model.totalFeesForProfitPosition,
+      takeProfitAmountWithSlippage: model.takeProfitAmountWithSlippage,
+      takeProfitPriceWithSlippage: model.takeProfitPriceWithSlippage,
     );
   }
 
@@ -132,5 +144,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
         stopLossFeeAmount,
         takeProfitFeeAmount,
         totalFeesForProfitPosition,
+        takeProfitAmountWithSlippage,
+        takeProfitPriceWithSlippage,
       ];
 }
