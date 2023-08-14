@@ -647,12 +647,12 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     MatexStockPositionSizeCalculatorBlocResults results,
   ) {
     final takeProfitPrice = results.takeProfitPrice;
-    final takePromitAmount = results.takeProfitAmount;
+    final takeProfitAmount = results.takeProfitAmount;
 
     return takeProfitPrice != null &&
-        takePromitAmount != null &&
+        takeProfitAmount != null &&
         takeProfitPrice > 0 &&
-        takePromitAmount > 0;
+        takeProfitAmount > 0;
   }
 
   /// Builds the "Take Profit" category of the report.

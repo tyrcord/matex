@@ -2,7 +2,11 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:lingua_calculator/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:lingua_core/generated/locale_keys.g.dart';
 
 // Project imports:
 import 'package:matex_core/core.dart';
@@ -81,29 +85,35 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FastCalculatorPageLayout(
-      calculatorBloc: widget.calculatorBloc,
-      calculatorActions: widget.calculatorActions,
-      resultsActions: widget.resultsActions,
-      dividerBuilder: widget.dividerBuilder,
-      headerBuilder: widget.headerBuilder,
-      footerBuilder: widget.footerBuilder,
-      resultsBuilder: widget.resultsBuilder,
-      fieldsBuilder: widget.fieldsBuilder,
-      resultsTitleText: widget.resultsTitleText,
-      fieldsTitleText: widget.fieldsTitleText,
-      pageTitleText: widget.pageTitleText,
-      showRefreshIcon: widget.showRefreshIcon,
-      requestFullApp: widget.requestFullApp,
-      refreshIcon: widget.refreshIcon,
-      showClearIcon: widget.showClearIcon,
-      backButton: widget.backButton,
-      shareIcon: widget.shareIcon,
-      clearIcon: widget.clearIcon,
-      showInfoIcon: widget.showInfoIcon,
-      infoIcon: widget.infoIcon,
-      onInfo: widget.onInfo,
-      leading: widget.leading,
+    return FastAppSettingsLanguageBuilder(
+      builder: (context, state) {
+        return FastCalculatorPageLayout(
+          calculatorBloc: widget.calculatorBloc,
+          calculatorActions: widget.calculatorActions,
+          resultsActions: widget.resultsActions,
+          dividerBuilder: widget.dividerBuilder,
+          headerBuilder: widget.headerBuilder,
+          footerBuilder: widget.footerBuilder,
+          resultsBuilder: widget.resultsBuilder,
+          fieldsBuilder: widget.fieldsBuilder,
+          resultsTitleText:
+              widget.resultsTitleText ?? CoreLocaleKeys.core_label_results.tr(),
+          fieldsTitleText: widget.fieldsTitleText ??
+              CalculatorLocaleKeys.calculator_label_calculator.tr(),
+          pageTitleText: widget.pageTitleText,
+          showRefreshIcon: widget.showRefreshIcon,
+          requestFullApp: widget.requestFullApp,
+          refreshIcon: widget.refreshIcon,
+          showClearIcon: widget.showClearIcon,
+          backButton: widget.backButton,
+          shareIcon: widget.shareIcon,
+          clearIcon: widget.clearIcon,
+          showInfoIcon: widget.showInfoIcon,
+          infoIcon: widget.infoIcon,
+          onInfo: widget.onInfo,
+          leading: widget.leading,
+        );
+      },
     );
   }
 }
