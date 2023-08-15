@@ -6,6 +6,10 @@ import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
+import 'package:lingua_finance/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:lingua_finance_stock/generated/locale_keys.g.dart';
+import 'package:lingua_core/generated/locale_keys.g.dart';
 
 final _kDefaultStockPositionSizeBlocState =
     MatexStockPositionSizeCalculatorBlocState(
@@ -323,17 +327,22 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     final results = _buildResultReportEntries(context);
 
     final reporter = FastPdfCalculatorReporter();
+    final appInfoBloc = FastAppInfoBloc();
+    final appInfo = appInfoBloc.currentState;
 
     return reporter.report(
-      title: 'Stock Position Size Report',
+      title: CoreLocaleKeys.core_label_report.tr(),
       disclaimerText:
-          'Participating in financial markets involves risks that may lead to '
-          'financial losses. Please do not make trading or investment '
-          'decisions based solely on this information.',
+          FinanceLocaleKeys.finance_disclaimer_intervening_markets.tr(),
       inputs: inputs,
       results: results,
-      author: 'Pdf generated using StockPosQal App',
+      author: CoreLocaleKeys.core_message_pdf_generated_by.tr(namedArgs: {
+        'app_name': appInfo.appName,
+      }),
       categories: _buildCategoryEntries(context),
+      alwaysUse24HourFormat: appSettingsBloc.currentState.alwaysUse24HourFormat,
+      countryCode: appSettingsBloc.currentState.countryCode,
+      languageCode: appSettingsBloc.currentState.languageCode,
     );
   }
 
@@ -352,44 +361,44 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
     return [
       FastReportEntry(
-        name: 'Account Balance',
+        name: FinanceLocaleKeys.finance_label_account_balance.tr(),
         value: localizeCurrency(value: accountBalance),
       ),
       if (fields.riskFieldType == FastAmountSwitchFieldType.amount.name)
         FastReportEntry(
-          name: 'Stop Loss Amount',
+          name: FinanceLocaleKeys.finance_label_amount_at_risk.tr(),
           value: localizeCurrency(value: stopLossAmount),
         )
       else
         FastReportEntry(
-          name: 'Risk',
+          name: FinanceLocaleKeys.finance_label_risk_text.tr(),
           value: '${localizeNumber(value: risk)}%',
         ),
       FastReportEntry(
-        name: 'Entry Price',
+        name: FinanceLocaleKeys.finance_label_entry_price_at.tr(),
         value: localizeCurrency(value: entryPrice),
       ),
       FastReportEntry(
-        name: 'Stop Loss Price',
+        name: FinanceLocaleKeys.finance_label_stop_loss_at.tr(),
         value: localizeCurrency(value: stopLossPrice),
       ),
       FastReportEntry(
-        name: 'Reward/Risk Ratio',
+        name: FinanceLocaleKeys.finance_label_risk_reward_ratio.tr(),
         value: '${localizeNumber(value: riskReward)}:1',
       ),
       if (fields.entryFees != null && fields.entryFees!.isNotEmpty)
         FastReportEntry(
-          name: 'Entry Fees',
+          name: FinanceLocaleKeys.finance_label_entry_fees_text.tr(),
           value: '${localizeNumber(value: entryFees)}%',
         ),
       if (fields.exitFees != null && fields.exitFees!.isNotEmpty)
         FastReportEntry(
-          name: 'Exit Fees',
+          name: FinanceLocaleKeys.finance_label_exit_fees_text.tr(),
           value: '${localizeNumber(value: exitFees)}%',
         ),
       if (fields.slippagePercent != null && fields.slippagePercent!.isNotEmpty)
         FastReportEntry(
-          name: 'Slippage',
+          name: FinanceLocaleKeys.finance_label_slippage.tr(),
           value: '${localizeNumber(value: slippage)}%',
         ),
     ];
@@ -401,13 +410,13 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
     return [
       FastReportEntry(
-        name: 'Shares',
+        name: FinanceStockLocaleKeys.stock_label_stock.tr(),
         value: results.formattedShares.toString(),
         color: palette.indigo.mid,
       ),
       if (results.positionAmount != null && results.positionAmount != 0)
         FastReportEntry(
-          name: 'Position Amount',
+          name: FinanceLocaleKeys.finance_label_position_amount.tr(),
           value: results.formattedPositionAmount!,
           color: palette.blueGray.mid,
         ),
@@ -468,7 +477,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
     if (results.involvedCapital != null && results.involvedCapital != 0) {
       entries.add(FastReportEntry(
-        name: 'Involved Capital',
+        name: FinanceLocaleKeys.finance_label_involved_capital.tr(),
         value: results.formattedInvolvedCapital!,
       ));
     }
@@ -477,7 +486,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         results.riskPercent != 0 &&
         fields.riskFieldType != FastAmountSwitchFieldType.percent.name) {
       entries.add(FastReportEntry(
-        name: 'Risk Percent',
+        name: FinanceLocaleKeys.finance_label_risk_in_percentage.tr(),
         value: results.formattedRiskPercent!,
       ));
     }
@@ -486,7 +495,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         results.toleratedRisk != 0 &&
         fields.riskFieldType != FastAmountSwitchFieldType.amount.name) {
       entries.add(FastReportEntry(
-        name: 'Tolerated Risk',
+        name: FinanceLocaleKeys.finance_label_risk_tolerated.tr(),
         value: results.formattedToleratedRisk!,
       ));
     }
@@ -495,14 +504,14 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         results.effectiveRisk != 0 &&
         results.effectiveRisk != results.toleratedRisk) {
       entries.add(FastReportEntry(
-        name: 'Effective Risk',
+        name: FinanceLocaleKeys.finance_label_risk_effective.tr(),
         value: results.formattedEffectiveRisk!,
         color: palette.red.mid,
       ));
     }
 
     return FastReportCategoryEntry(
-      name: 'Risk',
+      name: FinanceLocaleKeys.finance_label_risk_text.tr(),
       entries: entries,
     );
   }
@@ -550,20 +559,20 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         fields.slippagePercent != null &&
         fields.slippagePercent!.isNotEmpty) {
       entries.add(FastReportEntry(
-        name: 'Entry Price with Slippage',
+        name: FinanceLocaleKeys.finance_label_entry_price_with_slippage.tr(),
         value: results.formattedEntryPriceWithSlippage!,
       ));
     }
 
     if (results.entryFeeAmount != null && results.entryFeeAmount != 0) {
       entries.add(FastReportEntry(
-        name: 'Entry Fee Amount',
+        name: FinanceLocaleKeys.finance_label_entry_fees_amount.tr(),
         value: results.formattedEntryFeeAmount!,
       ));
     }
 
     return FastReportCategoryEntry(
-      name: 'Entry',
+      name: FinanceLocaleKeys.finance_label_entry_text.tr(),
       entries: entries,
     );
   }
@@ -599,14 +608,15 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         fields.slippagePercent != null &&
         fields.slippagePercent!.isNotEmpty) {
       entries.add(FastReportEntry(
-        name: 'Stop Loss Price with Slippage',
+        name:
+            FinanceLocaleKeys.finance_label_stop_loss_price_with_slippage.tr(),
         value: results.formattedStopLossPriceWithSlippage!,
       ));
     }
 
     if (results.stopLossPercent != null && results.stopLossPercent != 0) {
       entries.add(FastReportEntry(
-        name: 'Stop Loss Percent',
+        name: FinanceLocaleKeys.finance_label_stop_loss_in_percentage_text.tr(),
         value: results.formattedStopLossPercent!,
       ));
     }
@@ -615,14 +625,16 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         results.stopLossPercentWithSlippage != 0 &&
         results.stopLossPercent != results.stopLossPercentWithSlippage) {
       entries.add(FastReportEntry(
-        name: 'Stop Loss Percent with Slippage',
+        name: FinanceLocaleKeys
+            .finance_label_stop_loss_in_percentage_with_slippage
+            .tr(),
         value: results.formattedStopLossPercentWithSlippage!,
       ));
     }
 
     if (results.stopLossFeeAmount != null && results.stopLossFeeAmount != 0) {
       entries.add(FastReportEntry(
-        name: 'Stop Loss Fee Amount',
+        name: FinanceLocaleKeys.finance_label_stop_loss_fees_amount.tr(),
         value: results.formattedStopLossFeeAmount!,
       ));
     }
@@ -631,14 +643,14 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         results.totalFeesForLossPosition != 0 &&
         results.totalFeesForLossPosition != results.stopLossFeeAmount) {
       entries.add(FastReportEntry(
-        name: 'Total Fees for Loss Position',
+        name: FinanceLocaleKeys.finance_label_total_costs_losing_position.tr(),
         value: results.formattedTotalFeesForLossPosition!,
         color: palette.orange.mid,
       ));
     }
 
     return FastReportCategoryEntry(
-      name: 'Stop Loss',
+      name: FinanceLocaleKeys.finance_label_stop_loss_text.tr(),
       entries: entries,
     );
   }
@@ -674,7 +686,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
     if (results.takeProfitAmount != null && results.takeProfitAmount != 0) {
       entries.add(FastReportEntry(
-        name: 'Take Profit Amount',
+        name: FinanceLocaleKeys.finance_label_take_profit_amount.tr(),
         value: results.formattedTakeProfitAmount!,
         color: palette.green.mid,
       ));
@@ -682,7 +694,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
     if (results.takeProfitPrice != null && results.takeProfitPrice != 0) {
       entries.add(FastReportEntry(
-        name: 'Take Profit Price',
+        name: FinanceLocaleKeys.finance_label_take_profit_price_at.tr(),
         value: results.formattedTakeProfitPrice!,
       ));
     }
@@ -690,7 +702,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     if (results.takeProfitFeeAmount != null &&
         results.takeProfitFeeAmount != 0) {
       entries.add(FastReportEntry(
-        name: 'Take Profit Fee Amount',
+        name: FinanceLocaleKeys.finance_label_take_profit_fees_amount.tr(),
         value: results.formattedTakeProfitFeeAmount!,
       ));
     }
@@ -699,14 +711,14 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         results.totalFeesForProfitPosition != 0 &&
         results.takeProfitFeeAmount != results.totalFeesForProfitPosition) {
       entries.add(FastReportEntry(
-        name: 'Total Fees for Profit Position',
+        name: FinanceLocaleKeys.finance_label_total_costs_profit_position.tr(),
         value: results.formattedTotalFeesForProfitPosition!,
         color: palette.orange.mid,
       ));
     }
 
     return FastReportCategoryEntry(
-      name: 'Take Profit',
+      name: FinanceLocaleKeys.finance_label_take_profit_text.tr(),
       entries: entries,
     );
   }
