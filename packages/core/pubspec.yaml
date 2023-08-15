@@ -10,17 +10,31 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # public
+
   decimal: ^2.3.3
-  tmodel_dart: ^0.5.0
-  fastyle_core: ^0.0.10
-  fastyle_calculator: ^1.21.1
-  tstore: ^0.8.10
   collection: ^1.17.1
+  share_plus: ^7.1.0
+  intl: ^0.18.0
+  easy_localization: ^3.0.2
+
+  # t
+  tstore: ^0.8.10
   tbloc: ^0.21.2
   t_helpers: ^0.0.26
-  share_plus: ^7.1.0
+  tmodel: ^0.5.0
+
+  # lingua
+
+  lingua_core: ^0.0.19
+  lingua_calculator: ^0.0.2+1
+
+  # fastyle
+
   fastyle_settings: ^0.0.19
-  intl: ^0.18.0
+  fastyle_core: ^0.0.10
+  fastyle_calculator: ^1.21.1
 
 dev_dependencies:
   flutter_test:

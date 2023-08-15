@@ -10,25 +10,44 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # public
+
   decimal: ^2.3.3
-  tmodel_dart: ^0.5.0
-  matex_core: ^0.0.8+1
-  fastyle_calculator: ^1.21.1
-  t_helpers: ^0.0.26
   pdf: ^3.10.4
   cross_file: ^0.3.3+4
   printing: ^5.11.0
-  fastyle_forms: ^0.0.14
+  easy_localization: ^3.0.2
+
+  # matex
+
+  matex_dart: ^0.11.1
+  matex_core: ^0.0.8+1
+
+  # t
+  tbloc: ^0.21.2
+  t_helpers: ^0.0.26
+  tmodel: ^0.5.4
+
+  #lingua
+
+  lingua_finance: ^0.0.10
+  lingua_finance_stock: ^0.0.5
+  lingua_core: ^0.0.19
+  lingua_settings: ^0.0.9
+
+  # fastyle
+
+  fastyle_forms: ^0.0.14+2
   fastyle_core: ^0.0.10
   fastyle_financial: ^0.0.12+1
-  matex_dart: ^0.11.1
-  tbloc: ^0.21.2
+  fastyle_calculator: ^1.21.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.2
   dart_code_metrics: ^5.7.6
-  tstore: ^0.8.9
+  tstore: ^0.8.10
   import_sorter: ^4.6.0
   dependency_validator: ^3.2.2
