@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-08-15
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.9`](#matex_core---v009)
+ - [`matex_financial` - `v0.0.14`](#matex_financial---v0014)
+
+---
+
+#### `matex_core` - `v0.0.9`
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: remove dead code.
+ - **FEAT**: add validators to MatexStockPositionSizeCalculator.
+ - **FEAT**: better export to PDF file.
+
+#### `matex_financial` - `v0.0.14`
+
+ - **FIX**: minor improvements.
+ - **FIX**: rename to RiskReward.
+ - **FIX**: minor improvements.
+ - **FEAT**: localize PDF.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add validators to MatexStockPositionSizeCalculator.
+ - **FEAT**: better export to PDF file.
+
+
 ## 2023-08-07
 
 ### Changes

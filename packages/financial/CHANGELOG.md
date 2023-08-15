@@ -1,3 +1,14 @@
+## 0.0.14
+
+ - **FIX**: minor improvements.
+ - **FIX**: rename to RiskReward.
+ - **FIX**: minor improvements.
+ - **FEAT**: localize PDF.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add validators to MatexStockPositionSizeCalculator.
+ - **FEAT**: better export to PDF file.
+
 ## 0.0.13+1
 
  - **FIX**: dependency requirements.

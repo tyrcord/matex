@@ -1,3 +1,11 @@
+## 0.0.9
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: remove dead code.
+ - **FEAT**: add validators to MatexStockPositionSizeCalculator.
+ - **FEAT**: better export to PDF file.
+
 ## 0.0.8+1
 
  - **FIX**: dependency requirements.
