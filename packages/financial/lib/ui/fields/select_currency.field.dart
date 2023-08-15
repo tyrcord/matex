@@ -13,7 +13,7 @@ class MatexSelectCurrencyField extends StatefulWidget {
 
   /// A callback function that will be called when the selection changes.
   /// It takes a [FastItem<String>] object representing the selected item.
-  final Function(FastItem<String>?)? onSelectionChanged;
+  final Function(FastItem<MatexInstrumentMetadata>?)? onSelectionChanged;
 
   /// The width of the flag icon displayed in each item.
   final double? flagIconWidth;
@@ -73,11 +73,8 @@ class _MatexSelectCurrencyFieldState extends State<MatexSelectCurrencyField> {
   void initState() {
     super.initState();
 
-    // Initialize the calculator bloc.
     _currencyBloc = MatexCurrencyBloc();
-
-    // Show the splash ad after the first frame is rendered.
-    SchedulerBinding.instance.addPostFrameCallback(_loadFinancialInstruments);
+    _loadFinancialInstruments();
   }
 
   @override
@@ -105,7 +102,9 @@ class _MatexSelectCurrencyFieldState extends State<MatexSelectCurrencyField> {
     );
   }
 
-  void _loadFinancialInstruments(_) {
-    _currencyBloc.addEvent(const MatexCurrencyBlocEvent.init());
+  void _loadFinancialInstruments() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      _currencyBloc.addEvent(const MatexCurrencyBlocEvent.init());
+    });
   }
 }
