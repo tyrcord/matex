@@ -107,7 +107,10 @@ abstract class MatexCalculatorBloc<
     await super.clearCalculatorState();
     await resetCalculator(defaultDocument);
 
-    return resetCalculatorBlocState(defaultDocument);
+    final metadata = await loadMetadata();
+    final clearedState = await resetCalculatorBlocState(defaultDocument);
+
+    return clearedState.copyWith(metadata: metadata) as S;
   }
 
   /// Handles compute errors.
