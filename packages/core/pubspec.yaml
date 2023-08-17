@@ -11,30 +11,27 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # public
-
+  # Public
   decimal: ^2.3.3
   collection: ^1.17.1
   share_plus: ^7.1.0
   intl: ^0.18.0
   easy_localization: ^3.0.2
 
-  # t
+  # T
   tstore: ^0.8.10
   tbloc: ^0.21.2
-  t_helpers: ^0.0.26
-  tmodel: ^0.5.0
+  t_helpers: ^0.0.26+1
+  tmodel: ^0.5.4
 
-  # lingua
-
-  lingua_core: ^0.0.19
+  # Lingua
+  lingua_core: ^0.0.21
   lingua_calculator: ^0.0.2+1
 
-  # fastyle
-
-  fastyle_settings: ^0.0.19
-  fastyle_core: ^0.0.10
-  fastyle_calculator: ^1.21.1
+  # Fastyle
+  fastyle_settings: ^0.0.21
+  fastyle_core: ^0.0.12
+  fastyle_calculator: ^1.24.0
 
 dev_dependencies:
   flutter_test:
