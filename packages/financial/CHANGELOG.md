@@ -1,3 +1,8 @@
+## 0.0.15
+
+ - **FEAT**(pdf): add subtitle.
+ - **FEAT**: update dependencies.
+
 ## 0.0.14
 
  - **FIX**: minor improvements.

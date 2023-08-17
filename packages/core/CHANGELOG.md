@@ -1,3 +1,8 @@
+## 0.0.10
+
+ - **FIX**: make sure we keep the default metadata after reseting a calculator.
+ - **FEAT**: update dependencies.
+
 ## 0.0.9
 
  - **FEAT**: update dependencies.
