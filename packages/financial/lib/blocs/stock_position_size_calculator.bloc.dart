@@ -336,6 +336,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
           FinanceLocaleKeys.finance_disclaimer_intervening_markets.tr(),
       inputs: inputs,
       results: results,
+      subtitle: FinanceLocaleKeys.finance_label_position_size.tr(),
       author: CoreLocaleKeys.core_message_pdf_generated_by.tr(namedArgs: {
         'app_name': appInfo.appName,
       }),
