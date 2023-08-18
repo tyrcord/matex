@@ -33,6 +33,16 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
           debugLabel: 'MatexStockPositionSizeCalculatorBloc',
         ) {
     calculator = MatexStockPositionSizeCalculator();
+
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.matexCalculatorRiskRewardRatio.name,
+      MatexStockPositionSizeCalculatorBlocKey.riskReward,
+    );
+
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.calculatorRiskPercent.name,
+      MatexStockPositionSizeCalculatorBlocKey.riskPercent,
+    );
   }
 
   @override
@@ -207,13 +217,27 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   Future<MatexStockPositionSizeCalculatorBlocState> resetCalculatorBlocState(
     MatexStockPositionSizeCalculatorBlocDocument document,
   ) async {
-    return _kDefaultStockPositionSizeBlocState;
+    return _kDefaultStockPositionSizeBlocState.copyWith(
+      fields: MatexStockPositionSizeCalculatorBlocFields(
+        riskPercent: document.riskPercent,
+        riskReward: document.riskReward,
+      ),
+    );
   }
 
   @override
   Future<MatexStockPositionSizeCalculatorBlocDocument>
       retrieveDefaultCalculatorDocument() async {
-    return const MatexStockPositionSizeCalculatorBlocDocument();
+    final bloc = FastAppDictBloc.instance;
+
+    return MatexStockPositionSizeCalculatorBlocDocument(
+      riskReward: bloc.getValue<String?>(
+        MatexCalculatorDefaultValueKeys.matexCalculatorRiskRewardRatio.name,
+      ),
+      riskPercent: bloc.getValue<String?>(
+        MatexCalculatorDefaultValueKeys.calculatorRiskPercent.name,
+      ),
+    );
   }
 
   @override

@@ -136,6 +136,31 @@ abstract class MatexCalculatorBloc<
     };
   }
 
+  void listenOnDefaultValueChanges(String defaultValueKey, String stateKey) {
+    final appDictBloc = FastAppDictBloc.instance;
+
+    subxList.add(appDictBloc.onData.distinct((previous, next) {
+      final previousValue = previous.getValue(defaultValueKey);
+      final nextValue = next.getValue(defaultValueKey);
+
+      return previousValue == nextValue;
+    }).listen((state) {
+      handleDefaultValueChanges(defaultValueKey, stateKey, state);
+    }));
+  }
+
+  void handleDefaultValueChanges(
+    String defaultValueKey,
+    String stateKey,
+    FastAppDictBlocState state,
+  ) {
+    addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
+    addEvent(FastCalculatorBlocEvent.patchValue(
+      value: state.getValue(defaultValueKey),
+      key: stateKey,
+    ));
+  }
+
   @override
   Future<void> shareCalculatorState(BuildContext context) async {
     if (calculator.isValid) {

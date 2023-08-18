@@ -73,10 +73,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
         stopLossAmount / accountBalance,
       );
     } else {
-      throw Exception(
-        'Either riskPercent should be provided or both stopLossAmount and '
-        'accountSize should be provided',
-      );
+      return const MatexStockPositionSizeCalculatorResults();
     }
 
     final slippage = toDecimal(state.slippagePercent ?? 0.0)!;

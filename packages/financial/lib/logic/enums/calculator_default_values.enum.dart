@@ -1,0 +1,4 @@
+enum MatexCalculatorDefaultValueKeys {
+  matexCalculatorRiskRewardRatio,
+  calculatorRiskPercent,
+}
