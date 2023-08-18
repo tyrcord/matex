@@ -30,6 +30,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
           initialState: initialState ?? _kDefaultStockPositionSizeBlocState,
           dataProvider:
               dataProvider ?? MatexStockPositionSizeCalculatorDataProvider(),
+          debugLabel: 'MatexStockPositionSizeCalculatorBloc',
         ) {
     calculator = MatexStockPositionSizeCalculator();
   }
