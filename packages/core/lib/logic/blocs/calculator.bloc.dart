@@ -84,7 +84,7 @@ abstract class MatexCalculatorBloc<
   @override
   @protected
   Future<S> initializeDefaultCalculatorState() async {
-    return resetCalculatorBlocState(document);
+    return resetCalculatorBlocState(defaultDocument);
   }
 
   /// Initializes the calculator state.
