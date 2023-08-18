@@ -217,5 +217,36 @@ void main() {
       expect(results.takeProfitAmountWithSlippage, closeTo(559.71, 0.01));
       expect(results.takeProfitPriceWithSlippage, closeTo(70.49, 0.01));
     });
+
+    test('should handles very small values correctly', () {
+      calculator.accountSize = 0.0001;
+      calculator.entryPrice = 0.00001;
+      calculator.stopLossPrice = 0.000005;
+      calculator.riskPercent = 0.00001;
+      calculator.riskReward = 3.0;
+
+      final result = calculator.value();
+
+      expect(result.shares, isNotNull);
+      expect(result.involvedCapital, lessThan(1e-3));
+      expect(result.entryPriceWithSlippage, closeTo(0.00001, 1e-6));
+      expect(result.stopLossPriceWithSlippage, closeTo(0.000005, 1e-6));
+      expect(result.stopLossPercent, closeTo(0.5, 1e-3));
+    });
+
+    test('should handles very large values correctly', () {
+      calculator.accountSize = 1e9; // 1 billion
+      calculator.entryPrice = 1e6; // 1 million
+      calculator.stopLossPrice = 9e5; // 900,000
+      calculator.riskPercent = 0.01;
+
+      final result = calculator.value();
+
+      expect(result.shares, isNotNull);
+      expect(result.involvedCapital, lessThan(1));
+      expect(result.entryPriceWithSlippage, closeTo(1e6, 1e-3));
+      expect(result.stopLossPriceWithSlippage, closeTo(9e5, 1e-3));
+      expect(result.stopLossPercent, closeTo(0.1, 1e-3));
+    });
   });
 }

@@ -244,6 +244,10 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     Decimal shares,
     Decimal riskReward,
   ) {
+    if (shares == dZero) {
+      return adjustedEntryPrice;
+    }
+
     final riskPerShare = decimalFromRational(effectiveRisk / shares);
 
     return adjustedEntryPrice + riskPerShare * riskReward;
@@ -257,6 +261,10 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     Decimal positionAmount,
     Decimal accountBalance,
   ) {
+    if (accountBalance == dZero) {
+      return dZero;
+    }
+
     return decimalFromRational(positionAmount / accountBalance);
   }
 
