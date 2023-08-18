@@ -40,7 +40,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     );
 
     listenOnDefaultValueChanges(
-      MatexCalculatorDefaultValueKeys.calculatorRiskPercent.name,
+      MatexCalculatorDefaultValueKeys.matexCalculatorRiskPercent.name,
       MatexStockPositionSizeCalculatorBlocKey.riskPercent,
     );
   }
@@ -235,7 +235,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         MatexCalculatorDefaultValueKeys.matexCalculatorRiskRewardRatio.name,
       ),
       riskPercent: bloc.getValue<String?>(
-        MatexCalculatorDefaultValueKeys.calculatorRiskPercent.name,
+        MatexCalculatorDefaultValueKeys.matexCalculatorRiskPercent.name,
       ),
     );
   }
