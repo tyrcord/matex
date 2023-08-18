@@ -13,7 +13,7 @@ import 'package:lingua_core/generated/locale_keys.g.dart';
 
 final _kDefaultStockPositionSizeBlocState =
     MatexStockPositionSizeCalculatorBlocState(
-  fields: const MatexStockPositionSizeCalculatorBlocFields(),
+  fields: MatexStockPositionSizeCalculatorBlocFields(),
   results: const MatexStockPositionSizeCalculatorBlocResults(),
 );
 

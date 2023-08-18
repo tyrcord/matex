@@ -1,29 +1,34 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
+  late final String? riskPercent;
+  late final String? riskReward;
+  late final String? stopLossAmount;
+
   final String? accountSize;
   final String? entryPrice;
   final String? stopLossPrice;
-  final String? stopLossAmount;
   final String? slippagePercent;
-  final String? riskPercent;
-  final String? riskReward;
   final String? entryFees;
   final String? exitFees;
   final String? riskFieldType;
 
-  const MatexStockPositionSizeCalculatorBlocFields({
+  MatexStockPositionSizeCalculatorBlocFields({
     this.accountSize,
     this.entryPrice,
     this.stopLossPrice,
-    this.stopLossAmount,
     this.slippagePercent,
-    this.riskPercent,
-    this.riskReward,
     this.entryFees,
     this.exitFees,
     String? riskFieldType,
-  }) : riskFieldType = riskFieldType ?? 'percent';
+    String? riskPercent,
+    String? riskReward,
+    String? stopLossAmount,
+  }) : riskFieldType = riskFieldType ?? 'percent' {
+    this.stopLossAmount = assignValue(stopLossAmount);
+    this.riskPercent = assignValue(riskPercent);
+    this.riskReward = assignValue(riskReward);
+  }
 
   @override
   MatexStockPositionSizeCalculatorBlocFields clone() => copyWith();

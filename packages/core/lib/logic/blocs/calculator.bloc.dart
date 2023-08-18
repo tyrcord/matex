@@ -139,7 +139,9 @@ abstract class MatexCalculatorBloc<
   void listenOnDefaultValueChanges(String defaultValueKey, String stateKey) {
     final appDictBloc = FastAppDictBloc.instance;
 
-    subxList.add(appDictBloc.onData.distinct((previous, next) {
+    subxList.add(appDictBloc.onData
+        .where((event) => isInitialized)
+        .distinct((previous, next) {
       final previousValue = previous.getValue(defaultValueKey);
       final nextValue = next.getValue(defaultValueKey);
 
