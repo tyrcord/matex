@@ -13,6 +13,8 @@ import 'package:matex_core/core.dart';
 
 class MatexCalculatorWidget<B extends MatexCalculatorBloc,
     R extends FastCalculatorResults> extends StatefulWidget {
+  final bool Function(FastCalculatorBlocState state)?
+      canEnableShareInteractions;
   final List<Widget>? calculatorActions;
   final List<Widget>? resultsActions;
   final WidgetBuilder? dividerBuilder;
@@ -41,6 +43,7 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
     required this.calculatorBloc,
     required this.resultsBuilder,
     required this.fieldsBuilder,
+    this.canEnableShareInteractions,
     this.requestFullApp = false,
     this.showRefreshIcon = true,
     this.showClearIcon = true,
@@ -88,6 +91,7 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
     return FastAppSettingsLanguageBuilder(
       builder: (context, state) {
         return FastCalculatorPageLayout(
+          canEnableShareInteractions: widget.canEnableShareInteractions,
           calculatorBloc: widget.calculatorBloc,
           calculatorActions: widget.calculatorActions,
           resultsActions: widget.resultsActions,
