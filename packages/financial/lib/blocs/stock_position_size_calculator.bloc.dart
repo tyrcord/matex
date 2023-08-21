@@ -523,6 +523,9 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       entries.add(FastReportEntry(
         name: FinanceLocaleKeys.finance_label_risk_tolerated.tr(),
         value: results.formattedToleratedRisk!,
+        color: results.toleratedRisk == results.effectiveRisk
+            ? palette.red.mid
+            : null,
       ));
     }
 
