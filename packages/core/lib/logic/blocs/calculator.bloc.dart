@@ -98,6 +98,12 @@ abstract class MatexCalculatorBloc<
     return super.initializeCalculatorState();
   }
 
+  @override
+  @protected
+  Future<bool> canSaveUserEntry() async {
+    return appSettingsBloc.currentState.saveEntry;
+  }
+
   /// Clears the calculator state.
   ///
   /// Returns a `Future` that completes with the new state of the bloc.
