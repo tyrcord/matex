@@ -1,3 +1,14 @@
+## 0.0.16
+
+ - **FIX**: regression.
+ - **FIX**: typo.
+ - **FIX**: support very small values correctly.
+ - **FEAT**: update dependencies.
+ - **FEAT**: support takeProfitAmountAfterFee.
+ - **FEAT**: minor improvements.
+ - **FEAT**: toleratedRisk should be red when it's equal to effectiveRisk.
+ - **FEAT**: support default values.
+
 ## 0.0.15
 
  - **FEAT**(pdf): add subtitle.

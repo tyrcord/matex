@@ -1,3 +1,13 @@
+## 0.0.11
+
+ - **FIX**: regression.
+ - **FIX**: use right document for resetCalculatorBlocState.
+ - **FEAT**: update dependencies.
+ - **FEAT**: override canSaveEntry.
+ - **FEAT**: allow to override share user interactions.
+ - **FEAT**: remove dead code.
+ - **FEAT**: support default values.
+
 ## 0.0.10
 
  - **FIX**: make sure we keep the default metadata after reseting a calculator.

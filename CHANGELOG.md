@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-08-22
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.11`](#matex_core---v0011)
+ - [`matex_financial` - `v0.0.16`](#matex_financial---v0016)
+
+---
+
+#### `matex_core` - `v0.0.11`
+
+ - **FIX**: regression.
+ - **FIX**: use right document for resetCalculatorBlocState.
+ - **FEAT**: update dependencies.
+ - **FEAT**: override canSaveEntry.
+ - **FEAT**: allow to override share user interactions.
+ - **FEAT**: remove dead code.
+ - **FEAT**: support default values.
+
+#### `matex_financial` - `v0.0.16`
+
+ - **FIX**: regression.
+ - **FIX**: typo.
+ - **FIX**: support very small values correctly.
+ - **FEAT**: update dependencies.
+ - **FEAT**: support takeProfitAmountAfterFee.
+ - **FEAT**: minor improvements.
+ - **FEAT**: toleratedRisk should be red when it's equal to effectiveRisk.
+ - **FEAT**: support default values.
+
+
 ## 2023-08-17
 
 ### Changes
