@@ -22,6 +22,6 @@ class MatexStockPositionSizeCalculatorDataProvider
       return MatexStockPositionSizeCalculatorBlocDocument.fromJson(json);
     }
 
-    return const MatexStockPositionSizeCalculatorBlocDocument();
+    return MatexStockPositionSizeCalculatorBlocDocument();
   }
 }

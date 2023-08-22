@@ -214,7 +214,7 @@ void main() {
       expect(results.stopLossPercentWithSlippage, closeTo(0.1178, 0.0001));
       expect(results.takeProfitAmount, closeTo(579.64, 0.01));
       expect(results.takeProfitPrice, closeTo(71.20, 0.01));
-      expect(results.takeProfitAmountWithSlippage, closeTo(559.71, 0.01));
+      expect(results.takeProfitAmountAfterFee, closeTo(559.71, 0.01));
       expect(results.takeProfitPriceWithSlippage, closeTo(70.49, 0.01));
     });
 

@@ -66,6 +66,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       riskPercent: results.riskPercent,
       totalFeesForLossPosition: results.totalFeesForLossPosition,
       totalFeesForProfitPosition: results.totalFeesForProfitPosition,
+      takeProfitAmountAfterFee: results.takeProfitAmountAfterFee,
       shares: results.shares,
       formattedPositionAmount: localizeCurrency(value: results.positionAmount),
       formattedEntryFeeAmount: localizeCurrency(value: results.entryFeeAmount),
@@ -105,6 +106,9 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       ),
       formattedEntryPriceWithSlippage: localizeCurrency(
         value: results.entryPriceWithSlippage,
+      ),
+      formattedTakeProfitAmountAfterFee: localizeCurrency(
+        value: results.takeProfitAmountAfterFee,
       ),
     );
   }
@@ -729,7 +733,9 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       entries.add(FastReportEntry(
         name: FinanceLocaleKeys.finance_label_take_profit_amount.tr(),
         value: results.formattedTakeProfitAmount!,
-        color: palette.green.mid,
+        color: results.takeProfitAmount == results.takeProfitAmountAfterFee
+            ? palette.green.mid
+            : null,
       ));
     }
 
@@ -745,6 +751,16 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       entries.add(FastReportEntry(
         name: FinanceLocaleKeys.finance_label_amount_fee.tr(),
         value: results.formattedTakeProfitFeeAmount!,
+      ));
+    }
+
+    if (results.takeProfitAmountAfterFee != null &&
+        results.takeProfitAmountAfterFee != 0 &&
+        results.takeProfitAmount != results.takeProfitAmountAfterFee) {
+      entries.add(FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_take_profit_price_after_fee.tr(),
+        value: results.formattedTakeProfitAmountAfterFee!,
+        color: palette.green.mid,
       ));
     }
 

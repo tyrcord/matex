@@ -5,7 +5,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
   final double? positionAmount;
   final double? involvedCapital;
   final double? takeProfitAmount;
-  final double? takeProfitAmountWithSlippage;
+  final double? takeProfitAmountAfterFee;
   final double? takeProfitPrice;
   final double? takeProfitPriceWithSlippage;
   final double? toleratedRisk;
@@ -39,7 +39,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     this.stopLossFeeAmount,
     this.takeProfitFeeAmount,
     this.totalFeesForProfitPosition,
-    this.takeProfitAmountWithSlippage,
+    this.takeProfitAmountAfterFee,
     this.takeProfitPriceWithSlippage,
   });
 
@@ -91,8 +91,8 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
       takeProfitFeeAmount: takeProfitFeeAmount ?? this.takeProfitFeeAmount,
       totalFeesForProfitPosition:
           totalFeesForProfitPosition ?? this.totalFeesForProfitPosition,
-      takeProfitAmountWithSlippage:
-          takeProfitAmountWithSlippage ?? this.takeProfitAmountWithSlippage,
+      takeProfitAmountAfterFee:
+          takeProfitAmountWithSlippage ?? this.takeProfitAmountAfterFee,
       takeProfitPriceWithSlippage:
           takeProfitPriceWithSlippage ?? this.takeProfitPriceWithSlippage,
     );
@@ -120,7 +120,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
       stopLossFeeAmount: model.stopLossFeeAmount,
       takeProfitFeeAmount: model.takeProfitFeeAmount,
       totalFeesForProfitPosition: model.totalFeesForProfitPosition,
-      takeProfitAmountWithSlippage: model.takeProfitAmountWithSlippage,
+      takeProfitAmountWithSlippage: model.takeProfitAmountAfterFee,
       takeProfitPriceWithSlippage: model.takeProfitPriceWithSlippage,
     );
   }
@@ -144,7 +144,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
         stopLossFeeAmount,
         takeProfitFeeAmount,
         totalFeesForProfitPosition,
-        takeProfitAmountWithSlippage,
+        takeProfitAmountAfterFee,
         takeProfitPriceWithSlippage,
       ];
 }

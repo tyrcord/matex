@@ -37,6 +37,8 @@ class MatexStockPositionSizeCalculatorBlocResults
   final String? formattedTakeProfitFeeAmount;
   final double? totalFeesForProfitPosition;
   final String? formattedTotalFeesForProfitPosition;
+  final double? takeProfitAmountAfterFee;
+  final String? formattedTakeProfitAmountAfterFee;
 
   const MatexStockPositionSizeCalculatorBlocResults({
     this.shares,
@@ -73,6 +75,8 @@ class MatexStockPositionSizeCalculatorBlocResults
     this.formattedTakeProfitFeeAmount,
     this.totalFeesForProfitPosition,
     this.formattedTotalFeesForProfitPosition,
+    this.takeProfitAmountAfterFee,
+    this.formattedTakeProfitAmountAfterFee,
   });
 
   factory MatexStockPositionSizeCalculatorBlocResults.fromCalculatorResults(
@@ -117,6 +121,9 @@ class MatexStockPositionSizeCalculatorBlocResults
       formattedTakeProfitFeeAmount: results.takeProfitFeeAmount?.toString(),
       totalFeesForProfitPosition: null,
       formattedTotalFeesForProfitPosition: null,
+      takeProfitAmountAfterFee: results.takeProfitAmountAfterFee,
+      formattedTakeProfitAmountAfterFee:
+          results.takeProfitAmountAfterFee?.toString(),
     );
   }
 
@@ -159,6 +166,8 @@ class MatexStockPositionSizeCalculatorBlocResults
     String? formattedTakeProfitFeeAmount,
     double? totalFeesForProfitPosition,
     String? formattedTotalFeesForProfitPosition,
+    double? takeProfitAmountAfterFee,
+    String? formattedTakeProfitAmountAfterFee,
   }) {
     return MatexStockPositionSizeCalculatorBlocResults(
       shares: shares ?? this.shares,
@@ -217,6 +226,10 @@ class MatexStockPositionSizeCalculatorBlocResults
       formattedTotalFeesForProfitPosition:
           formattedTotalFeesForProfitPosition ??
               this.formattedTotalFeesForProfitPosition,
+      takeProfitAmountAfterFee:
+          takeProfitAmountAfterFee ?? this.takeProfitAmountAfterFee,
+      formattedTakeProfitAmountAfterFee: formattedTakeProfitAmountAfterFee ??
+          this.formattedTakeProfitAmountAfterFee,
     );
   }
 
@@ -263,6 +276,9 @@ class MatexStockPositionSizeCalculatorBlocResults
       totalFeesForProfitPosition: model.totalFeesForProfitPosition,
       formattedTotalFeesForProfitPosition:
           model.formattedTotalFeesForProfitPosition,
+      takeProfitAmountAfterFee: model.takeProfitAmountAfterFee,
+      formattedTakeProfitAmountAfterFee:
+          model.formattedTakeProfitAmountAfterFee,
     );
   }
 
@@ -302,5 +318,7 @@ class MatexStockPositionSizeCalculatorBlocResults
         formattedTakeProfitFeeAmount,
         totalFeesForProfitPosition,
         formattedTotalFeesForProfitPosition,
+        takeProfitAmountAfterFee,
+        formattedTakeProfitAmountAfterFee,
       ];
 }

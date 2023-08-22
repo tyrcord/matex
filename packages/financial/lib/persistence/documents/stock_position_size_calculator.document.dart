@@ -3,29 +3,39 @@ import 'package:matex_financial/models/fields/stock_position_size_calculator.fie
 
 class MatexStockPositionSizeCalculatorBlocDocument
     extends FastCalculatorDocument {
-  final String? accountSize;
-  final String? entryPrice;
-  final String? stopLossPrice;
-  final String? stopLossAmount;
-  final String? slippagePercent;
-  final String? riskPercent;
-  final String? riskReward;
-  final String? entryFees;
-  final String? exitFees;
-  final String? riskFieldType;
+  late final String? accountSize;
+  late final String? entryPrice;
+  late final String? stopLossPrice;
+  late final String? stopLossAmount;
+  late final String? slippagePercent;
+  late final String? riskPercent;
+  late final String? riskReward;
+  late final String? entryFees;
+  late final String? exitFees;
+  late final String? riskFieldType;
 
-  const MatexStockPositionSizeCalculatorBlocDocument({
-    this.accountSize,
-    this.entryPrice,
-    this.stopLossPrice,
-    this.stopLossAmount,
-    this.slippagePercent,
-    this.riskPercent,
-    this.riskReward,
-    this.entryFees,
-    this.exitFees,
-    this.riskFieldType,
-  });
+  MatexStockPositionSizeCalculatorBlocDocument({
+    String? accountSize,
+    String? entryPrice,
+    String? stopLossPrice,
+    String? stopLossAmount,
+    String? slippagePercent,
+    String? riskPercent,
+    String? riskReward,
+    String? entryFees,
+    String? exitFees,
+    String? riskFieldType,
+  }) : riskFieldType = riskFieldType ?? 'percent' {
+    this.accountSize = assignValue(accountSize);
+    this.entryPrice = assignValue(entryPrice);
+    this.stopLossPrice = assignValue(stopLossPrice);
+    this.stopLossAmount = assignValue(stopLossAmount);
+    this.slippagePercent = assignValue(slippagePercent);
+    this.riskPercent = assignValue(riskPercent);
+    this.riskReward = assignValue(riskReward);
+    this.entryFees = assignValue(entryFees);
+    this.exitFees = assignValue(exitFees);
+  }
 
   @override
   MatexStockPositionSizeCalculatorBlocDocument clone() => copyWith();

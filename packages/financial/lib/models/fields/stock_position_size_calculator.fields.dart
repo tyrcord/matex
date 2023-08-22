@@ -1,33 +1,38 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
+  late final String? accountSize;
+  late final String? entryPrice;
+  late final String? stopLossPrice;
+  late final String? stopLossAmount;
+  late final String? slippagePercent;
   late final String? riskPercent;
   late final String? riskReward;
-  late final String? stopLossAmount;
-
-  final String? accountSize;
-  final String? entryPrice;
-  final String? stopLossPrice;
-  final String? slippagePercent;
-  final String? entryFees;
-  final String? exitFees;
-  final String? riskFieldType;
+  late final String? entryFees;
+  late final String? exitFees;
+  late final String? riskFieldType;
 
   MatexStockPositionSizeCalculatorBlocFields({
-    this.accountSize,
-    this.entryPrice,
-    this.stopLossPrice,
-    this.slippagePercent,
-    this.entryFees,
-    this.exitFees,
-    String? riskFieldType,
+    String? accountSize,
+    String? entryPrice,
+    String? stopLossPrice,
+    String? stopLossAmount,
+    String? slippagePercent,
     String? riskPercent,
     String? riskReward,
-    String? stopLossAmount,
+    String? entryFees,
+    String? exitFees,
+    String? riskFieldType,
   }) : riskFieldType = riskFieldType ?? 'percent' {
+    this.accountSize = assignValue(accountSize);
+    this.entryPrice = assignValue(entryPrice);
+    this.stopLossPrice = assignValue(stopLossPrice);
     this.stopLossAmount = assignValue(stopLossAmount);
+    this.slippagePercent = assignValue(slippagePercent);
     this.riskPercent = assignValue(riskPercent);
     this.riskReward = assignValue(riskReward);
+    this.entryFees = assignValue(entryFees);
+    this.exitFees = assignValue(exitFees);
   }
 
   @override

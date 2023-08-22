@@ -154,7 +154,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       stopLossPriceWithSlippage: adjustedStopLossPrice.toDouble(),
       entryPriceWithSlippage: adjustedEntryPrice.toDouble(),
       takeProfitAmount: takeProfitAmount.toDouble(),
-      takeProfitAmountWithSlippage: adjustedTakeProfitAmount.toDouble(),
+      takeProfitAmountAfterFee: adjustedTakeProfitAmount.toDouble(),
       takeProfitPrice: takeProfitPrice.toDouble(),
       takeProfitPriceWithSlippage: adjustedTakeProfitPrice.toDouble(),
       entryFeeAmount: entryFeeAmount.toDouble(),
