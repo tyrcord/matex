@@ -59,6 +59,12 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     setState(state.copyWith(riskReward: value));
   }
 
+  set isShortPosition(bool? value) {
+    setState(state.copyWith(isShortPosition: value));
+  }
+
+  bool get isShortPosition => state.isShortPosition;
+
   @override
   MatexStockPositionSizeCalculatorResults value() {
     Decimal riskPercent;
@@ -86,21 +92,25 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     final adjustedEntryPrice = adjustEntryPriceForSlippage(
       entryPrice,
       slippage,
+      isShortPosition: isShortPosition,
     );
 
     final adjustedStopLossPrice = adjustStopLossPriceForSlippage(
       stopLossPrice,
       slippage,
+      isShortPosition: isShortPosition,
     );
 
     final adjustedEntryPriceWithFees = adjustEntryPriceForFees(
       adjustedEntryPrice,
       entryFees,
+      isShortPosition: isShortPosition,
     );
 
     final adjustedStopLossPriceWithFees = adjustExitPriceForFees(
       adjustedStopLossPrice,
       exitFees,
+      isShortPosition: isShortPosition,
     );
 
     final shares = calculateShares(
@@ -131,6 +141,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     final adjustedTakeProfitPrice = adjustExitPriceForFees(
       takeProfitPrice,
       exitFees,
+      isShortPosition: isShortPosition,
     );
 
     final takeProfitAmount = calculateTakeProfitAmount(
@@ -139,12 +150,15 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     );
 
     // Calculate the total fees based on adjusted prices
-    final entryFeeAmount =
-        shares * (adjustedEntryPriceWithFees - adjustedEntryPrice);
-    final stopLossFeeAmount =
-        shares * (adjustedStopLossPrice - adjustedStopLossPriceWithFees);
-    final takeProfitFeeAmount =
-        shares * (takeProfitPrice - adjustedTakeProfitPrice);
+    final entryFeeAmount = isShortPosition
+        ? shares * (adjustedEntryPrice - adjustedEntryPriceWithFees)
+        : shares * (adjustedEntryPriceWithFees - adjustedEntryPrice);
+    final stopLossFeeAmount = isShortPosition
+        ? shares * (adjustedStopLossPriceWithFees - adjustedStopLossPrice)
+        : shares * (adjustedStopLossPrice - adjustedStopLossPriceWithFees);
+    final takeProfitFeeAmount = isShortPosition
+        ? shares * (adjustedTakeProfitPrice - takeProfitPrice)
+        : shares * (takeProfitPrice - adjustedTakeProfitPrice);
 
     final totalFeesForLossPosition = entryFeeAmount + stopLossFeeAmount;
     final totalFeesForProfitPosition = entryFeeAmount + takeProfitFeeAmount;
@@ -185,22 +199,6 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     );
   }
 
-  Decimal adjustEntryPriceForSlippage(Decimal price, Decimal slippageRate) {
-    return price * (dOne + slippageRate);
-  }
-
-  Decimal adjustStopLossPriceForSlippage(Decimal price, Decimal slippageRate) {
-    return price * (dOne - slippageRate);
-  }
-
-  Decimal adjustEntryPriceForFees(Decimal price, Decimal fees) {
-    return price * (dOne + fees);
-  }
-
-  Decimal adjustExitPriceForFees(Decimal price, Decimal fees) {
-    return price * (dOne - fees);
-  }
-
   Decimal calculateShares(
     double stopLossPrice,
     double entryPrice,
@@ -211,13 +209,14 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     double slippage,
   ) {
     final shares = getShareAmount(
+      isShortPosition: isShortPosition,
+      accountBalance: accountBalance,
       stopLossPrice: stopLossPrice,
       entryPrice: entryPrice,
-      accountBalance: accountBalance,
       entryFees: entryFees,
+      slippage: slippage,
       exitFees: exitFees,
       risk: riskPercent,
-      slippage: slippage,
     );
 
     return decimalFromDouble(shares)!;
@@ -232,7 +231,9 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     Decimal entryPriceWithFees,
     Decimal stopLossPriceWithFees,
   ) {
-    return shares * entryPriceWithFees - shares * stopLossPriceWithFees;
+    return isShortPosition
+        ? shares * stopLossPriceWithFees - shares * entryPriceWithFees
+        : shares * entryPriceWithFees - shares * stopLossPriceWithFees;
   }
 
   Decimal calculateTakeProfitPrice(
@@ -247,7 +248,9 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
 
     final riskPerShare = decimalFromRational(effectiveRisk / shares);
 
-    return adjustedEntryPrice + riskPerShare * riskReward;
+    return isShortPosition
+        ? adjustedEntryPrice - riskPerShare * riskReward
+        : adjustedEntryPrice + riskPerShare * riskReward;
   }
 
   Decimal calculateToleratedRisk(Decimal accountBalance, Decimal riskPercent) {

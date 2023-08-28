@@ -11,8 +11,10 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
   final double? riskReward;
   final double? entryFees;
   final double? exitFees;
+  final bool isShortPosition;
 
   const MatexStockPositionSizeCalculatorState({
+    this.isShortPosition = false,
     this.accountSize,
     this.entryPrice,
     this.stopLossPrice,
@@ -38,6 +40,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
     double? riskReward,
     double? entryFees,
     double? exitFees,
+    bool? isShortPosition,
   }) {
     return MatexStockPositionSizeCalculatorState(
       accountSize: accountSize ?? this.accountSize,
@@ -49,6 +52,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
       riskReward: riskReward ?? this.riskReward,
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
+      isShortPosition: isShortPosition ?? this.isShortPosition,
     );
   }
 
@@ -66,6 +70,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
       riskReward: model.riskReward,
       entryFees: model.entryFees,
       exitFees: model.exitFees,
+      isShortPosition: model.isShortPosition,
     );
   }
 
@@ -75,6 +80,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
         entryPrice,
         stopLossPrice,
         stopLossAmount,
+        isShortPosition,
         slippagePercent,
         riskPercent,
         riskReward,

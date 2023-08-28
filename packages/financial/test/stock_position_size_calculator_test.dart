@@ -21,6 +21,7 @@ void main() {
       expect(defaultState.riskReward, isNull);
       expect(defaultState.entryFees, isNull);
       expect(defaultState.exitFees, isNull);
+      expect(defaultState.isShortPosition, false);
     });
 
     test('Setting state properties should update the state', () {
@@ -176,6 +177,17 @@ void main() {
       expect(result.takeProfitPrice, closeTo(114.90, 1e-3));
     });
 
+    test('should handle zero values correctly', () {
+      calculator.accountSize = 0;
+      calculator.entryPrice = 0;
+      calculator.stopLossPrice = 0;
+
+      final result = calculator.value();
+
+      expect(result.shares, isNull);
+      expect(result.positionAmount, isNull);
+    });
+
     test('should calculate riskPercent from stopLossAmount and accountSize',
         () {
       final calculator = MatexStockPositionSizeCalculator();
@@ -247,6 +259,82 @@ void main() {
       expect(result.entryPriceWithSlippage, closeTo(1e6, 1e-3));
       expect(result.stopLossPriceWithSlippage, closeTo(9e5, 1e-3));
       expect(result.stopLossPercent, closeTo(0.1, 1e-3));
+    });
+
+    test('Calculating short position size should return correct results', () {
+      calculator.accountSize = 10000.0;
+      calculator.entryPrice = 150.0;
+      calculator.stopLossPrice = 155.0;
+      calculator.riskPercent = 0.02;
+      calculator.isShortPosition = true;
+
+      final results = calculator.value();
+
+      expect(results.shares, 40);
+      expect(results.effectiveRisk, 200);
+      expect(results.positionAmount, 6000);
+    });
+
+    test(
+        'Calculating short position size with slippage'
+        'should return correct results', () {
+      calculator.accountSize = 10000.0;
+      calculator.entryPrice = 150.0;
+      calculator.stopLossPrice = 155.0;
+      calculator.riskPercent = 0.02;
+      calculator.slippagePercent = 0.01; // 1% slippage
+      calculator.isShortPosition = true;
+
+      final results = calculator.value();
+
+      expect(results.shares, 24);
+      expect(results.positionAmount, 3564.00);
+      expect(results.effectiveRisk, 193.2);
+      expect(results.entryPriceWithSlippage, 148.5);
+      expect(results.stopLossPriceWithSlippage, 156.55);
+    });
+
+    test(
+        'Calculating short position size with fess'
+        'should return correct results', () {
+      calculator.accountSize = 10000.0;
+      calculator.entryPrice = 150.0;
+      calculator.stopLossPrice = 155.0;
+      calculator.riskPercent = 0.02;
+      calculator.entryFees = 0.01; // 1% fees
+      calculator.exitFees = 0.01; // 1% fees
+      calculator.isShortPosition = true;
+      calculator.riskReward = 2;
+
+      final results = calculator.value();
+
+      expect(results.shares, 24);
+      expect(results.effectiveRisk, 193.2);
+      expect(results.positionAmount, 3600);
+      expect(results.entryFeeAmount, 36.0);
+      expect(results.stopLossFeeAmount, 37.2);
+      expect(results.totalFeesForLossPosition, 73.2);
+      expect(results.takeProfitAmount, 386.4);
+      expect(results.takeProfitPrice, 133.9);
+      expect(results.takeProfitAmountAfterFee, 354.264);
+    });
+
+    test(
+        'Calculating short position size with risk-reward ratio '
+        'should return correct results', () {
+      calculator.accountSize = 10000.0;
+      calculator.entryPrice = 150.0;
+      calculator.stopLossPrice = 155.0;
+      calculator.riskPercent = 0.02;
+      calculator.riskReward = 2.5;
+      calculator.isShortPosition = true;
+
+      final results = calculator.value();
+
+      expect(results.shares, 40);
+      expect(results.effectiveRisk, 200);
+      expect(results.takeProfitPrice, 137.5);
+      expect(results.takeProfitAmount, 500);
     });
   });
 }
