@@ -14,7 +14,7 @@ import 'package:printing/printing.dart';
 import 'package:matex_financial/financial.dart';
 
 final _kDefaultVatBlocState = MatexVatCalculatorBlocState(
-  fields: const MatexVatCalculatorBlocFields(),
+  fields: MatexVatCalculatorBlocFields(),
   results: const MatexVatCalculatorBlocResults(),
 );
 
@@ -29,6 +29,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }) : super(
           dataProvider: MatexVatCalculatorDataProvider(),
           initialState: initialState ?? _kDefaultVatBlocState,
+          debugLabel: 'MatexVatCalculatorBloc',
         ) {
     calculator = MatexVatCalculator();
   }
@@ -78,36 +79,38 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (key == MatexVatCalculatorBlocKey.priceBeforeVat) {
-      return document.copyWith(priceBeforeVat: value?.toString());
-    } else if (key == MatexVatCalculatorBlocKey.customVatRate) {
-      return document.copyWith(customVatRate: value?.toString());
-    } else if (key == MatexVatCalculatorBlocKey.vatRate) {
-      return document.copyWith(vatRate: value?.toString());
-    } else if (key == MatexVatCalculatorBlocKey.federalVatRate) {
-      return document.copyWith(federalVatRate: value?.toString());
-    } else if (key == MatexVatCalculatorBlocKey.regionalVatRate) {
-      return document.copyWith(regionalVatRate: value?.toString());
-    } else if (key == MatexVatCalculatorBlocKey.discountAmount) {
-      return document.copyWith(
-        discountAmount: value?.toString(),
-        discountRate: '',
-      );
-    } else if (key == MatexVatCalculatorBlocKey.tipAmount) {
-      return document.copyWith(
-        tipAmount: value?.toString(),
-        tipRate: '',
-      );
-    } else if (key == MatexVatCalculatorBlocKey.tipRate) {
-      return document.copyWith(
-        tipRate: value?.toString(),
-        tipAmount: '',
-      );
-    } else if (key == MatexVatCalculatorBlocKey.discountRate) {
-      return document.copyWith(
-        discountRate: value?.toString(),
-        discountAmount: '',
-      );
+    if (value is String) {
+      if (key == MatexVatCalculatorBlocKey.priceBeforeVat) {
+        return document.copyWith(priceBeforeVat: value.toString());
+      } else if (key == MatexVatCalculatorBlocKey.customVatRate) {
+        return document.copyWith(customVatRate: value.toString());
+      } else if (key == MatexVatCalculatorBlocKey.vatRate) {
+        return document.copyWith(vatRate: value.toString());
+      } else if (key == MatexVatCalculatorBlocKey.federalVatRate) {
+        return document.copyWith(federalVatRate: value.toString());
+      } else if (key == MatexVatCalculatorBlocKey.regionalVatRate) {
+        return document.copyWith(regionalVatRate: value.toString());
+      } else if (key == MatexVatCalculatorBlocKey.discountAmount) {
+        return document.copyWith(
+          discountAmount: value?.toString(),
+          discountRate: '',
+        );
+      } else if (key == MatexVatCalculatorBlocKey.tipAmount) {
+        return document.copyWith(
+          tipAmount: value.toString(),
+          tipRate: '',
+        );
+      } else if (key == MatexVatCalculatorBlocKey.tipRate) {
+        return document.copyWith(
+          tipRate: value.toString(),
+          tipAmount: '',
+        );
+      } else if (key == MatexVatCalculatorBlocKey.discountRate) {
+        return document.copyWith(
+          discountRate: value.toString(),
+          discountAmount: '',
+        );
+      }
     } else if (value is Enum) {
       value = describeEnum(value);
 
@@ -126,7 +129,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       }
     }
 
-    return document;
+    return null;
   }
 
   @override
@@ -208,7 +211,10 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
 
   @override
   Future<MatexVatCalculatorBlocResults> retrieveDefaultResult() async {
-    return const MatexVatCalculatorBlocResults();
+    return MatexVatCalculatorBlocResults(
+      formattedTotal: localizeNumber(value: 0),
+      total: 0,
+    );
   }
 
   MatexVatCalculatorBlocState patchPriceBeforeVat(String value) {

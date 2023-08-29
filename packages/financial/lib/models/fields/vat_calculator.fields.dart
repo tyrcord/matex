@@ -2,32 +2,42 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexVatCalculatorBlocFields extends FastCalculatorFields {
-  final String? regionalVatRate;
-  final String? federalVatRate;
-  final String? discountAmount;
-  final String? priceBeforeVat;
-  final String? customVatRate;
-  final String? tipRate;
-  final String? vatRate;
-  final String? discountRate;
-  final String? tipAmount;
-  final String tipFieldType;
-  final String discountFieldType;
+  late final String? regionalVatRate;
+  late final String? federalVatRate;
+  late final String? discountAmount;
+  late final String? priceBeforeVat;
+  late final String? customVatRate;
+  late final String? tipRate;
+  late final String? vatRate;
+  late final String? discountRate;
+  late final String? tipAmount;
+  late final String tipFieldType;
+  late final String discountFieldType;
 
-  const MatexVatCalculatorBlocFields({
-    this.regionalVatRate,
-    this.federalVatRate,
-    this.discountAmount,
-    this.priceBeforeVat,
-    this.customVatRate,
-    this.tipRate,
-    this.vatRate,
-    this.discountRate,
-    this.tipAmount,
+  MatexVatCalculatorBlocFields({
+    String? regionalVatRate,
+    String? federalVatRate,
+    String? discountAmount,
+    String? priceBeforeVat,
+    String? customVatRate,
+    String? tipRate,
+    String? vatRate,
+    String? discountRate,
+    String? tipAmount,
     String? tipFieldType,
     String? discountFieldType,
   })  : tipFieldType = tipFieldType ?? 'percent',
-        discountFieldType = discountFieldType ?? 'amount';
+        discountFieldType = discountFieldType ?? 'amount' {
+    this.regionalVatRate = assignValue(regionalVatRate);
+    this.federalVatRate = assignValue(federalVatRate);
+    this.discountAmount = assignValue(discountAmount);
+    this.priceBeforeVat = assignValue(priceBeforeVat);
+    this.customVatRate = assignValue(customVatRate);
+    this.tipRate = assignValue(tipRate);
+    this.vatRate = assignValue(vatRate);
+    this.discountRate = assignValue(discountRate);
+    this.tipAmount = assignValue(tipAmount);
+  }
 
   @override
   MatexVatCalculatorBlocFields clone() => copyWith();
