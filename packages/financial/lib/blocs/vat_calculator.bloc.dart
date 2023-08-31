@@ -92,7 +92,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWith(regionalVatRate: value.toString());
       } else if (key == MatexVatCalculatorBlocKey.discountAmount) {
         return document.copyWith(
-          discountAmount: value?.toString(),
+          discountAmount: value.toString(),
           discountRate: '',
         );
       } else if (key == MatexVatCalculatorBlocKey.tipAmount) {
