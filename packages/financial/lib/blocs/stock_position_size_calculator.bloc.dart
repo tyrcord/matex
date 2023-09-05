@@ -378,16 +378,15 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
   List<FastReportEntry> _buildInputReportEntries(BuildContext context) {
     final fields = currentState.fields;
-
-    final accountBalance = double.tryParse(fields.accountSize ?? '') ?? 0;
-    final stopLossAmount = double.tryParse(fields.stopLossAmount ?? '') ?? 0;
-    final risk = double.tryParse(fields.riskPercent ?? '') ?? 0;
-    final entryPrice = double.tryParse(fields.entryPrice ?? '') ?? 0;
-    final stopLossPrice = double.tryParse(fields.stopLossPrice ?? '') ?? 0;
-    final riskReward = double.tryParse(fields.riskReward ?? '') ?? 0;
-    final entryFees = double.tryParse(fields.entryFees ?? '') ?? 0;
-    final exitFees = double.tryParse(fields.exitFees ?? '') ?? 0;
-    final slippage = double.tryParse(fields.slippagePercent ?? '') ?? 0;
+    final accountBalance = parseFieldValueToDouble(fields.accountSize);
+    final stopLossAmount = parseFieldValueToDouble(fields.stopLossAmount);
+    final risk = parseFieldValueToDouble(fields.riskPercent);
+    final entryPrice = parseFieldValueToDouble(fields.entryPrice);
+    final stopLossPrice = parseFieldValueToDouble(fields.stopLossPrice);
+    final riskReward = parseFieldValueToDouble(fields.riskReward);
+    final entryFees = parseFieldValueToDouble(fields.entryFees);
+    final exitFees = parseFieldValueToDouble(fields.exitFees);
+    final slippage = parseFieldValueToDouble(fields.slippagePercent);
 
     return [
       FastReportEntry(
@@ -417,23 +416,17 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
           name: FinanceLocaleKeys.finance_label_risk_reward_ratio.tr(),
           value: '${localizeNumber(value: riskReward)}:1',
         ),
-      if (fields.entryFees != null &&
-          fields.entryFees!.isNotEmpty &&
-          fields.entryFees != '0')
+      if (entryFees > 0)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_entry_fees_text.tr(),
           value: '${localizeNumber(value: entryFees)}%',
         ),
-      if (fields.exitFees != null &&
-          fields.exitFees!.isNotEmpty &&
-          fields.exitFees != '0')
+      if (exitFees > 0)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_exit_fees_text.tr(),
           value: '${localizeNumber(value: exitFees)}%',
         ),
-      if (fields.slippagePercent != null &&
-          fields.slippagePercent!.isNotEmpty &&
-          fields.slippagePercent != '0')
+      if (slippage > 0)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_slippage.tr(),
           value: '${localizeNumber(value: slippage)}%',
