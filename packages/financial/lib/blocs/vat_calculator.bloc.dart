@@ -354,6 +354,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       categoryColumns: 3,
       results: [],
       inputs: inputs,
+      subtitle: FinanceLocaleKeys.finance_label_vat_text.tr(),
       author: CoreLocaleKeys.core_message_pdf_generated_by.tr(namedArgs: {
         'app_name': appInfo.appName,
       }),

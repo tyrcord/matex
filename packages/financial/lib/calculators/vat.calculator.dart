@@ -10,7 +10,7 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
   MatexVatCalculator({
     super.defaultState,
     super.state,
-  });
+  }) : super(validators: vatValidators);
 
   @override
   MatexVatCalculatorState initializeState() => const MatexVatCalculatorState();
@@ -54,8 +54,14 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     setState(state.copyWith(customVatRate: value));
   }
 
+  static const defaultResults = MatexVatCalculatorResults(total: 0);
+
   @override
   MatexVatCalculatorResults value() {
+    if (!isValid) {
+      return defaultResults;
+    }
+
     const d = Decimal.parse;
     final price = state.priceBeforeVat ?? 0.0;
     final dFederalVatRate = d((state.federalVatRate ?? 0.0).toString());
