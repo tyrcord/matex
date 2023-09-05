@@ -7,13 +7,9 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     MatexStockPositionSizeCalculatorState,
     MatexStockPositionSizeCalculatorResults> {
   MatexStockPositionSizeCalculator({
-    MatexStockPositionSizeCalculatorState? defaultState,
-    MatexStockPositionSizeCalculatorState? state,
-  }) : super(
-          validators: stockPositionSizeValidators,
-          defaultState: defaultState,
-          state: state,
-        );
+    super.defaultState,
+    super.state,
+  }) : super(validators: stockPositionSizeValidators);
 
   @override
   MatexStockPositionSizeCalculatorState initializeState() =>
@@ -65,8 +61,17 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
 
   bool get isShortPosition => state.isShortPosition;
 
+  static const defaultResults = MatexStockPositionSizeCalculatorResults(
+    shares: 0,
+    positionAmount: 0,
+  );
+
   @override
   MatexStockPositionSizeCalculatorResults value() {
+    if (!isValid) {
+      return defaultResults;
+    }
+
     Decimal riskPercent;
 
     final accountBalance = toDecimal((state.accountSize ?? 0.0))!;
@@ -79,7 +84,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
         stopLossAmount / accountBalance,
       );
     } else {
-      return const MatexStockPositionSizeCalculatorResults();
+      return defaultResults;
     }
 
     final slippage = toDecimal(state.slippagePercent ?? 0.0)!;
