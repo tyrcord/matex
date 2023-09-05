@@ -222,6 +222,12 @@ abstract class MatexCalculatorBloc<
     return null;
   }
 
+  double parseFieldValueToDouble(String? value) {
+    final parsedValue = parseStringToDouble(value);
+
+    return parsedValue ?? 0.0;
+  }
+
   @protected
   String getUserLocaleCode() {
     return appSettingsBloc.currentState.localeCode;
