@@ -1,3 +1,15 @@
+## 0.0.17
+
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add vat validators.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: implement toPdf for MatexVatCalculatorBloc.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: stock position size supports short positions.
+
 ## 0.0.16
 
  - **FIX**: regression.

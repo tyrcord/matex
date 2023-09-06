@@ -1,3 +1,9 @@
+## 0.0.12
+
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: implement toPdf for MatexVatCalculatorBloc.
+
 ## 0.0.11
 
  - **FIX**: regression.

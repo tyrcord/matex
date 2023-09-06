@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-09-06
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.12`](#matex_core---v0012)
+ - [`matex_financial` - `v0.0.17`](#matex_financial---v0017)
+
+---
+
+#### `matex_core` - `v0.0.12`
+
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: implement toPdf for MatexVatCalculatorBloc.
+
+#### `matex_financial` - `v0.0.17`
+
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add vat validators.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: implement toPdf for MatexVatCalculatorBloc.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: stock position size supports short positions.
+
+
 ## 2023-08-22
 
 ### Changes
