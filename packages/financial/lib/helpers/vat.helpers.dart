@@ -63,8 +63,8 @@ double removeVAT(double priceWithVAT, double vatRate) {
 /// print(vatAmount); // 20.0
 /// ```
 double getVATAmount(double price, double vatRate) {
-  Decimal dPrice = Decimal.parse(price.toString());
-  Decimal dVatRate = Decimal.parse(vatRate.toString());
+  final Decimal dPrice = Decimal.parse(price.toString());
+  final Decimal dVatRate = Decimal.parse(vatRate.toString());
 
   return (dPrice * dVatRate).toDouble();
 }

@@ -6,7 +6,21 @@ List<MatexCalculatorValidator<MatexVatCalculatorState>> vatValidators = [
   (state) => state.priceBeforeVat != null && state.priceBeforeVat! > 0,
 
   // Vat rate must be greater than 0 and less than 100
-  (state) => state.vatRate != null && state.vatRate! > 0 && state.vatRate! < 1,
+  (state) {
+    if (state.vatRate != null && state.vatRate! > 0 && state.vatRate! < 1) {
+      return true;
+    } else if (state.federalVatRate != null &&
+        state.federalVatRate! > 0 &&
+        state.federalVatRate! < 1) {
+      return true;
+    } else if (state.regionalVatRate != null &&
+        state.regionalVatRate! > 0 &&
+        state.regionalVatRate! < 1) {
+      return true;
+    }
+
+    return false;
+  },
 
   // Discount amount must be greater than 0 and less than price before vat
   (state) {

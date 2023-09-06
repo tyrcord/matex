@@ -16,9 +16,9 @@ double applyDiscount(
   discountAmount ??= 0.0;
   discountRate ??= 0.0;
 
-  Decimal dPrice = Decimal.parse(price.toString());
-  Decimal dDiscountAmount = Decimal.parse(discountAmount.toString());
-  Decimal dDiscountRate = Decimal.parse(discountRate.toString());
+  final Decimal dPrice = Decimal.parse(price.toString());
+  final Decimal dDiscountAmount = Decimal.parse(discountAmount.toString());
+  final Decimal dDiscountRate = Decimal.parse(discountRate.toString());
   Decimal discountedPrice = dPrice;
 
   if (dDiscountAmount > Decimal.zero) {

@@ -26,15 +26,16 @@ void main() {
       });
 
       test('Setting state properties should update the state', () {
-        calculator.accountSize = 10000.0;
-        calculator.entryPrice = 50.0;
-        calculator.stopLossPrice = 45.0;
-        calculator.stopLossAmount = 500.0;
-        calculator.slippagePercent = 0.01;
-        calculator.riskPercent = 0.02;
-        calculator.riskReward = 3.0;
-        calculator.entryFees = 0.001;
-        calculator.exitFees = 0.002;
+        calculator
+          ..accountSize = 10000.0
+          ..entryPrice = 50.0
+          ..stopLossPrice = 45.0
+          ..stopLossAmount = 500.0
+          ..slippagePercent = 0.01
+          ..riskPercent = 0.02
+          ..riskReward = 3.0
+          ..entryFees = 0.001
+          ..exitFees = 0.002;
 
         final state = calculator.getState();
 
@@ -52,10 +53,11 @@ void main() {
 
     group('Calculation without fees', () {
       test('Calculates correct results with mandatory properties', () {
-        calculator.accountSize = 10000;
-        calculator.entryPrice = 100;
-        calculator.stopLossPrice = 95;
-        calculator.riskPercent = 0.01;
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01;
 
         final result = calculator.value();
 
@@ -73,11 +75,12 @@ void main() {
 
     group('Calculation with fees', () {
       test('Calculates correct results when entryFees is set', () {
-        calculator.accountSize = 10000;
-        calculator.entryPrice = 100;
-        calculator.stopLossPrice = 95;
-        calculator.riskPercent = 0.01;
-        calculator.entryFees = 0.01;
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..entryFees = 0.01;
 
         final result = calculator.value();
 
@@ -89,11 +92,12 @@ void main() {
       });
 
       test('Calculates correct results when exitFees is set', () {
-        calculator.accountSize = 10000;
-        calculator.entryPrice = 100;
-        calculator.stopLossPrice = 95;
-        calculator.riskPercent = 0.01;
-        calculator.exitFees = 0.01;
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..exitFees = 0.01;
 
         final result = calculator.value();
 
@@ -106,12 +110,13 @@ void main() {
 
       test('Calculates correct results when entryFees and exitFees are set',
           () {
-        calculator.accountSize = 10000;
-        calculator.entryPrice = 100;
-        calculator.stopLossPrice = 95;
-        calculator.riskPercent = 0.01;
-        calculator.exitFees = 0.01;
-        calculator.entryFees = 0.01;
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..exitFees = 0.01
+          ..entryFees = 0.01;
 
         final result = calculator.value();
 
@@ -125,11 +130,12 @@ void main() {
 
     group('Calculation with slippage', () {
       test('Calculates correct results when slippage is set', () {
-        calculator.accountSize = 10000;
-        calculator.entryPrice = 100;
-        calculator.stopLossPrice = 95;
-        calculator.riskPercent = 0.01;
-        calculator.slippagePercent = 0.01;
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..slippagePercent = 0.01;
 
         final result = calculator.value();
 
@@ -145,13 +151,14 @@ void main() {
       });
 
       test('Calculates correct results when slippage and fess are set', () {
-        calculator.accountSize = 10000;
-        calculator.entryPrice = 100;
-        calculator.stopLossPrice = 95;
-        calculator.riskPercent = 0.01;
-        calculator.slippagePercent = 0.01;
-        calculator.entryFees = 0.01;
-        calculator.exitFees = 0.01;
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..slippagePercent = 0.01
+          ..entryFees = 0.01
+          ..exitFees = 0.01;
 
         final result = calculator.value();
 
@@ -169,12 +176,13 @@ void main() {
 
     group('Calculation with risk/reward', () {
       test('Calculates correct results when reward/risk is set', () {
-        calculator.accountSize = 10000;
-        calculator.entryPrice = 100;
-        calculator.stopLossPrice = 95;
-        calculator.riskPercent = 0.01;
-        calculator.slippagePercent = 0.01;
-        calculator.riskReward = 2;
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..slippagePercent = 0.01
+          ..riskReward = 2;
 
         final result = calculator.value();
 
@@ -189,14 +197,15 @@ void main() {
     });
 
     test('Calculating position size should return correct results', () {
-      calculator.accountSize = 10000.0;
-      calculator.entryPrice = 50.0;
-      calculator.stopLossPrice = 45.0;
-      calculator.slippagePercent = 0.01;
-      calculator.riskPercent = 0.02;
-      calculator.riskReward = 3.0;
-      calculator.entryFees = 0.01;
-      calculator.exitFees = 0.01;
+      calculator
+        ..accountSize = 10000.0
+        ..entryPrice = 50.0
+        ..stopLossPrice = 45.0
+        ..slippagePercent = 0.01
+        ..riskPercent = 0.02
+        ..riskReward = 3.0
+        ..entryFees = 0.01
+        ..exitFees = 0.01;
 
       final results = calculator.value();
 
@@ -214,22 +223,24 @@ void main() {
 
     group('Edge cases', () {
       test('should handle zero values correctly', () {
-        calculator.accountSize = 0;
-        calculator.entryPrice = 0;
-        calculator.stopLossPrice = 0;
+        calculator
+          ..accountSize = 0
+          ..entryPrice = 0
+          ..stopLossPrice = 0;
 
         final result = calculator.value();
 
-        expect(result.shares, isNull);
-        expect(result.positionAmount, isNull);
+        expect(result.shares, 0);
+        expect(result.positionAmount, 0);
       });
 
       test('should calculate riskPercent from stopLossAmount and accountSize',
           () {
-        calculator.accountSize = 10000;
-        calculator.entryPrice = 100;
-        calculator.stopLossPrice = 95;
-        calculator.stopLossAmount = 200;
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..stopLossAmount = 200;
 
         final result = calculator.value();
 
@@ -241,11 +252,12 @@ void main() {
       });
 
       test('should handles very small values correctly', () {
-        calculator.accountSize = 0.0001;
-        calculator.entryPrice = 0.00001;
-        calculator.stopLossPrice = 0.000005;
-        calculator.riskPercent = 0.00001;
-        calculator.riskReward = 3.0;
+        calculator
+          ..accountSize = 0.0001
+          ..entryPrice = 0.00001
+          ..stopLossPrice = 0.000005
+          ..riskPercent = 0.00001
+          ..riskReward = 3.0;
 
         final result = calculator.value();
 
@@ -257,10 +269,11 @@ void main() {
       });
 
       test('should handles very large values correctly', () {
-        calculator.accountSize = 1e9; // 1 billion
-        calculator.entryPrice = 1e6; // 1 million
-        calculator.stopLossPrice = 9e5; // 900,000
-        calculator.riskPercent = 0.01;
+        calculator
+          ..accountSize = 1e9 // 1 billion
+          ..entryPrice = 1e6 // 1 million
+          ..stopLossPrice = 9e5 // 900,000
+          ..riskPercent = 0.01;
 
         final result = calculator.value();
 
@@ -274,11 +287,12 @@ void main() {
 
     group('Short position calculations', () {
       test('Calculating short position size should return correct results', () {
-        calculator.accountSize = 10000.0;
-        calculator.entryPrice = 150.0;
-        calculator.stopLossPrice = 155.0;
-        calculator.riskPercent = 0.02;
-        calculator.isShortPosition = true;
+        calculator
+          ..accountSize = 10000.0
+          ..entryPrice = 150.0
+          ..stopLossPrice = 155.0
+          ..riskPercent = 0.02
+          ..isShortPosition = true;
 
         final results = calculator.value();
 
@@ -290,12 +304,13 @@ void main() {
       test(
           'Calculating short position size with slippage'
           'should return correct results', () {
-        calculator.accountSize = 10000.0;
-        calculator.entryPrice = 150.0;
-        calculator.stopLossPrice = 155.0;
-        calculator.riskPercent = 0.02;
-        calculator.slippagePercent = 0.01; // 1% slippage
-        calculator.isShortPosition = true;
+        calculator
+          ..accountSize = 10000.0
+          ..entryPrice = 150.0
+          ..stopLossPrice = 155.0
+          ..riskPercent = 0.02
+          ..slippagePercent = 0.01 // 1% slippage
+          ..isShortPosition = true;
 
         final results = calculator.value();
 
@@ -309,14 +324,15 @@ void main() {
       test(
           'Calculating short position size with fess'
           'should return correct results', () {
-        calculator.accountSize = 10000.0;
-        calculator.entryPrice = 150.0;
-        calculator.stopLossPrice = 155.0;
-        calculator.riskPercent = 0.02;
-        calculator.entryFees = 0.01; // 1% fees
-        calculator.exitFees = 0.01; // 1% fees
-        calculator.isShortPosition = true;
-        calculator.riskReward = 2;
+        calculator
+          ..accountSize = 10000.0
+          ..entryPrice = 150.0
+          ..stopLossPrice = 155.0
+          ..riskPercent = 0.02
+          ..entryFees = 0.01 // 1% fees
+          ..exitFees = 0.01 // 1% fees
+          ..isShortPosition = true
+          ..riskReward = 2;
 
         final results = calculator.value();
 
@@ -334,12 +350,13 @@ void main() {
       test(
           'Calculating short position size with risk-reward ratio '
           'should return correct results', () {
-        calculator.accountSize = 10000.0;
-        calculator.entryPrice = 150.0;
-        calculator.stopLossPrice = 155.0;
-        calculator.riskPercent = 0.02;
-        calculator.riskReward = 2.5;
-        calculator.isShortPosition = true;
+        calculator
+          ..accountSize = 10000.0
+          ..entryPrice = 150.0
+          ..stopLossPrice = 155.0
+          ..riskPercent = 0.02
+          ..riskReward = 2.5
+          ..isShortPosition = true;
 
         final results = calculator.value();
 

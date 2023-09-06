@@ -41,8 +41,8 @@ double calculateTip(double price, double tipRate) {
 /// print(tipAmount); // 15.0
 /// ```
 double getTipAmount(double price, double tipRate) {
-  Decimal dPrice = Decimal.parse(price.toString());
-  Decimal dTipRate = Decimal.parse(tipRate.toString());
+  final Decimal dPrice = Decimal.parse(price.toString());
+  final dTipRate = Decimal.parse(tipRate.toString());
 
   return (dPrice * dTipRate).toDouble();
 }

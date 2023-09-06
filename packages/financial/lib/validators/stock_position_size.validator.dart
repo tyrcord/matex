@@ -11,6 +11,13 @@ List<MatexCalculatorValidator<MatexStockPositionSizeCalculatorState>>
 
   // Stop loss price must be greater than 0 and less than entry price
   (state) {
+    if (state.isShortPosition) {
+      // Short position
+      return state.stopLossPrice != null &&
+          state.stopLossPrice! > 0 &&
+          state.stopLossPrice! > state.entryPrice!;
+    }
+
     return state.stopLossPrice != null &&
         state.stopLossPrice! > 0 &&
         state.stopLossPrice! < state.entryPrice!;

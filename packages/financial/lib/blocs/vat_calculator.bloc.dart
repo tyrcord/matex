@@ -178,12 +178,12 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
 
   @override
   Future<void> resetCalculator(MatexVatCalculatorBlocDocument document) async {
-    var vatRate = toDecimal(document.vatRate) ?? dZero;
-    var customVatRate = toDecimal(document.customVatRate) ?? dZero;
-    var tipRate = toDecimal(document.tipRate) ?? dZero;
-    var discountRate = toDecimal(document.discountRate) ?? dZero;
-    var federalVatRate = toDecimal(document.federalVatRate) ?? dZero;
-    var regionalVatRate = toDecimal(document.regionalVatRate) ?? dZero;
+    final vatRate = toDecimal(document.vatRate) ?? dZero;
+    final customVatRate = toDecimal(document.customVatRate) ?? dZero;
+    final tipRate = toDecimal(document.tipRate) ?? dZero;
+    final discountRate = toDecimal(document.discountRate) ?? dZero;
+    final federalVatRate = toDecimal(document.federalVatRate) ?? dZero;
+    final regionalVatRate = toDecimal(document.regionalVatRate) ?? dZero;
 
     calculator.setState(MatexVatCalculatorState(
       priceBeforeVat: parseStringToDouble(document.priceBeforeVat),

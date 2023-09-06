@@ -2,3 +2,15 @@ name: matex
 
 packages:
   - packages/*
+
+scripts:
+  analyze:
+    exec: dart analyze .
+  fix:
+    exec: dart fix --apply
+  test:
+    exec: flutter test
+  update:analysis_options:
+    exec: $PWD/scripts/update_analysis_options.sh
+  sort_imports:
+    exec: flutter pub run import_sorter:main

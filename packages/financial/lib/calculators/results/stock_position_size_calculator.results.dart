@@ -67,6 +67,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     double? totalFeesForProfitPosition,
     double? takeProfitAmountWithSlippage,
     double? takeProfitPriceWithSlippage,
+    double? takeProfitAmountAfterFee,
   }) {
     return MatexStockPositionSizeCalculatorResults(
       shares: shares ?? this.shares,
@@ -92,7 +93,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
       totalFeesForProfitPosition:
           totalFeesForProfitPosition ?? this.totalFeesForProfitPosition,
       takeProfitAmountAfterFee:
-          takeProfitAmountWithSlippage ?? this.takeProfitAmountAfterFee,
+          takeProfitAmountAfterFee ?? this.takeProfitAmountAfterFee,
       takeProfitPriceWithSlippage:
           takeProfitPriceWithSlippage ?? this.takeProfitPriceWithSlippage,
     );

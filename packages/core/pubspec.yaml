@@ -29,14 +29,13 @@ dependencies:
   lingua_calculator: ^0.0.2+1
 
   # Fastyle
-  fastyle_settings: ^0.0.23+2
-  fastyle_core: ^0.0.16
-  fastyle_calculator: ^1.28.0
+  fastyle_settings: ^0.0.24
+  fastyle_core: ^0.0.18
+  fastyle_calculator: ^1.29.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.3
-  dart_code_metrics: ^5.7.6
   import_sorter: ^4.6.0
   dependency_validator: ^3.2.2

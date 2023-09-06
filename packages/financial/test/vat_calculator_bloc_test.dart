@@ -283,7 +283,7 @@ void main() {
       'percent',
     );
     // Verify that the tipAmount field is empty
-    expect(vatCalculatorBloc.currentState.fields.tipAmount, '');
+    expect(vatCalculatorBloc.currentState.fields.tipAmount, isNull);
 
     // Patch the tipFieldType to amount
     vatCalculatorBloc.addEvent(
@@ -298,8 +298,8 @@ void main() {
     // Verify that the tipFieldType is updated to amount
     expect(vatCalculatorBloc.currentState.fields.tipFieldType, 'amount');
     // Verify that the tipAmount field is empty
-    expect(vatCalculatorBloc.currentState.fields.tipAmount, '');
-    expect(vatCalculatorBloc.currentState.fields.tipRate, '');
+    expect(vatCalculatorBloc.currentState.fields.tipAmount, isNull);
+    expect(vatCalculatorBloc.currentState.fields.tipRate, isNull);
 
     // Patch the tipRate
     vatCalculatorBloc.addEvent(
@@ -322,7 +322,7 @@ void main() {
     // Verify that the tipAmount field is updated
     expect(vatCalculatorBloc.currentState.fields.tipAmount, amountValue);
     // Verify that the tipRate field is empty
-    expect(vatCalculatorBloc.currentState.fields.tipRate, '');
+    expect(vatCalculatorBloc.currentState.fields.tipRate, isNull);
 
     // Patch the tipRate
     vatCalculatorBloc.addEvent(
@@ -336,7 +336,7 @@ void main() {
     // Verify that the tipRate field is updated
     expect(vatCalculatorBloc.currentState.fields.tipRate, rateValue);
     // Verify that the tipAmount field is empty
-    expect(vatCalculatorBloc.currentState.fields.tipAmount, '');
+    expect(vatCalculatorBloc.currentState.fields.tipAmount, isNull);
   });
 
   test('patchDiscountFieldType, patchDiscountAmount, patchDiscountRate',
@@ -372,7 +372,7 @@ void main() {
       'percent',
     );
     // Verify that the discountAmount field is empty
-    expect(vatCalculatorBloc.currentState.fields.discountAmount, '');
+    expect(vatCalculatorBloc.currentState.fields.discountAmount, isNull);
 
     // Patch the discountFieldType to amount
     vatCalculatorBloc.addEvent(
@@ -387,8 +387,8 @@ void main() {
     // Verify that the discountFieldType is updated to amount
     expect(vatCalculatorBloc.currentState.fields.discountFieldType, 'amount');
     // Verify that the discountAmount field is empty
-    expect(vatCalculatorBloc.currentState.fields.discountAmount, '');
-    expect(vatCalculatorBloc.currentState.fields.discountRate, '');
+    expect(vatCalculatorBloc.currentState.fields.discountAmount, isNull);
+    expect(vatCalculatorBloc.currentState.fields.discountRate, isNull);
 
     // Patch the discountRate
     vatCalculatorBloc.addEvent(
@@ -411,7 +411,7 @@ void main() {
     // Verify that the discountAmount field is updated
     expect(vatCalculatorBloc.currentState.fields.discountAmount, amountValue);
     // Verify that the discountRate field is empty
-    expect(vatCalculatorBloc.currentState.fields.discountRate, '');
+    expect(vatCalculatorBloc.currentState.fields.discountRate, isNull);
 
     // Patch the discountRate
     vatCalculatorBloc.addEvent(
@@ -425,7 +425,7 @@ void main() {
     // Verify that the discountRate field is updated
     expect(vatCalculatorBloc.currentState.fields.discountRate, rateValue);
     // Verify that the discountAmount field is empty
-    expect(vatCalculatorBloc.currentState.fields.discountAmount, '');
+    expect(vatCalculatorBloc.currentState.fields.discountAmount, isNull);
   });
 
   test('compute() should compute the VAT values correctly', () async {

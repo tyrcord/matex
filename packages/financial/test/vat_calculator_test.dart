@@ -16,23 +16,25 @@ void main() {
       calculator.priceBeforeVat = 100.0;
       final results = calculator.value();
 
-      expect(results.subTotal, equals(0.0));
-      expect(results.totalTaxes, equals(0.0));
-      expect(results.total, equals(100.0));
-      expect(results.grandTotal, equals(0.0));
-      expect(results.federalVatAmount, equals(0.0));
-      expect(results.regionalVatAmount, equals(0.0));
-      expect(results.vatAmount, equals(0.0));
-      expect(results.customVatAmount, equals(0.0));
-      expect(results.discountAmount, equals(0.0));
-      expect(results.discountRate, equals(0.0));
-      expect(results.tipAmount, equals(0.0));
-      expect(results.tipRate, equals(0.0));
+      expect(results.subTotal, isNull);
+      expect(results.totalTaxes, isNull);
+      expect(results.total, 0);
+      expect(results.grandTotal, isNull);
+      expect(results.federalVatAmount, isNull);
+      expect(results.regionalVatAmount, isNull);
+      expect(results.vatAmount, isNull);
+      expect(results.customVatAmount, isNull);
+      expect(results.discountAmount, isNull);
+      expect(results.discountRate, isNull);
+      expect(results.tipAmount, isNull);
+      expect(results.tipRate, isNull);
     });
 
     test('value() returns correct results with federal VAT', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.federalVatRate = 0.05;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..federalVatRate = 0.05;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(0.0));
@@ -50,8 +52,10 @@ void main() {
     });
 
     test('value() returns correct results with regional VAT', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.regionalVatRate = 0.07;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..regionalVatRate = 0.07;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(0.0));
@@ -69,17 +73,20 @@ void main() {
     });
 
     test('value() returns correct results with custom VAT', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.customVatRate = 0.10;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..vatRate = 0.10
+        ..customVatRate = 0.10;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(0.0));
-      expect(results.totalTaxes, equals(10.0));
-      expect(results.total, equals(110.0));
+      expect(results.totalTaxes, equals(20.0));
+      expect(results.total, equals(120.0));
       expect(results.grandTotal, equals(0.0));
       expect(results.federalVatAmount, equals(0.0));
       expect(results.regionalVatAmount, equals(0.0));
-      expect(results.vatAmount, equals(0.0));
+      expect(results.vatAmount, equals(10.0));
       expect(results.customVatAmount, equals(10.0));
       expect(results.discountAmount, equals(0.0));
       expect(results.discountRate, equals(0.0));
@@ -88,17 +95,20 @@ void main() {
     });
 
     test('value() returns correct results with discount amount', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.discountAmount = 10.0;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..vatRate = 0.10
+        ..discountAmount = 10.0;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(90.0));
-      expect(results.totalTaxes, equals(0.0));
-      expect(results.total, equals(90.0));
+      expect(results.totalTaxes, equals(9.0));
+      expect(results.total, equals(99.0));
       expect(results.grandTotal, equals(0.0));
       expect(results.federalVatAmount, equals(0.0));
       expect(results.regionalVatAmount, equals(0.0));
-      expect(results.vatAmount, equals(0.0));
+      expect(results.vatAmount, equals(9.0));
       expect(results.customVatAmount, equals(0.0));
       expect(results.discountAmount, equals(10.0));
       expect(results.discountRate, equals(0.10));
@@ -107,17 +117,20 @@ void main() {
     });
 
     test('value() returns correct results with tip rate', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.tipRate = 0.10;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..vatRate = 0.10
+        ..tipRate = 0.10;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(0.0));
-      expect(results.totalTaxes, equals(0.0));
-      expect(results.total, equals(100.0));
-      expect(results.grandTotal, equals(110.0));
+      expect(results.totalTaxes, equals(10.0));
+      expect(results.total, equals(110.0));
+      expect(results.grandTotal, equals(120.0));
       expect(results.federalVatAmount, equals(0.0));
       expect(results.regionalVatAmount, equals(0.0));
-      expect(results.vatAmount, equals(0.0));
+      expect(results.vatAmount, equals(10.0));
       expect(results.customVatAmount, equals(0.0));
       expect(results.discountAmount, equals(0.0));
       expect(results.discountRate, equals(0.0));
@@ -127,18 +140,21 @@ void main() {
 
     test('value() returns correct results with discount amount and tip rate',
         () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.discountAmount = 10.0;
-      calculator.tipRate = 0.10;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..vatRate = 0.10
+        ..discountAmount = 10.0
+        ..tipRate = 0.10;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(90.0));
-      expect(results.totalTaxes, equals(0.0));
-      expect(results.total, equals(90.0));
-      expect(results.grandTotal, equals(99.0));
+      expect(results.totalTaxes, equals(9.0));
+      expect(results.total, equals(99.0));
+      expect(results.grandTotal, equals(108.0));
       expect(results.federalVatAmount, equals(0.0));
       expect(results.regionalVatAmount, equals(0.0));
-      expect(results.vatAmount, equals(0.0));
+      expect(results.vatAmount, equals(9.0));
       expect(results.customVatAmount, equals(0.0));
       expect(results.discountAmount, equals(10.0));
       expect(results.discountRate, equals(0.10));
@@ -147,9 +163,11 @@ void main() {
     });
 
     test('value() returns correct results with federal and regional VAT', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.federalVatRate = 0.05;
-      calculator.regionalVatRate = 0.07;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..federalVatRate = 0.05
+        ..regionalVatRate = 0.07;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(0.0));
@@ -167,9 +185,11 @@ void main() {
     });
 
     test('value() returns correct results with federal and custom VAT', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.federalVatRate = 0.05;
-      calculator.customVatRate = 0.10;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..federalVatRate = 0.05
+        ..customVatRate = 0.10;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(0.0));
@@ -187,9 +207,11 @@ void main() {
     });
 
     test('value() returns correct results with regional and custom VAT', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.regionalVatRate = 0.07;
-      calculator.customVatRate = 0.10;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..regionalVatRate = 0.07
+        ..customVatRate = 0.10;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(0.0));
@@ -209,10 +231,12 @@ void main() {
     test(
         'value() returns correct results with federal, regional, '
         'and custom VAT', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.federalVatRate = 0.05;
-      calculator.regionalVatRate = 0.07;
-      calculator.customVatRate = 0.10;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..federalVatRate = 0.05
+        ..regionalVatRate = 0.07
+        ..customVatRate = 0.10;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(0.0));
@@ -230,17 +254,20 @@ void main() {
     });
 
     test('value() returns correct results with discount rate', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.discountRate = 0.15;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..vatRate = 0.10
+        ..discountRate = 0.15;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(85.0));
-      expect(results.totalTaxes, equals(0.0));
-      expect(results.total, equals(85.0));
+      expect(results.totalTaxes, equals(8.5));
+      expect(results.total, equals(93.5));
       expect(results.grandTotal, equals(0.0));
       expect(results.federalVatAmount, equals(0.0));
       expect(results.regionalVatAmount, equals(0.0));
-      expect(results.vatAmount, equals(0.0));
+      expect(results.vatAmount, equals(8.5));
       expect(results.customVatAmount, equals(0.0));
       expect(results.discountAmount, equals(15.0));
       expect(results.discountRate, equals(0.15));
@@ -249,17 +276,20 @@ void main() {
     });
 
     test('value() returns correct results with tip amount', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.tipAmount = 10.0;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..vatRate = 0.10
+        ..tipAmount = 10.0;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(0.0));
-      expect(results.totalTaxes, equals(0.0));
-      expect(results.total, equals(100.0));
-      expect(results.grandTotal, equals(110.0));
+      expect(results.totalTaxes, equals(10.0));
+      expect(results.total, equals(110.0));
+      expect(results.grandTotal, equals(120.0));
       expect(results.federalVatAmount, equals(0.0));
       expect(results.regionalVatAmount, equals(0.0));
-      expect(results.vatAmount, equals(0.0));
+      expect(results.vatAmount, equals(10.0));
       expect(results.customVatAmount, equals(0.0));
       expect(results.discountAmount, equals(0.0));
       expect(results.discountRate, equals(0.0));
@@ -268,18 +298,21 @@ void main() {
     });
 
     test('value() returns correct results with discount rate and tip rate', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.discountRate = 0.10;
-      calculator.tipRate = 0.15;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..discountRate = 0.10
+        ..vatRate = 0.10
+        ..tipRate = 0.15;
+
       final results = calculator.value();
 
       expect(results.subTotal, equals(90.0));
-      expect(results.totalTaxes, equals(0.0));
-      expect(results.total, equals(90.0));
-      expect(results.grandTotal, equals(103.5));
+      expect(results.totalTaxes, equals(9.0));
+      expect(results.total, equals(99.0));
+      expect(results.grandTotal, equals(112.5));
       expect(results.federalVatAmount, equals(0.0));
       expect(results.regionalVatAmount, equals(0.0));
-      expect(results.vatAmount, equals(0.0));
+      expect(results.vatAmount, equals(9.0));
       expect(results.customVatAmount, equals(0.0));
       expect(results.discountAmount, equals(10.0));
       expect(results.discountRate, equals(0.10));
@@ -288,12 +321,13 @@ void main() {
     });
 
     test('value() returns correct results with all options applied', () {
-      calculator.priceBeforeVat = 100.0;
-      calculator.federalVatRate = 0.05;
-      calculator.regionalVatRate = 0.07;
-      calculator.customVatRate = 0.10;
-      calculator.discountAmount = 10.0;
-      calculator.tipRate = 0.05;
+      calculator
+        ..priceBeforeVat = 100.0
+        ..federalVatRate = 0.05
+        ..regionalVatRate = 0.07
+        ..customVatRate = 0.10
+        ..discountAmount = 10.0
+        ..tipRate = 0.05;
       final results = calculator.value();
 
       expect(results.subTotal, equals(90));

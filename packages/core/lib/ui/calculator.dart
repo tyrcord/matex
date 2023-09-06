@@ -82,8 +82,7 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
   void dispose() {
     super.dispose();
 
-    final bloc = widget.calculatorBloc;
-    bloc.close();
+    widget.calculatorBloc.close();
   }
 
   @override
