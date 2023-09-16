@@ -1,4 +1,4 @@
-name: matex_dataa
+name: matex_data
 description: The data tool of the Matex packages.
 version: 0.0.1
 repository: https://github.com/tyrcord/matex/tree/main/packages/data
@@ -10,6 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # T
+  tmodel: ^0.5.8
+  t_helpers: ^0.0.28+1
+  t_cache: ^0.0.5+3
 
 dev_dependencies:
   flutter_test:

@@ -1,0 +1,118 @@
+{
+  "austria": {
+    "vatRates": [10, 13, 20],
+    "currency": "EUR"
+  },
+  "belgium": {
+    "vatRates": [6, 12, 21],
+    "currency": "EUR"
+  },
+  "bulgaria": {
+    "vatRates": [9, 20],
+    "currency": "EUR"
+  },
+  "croatia": {
+    "vatRates": [5, 13, 25],
+    "currency": "EUR"
+  },
+  "cyprus": {
+    "vatRates": [5, 9, 19],
+    "currency": "EUR"
+  },
+  "czech": {
+    "vatRates": [10, 15, 21],
+    "currency": "EUR"
+  },
+  "denmark": {
+    "vatRates": [25],
+    "currency": "EUR"
+  },
+  "estonia": {
+    "vatRates": [5, 9, 20],
+    "currency": "EUR"
+  },
+  "finland": {
+    "vatRates": [10, 14, 24],
+    "currency": "EUR"
+  },
+  "france": {
+    "vatRates": [2.1, 5.5, 10, 20],
+    "currency": "EUR"
+  },
+  "germany": {
+    "vatRates": [7, 19],
+    "currency": "EUR"
+  },
+  "greece": {
+    "vatRates": [6, 13, 24],
+    "currency": "EUR"
+  },
+  "hungary": {
+    "vatRates": [5, 18, 27],
+    "currency": "EUR"
+  },
+  "ireland": {
+    "vatRates": [4.8, 9, 13.5, 23],
+    "currency": "EUR"
+  },
+  "italy": {
+    "vatRates": [4, 5, 10, 22],
+    "currency": "EUR"
+  },
+  "latvia": {
+    "vatRates": [12, 21],
+    "currency": "EUR"
+  },
+  "lithuania": {
+    "vatRates": [5, 9, 21],
+    "currency": "EUR"
+  },
+  "luxembourg": {
+    "vatRates": [3, 7, 13, 16],
+    "currency": "EUR"
+  },
+  "malta": {
+    "vatRates": [5, 7, 18],
+    "currency": "EUR"
+  },
+  "monaco": {
+    "vatRates": [2.1, 5.5, 10, 20],
+    "currency": "EUR"
+  },
+  "netherlands": {
+    "vatRates": [9, 21],
+    "currency": "EUR"
+  },
+  "poland": {
+    "vatRates": [5, 8, 23],
+    "currency": "EUR"
+  },
+  "romania": {
+    "vatRates": [5, 9, 19],
+    "currency": "EUR"
+  },
+  "slovakia": {
+    "vatRates": [10, 20],
+    "currency": "EUR"
+  },
+  "slovenia": {
+    "vatRates": [5, 9.5, 22],
+    "currency": "EUR"
+  },
+  "spain": {
+    "vatRates": [4, 10, 21],
+    "currency": "EUR"
+  },
+  "sweden": {
+    "vatRates": [6, 12, 25],
+    "currency": "EUR"
+  },
+  "switzerland": {
+    "vatRates": [2.5, 3.7, 7.7],
+    "currency": "CHF"
+  },
+  "unitedKingdom": {
+    "vatRates": [5, 20],
+    "currency": "GBP"
+  }
+}
