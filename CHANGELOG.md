@@ -15,6 +15,28 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_data` - `v0.0.2`](#matex_data---v002)
+
+---
+
+#### `matex_data` - `v0.0.2`
+
+ - **FEAT**: add MatexCountryMetadata.
+ - **FEAT**: initial commit for matex_data.
+
+
+## 2023-09-16
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_financial` - `v0.0.17+1`](#matex_financial---v00171)
 
 ---
