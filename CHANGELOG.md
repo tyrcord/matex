@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-09-16
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_financial` - `v0.0.17+1`](#matex_financial---v00171)
+
+---
+
+#### `matex_financial` - `v0.0.17+1`
+
+ - **FIX**: remove MatexSelectCurrencyField.
+
+
 ## 2023-09-06
 
 ### Changes

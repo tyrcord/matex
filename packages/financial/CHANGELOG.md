@@ -1,3 +1,7 @@
+## 0.0.17+1
+
+ - **FIX**: remove MatexSelectCurrencyField.
+
 ## 0.0.17
 
  - **FEAT**: minor improvements.
