@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-09-17
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_data` - `v0.0.3`](#matex_data---v003)
+
+---
+
+#### `matex_data` - `v0.0.3`
+
+ - **FEAT**: add id property to MatexCountryMetadata.
+
+
 ## 2023-09-16
 
 ### Changes

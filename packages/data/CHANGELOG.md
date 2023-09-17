@@ -1,3 +1,7 @@
+## 0.0.3
+
+ - **FEAT**: add id property to MatexCountryMetadata.
+
 ## 0.0.2
 
  - **FEAT**: add MatexCountryMetadata.
