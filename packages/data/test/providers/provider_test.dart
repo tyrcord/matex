@@ -21,9 +21,12 @@ class MockMatexDataProvider extends MatexDataProvider<Person> {
     super.ttl,
   });
 
+  static String jsonString =
+      '{"0": { "name": "Bob" }, "1": { "name": "Alice" }}';
+
   @override
   Future<String> fetchData() async {
-    return '{"0": { "name": "Bob" }}';
+    return jsonString;
   }
 
   @override
@@ -46,7 +49,7 @@ void main() {
 
     test('fetchData returns correct raw data', () async {
       final data = await provider.fetchData();
-      expect(data, '{"0": { "name": "Bob" }}');
+      expect(data, MockMatexDataProvider.jsonString);
     });
 
     test('parse correctly parses raw JSON data to Person object', () {
@@ -61,13 +64,19 @@ void main() {
     });
 
     test('get returns null for non-existent key', () async {
-      final person = await provider.get('1');
+      final person = await provider.get('2');
       expect(person, null);
     });
 
+    test('getAll returns list of models when data is available', () async {
+      final models = await provider.getAll();
+
+      expect(models, hasLength(2));
+      expect(models[0].name, 'Bob');
+      expect(models[1].name, 'Alice');
+    });
+
     test('Data is cached correctly', () async {
-      // This assumes that the cache behaves synchronously for simplicity,
-      // in real-world scenarios you might need a more sophisticated setup.
       await provider.get('0');
       final cachedData = provider.modelCache.get('0');
       expect(cachedData!.name, 'Bob');
