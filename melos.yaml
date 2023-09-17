@@ -14,3 +14,8 @@ scripts:
     exec: $PWD/scripts/update_analysis_options.sh
   sort_imports:
     exec: flutter pub run import_sorter:main
+  update:meta:
+    exec: $PWD/scripts/update_meta.sh
+    packageFilters:
+      scope:
+        - matex_data
