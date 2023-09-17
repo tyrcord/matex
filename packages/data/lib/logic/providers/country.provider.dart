@@ -26,7 +26,8 @@ class MatexCountryDataProvider extends MatexDataProvider<MatexCountryMetadata> {
   /// If [jsonData] is provided during class instantiation, it will be returned.
   /// Otherwise, the data is fetched from the default asset path.
   ///
-  /// Returns a [Future] that completes with the country data in a string format.
+  /// Returns a [Future] that completes with the country data in a string
+  /// format.
   @override
   Future<String> fetchData() async {
     if (jsonData != null) {
@@ -40,7 +41,7 @@ class MatexCountryDataProvider extends MatexDataProvider<MatexCountryMetadata> {
   ///
   /// [jsonData] is the Map representation of the JSON data.
   @override
-  MatexCountryMetadata parse(Map<String, dynamic> jsonData) {
-    return MatexCountryMetadata.fromJson(jsonData);
+  MatexCountryMetadata parse(String key, Map<String, dynamic> jsonData) {
+    return MatexCountryMetadata.fromJson(key, jsonData);
   }
 }

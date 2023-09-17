@@ -4,7 +4,8 @@ import 'package:matex_data/matex_data.dart';
 import 'package:t_cache/cache_manager.dart';
 import 'package:t_helpers/helpers.dart';
 
-/// Abstract data provider class to fetch, parse, cache, and retrieve model data.
+/// Abstract data provider class to fetch, parse, cache, and retrieve model
+/// data.
 ///
 /// - Generics:
 ///   - T: The type of data model this provider handles.
@@ -27,7 +28,8 @@ abstract class MatexDataProvider<T> {
   /// Constructor for the data provider.
   ///
   /// - Parameters:
-  ///   - debugLabel: Optional label for debugging. Defaults to 'MatexDataProvider'.
+  ///   - debugLabel: Optional label for debugging.
+  /// Defaults to 'MatexDataProvider'.
   ///   - ttl: Optional time to live duration for cache. Defaults to 1 day.
   MatexDataProvider({
     this.debugLabel = 'MatexDataProvider',
@@ -46,13 +48,14 @@ abstract class MatexDataProvider<T> {
   /// - Returns: A Future containing raw string data.
   Future<String> fetchData();
 
-  /// Parse the provided JSON data into a model of type T.
+  /// Parse the provided JSON data into a model of type T using the given key.
   ///
   /// - Parameters:
+  ///   - key: The key associated with the JSON data.
   ///   - jsonData: A Map containing the JSON data to parse.
   ///
   /// - Returns: A parsed model of type T or null if parsing fails.
-  T? parse(Map<String, dynamic> jsonData);
+  T? parse(String key, Map<String, dynamic> jsonData);
 
   /// Dispose both the model and JSON cache managers.
   void dispose() {
@@ -88,6 +91,30 @@ abstract class MatexDataProvider<T> {
     return null;
   }
 
+  /// Get all the models of type T.
+  ///
+  /// - Returns: A Future containing a list of models of type T.
+  Future<List<T>> getAll() async {
+    final models = <T>[];
+    final jsonData = await _fetchData();
+
+    for (final key in jsonData.keys) {
+      if (jsonData[key] is Map<String, dynamic>) {
+        final modelJsonData = jsonData[key];
+
+        if (modelJsonData is Map<String, dynamic>) {
+          final model = _parseModel(key, modelJsonData);
+
+          if (model != null) {
+            models.add(model);
+          }
+        }
+      }
+    }
+
+    return models;
+  }
+
   /// Fetch raw JSON data, either from cache or source.
   ///
   /// - Returns: A Future containing the JSON data as a Map.
@@ -114,7 +141,7 @@ abstract class MatexDataProvider<T> {
   ///
   /// - Returns: The parsed model of type T or null if parsing fails.
   T? _parseModel(String key, Map<String, dynamic> jsonData) {
-    final model = parse(jsonData);
+    final model = parse(key, jsonData);
     _cacheModel(key, model);
 
     return model;

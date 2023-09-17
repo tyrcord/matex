@@ -9,7 +9,10 @@ void main() {
         'currency': null
       };
 
-      expect(() => MatexCountryMetadata.fromJson(json), throwsArgumentError);
+      expect(
+        () => MatexCountryMetadata.fromJson('germany', json),
+        throwsArgumentError,
+      );
     });
 
     test('fromJson() throws ArgumentError if currency is not a string', () {
@@ -18,7 +21,10 @@ void main() {
         'currency': 123
       };
 
-      expect(() => MatexCountryMetadata.fromJson(json), throwsArgumentError);
+      expect(
+        () => MatexCountryMetadata.fromJson('germany', json),
+        throwsArgumentError,
+      );
     });
 
     test('fromJson() throws ArgumentError if currency is empty', () {
@@ -27,7 +33,10 @@ void main() {
         'currency': ''
       };
 
-      expect(() => MatexCountryMetadata.fromJson(json), throwsArgumentError);
+      expect(
+        () => MatexCountryMetadata.fromJson('germany', json),
+        throwsArgumentError,
+      );
     });
 
     test('fromJson() converts raw VAT rates into a list of doubles', () {
@@ -35,13 +44,17 @@ void main() {
         'vatRates': [0.2, 0.1],
         'currency': 'USD'
       };
-      final metadata = MatexCountryMetadata.fromJson(json);
+      final metadata = MatexCountryMetadata.fromJson('germany', json);
 
       expect(metadata.vatRates, equals([0.2, 0.1]));
     });
 
     test('copyWith() returns a copy with modified properties', () {
-      const metadata = MatexCountryMetadata(currency: 'USD', vatRates: [0.2]);
+      const metadata = MatexCountryMetadata(
+        id: 'germany',
+        currency: 'USD',
+        vatRates: [0.2],
+      );
       final copy = metadata.copyWith(currency: 'EUR');
 
       expect(copy.currency, equals('EUR'));
@@ -49,8 +62,17 @@ void main() {
     });
 
     test('merge() returns a merged copy with prioritized properties', () {
-      const metadata1 = MatexCountryMetadata(currency: 'USD', vatRates: [0.2]);
-      const metadata2 = MatexCountryMetadata(currency: 'EUR', vatRates: [0.1]);
+      const metadata1 = MatexCountryMetadata(
+        id: 'germany',
+        currency: 'USD',
+        vatRates: [0.2],
+      );
+      const metadata2 = MatexCountryMetadata(
+        id: 'germany',
+        currency: 'EUR',
+        vatRates: [0.1],
+      );
+
       final merged = metadata1.merge(metadata2);
 
       expect(merged.currency, equals('EUR'));
@@ -58,11 +80,16 @@ void main() {
     });
 
     test('props returns a list of identifying properties', () {
-      const metadata = MatexCountryMetadata(currency: 'USD', vatRates: [0.2]);
+      const metadata = MatexCountryMetadata(
+        id: 'germany',
+        currency: 'USD',
+        vatRates: [0.2],
+      );
 
       expect(
           metadata.props,
           equals([
+            'germany',
             'USD',
             [0.2]
           ]));

@@ -31,7 +31,7 @@ void main() {
         "vatRates": [7, 19],
         "currency": "EUR",
       };
-      final metadata = providerWithJsonData.parse(jsonData);
+      final metadata = providerWithJsonData.parse('germany', jsonData);
 
       expect(metadata, isNotNull);
       expect(metadata!.vatRates, [7, 19]);

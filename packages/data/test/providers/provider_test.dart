@@ -27,7 +27,7 @@ class MockMatexDataProvider extends MatexDataProvider<Person> {
   }
 
   @override
-  Person? parse(Map<String, dynamic> jsonData) {
+  Person? parse(String key, Map<String, dynamic> jsonData) {
     return Person.fromJson(jsonData);
   }
 }
@@ -51,7 +51,7 @@ void main() {
 
     test('parse correctly parses raw JSON data to Person object', () {
       final jsonData = {"name": "Alice"};
-      final person = provider.parse(jsonData);
+      final person = provider.parse('0', jsonData);
       expect(person!.name, "Alice");
     });
 
