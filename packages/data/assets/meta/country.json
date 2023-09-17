@@ -111,7 +111,7 @@
     "vatRates": [2.5, 3.7, 7.7],
     "currency": "CHF"
   },
-  "unitedKingdom": {
+  "uk": {
     "vatRates": [5, 20],
     "currency": "GBP"
   }
