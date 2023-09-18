@@ -35,8 +35,12 @@ abstract class MatexDataProvider<T> {
     this.debugLabel = 'MatexDataProvider',
     this.ttl = const Duration(days: 1),
   }) {
-    modelCache = TCacheManager<T>(debugLabel: '${debugLabel}ModelCache');
+    modelCache = TCacheManager<T>(
+      cleaningInterval: const Duration(days: 1),
+      debugLabel: '${debugLabel}ModelCache',
+    );
     jsonCache = TCacheManager<Map<String, dynamic>>(
+      cleaningInterval: const Duration(days: 1),
       debugLabel: '${debugLabel}JsonCache',
     );
   }
