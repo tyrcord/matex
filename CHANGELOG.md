@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_data` - `v0.0.5`](#matex_data---v005)
+
+---
+
+#### `matex_data` - `v0.0.5`
+
+ - **FEAT**: minor perf improvements.
+
+
+## 2023-09-18
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_data` - `v0.0.4`](#matex_data---v004)
 
 ---

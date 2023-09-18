@@ -1,3 +1,7 @@
+## 0.0.5
+
+ - **FEAT**: minor perf improvements.
+
 ## 0.0.4
 
  - **FEAT**: add country data bloc.
