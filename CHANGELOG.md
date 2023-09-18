@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_data` - `v0.0.7`](#matex_data---v007)
+
+---
+
+#### `matex_data` - `v0.0.7`
+
+ - **FEAT**: update country metadata.
+
+
+## 2023-09-18
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_core` - `v0.0.13`](#matex_core---v0013)
  - [`matex_data` - `v0.0.6`](#matex_data---v006)
  - [`matex_financial` - `v0.0.18`](#matex_financial---v0018)
