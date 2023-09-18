@@ -10,6 +10,11 @@ scripts:
     exec: dart fix --apply
   test:
     exec: flutter test
+    packageFilters:
+      scope:
+        - matex_data
+        - matex_financial
+
   update:analysis_options:
     exec: $PWD/scripts/update_analysis_options.sh
   sort_imports:

@@ -1,118 +1,147 @@
 {
   "austria": {
     "vatRates": [10, 13, 20],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "AT"
   },
   "belgium": {
     "vatRates": [6, 12, 21],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "BE"
   },
   "bulgaria": {
     "vatRates": [9, 20],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "BG"
   },
   "croatia": {
     "vatRates": [5, 13, 25],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "HR"
   },
   "cyprus": {
     "vatRates": [5, 9, 19],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "CY"
   },
   "czech": {
     "vatRates": [10, 15, 21],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "CZ"
   },
   "denmark": {
     "vatRates": [25],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "DK"
   },
   "estonia": {
     "vatRates": [5, 9, 20],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "EE"
   },
   "finland": {
     "vatRates": [10, 14, 24],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "FI"
   },
   "france": {
     "vatRates": [2.1, 5.5, 10, 20],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "FR"
   },
   "germany": {
     "vatRates": [7, 19],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "DE"
   },
   "greece": {
     "vatRates": [6, 13, 24],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "GR"
   },
   "hungary": {
     "vatRates": [5, 18, 27],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "HU"
   },
   "ireland": {
     "vatRates": [4.8, 9, 13.5, 23],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "IE"
   },
   "italy": {
     "vatRates": [4, 5, 10, 22],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "IT"
   },
   "latvia": {
     "vatRates": [12, 21],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "LV"
   },
   "lithuania": {
     "vatRates": [5, 9, 21],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "LT"
   },
   "luxembourg": {
     "vatRates": [3, 7, 13, 16],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "LU"
   },
   "malta": {
     "vatRates": [5, 7, 18],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "MT"
   },
   "monaco": {
     "vatRates": [2.1, 5.5, 10, 20],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "MC"
   },
   "netherlands": {
     "vatRates": [9, 21],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "NL"
   },
   "poland": {
     "vatRates": [5, 8, 23],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "PL"
   },
   "romania": {
     "vatRates": [5, 9, 19],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "RO"
   },
   "slovakia": {
     "vatRates": [10, 20],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "SK"
   },
   "slovenia": {
     "vatRates": [5, 9.5, 22],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "SI"
   },
   "spain": {
     "vatRates": [4, 10, 21],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "ES"
   },
   "sweden": {
     "vatRates": [6, 12, 25],
-    "currency": "EUR"
+    "currency": "EUR",
+    "code": "SE"
   },
   "switzerland": {
     "vatRates": [2.5, 3.7, 7.7],
-    "currency": "CHF"
+    "currency": "CHF",
+    "code": "CH"
   },
   "uk": {
     "vatRates": [5, 20],
-    "currency": "GBP"
+    "currency": "GBP",
+    "code": "GB"
   }
 }

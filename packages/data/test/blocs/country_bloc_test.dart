@@ -6,17 +6,20 @@ void main() {
     MatexCountryMetadata(
       id: 'us',
       currency: 'USD',
+      code: 'US',
     ),
     MatexCountryMetadata(
       id: 'ca',
       currency: 'CAD',
+      code: 'CA',
     ),
   ];
 
   group('MatexCountryBloc', () {
     // singleton instance, so keep in order
     final bloc = MatexCountryBloc(
-      jsonData: '{"us": { "currency": "USD" }, "ca": { "currency": "CAD" }}',
+      jsonData: '''{"us": { "currency": "USD", "code": "US" }, '''
+          '''"ca": { "currency": "CAD", "code": "CA" }}''',
     );
 
     test('initial state is correct', () {
@@ -60,10 +63,12 @@ void main() {
         MatexCountryMetadata(
           id: 'fr',
           currency: 'EUR',
+          code: 'FR',
         ),
         MatexCountryMetadata(
           id: 'de',
           currency: 'EUR',
+          code: 'DE',
         ),
       ];
 

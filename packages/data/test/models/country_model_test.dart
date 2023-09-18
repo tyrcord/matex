@@ -42,7 +42,8 @@ void main() {
     test('fromJson() converts raw VAT rates into a list of doubles', () {
       final json = {
         'vatRates': [0.2, 0.1],
-        'currency': 'USD'
+        'currency': 'USD',
+        'code': 'DE',
       };
       final metadata = MatexCountryMetadata.fromJson('germany', json);
 
@@ -54,6 +55,7 @@ void main() {
         id: 'germany',
         currency: 'USD',
         vatRates: [0.2],
+        code: 'DE',
       );
       final copy = metadata.copyWith(currency: 'EUR');
 
@@ -65,11 +67,13 @@ void main() {
       const metadata1 = MatexCountryMetadata(
         id: 'germany',
         currency: 'USD',
+        code: 'DE',
         vatRates: [0.2],
       );
       const metadata2 = MatexCountryMetadata(
         id: 'germany',
         currency: 'EUR',
+        code: 'DE',
         vatRates: [0.1],
       );
 
@@ -83,6 +87,7 @@ void main() {
       const metadata = MatexCountryMetadata(
         id: 'germany',
         currency: 'USD',
+        code: 'DE',
         vatRates: [0.2],
       );
 
@@ -91,6 +96,7 @@ void main() {
           equals([
             'germany',
             'USD',
+            'DE',
             [0.2]
           ]));
     });
