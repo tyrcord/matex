@@ -373,8 +373,8 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       }),
       categories: _buildCategoryEntries(context),
       alwaysUse24HourFormat: appSettingsBloc.currentState.alwaysUse24HourFormat,
-      countryCode: appSettingsBloc.currentState.countryCode,
       languageCode: appSettingsBloc.currentState.languageCode,
+      countryCode: appInfo.deviceCountryCode,
     );
   }
 

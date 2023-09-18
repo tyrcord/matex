@@ -233,7 +233,14 @@ abstract class MatexCalculatorBloc<
 
   @protected
   String getUserLocaleCode() {
-    return appSettingsBloc.currentState.localeCode;
+    final appInfo = FastAppInfoBloc.instance.currentState;
+
+    final localeCode = toIos3166Code(
+      appSettingsBloc.currentState.languageCode,
+      countryCode: appInfo.deviceCountryCode,
+    );
+
+    return localeCode ?? kFastSettingsDefaultLanguageCode;
   }
 
   @protected

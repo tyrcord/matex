@@ -342,7 +342,6 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<Uint8List> toPdf(BuildContext context) async {
     final inputs = _buildInputReportEntries(context);
-
     final reporter = FastPdfCalculatorReporter();
     final appInfoBloc = FastAppInfoBloc();
     final appInfo = appInfoBloc.currentState;
@@ -350,7 +349,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     return reporter.report(
       alwaysUse24HourFormat: appSettingsBloc.currentState.alwaysUse24HourFormat,
       languageCode: appSettingsBloc.currentState.languageCode,
-      countryCode: appSettingsBloc.currentState.countryCode,
+      countryCode: appInfo.deviceCountryCode,
       title: CoreLocaleKeys.core_label_report.tr(),
       categories: _buildCategoryEntries(context),
       categoryColumns: 3,
