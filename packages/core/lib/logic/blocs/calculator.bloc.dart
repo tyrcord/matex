@@ -60,6 +60,8 @@ abstract class MatexCalculatorBloc<
   @protected
   Future<void> resetCalculator(D document);
 
+  final MatexPdfDialogCallback? showExportPdfDialog;
+
   /// Creates a new instance of the `MatexCalculatorBloc`.
   ///
   /// The `dataProvider` parameter is required and specifies the data provider
@@ -76,6 +78,7 @@ abstract class MatexCalculatorBloc<
     super.initialState,
     super.debouceComputeEvents = false,
     super.debugLabel,
+    this.showExportPdfDialog,
   });
 
   /// Initializes the default calculator state.
@@ -174,7 +177,7 @@ abstract class MatexCalculatorBloc<
     if (calculator.isValid) {
       XFile? file;
 
-      showExportPdfDialog(
+      showExportPdfDialog?.call(
         context: context,
         onCreateOperation: () async {
           file = await toPdfFile(context);
