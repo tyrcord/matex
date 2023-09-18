@@ -1,3 +1,8 @@
+## 0.0.4
+
+ - **FEAT**: add country data bloc.
+ - **FEAT**: update country data.
+
 ## 0.0.3
 
  - **FEAT**: add id property to MatexCountryMetadata.
