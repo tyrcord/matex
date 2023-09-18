@@ -15,6 +15,32 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_core` - `v0.0.12+1`](#matex_core---v00121)
+ - [`matex_financial` - `v0.0.17+2`](#matex_financial---v00172)
+
+---
+
+#### `matex_core` - `v0.0.12+1`
+
+ - **FIX**: remove fastyle_ad dependency.
+
+#### `matex_financial` - `v0.0.17+2`
+
+ - **FIX**: remove fastyle_ad dependency.
+
+
+## 2023-09-18
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_data` - `v0.0.5`](#matex_data---v005)
 
 ---

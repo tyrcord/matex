@@ -1,3 +1,7 @@
+## 0.0.17+2
+
+ - **FIX**: remove fastyle_ad dependency.
+
 ## 0.0.17+1
 
  - **FIX**: remove MatexSelectCurrencyField.
