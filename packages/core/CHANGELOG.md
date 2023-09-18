@@ -1,3 +1,7 @@
+## 0.0.13
+
+ - **FEAT**: update dependencies.
+
 ## 0.0.12+1
 
  - **FIX**: remove fastyle_ad dependency.
