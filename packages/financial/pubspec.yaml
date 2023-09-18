@@ -23,25 +23,25 @@ dependencies:
   matex_core: ^0.0.12+1
 
   # T
-  tbloc: ^0.21.3+3
-  t_helpers: ^0.0.28+1
-  tmodel: ^0.5.7+1
+  tbloc: ^0.21.4
+  t_helpers: ^0.0.29
+  tmodel: ^0.5.8
 
   # Lingua
-  lingua_finance: ^0.0.16
-  lingua_finance_stock: ^0.0.5
-  lingua_core: ^0.0.22
-  lingua_settings: ^0.0.10
+  lingua_finance: ^0.0.17
+  lingua_finance_stock: ^0.0.6
+  lingua_core: ^0.0.23
+  lingua_settings: ^0.0.11
 
   # Fastyle
-  fastyle_forms: ^0.0.19
-  fastyle_core: ^0.0.18
-  fastyle_calculator: ^1.29.0
+  fastyle_forms: ^0.0.20
+  fastyle_core: ^0.0.20
+  fastyle_calculator: ^1.30.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.3
-  tstore: ^0.8.14+1
+  tstore: ^0.8.15
   import_sorter: ^4.6.0
   dependency_validator: ^3.2.2

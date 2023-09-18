@@ -13,8 +13,8 @@ dependencies:
 
   # T
   tmodel: ^0.5.8
-  t_helpers: ^0.0.28+1
-  t_cache: ^0.0.5+3
+  t_helpers: ^0.0.29
+  t_cache: ^0.0.6
   tbloc: ^0.21.4
 
 dev_dependencies:
