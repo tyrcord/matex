@@ -1,3 +1,7 @@
+## 0.0.14
+
+ - **FEAT**: support latest fastyle_settings.
+
 ## 0.0.13
 
  - **FEAT**: update dependencies.

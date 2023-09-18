@@ -15,6 +15,32 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_core` - `v0.0.14`](#matex_core---v0014)
+ - [`matex_financial` - `v0.0.19`](#matex_financial---v0019)
+
+---
+
+#### `matex_core` - `v0.0.14`
+
+ - **FEAT**: support latest fastyle_settings.
+
+#### `matex_financial` - `v0.0.19`
+
+ - **FEAT**: support latest fastyle_settings.
+
+
+## 2023-09-18
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_data` - `v0.0.7`](#matex_data---v007)
 
 ---
