@@ -94,7 +94,7 @@ abstract class MatexDataProvider<T> {
   /// Get all the models of type T.
   ///
   /// - Returns: A Future containing a list of models of type T.
-  Future<List<T>> getAll() async {
+  Future<List<T>> list() async {
     final models = <T>[];
     final jsonData = await _fetchData();
 

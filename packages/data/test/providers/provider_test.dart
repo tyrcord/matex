@@ -69,7 +69,7 @@ void main() {
     });
 
     test('getAll returns list of models when data is available', () async {
-      final models = await provider.getAll();
+      final models = await provider.list();
 
       expect(models, hasLength(2));
       expect(models[0].name, 'Bob');
