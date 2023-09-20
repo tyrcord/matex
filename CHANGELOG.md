@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-09-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_data` - `v0.0.8`](#matex_data---v008)
+ - [`matex_financial` - `v0.0.20`](#matex_financial---v0020)
+
+---
+
+#### `matex_data` - `v0.0.8`
+
+ - **FEAT**: bunch of improvements.
+
+#### `matex_financial` - `v0.0.20`
+
+ - **FEAT**: bunch of improvements.
+
+
 ## 2023-09-18
 
 ### Changes
