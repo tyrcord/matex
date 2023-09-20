@@ -30,7 +30,7 @@ void main() {
         () async {
       expect(bloc.currentState.isInitializing, false);
       expect(bloc.currentState.isInitialized, false);
-      bloc.addEvent(const MatexCountryBlocEvent.initialized(countries));
+      bloc.addEvent(MatexCountryBlocEvent.initialized(countries));
 
       await expectLater(
         bloc.onData,
@@ -39,7 +39,7 @@ void main() {
     });
 
     test('handleInitEvent should init the bloc', () async {
-      bloc.addEvent(const MatexCountryBlocEvent.init());
+      bloc.addEvent(MatexCountryBlocEvent.init());
 
       await expectLater(
         bloc.onData,
@@ -72,7 +72,7 @@ void main() {
         ),
       ];
 
-      bloc.addEvent(const MatexCountryBlocEvent.initialized(countries2));
+      bloc.addEvent(MatexCountryBlocEvent.initialized(countries2));
 
       await expectLater(
         bloc.onData,

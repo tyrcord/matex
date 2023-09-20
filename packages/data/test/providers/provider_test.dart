@@ -81,5 +81,26 @@ void main() {
       final cachedData = provider.modelCache.get('0');
       expect(cachedData!.name, 'Bob');
     });
+
+    test('findOne returns correct model based on filter', () async {
+      final person = await provider.findOne(filter: (p) => p.name == 'Alice');
+      expect(person!.name, 'Alice');
+    });
+
+    test('findOne returns null if no model matches the filter', () async {
+      final person = await provider.findOne(filter: (p) => p.name == 'Charlie');
+      expect(person, null);
+    });
+
+    test('findOne returns the first matching model if multiple matches exist',
+        () async {
+      MockMatexDataProvider.jsonString = '{"0": { "name": "Bob" }, '
+          '"1": { "name": "Alice" }, '
+          '"2": { "name": "Alice" }}';
+
+      final person = await provider.findOne(filter: (p) => p.name == 'Alice');
+      // Even though there are two Alices, it should return the first one.
+      expect(person!.name, 'Alice');
+    });
   });
 }

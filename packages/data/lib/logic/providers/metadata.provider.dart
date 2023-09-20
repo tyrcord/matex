@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:matex_data/matex_data.dart';
 import 'package:t_cache/cache_manager.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:collection/collection.dart';
 
 /// Abstract data provider class to fetch, parse, cache, and retrieve model
 /// data.
@@ -93,6 +94,19 @@ abstract class MatexDataProvider<T> {
     }
 
     return null;
+  }
+
+  /// Retrieves a single model of type T that satisfies the given filter.
+  ///
+  /// [filter]: The filtering criteria function.
+  ///
+  /// Returns: A model of type T or null if not found.
+  Future<T?> findOne({
+    required bool Function(T) filter,
+  }) async {
+    final models = await list();
+
+    return models.firstWhereOrNull(filter);
   }
 
   /// Get all the models of type T.

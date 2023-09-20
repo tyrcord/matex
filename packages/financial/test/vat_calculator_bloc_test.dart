@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tstore/tstore.dart';
@@ -8,10 +9,15 @@ import 'package:tstore/tstore.dart';
 import 'package:matex_financial/blocs/keys/keys.dart';
 import 'package:matex_financial/blocs/vat_calculator.bloc.dart';
 
-void main() {
+void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
   setUpTStoreTesting();
 
   late MatexVatCalculatorBloc vatCalculatorBloc;
+
+  // Provide the appInfoBloc to the tests
+  // ignore: unused_local_variable
+  final appInfoBloc = FastAppInfoBloc();
 
   Future<void> clearDocument() async {
     vatCalculatorBloc.addEvent(FastCalculatorBlocEvent.clear());

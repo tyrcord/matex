@@ -30,7 +30,7 @@ class MatexCountryDataProvider extends MatexDataProvider<MatexCountryMetadata> {
   /// format.
   @override
   Future<String> fetchData() async {
-    if (jsonData != null) {
+    if (jsonData != null && jsonData!.isNotEmpty) {
       return jsonData!;
     }
 

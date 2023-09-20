@@ -1,34 +1,38 @@
 import 'package:matex_data/matex_data.dart';
 import 'package:tbloc/tbloc.dart';
 
-/// Enum that represents the type of events that can be dispatched to the
-/// [MatexCountryBloc].
-enum MatexCountryBlocEventType {
-  init,
-  initialized,
-}
-
-/// The [MatexCountryBlocEvent] class is used to represent events that can be
-/// dispatched to the [MatexCountryBloc].
+/// Represents events that can be dispatched to the [MatexCountryBloc].
 ///
-/// The [MatexCountryBlocEvent] class extends the [BlocEvent] class from the
-/// [tbloc] package, and defines two event types: [init] and [initialized].
+/// This class extends the [BlocEvent] class from the `tbloc` package. It
+/// provides two specific events for the [MatexCountryBloc]: initialization
+/// (`init`) and post-initialization (`initialized`).
 ///
-/// The [init] event is used to signal that the bloc should be initialized,
-/// while the [initialized] event is used to signal that the bloc has been
+/// - `init` event: Indicates that the bloc should be initialized.
+/// - `initialized` event: Informs that the bloc has been successfully
 /// initialized with a list of [MatexCountryMetadata] objects.
 class MatexCountryBlocEvent
-    extends BlocEvent<MatexCountryBlocEventType, List<MatexCountryMetadata>> {
-  /// Constructs an [init] event for the [MatexCountryBloc].
-  const MatexCountryBlocEvent.init()
-      : super(type: MatexCountryBlocEventType.init);
+    extends BlocEvent<MatexCountryBlocEventType, MatexCountryBlocEventPayload> {
+  /// Creates an `init` event for the [MatexCountryBloc].
+  ///
+  /// Optionally, JSON data can be provided as part of the initialization.
+  ///
+  /// - [jsonData]: A JSON formatted string (optional).
+  MatexCountryBlocEvent.init({String? jsonData})
+      : super(
+          type: MatexCountryBlocEventType.init,
+          payload: MatexCountryBlocEventPayload(jsonData: jsonData),
+        );
 
-  /// Constructs an [initialized] event for the [MatexCountryBloc] with a
-  /// payload containing a list of [MatexCountryMetadata] objects.
-  const MatexCountryBlocEvent.initialized(
+  /// Creates an `initialized` event for the [MatexCountryBloc].
+  ///
+  /// This event carries a payload with a list of [MatexCountryMetadata]
+  /// objects, indicating successful initialization.
+  ///
+  /// - [countries]: A list of `MatexCountryMetadata` instances.
+  MatexCountryBlocEvent.initialized(
     List<MatexCountryMetadata> countries,
   ) : super(
           type: MatexCountryBlocEventType.initialized,
-          payload: countries,
+          payload: MatexCountryBlocEventPayload(countries: countries),
         );
 }

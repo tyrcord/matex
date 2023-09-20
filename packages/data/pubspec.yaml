@@ -11,9 +11,16 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Public
+  rxdart: ^0.27.7
+  collection: ^1.17.2
+
+  # Fastyle
+  fastyle_core: ^0.0.21
+
   # T
-  tmodel: ^0.5.8
-  t_helpers: ^0.0.29
+  tmodel: ^0.5.8+1
+  t_helpers: ^0.0.29+1
   t_cache: ^0.0.6
   tbloc: ^0.21.4
 
