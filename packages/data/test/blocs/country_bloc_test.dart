@@ -85,5 +85,35 @@ void main() {
         ]),
       );
     });
+
+    group('findOneByCountryCode', () {
+      test('returns correct country metadata for a given country code',
+          () async {
+        final result = await bloc.findOneByCountryCode('US');
+
+        expect(result, isNotNull);
+        expect(result?.id, 'us');
+        expect(result?.currency, 'USD');
+        expect(result?.code, 'US');
+      });
+
+      test('returns null if country code is not found', () async {
+        // ZZ is not a valid country code.
+        final result = await bloc.findOneByCountryCode('ZZ');
+
+        expect(result, isNull);
+      });
+
+      test('handles case-insensitive country codes', () async {
+        final resultUppercase = await bloc.findOneByCountryCode('US');
+        final resultLowercase = await bloc.findOneByCountryCode('us');
+
+        expect(resultUppercase?.id, 'us');
+        expect(resultLowercase?.id, 'us');
+        expect(resultUppercase?.id, resultLowercase?.id);
+        expect(resultUppercase?.currency, resultLowercase?.currency);
+        expect(resultUppercase?.code, resultLowercase?.code);
+      });
+    });
   });
 }

@@ -54,6 +54,15 @@ class MatexCountryBloc
     return _countryProvider.findOne(filter: filter);
   }
 
+  /// Fetches metadata for a country with the given country code.
+  Future<MatexCountryMetadata?> findOneByCountryCode(String countryCode) {
+    countryCode = countryCode.toLowerCase();
+
+    return MatexCountryBloc.instance.findOne(
+      filter: (country) => country.code.toLowerCase() == countryCode,
+    );
+  }
+
   /// Maps incoming [MatexCountryBlocEvent] to corresponding
   /// [MatexCountryBlocState].
   /// Processes events and updates states accordingly.
