@@ -20,6 +20,6 @@ class MatexVatCalculatorDataProvider
       return MatexVatCalculatorBlocDocument.fromJson(json);
     }
 
-    return const MatexVatCalculatorBlocDocument();
+    return MatexVatCalculatorBlocDocument();
   }
 }

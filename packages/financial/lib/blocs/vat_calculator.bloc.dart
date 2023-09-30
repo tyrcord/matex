@@ -84,36 +84,29 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     dynamic value,
   ) async {
     if (value is String) {
+      final dValue = toDecimal(value) ?? dZero;
+      final isNumber = isStringNumber(value) || value.isEmpty;
+
+      if (dValue < dZero || !isNumber) return null;
+
       if (key == MatexVatCalculatorBlocKey.priceBeforeVat) {
-        return document.copyWith(priceBeforeVat: value.toString());
+        return document.copyWith(priceBeforeVat: value);
       } else if (key == MatexVatCalculatorBlocKey.customVatRate) {
-        return document.copyWith(customVatRate: value.toString());
+        return document.copyWith(customVatRate: value);
       } else if (key == MatexVatCalculatorBlocKey.vatRate) {
-        return document.copyWith(vatRate: value.toString());
+        return document.copyWith(vatRate: value);
       } else if (key == MatexVatCalculatorBlocKey.federalVatRate) {
-        return document.copyWith(federalVatRate: value.toString());
+        return document.copyWith(federalVatRate: value);
       } else if (key == MatexVatCalculatorBlocKey.regionalVatRate) {
-        return document.copyWith(regionalVatRate: value.toString());
+        return document.copyWith(regionalVatRate: value);
       } else if (key == MatexVatCalculatorBlocKey.discountAmount) {
-        return document.copyWith(
-          discountAmount: value.toString(),
-          discountRate: '',
-        );
+        return document.copyWith(discountAmount: value, discountRate: '');
       } else if (key == MatexVatCalculatorBlocKey.tipAmount) {
-        return document.copyWith(
-          tipAmount: value.toString(),
-          tipRate: '',
-        );
+        return document.copyWith(tipAmount: value, tipRate: '');
       } else if (key == MatexVatCalculatorBlocKey.tipRate) {
-        return document.copyWith(
-          tipRate: value.toString(),
-          tipAmount: '',
-        );
+        return document.copyWith(tipRate: value, tipAmount: '');
       } else if (key == MatexVatCalculatorBlocKey.discountRate) {
-        return document.copyWith(
-          discountRate: value.toString(),
-          discountAmount: '',
-        );
+        return document.copyWith(discountRate: value, discountAmount: '');
       }
     } else if (value is Enum) {
       value = describeEnum(value);
@@ -142,6 +135,11 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     dynamic value,
   ) async {
     if (value is String) {
+      final dValue = toDecimal(value) ?? dZero;
+      final isNumber = isStringNumber(value) || value.isEmpty;
+
+      if (dValue < dZero || !isNumber) return null;
+
       if (key == MatexVatCalculatorBlocKey.priceBeforeVat) {
         return patchPriceBeforeVat(value);
       } else if (key == MatexVatCalculatorBlocKey.customVatRate) {
@@ -210,7 +208,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<MatexVatCalculatorBlocDocument>
       retrieveDefaultCalculatorDocument() async {
-    return const MatexVatCalculatorBlocDocument();
+    return MatexVatCalculatorBlocDocument();
   }
 
   @override

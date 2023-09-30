@@ -19,7 +19,7 @@ void main() async {
   // ignore: unused_local_variable
   final appInfoBloc = FastAppInfoBloc();
 
-  Future<void> clearDocument() async {
+  Future<void> clearCalculator() async {
     vatCalculatorBloc.addEvent(FastCalculatorBlocEvent.clear());
     await Future.delayed(const Duration(milliseconds: 100));
   }
@@ -34,7 +34,7 @@ void main() async {
 
   test('patchPriceBeforeVat() should update the priceBeforeVat field',
       () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define a test value
     const testValue = '100';
@@ -51,10 +51,11 @@ void main() async {
 
     // Verify that the priceBeforeVat field is updated
     expect(vatCalculatorBloc.currentState.fields.priceBeforeVat, testValue);
+    expect(vatCalculatorBloc.document.priceBeforeVat, testValue);
   });
 
   test('patchVatRate() should update the vatRate field', () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define a test value
     const testValue = '7.5';
@@ -71,13 +72,13 @@ void main() async {
 
     // Verify that the vatRate field is updated
     expect(vatCalculatorBloc.currentState.fields.vatRate, testValue);
+    expect(vatCalculatorBloc.document.vatRate, testValue);
   });
 
   test('patchFederalVatRate() should update the federalVatRate field',
       () async {
-    await clearDocument();
+    await clearCalculator();
 
-    // Define a test value
     const testValue = '5';
 
     // Call the patchFederalVatRate() method
@@ -92,13 +93,13 @@ void main() async {
 
     // Verify that the federalVatRate field is updated
     expect(vatCalculatorBloc.currentState.fields.federalVatRate, testValue);
+    expect(vatCalculatorBloc.document.federalVatRate, testValue);
   });
 
   test('patchRegionalVatRate() should update the regionalVatRate field',
       () async {
-    await clearDocument();
+    await clearCalculator();
 
-    // Define a test value
     const testValue = '2.5';
 
     // Call the patchRegionalVatRate() method
@@ -113,10 +114,11 @@ void main() async {
 
     // Verify that the regionalVatRate field is updated
     expect(vatCalculatorBloc.currentState.fields.regionalVatRate, testValue);
+    expect(vatCalculatorBloc.document.regionalVatRate, testValue);
   });
 
   test('patchCustomVatRate() should update the customVatRate field', () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define a test value
     const testValue = '10';
@@ -133,11 +135,12 @@ void main() async {
 
     // Verify that the customVatRate field is updated
     expect(vatCalculatorBloc.currentState.fields.customVatRate, testValue);
+    expect(vatCalculatorBloc.document.customVatRate, testValue);
   });
 
   test('patchDiscountAmount() should update the discountAmount field',
       () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define a test value
     const testValue = '20';
@@ -154,10 +157,11 @@ void main() async {
 
     // Verify that the discountAmount field is updated
     expect(vatCalculatorBloc.currentState.fields.discountAmount, testValue);
+    expect(vatCalculatorBloc.document.discountAmount, testValue);
   });
 
   test('patchDiscountRate() should update the discountRate field', () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define a test value
     const testValue = '15';
@@ -174,10 +178,11 @@ void main() async {
 
     // Verify that the discountRate field is updated
     expect(vatCalculatorBloc.currentState.fields.discountRate, testValue);
+    expect(vatCalculatorBloc.document.discountRate, testValue);
   });
 
   test('patchTipRate() should update the tipRate field', () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define a test value
     const testValue = '10';
@@ -194,10 +199,11 @@ void main() async {
 
     // Verify that the tipRate field is updated
     expect(vatCalculatorBloc.currentState.fields.tipRate, testValue);
+    expect(vatCalculatorBloc.document.tipRate, testValue);
   });
 
   test('patchTipAmount() should update the tipAmount field', () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define a test value
     const testValue = '5';
@@ -214,13 +220,14 @@ void main() async {
 
     // Verify that the tipAmount field is updated
     expect(vatCalculatorBloc.currentState.fields.tipAmount, testValue);
+    expect(vatCalculatorBloc.document.tipAmount, testValue);
   });
 
   test('patchTipFieldType() should update the tipFieldType field', () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define a test value
-    const testValue = 'amount';
+    const testValue = FastAmountSwitchFieldType.amount;
 
     // Call the patchTipFieldType() method
     vatCalculatorBloc.addEvent(
@@ -233,12 +240,13 @@ void main() async {
     await Future.delayed(const Duration(milliseconds: 300));
 
     // Verify that the tipFieldType field is updated
-    expect(vatCalculatorBloc.currentState.fields.tipFieldType, testValue);
+    expect(vatCalculatorBloc.currentState.fields.tipFieldType, 'amount');
+    expect(vatCalculatorBloc.document.tipFieldType, 'amount');
   });
 
   test('patchDiscountFieldType() should update the discountFieldType field',
       () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define a test value
     const testValue = FastAmountSwitchFieldType.percent;
@@ -255,10 +263,11 @@ void main() async {
 
     // Verify that the discountFieldType field is updated
     expect(vatCalculatorBloc.currentState.fields.discountFieldType, 'percent');
+    expect(vatCalculatorBloc.document.discountFieldType, 'percent');
   });
 
   test('patchTipFieldType, patchTipAmount, patchTipRate ', () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define test values
     const fieldType = FastAmountSwitchFieldType.amount;
@@ -347,7 +356,7 @@ void main() async {
 
   test('patchDiscountFieldType, patchDiscountAmount, patchDiscountRate',
       () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Define test values
     const fieldType = FastAmountSwitchFieldType.amount;
@@ -435,7 +444,7 @@ void main() async {
   });
 
   test('compute() should compute the VAT values correctly', () async {
-    await clearDocument();
+    await clearCalculator();
 
     // Set the initial state of the bloc with specific values
     vatCalculatorBloc.addEvent(
@@ -469,4 +478,137 @@ void main() async {
     expect(result.total, 88.0);
     expect(result.discountAmount, 20.0);
   });
+
+  test('addEvent() should handle negative values correctly', () async {
+    await clearCalculator();
+
+    vatCalculatorBloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.priceBeforeVat,
+        value: '-100',
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    expect(vatCalculatorBloc.currentState.fields.priceBeforeVat, isNull);
+    expect(vatCalculatorBloc.document.priceBeforeVat, isNull);
+  });
+
+  test('patchPriceBeforeVat() with value "" should handle edge case', () async {
+    await clearCalculator();
+
+    vatCalculatorBloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.priceBeforeVat,
+        value: "100",
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    // Update the priceBeforeVat field with edge case value
+    vatCalculatorBloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.priceBeforeVat,
+        value: "",
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    // Verify the behavior (assuming edge case values should be null in the state)
+    expect(vatCalculatorBloc.currentState.fields.priceBeforeVat, isNull);
+    expect(vatCalculatorBloc.document.priceBeforeVat, isNull);
+  });
+
+  test('patchVatRate() with value null should handle edge case', () async {
+    await clearCalculator();
+
+    // Update the vatRate field with edge case value
+    vatCalculatorBloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.vatRate,
+        value: null,
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    // Verify the behavior (assuming edge case values should be null in the state)
+    expect(vatCalculatorBloc.currentState.fields.vatRate, null);
+  });
+
+  test('Setting priceBeforeVat and discountRate fields', () async {
+    await clearCalculator();
+
+    // Set the priceBeforeVat field
+    vatCalculatorBloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.priceBeforeVat,
+        value: '100',
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    // Set the discountRate field
+    vatCalculatorBloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.discountRate,
+        value: '10',
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    expect(vatCalculatorBloc.currentState.fields.priceBeforeVat, '100');
+    expect(vatCalculatorBloc.currentState.fields.discountRate, '10');
+  });
+
+  test('patchDiscountRate() with value "abcd" should handle edge case',
+      () async {
+    await clearCalculator();
+
+    // Update the discountRate field with edge case value
+    vatCalculatorBloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.discountRate,
+        value: "abcd",
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    expect(vatCalculatorBloc.currentState.fields.discountRate, null);
+  });
+
+  test('VAT calculation with language set to English and currency to USD',
+      () async {
+    await clearCalculator();
+
+    vatCalculatorBloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.priceBeforeVat,
+        value: '10',
+      ),
+    );
+
+    // Assuming a VAT rate of 5%
+    vatCalculatorBloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.vatRate,
+        value: '5',
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    final results = await vatCalculatorBloc.compute();
+
+    expect(results.formattedTotal, '\$10.50');
+    expect(results.formattedTotalTaxes, '\$0.50');
+  });
+
+  // TODO: test more formatted values
 }

@@ -343,5 +343,113 @@ void main() {
       expect(results.tipAmount, equals(4.5));
       expect(results.tipRate, equals(0.05));
     });
+
+    test('value() handles negative priceBeforeVat', () {
+      calculator.priceBeforeVat = -50.0;
+      final results = calculator.value();
+
+      expect(results.subTotal, equals(isNull));
+      expect(results.totalTaxes, equals(isNull));
+      expect(results.total, equals(0.0));
+      expect(results.grandTotal, equals(isNull));
+      expect(results.federalVatAmount, equals(isNull));
+      expect(results.regionalVatAmount, equals(isNull));
+      expect(results.vatAmount, equals(isNull));
+      expect(results.customVatAmount, equals(isNull));
+      expect(results.discountAmount, equals(isNull));
+      expect(results.discountRate, equals(isNull));
+      expect(results.tipAmount, equals(isNull));
+      expect(results.tipRate, equals(isNull));
+    });
+
+    test('value() handles all zero VAT rates', () {
+      calculator
+        ..priceBeforeVat = 100.0
+        ..federalVatRate = 0.0
+        ..regionalVatRate = 0.0
+        ..vatRate = 0.0
+        ..customVatRate = 0.0;
+
+      final results = calculator.value();
+
+      expect(results.subTotal, equals(isNull));
+      expect(results.totalTaxes, equals(isNull));
+      expect(results.total, equals(0.0));
+      expect(results.grandTotal, equals(isNull));
+      expect(results.federalVatAmount, equals(isNull));
+      expect(results.regionalVatAmount, equals(isNull));
+      expect(results.vatAmount, equals(isNull));
+      expect(results.customVatAmount, equals(isNull));
+      expect(results.discountAmount, equals(isNull));
+      expect(results.discountRate, equals(isNull));
+      expect(results.tipAmount, equals(isNull));
+      expect(results.tipRate, equals(isNull));
+    });
+
+    test('value() handles discount amount greater than priceBeforeVat', () {
+      calculator
+        ..priceBeforeVat = 100.0
+        ..discountAmount = 110.0; // Greater than priceBeforeVat
+
+      final results = calculator.value();
+
+      expect(results.subTotal, equals(isNull));
+      expect(results.totalTaxes, equals(isNull));
+      expect(results.total, equals(0.0));
+      expect(results.grandTotal, equals(isNull));
+      expect(results.federalVatAmount, equals(isNull));
+      expect(results.regionalVatAmount, equals(isNull));
+      expect(results.vatAmount, equals(isNull));
+      expect(results.customVatAmount, equals(isNull));
+      expect(results.discountAmount, equals(isNull));
+      expect(results.discountRate, equals(isNull));
+      expect(results.tipAmount, equals(isNull));
+      expect(results.tipRate, equals(isNull));
+    });
+
+    test('value() handles maximum values', () {
+      calculator
+        ..priceBeforeVat = double.maxFinite
+        ..customVatRate = 1.0
+        ..discountRate = 1.0
+        ..tipRate = 1.0;
+
+      final results = calculator.value();
+
+      expect(results.subTotal, equals(isNull));
+      expect(results.totalTaxes, equals(isNull));
+      expect(results.total, equals(0.0));
+      expect(results.grandTotal, equals(isNull));
+      expect(results.federalVatAmount, equals(isNull));
+      expect(results.regionalVatAmount, equals(isNull));
+      expect(results.vatAmount, equals(isNull));
+      expect(results.customVatAmount, equals(isNull));
+      expect(results.discountAmount, equals(isNull));
+      expect(results.discountRate, equals(isNull));
+      expect(results.tipAmount, equals(isNull));
+      expect(results.tipRate, equals(isNull));
+    });
+
+    test('value() handles combinations of discounts and tips', () {
+      calculator
+        ..priceBeforeVat = 100.0
+        ..vatRate = 0.10
+        ..discountAmount = 10.0
+        ..tipRate = 0.05;
+      final results = calculator.value();
+
+      expect(results.subTotal, equals(90.0));
+      expect(results.totalTaxes, equals(9.0));
+      expect(results.total, equals(99.0));
+      expect(results.grandTotal, equals(103.50));
+      expect(results.federalVatAmount, equals(0.0));
+      expect(results.regionalVatAmount, equals(0.0));
+      expect(results.vatAmount, equals(9.0));
+      expect(results.customVatAmount, equals(0.0));
+      expect(results.discountAmount, equals(10.0));
+      expect(results.discountRate, equals(0.10));
+      expect(results.tipAmount, equals(4.5));
+      expect(results.tipRate, equals(0.05));
+    });
   });
 }
