@@ -1,3 +1,8 @@
+## 0.0.21
+
+ - **FIX**: minor issues.
+ - **FEAT**: more tests.
+
 ## 0.0.20
 
  - **FEAT**: bunch of improvements.

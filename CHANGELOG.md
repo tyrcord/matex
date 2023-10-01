@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-10-01
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.15`](#matex_core---v0015)
+ - [`matex_data` - `v0.0.9`](#matex_data---v009)
+ - [`matex_financial` - `v0.0.21`](#matex_financial---v0021)
+
+---
+
+#### `matex_core` - `v0.0.15`
+
+ - **FEAT**: more tests.
+
+#### `matex_data` - `v0.0.9`
+
+ - **FEAT**: add findOneByCountryCode method.
+
+#### `matex_financial` - `v0.0.21`
+
+ - **FIX**: minor issues.
+ - **FEAT**: more tests.
+
+
 ## 2023-09-20
 
 ### Changes

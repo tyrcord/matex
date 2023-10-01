@@ -1,3 +1,7 @@
+## 0.0.9
+
+ - **FEAT**: add findOneByCountryCode method.
+
 ## 0.0.8
 
  - **FEAT**: bunch of improvements.

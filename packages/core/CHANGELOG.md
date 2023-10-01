@@ -1,3 +1,7 @@
+## 0.0.15
+
+ - **FEAT**: more tests.
+
 ## 0.0.14
 
  - **FEAT**: support latest fastyle_settings.
