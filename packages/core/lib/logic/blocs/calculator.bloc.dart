@@ -60,6 +60,16 @@ abstract class MatexCalculatorBloc<
   @protected
   Future<void> resetCalculator(D document);
 
+  /// An optional delegate for handling MatexCalculatorBloc-specific tasks.
+  /// This delegate can be used to load metadata, retrieve user information...
+  ///
+  /// If not provided, it will be `null`.
+  final MatexCalculatorBlocDelegate? delegate;
+
+  /// A callback function for showing an export PDF dialog in the UI.
+  /// This callback can be used to display a dialog for exporting PDF documents.
+  ///
+  /// If not provided, it will be `null`.
   final MatexPdfDialogCallback? showExportPdfDialog;
 
   /// Creates a new instance of the `MatexCalculatorBloc`.
@@ -79,6 +89,7 @@ abstract class MatexCalculatorBloc<
     super.debouceComputeEvents = false,
     super.debugLabel,
     this.showExportPdfDialog,
+    this.delegate,
   });
 
   /// Initializes the default calculator state.
@@ -138,11 +149,14 @@ abstract class MatexCalculatorBloc<
   @override
   @mustCallSuper
   Future<Map<String, dynamic>> loadMetadata() async {
-    return <String, dynamic>{
-      'userCurrencySymbol': getUserCurrencySymbol(),
-      'userCurrencyCode': getUserCurrencyCode(),
-      'userLocaleCode': getUserLocaleCode(),
-    };
+    final metadata = await delegate?.loadMetadata();
+
+    return metadata ??
+        <String, dynamic>{
+          'userCurrencySymbol': getUserCurrencySymbol(),
+          'userCurrencyCode': getUserCurrencyCode(),
+          'userLocaleCode': getUserLocaleCode(),
+        };
   }
 
   void listenOnDefaultValueChanges(String defaultValueKey, String stateKey) {
@@ -225,6 +239,7 @@ abstract class MatexCalculatorBloc<
     return null;
   }
 
+  /// Parses a string value to a double, returning 0.0 if the parsing fails.
   double parseFieldValueToDouble(String? value) {
     final parsedValue = parseStringToDouble(value);
 
@@ -232,23 +247,50 @@ abstract class MatexCalculatorBloc<
   }
 
   @protected
+
+  /// Retrieves the user's locale code.
+  ///
+  /// If the `delegate` provides a locale code, it will be returned. Otherwise,
+  /// it attempts to derive the locale code from the app settings and device
+  /// information.
   String getUserLocaleCode() {
-    final appInfo = FastAppInfoBloc.instance.currentState;
+    String? localeCode = delegate?.getUserLocaleCode();
 
-    final localeCode = toIos3166Code(
-      appSettingsBloc.currentState.languageCode,
-      countryCode: appInfo.deviceCountryCode,
-    );
+    if (localeCode == null) {
+      final appInfo = FastAppInfoBloc.instance.currentState;
 
-    return localeCode ?? kFastSettingsDefaultLanguageCode;
+      localeCode = toIos3166Code(
+        appSettingsBloc.currentState.languageCode,
+        countryCode: appInfo.deviceCountryCode,
+      );
+
+      return localeCode ?? kFastSettingsDefaultLanguageCode;
+    }
+
+    return localeCode;
   }
 
   @protected
+
+  /// Retrieves the user's currency code.
+  ///
+  /// If the `delegate` provides a currency code, it will be returned.
+  /// Otherwise, it retrieves the primary currency code from the app settings.
   String getUserCurrencyCode() {
-    return appSettingsBloc.currentState.primaryCurrencyCode.toUpperCase();
+    final currencyCode = delegate?.getUserCurrencyCode();
+
+    return currencyCode ??
+        appSettingsBloc.currentState.primaryCurrencyCode.toUpperCase();
   }
 
   @protected
+
+  /// Retrieves the user's currency symbol using the provided locale and
+  /// currency code.
+  ///
+  /// If the `delegate` provides a locale code, it is used. Otherwise,
+  /// the user's locale code is derived from the app settings and
+  /// device information.
   String getUserCurrencySymbol() {
     final format = NumberFormat.simpleCurrency(
       locale: getUserLocaleCode(),
@@ -259,6 +301,13 @@ abstract class MatexCalculatorBloc<
   }
 
   @protected
+
+  /// Localizes a percentage value according to the specified parameters.
+  ///
+  /// The `value` is the numeric value to be formatted as a percentage.
+  /// The `locale` parameter specifies the locale to use for formatting.
+  /// `minimumFractionDigits` and `maximumFractionDigits` control the precision
+  /// of the formatted percentage.
   String localizePercentage({
     num? value,
     String? locale,
@@ -273,6 +322,12 @@ abstract class MatexCalculatorBloc<
     );
   }
 
+  /// Localizes a numeric value according to the specified parameters.
+  ///
+  /// The `value` is the numeric value to be formatted.
+  /// The `locale` parameter specifies the locale to use for formatting.
+  /// `minimumFractionDigits` and `maximumFractionDigits` control the precision
+  /// of the formatted number.
   String localizeNumber({
     num? value,
     String? locale,
@@ -287,6 +342,14 @@ abstract class MatexCalculatorBloc<
     );
   }
 
+  /// Localizes a currency value according to the specified parameters.
+  ///
+  /// The `value` is the numeric value to be formatted as currency.
+  /// The `symbol` is the currency symbol to use (if not provided, it uses the
+  /// user's currency code).
+  /// The `locale` parameter specifies the locale to use for formatting.
+  /// `minimumFractionDigits` and `maximumFractionDigits` control the precision
+  /// of the formatted currency.
   String localizeCurrency({
     num? value,
     String? symbol,

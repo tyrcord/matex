@@ -3,11 +3,23 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:matex_core/core.dart';
 import 'package:tstore/tstore.dart';
 
 // Project imports:
 import 'package:matex_financial/blocs/keys/keys.dart';
 import 'package:matex_financial/blocs/vat_calculator.bloc.dart';
+
+class FrenchMatexVatCalculatorBlocDelegate with MatexCalculatorBlocDelegate {
+  @override
+  String? getUserCurrencyCode() => 'EUR';
+
+  @override
+  String? getUserLocaleCode() => 'fr';
+
+  @override
+  String? getUserCurrencySymbol() => '€';
+}
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -610,5 +622,32 @@ void main() async {
     expect(results.formattedTotalTaxes, '\$0.50');
   });
 
-  // TODO: test more formatted values
+  test('VAT calculation with language set to English and currency to USD',
+      () async {
+    final delegate = FrenchMatexVatCalculatorBlocDelegate();
+
+    final bloc = MatexVatCalculatorBloc(delegate: delegate);
+
+    bloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.priceBeforeVat,
+        value: '10',
+      ),
+    );
+
+    // Assuming a VAT rate of 5%
+    bloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.vatRate,
+        value: '5',
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    final results = await bloc.compute();
+
+    expect(results.formattedTotal, '10,50 €');
+    expect(results.formattedTotalTaxes, '0,50 €');
+  });
 }
