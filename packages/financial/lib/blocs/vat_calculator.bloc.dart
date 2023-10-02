@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:matex_core/core.dart';
+import 'package:matex_data/matex_data.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -37,6 +38,30 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
           debugLabel: 'MatexVatCalculatorBloc',
         ) {
     calculator = MatexVatCalculator();
+
+    subxList.add(appSettingsBloc.onData
+        .where((event) => isInitialized)
+        .distinct((previous, next) {
+      final previousValue = previous.countryCode;
+      final nextValue = next.countryCode;
+
+      return previousValue == nextValue;
+    }).listen(handleUserCountryChanges));
+  }
+
+  /// Handles user's country changes.
+  @protected
+  void handleUserCountryChanges(FastAppSettingsBlocState state) {
+    if (isInitialized) {
+      addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
+
+      if (state.countryCode == null) {
+        addEvent(FastCalculatorBlocEvent.patchValue(
+          key: MatexVatCalculatorBlocKey.vatRate,
+          value: '',
+        ));
+      }
+    }
   }
 
   @override
@@ -203,12 +228,34 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   Future<MatexVatCalculatorBlocState> resetCalculatorBlocState(
     MatexVatCalculatorBlocDocument document,
   ) async {
-    return _kDefaultVatBlocState;
+    return _kDefaultVatBlocState.copyWith(
+      fields: document.toFields(),
+    );
   }
 
   @override
   Future<MatexVatCalculatorBlocDocument>
       retrieveDefaultCalculatorDocument() async {
+    final appSettingState = appSettingsBloc.currentState;
+    final code = appSettingState.countryCode;
+
+    if (code != null) {
+      final future = MatexCountryBloc.instance.findOneByCountryCode(code);
+      final countryMetadata = await future;
+
+      if (countryMetadata != null &&
+          countryMetadata.vatRates != null &&
+          countryMetadata.vatRates!.isNotEmpty) {
+        final value = formatDecimal(
+          value: countryMetadata.vatRates![0],
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 0,
+        );
+
+        return MatexVatCalculatorBlocDocument(vatRate: value);
+      }
+    }
+
     return MatexVatCalculatorBlocDocument();
   }
 
