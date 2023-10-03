@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-10-03
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.16`](#matex_core---v0016)
+ - [`matex_data` - `v0.0.10`](#matex_data---v0010)
+ - [`matex_financial` - `v0.0.22`](#matex_financial---v0022)
+
+---
+
+#### `matex_core` - `v0.0.16`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.10`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.22`
+
+ - **FIX**: short positions.
+ - **FIX**: better user country handling.
+ - **FEAT**(PDF): support short position.
+ - **FEAT**: add support for short positions.
+ - **FEAT**: update dependencies.
+
+
 ## 2023-10-01
 
 ### Changes

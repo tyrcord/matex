@@ -1,3 +1,11 @@
+## 0.0.22
+
+ - **FIX**: short positions.
+ - **FIX**: better user country handling.
+ - **FEAT**(PDF): support short position.
+ - **FEAT**: add support for short positions.
+ - **FEAT**: update dependencies.
+
 ## 0.0.21
 
  - **FIX**: minor issues.
