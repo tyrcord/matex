@@ -319,6 +319,8 @@ void main() {
         expect(results.effectiveRisk, 193.2);
         expect(results.entryPriceWithSlippage, 148.5);
         expect(results.stopLossPriceWithSlippage, 156.55);
+        expect(results.stopLossPercent, closeTo(0.033, 1e-3));
+        expect(results.stopLossPercentWithSlippage, closeTo(0.0542, 1e-3));
       });
 
       test(
@@ -345,6 +347,7 @@ void main() {
         expect(results.takeProfitAmount, 386.4);
         expect(results.takeProfitPrice, 133.9);
         expect(results.takeProfitAmountAfterFee, 354.264);
+        expect(results.stopLossPercent, closeTo(0.033, 1e-3));
       });
 
       test(
@@ -364,6 +367,7 @@ void main() {
         expect(results.effectiveRisk, 200);
         expect(results.takeProfitPrice, 137.5);
         expect(results.takeProfitAmount, 500);
+        expect(results.stopLossPercent, closeTo(0.033, 1e-3));
       });
     });
   });

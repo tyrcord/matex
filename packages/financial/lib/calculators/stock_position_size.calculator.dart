@@ -188,11 +188,11 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       stopLossPercentWithSlippage: calculatePercentageDecrease(
         adjustedEntryPrice.toDouble(),
         adjustedStopLossPrice.toDouble(),
-      ),
+      ).abs(),
       stopLossPercent: calculatePercentageDecrease(
         entryPrice.toDouble(),
         stopLossPrice.toDouble(),
-      ),
+      ).abs(),
       toleratedRisk: calculateToleratedRisk(
         accountBalance,
         riskPercent,
