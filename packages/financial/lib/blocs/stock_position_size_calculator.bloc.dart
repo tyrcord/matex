@@ -3,6 +3,7 @@ import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:matex_core/core.dart';
+import 'package:matex_dart/matex_dart.dart' show MatexPosition;
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
@@ -153,6 +154,11 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
           stopLossAmount: '',
           riskPercent: '',
         );
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.position) {
+        return document.copyWith(
+          position: value.toString(),
+          stopLossPrice: '',
+        );
       }
     }
 
@@ -191,6 +197,8 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
       if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
         return patchRiskFieldType(value);
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.position) {
+        return patchPosition(value);
       }
     }
 
@@ -207,12 +215,13 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     final exitFees = toDecimal(document.exitFees) ?? dZero;
 
     calculator.setState(MatexStockPositionSizeCalculatorState(
+      isShortPosition: document.position == MatexPosition.short.name,
       stopLossAmount: parseStringToDouble(document.stopLossAmount),
       stopLossPrice: parseStringToDouble(document.stopLossPrice),
+      slippagePercent: (slippagePercent / dHundred).toDouble(),
       accountSize: parseStringToDouble(document.accountSize),
       entryPrice: parseStringToDouble(document.entryPrice),
       riskReward: parseStringToDouble(document.riskReward),
-      slippagePercent: (slippagePercent / dHundred).toDouble(),
       riskPercent: (riskPercent / dHundred).toDouble(),
       entryFees: (entryFees / dHundred).toDouble(),
       exitFees: (exitFees / dHundred).toDouble(),
@@ -253,6 +262,19 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       formattedShares: localizeNumber(value: 0),
       shares: 0,
     );
+  }
+
+  MatexStockPositionSizeCalculatorBlocState patchPosition(String value) {
+    final fields = currentState.fields.copyWith(
+      position: value.toString(),
+      stopLossPrice: '',
+    );
+
+    calculator
+      ..isShortPosition = value == MatexPosition.short.name
+      ..stopLossPrice = 0;
+
+    return currentState.copyWith(fields: fields);
   }
 
   MatexStockPositionSizeCalculatorBlocState patchAccountSize(String value) {

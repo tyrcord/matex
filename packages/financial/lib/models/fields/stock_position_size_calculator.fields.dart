@@ -1,4 +1,9 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:matex_dart/matex_dart.dart' show MatexPosition;
+import 'package:fastyle_forms/fastyle_forms.dart';
+
+final String _kDefaultRiskFieldType = FastAmountSwitchFieldType.percent.name;
+final String _kDefaultPosition = MatexPosition.long.name;
 
 class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
   late final String? accountSize;
@@ -11,6 +16,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
   late final String? entryFees;
   late final String? exitFees;
   late final String? riskFieldType;
+  late final String position;
 
   MatexStockPositionSizeCalculatorBlocFields({
     String? accountSize,
@@ -23,7 +29,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
     String? entryFees,
     String? exitFees,
     String? riskFieldType,
-  }) : riskFieldType = riskFieldType ?? 'percent' {
+    String? position,
+  }) {
     this.accountSize = assignValue(accountSize);
     this.entryPrice = assignValue(entryPrice);
     this.stopLossPrice = assignValue(stopLossPrice);
@@ -33,6 +40,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
     this.riskReward = assignValue(riskReward);
     this.entryFees = assignValue(entryFees);
     this.exitFees = assignValue(exitFees);
+    this.riskFieldType = riskFieldType ?? _kDefaultRiskFieldType;
+    this.position = position ?? _kDefaultPosition;
   }
 
   @override
@@ -50,6 +59,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
     String? entryFees,
     String? exitFees,
     String? riskFieldType,
+    String? position,
   }) {
     return MatexStockPositionSizeCalculatorBlocFields(
       accountSize: accountSize ?? this.accountSize,
@@ -62,6 +72,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
       riskFieldType: riskFieldType ?? this.riskFieldType,
+      position: position ?? this.position,
     );
   }
 
@@ -80,6 +91,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
       entryFees: model.entryFees,
       exitFees: model.exitFees,
       riskFieldType: model.riskFieldType,
+      position: model.position,
     );
   }
 
@@ -95,5 +107,6 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
         entryFees,
         exitFees,
         riskFieldType,
+        position,
       ];
 }
