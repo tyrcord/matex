@@ -428,6 +428,12 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
           value: '${localizeNumber(value: risk)}%',
         ),
       FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_position_text.tr(),
+        value: calculator.isShortPosition
+            ? FinanceLocaleKeys.finance_label_position_short.tr()
+            : FinanceLocaleKeys.finance_label_position_long.tr(),
+      ),
+      FastReportEntry(
         name: FinanceLocaleKeys.finance_label_entry_price_at.tr(),
         value: localizeCurrency(value: entryPrice),
       ),
