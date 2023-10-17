@@ -14,7 +14,7 @@ dependencies:
   # Public
   decimal: ^2.3.3
   pdf: ^3.10.4
-  cross_file: ^0.3.3+5
+  cross_file: ^0.3.3+6
   printing: ^5.11.0
   easy_localization: ^3.0.3
 
@@ -24,14 +24,14 @@ dependencies:
   matex_data: ^0.0.10
 
   # T
-  tbloc: ^0.21.5+1
-  t_helpers: ^0.0.31
-  tmodel: ^0.5.9+1
+  tbloc: ^0.21.5+2
+  t_helpers: ^0.0.32
+  tmodel: ^0.5.9+2
 
   # Lingua
   lingua_finance: ^0.0.17
   lingua_finance_stock: ^0.0.6
-  lingua_core: ^0.0.29
+  lingua_core: ^0.0.30
   lingua_settings: ^0.0.11
 
   # Fastyle
@@ -43,6 +43,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.3
-  tstore: ^0.8.16+1
+  tstore: ^0.8.17
   import_sorter: ^4.6.0
   dependency_validator: ^3.2.3
