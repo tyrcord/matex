@@ -20,6 +20,24 @@ class MatexStockPositionSizeCalculatorBlocDocument
   late final String? riskFieldType;
   late final String? position;
 
+  static MatexStockPositionSizeCalculatorBlocDocument fromJson(
+    Map<String, dynamic> json,
+  ) {
+    return MatexStockPositionSizeCalculatorBlocDocument(
+      accountSize: json['accountSize'] as String?,
+      entryPrice: json['entryPrice'] as String?,
+      stopLossPrice: json['stopLossPrice'] as String?,
+      stopLossAmount: json['stopLossAmount'] as String?,
+      slippagePercent: json['slippagePercent'] as String?,
+      riskPercent: json['riskPercent'] as String?,
+      riskReward: json['riskReward'] as String?,
+      entryFees: json['entryFees'] as String?,
+      exitFees: json['exitFees'] as String?,
+      riskFieldType: json['riskFieldType'] as String?,
+      position: json['position'] as String?,
+    );
+  }
+
   MatexStockPositionSizeCalculatorBlocDocument({
     String? accountSize,
     String? entryPrice,
@@ -98,23 +116,6 @@ class MatexStockPositionSizeCalculatorBlocDocument
   }
 
   @override
-  Map<String, dynamic> toJson() {
-    return {
-      'accountSize': accountSize,
-      'entryPrice': entryPrice,
-      'stopLossPrice': stopLossPrice,
-      'stopLossAmount': stopLossAmount,
-      'slippagePercent': slippagePercent,
-      'riskPercent': riskPercent,
-      'riskReward': riskReward,
-      'entryFees': entryFees,
-      'exitFees': exitFees,
-      'riskFieldType': riskFieldType,
-      'position': position,
-    };
-  }
-
-  @override
   MatexStockPositionSizeCalculatorBlocFields toFields() {
     return MatexStockPositionSizeCalculatorBlocFields(
       accountSize: accountSize,
@@ -131,22 +132,21 @@ class MatexStockPositionSizeCalculatorBlocDocument
     );
   }
 
-  static MatexStockPositionSizeCalculatorBlocDocument fromJson(
-    Map<String, dynamic> json,
-  ) {
-    return MatexStockPositionSizeCalculatorBlocDocument(
-      accountSize: json['accountSize'] as String?,
-      entryPrice: json['entryPrice'] as String?,
-      stopLossPrice: json['stopLossPrice'] as String?,
-      stopLossAmount: json['stopLossAmount'] as String?,
-      slippagePercent: json['slippagePercent'] as String?,
-      riskPercent: json['riskPercent'] as String?,
-      riskReward: json['riskReward'] as String?,
-      entryFees: json['entryFees'] as String?,
-      exitFees: json['exitFees'] as String?,
-      riskFieldType: json['riskFieldType'] as String?,
-      position: json['position'] as String?,
-    );
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'accountSize': accountSize,
+      'entryPrice': entryPrice,
+      'stopLossPrice': stopLossPrice,
+      'stopLossAmount': stopLossAmount,
+      'slippagePercent': slippagePercent,
+      'riskPercent': riskPercent,
+      'riskReward': riskReward,
+      'entryFees': entryFees,
+      'exitFees': exitFees,
+      'riskFieldType': riskFieldType,
+      'position': position,
+    };
   }
 
   @override

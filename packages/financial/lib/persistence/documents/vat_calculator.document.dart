@@ -1,8 +1,12 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:fastyle_forms/fastyle_forms.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+
+final String _kDefaulTipFieldType = FastAmountSwitchFieldType.percent.name;
+final String _kDefaulDiscountFieldType = FastAmountSwitchFieldType.amount.name;
 
 class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
   late final String? regionalVatRate;
@@ -57,8 +61,9 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
     this.vatRate = assignValue(vatRate);
     this.discountRate = assignValue(discountRate);
     this.tipAmount = assignValue(tipAmount);
-    this.tipFieldType = assignValue(tipFieldType);
-    this.discountFieldType = assignValue(discountFieldType);
+    this.tipFieldType = assignValue(tipFieldType) ?? _kDefaulTipFieldType;
+    this.discountFieldType =
+        assignValue(discountFieldType) ?? _kDefaulDiscountFieldType;
   }
 
   @override

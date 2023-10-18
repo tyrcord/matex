@@ -1,5 +1,9 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:fastyle_forms/fastyle_forms.dart';
+
+final String _kDefaulTipFieldType = FastAmountSwitchFieldType.percent.name;
+final String _kDefaulDiscountFieldType = FastAmountSwitchFieldType.amount.name;
 
 class MatexVatCalculatorBlocFields extends FastCalculatorFields {
   late final String? regionalVatRate;
@@ -26,8 +30,7 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields {
     String? tipAmount,
     String? tipFieldType,
     String? discountFieldType,
-  })  : tipFieldType = tipFieldType ?? 'percent',
-        discountFieldType = discountFieldType ?? 'amount' {
+  }) {
     this.regionalVatRate = assignValue(regionalVatRate);
     this.federalVatRate = assignValue(federalVatRate);
     this.discountAmount = assignValue(discountAmount);
@@ -37,6 +40,8 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields {
     this.vatRate = assignValue(vatRate);
     this.discountRate = assignValue(discountRate);
     this.tipAmount = assignValue(tipAmount);
+    this.tipFieldType = tipFieldType ?? _kDefaulTipFieldType;
+    this.discountFieldType = discountFieldType ?? _kDefaulDiscountFieldType;
   }
 
   @override
