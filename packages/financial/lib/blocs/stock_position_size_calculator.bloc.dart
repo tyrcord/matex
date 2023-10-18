@@ -123,27 +123,27 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   ) async {
     if (value is String) {
       if (key == MatexStockPositionSizeCalculatorBlocKey.accountSize) {
-        return document.copyWith(accountSize: value.toString());
+        return document.copyWith(accountSize: value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryPrice) {
-        return document.copyWith(entryPrice: value.toString());
+        return document.copyWith(entryPrice: value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.stopLossPrice) {
-        return document.copyWith(stopLossPrice: value.toString());
+        return document.copyWith(stopLossPrice: value);
       } else if (key ==
           MatexStockPositionSizeCalculatorBlocKey.stopLossAmount) {
-        return document.copyWith(stopLossAmount: value.toString());
+        return document.copyWith(stopLossAmount: value);
       } else if (key ==
           MatexStockPositionSizeCalculatorBlocKey.slippagePercent) {
-        return document.copyWith(slippagePercent: value.toString());
+        return document.copyWith(slippagePercent: value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskPercent) {
-        return document.copyWith(riskPercent: value.toString());
+        return document.copyWith(riskPercent: value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskReward) {
-        return document.copyWith(riskReward: value.toString());
+        return document.copyWith(riskReward: value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryFees) {
-        return document.copyWith(entryFees: value.toString());
+        return document.copyWith(entryFees: value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.exitFees) {
-        return document.copyWith(exitFees: value.toString());
+        return document.copyWith(exitFees: value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
-        return document.copyWith(riskFieldType: value.toString());
+        return document.copyWith(riskFieldType: value);
       }
     } else if (value is Enum) {
       value = describeEnum(value);
@@ -266,7 +266,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
   MatexStockPositionSizeCalculatorBlocState patchPosition(String value) {
     final fields = currentState.fields.copyWith(
-      position: value.toString(),
+      position: value,
       stopLossPrice: '',
     );
 
@@ -363,7 +363,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     String value,
   ) {
     final fields = currentState.fields.copyWith(
-      riskFieldType: value.toString(),
+      riskFieldType: value,
       stopLossAmount: '',
       riskPercent: '',
     );

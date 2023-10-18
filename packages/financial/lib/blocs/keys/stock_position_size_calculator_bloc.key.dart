@@ -10,4 +10,7 @@ class MatexStockPositionSizeCalculatorBlocKey {
   static const String exitFees = 'exitFees';
   static const String riskFieldType = 'riskFieldType';
   static const String position = 'position';
+
+  // Prevent the creation of instances of this class
+  MatexStockPositionSizeCalculatorBlocKey._();
 }

@@ -10,4 +10,7 @@ class MatexVatCalculatorBlocKey {
   static const String tipAmount = 'tipAmount';
   static const String tipFieldType = 'tipFieldType';
   static const String discountFieldType = 'discountFieldType';
+
+  // Prevent the creation of instances of this class
+  MatexVatCalculatorBlocKey._();
 }
