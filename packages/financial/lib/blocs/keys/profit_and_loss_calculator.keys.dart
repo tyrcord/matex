@@ -1,13 +1,13 @@
 class MatexProfitAndLossCalculatorBlocKey {
   // Define all the keys as static constants
-  static const String positionSize = 'positionSize';
-  static const String entryPrice = 'entryPrice';
-  static const String exitPrice = 'exitPrice';
+  static const String expectedUnitSales = 'expectedUnitSales';
+  static const String buyPrice = 'buyPrice';
+  static const String sellPrice = 'sellPrice';
   static const String fixedCosts = 'fixedCosts';
-  static const String entryFeePercentagePerUnit = 'entryFeePercentagePerUnit';
-  static const String entryFeeAmountPerUnit = 'entryFeeAmountPerUnit';
-  static const String exitFeeAmountPerUnit = 'exitFeeAmountPerUnit';
-  static const String exitFeePercentagePerUnit = 'exitFeePercentagePerUnit';
+  static const String buyFeeRate = 'buyFeeRate';
+  static const String buyFeeAmount = 'buyFeeAmount';
+  static const String sellFeeAmountPerUnit = 'sellFeeAmountPerUnit';
+  static const String sellFeeRatePerUnit = 'sellFeeRatePerUnit';
   static const String taxRate = 'taxRate';
   static const String entryFeeType = 'entryFeeType';
   static const String exitFeeType = 'exitFeeType';

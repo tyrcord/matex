@@ -10,7 +10,7 @@ final _kDefaultProfitAndLossBlocState = MatexProfitAndLossCalculatorBlocState(
 );
 
 class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
-    MatexStockPositionSizeCalculator,
+    MatexProfitAndLossCalculator,
     FastCalculatorBlocEvent,
     MatexProfitAndLossCalculatorBlocState,
     MatexProfitAndLossCalculatorDocument,
@@ -27,7 +27,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
           debugLabel: 'MatexProfitAndLossCalculatorBloc',
         ) {
     // FIXME: implement constructor
-    calculator = MatexStockPositionSizeCalculator();
+    calculator = MatexProfitAndLossCalculator();
   }
 
   @override
@@ -44,26 +44,24 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     dynamic value,
   ) async {
     if (value is String) {
-      if (key == MatexProfitAndLossCalculatorBlocKey.positionSize) {
-        return document.copyWith(positionSize: value.toString());
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.entryPrice) {
-        return document.copyWith(entryPrice: value.toString());
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.exitPrice) {
-        return document.copyWith(exitPrice: value.toString());
+      if (key == MatexProfitAndLossCalculatorBlocKey.expectedUnitSales) {
+        return document.copyWith(expectedUnitSales: value.toString());
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyPrice) {
+        return document.copyWith(buyPrice: value.toString());
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.sellPrice) {
+        return document.copyWith(sellPrice: value.toString());
       } else if (key == MatexProfitAndLossCalculatorBlocKey.fixedCosts) {
         return document.copyWith(fixedCosts: value.toString());
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyFeeRate) {
+        return document.copyWith(buyFeeRate: value.toString());
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyFeeAmount) {
+        return document.copyWith(buyFeeAmount: value.toString());
       } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.entryFeePercentagePerUnit) {
-        return document.copyWith(entryFeePercentagePerUnit: value.toString());
+          MatexProfitAndLossCalculatorBlocKey.sellFeeAmountPerUnit) {
+        return document.copyWith(sellFeeAmountPerUnit: value.toString());
       } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.entryFeeAmountPerUnit) {
-        return document.copyWith(entryFeeAmountPerUnit: value.toString());
-      } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.exitFeeAmountPerUnit) {
-        return document.copyWith(exitFeeAmountPerUnit: value.toString());
-      } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.exitFeePercentagePerUnit) {
-        return document.copyWith(exitFeePercentagePerUnit: value.toString());
+          MatexProfitAndLossCalculatorBlocKey.sellFeeRatePerUnit) {
+        return document.copyWith(sellFeeRatePerUnit: value.toString());
       } else if (key == MatexProfitAndLossCalculatorBlocKey.taxRate) {
         return document.copyWith(taxRate: value.toString());
       } else if (key == MatexProfitAndLossCalculatorBlocKey.entryFeeType) {
@@ -99,26 +97,24 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   ) async {
     if (value is String) {
       // Match the key with the appropriate patch function for String values.
-      if (key == MatexProfitAndLossCalculatorBlocKey.positionSize) {
-        return patchPositionSize(value);
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.entryPrice) {
-        return patchEntryPrice(value);
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.exitPrice) {
-        return patchExitPrice(value);
+      if (key == MatexProfitAndLossCalculatorBlocKey.expectedUnitSales) {
+        return patchExpectedUnitSales(value);
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyPrice) {
+        return patchBuyPrice(value);
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.sellPrice) {
+        return patchSellPrice(value);
       } else if (key == MatexProfitAndLossCalculatorBlocKey.fixedCosts) {
         return patchFixedCosts(value);
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyFeeRate) {
+        return patchBuyFeeRate(value);
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyFeeAmount) {
+        return patchBuyFeeAmount(value);
       } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.entryFeePercentagePerUnit) {
-        return patchEntryFeePercentagePerUnit(value);
+          MatexProfitAndLossCalculatorBlocKey.sellFeeAmountPerUnit) {
+        return patchSellFeeAmountPerUnit(value);
       } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.entryFeeAmountPerUnit) {
-        return patchEntryFeeAmountPerUnit(value);
-      } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.exitFeeAmountPerUnit) {
-        return patchExitFeeAmountPerUnit(value);
-      } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.exitFeePercentagePerUnit) {
-        return patchExitFeePercentagePerUnit(value);
+          MatexProfitAndLossCalculatorBlocKey.sellFeeRatePerUnit) {
+        return patchSellFeeRatePerUnit(value);
       } else if (key == MatexProfitAndLossCalculatorBlocKey.taxRate) {
         return patchTaxRate(value);
       }
@@ -169,26 +165,26 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     );
   }
 
-  MatexProfitAndLossCalculatorBlocState patchPositionSize(String value) {
+  MatexProfitAndLossCalculatorBlocState patchExpectedUnitSales(String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(positionSize: value);
-    // calculator.positionSize = dValue.toDouble();
+    final fields = currentState.fields.copyWith(expectedUnitSales: value);
+    // calculator.expectedUnitSales = dValue.toDouble();
 
     return currentState.copyWith(fields: fields); // Return the updated state.
   }
 
-  MatexProfitAndLossCalculatorBlocState patchEntryPrice(String value) {
+  MatexProfitAndLossCalculatorBlocState patchBuyPrice(String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(entryPrice: value);
-    calculator.entryPrice = dValue.toDouble();
+    final fields = currentState.fields.copyWith(buyPrice: value);
+    // calculator.buyPrice = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchExitPrice(String value) {
+  MatexProfitAndLossCalculatorBlocState patchSellPrice(String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(exitPrice: value);
-    // calculator.exitPrice = dValue.toDouble();
+    final fields = currentState.fields.copyWith(sellPrice: value);
+    // calculator.sellPrice = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
@@ -201,40 +197,35 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchEntryFeePercentagePerUnit(
-      String value) {
+  MatexProfitAndLossCalculatorBlocState patchBuyFeeRate(String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields =
-        currentState.fields.copyWith(entryFeePercentagePerUnit: value);
-    // calculator.entryFeePercentagePerUnit = dValue.toDouble();
+    final fields = currentState.fields.copyWith(buyFeeRate: value);
+    // calculator.buyFeeRate = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchEntryFeeAmountPerUnit(
-      String value) {
+  MatexProfitAndLossCalculatorBlocState patchBuyFeeAmount(String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(entryFeeAmountPerUnit: value);
-    // calculator.entryFeeAmountPerUnit = dValue.toDouble();
+    final fields = currentState.fields.copyWith(buyFeeAmount: value);
+    // calculator.buyFeeAmount = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchExitFeeAmountPerUnit(
+  MatexProfitAndLossCalculatorBlocState patchSellFeeAmountPerUnit(
       String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(exitFeeAmountPerUnit: value);
-    // calculator.exitFeeAmountPerUnit = dValue.toDouble();
+    final fields = currentState.fields.copyWith(sellFeeAmountPerUnit: value);
+    // calculator.sellFeeAmountPerUnit = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchExitFeePercentagePerUnit(
-      String value) {
+  MatexProfitAndLossCalculatorBlocState patchSellFeeRatePerUnit(String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields =
-        currentState.fields.copyWith(exitFeePercentagePerUnit: value);
-    // calculator.exitFeePercentagePerUnit = dValue.toDouble();
+    final fields = currentState.fields.copyWith(sellFeeRatePerUnit: value);
+    // calculator.sellFeeRatePerUnit = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }

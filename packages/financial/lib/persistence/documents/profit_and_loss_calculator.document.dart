@@ -6,39 +6,39 @@ final String _kDefaultEntryFeeType = FastAmountSwitchFieldType.amount.name;
 final String _kDefaultExitFeeType = FastAmountSwitchFieldType.amount.name;
 
 class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
-  late final String? positionSize;
-  late final String? entryPrice;
-  late final String? exitPrice;
+  late final String? expectedUnitSales;
+  late final String? buyPrice;
+  late final String? sellPrice;
   late final String? fixedCosts;
-  late final String? entryFeePercentagePerUnit;
-  late final String? entryFeeAmountPerUnit;
-  late final String? exitFeeAmountPerUnit;
-  late final String? exitFeePercentagePerUnit;
+  late final String? buyFeeRate;
+  late final String? buyFeeAmount;
+  late final String? sellFeeAmountPerUnit;
+  late final String? sellFeeRatePerUnit;
   late final String? taxRate;
   late final String? entryFeeType;
   late final String? exitFeeType;
 
   MatexProfitAndLossCalculatorDocument({
-    String? positionSize,
-    String? entryPrice,
-    String? exitPrice,
+    String? expectedUnitSales,
+    String? buyPrice,
+    String? sellPrice,
     String? fixedCosts,
-    String? entryFeePercentagePerUnit,
-    String? entryFeeAmountPerUnit,
-    String? exitFeeAmountPerUnit,
-    String? exitFeePercentagePerUnit,
+    String? buyFeeRate,
+    String? buyFeeAmount,
+    String? sellFeeAmountPerUnit,
+    String? sellFeeRatePerUnit,
     String? taxRate,
     String? entryFeeType,
     String? exitFeeType,
   }) {
-    this.positionSize = assignValue(positionSize);
-    this.entryPrice = assignValue(entryPrice);
-    this.exitPrice = assignValue(exitPrice);
+    this.expectedUnitSales = assignValue(expectedUnitSales);
+    this.buyPrice = assignValue(buyPrice);
+    this.sellPrice = assignValue(sellPrice);
     this.fixedCosts = assignValue(fixedCosts);
-    this.entryFeePercentagePerUnit = assignValue(entryFeePercentagePerUnit);
-    this.entryFeeAmountPerUnit = assignValue(entryFeeAmountPerUnit);
-    this.exitFeeAmountPerUnit = assignValue(exitFeeAmountPerUnit);
-    this.exitFeePercentagePerUnit = assignValue(exitFeePercentagePerUnit);
+    this.buyFeeRate = assignValue(buyFeeRate);
+    this.buyFeeAmount = assignValue(buyFeeAmount);
+    this.sellFeeAmountPerUnit = assignValue(sellFeeAmountPerUnit);
+    this.sellFeeRatePerUnit = assignValue(sellFeeRatePerUnit);
     this.taxRate = assignValue(taxRate);
     this.entryFeeType = assignValue(entryFeeType) ?? _kDefaultEntryFeeType;
     this.exitFeeType = assignValue(exitFeeType) ?? _kDefaultExitFeeType;
@@ -49,30 +49,27 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
 
   @override
   MatexProfitAndLossCalculatorDocument copyWith({
-    String? positionSize,
-    String? entryPrice,
-    String? exitPrice,
+    String? expectedUnitSales,
+    String? buyPrice,
+    String? sellPrice,
     String? fixedCosts,
-    String? entryFeePercentagePerUnit,
-    String? entryFeeAmountPerUnit,
-    String? exitFeeAmountPerUnit,
-    String? exitFeePercentagePerUnit,
+    String? buyFeeRate,
+    String? buyFeeAmount,
+    String? sellFeeAmountPerUnit,
+    String? sellFeeRatePerUnit,
     String? taxRate,
     String? entryFeeType,
     String? exitFeeType,
   }) {
     return MatexProfitAndLossCalculatorDocument(
-      positionSize: positionSize ?? this.positionSize,
-      entryPrice: entryPrice ?? this.entryPrice,
-      exitPrice: exitPrice ?? this.exitPrice,
+      expectedUnitSales: expectedUnitSales ?? this.expectedUnitSales,
+      buyPrice: buyPrice ?? this.buyPrice,
+      sellPrice: sellPrice ?? this.sellPrice,
       fixedCosts: fixedCosts ?? this.fixedCosts,
-      entryFeePercentagePerUnit:
-          entryFeePercentagePerUnit ?? this.entryFeePercentagePerUnit,
-      entryFeeAmountPerUnit:
-          entryFeeAmountPerUnit ?? this.entryFeeAmountPerUnit,
-      exitFeeAmountPerUnit: exitFeeAmountPerUnit ?? this.exitFeeAmountPerUnit,
-      exitFeePercentagePerUnit:
-          exitFeePercentagePerUnit ?? this.exitFeePercentagePerUnit,
+      buyFeeRate: buyFeeRate ?? this.buyFeeRate,
+      buyFeeAmount: buyFeeAmount ?? this.buyFeeAmount,
+      sellFeeAmountPerUnit: sellFeeAmountPerUnit ?? this.sellFeeAmountPerUnit,
+      sellFeeRatePerUnit: sellFeeRatePerUnit ?? this.sellFeeRatePerUnit,
       taxRate: taxRate ?? this.taxRate,
       exitFeeType: exitFeeType ?? this.exitFeeType,
       entryFeeType: entryFeeType ?? this.entryFeeType,
@@ -84,14 +81,14 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
     covariant MatexProfitAndLossCalculatorDocument model,
   ) {
     return copyWith(
-      positionSize: model.positionSize,
-      entryPrice: model.entryPrice,
-      exitPrice: model.exitPrice,
+      expectedUnitSales: model.expectedUnitSales,
+      buyPrice: model.buyPrice,
+      sellPrice: model.sellPrice,
       fixedCosts: model.fixedCosts,
-      entryFeePercentagePerUnit: model.entryFeePercentagePerUnit,
-      entryFeeAmountPerUnit: model.entryFeeAmountPerUnit,
-      exitFeeAmountPerUnit: model.exitFeeAmountPerUnit,
-      exitFeePercentagePerUnit: model.exitFeePercentagePerUnit,
+      buyFeeRate: model.buyFeeRate,
+      buyFeeAmount: model.buyFeeAmount,
+      sellFeeAmountPerUnit: model.sellFeeAmountPerUnit,
+      sellFeeRatePerUnit: model.sellFeeRatePerUnit,
       taxRate: model.taxRate,
       exitFeeType: model.exitFeeType,
       entryFeeType: model.entryFeeType,
@@ -101,14 +98,14 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
   @override
   MatexProfitAndLossCalculatorBlocFields toFields() {
     return MatexProfitAndLossCalculatorBlocFields(
-      positionSize: positionSize,
-      entryPrice: entryPrice,
-      exitPrice: exitPrice,
+      expectedUnitSales: expectedUnitSales,
+      buyPrice: buyPrice,
+      sellPrice: sellPrice,
       fixedCosts: fixedCosts,
-      entryFeePercentagePerUnit: entryFeePercentagePerUnit,
-      entryFeeAmountPerUnit: entryFeeAmountPerUnit,
-      exitFeeAmountPerUnit: exitFeeAmountPerUnit,
-      exitFeePercentagePerUnit: exitFeePercentagePerUnit,
+      buyFeeRate: buyFeeRate,
+      buyFeeAmount: buyFeeAmount,
+      sellFeeAmountPerUnit: sellFeeAmountPerUnit,
+      sellFeeRatePerUnit: sellFeeRatePerUnit,
       taxRate: taxRate,
       entryFeeType: entryFeeType,
       exitFeeType: exitFeeType,
@@ -118,16 +115,16 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
   @override
   Map<String, dynamic> toJson() {
     return {
-      'entryFeePercentagePerUnit': entryFeePercentagePerUnit,
+      'buyFeeRate': buyFeeRate,
       'entryFeeType': entryFeeType,
       'exitFeeType': exitFeeType,
-      'exitFeePercentagePerUnit': exitFeePercentagePerUnit,
-      'entryFeeAmountPerUnit': entryFeeAmountPerUnit,
-      'exitFeeAmountPerUnit': exitFeeAmountPerUnit,
-      'positionSize': positionSize,
+      'sellFeeRatePerUnit': sellFeeRatePerUnit,
+      'buyFeeAmount': buyFeeAmount,
+      'sellFeeAmountPerUnit': sellFeeAmountPerUnit,
+      'expectedUnitSales': expectedUnitSales,
       'fixedCosts': fixedCosts,
-      'entryPrice': entryPrice,
-      'exitPrice': exitPrice,
+      'buyPrice': buyPrice,
+      'sellPrice': sellPrice,
       'taxRate': taxRate,
     };
   }
@@ -138,28 +135,28 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
     return MatexProfitAndLossCalculatorDocument(
       entryFeeType: json['entryFeeType'] as String?,
       exitFeeType: json['exitFeeType'] as String?,
-      positionSize: json['positionSize'] as String?,
-      entryPrice: json['entryPrice'] as String?,
-      exitPrice: json['exitPrice'] as String?,
+      expectedUnitSales: json['expectedUnitSales'] as String?,
+      buyPrice: json['buyPrice'] as String?,
+      sellPrice: json['sellPrice'] as String?,
       fixedCosts: json['fixedCosts'] as String?,
-      entryFeePercentagePerUnit: json['entryFeePercentagePerUnit'] as String?,
-      entryFeeAmountPerUnit: json['entryFeeAmountPerUnit'] as String?,
-      exitFeeAmountPerUnit: json['exitFeeAmountPerUnit'] as String?,
-      exitFeePercentagePerUnit: json['exitFeePercentagePerUnit'] as String?,
+      buyFeeRate: json['buyFeeRate'] as String?,
+      buyFeeAmount: json['buyFeeAmount'] as String?,
+      sellFeeAmountPerUnit: json['sellFeeAmountPerUnit'] as String?,
+      sellFeeRatePerUnit: json['sellFeeRatePerUnit'] as String?,
       taxRate: json['taxRate'] as String?,
     );
   }
 
   @override
   List<Object?> get props => [
-        positionSize,
-        entryPrice,
-        exitPrice,
+        expectedUnitSales,
+        buyPrice,
+        sellPrice,
         fixedCosts,
-        entryFeePercentagePerUnit,
-        entryFeeAmountPerUnit,
-        exitFeeAmountPerUnit,
-        exitFeePercentagePerUnit,
+        buyFeeRate,
+        buyFeeAmount,
+        sellFeeAmountPerUnit,
+        sellFeeRatePerUnit,
         taxRate,
         entryFeeType,
         exitFeeType,

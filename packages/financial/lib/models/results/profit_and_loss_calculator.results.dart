@@ -2,25 +2,25 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
   final double? grossProfit;
-  final double? operatingExpenses;
+  final double? totalCosts;
   final double? netProfit;
   final double? returnOnInvestment;
   final double? breakEvenUnit;
 
   final String? formattedGrossProfit;
-  final String? formattedOperatingExpenses;
+  final String? formattedTotalCosts;
   final String? formattedNetProfit;
   final String? formattedReturnOnInvestment;
   final String? formattedBreakEvenUnit;
 
   const MatexProfitAndLossCalculatorBlocResults({
     this.grossProfit,
-    this.operatingExpenses,
+    this.totalCosts,
     this.netProfit,
     this.returnOnInvestment,
     this.breakEvenUnit,
     this.formattedGrossProfit,
-    this.formattedOperatingExpenses,
+    this.formattedTotalCosts,
     this.formattedNetProfit,
     this.formattedReturnOnInvestment,
     this.formattedBreakEvenUnit,
@@ -33,13 +33,13 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
   // ) {
   //   return MatexProfitAndLossCalculatorBlocResults(
   //     grossProfit: results.grossProfit,
-  //     operatingExpenses: results.operatingExpenses,
+  //     totalCosts: results.totalCosts,
   //     netProfit: results.netProfit,
   //     returnOnInvestment: results.returnOnInvestment,
   //     breakEvenUnit: results.breakEvenUnit,
   //     // formatted values
   //     formattedGrossProfit: results.formattedGrossProfit,
-  //     formattedOperatingExpenses: results.formattedOperatingExpenses,
+  //     formattedTotalCosts: results.formattedTotalCosts,
   //     formattedNetProfit: results.formattedNetProfit,
   //     formattedReturnOnInvestment: results.formattedReturnOnInvestment,
   //     formattedBreakEvenUnit: results.formattedBreakEvenUnit,
@@ -52,25 +52,24 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
   @override
   MatexProfitAndLossCalculatorBlocResults copyWith({
     double? grossProfit,
-    double? operatingExpenses,
+    double? totalCosts,
     double? netProfit,
     double? returnOnInvestment,
     double? breakEvenUnit,
     String? formattedGrossProfit,
-    String? formattedOperatingExpenses,
+    String? formattedTotalCosts,
     String? formattedNetProfit,
     String? formattedReturnOnInvestment,
     String? formattedBreakEvenUnit,
   }) {
     return MatexProfitAndLossCalculatorBlocResults(
       grossProfit: grossProfit ?? this.grossProfit,
-      operatingExpenses: operatingExpenses ?? this.operatingExpenses,
+      totalCosts: totalCosts ?? this.totalCosts,
       netProfit: netProfit ?? this.netProfit,
       returnOnInvestment: returnOnInvestment ?? this.returnOnInvestment,
       breakEvenUnit: breakEvenUnit ?? this.breakEvenUnit,
       formattedGrossProfit: formattedGrossProfit ?? this.formattedGrossProfit,
-      formattedOperatingExpenses:
-          formattedOperatingExpenses ?? this.formattedOperatingExpenses,
+      formattedTotalCosts: formattedTotalCosts ?? this.formattedTotalCosts,
       formattedNetProfit: formattedNetProfit ?? this.formattedNetProfit,
       formattedReturnOnInvestment:
           formattedReturnOnInvestment ?? this.formattedReturnOnInvestment,
@@ -85,12 +84,12 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
   ) {
     return copyWith(
       grossProfit: model.grossProfit,
-      operatingExpenses: model.operatingExpenses,
+      totalCosts: model.totalCosts,
       netProfit: model.netProfit,
       returnOnInvestment: model.returnOnInvestment,
       breakEvenUnit: model.breakEvenUnit,
       formattedGrossProfit: model.formattedGrossProfit,
-      formattedOperatingExpenses: model.formattedOperatingExpenses,
+      formattedTotalCosts: model.formattedTotalCosts,
       formattedNetProfit: model.formattedNetProfit,
       formattedReturnOnInvestment: model.formattedReturnOnInvestment,
       formattedBreakEvenUnit: model.formattedBreakEvenUnit,
@@ -100,12 +99,12 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
   @override
   List<Object?> get props => [
         grossProfit,
-        operatingExpenses,
+        totalCosts,
         netProfit,
         returnOnInvestment,
         breakEvenUnit,
         formattedGrossProfit,
-        formattedOperatingExpenses,
+        formattedTotalCosts,
         formattedNetProfit,
         formattedReturnOnInvestment,
         formattedBreakEvenUnit,
