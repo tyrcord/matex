@@ -68,17 +68,14 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
 
   @override
   MatexStockPositionSizeCalculatorResults value() {
-    if (!isValid) {
-      return defaultResults;
-    }
+    if (!isValid) return defaultResults;
 
+    final accountBalance = toDecimal(state.accountSize) ?? dZero;
+    final stopLossAmount = toDecimal(state.stopLossAmount) ?? dZero;
     Decimal riskPercent;
 
-    final accountBalance = toDecimal((state.accountSize ?? 0.0))!;
-    final stopLossAmount = toDecimal(state.stopLossAmount ?? 0)!;
-
     if (state.riskPercent != null && state.riskPercent != 0) {
-      riskPercent = toDecimal((state.riskPercent ?? 0.0))!;
+      riskPercent = toDecimal(state.riskPercent) ?? dZero;
     } else if (stopLossAmount != dZero && accountBalance != dZero) {
       riskPercent = decimalFromRational(
         stopLossAmount / accountBalance,
@@ -87,12 +84,12 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       return defaultResults;
     }
 
-    final slippage = toDecimal(state.slippagePercent ?? 0.0)!;
-    final entryPrice = toDecimal((state.entryPrice ?? 0.0))!;
-    final entryFees = toDecimal((state.entryFees ?? 0.0))!;
-    final exitFees = toDecimal((state.exitFees ?? 0.0))!;
-    final stopLossPrice = toDecimal((state.stopLossPrice ?? 0.0))!;
-    final riskReward = toDecimal((state.riskReward ?? 0.0))!;
+    final slippage = toDecimal(state.slippagePercent) ?? dZero;
+    final entryPrice = toDecimal(state.entryPrice) ?? dZero;
+    final entryFees = toDecimal(state.entryFees) ?? dZero;
+    final exitFees = toDecimal(state.exitFees) ?? dZero;
+    final stopLossPrice = toDecimal(state.stopLossPrice) ?? dZero;
+    final riskReward = toDecimal(state.riskReward) ?? dZero;
 
     final adjustedEntryPrice = adjustEntryPriceForSlippage(
       entryPrice,

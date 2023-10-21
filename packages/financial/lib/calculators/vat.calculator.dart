@@ -1,9 +1,9 @@
 // Package imports:
-import 'package:decimal/decimal.dart';
 import 'package:matex_core/core.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:t_helpers/helpers.dart';
 
 class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     MatexVatCalculatorResults> {
@@ -58,16 +58,13 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
 
   @override
   MatexVatCalculatorResults value() {
-    if (!isValid) {
-      return defaultResults;
-    }
+    if (!isValid) return defaultResults;
 
-    const d = Decimal.parse;
     final price = state.priceBeforeVat ?? 0.0;
-    final dFederalVatRate = d((state.federalVatRate ?? 0.0).toString());
-    final dRegionalVatRate = d((state.regionalVatRate ?? 0.0).toString());
-    final dVatRate = d((state.vatRate ?? 0.0).toString());
-    final dCustomVatRate = d((state.customVatRate ?? 0.0).toString());
+    final dFederalVatRate = toDecimal(state.federalVatRate) ?? dZero;
+    final dRegionalVatRate = toDecimal(state.regionalVatRate) ?? dZero;
+    final dVatRate = toDecimal(state.vatRate) ?? dZero;
+    final dCustomVatRate = toDecimal(state.customVatRate) ?? dZero;
 
     final dTotalVatRate =
         dFederalVatRate + dRegionalVatRate + dVatRate + dCustomVatRate;
