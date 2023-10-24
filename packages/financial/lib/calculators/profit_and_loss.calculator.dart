@@ -5,6 +5,11 @@ import 'package:t_helpers/helpers.dart';
 
 class MatexProfitAndLossCalculator extends MatexCalculator<
     MatexProfitAndLossCalculatorState, MatexProfitAndLossCalculatorResults> {
+  MatexProfitAndLossCalculator({
+    super.defaultState,
+    super.state,
+  }) : super(validators: profitAndLossValidators);
+
   @override
   MatexProfitAndLossCalculatorState initializeState() =>
       const MatexProfitAndLossCalculatorState();
@@ -14,39 +19,39 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
       initializeState();
 
   set expectedSaleUnits(double? value) {
-    state = state.copyWith(expectedSaleUnits: value);
+    setState(state.copyWith(expectedSaleUnits: value));
   }
 
   set buyingPrice(double? value) {
-    state = state.copyWith(buyingPrice: value);
+    setState(state.copyWith(buyingPrice: value));
   }
 
   set sellingPrice(double? value) {
-    state = state.copyWith(sellingPrice: value);
+    setState(state.copyWith(sellingPrice: value));
   }
 
   set operatingExpenses(double? value) {
-    state = state.copyWith(operatingExpenses: value);
+    setState(state.copyWith(operatingExpenses: value));
   }
 
   set buyingExpensePerUnitAmount(double? value) {
-    state = state.copyWith(buyingExpensePerUnitAmount: value);
+    setState(state.copyWith(buyingExpensePerUnitAmount: value));
   }
 
   set buyingExpensePerUnitRate(double? value) {
-    state = state.copyWith(buyingExpensePerUnitRate: value);
+    setState(state.copyWith(buyingExpensePerUnitRate: value));
   }
 
   set sellingExpensePerUnitAmount(double? value) {
-    state = state.copyWith(sellingExpensePerUnitAmount: value);
+    setState(state.copyWith(sellingExpensePerUnitAmount: value));
   }
 
   set sellingExpensePerUnitRate(double? value) {
-    state = state.copyWith(sellingExpensePerUnitRate: value);
+    setState(state.copyWith(sellingExpensePerUnitRate: value));
   }
 
   set taxRate(double? value) {
-    state = state.copyWith(taxRate: value);
+    setState(state.copyWith(taxRate: value));
   }
 
   static const defaultResults = MatexProfitAndLossCalculatorResults(

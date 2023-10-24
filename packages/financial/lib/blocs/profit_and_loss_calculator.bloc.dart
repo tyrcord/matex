@@ -30,36 +30,40 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
 
   @override
   Future<MatexProfitAndLossCalculatorBlocResults> compute() async {
-    final results = calculator.value();
+    if (await isCalculatorStateValid()) {
+      final results = calculator.value();
 
-    return MatexProfitAndLossCalculatorBlocResults(
-      formattedBreakEvenUnits: localizeNumber(value: results.breakEvenUnits),
-      formattedGrossProfit: localizeCurrency(value: results.grossProfit),
-      formattedNetProfit: localizeCurrency(value: results.netProfit),
-      formattedTaxAmount: localizeCurrency(value: results.taxAmount),
-      formattedRevenue: localizeCurrency(value: results.revenue),
-      formattedReturnOnInvestment: localizePercentage(
-        value: results.returnOnInvestment,
-      ),
-      formattedSellingExpenses: localizeCurrency(
-        value: results.sellingExpenses,
-      ),
-      formattedOperatingProfit: localizeCurrency(
-        value: results.operatingProfit,
-      ),
-      formattedCostOfGoodsSold: localizeCurrency(
-        value: results.costOfGoodsSold,
-      ),
-      returnOnInvestment: results.returnOnInvestment,
-      costOfGoodsSold: results.costOfGoodsSold,
-      operatingProfit: results.operatingProfit,
-      sellingExpenses: results.sellingExpenses,
-      breakEvenUnits: results.breakEvenUnits,
-      grossProfit: results.grossProfit,
-      taxAmount: results.taxAmount,
-      netProfit: results.netProfit,
-      revenue: results.revenue,
-    );
+      return MatexProfitAndLossCalculatorBlocResults(
+        formattedBreakEvenUnits: localizeNumber(value: results.breakEvenUnits),
+        formattedGrossProfit: localizeCurrency(value: results.grossProfit),
+        formattedNetProfit: localizeCurrency(value: results.netProfit),
+        formattedTaxAmount: localizeCurrency(value: results.taxAmount),
+        formattedRevenue: localizeCurrency(value: results.revenue),
+        formattedReturnOnInvestment: localizePercentage(
+          value: results.returnOnInvestment,
+        ),
+        formattedSellingExpenses: localizeCurrency(
+          value: results.sellingExpenses,
+        ),
+        formattedOperatingProfit: localizeCurrency(
+          value: results.operatingProfit,
+        ),
+        formattedCostOfGoodsSold: localizeCurrency(
+          value: results.costOfGoodsSold,
+        ),
+        returnOnInvestment: results.returnOnInvestment,
+        costOfGoodsSold: results.costOfGoodsSold,
+        operatingProfit: results.operatingProfit,
+        sellingExpenses: results.sellingExpenses,
+        breakEvenUnits: results.breakEvenUnits,
+        grossProfit: results.grossProfit,
+        taxAmount: results.taxAmount,
+        netProfit: results.netProfit,
+        revenue: results.revenue,
+      );
+    }
+
+    return retrieveDefaultResult();
   }
 
   @override
