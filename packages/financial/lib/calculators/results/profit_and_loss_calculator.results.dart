@@ -9,6 +9,7 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
   final double? sellingExpenses;
   final double? returnOnInvestment;
   final int? breakEvenUnits;
+  final double? costOfGoodsSold;
 
   const MatexProfitAndLossCalculatorResults({
     this.revenue,
@@ -19,6 +20,7 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
     this.sellingExpenses,
     this.returnOnInvestment,
     this.breakEvenUnits,
+    this.costOfGoodsSold,
   });
 
   @override
@@ -34,6 +36,7 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
     double? sellingExpenses,
     double? returnOnInvestment,
     int? breakEvenUnits,
+    double? costOfGoodsSold,
   }) {
     return MatexProfitAndLossCalculatorResults(
       returnOnInvestment: returnOnInvestment ?? this.returnOnInvestment,
@@ -44,6 +47,7 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
       netProfit: netProfit ?? this.netProfit,
       taxAmount: taxAmount ?? this.taxAmount,
       revenue: revenue ?? this.revenue,
+      costOfGoodsSold: costOfGoodsSold ?? this.costOfGoodsSold,
     );
   }
 
@@ -60,6 +64,7 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
       sellingExpenses: model.sellingExpenses,
       returnOnInvestment: model.returnOnInvestment,
       breakEvenUnits: model.breakEvenUnits,
+      costOfGoodsSold: model.costOfGoodsSold,
     );
   }
 
@@ -73,5 +78,6 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
         sellingExpenses,
         returnOnInvestment,
         breakEvenUnits,
+        costOfGoodsSold,
       ];
 }

@@ -83,12 +83,11 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
   }
 
 // Calculates gross profit
-  Decimal get grossProfit {
-    return revenue - costOfGoodsSold;
-  }
+  Decimal get grossProfit => revenue - costOfGoodsSold;
 
 // Calculates selling expenses
   Decimal get sellingExpenses {
+    final operatingExpenses = toDecimal(state.operatingExpenses) ?? dZero;
     final dExpectedSaleUnits = toDecimal(state.expectedSaleUnits) ?? dZero;
     // The selling price is not required for calculating selling expenses
     // so it is removed from here.
@@ -100,25 +99,23 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
     final dSellingPrice = toDecimal(state.sellingPrice) ??
         dZero; // This will be used for rate calculation.
 
-    // Calculate the total selling expense per unit, considering both a fixed amount and a rate.
+    // Calculate the total selling expense per unit, considering both a fixed
+    // amount and a rate.
     final totalSellingExpensePerUnitAmount = dSellingExpensePerUnitAmount;
     final totalSellingExpensePerUnitRate =
         dSellingPrice * dSellingExpensePerUnitRate;
 
-    // Total selling expenses are the sum of the fixed and rate-based expenses for each unit sold.
-    // It is not related to the selling price, so we should not add it to the selling price.
+    // Total selling expenses are the sum of the fixed and rate-based expenses
+    // for each unit sold. It is not related to the selling price,
+    // so we should not add it to the selling price.
     final totalSellingExpenses = dExpectedSaleUnits *
         (totalSellingExpensePerUnitAmount + totalSellingExpensePerUnitRate);
 
-    return totalSellingExpenses;
+    return totalSellingExpenses + operatingExpenses;
   }
 
 // Calculates operating profit
-  Decimal get operatingProfit {
-    final operatingExpenses = toDecimal(state.operatingExpenses) ?? dZero;
-
-    return grossProfit - sellingExpenses - operatingExpenses;
-  }
+  Decimal get operatingProfit => grossProfit - sellingExpenses;
 
 // Calculates the tax amount
   Decimal get taxAmount {
@@ -132,11 +129,7 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
     return operatingProfit - taxAmount;
   }
 
-  Decimal get totalExpenses {
-    final operatingExpenses = toDecimal(state.operatingExpenses) ?? dZero;
-
-    return sellingExpenses + operatingExpenses + costOfGoodsSold;
-  }
+  Decimal get totalExpenses => sellingExpenses + costOfGoodsSold;
 
 // Calculates the return on investment
   Decimal get returnOnInvestment {
@@ -188,6 +181,7 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
     if (!isValid) return defaultResults;
 
     return MatexProfitAndLossCalculatorResults(
+      costOfGoodsSold: costOfGoodsSold.toDouble(),
       revenue: revenue.toDouble(),
       grossProfit: grossProfit.toDouble(),
       operatingProfit: operatingProfit.toDouble(),

@@ -1,5 +1,4 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:flutter/foundation.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
@@ -26,16 +25,41 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
               dataProvider ?? MatexProfitAndLossCalculatorDataProvider(),
           debugLabel: 'MatexProfitAndLossCalculatorBloc',
         ) {
-    // FIXME: implement constructor
     calculator = MatexProfitAndLossCalculator();
   }
 
   @override
   Future<MatexProfitAndLossCalculatorBlocResults> compute() async {
-    // FIXME: implement compute
-    // final results = calculator.value();
+    final results = calculator.value();
 
-    return retrieveDefaultResult();
+    return MatexProfitAndLossCalculatorBlocResults(
+      formattedBreakEvenUnits: localizeNumber(value: results.breakEvenUnits),
+      formattedGrossProfit: localizeCurrency(value: results.grossProfit),
+      formattedNetProfit: localizeCurrency(value: results.netProfit),
+      formattedTaxAmount: localizeCurrency(value: results.taxAmount),
+      formattedRevenue: localizeCurrency(value: results.revenue),
+      formattedReturnOnInvestment: localizePercentage(
+        value: results.returnOnInvestment,
+      ),
+      formattedSellingExpenses: localizeCurrency(
+        value: results.sellingExpenses,
+      ),
+      formattedOperatingProfit: localizeCurrency(
+        value: results.operatingProfit,
+      ),
+      formattedCostOfGoodsSold: localizeCurrency(
+        value: results.costOfGoodsSold,
+      ),
+      returnOnInvestment: results.returnOnInvestment,
+      costOfGoodsSold: results.costOfGoodsSold,
+      operatingProfit: results.operatingProfit,
+      sellingExpenses: results.sellingExpenses,
+      breakEvenUnits: results.breakEvenUnits,
+      grossProfit: results.grossProfit,
+      taxAmount: results.taxAmount,
+      netProfit: results.netProfit,
+      revenue: results.revenue,
+    );
   }
 
   @override
@@ -44,46 +68,32 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     dynamic value,
   ) async {
     if (value is String) {
-      if (key == MatexProfitAndLossCalculatorBlocKey.expectedUnitSales) {
-        return document.copyWith(expectedUnitSales: value.toString());
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyPrice) {
-        return document.copyWith(buyPrice: value.toString());
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.sellPrice) {
-        return document.copyWith(sellPrice: value.toString());
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.fixedCosts) {
-        return document.copyWith(fixedCosts: value.toString());
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyFeeRate) {
-        return document.copyWith(buyFeeRate: value.toString());
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyFeeAmount) {
-        return document.copyWith(buyFeeAmount: value.toString());
+      if (key == MatexProfitAndLossCalculatorBlocKey.expectedSaleUnits) {
+        return document.copyWith(expectedSaleUnits: value.toString());
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyingPrice) {
+        return document.copyWith(buyingPrice: value.toString());
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.sellingPrice) {
+        return document.copyWith(sellingPrice: value.toString());
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.operatingExpenses) {
+        return document.copyWith(operatingExpenses: value.toString());
       } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.sellFeeAmountPerUnit) {
-        return document.copyWith(sellFeeAmountPerUnit: value.toString());
+          MatexProfitAndLossCalculatorBlocKey.buyingExpensePerUnitRate) {
+        return document.copyWith(buyingExpensePerUnitRate: value.toString());
       } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.sellFeeRatePerUnit) {
-        return document.copyWith(sellFeeRatePerUnit: value.toString());
+          MatexProfitAndLossCalculatorBlocKey.buyingExpensePerUnitAmount) {
+        return document.copyWith(buyingExpensePerUnitAmount: value.toString());
+      } else if (key ==
+          MatexProfitAndLossCalculatorBlocKey.sellingExpensePerUnitRate) {
+        return document.copyWith(sellingExpensePerUnitRate: value.toString());
+      } else if (key ==
+          MatexProfitAndLossCalculatorBlocKey.sellingExpensePerUnitAmount) {
+        return document.copyWith(sellingExpensePerUnitAmount: value.toString());
       } else if (key == MatexProfitAndLossCalculatorBlocKey.taxRate) {
         return document.copyWith(taxRate: value.toString());
       } else if (key == MatexProfitAndLossCalculatorBlocKey.entryFeeType) {
         return document.copyWith(entryFeeType: value.toString());
       } else if (key == MatexProfitAndLossCalculatorBlocKey.exitFeeType) {
         return document.copyWith(exitFeeType: value.toString());
-      }
-    } else if (value is Enum) {
-      value = describeEnum(value);
-
-      if (key == MatexProfitAndLossCalculatorBlocKey.entryFeeType) {
-        return document.copyWith(
-          entryFeeType: value.toString(),
-          //FIXME: You might want to reset other related fields depending on
-          // your logic
-        );
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.exitFeeType) {
-        return document.copyWith(
-          exitFeeType: value.toString(),
-          //FIXME: You might want to reset other related fields depending on
-          // your logic
-        );
       }
     }
 
@@ -96,41 +106,31 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     dynamic value,
   ) async {
     if (value is String) {
-      // Match the key with the appropriate patch function for String values.
-      if (key == MatexProfitAndLossCalculatorBlocKey.expectedUnitSales) {
-        return patchExpectedUnitSales(value);
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyPrice) {
-        return patchBuyPrice(value);
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.sellPrice) {
-        return patchSellPrice(value);
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.fixedCosts) {
-        return patchFixedCosts(value);
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyFeeRate) {
-        return patchBuyFeeRate(value);
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyFeeAmount) {
-        return patchBuyFeeAmount(value);
+      if (key == MatexProfitAndLossCalculatorBlocKey.expectedSaleUnits) {
+        return patchExpectedSaleUnits(value);
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyingPrice) {
+        return patchBuyingPrice(value);
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.sellingPrice) {
+        return patchSellingPrice(value);
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.operatingExpenses) {
+        return patchOperatingExpenses(value);
       } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.sellFeeAmountPerUnit) {
-        return patchSellFeeAmountPerUnit(value);
+          MatexProfitAndLossCalculatorBlocKey.buyingExpensePerUnitAmount) {
+        return patchBuyingExpensePerUnitAmount(value);
       } else if (key ==
-          MatexProfitAndLossCalculatorBlocKey.sellFeeRatePerUnit) {
-        return patchSellFeeRatePerUnit(value);
+          MatexProfitAndLossCalculatorBlocKey.buyingExpensePerUnitRate) {
+        return patchBuyingExpensePerUnitRate(value);
+      } else if (key ==
+          MatexProfitAndLossCalculatorBlocKey.sellingExpensePerUnitAmount) {
+        return patchSellingExpensePerUnitAmount(value);
+      } else if (key ==
+          MatexProfitAndLossCalculatorBlocKey.sellingExpensePerUnitRate) {
+        return patchSellingExpensePerUnitRate(value);
       } else if (key == MatexProfitAndLossCalculatorBlocKey.taxRate) {
         return patchTaxRate(value);
       }
-    } else if (value is Enum) {
-      // Handle the case where value is an Enum, using the describeEnum function to convert it.
-      value = describeEnum(value);
-
-      if (key == MatexProfitAndLossCalculatorBlocKey.entryFeeType) {
-        return patchEntryFeeType(value);
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.exitFeeType) {
-        return patchExitFeeType(value);
-      }
     }
 
-    // If the key does not match any of the expected keys, or if the value type isn't handled,
-    // return the current state without any modifications.
     return currentState;
   }
 
@@ -138,7 +138,33 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   Future<void> resetCalculator(
     MatexProfitAndLossCalculatorDocument document,
   ) async {
-    // FIXME: implement resetCalculator
+    final taxRate = toDecimal(document.taxRate) ?? dZero;
+    final sellingExpensePerUnitRate = toDecimal(
+          document.sellingExpensePerUnitRate,
+        ) ??
+        dZero;
+    final buyingExpensePerUnitRate = toDecimal(
+          document.buyingExpensePerUnitRate,
+        ) ??
+        dZero;
+
+    calculator.setState(MatexProfitAndLossCalculatorState(
+      expectedSaleUnits: parseStringToDouble(document.expectedSaleUnits),
+      operatingExpenses: parseStringToDouble(document.operatingExpenses),
+      sellingPrice: parseStringToDouble(document.sellingPrice),
+      buyingPrice: parseStringToDouble(document.buyingPrice),
+      taxRate: (taxRate / dHundred).toDouble(),
+      buyingExpensePerUnitAmount: parseStringToDouble(
+        document.buyingExpensePerUnitAmount,
+      ),
+      sellingExpensePerUnitAmount: parseStringToDouble(
+        document.sellingExpensePerUnitAmount,
+      ),
+      buyingExpensePerUnitRate:
+          (buyingExpensePerUnitRate / dHundred).toDouble(),
+      sellingExpensePerUnitRate:
+          (sellingExpensePerUnitRate / dHundred).toDouble(),
+    ));
   }
 
   @override
@@ -165,67 +191,82 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     );
   }
 
-  MatexProfitAndLossCalculatorBlocState patchExpectedUnitSales(String value) {
+  MatexProfitAndLossCalculatorBlocState patchExpectedSaleUnits(String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(expectedUnitSales: value);
-    // calculator.expectedUnitSales = dValue.toDouble();
-
-    return currentState.copyWith(fields: fields); // Return the updated state.
-  }
-
-  MatexProfitAndLossCalculatorBlocState patchBuyPrice(String value) {
-    final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(buyPrice: value);
-    // calculator.buyPrice = dValue.toDouble();
+    final fields = currentState.fields.copyWith(expectedSaleUnits: value);
+    calculator.expectedSaleUnits = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchSellPrice(String value) {
+  MatexProfitAndLossCalculatorBlocState patchBuyingPrice(String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(sellPrice: value);
-    // calculator.sellPrice = dValue.toDouble();
+    final fields = currentState.fields.copyWith(buyingPrice: value);
+    calculator.buyingPrice = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchFixedCosts(String value) {
+  MatexProfitAndLossCalculatorBlocState patchSellingPrice(String value) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(fixedCosts: value);
-    // calculator.fixedCosts = dValue.toDouble();
+    final fields = currentState.fields.copyWith(sellingPrice: value);
+    calculator.sellingPrice = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchBuyFeeRate(String value) {
+  MatexProfitAndLossCalculatorBlocState patchBuyingExpensePerUnitAmount(
+    String value,
+  ) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(buyFeeRate: value);
-    // calculator.buyFeeRate = dValue.toDouble();
+    final fields = currentState.fields.copyWith(
+      buyingExpensePerUnitAmount: value,
+    );
+    calculator.buyingExpensePerUnitAmount = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchBuyFeeAmount(String value) {
+  MatexProfitAndLossCalculatorBlocState patchBuyingExpensePerUnitRate(
+    String value,
+  ) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(buyFeeAmount: value);
-    // calculator.buyFeeAmount = dValue.toDouble();
+    final fields = currentState.fields.copyWith(
+      buyingExpensePerUnitRate: value,
+    );
+    calculator.buyingExpensePerUnitRate = (dValue / dHundred).toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchSellFeeAmountPerUnit(
-      String value) {
+  MatexProfitAndLossCalculatorBlocState patchSellingExpensePerUnitAmount(
+    String value,
+  ) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(sellFeeAmountPerUnit: value);
-    // calculator.sellFeeAmountPerUnit = dValue.toDouble();
+    final fields = currentState.fields.copyWith(
+      sellingExpensePerUnitAmount: value,
+    );
+    calculator.sellingExpensePerUnitAmount = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchSellFeeRatePerUnit(String value) {
+  MatexProfitAndLossCalculatorBlocState patchSellingExpensePerUnitRate(
+    String value,
+  ) {
     final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(sellFeeRatePerUnit: value);
-    // calculator.sellFeeRatePerUnit = dValue.toDouble();
+    final fields = currentState.fields.copyWith(
+      sellingExpensePerUnitRate: value,
+    );
+    calculator.sellingExpensePerUnitRate = (dValue / dHundred).toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexProfitAndLossCalculatorBlocState patchOperatingExpenses(String value) {
+    final dValue = toDecimal(value) ?? dZero;
+    final fields = currentState.fields.copyWith(operatingExpenses: value);
+    calculator.operatingExpenses = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
@@ -233,21 +274,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   MatexProfitAndLossCalculatorBlocState patchTaxRate(String value) {
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(taxRate: value);
-    // calculator.taxRate = dValue.toDouble();
-
-    return currentState.copyWith(fields: fields);
-  }
-
-  MatexProfitAndLossCalculatorBlocState patchEntryFeeType(String value) {
-    final fields = currentState.fields.copyWith(entryFeeType: value);
-    // calculator.entryFeeType = value;
-
-    return currentState.copyWith(fields: fields);
-  }
-
-  MatexProfitAndLossCalculatorBlocState patchExitFeeType(String value) {
-    final fields = currentState.fields.copyWith(exitFeeType: value);
-    // calculator.exitFeeType = value;
+    calculator.taxRate = (dValue / dHundred).toDouble();
 
     return currentState.copyWith(fields: fields);
   }

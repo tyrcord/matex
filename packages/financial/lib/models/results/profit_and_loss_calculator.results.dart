@@ -1,80 +1,95 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
+  final double? revenue;
   final double? grossProfit;
-  final double? totalCosts;
+  final double? operatingProfit;
+  final double? taxAmount;
+  final double? sellingExpenses;
   final double? netProfit;
   final double? returnOnInvestment;
-  final double? breakEvenUnit;
+  final int? breakEvenUnits;
+  final double? costOfGoodsSold;
 
+  final String? formattedRevenue;
   final String? formattedGrossProfit;
-  final String? formattedTotalCosts;
+  final String? formattedOperatingProfit;
+  final String? formattedTaxAmount;
+  final String? formattedSellingExpenses;
   final String? formattedNetProfit;
   final String? formattedReturnOnInvestment;
-  final String? formattedBreakEvenUnit;
+  final String? formattedBreakEvenUnits;
+  final String? formattedCostOfGoodsSold;
 
   const MatexProfitAndLossCalculatorBlocResults({
+    this.revenue,
     this.grossProfit,
-    this.totalCosts,
+    this.operatingProfit,
+    this.taxAmount,
+    this.sellingExpenses,
     this.netProfit,
     this.returnOnInvestment,
-    this.breakEvenUnit,
+    this.breakEvenUnits,
+    this.costOfGoodsSold,
+    this.formattedRevenue,
     this.formattedGrossProfit,
-    this.formattedTotalCosts,
+    this.formattedOperatingProfit,
+    this.formattedTaxAmount,
+    this.formattedSellingExpenses,
     this.formattedNetProfit,
     this.formattedReturnOnInvestment,
-    this.formattedBreakEvenUnit,
+    this.formattedBreakEvenUnits,
+    this.formattedCostOfGoodsSold,
   });
-
-  //FIXME: implement fromCalculatorResults
-
-  // static MatexProfitAndLossCalculatorBlocResults fromCalculatorResults(
-  //   FastCalculatorResults results,
-  // ) {
-  //   return MatexProfitAndLossCalculatorBlocResults(
-  //     grossProfit: results.grossProfit,
-  //     totalCosts: results.totalCosts,
-  //     netProfit: results.netProfit,
-  //     returnOnInvestment: results.returnOnInvestment,
-  //     breakEvenUnit: results.breakEvenUnit,
-  //     // formatted values
-  //     formattedGrossProfit: results.formattedGrossProfit,
-  //     formattedTotalCosts: results.formattedTotalCosts,
-  //     formattedNetProfit: results.formattedNetProfit,
-  //     formattedReturnOnInvestment: results.formattedReturnOnInvestment,
-  //     formattedBreakEvenUnit: results.formattedBreakEvenUnit,
-  //   );
-  // }
 
   @override
   MatexProfitAndLossCalculatorBlocResults clone() => copyWith();
 
   @override
   MatexProfitAndLossCalculatorBlocResults copyWith({
+    double? revenue,
     double? grossProfit,
-    double? totalCosts,
+    double? operatingProfit,
+    double? taxAmount,
+    double? sellingExpenses,
     double? netProfit,
     double? returnOnInvestment,
-    double? breakEvenUnit,
+    int? breakEvenUnits,
+    double? costOfGoodsSold,
+    String? formattedRevenue,
     String? formattedGrossProfit,
-    String? formattedTotalCosts,
+    String? formattedOperatingProfit,
+    String? formattedTaxAmount,
+    String? formattedSellingExpenses,
     String? formattedNetProfit,
     String? formattedReturnOnInvestment,
-    String? formattedBreakEvenUnit,
+    String? formattedBreakEvenUnits,
+    String? formattedCostOfGoodsSold,
   }) {
     return MatexProfitAndLossCalculatorBlocResults(
+      revenue: revenue ?? this.revenue,
       grossProfit: grossProfit ?? this.grossProfit,
-      totalCosts: totalCosts ?? this.totalCosts,
+      operatingProfit: operatingProfit ?? this.operatingProfit,
+      taxAmount: taxAmount ?? this.taxAmount,
+      sellingExpenses: sellingExpenses ?? this.sellingExpenses,
       netProfit: netProfit ?? this.netProfit,
       returnOnInvestment: returnOnInvestment ?? this.returnOnInvestment,
-      breakEvenUnit: breakEvenUnit ?? this.breakEvenUnit,
+      breakEvenUnits: breakEvenUnits ?? this.breakEvenUnits,
+      costOfGoodsSold: costOfGoodsSold ?? this.costOfGoodsSold,
+      formattedRevenue: formattedRevenue ?? this.formattedRevenue,
       formattedGrossProfit: formattedGrossProfit ?? this.formattedGrossProfit,
-      formattedTotalCosts: formattedTotalCosts ?? this.formattedTotalCosts,
+      formattedOperatingProfit:
+          formattedOperatingProfit ?? this.formattedOperatingProfit,
+      formattedTaxAmount: formattedTaxAmount ?? this.formattedTaxAmount,
+      formattedSellingExpenses:
+          formattedSellingExpenses ?? this.formattedSellingExpenses,
       formattedNetProfit: formattedNetProfit ?? this.formattedNetProfit,
       formattedReturnOnInvestment:
           formattedReturnOnInvestment ?? this.formattedReturnOnInvestment,
-      formattedBreakEvenUnit:
-          formattedBreakEvenUnit ?? this.formattedBreakEvenUnit,
+      formattedBreakEvenUnits:
+          formattedBreakEvenUnits ?? this.formattedBreakEvenUnits,
+      formattedCostOfGoodsSold:
+          formattedCostOfGoodsSold ?? this.formattedCostOfGoodsSold,
     );
   }
 
@@ -83,30 +98,46 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
     covariant MatexProfitAndLossCalculatorBlocResults model,
   ) {
     return copyWith(
+      revenue: model.revenue,
       grossProfit: model.grossProfit,
-      totalCosts: model.totalCosts,
+      operatingProfit: model.operatingProfit,
+      taxAmount: model.taxAmount,
+      sellingExpenses: model.sellingExpenses,
       netProfit: model.netProfit,
       returnOnInvestment: model.returnOnInvestment,
-      breakEvenUnit: model.breakEvenUnit,
+      breakEvenUnits: model.breakEvenUnits,
+      costOfGoodsSold: model.costOfGoodsSold,
+      formattedRevenue: model.formattedRevenue,
       formattedGrossProfit: model.formattedGrossProfit,
-      formattedTotalCosts: model.formattedTotalCosts,
+      formattedOperatingProfit: model.formattedOperatingProfit,
+      formattedTaxAmount: model.formattedTaxAmount,
+      formattedSellingExpenses: model.formattedSellingExpenses,
       formattedNetProfit: model.formattedNetProfit,
       formattedReturnOnInvestment: model.formattedReturnOnInvestment,
-      formattedBreakEvenUnit: model.formattedBreakEvenUnit,
+      formattedBreakEvenUnits: model.formattedBreakEvenUnits,
+      formattedCostOfGoodsSold: model.formattedCostOfGoodsSold,
     );
   }
 
   @override
   List<Object?> get props => [
+        revenue,
         grossProfit,
-        totalCosts,
+        operatingProfit,
+        taxAmount,
+        sellingExpenses,
         netProfit,
         returnOnInvestment,
-        breakEvenUnit,
+        breakEvenUnits,
+        costOfGoodsSold,
+        formattedRevenue,
         formattedGrossProfit,
-        formattedTotalCosts,
+        formattedOperatingProfit,
+        formattedTaxAmount,
+        formattedSellingExpenses,
         formattedNetProfit,
         formattedReturnOnInvestment,
-        formattedBreakEvenUnit,
+        formattedBreakEvenUnits,
+        formattedCostOfGoodsSold,
       ];
 }

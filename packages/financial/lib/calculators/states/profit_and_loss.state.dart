@@ -5,10 +5,10 @@ class MatexProfitAndLossCalculatorState extends MatexCalculatorState {
   final double? buyingPrice;
   final double? sellingPrice;
   final double? operatingExpenses;
+  final double? buyingExpensePerUnitAmount;
   final double? buyingExpensePerUnitRate;
   final double? sellingExpensePerUnitAmount;
   final double? sellingExpensePerUnitRate;
-  final double? buyingExpensePerUnitAmount;
   final double? taxRate;
 
   const MatexProfitAndLossCalculatorState({

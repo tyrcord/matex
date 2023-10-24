@@ -1,9 +1,6 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
-// Project imports:
-import 'package:matex_financial/financial.dart';
-
 class MatexVatCalculatorBlocResults extends FastCalculatorResults {
   final double? totalTaxes;
   final double? total;
@@ -56,37 +53,6 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     this.formattedRegionalVatAmount,
     this.formattedVatAmount,
   });
-
-  factory MatexVatCalculatorBlocResults.fromCalculatorResults(
-    MatexVatCalculatorResults results,
-  ) {
-    return MatexVatCalculatorBlocResults(
-      totalTaxes: results.totalTaxes,
-      total: results.total,
-      tipAmount: results.tipAmount,
-      grandTotal: results.grandTotal,
-      tipRate: results.tipRate,
-      subTotal: results.subTotal,
-      discountAmount: results.discountAmount,
-      discountRate: results.discountRate,
-      customVatAmount: results.customVatAmount,
-      federalVatAmount: results.federalVatAmount,
-      regionalVatAmount: results.regionalVatAmount,
-      vatAmount: results.vatAmount,
-      formattedTotalTaxes: results.totalTaxes?.toString(),
-      formattedTotal: results.total?.toString(),
-      formattedTipAmount: results.tipAmount?.toString(),
-      formattedGrandTotal: results.grandTotal?.toString(),
-      formattedTipRate: results.tipRate?.toString(),
-      formattedSubTotal: results.subTotal?.toString(),
-      formattedDiscountAmount: results.discountAmount?.toString(),
-      formattedDiscountRate: results.discountRate?.toString(),
-      formattedCustomVatAmount: results.customVatAmount?.toString(),
-      formattedFederalVatAmount: results.federalVatAmount?.toString(),
-      formattedRegionalVatAmount: results.regionalVatAmount?.toString(),
-      formattedVatAmount: results.vatAmount?.toString(),
-    );
-  }
 
   @override
   MatexVatCalculatorBlocResults clone() => copyWith();

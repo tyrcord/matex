@@ -1,5 +1,4 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:matex_financial/financial.dart';
 
 class MatexStockPositionSizeCalculatorBlocResults
     extends FastCalculatorResults {
@@ -78,54 +77,6 @@ class MatexStockPositionSizeCalculatorBlocResults
     this.takeProfitAmountAfterFee,
     this.formattedTakeProfitAmountAfterFee,
   });
-
-  factory MatexStockPositionSizeCalculatorBlocResults.fromCalculatorResults(
-    MatexStockPositionSizeCalculatorResults results,
-  ) {
-    return MatexStockPositionSizeCalculatorBlocResults(
-      shares: results.shares,
-      positionAmount: results.positionAmount,
-      involvedCapital: results.involvedCapital,
-      takeProfitAmount: results.takeProfitAmount,
-      takeProfitPrice: results.takeProfitPrice,
-      toleratedRisk: results.toleratedRisk,
-      effectiveRisk: results.effectiveRisk,
-      stopLossPercent: results.stopLossPercent,
-      stopLossPercentWithSlippage: results.stopLossPercentWithSlippage,
-      stopLossPriceWithSlippage: results.stopLossPriceWithSlippage,
-      entryPriceWithSlippage: results.entryPriceWithSlippage,
-      riskPercent: results.riskPercent,
-      totalFeesForLossPosition: results.totalFeesForLossPosition,
-      entryFeeAmount: results.entryFeeAmount,
-      stopLossFeeAmount: results.stopLossFeeAmount,
-      takeProfitFeeAmount: results.takeProfitFeeAmount,
-      formattedShares: results.shares?.toString(),
-      formattedPositionAmount: results.positionAmount?.toString(),
-      formattedInvolvedCapital: results.involvedCapital?.toString(),
-      formattedTakeProfitAmount: results.takeProfitAmount?.toString(),
-      formattedTakeProfitPrice: results.takeProfitPrice?.toString(),
-      formattedToleratedRisk: results.toleratedRisk?.toString(),
-      formattedEffectiveRisk: results.effectiveRisk?.toString(),
-      formattedStopLossPercent: results.stopLossPercent?.toString(),
-      formattedStopLossPercentWithSlippage:
-          results.stopLossPercentWithSlippage?.toString(),
-      formattedStopLossPriceWithSlippage:
-          results.stopLossPriceWithSlippage?.toString(),
-      formattedEntryPriceWithSlippage:
-          results.entryPriceWithSlippage?.toString(),
-      formattedRiskPercent: results.riskPercent?.toString(),
-      formattedTotalFeesForLossPosition:
-          results.totalFeesForLossPosition?.toString(),
-      formattedEntryFeeAmount: results.entryFeeAmount?.toString(),
-      formattedStopLossFeeAmount: results.stopLossFeeAmount?.toString(),
-      formattedTakeProfitFeeAmount: results.takeProfitFeeAmount?.toString(),
-      totalFeesForProfitPosition: null,
-      formattedTotalFeesForProfitPosition: null,
-      takeProfitAmountAfterFee: results.takeProfitAmountAfterFee,
-      formattedTakeProfitAmountAfterFee:
-          results.takeProfitAmountAfterFee?.toString(),
-    );
-  }
 
   @override
   MatexStockPositionSizeCalculatorBlocResults clone() => copyWith();
