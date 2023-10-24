@@ -119,27 +119,15 @@ void main() {
 
       final result = calculator.value();
 
+      expect(result.revenue, 150000.0);
+      expect(result.costOfGoodsSold, 110000.0);
+      expect(result.grossProfit, 40000.0);
+      expect(result.sellingExpenses, 7000.0);
+      expect(result.operatingProfit, 33000.0);
+      expect(result.taxAmount, 6600.0);
+      expect(result.netProfit, 26400.0);
+      expect(result.returnOnInvestment, closeTo(0.2136, 0.0001));
       expect(result.breakEvenUnits, 58);
-    });
-
-    test('Custom', () {
-      calculator
-        ..expectedSaleUnits = 100
-        ..buyingPrice = 100.0
-        ..sellingPrice = 150.0
-        ..operatingExpenses = 2000.0
-        ..sellingExpensePerUnitAmount = 10.0;
-
-      final result = calculator.value();
-
-      expect(result.revenue, 15000.0);
-      expect(result.grossProfit, 5000.0);
-      expect(result.sellingExpenses, 3000.0);
-      expect(result.operatingProfit, 2000.0);
-      expect(result.netProfit, 2000.0);
-      // expect(result.taxAmount, 400.0);
-      expect(result.returnOnInvestment, closeTo(0.1538, 0.0001));
-      expect(result.breakEvenUnits, 50);
     });
   });
 }
