@@ -1,11 +1,15 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:lingua_finance/generated/locale_keys.g.dart';
+import 'package:matex_core/core.dart';
 import 'package:matex_dart/matex_dart.dart' show MatexPosition;
 import 'package:fastyle_forms/fastyle_forms.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 final String _kDefaultRiskFieldType = FastAmountSwitchFieldType.percent.name;
 final String _kDefaultPosition = MatexPosition.long.name;
 
-class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
+class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
+    with MatexCalculatorFormatterMixin {
   late final String? accountSize;
   late final String? entryPrice;
   late final String? stopLossPrice;
@@ -17,6 +21,66 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
   late final String? exitFees;
   late final String? riskFieldType;
   late final String position;
+
+  String get formattedAccountSize {
+    final accountBalance = parseFieldValueToDouble(accountSize);
+
+    return localizeCurrency(value: accountBalance);
+  }
+
+  String get formattedEntryPrice {
+    final entryPriceValue = parseFieldValueToDouble(entryPrice);
+
+    return localizeCurrency(value: entryPriceValue);
+  }
+
+  String get formattedStopLossPrice {
+    final stopLossPriceValue = parseFieldValueToDouble(stopLossPrice);
+
+    return localizeCurrency(value: stopLossPriceValue);
+  }
+
+  String get formattedStopLossAmount {
+    final stopLossAmountValue = parseFieldValueToDouble(stopLossAmount);
+
+    return localizeCurrency(value: stopLossAmountValue);
+  }
+
+  String get formattedSlippagePercent {
+    final slippagePercentValue = parseFieldValueToDouble(slippagePercent);
+
+    return '${localizeNumber(value: slippagePercentValue)}%';
+  }
+
+  String get formattedRiskPercent {
+    final riskPercentValue = parseFieldValueToDouble(riskPercent);
+
+    return '${localizeNumber(value: riskPercentValue)}%';
+  }
+
+  String get formattedRiskReward {
+    final riskRewardValue = parseFieldValueToDouble(riskReward);
+
+    return '${localizeNumber(value: riskRewardValue)}:1';
+  }
+
+  String get formattedEntryFees {
+    final entryFeesValue = parseFieldValueToDouble(entryFees);
+
+    return '${localizeNumber(value: entryFeesValue)}%';
+  }
+
+  String get formattedExitFees {
+    final exitFeesValue = parseFieldValueToDouble(exitFees);
+
+    return '${localizeNumber(value: exitFeesValue)}%';
+  }
+
+  String get formattedPosition {
+    return position == MatexPosition.short.name
+        ? FinanceLocaleKeys.finance_label_position_short.tr()
+        : FinanceLocaleKeys.finance_label_position_long.tr();
+  }
 
   MatexStockPositionSizeCalculatorBlocFields({
     String? accountSize,
@@ -30,6 +94,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
     String? exitFees,
     String? riskFieldType,
     String? position,
+    MatexCalculatorBlocDelegate? delegate,
   }) {
     this.accountSize = assignValue(accountSize);
     this.entryPrice = assignValue(entryPrice);
@@ -42,6 +107,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
     this.exitFees = assignValue(exitFees);
     this.riskFieldType = riskFieldType ?? _kDefaultRiskFieldType;
     this.position = position ?? _kDefaultPosition;
+    this.delegate = delegate;
   }
 
   @override
@@ -60,6 +126,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
     String? exitFees,
     String? riskFieldType,
     String? position,
+    MatexCalculatorBlocDelegate? delegate,
   }) {
     return MatexStockPositionSizeCalculatorBlocFields(
       accountSize: accountSize ?? this.accountSize,
@@ -73,6 +140,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
       exitFees: exitFees ?? this.exitFees,
       riskFieldType: riskFieldType ?? this.riskFieldType,
       position: position ?? this.position,
+      delegate: delegate,
     );
   }
 
@@ -92,6 +160,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
       exitFees: model.exitFees,
       riskFieldType: model.riskFieldType,
       position: model.position,
+      delegate: model.delegate,
     );
   }
 
@@ -108,5 +177,6 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields {
         exitFees,
         riskFieldType,
         position,
+        delegate,
       ];
 }

@@ -5,11 +5,8 @@ import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/foundation.dart';
 
 // Package imports:
-import 'package:decimal/decimal.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:t_helpers/helpers.dart';
 import 'package:share_plus/share_plus.dart';
 
 // Project imports:
@@ -34,7 +31,8 @@ abstract class MatexCalculatorBloc<
         S extends FastCalculatorBlocState,
         D extends FastCalculatorDocument,
         R extends FastCalculatorResults>
-    extends HydratedFastCalculatorBloc<E, S, D, R> {
+    extends HydratedFastCalculatorBloc<E, S, D, R>
+    with MatexCalculatorFormatterMixin {
   @protected
   late final C calculator;
 
@@ -60,12 +58,6 @@ abstract class MatexCalculatorBloc<
   @protected
   Future<void> resetCalculator(D document);
 
-  /// An optional delegate for handling MatexCalculatorBloc-specific tasks.
-  /// This delegate can be used to load metadata, retrieve user information...
-  ///
-  /// If not provided, it will be `null`.
-  final MatexCalculatorBlocDelegate? delegate;
-
   /// A callback function for showing an export PDF dialog in the UI.
   /// This callback can be used to display a dialog for exporting PDF documents.
   ///
@@ -89,8 +81,10 @@ abstract class MatexCalculatorBloc<
     super.debouceComputeEvents = false,
     super.debugLabel,
     this.showExportPdfDialog,
-    this.delegate,
-  });
+    MatexCalculatorBlocDelegate? delegate,
+  }) {
+    this.delegate = delegate;
+  }
 
   /// Initializes the default calculator state.
   ///
@@ -222,147 +216,5 @@ abstract class MatexCalculatorBloc<
 
   Future<Uint8List> toPdf(BuildContext context) async {
     throw UnimplementedError('toPdf() is not implemented');
-  }
-
-  /// Parses a string to a double.
-  ///
-  /// The `value` parameter is the string to parse.
-  ///
-  /// Returns the parsed double, or `null` if the string could not be parsed.
-  double? parseStringToDouble(String? value) {
-    if (value is String && value.isNotEmpty) {
-      final dValue = Decimal.tryParse(value);
-
-      return dValue?.toDouble();
-    }
-
-    return null;
-  }
-
-  /// Parses a string value to a double, returning 0.0 if the parsing fails.
-  double parseFieldValueToDouble(String? value) {
-    final parsedValue = parseStringToDouble(value);
-
-    return parsedValue ?? 0.0;
-  }
-
-  @protected
-
-  /// Retrieves the user's locale code.
-  ///
-  /// If the `delegate` provides a locale code, it will be returned. Otherwise,
-  /// it attempts to derive the locale code from the app settings and device
-  /// information.
-  String getUserLocaleCode() {
-    String? localeCode = delegate?.getUserLocaleCode();
-
-    if (localeCode == null) {
-      final appInfo = FastAppInfoBloc.instance.currentState;
-
-      localeCode = toIos3166Code(
-        appSettingsBloc.currentState.languageCode,
-        countryCode: appInfo.deviceCountryCode,
-      );
-
-      return localeCode ?? kFastSettingsDefaultLanguageCode;
-    }
-
-    return localeCode;
-  }
-
-  @protected
-
-  /// Retrieves the user's currency code.
-  ///
-  /// If the `delegate` provides a currency code, it will be returned.
-  /// Otherwise, it retrieves the primary currency code from the app settings.
-  String getUserCurrencyCode() {
-    final currencyCode = delegate?.getUserCurrencyCode();
-
-    return currencyCode ??
-        appSettingsBloc.currentState.primaryCurrencyCode.toUpperCase();
-  }
-
-  @protected
-
-  /// Retrieves the user's currency symbol using the provided locale and
-  /// currency code.
-  ///
-  /// If the `delegate` provides a locale code, it is used. Otherwise,
-  /// the user's locale code is derived from the app settings and
-  /// device information.
-  String getUserCurrencySymbol() {
-    final format = NumberFormat.simpleCurrency(
-      locale: getUserLocaleCode(),
-      name: getUserCurrencyCode(),
-    );
-
-    return format.currencySymbol;
-  }
-
-  @protected
-
-  /// Localizes a percentage value according to the specified parameters.
-  ///
-  /// The `value` is the numeric value to be formatted as a percentage.
-  /// The `locale` parameter specifies the locale to use for formatting.
-  /// `minimumFractionDigits` and `maximumFractionDigits` control the precision
-  /// of the formatted percentage.
-  String localizePercentage({
-    num? value,
-    String? locale,
-    int? minimumFractionDigits,
-    int? maximumFractionDigits,
-  }) {
-    return formatPercentage(
-      minimumFractionDigits: minimumFractionDigits,
-      maximumFractionDigits: maximumFractionDigits,
-      locale: locale ?? getUserLocaleCode(),
-      value: value,
-    );
-  }
-
-  /// Localizes a numeric value according to the specified parameters.
-  ///
-  /// The `value` is the numeric value to be formatted.
-  /// The `locale` parameter specifies the locale to use for formatting.
-  /// `minimumFractionDigits` and `maximumFractionDigits` control the precision
-  /// of the formatted number.
-  String localizeNumber({
-    num? value,
-    String? locale,
-    int? minimumFractionDigits,
-    int? maximumFractionDigits,
-  }) {
-    return formatDecimal(
-      minimumFractionDigits: minimumFractionDigits,
-      maximumFractionDigits: maximumFractionDigits,
-      locale: locale ?? getUserLocaleCode(),
-      value: value,
-    );
-  }
-
-  /// Localizes a currency value according to the specified parameters.
-  ///
-  /// The `value` is the numeric value to be formatted as currency.
-  /// The `symbol` is the currency symbol to use (if not provided, it uses the
-  /// user's currency code).
-  /// The `locale` parameter specifies the locale to use for formatting.
-  /// `minimumFractionDigits` and `maximumFractionDigits` control the precision
-  /// of the formatted currency.
-  String localizeCurrency({
-    num? value,
-    String? symbol,
-    String? locale,
-    int? minimumFractionDigits,
-    int? maximumFractionDigits,
-  }) {
-    return formatCurrency(
-      minimumFractionDigits: minimumFractionDigits,
-      maximumFractionDigits: maximumFractionDigits,
-      locale: locale ?? getUserLocaleCode(),
-      symbol: symbol ?? getUserCurrencyCode(),
-      value: value,
-    );
   }
 }

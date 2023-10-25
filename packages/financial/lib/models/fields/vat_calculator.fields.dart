@@ -1,11 +1,13 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
+import 'package:matex_core/core.dart';
 
 final String _kDefaulTipFieldType = FastAmountSwitchFieldType.percent.name;
 final String _kDefaulDiscountFieldType = FastAmountSwitchFieldType.amount.name;
 
-class MatexVatCalculatorBlocFields extends FastCalculatorFields {
+class MatexVatCalculatorBlocFields extends FastCalculatorFields
+    with MatexCalculatorFormatterMixin {
   late final String? regionalVatRate;
   late final String? federalVatRate;
   late final String? discountAmount;
@@ -17,6 +19,60 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields {
   late final String? tipAmount;
   late final String tipFieldType;
   late final String discountFieldType;
+
+  String get formattedPriceBeforeVat {
+    final priceBeforeVatValue = parseFieldValueToDouble(priceBeforeVat);
+
+    return localizeCurrency(value: priceBeforeVatValue);
+  }
+
+  String get formattedRegionalVatRate {
+    final regionalVatRateValue = parseFieldValueToDouble(regionalVatRate);
+
+    return '${localizeNumber(value: regionalVatRateValue)}%';
+  }
+
+  String get formattedFederalVatRate {
+    final federalVatRateValue = parseFieldValueToDouble(federalVatRate);
+
+    return '${localizeNumber(value: federalVatRateValue)}%';
+  }
+
+  String get formattedDiscountAmount {
+    final discountAmountValue = parseFieldValueToDouble(discountAmount);
+
+    return localizeCurrency(value: discountAmountValue);
+  }
+
+  String get formattedCustomVatRate {
+    final customVatRateValue = parseFieldValueToDouble(customVatRate);
+
+    return '${localizeNumber(value: customVatRateValue)}%';
+  }
+
+  String get formattedTipRate {
+    final tipRateValue = parseFieldValueToDouble(tipRate);
+
+    return '${localizeNumber(value: tipRateValue)}%';
+  }
+
+  String get formattedVatRate {
+    final vatRateValue = parseFieldValueToDouble(vatRate);
+
+    return '${localizeNumber(value: vatRateValue)}%';
+  }
+
+  String get formattedDiscountRate {
+    final discountRateValue = parseFieldValueToDouble(discountRate);
+
+    return '${localizeNumber(value: discountRateValue)}%';
+  }
+
+  String get formattedTipAmount {
+    final tipAmountValue = parseFieldValueToDouble(tipAmount);
+
+    return localizeCurrency(value: tipAmountValue);
+  }
 
   MatexVatCalculatorBlocFields({
     String? regionalVatRate,

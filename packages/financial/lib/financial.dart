@@ -7,3 +7,4 @@ export './helpers/helpers.dart';
 export './models/models.dart';
 export './persistence/persistence.dart';
 export './validators/validators.dart';
+export './generators/generators.dart';
