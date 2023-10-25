@@ -1,10 +1,12 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
+import 'package:matex_core/core.dart';
 
 final String _kDefaultEntryFeeType = FastAmountSwitchFieldType.amount.name;
 final String _kDefaultExitFeeType = FastAmountSwitchFieldType.amount.name;
 
-class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
+class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
+    with MatexCalculatorFormatterMixin {
   late final String? expectedSaleUnits;
   late final String? buyingPrice;
   late final String? sellingPrice;
@@ -14,8 +16,62 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
   late final String? sellingExpensePerUnitRate;
   late final String? sellingExpensePerUnitAmount;
   late final String? taxRate;
-  late final String? entryFeeType;
-  late final String? exitFeeType;
+  late final String? buyingCostsPerUnitType;
+  late final String? sellingCostsPerUnitType;
+
+  String get formattedBuyingPrice {
+    final value = parseFieldValueToDouble(buyingPrice);
+
+    return localizeCurrency(value: value);
+  }
+
+  String get formattedExpectedSaleUnits {
+    final value = parseFieldValueToDouble(expectedSaleUnits);
+
+    return localizeNumber(value: value);
+  }
+
+  String get formattedSellingPrice {
+    final value = parseFieldValueToDouble(sellingPrice);
+
+    return localizeCurrency(value: value);
+  }
+
+  String get formattedOperatingExpenses {
+    final value = parseFieldValueToDouble(operatingExpenses);
+
+    return localizeCurrency(value: value);
+  }
+
+  String get formattedBuyingExpensePerUnitRate {
+    final value = parseFieldValueToDouble(buyingExpensePerUnitRate);
+
+    return '${localizeNumber(value: value)}%';
+  }
+
+  String get formattedBuyingExpensePerUnitAmount {
+    final value = parseFieldValueToDouble(buyingExpensePerUnitAmount);
+
+    return localizeCurrency(value: value);
+  }
+
+  String get formattedSellingExpensePerUnitRate {
+    final value = parseFieldValueToDouble(sellingExpensePerUnitRate);
+
+    return '${localizeNumber(value: value)}%';
+  }
+
+  String get formattedSellingExpensePerUnitAmount {
+    final value = parseFieldValueToDouble(sellingExpensePerUnitAmount);
+
+    return localizeCurrency(value: value);
+  }
+
+  String get formattedTaxRate {
+    final value = parseFieldValueToDouble(taxRate);
+
+    return '${localizeNumber(value: value)}%';
+  }
 
   MatexProfitAndLossCalculatorBlocFields({
     String? expectedSaleUnits,
@@ -27,8 +83,9 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
     String? sellingExpensePerUnitRate,
     String? sellingExpensePerUnitAmount,
     String? taxRate,
-    String? entryFeeType,
-    String? exitFeeType,
+    String? buyingCostsPerUnitType,
+    String? sellingCostsPerUnitType,
+    MatexCalculatorBlocDelegate? delegate,
   }) {
     this.expectedSaleUnits = assignValue(expectedSaleUnits);
     this.buyingPrice = assignValue(buyingPrice);
@@ -39,8 +96,11 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
     this.sellingExpensePerUnitRate = assignValue(sellingExpensePerUnitRate);
     this.sellingExpensePerUnitAmount = assignValue(sellingExpensePerUnitAmount);
     this.taxRate = assignValue(taxRate);
-    this.entryFeeType = assignValue(entryFeeType) ?? _kDefaultEntryFeeType;
-    this.exitFeeType = assignValue(exitFeeType) ?? _kDefaultExitFeeType;
+    this.buyingCostsPerUnitType =
+        assignValue(buyingCostsPerUnitType) ?? _kDefaultEntryFeeType;
+    this.sellingCostsPerUnitType =
+        assignValue(sellingCostsPerUnitType) ?? _kDefaultExitFeeType;
+    this.delegate = delegate;
   }
 
   @override
@@ -59,6 +119,7 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
     String? taxRate,
     String? buyingCostsPerUnitType,
     String? sellingCostsPerUnitType,
+    MatexCalculatorBlocDelegate? delegate,
   }) {
     return MatexProfitAndLossCalculatorBlocFields(
       expectedSaleUnits: expectedSaleUnits ?? this.expectedSaleUnits,
@@ -74,8 +135,11 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
       sellingExpensePerUnitAmount:
           sellingExpensePerUnitAmount ?? this.sellingExpensePerUnitAmount,
       taxRate: taxRate ?? this.taxRate,
-      exitFeeType: sellingCostsPerUnitType ?? this.exitFeeType,
-      entryFeeType: buyingCostsPerUnitType ?? this.entryFeeType,
+      sellingCostsPerUnitType:
+          sellingCostsPerUnitType ?? this.sellingCostsPerUnitType,
+      buyingCostsPerUnitType:
+          buyingCostsPerUnitType ?? this.buyingCostsPerUnitType,
+      delegate: delegate ?? this.delegate,
     );
   }
 
@@ -93,8 +157,9 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
       sellingExpensePerUnitRate: model.sellingExpensePerUnitRate,
       sellingExpensePerUnitAmount: model.sellingExpensePerUnitAmount,
       taxRate: model.taxRate,
-      sellingCostsPerUnitType: model.exitFeeType,
-      buyingCostsPerUnitType: model.entryFeeType,
+      sellingCostsPerUnitType: model.sellingCostsPerUnitType,
+      buyingCostsPerUnitType: model.buyingCostsPerUnitType,
+      delegate: model.delegate,
     );
   }
 
@@ -109,7 +174,8 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
         sellingExpensePerUnitRate,
         sellingExpensePerUnitAmount,
         taxRate,
-        exitFeeType,
-        entryFeeType,
+        sellingCostsPerUnitType,
+        buyingCostsPerUnitType,
+        delegate,
       ];
 }

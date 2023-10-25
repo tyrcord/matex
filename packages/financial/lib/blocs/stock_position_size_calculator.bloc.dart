@@ -371,7 +371,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
   @override
   Future<Uint8List> toPdf(BuildContext context) async {
-    final pdfGenerator = StockPositionSizePdfGenerator();
+    final pdfGenerator = MatexStockPositionSizeCalculatorPdfGenerator();
     final fields = currentState.fields;
     final results = await compute();
 

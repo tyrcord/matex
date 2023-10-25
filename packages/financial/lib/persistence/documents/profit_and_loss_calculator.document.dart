@@ -110,8 +110,8 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
   MatexProfitAndLossCalculatorBlocFields toFields() {
     return MatexProfitAndLossCalculatorBlocFields(
       taxRate: taxRate,
-      entryFeeType: buyingCostsPerUnitType,
-      exitFeeType: sellingCostsPerUnitType,
+      buyingCostsPerUnitType: buyingCostsPerUnitType,
+      sellingCostsPerUnitType: sellingCostsPerUnitType,
       expectedSaleUnits: expectedSaleUnits,
       buyingPrice: buyingPrice,
       sellingPrice: sellingPrice,

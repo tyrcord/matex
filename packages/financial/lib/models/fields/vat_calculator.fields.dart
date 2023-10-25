@@ -86,6 +86,7 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
     String? tipAmount,
     String? tipFieldType,
     String? discountFieldType,
+    MatexCalculatorBlocDelegate? delegate,
   }) {
     this.regionalVatRate = assignValue(regionalVatRate);
     this.federalVatRate = assignValue(federalVatRate);
@@ -98,6 +99,7 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
     this.tipAmount = assignValue(tipAmount);
     this.tipFieldType = tipFieldType ?? _kDefaulTipFieldType;
     this.discountFieldType = discountFieldType ?? _kDefaulDiscountFieldType;
+    this.delegate = delegate;
   }
 
   @override
@@ -116,6 +118,7 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
     String? tipAmount,
     String? tipFieldType,
     String? discountFieldType,
+    MatexCalculatorBlocDelegate? delegate,
   }) {
     return MatexVatCalculatorBlocFields(
       federalVatRate: federalVatRate ?? this.federalVatRate,
@@ -129,6 +132,7 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
       tipAmount: tipAmount ?? this.tipAmount,
       tipFieldType: tipFieldType ?? this.tipFieldType,
       discountFieldType: discountFieldType ?? this.discountFieldType,
+      delegate: delegate ?? this.delegate,
     );
   }
 
@@ -148,6 +152,7 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
       tipAmount: model.tipAmount,
       tipFieldType: model.tipFieldType,
       discountFieldType: model.discountFieldType,
+      delegate: model.delegate,
     );
   }
 
@@ -164,5 +169,6 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
         tipAmount,
         tipFieldType,
         discountFieldType,
+        delegate,
       ];
 }

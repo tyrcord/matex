@@ -12,7 +12,7 @@ import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 
-class StockPositionSizePdfGenerator {
+class MatexStockPositionSizeCalculatorPdfGenerator {
   final appSettingsBloc = FastAppSettingsBloc();
   final appInfoBloc = FastAppInfoBloc();
 
@@ -25,7 +25,7 @@ class StockPositionSizePdfGenerator {
     final appInfo = appInfoBloc.currentState;
 
     return reporter.report(
-      title: CoreLocaleKeys.core_label_report.tr(),
+      title: CoreLocaleKeys.core_label_report_text.tr(),
       disclaimerText:
           FinanceLocaleKeys.finance_disclaimer_intervening_markets.tr(),
       inputs: _buildInputReportEntries(context, fields, results),

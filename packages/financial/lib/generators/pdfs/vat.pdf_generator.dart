@@ -23,17 +23,15 @@ class MatexVatCalculatorPdfGenerator {
     final appInfo = appInfoBloc.currentState;
 
     return reporter.report(
-      disclaimerText:
-          FinanceLocaleKeys.finance_disclaimer_intervening_markets.tr(),
       alwaysUse24HourFormat: appSettingsBloc.currentState.alwaysUse24HourFormat,
       subtitle: FinanceLocaleKeys.finance_label_vat_text.tr(),
       inputs: _buildInputReportEntries(context, fields, results),
       categories: _buildCategoryEntries(context, fields, results),
       languageCode: appSettingsBloc.currentState.languageCode,
-      title: CoreLocaleKeys.core_label_report.tr(),
+      title: CoreLocaleKeys.core_label_report_text.tr(),
       countryCode: appInfo.deviceCountryCode,
       categoryColumns: 3,
-      // FIXME: add results
+      // FIXME: make optional
       results: [],
       author: CoreLocaleKeys.core_message_pdf_generated_by.tr(
         namedArgs: {
@@ -53,6 +51,8 @@ class MatexVatCalculatorPdfGenerator {
     final customVatRate = parseFieldValueToDouble(fields.customVatRate);
     final tipAmount = parseFieldValueToDouble(fields.tipAmount);
     final tipRate = parseFieldValueToDouble(fields.tipRate);
+    final discountFieldType = fields.discountFieldType;
+    final tipFieldType = fields.tipFieldType;
 
     return [
       FastReportEntry(
@@ -63,13 +63,14 @@ class MatexVatCalculatorPdfGenerator {
         name: FinanceLocaleKeys.finance_label_vat_rate.tr(),
         value: fields.formattedVatRate,
       ),
-      if (fields.discountFieldType == FastAmountSwitchFieldType.amount.name &&
+      if (discountFieldType == FastAmountSwitchFieldType.amount.name &&
           discountAmount > 0)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_discount_amount.tr(),
           value: fields.formattedDiscountAmount,
         )
-      else if (discountRate > 0)
+      else if (discountFieldType == FastAmountSwitchFieldType.percent.name &&
+          discountRate > 0)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_discount_rate.tr(),
           value: fields.formattedDiscountRate,
@@ -79,13 +80,14 @@ class MatexVatCalculatorPdfGenerator {
           name: FinanceLocaleKeys.finance_label_additional_tax_rate.tr(),
           value: fields.formattedCustomVatRate,
         ),
-      if (fields.tipFieldType == FastAmountSwitchFieldType.amount.name &&
+      if (tipFieldType == FastAmountSwitchFieldType.amount.name &&
           tipAmount > 0)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_tip_amount.tr(),
           value: fields.formattedTipAmount,
         )
-      else if (tipRate > 0)
+      else if (tipFieldType == FastAmountSwitchFieldType.percent.name &&
+          tipRate > 0)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_tip_rate.tr(),
           value: fields.formattedTipRate,
