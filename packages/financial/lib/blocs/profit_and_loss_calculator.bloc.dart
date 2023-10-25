@@ -1,5 +1,6 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
@@ -337,5 +338,15 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       ..sellingExpensePerUnitRate = 0;
 
     return currentState.copyWith(fields: fields);
+  }
+
+  @override
+  Future<Uint8List> toPdf(BuildContext context) async {
+    final pdfGenerator = MatexProfitAndLossCalculatorPdfGenerator();
+    final fields = currentState.fields;
+    final results = await compute();
+
+    // ignore: use_build_context_synchronously
+    return pdfGenerator.generate(context, fields, results);
   }
 }
