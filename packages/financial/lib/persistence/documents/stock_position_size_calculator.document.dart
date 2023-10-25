@@ -146,6 +146,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       'exitFees': exitFees,
       'riskFieldType': riskFieldType,
       'position': position,
+      ...super.toJson(),
     };
   }
 

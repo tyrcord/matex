@@ -148,6 +148,7 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
       'tipAmount': tipAmount,
       'tipFieldType': tipFieldType,
       'discountFieldType': discountFieldType,
+      ...super.toJson(),
     };
   }
 

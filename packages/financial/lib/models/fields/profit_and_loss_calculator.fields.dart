@@ -57,8 +57,8 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
     String? sellingExpensePerUnitRate,
     String? sellingExpensePerUnitAmount,
     String? taxRate,
-    String? entryFeeType,
-    String? exitFeeType,
+    String? buyingCostsPerUnitType,
+    String? sellingCostsPerUnitType,
   }) {
     return MatexProfitAndLossCalculatorBlocFields(
       expectedSaleUnits: expectedSaleUnits ?? this.expectedSaleUnits,
@@ -74,8 +74,8 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
       sellingExpensePerUnitAmount:
           sellingExpensePerUnitAmount ?? this.sellingExpensePerUnitAmount,
       taxRate: taxRate ?? this.taxRate,
-      exitFeeType: exitFeeType ?? this.exitFeeType,
-      entryFeeType: entryFeeType ?? this.entryFeeType,
+      exitFeeType: sellingCostsPerUnitType ?? this.exitFeeType,
+      entryFeeType: buyingCostsPerUnitType ?? this.entryFeeType,
     );
   }
 
@@ -93,8 +93,8 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields {
       sellingExpensePerUnitRate: model.sellingExpensePerUnitRate,
       sellingExpensePerUnitAmount: model.sellingExpensePerUnitAmount,
       taxRate: model.taxRate,
-      exitFeeType: model.exitFeeType,
-      entryFeeType: model.entryFeeType,
+      sellingCostsPerUnitType: model.exitFeeType,
+      buyingCostsPerUnitType: model.entryFeeType,
     );
   }
 

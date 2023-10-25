@@ -1,4 +1,5 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
@@ -8,6 +9,7 @@ final _kDefaultProfitAndLossBlocState = MatexProfitAndLossCalculatorBlocState(
   results: const MatexProfitAndLossCalculatorBlocResults(),
 );
 
+// FIXME: implement ToPDF
 class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     MatexProfitAndLossCalculator,
     FastCalculatorBlocEvent,
@@ -94,10 +96,23 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWith(sellingExpensePerUnitAmount: value.toString());
       } else if (key == MatexProfitAndLossCalculatorBlocKey.taxRate) {
         return document.copyWith(taxRate: value.toString());
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.entryFeeType) {
-        return document.copyWith(entryFeeType: value.toString());
-      } else if (key == MatexProfitAndLossCalculatorBlocKey.exitFeeType) {
-        return document.copyWith(exitFeeType: value.toString());
+      }
+    } else if (value is Enum) {
+      value = describeEnum(value);
+
+      if (key == MatexProfitAndLossCalculatorBlocKey.buyingCostsPerUnitType) {
+        return document.copyWith(
+          buyingCostsPerUnitType: value.toString(),
+          buyingExpensePerUnitAmount: '',
+          buyingExpensePerUnitRate: '',
+        );
+      } else if (key ==
+          MatexProfitAndLossCalculatorBlocKey.sellingCostsPerUnitType) {
+        return document.copyWith(
+          sellingCostsPerUnitType: value.toString(),
+          sellingExpensePerUnitAmount: '',
+          sellingExpensePerUnitRate: '',
+        );
       }
     }
 
@@ -132,6 +147,15 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
         return patchSellingExpensePerUnitRate(value);
       } else if (key == MatexProfitAndLossCalculatorBlocKey.taxRate) {
         return patchTaxRate(value);
+      }
+    } else if (value is Enum) {
+      value = describeEnum(value);
+
+      if (key == MatexProfitAndLossCalculatorBlocKey.buyingCostsPerUnitType) {
+        return patchBuyingCostsPerUnitType(value);
+      } else if (key ==
+          MatexProfitAndLossCalculatorBlocKey.sellingCostsPerUnitType) {
+        return patchSellingCostsPerUnitType(value);
       }
     }
 
@@ -279,6 +303,38 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(taxRate: value);
     calculator.taxRate = (dValue / dHundred).toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexProfitAndLossCalculatorBlocState patchBuyingCostsPerUnitType(
+    String value,
+  ) {
+    final fields = currentState.fields.copyWith(
+      buyingCostsPerUnitType: value,
+      buyingExpensePerUnitAmount: '',
+      buyingExpensePerUnitRate: '',
+    );
+
+    calculator
+      ..buyingExpensePerUnitAmount = 0
+      ..buyingExpensePerUnitRate = 0;
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexProfitAndLossCalculatorBlocState patchSellingCostsPerUnitType(
+    String value,
+  ) {
+    final fields = currentState.fields.copyWith(
+      sellingCostsPerUnitType: value,
+      sellingExpensePerUnitAmount: '',
+      sellingExpensePerUnitRate: '',
+    );
+
+    calculator
+      ..sellingExpensePerUnitAmount = 0
+      ..sellingExpensePerUnitRate = 0;
 
     return currentState.copyWith(fields: fields);
   }

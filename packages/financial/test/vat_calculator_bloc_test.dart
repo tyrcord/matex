@@ -529,7 +529,6 @@ void main() async {
 
     await Future.delayed(const Duration(milliseconds: 100));
 
-    // Verify the behavior (assuming edge case values should be null in the state)
     expect(vatCalculatorBloc.currentState.fields.priceBeforeVat, isNull);
     expect(vatCalculatorBloc.document.priceBeforeVat, isNull);
   });
@@ -547,7 +546,6 @@ void main() async {
 
     await Future.delayed(const Duration(milliseconds: 100));
 
-    // Verify the behavior (assuming edge case values should be null in the state)
     expect(vatCalculatorBloc.currentState.fields.vatRate, null);
   });
 

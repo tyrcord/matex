@@ -10,8 +10,8 @@ class MatexProfitAndLossCalculatorBlocKey {
       'sellingExpensePerUnitAmount';
   static const String sellingExpensePerUnitRate = 'sellingExpensePerUnitRate';
   static const String taxRate = 'taxRate';
-  static const String entryFeeType = 'entryFeeType';
-  static const String exitFeeType = 'exitFeeType';
+  static const String buyingCostsPerUnitType = 'entryFeeType';
+  static const String sellingCostsPerUnitType = 'exitFeeType';
 
   // Prevent the creation of instances of this class
   MatexProfitAndLossCalculatorBlocKey._();
