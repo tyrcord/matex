@@ -1,4 +1,5 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:matex_core/core.dart';
@@ -10,7 +11,6 @@ final _kDefaultProfitAndLossBlocState = MatexProfitAndLossCalculatorBlocState(
   results: const MatexProfitAndLossCalculatorBlocResults(),
 );
 
-// FIXME: implement ToPDF
 class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     MatexProfitAndLossCalculator,
     FastCalculatorBlocEvent,
@@ -29,6 +29,11 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
           debugLabel: 'MatexProfitAndLossCalculatorBloc',
         ) {
     calculator = MatexProfitAndLossCalculator();
+
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.matexCalculatorTaxRate.name,
+      MatexProfitAndLossCalculatorBlocKey.taxRate,
+    );
   }
 
   @override
@@ -200,13 +205,23 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   Future<MatexProfitAndLossCalculatorBlocState> resetCalculatorBlocState(
     MatexProfitAndLossCalculatorDocument document,
   ) async {
-    return _kDefaultProfitAndLossBlocState;
+    return _kDefaultProfitAndLossBlocState.copyWith(
+      fields: MatexProfitAndLossCalculatorBlocFields(
+        taxRate: document.taxRate,
+      ),
+    );
   }
 
   @override
   Future<MatexProfitAndLossCalculatorDocument>
       retrieveDefaultCalculatorDocument() async {
-    return MatexProfitAndLossCalculatorDocument();
+    final bloc = FastAppDictBloc.instance;
+
+    return MatexProfitAndLossCalculatorDocument(
+      taxRate: bloc.getValue<String?>(
+        MatexCalculatorDefaultValueKeys.matexCalculatorTaxRate.name,
+      ),
+    );
   }
 
   @override
