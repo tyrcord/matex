@@ -76,7 +76,7 @@ class MatexProfitAndLossCalculatorPdfGenerator {
       ),
       if (operatingExpenses > 0)
         FastReportEntry(
-          name: 'Operating expenses',
+          name: FinanceLocaleKeys.finance_label_operating_expenses.tr(),
           value: fields.formattedOperatingExpenses,
         ),
       if (buyingCostsPerUnitType == FastAmountSwitchFieldType.amount.name &&
