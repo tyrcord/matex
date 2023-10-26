@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-10-26
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.18`](#matex_core---v0018)
+ - [`matex_data` - `v0.0.12`](#matex_data---v0012)
+ - [`matex_financial` - `v0.0.24`](#matex_financial---v0024)
+
+---
+
+#### `matex_core` - `v0.0.18`
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: add PDF generators.
+
+#### `matex_data` - `v0.0.12`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.24`
+
+ - **REFACTOR**: property names.
+ - **FIX**: bunch of fixes.
+ - **FIX**: minor improvements.
+ - **FEAT**: add default tax rate to MatexProfitAndLossCalculatorBloc.
+ - **FEAT**: add MatexProfitAndLossCalculatorPdfGenerator.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add PDF generators.
+ - **FEAT**: minor improvements.
+ - **FEAT**: implement MatexProfitAndLossCalculator.
+ - **FEAT**: initial commit for MatexProfitAndLossCalculatorBloc.
+ - **FEAT**: minor improvements.
+
+
 ## 2023-10-17
 
 ### Changes

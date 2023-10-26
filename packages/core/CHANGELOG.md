@@ -1,3 +1,8 @@
+## 0.0.18
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: add PDF generators.
+
 ## 0.0.17
 
  - **FEAT**: update dependencies.

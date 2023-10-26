@@ -1,3 +1,17 @@
+## 0.0.24
+
+ - **REFACTOR**: property names.
+ - **FIX**: bunch of fixes.
+ - **FIX**: minor improvements.
+ - **FEAT**: add default tax rate to MatexProfitAndLossCalculatorBloc.
+ - **FEAT**: add MatexProfitAndLossCalculatorPdfGenerator.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add PDF generators.
+ - **FEAT**: minor improvements.
+ - **FEAT**: implement MatexProfitAndLossCalculator.
+ - **FEAT**: initial commit for MatexProfitAndLossCalculatorBloc.
+ - **FEAT**: minor improvements.
+
 ## 0.0.23
 
  - **FEAT**: update dependencies.

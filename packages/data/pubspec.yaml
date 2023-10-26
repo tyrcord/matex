@@ -1,6 +1,6 @@
 name: matex_data
 description: The data tool of the Matex packages.
-version: 0.0.11
+version: 0.0.12
 repository: https://github.com/tyrcord/matex/tree/main/packages/data
 
 environment:
@@ -19,10 +19,10 @@ dependencies:
   fastyle_core: ^0.0.29
 
   # T
-  tmodel: ^0.5.10+1
-  t_helpers: ^0.0.35
-  t_cache: ^0.0.8+1
-  tbloc: ^0.21.6+1
+  tmodel: ^0.5.10+2
+  t_helpers: ^0.0.35+1
+  t_cache: ^0.0.8+2
+  tbloc: ^0.21.6+2
 
 dev_dependencies:
   flutter_test:
