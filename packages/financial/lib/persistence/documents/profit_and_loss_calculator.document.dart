@@ -18,9 +18,6 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
   late final String? buyingCostsPerUnitType;
   late final String? sellingCostsPerUnitType;
 
-  @override
-  int get version => 1;
-
   MatexProfitAndLossCalculatorDocument({
     String? expectedSaleUnits,
     String? buyingPrice,
