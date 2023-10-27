@@ -32,9 +32,7 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
       results: _buildResultReportEntries(context, fields, results),
       subtitle: FinanceLocaleKeys.finance_label_position_size.tr(),
       author: CoreLocaleKeys.core_message_pdf_generated_by.tr(
-        namedArgs: {
-          'app_name': appInfo.appName,
-        },
+        namedArgs: {'app_name': appInfo.appName},
       ),
       categories: _buildCategoryEntries(context, fields, results),
       alwaysUse24HourFormat: appSettingsBloc.currentState.alwaysUse24HourFormat,

@@ -24,17 +24,16 @@ class MatexProfitAndLossCalculatorPdfGenerator {
 
     return reporter.report(
       alwaysUse24HourFormat: appSettingsBloc.currentState.alwaysUse24HourFormat,
-      subtitle: FinanceLocaleKeys.finance_label_profit_and_loss.tr(),
+      subtitle: FinanceLocaleKeys.finance_label_profit_and_loss_overview.tr(),
       inputs: _buildInputReportEntries(context, fields, results),
+      categories: _buildCategoryEntries(context, fields, results),
       languageCode: appSettingsBloc.currentState.languageCode,
       title: CoreLocaleKeys.core_label_report_text.tr(),
       results: _buildResults(context, fields, results),
       countryCode: appInfo.deviceCountryCode,
       categoryColumns: 3,
       author: CoreLocaleKeys.core_message_pdf_generated_by.tr(
-        namedArgs: {
-          'app_name': appInfo.appName,
-        },
+        namedArgs: {'app_name': appInfo.appName},
       ),
     );
   }
@@ -123,8 +122,6 @@ class MatexProfitAndLossCalculatorPdfGenerator {
     final operatingProfit = results.operatingProfit;
     final taxAmount = results.taxAmount;
     final netProfit = results.netProfit;
-    final returnOnInvestment = results.returnOnInvestment;
-    final breakEvenUnits = results.breakEvenUnits;
 
     return [
       // Revenue
@@ -173,19 +170,55 @@ class MatexProfitAndLossCalculatorPdfGenerator {
           value: results.formattedNetProfit!,
           color: getColorBasedOnValue(context, netProfit),
         ),
-
-      // Return on investment
-      if (returnOnInvestment != null && returnOnInvestment != 0)
-        FastReportEntry(
-          name: FinanceLocaleKeys.finance_label_return_on_investment.tr(),
-          value: results.formattedReturnOnInvestment!,
-          color: getColorBasedOnValue(context, returnOnInvestment),
-        ),
-      if (breakEvenUnits != null && breakEvenUnits != 0)
-        FastReportEntry(
-          name: FinanceLocaleKeys.finance_label_break_even_units.tr(),
-          value: results.formattedBreakEvenUnits!,
-        ),
     ];
+  }
+
+  List<FastReportCategoryEntry> _buildCategoryEntries(
+    BuildContext context,
+    MatexProfitAndLossCalculatorBlocFields fields,
+    MatexProfitAndLossCalculatorBlocResults results,
+  ) {
+    return [
+      if (_shouldAddAdditionalMetrics(results))
+        _buildAdditionalMetricsCategory(context, fields, results),
+    ];
+  }
+
+  bool _shouldAddAdditionalMetrics(
+    MatexProfitAndLossCalculatorBlocResults results,
+  ) {
+    final breakEvenUnits = results.breakEvenUnits;
+    final returnOnInvestment = results.returnOnInvestment;
+
+    return (breakEvenUnits != null && breakEvenUnits != 0) ||
+        (returnOnInvestment != null && returnOnInvestment != 0);
+  }
+
+  FastReportCategoryEntry _buildAdditionalMetricsCategory(
+    BuildContext context,
+    MatexProfitAndLossCalculatorBlocFields fields,
+    MatexProfitAndLossCalculatorBlocResults results,
+  ) {
+    final entries = <FastReportEntry>[];
+
+    if (results.returnOnInvestment != null && results.returnOnInvestment != 0) {
+      entries.add(FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_return_on_investment.tr(),
+        value: results.formattedReturnOnInvestment!,
+        color: getColorBasedOnValue(context, results.returnOnInvestment),
+      ));
+    }
+
+    if (results.breakEvenUnits != null && results.breakEvenUnits != 0) {
+      entries.add(FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_break_even_units.tr(),
+        value: results.formattedBreakEvenUnits!,
+      ));
+    }
+
+    return FastReportCategoryEntry(
+      name: FinanceLocaleKeys.finance_label_additional_metrics.tr(),
+      entries: entries,
+    );
   }
 }
