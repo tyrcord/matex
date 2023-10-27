@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-10-27
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.19`](#matex_core---v0019)
+ - [`matex_data` - `v0.0.13`](#matex_data---v0013)
+ - [`matex_financial` - `v0.0.25`](#matex_financial---v0025)
+
+---
+
+#### `matex_core` - `v0.0.19`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.13`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.25`
+
+ - **FEAT**(MatexProfitAndLossCalculatorPdfGenerator): add additional metrics category.
+ - **FEAT**: update localization.
+ - **FEAT**: update dependencies.
+
+
 ## 2023-10-26
 
 ### Changes

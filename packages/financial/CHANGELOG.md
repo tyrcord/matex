@@ -1,3 +1,9 @@
+## 0.0.25
+
+ - **FEAT**(MatexProfitAndLossCalculatorPdfGenerator): add additional metrics category.
+ - **FEAT**: update localization.
+ - **FEAT**: update dependencies.
+
 ## 0.0.24
 
  - **REFACTOR**: property names.

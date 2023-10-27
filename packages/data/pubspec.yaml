@@ -1,6 +1,6 @@
 name: matex_data
 description: The data tool of the Matex packages.
-version: 0.0.12
+version: 0.0.13
 repository: https://github.com/tyrcord/matex/tree/main/packages/data
 
 environment:
