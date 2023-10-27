@@ -258,7 +258,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<MatexVatCalculatorBlocResults> retrieveDefaultResult() async {
     return MatexVatCalculatorBlocResults(
-      formattedTotal: localizeNumber(value: 0),
+      formattedTotal: localizeCurrency(value: 0),
       total: 0,
     );
   }

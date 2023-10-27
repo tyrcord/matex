@@ -81,27 +81,27 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   ) async {
     if (value is String) {
       if (key == MatexProfitAndLossCalculatorBlocKey.expectedSaleUnits) {
-        return document.copyWith(expectedSaleUnits: value.toString());
+        return document.copyWith(expectedSaleUnits: value);
       } else if (key == MatexProfitAndLossCalculatorBlocKey.buyingPrice) {
-        return document.copyWith(buyingPrice: value.toString());
+        return document.copyWith(buyingPrice: value);
       } else if (key == MatexProfitAndLossCalculatorBlocKey.sellingPrice) {
-        return document.copyWith(sellingPrice: value.toString());
+        return document.copyWith(sellingPrice: value);
       } else if (key == MatexProfitAndLossCalculatorBlocKey.operatingExpenses) {
-        return document.copyWith(operatingExpenses: value.toString());
+        return document.copyWith(operatingExpenses: value);
       } else if (key ==
           MatexProfitAndLossCalculatorBlocKey.buyingExpensePerUnitRate) {
-        return document.copyWith(buyingExpensePerUnitRate: value.toString());
+        return document.copyWith(buyingExpensePerUnitRate: value);
       } else if (key ==
           MatexProfitAndLossCalculatorBlocKey.buyingExpensePerUnitAmount) {
-        return document.copyWith(buyingExpensePerUnitAmount: value.toString());
+        return document.copyWith(buyingExpensePerUnitAmount: value);
       } else if (key ==
           MatexProfitAndLossCalculatorBlocKey.sellingExpensePerUnitRate) {
-        return document.copyWith(sellingExpensePerUnitRate: value.toString());
+        return document.copyWith(sellingExpensePerUnitRate: value);
       } else if (key ==
           MatexProfitAndLossCalculatorBlocKey.sellingExpensePerUnitAmount) {
-        return document.copyWith(sellingExpensePerUnitAmount: value.toString());
+        return document.copyWith(sellingExpensePerUnitAmount: value);
       } else if (key == MatexProfitAndLossCalculatorBlocKey.taxRate) {
-        return document.copyWith(taxRate: value.toString());
+        return document.copyWith(taxRate: value);
       }
     } else if (value is Enum) {
       value = describeEnum(value);
@@ -229,7 +229,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       retrieveDefaultResult() async {
     return MatexProfitAndLossCalculatorBlocResults(
       formattedReturnOnInvestment: localizePercentage(value: 0),
-      formattedNetProfit: localizeNumber(value: 0),
+      formattedNetProfit: localizeCurrency(value: 0),
       returnOnInvestment: 0,
       netProfit: 0,
     );
