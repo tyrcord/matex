@@ -25,13 +25,13 @@ dependencies:
   tmodel: ^0.5.10+2
 
   # Lingua
-  lingua_core: ^0.0.30
-  lingua_calculator: ^0.0.3
+  lingua_core: ^0.0.31
+  lingua_calculator: ^0.0.4
 
   # Fastyle
-  fastyle_settings: ^0.0.33+1
-  fastyle_core: ^0.0.29
-  fastyle_calculator: ^1.38.1
+  fastyle_settings: ^0.0.35
+  fastyle_core: ^0.0.31
+  fastyle_calculator: ^1.40.0
 
 dev_dependencies:
   flutter_test:

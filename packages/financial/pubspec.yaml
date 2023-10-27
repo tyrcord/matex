@@ -29,20 +29,20 @@ dependencies:
   tmodel: ^0.5.10+2
 
   # Lingua
-  lingua_finance: ^0.0.19
-  lingua_finance_stock: ^0.0.6
-  lingua_core: ^0.0.30
-  lingua_settings: ^0.0.11
+  lingua_finance: ^0.0.20
+  lingua_finance_stock: ^0.0.7
+  lingua_core: ^0.0.31
+  lingua_settings: ^0.0.12
 
   # Fastyle
-  fastyle_forms: ^0.0.28+1
-  fastyle_core: ^0.0.29
-  fastyle_calculator: ^1.38.1
+  fastyle_forms: ^0.0.30
+  fastyle_core: ^0.0.31
+  fastyle_calculator: ^1.40.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  tstore: ^0.8.19
+  tstore: ^0.8.19+1
   import_sorter: ^4.6.0
   dependency_validator: ^3.2.3
