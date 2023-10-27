@@ -148,7 +148,7 @@ class MatexProfitAndLossCalculatorPdfGenerator {
       // Selling expenses
       if (sellingExpenses != null && sellingExpenses != 0)
         FastReportEntry(
-          name: FinanceLocaleKeys.finance_label_selling_expenses.tr(),
+          name: FinanceLocaleKeys.finance_label_selling_operating_expenses.tr(),
           value: results.formattedSellingExpenses!,
         ),
       // Operating profit
