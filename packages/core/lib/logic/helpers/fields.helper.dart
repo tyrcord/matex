@@ -22,3 +22,13 @@ double? parseStringToDouble(String? value) {
 
   return null;
 }
+
+int? parseStringToInt(String? value) {
+  if (value is String && value.isNotEmpty) {
+    final dValue = Decimal.tryParse(value);
+
+    return dValue?.toDouble().toInt();
+  }
+
+  return null;
+}
