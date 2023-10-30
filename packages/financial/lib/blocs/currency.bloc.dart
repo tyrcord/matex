@@ -40,7 +40,7 @@ class MatexCurrencyBloc
   Stream<MatexCurrencyBlocState> handleInitEvent() async* {
     if (canInitialize) {
       isInitializing = true;
-      yield MatexCurrencyBlocState(isInitializing: true);
+      yield currentState.copyWith(isInitializing: true);
 
       final instrumentsMetadata = await _instrumentProvider.list();
       final instrumentsMetadataList = instrumentsMetadata.values;
