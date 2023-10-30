@@ -38,6 +38,7 @@ dependencies:
   fastyle_forms: ^0.0.30
   fastyle_core: ^0.0.31
   fastyle_calculator: ^1.40.0
+  fastyle_financial: ^0.0.25
 
 dev_dependencies:
   flutter_test:

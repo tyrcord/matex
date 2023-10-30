@@ -1,5 +1,9 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
+import 'package:fastyle_financial/fastyle_financial.dart';
+
+final String _kDefaultPositionSizeFieldType =
+    FastPositionSizeSwitchFieldType.unit.name;
 
 class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
@@ -9,6 +13,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   late final String? positionSize;
   late final String? numberOfPips;
   late final String? pipDecimalPlaces;
+  late final String positionSizeFieldType;
 
   String get formattedPositionSize {
     final value = parseFieldValueToDouble(positionSize);
@@ -35,6 +40,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     String? positionSize,
     String? numberOfPips,
     String? pipDecimalPlaces,
+    String? positionSizeFieldType,
     MatexCalculatorBlocDelegate? delegate,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
@@ -44,6 +50,8 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     this.numberOfPips = assignValue(numberOfPips);
     this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
     this.delegate = delegate;
+    this.positionSizeFieldType =
+        positionSizeFieldType ?? _kDefaultPositionSizeFieldType;
   }
 
   @override
@@ -57,6 +65,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     String? positionSize,
     String? numberOfPips,
     String? pipDecimalPlaces,
+    String? positionSizeFieldType,
     MatexCalculatorBlocDelegate? delegate,
   }) {
     return MatexPipValueCalculatorBlocFields(
@@ -66,6 +75,8 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
       positionSize: positionSize ?? this.positionSize,
       numberOfPips: numberOfPips ?? this.numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
+      positionSizeFieldType:
+          positionSizeFieldType ?? this.positionSizeFieldType,
       delegate: delegate ?? this.delegate,
     );
   }
@@ -81,6 +92,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
       positionSize: model.positionSize,
       numberOfPips: model.numberOfPips,
       pipDecimalPlaces: model.pipDecimalPlaces,
+      positionSizeFieldType: model.positionSizeFieldType,
       delegate: model.delegate,
     );
   }
@@ -93,6 +105,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
         positionSize,
         numberOfPips,
         pipDecimalPlaces,
+        positionSizeFieldType,
         delegate,
       ];
 }

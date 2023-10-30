@@ -1,5 +1,6 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
@@ -31,6 +32,30 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
 
     // FIXME:
     // Add listeners for default value changes if needed
+
+    _listenToPrimaryCurrencyCodeChanges();
+  }
+
+  void _listenToPrimaryCurrencyCodeChanges() {
+    subxList.add(appSettingsBloc.onData
+        .where((event) => isInitialized)
+        .distinct((previous, next) {
+      final previousValue = previous.primaryCurrencyCode;
+      final nextValue = next.primaryCurrencyCode;
+
+      return previousValue == nextValue;
+    }).listen(handlePrimaryCurrencyCodeChanges));
+  }
+
+  void handlePrimaryCurrencyCodeChanges(FastAppSettingsBlocState state) {
+    if (isInitialized) {
+      addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
+
+      addEvent(FastCalculatorBlocEvent.patchValue(
+        key: MatexPipValueCalculatorBlocKey.accountCurrency,
+        value: state.primaryCurrencyCode,
+      ));
+    }
   }
 
   @override
@@ -42,7 +67,7 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
       return MatexPipValueCalculatorBlocResults();
     }
 
-    return retrieveDefaultResult(); // You may want to return a default result structure here
+    return retrieveDefaultResult();
   }
 
   @override
@@ -73,12 +98,25 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
         default:
           debugLog('Invalid key: $key', debugLabel: debugLabel);
       }
+    } else if (value is Enum) {
+      value = describeEnum(value);
+
+      switch (key) {
+        case MatexPipValueCalculatorBlocKey.positionSizeFieldType:
+          return document.copyWith(
+            positionSizeFieldType: value,
+            positionSize: '',
+          );
+
+        default:
+          debugLog('Invalid key: $key', debugLabel: debugLabel);
+          break;
+      }
     }
 
     return null;
   }
 
-  // Implement the patchCalculatorState method to update the calculator's state based on input changes.
   @override
   Future<MatexPipValueCalculatorBlocState?> patchCalculatorState(
     String key,
@@ -108,9 +146,20 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
           debugLog('Invalid key: $key', debugLabel: debugLabel);
           break;
       }
+    } else if (value is Enum) {
+      value = describeEnum(value);
+
+      switch (key) {
+        case MatexPipValueCalculatorBlocKey.positionSizeFieldType:
+          return patchPositionSizeFieldType(value);
+
+        default:
+          debugLog('Invalid key: $key', debugLabel: debugLabel);
+          break;
+      }
     }
-    // Handle any other necessary types or error handling here.
-    return null; // Or handle this scenario as needed.
+
+    return null;
   }
 
   @override
@@ -133,8 +182,9 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
   ) async {
     return _kDefaultPipValueBlocState.copyWith(
       fields: MatexPipValueCalculatorBlocFields(
-          // FIXME: add default values here
-          ),
+        // FIXME: add default values here
+        accountCurrency: document.accountCurrency,
+      ),
     );
   }
 
@@ -143,10 +193,12 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
       retrieveDefaultCalculatorDocument() async {
     final bloc = FastAppDictBloc.instance;
 
-    return MatexPipValueCalculatorDocument(
-        // FIXME: add default values here
+    print('retrieveDefaultCalculatorDocument');
 
-        );
+    return MatexPipValueCalculatorDocument(
+      // FIXME: add default values here
+      accountCurrency: getUserCurrencyCode(),
+    );
   }
 
   @override
@@ -158,9 +210,8 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexPipValueCalculatorBlocState patchAccountCurrency(String value) {
-    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(accountCurrency: value);
-    // calculator.accountCurrency = dValue.toDouble();
+    //  calculator.accountCurrency = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
@@ -199,6 +250,15 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(pipDecimalPlaces: value);
     // calculator.pipDecimalPlaces = dValue.toInt();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexPipValueCalculatorBlocState patchPositionSizeFieldType(String value) {
+    final fields = currentState.fields.copyWith(
+      positionSizeFieldType: value,
+      positionSize: '',
+    );
 
     return currentState.copyWith(fields: fields);
   }

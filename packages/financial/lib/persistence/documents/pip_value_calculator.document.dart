@@ -1,6 +1,9 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
-// import other necessary packages
+import 'package:fastyle_financial/fastyle_financial.dart';
+
+final String _kDefaultPositionSizeFieldType =
+    FastPositionSizeSwitchFieldType.unit.name;
 
 class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   late final String? accountCurrency;
@@ -9,6 +12,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   late final String? positionSize;
   late final String? numberOfPips;
   late final String? pipDecimalPlaces;
+  late final String positionSizeFieldType;
 
   MatexPipValueCalculatorDocument({
     String? accountCurrency,
@@ -17,6 +21,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
     String? positionSize,
     String? numberOfPips,
     String? pipDecimalPlaces,
+    String? positionSizeFieldType,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
     this.baseCurrency = assignValue(baseCurrency);
@@ -24,6 +29,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
     this.positionSize = assignValue(positionSize);
     this.numberOfPips = assignValue(numberOfPips);
     this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
+    this.positionSizeFieldType =
+        positionSizeFieldType ?? _kDefaultPositionSizeFieldType;
   }
 
   @override
@@ -37,6 +44,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
     String? positionSize,
     String? numberOfPips,
     String? pipDecimalPlaces,
+    String? positionSizeFieldType,
   }) {
     return MatexPipValueCalculatorDocument(
       accountCurrency: accountCurrency ?? this.accountCurrency,
@@ -45,6 +53,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
       positionSize: positionSize ?? this.positionSize,
       numberOfPips: numberOfPips ?? this.numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
+      positionSizeFieldType:
+          positionSizeFieldType ?? this.positionSizeFieldType,
     );
   }
 
@@ -59,6 +69,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
       positionSize: model.positionSize,
       numberOfPips: model.numberOfPips,
       pipDecimalPlaces: model.pipDecimalPlaces,
+      positionSizeFieldType: model.positionSizeFieldType,
     );
   }
 
@@ -71,6 +82,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
       positionSize: positionSize,
       numberOfPips: numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces,
+      positionSizeFieldType: positionSizeFieldType,
     );
   }
 
@@ -83,6 +95,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
       'positionSize': positionSize,
       'numberOfPips': numberOfPips,
       'pipDecimalPlaces': pipDecimalPlaces,
+      'positionSizeFieldType': positionSizeFieldType,
       ...super.toJson(),
     };
   }
@@ -97,6 +110,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
       positionSize: json['positionSize'] as String?,
       numberOfPips: json['numberOfPips'] as String?,
       pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
+      positionSizeFieldType: json['positionSizeFieldType'] as String?,
     );
   }
 
@@ -108,5 +122,6 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
         positionSize,
         numberOfPips,
         pipDecimalPlaces,
+        positionSizeFieldType,
       ];
 }
