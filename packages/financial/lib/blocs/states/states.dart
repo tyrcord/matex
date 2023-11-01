@@ -4,3 +4,4 @@ export 'currency.state.dart';
 export 'profit_and_loss_calculator.state.dart';
 export 'pip_value_calculator.state.dart';
 export 'financial_instruments.state.dart';
+export 'instrument_favorite.state.dart';

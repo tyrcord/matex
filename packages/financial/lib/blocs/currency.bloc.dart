@@ -1,5 +1,6 @@
 // Package imports:
-import 'package:matex_dart/matex_dart.dart';
+import 'package:matex_dart/matex_dart.dart'
+    show MatexInstrumentProvider, MatexInstrumentMetadata;
 import 'package:tbloc/tbloc.dart';
 
 // Project imports:
