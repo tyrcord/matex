@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:rxdart/rxdart.dart';
 import 'package:fastyle_core/fastyle_core.dart';
+import 'package:rxdart/rxdart.dart';
 
 // Project imports:
 import 'package:matex_data/matex_data.dart';

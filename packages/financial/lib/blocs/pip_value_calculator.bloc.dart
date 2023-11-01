@@ -1,10 +1,14 @@
-import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_core/fastyle_core.dart';
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 
+// Package imports:
+import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:matex_core/core.dart';
-import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 // Initialize default state for the Pip Value Calculator
 final _kDefaultPipValueBlocState = MatexPipValueCalculatorBlocState(

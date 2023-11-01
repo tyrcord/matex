@@ -1,9 +1,10 @@
+// Package imports:
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:fastyle_forms/fastyle_forms.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_dart/matex_dart.dart' show MatexPosition;
-import 'package:fastyle_forms/fastyle_forms.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 final String _kDefaultRiskFieldType = FastAmountSwitchFieldType.percent.name;
 final String _kDefaultPosition = MatexPosition.long.name;

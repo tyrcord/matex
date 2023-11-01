@@ -1,9 +1,15 @@
 // Required imports
+
+// Flutter imports:
 import 'package:flutter/foundation.dart';
-import 'package:matex_data/matex_data.dart';
+
+// Package imports:
+import 'package:collection/collection.dart';
 import 'package:t_cache/cache_manager.dart';
 import 'package:t_helpers/helpers.dart';
-import 'package:collection/collection.dart';
+
+// Project imports:
+import 'package:matex_data/matex_data.dart';
 
 /// Abstract data provider class to fetch, parse, cache, and retrieve model
 /// data.

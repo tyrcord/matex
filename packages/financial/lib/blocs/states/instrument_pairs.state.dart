@@ -1,5 +1,5 @@
+// Package imports:
 import 'package:matex_dart/matex_dart.dart' show MatexPairMetadata;
-
 import 'package:tbloc/tbloc.dart';
 
 /// The state of the `MatexInstrumentBloc`.

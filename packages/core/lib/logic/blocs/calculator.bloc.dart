@@ -1,12 +1,13 @@
-// Flutter imports:
+// Dart imports:
 import 'dart:async';
 
-import 'package:fastyle_core/fastyle_core.dart';
+// Flutter imports:
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:flutter/material.dart';
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:share_plus/share_plus.dart';
 
 // Project imports:

@@ -1,14 +1,17 @@
-// Package imports:
+// Dart imports:
 import 'dart:math';
 
+// Package imports:
 import 'package:decimal/decimal.dart';
 import 'package:matex_core/core.dart';
-import 'package:matex_dart/matex_dart.dart'
-    show MatexLotDescriptors, MatexLotDescriptor;
+import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
-import 'package:t_helpers/helpers.dart';
+
+import 'package:matex_dart/matex_dart.dart'
+    show MatexLotDescriptors, MatexLotDescriptor;
+
 
 class MatexPipValueCalculator extends MatexCalculator<
     MatexPipValueCalculatorState, MatexPipValueCalculatorResults> {

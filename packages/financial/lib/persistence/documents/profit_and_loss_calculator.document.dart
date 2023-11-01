@@ -1,5 +1,8 @@
+// Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
+
+// Project imports:
 import 'package:matex_financial/financial.dart';
 
 final String _kDefaultEntryFeeType = FastAmountSwitchFieldType.amount.name;

@@ -1,5 +1,8 @@
-import 'package:matex_data/matex_data.dart';
+// Package imports:
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_data/matex_data.dart';
 
 /// Represents the state for `MatexCountryBloc` which manages country data.
 class MatexCountryBlocState extends BlocState {

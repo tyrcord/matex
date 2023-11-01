@@ -1,5 +1,6 @@
-import 'package:tbloc/tbloc.dart';
+// Package imports:
 import 'package:matex_dart/matex_dart.dart' show MatexPairMetadata;
+import 'package:tbloc/tbloc.dart';
 
 enum MatexInstrumentPairsBlocEventType {
   init,

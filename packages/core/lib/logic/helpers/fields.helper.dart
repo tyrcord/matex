@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:decimal/decimal.dart';
 
 /// Parses a string value to a double, returning 0.0 if the parsing fails.

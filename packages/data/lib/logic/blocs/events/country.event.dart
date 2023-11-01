@@ -1,5 +1,8 @@
-import 'package:matex_data/matex_data.dart';
+// Package imports:
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_data/matex_data.dart';
 
 /// Represents events that can be dispatched to the [MatexCountryBloc].
 ///

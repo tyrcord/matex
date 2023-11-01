@@ -1,10 +1,10 @@
 // Flutter imports:
-import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:flutter/material.dart';
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_data/matex_data.dart';
 import 'package:t_helpers/helpers.dart';

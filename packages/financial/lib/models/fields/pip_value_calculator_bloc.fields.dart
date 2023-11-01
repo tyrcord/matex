@@ -1,6 +1,7 @@
+// Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:matex_core/core.dart';
 import 'package:fastyle_financial/fastyle_financial.dart';
+import 'package:matex_core/core.dart';
 
 final String _kDefaultPositionSizeFieldType =
     FastPositionSizeSwitchFieldType.unit.name;

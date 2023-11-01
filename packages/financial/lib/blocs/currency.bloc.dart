@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:matex_dart/matex_dart.dart';
-import 'package:matex_financial/financial.dart';
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 /// A BLoC (Business Logic Component) class for managing financial instruments.
 class MatexCurrencyBloc

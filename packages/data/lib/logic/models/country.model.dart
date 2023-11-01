@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:tmodel/tmodel.dart';
 
 /// Represents metadata associated with a country, such as VAT rates and

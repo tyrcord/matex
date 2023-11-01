@@ -1,7 +1,10 @@
-import 'package:matex_core/core.dart';
-import 'package:matex_financial/financial.dart';
+// Package imports:
 import 'package:decimal/decimal.dart';
+import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 class MatexProfitAndLossCalculator extends MatexCalculator<
     MatexProfitAndLossCalculatorState, MatexProfitAndLossCalculatorResults> {
