@@ -9,14 +9,13 @@ class MatexFinancialInstrumentsBloc extends BidirectionalBloc<
     MatexFinancialInstrumentsBlocEvent, MatexFinancialInstrumentsBlocState> {
   static MatexFinancialInstrumentsBloc? _singleton;
 
-  final _instrumentIairProvider = MatexPairMetadataProvider();
+  final _instrumentsProvider = MatexPairMetadataProvider();
   final _instrumentProvider = MatexInstrumentProvider();
 
-  MatexFinancialInstrumentsBloc._({
-    MatexFinancialInstrumentsBlocState? initialState,
-  }) : super(
-          initialState: initialState ?? MatexFinancialInstrumentsBlocState(),
-        );
+  MatexFinancialInstrumentsBloc._(
+      {MatexFinancialInstrumentsBlocState? initialState})
+      : super(
+            initialState: initialState ?? MatexFinancialInstrumentsBlocState());
 
   factory MatexFinancialInstrumentsBloc() {
     _singleton ??= MatexFinancialInstrumentsBloc._();
@@ -36,7 +35,7 @@ class MatexFinancialInstrumentsBloc extends BidirectionalBloc<
     } else if (type == MatexFinancialInstrumentsBlocEventType.initialized) {
       yield* handleInitializedEvent(payload);
     } else {
-      assert(false, 'MatexCurrencyBloc is not initialized yet.');
+      assert(false, 'MatexFinancialInstrumentsBloc is not initialized yet.');
     }
   }
 
@@ -67,7 +66,7 @@ class MatexFinancialInstrumentsBloc extends BidirectionalBloc<
   }
 
   Future<List<MatexPairMetadata>> _loadInstrumentPairsMetadata() async {
-    final instrumentsMetadata = await _instrumentIairProvider.list();
+    final instrumentsMetadata = await _instrumentsProvider.list();
     final instruments = <MatexPairMetadata>[];
 
     for (final instrument in instrumentsMetadata.values.toList()) {

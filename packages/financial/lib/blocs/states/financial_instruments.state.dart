@@ -2,41 +2,42 @@
 import 'package:matex_dart/matex_dart.dart' show MatexPairMetadata;
 import 'package:tbloc/tbloc.dart';
 
-/// The state of the `MatexInstrumentBloc`.
-class MatexInstrumentPairsBlocState extends BlocState {
-  /// The list of instrument pairs.
-  final List<MatexPairMetadata> instrumentPairs;
+/// The state of the `MatexFinancialInstrumentBloc`.
+class MatexFinancialInstrumentsBlocState extends BlocState {
+  /// The list of financial instruments.
+  final List<MatexPairMetadata> instruments;
 
   /// Creates a new `MatexInstrumentBlocState`.
   ///
   /// [instruments] is an optional parameter that defaults to an empty list.
-  MatexInstrumentPairsBlocState({
-    List<MatexPairMetadata>? instrumentPairs,
+  MatexFinancialInstrumentsBlocState({
+    List<MatexPairMetadata>? instruments,
     super.isInitializing = false,
     super.isInitialized = false,
-  }) : instrumentPairs = instrumentPairs ?? const [];
+  }) : instruments = instruments ?? const [];
 
   @override
-  MatexInstrumentPairsBlocState copyWith({
-    List<MatexPairMetadata>? instrumentPairs,
+  MatexFinancialInstrumentsBlocState copyWith({
+    List<MatexPairMetadata>? instruments,
     bool? isInitializing,
     bool? isInitialized,
   }) {
-    return MatexInstrumentPairsBlocState(
-      instrumentPairs: instrumentPairs ?? this.instrumentPairs,
+    return MatexFinancialInstrumentsBlocState(
+      instruments: instruments ?? this.instruments,
       isInitialized: isInitialized ?? this.isInitialized,
       isInitializing: isInitializing ?? this.isInitializing,
     );
   }
 
   @override
-  MatexInstrumentPairsBlocState clone() => copyWith();
+  MatexFinancialInstrumentsBlocState clone() => copyWith();
 
   @override
-  MatexInstrumentPairsBlocState merge(
-      covariant MatexInstrumentPairsBlocState model) {
+  MatexFinancialInstrumentsBlocState merge(
+    covariant MatexFinancialInstrumentsBlocState model,
+  ) {
     return copyWith(
-      instrumentPairs: model.instrumentPairs,
+      instruments: model.instruments,
       isInitialized: model.isInitialized,
       isInitializing: model.isInitializing,
     );
@@ -44,7 +45,7 @@ class MatexInstrumentPairsBlocState extends BlocState {
 
   @override
   List<Object> get props => [
-        instrumentPairs,
+        instruments,
         isInitializing,
         isInitialized,
       ];

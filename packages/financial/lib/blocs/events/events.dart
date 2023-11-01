@@ -1,2 +1,2 @@
 export 'currency.event.dart';
-export 'instrument_pairs.event.dart';
+export 'financial_instruments.event.dart';
