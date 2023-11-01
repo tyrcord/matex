@@ -1,20 +1,21 @@
 import 'package:matex_core/core.dart';
+import 'package:matex_dart/matex_dart.dart' show MatexLotDescriptors;
 
 class MatexPipValueCalculatorState extends MatexCalculatorState {
-  final String? accountCurrency;
-  final String? baseCurrency;
-  final String? counterCurrency;
   final double? positionSize;
-  final double? numberOfPips;
   final int? pipDecimalPlaces;
+  final bool isAccountCurrencyCounterCurrency;
+  final double counterToAccountCurrencyRate;
+  final double instrumentPairRate;
+  final MatexLotDescriptors? lotDescriptors;
 
   const MatexPipValueCalculatorState({
-    this.accountCurrency,
-    this.baseCurrency,
-    this.counterCurrency,
     this.positionSize,
-    this.numberOfPips,
     this.pipDecimalPlaces,
+    this.isAccountCurrencyCounterCurrency = false,
+    this.counterToAccountCurrencyRate = 0,
+    this.instrumentPairRate = 0,
+    this.lotDescriptors,
   });
 
   @override
@@ -22,20 +23,22 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
 
   @override
   MatexPipValueCalculatorState copyWith({
-    String? accountCurrency,
-    String? baseCurrency,
-    String? counterCurrency,
     double? positionSize,
-    double? numberOfPips,
     int? pipDecimalPlaces,
+    bool? isAccountCurrencyCounterCurrency,
+    double? counterToAccountCurrencyRate,
+    double? instrumentPairRate,
+    MatexLotDescriptors? lotDescriptors,
   }) {
     return MatexPipValueCalculatorState(
-      accountCurrency: accountCurrency ?? this.accountCurrency,
-      baseCurrency: baseCurrency ?? this.baseCurrency,
-      counterCurrency: counterCurrency ?? this.counterCurrency,
       positionSize: positionSize ?? this.positionSize,
-      numberOfPips: numberOfPips ?? this.numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
+      isAccountCurrencyCounterCurrency: isAccountCurrencyCounterCurrency ??
+          this.isAccountCurrencyCounterCurrency,
+      counterToAccountCurrencyRate:
+          counterToAccountCurrencyRate ?? this.counterToAccountCurrencyRate,
+      instrumentPairRate: instrumentPairRate ?? this.instrumentPairRate,
+      lotDescriptors: lotDescriptors ?? this.lotDescriptors,
     );
   }
 
@@ -44,22 +47,22 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
     covariant MatexPipValueCalculatorState model,
   ) {
     return copyWith(
-      accountCurrency: model.accountCurrency,
-      baseCurrency: model.baseCurrency,
-      counterCurrency: model.counterCurrency,
       positionSize: model.positionSize,
-      numberOfPips: model.numberOfPips,
       pipDecimalPlaces: model.pipDecimalPlaces,
+      isAccountCurrencyCounterCurrency: model.isAccountCurrencyCounterCurrency,
+      counterToAccountCurrencyRate: model.counterToAccountCurrencyRate,
+      instrumentPairRate: model.instrumentPairRate,
+      lotDescriptors: model.lotDescriptors,
     );
   }
 
   @override
   List<Object?> get props => [
-        accountCurrency,
-        baseCurrency,
-        counterCurrency,
         positionSize,
-        numberOfPips,
         pipDecimalPlaces,
+        isAccountCurrencyCounterCurrency,
+        counterToAccountCurrencyRate,
+        instrumentPairRate,
+        lotDescriptors,
       ];
 }
