@@ -50,6 +50,8 @@ abstract class MatexCalculator<S extends MatexCalculatorState, R> {
     } else {
       this.defaultState = initializeDefaultState();
     }
+
+    checkValidity();
   }
 
   /// Initializes the default state of the calculator.
