@@ -12,7 +12,6 @@ import 'package:matex_financial/financial.dart';
 import 'package:matex_dart/matex_dart.dart'
     show MatexLotDescriptors, MatexLotDescriptor;
 
-
 class MatexPipValueCalculator extends MatexCalculator<
     MatexPipValueCalculatorState, MatexPipValueCalculatorResults> {
   MatexPipValueCalculator({
@@ -111,7 +110,8 @@ class MatexPipValueCalculator extends MatexCalculator<
 
   Decimal computePipValue() {
     final counterToAccountCurrencyRate = state.counterToAccountCurrencyRate;
-    final baseCurrencyListedSecond = state.isAccountCurrencyCounterCurrency;
+    final isAccountCurrencyCounterCurrency =
+        state.isAccountCurrencyCounterCurrency;
     final dPositionSize = toDecimal(state.positionSize) ?? dZero;
     final pipDecimalPlaces = state.pipDecimalPlaces ?? 0;
     final decimalMultiplicator = pow(10, pipDecimalPlaces);
@@ -119,9 +119,9 @@ class MatexPipValueCalculator extends MatexCalculator<
     final dDecimalPip = decimalFromRational(dOne / dDecimalMultiplicator);
     final pipValue = dPositionSize * dDecimalPip;
 
-    if (baseCurrencyListedSecond) {
-      return pipValue;
-    } else if (counterToAccountCurrencyRate == 0) {
+    if (isAccountCurrencyCounterCurrency) return pipValue;
+
+    if (counterToAccountCurrencyRate == 0) {
       final dInstrumentPairRate = toDecimal(state.instrumentPairRate) ?? dOne;
 
       return decimalFromRational(pipValue / dInstrumentPairRate);

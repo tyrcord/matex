@@ -171,11 +171,7 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
     MatexPipValueCalculatorDocument document,
   ) async {
     calculator.setState(MatexPipValueCalculatorState(
-      accountCurrency: document.accountCurrency,
-      baseCurrency: document.baseCurrency,
-      counterCurrency: document.counterCurrency,
       positionSize: parseStringToDouble(document.positionSize),
-      numberOfPips: parseStringToDouble(document.numberOfPips),
       pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
     ));
   }
@@ -197,8 +193,6 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
       retrieveDefaultCalculatorDocument() async {
     final bloc = FastAppDictBloc.instance;
 
-    print('retrieveDefaultCalculatorDocument');
-
     return MatexPipValueCalculatorDocument(
       // FIXME: add default values here
       accountCurrency: getUserCurrencyCode(),
@@ -215,21 +209,22 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
 
   MatexPipValueCalculatorBlocState patchAccountCurrency(String value) {
     final fields = currentState.fields.copyWith(accountCurrency: value);
-    //  calculator.accountCurrency = dValue.toDouble();
+    calculator.isAccountCurrencyCounterCurrency =
+        value == fields.counterCurrency;
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexPipValueCalculatorBlocState patchBaseCurrency(String value) {
     final fields = currentState.fields.copyWith(baseCurrency: value);
-    // calculator.baseCurrency = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexPipValueCalculatorBlocState patchCounterCurrency(String value) {
     final fields = currentState.fields.copyWith(counterCurrency: value);
-    // calculator.counterCurrency = dValue.toDouble();
+    calculator.isAccountCurrencyCounterCurrency =
+        value == fields.accountCurrency;
 
     return currentState.copyWith(fields: fields);
   }
@@ -237,15 +232,13 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
   MatexPipValueCalculatorBlocState patchPositionSize(String value) {
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(positionSize: value);
-    // calculator.positionSize = dValue.toDouble();
+    calculator.positionSize = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexPipValueCalculatorBlocState patchNumberOfPips(String value) {
-    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(numberOfPips: value);
-    // calculator.numberOfPips = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
@@ -253,7 +246,7 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
   MatexPipValueCalculatorBlocState patchPipDecimalPlaces(String value) {
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(pipDecimalPlaces: value);
-    // calculator.pipDecimalPlaces = dValue.toInt();
+    calculator.pipDecimalPlaces = dValue.toDouble().toInt();
 
     return currentState.copyWith(fields: fields);
   }
@@ -263,6 +256,8 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
       positionSizeFieldType: value,
       positionSize: '',
     );
+
+    calculator.positionSize = 0;
 
     return currentState.copyWith(fields: fields);
   }
