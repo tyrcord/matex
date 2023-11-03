@@ -2,6 +2,7 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_financial/fastyle_financial.dart';
 import 'package:matex_core/core.dart';
+import 'package:matex_financial/models/instrument.model.dart';
 
 final String _kDefaultPositionSizeFieldType =
     FastPositionSizeSwitchFieldType.unit.name;
@@ -28,10 +29,19 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     return localizeNumber(value: value);
   }
 
-  String get financialInstrument {
+  String get formattedFinancialInstrument {
     if (baseCurrency == null || counterCurrency == null) return '';
 
     return '$baseCurrency/$counterCurrency';
+  }
+
+  MatexFinancialInstrument? get financialInstrument {
+    if (baseCurrency == null || counterCurrency == null) return null;
+
+    return MatexFinancialInstrument(
+      baseCode: baseCurrency!,
+      counterCode: counterCurrency!,
+    );
   }
 
   MatexPipValueCalculatorBlocFields({
@@ -57,6 +67,28 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexPipValueCalculatorBlocFields clone() => copyWith();
+
+  @override
+  MatexPipValueCalculatorBlocFields copyWithDefaults({
+    bool accountCurrency = false,
+    bool baseCurrency = false,
+    bool counterCurrency = false,
+    bool positionSize = false,
+    bool numberOfPips = false,
+    bool pipDecimalPlaces = false,
+    bool positionSizeFieldType = false,
+  }) {
+    return MatexPipValueCalculatorBlocFields(
+      accountCurrency: accountCurrency ? null : this.accountCurrency,
+      baseCurrency: baseCurrency ? null : this.baseCurrency,
+      counterCurrency: counterCurrency ? null : this.counterCurrency,
+      positionSize: positionSize ? null : this.positionSize,
+      numberOfPips: numberOfPips ? null : this.numberOfPips,
+      pipDecimalPlaces: pipDecimalPlaces ? null : this.pipDecimalPlaces,
+      positionSizeFieldType:
+          positionSizeFieldType ? null : this.positionSizeFieldType,
+    );
+  }
 
   @override
   MatexPipValueCalculatorBlocFields copyWith({

@@ -62,6 +62,28 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   }
 
   @override
+  MatexPipValueCalculatorDocument copyWithDefaults({
+    bool accountCurrency = false,
+    bool baseCurrency = false,
+    bool counterCurrency = false,
+    bool positionSize = false,
+    bool numberOfPips = false,
+    bool pipDecimalPlaces = false,
+    bool positionSizeFieldType = false,
+  }) {
+    return MatexPipValueCalculatorDocument(
+      accountCurrency: accountCurrency ? null : this.accountCurrency,
+      baseCurrency: baseCurrency ? null : this.baseCurrency,
+      counterCurrency: counterCurrency ? null : this.counterCurrency,
+      positionSize: positionSize ? null : this.positionSize,
+      numberOfPips: numberOfPips ? null : this.numberOfPips,
+      pipDecimalPlaces: pipDecimalPlaces ? null : this.pipDecimalPlaces,
+      positionSizeFieldType:
+          positionSizeFieldType ? null : this.positionSizeFieldType,
+    );
+  }
+
+  @override
   MatexPipValueCalculatorDocument merge(
     covariant MatexPipValueCalculatorDocument model,
   ) {

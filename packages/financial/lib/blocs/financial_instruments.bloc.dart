@@ -7,20 +7,26 @@ import 'package:matex_financial/financial.dart';
 
 class MatexFinancialInstrumentsBloc extends BidirectionalBloc<
     MatexFinancialInstrumentsBlocEvent, MatexFinancialInstrumentsBlocState> {
-  static MatexFinancialInstrumentsBloc? _singleton;
+  static late MatexFinancialInstrumentsBloc instance;
+  static bool _hasBeenInstantiated = false;
 
   final _instrumentsProvider = MatexPairMetadataProvider();
   final _instrumentProvider = MatexInstrumentProvider();
 
   MatexFinancialInstrumentsBloc._(
-      {MatexFinancialInstrumentsBlocState? initialState})
+      MatexFinancialInstrumentsBlocState? initialState)
       : super(
             initialState: initialState ?? MatexFinancialInstrumentsBlocState());
 
-  factory MatexFinancialInstrumentsBloc() {
-    _singleton ??= MatexFinancialInstrumentsBloc._();
+  factory MatexFinancialInstrumentsBloc({
+    MatexFinancialInstrumentsBlocState? initialState,
+  }) {
+    if (!_hasBeenInstantiated) {
+      instance = MatexFinancialInstrumentsBloc._(initialState);
+      _hasBeenInstantiated = true;
+    }
 
-    return _singleton!;
+    return instance;
   }
 
   @override
@@ -77,6 +83,8 @@ class MatexFinancialInstrumentsBloc extends BidirectionalBloc<
             await _instrumentProvider.metadata(instrument.counterCode),
       ));
     }
+
+    print('instruments: $instruments');
 
     return instruments;
   }

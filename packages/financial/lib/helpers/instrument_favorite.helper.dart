@@ -4,10 +4,12 @@ import 'package:matex_financial/financial.dart';
 /// Determines whether the financial instrument is marked as favorite or not
 /// based on the list of favorite instruments
 bool isInstrumentFavorite(
-  List<MatexInstrumentFavorite> favorites,
   String base,
-  String countrer,
-) {
+  String countrer, {
+  List<MatexInstrumentFavorite>? favorites,
+}) {
+  favorites ??= MatexInstrumentFavoriteBloc.instance.favorites;
+
   return favorites.any((favorite) {
     return favorite.base == base && favorite.counter == countrer;
   });
@@ -27,15 +29,17 @@ bool isInstrumentFavorite(
 /// objects that match the "favorite" pairs specified in the `favorites` list.
 List<FastItem<MatexFinancialInstrument>> findFavoriteInstuments(
   List<FastItem<MatexFinancialInstrument>> items,
-  List<MatexInstrumentFavorite> favorites,
 ) {
   return items.where((item) {
-    final instrumentPair = item.value!;
+    final instrumentPair = item.value;
 
-    return isInstrumentFavorite(
-      favorites,
-      instrumentPair.baseCode!,
-      instrumentPair.counterCode!,
-    );
+    if (item.value == null) return false;
+
+    final base = instrumentPair!.baseCode;
+    final counter = instrumentPair.counterCode;
+
+    if (base == null || counter == null) return false;
+
+    return isInstrumentFavorite(base, counter);
   }).toList();
 }

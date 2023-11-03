@@ -6,9 +6,28 @@ import 'package:tbloc/tbloc.dart';
 /// financial instruments in a trading app.
 class MatexInstrumentFavoriteBloc extends BidirectionalBloc<
     MatexInstrumentFavoriteBlocEvent, MatexInstrumentFavoriteBlocState> {
+  static bool _hasBeenInstantiated = false;
+  static late MatexInstrumentFavoriteBloc instance;
+
   /// Initializes a new instance of the [MatexInstrumentFavoriteBloc] class.
-  MatexInstrumentFavoriteBloc()
-      : super(initialState: MatexInstrumentFavoriteBlocState());
+  MatexInstrumentFavoriteBloc._({
+    MatexInstrumentFavoriteBlocState? initialState,
+  }) : super(initialState: initialState ?? MatexInstrumentFavoriteBlocState());
+
+  factory MatexInstrumentFavoriteBloc({
+    MatexInstrumentFavoriteBlocState? initialState,
+  }) {
+    if (!_hasBeenInstantiated) {
+      instance = MatexInstrumentFavoriteBloc._(initialState: initialState);
+      _hasBeenInstantiated = true;
+    }
+
+    return instance;
+  }
+
+  List<MatexInstrumentFavorite> get favorites => currentState.favorites;
+
+  bool get hasFavorites => currentState.favorites.isNotEmpty;
 
   /// Provides access to data source for managing favorites.
   final dataProvider = MatexInstrumentFavoriteDataProvider();

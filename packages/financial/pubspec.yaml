@@ -17,6 +17,7 @@ dependencies:
   cross_file: ^0.3.3+6
   printing: ^5.11.0
   easy_localization: ^3.0.3
+  rxdart: ^0.27.2
 
   # MateX
   matex_dart: ^0.11.1

@@ -65,7 +65,7 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<MatexPipValueCalculatorBlocResults> compute() async {
     if (await isCalculatorStateValid()) {
-      final results = calculator.value();
+      // final results = calculator.value();
       // FIXME: add your own logic here
 
       return MatexPipValueCalculatorBlocResults();
@@ -84,12 +84,6 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
         case MatexPipValueCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
 
-        case MatexPipValueCalculatorBlocKey.baseCurrency:
-          return document.copyWith(baseCurrency: value);
-
-        case MatexPipValueCalculatorBlocKey.counterCurrency:
-          return document.copyWith(counterCurrency: value);
-
         case MatexPipValueCalculatorBlocKey.positionSize:
           return document.copyWith(positionSize: value);
 
@@ -98,9 +92,6 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
 
         case MatexPipValueCalculatorBlocKey.pipDecimalPlaces:
           return document.copyWith(pipDecimalPlaces: value);
-
-        default:
-          debugLog('Invalid key: $key', debugLabel: debugLabel);
       }
     } else if (value is Enum) {
       value = describeEnum(value);
@@ -111,10 +102,14 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
             positionSizeFieldType: value,
             positionSize: '',
           );
-
-        default:
-          debugLog('Invalid key: $key', debugLabel: debugLabel);
-          break;
+      }
+    } else if (value is MatexFinancialInstrument) {
+      switch (key) {
+        case MatexPipValueCalculatorBlocKey.instrument:
+          return document.copyWith(
+            baseCurrency: value.baseCode,
+            counterCurrency: value.counterCode,
+          );
       }
     }
 
@@ -131,12 +126,6 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
         case MatexPipValueCalculatorBlocKey.accountCurrency:
           return patchAccountCurrency(value);
 
-        case MatexPipValueCalculatorBlocKey.baseCurrency:
-          return patchBaseCurrency(value);
-
-        case MatexPipValueCalculatorBlocKey.counterCurrency:
-          return patchCounterCurrency(value);
-
         case MatexPipValueCalculatorBlocKey.positionSize:
           return patchPositionSize(value);
 
@@ -145,10 +134,6 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
 
         case MatexPipValueCalculatorBlocKey.pipDecimalPlaces:
           return patchPipDecimalPlaces(value);
-
-        default:
-          debugLog('Invalid key: $key', debugLabel: debugLabel);
-          break;
       }
     } else if (value is Enum) {
       value = describeEnum(value);
@@ -161,6 +146,44 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
           debugLog('Invalid key: $key', debugLabel: debugLabel);
           break;
       }
+    } else if (value is MatexFinancialInstrument) {
+      switch (key) {
+        case MatexPipValueCalculatorBlocKey.instrument:
+          return patchInstrument(value);
+      }
+    }
+
+    return null;
+  }
+
+  @override
+  Future<MatexPipValueCalculatorDocument?> resetCalculatorDocument(
+    String key,
+  ) async {
+    switch (key) {
+      case MatexPipValueCalculatorBlocKey.accountCurrency:
+        return document.copyWithDefaults(accountCurrency: true);
+
+      case MatexPipValueCalculatorBlocKey.instrument:
+        return document.copyWithDefaults(
+          counterCurrency: true,
+          baseCurrency: true,
+        );
+    }
+
+    return null;
+  }
+
+  @override
+  Future<MatexPipValueCalculatorBlocState?> resetCalculatorState(
+    String key,
+  ) async {
+    switch (key) {
+      case MatexPipValueCalculatorBlocKey.accountCurrency:
+        return patchAccountCurrency(null);
+
+      case MatexPipValueCalculatorBlocKey.instrument:
+        return patchInstrument(null);
     }
 
     return null;
@@ -191,7 +214,7 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<MatexPipValueCalculatorDocument>
       retrieveDefaultCalculatorDocument() async {
-    final bloc = FastAppDictBloc.instance;
+    // final bloc = FastAppDictBloc.instance;
 
     return MatexPipValueCalculatorDocument(
       // FIXME: add default values here
@@ -207,24 +230,42 @@ class MatexPipValueCalculatorBloc extends MatexCalculatorBloc<
     );
   }
 
-  MatexPipValueCalculatorBlocState patchAccountCurrency(String value) {
-    final fields = currentState.fields.copyWith(accountCurrency: value);
+  MatexPipValueCalculatorBlocState patchAccountCurrency(String? value) {
+    late final MatexPipValueCalculatorBlocFields fields;
+
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(accountCurrency: true);
+    } else {
+      fields = currentState.fields.copyWith(accountCurrency: value);
+    }
+
     calculator.isAccountCurrencyCounterCurrency =
         value == fields.counterCurrency;
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexPipValueCalculatorBlocState patchBaseCurrency(String value) {
-    final fields = currentState.fields.copyWith(baseCurrency: value);
+  MatexPipValueCalculatorBlocState patchInstrument(
+    MatexFinancialInstrument? instrument,
+  ) {
+    late final MatexPipValueCalculatorBlocFields fields;
 
-    return currentState.copyWith(fields: fields);
-  }
+    if (instrument == null) {
+      fields = currentState.fields.copyWithDefaults(
+        baseCurrency: true,
+        counterCurrency: true,
+      );
 
-  MatexPipValueCalculatorBlocState patchCounterCurrency(String value) {
-    final fields = currentState.fields.copyWith(counterCurrency: value);
-    calculator.isAccountCurrencyCounterCurrency =
-        value == fields.accountCurrency;
+      calculator.isAccountCurrencyCounterCurrency = false;
+    } else {
+      fields = currentState.fields.copyWith(
+        baseCurrency: instrument.baseCode,
+        counterCurrency: instrument.counterCode,
+      );
+
+      calculator.isAccountCurrencyCounterCurrency =
+          instrument.counterCode == fields.accountCurrency;
+    }
 
     return currentState.copyWith(fields: fields);
   }
