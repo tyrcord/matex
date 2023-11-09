@@ -26,18 +26,31 @@ mixin MatexCalculatorFormatterMixin {
     String? localeCode = delegate?.getUserLocaleCode();
 
     if (localeCode == null) {
-      final appInfo = FastAppInfoBloc.instance.currentState;
       final appSettingsBloc = FastAppSettingsBloc.instance;
 
       localeCode = toIos3166Code(
         appSettingsBloc.currentState.languageCode,
-        countryCode: appInfo.deviceCountryCode,
+        countryCode: getDeviceCountryCode(),
       );
 
       return localeCode ?? kFastSettingsDefaultLanguageCode;
     }
 
     return localeCode;
+  }
+
+  /// Retrieves the country code of the device.
+  ///
+  /// This method accesses the current state of the `FastAppInfoBloc` to
+  /// obtain the country code that the device is registered in or operating.
+  /// The country code is often used for localizing user experiences.
+  ///
+  /// Returns a `String` representing the country code of the device,
+  /// or `null` if it's not available or cannot be determined.
+  String? getDeviceCountryCode() {
+    final appInfo = FastAppInfoBloc.instance.currentState;
+
+    return appInfo.deviceCountryCode;
   }
 
   /// Retrieves the user's currency code.
@@ -131,6 +144,31 @@ mixin MatexCalculatorFormatterMixin {
       locale: locale ?? getUserLocaleCode(),
       symbol: symbol ?? getUserCurrencyCode(),
       value: value,
+    );
+  }
+
+  /// Localizes the provided Unix timestamp in milliseconds based on user's
+  /// preferences and locale.
+  ///
+  /// It considers the user's format preference (24-hour or 12-hour) and
+  /// utilizes device-specific locale settings for accurate localization.
+  ///
+  /// Parameters:
+  ///   - `timestampInMilliseconds`: The Unix timestamp in milliseconds to be
+  ///                                localized.
+  ///
+  /// Returns a `Future<String>` that when completed, provides the localized
+  /// timestamp as a string.
+  Future<String> localizeTimestampInMilliseconds(
+    int timestampInMilliseconds,
+  ) async {
+    final appSettingsBloc = FastAppSettingsBloc.instance;
+
+    return formatTimestamp(
+      alwaysUse24HourFormat: appSettingsBloc.currentState.alwaysUse24HourFormat,
+      countryCode: getDeviceCountryCode(),
+      languageCode: getUserLocaleCode(),
+      timestamp: timestampInMilliseconds,
     );
   }
 }
