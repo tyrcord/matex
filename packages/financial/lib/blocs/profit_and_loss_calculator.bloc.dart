@@ -25,8 +25,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   MatexProfitAndLossCalculatorBloc({
     MatexProfitAndLossCalculatorBlocState? initialState,
     MatexProfitAndLossCalculatorDataProvider? dataProvider,
+    super.debouceComputeEvents = true,
     super.showExportPdfDialog,
-    super.debouceComputeEvents,
+    super.delegate,
   }) : super(
           initialState: initialState ?? _kDefaultProfitAndLossBlocState,
           dataProvider:

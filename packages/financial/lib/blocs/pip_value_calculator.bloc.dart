@@ -29,8 +29,9 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexPipValueCalculatorBlocState? initialState,
     MatexPipValueCalculatorDataProvider? dataProvider,
     required this.exchangeProvider,
+    super.debouceComputeEvents = true,
     super.showExportPdfDialog,
-    super.debouceComputeEvents,
+    super.delegate,
   }) : super(
           initialState: initialState ?? _kDefaultPipValueBlocState,
           dataProvider: dataProvider ?? MatexPipValueCalculatorDataProvider(),
