@@ -2,16 +2,21 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_financial/fastyle_financial.dart';
 import 'package:matex_core/core.dart';
-import 'package:matex_financial/models/instrument.model.dart';
+import 'package:matex_financial/financial.dart';
+import 'package:t_helpers/helpers.dart';
 
 final String _kDefaultPositionSizeFieldType =
     FastPositionSizeSwitchFieldType.unit.name;
 
 class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
-    with MatexCalculatorFormatterMixin {
-  late final String? accountCurrency;
+    with MatexCalculatorFormatterMixin
+    implements MatexFinancialInstrumentCalculatorBlocFields {
+  @override
   late final String? baseCurrency;
+  @override
   late final String? counterCurrency;
+
+  late final String? accountCurrency;
   late final String? positionSize;
   late final String? numberOfPips;
   late final String? pipDecimalPlaces;

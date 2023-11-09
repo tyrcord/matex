@@ -5,6 +5,7 @@ export 'profit_and_loss_calculator.bloc.dart';
 export 'pip_value_calculator.bloc.dart';
 export 'financial_instruments.bloc.dart';
 export 'financial_instrument_favorites.bloc.dart';
+export 'financial.bloc.dart';
 
 export './states/states.dart';
 export './events/events.dart';

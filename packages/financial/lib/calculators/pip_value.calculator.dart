@@ -61,9 +61,15 @@ class MatexPipValueCalculator extends MatexCalculator<
     setState(state.copyWith(counterToAccountCurrencyRate: value));
   }
 
+  double? get counterToAccountCurrencyRate {
+    return state.counterToAccountCurrencyRate;
+  }
+
   set instrumentPairRate(double? value) {
     setState(state.copyWith(instrumentPairRate: value));
   }
+
+  double? get instrumentPairRate => state.instrumentPairRate;
 
   set lot(double lot) {
     positionSize = getPositionSizeFromLotDescriptor(
