@@ -164,8 +164,8 @@ mixin MatexCalculatorFormatterMixin {
   ) async {
     final appSettingsBloc = FastAppSettingsBloc.instance;
 
-    return formatTimestamp(
-      alwaysUse24HourFormat: appSettingsBloc.currentState.alwaysUse24HourFormat,
+    return formatTimestampInMilliseconds(
+      use24HourFormat: appSettingsBloc.currentState.use24HourFormat,
       countryCode: getDeviceCountryCode(),
       languageCode: getUserLocaleCode(),
       timestamp: timestampInMilliseconds,
