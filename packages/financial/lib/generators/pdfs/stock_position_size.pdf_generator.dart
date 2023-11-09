@@ -41,7 +41,7 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
         namedArgs: {'app_name': appInfo.appName},
       ),
       categories: _buildCategoryEntries(context, fields, results),
-      alwaysUse24HourFormat: appSettingsBloc.currentState.alwaysUse24HourFormat,
+      use24HourFormat: appSettingsBloc.currentState.use24HourFormat,
       languageCode: appSettingsBloc.currentState.languageCode,
       countryCode: appInfo.deviceCountryCode,
     );

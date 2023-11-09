@@ -29,7 +29,7 @@ class MatexVatCalculatorPdfGenerator {
     final appInfo = appInfoBloc.currentState;
 
     return reporter.report(
-      alwaysUse24HourFormat: appSettingsBloc.currentState.alwaysUse24HourFormat,
+      use24HourFormat: appSettingsBloc.currentState.use24HourFormat,
       subtitle: FinanceLocaleKeys.finance_label_vat_text.tr(),
       inputs: _buildInputReportEntries(context, fields, results),
       categories: _buildCategoryEntries(context, fields, results),
