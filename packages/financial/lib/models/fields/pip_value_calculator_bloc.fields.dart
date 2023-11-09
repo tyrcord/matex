@@ -32,7 +32,11 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   String get formattedFinancialInstrument {
     if (baseCurrency == null || counterCurrency == null) return '';
 
-    return '$baseCurrency/$counterCurrency';
+    return formatCurrencyPair(
+      baseCurrency: baseCurrency!,
+      quoteCurrency: counterCurrency!,
+      delimiter: '/',
+    );
   }
 
   MatexFinancialInstrument? get financialInstrument {
