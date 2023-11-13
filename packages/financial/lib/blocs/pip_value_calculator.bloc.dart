@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
+import 'package:flutter/widgets.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
 
@@ -41,8 +42,10 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
         ) {
     calculator = MatexPipValueCalculator();
 
-    // FIXME:
-    // Add listeners for default value changes if needed
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.matexCalculatorFinancialInstrument.name,
+      MatexPipValueCalculatorBlocKey.instrument,
+    );
 
     _listenToPrimaryCurrencyCodeChanges();
   }
@@ -229,6 +232,11 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     String key,
     dynamic value,
   ) async {
+    if (value is Map<dynamic, dynamic> &&
+        key == MatexPipValueCalculatorBlocKey.instrument) {
+      value = MatexFinancialInstrument.fromJson(value);
+    }
+
     if (value is String) {
       switch (key) {
         case MatexPipValueCalculatorBlocKey.accountCurrency:
@@ -257,14 +265,14 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       switch (key) {
         case MatexPipValueCalculatorBlocKey.instrument:
           final pipDecimalPlaces = await getPipPrecision(
-            baseCurrency: value.baseCode,
             counterCurrency: value.counterCode,
+            baseCurrency: value.baseCode,
           );
 
           return document.copyWith(
-            baseCurrency: value.baseCode,
-            counterCurrency: value.counterCode,
             pipDecimalPlaces: pipDecimalPlaces.toString(),
+            counterCurrency: value.counterCode,
+            baseCurrency: value.baseCode,
           );
       }
     }
@@ -277,6 +285,11 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     String key,
     dynamic value,
   ) async {
+    if (value is Map<dynamic, dynamic> &&
+        key == MatexPipValueCalculatorBlocKey.instrument) {
+      value = MatexFinancialInstrument.fromJson(value);
+    }
+
     if (value is String) {
       switch (key) {
         case MatexPipValueCalculatorBlocKey.accountCurrency:
@@ -413,9 +426,10 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     return _kDefaultPipValueBlocState.copyWith(
       fields: MatexPipValueCalculatorBlocFields(
-        // FIXME: add default values here
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         accountCurrency: document.accountCurrency,
+        counterCurrency: document.counterCurrency,
+        baseCurrency: document.baseCurrency,
       ),
     );
   }
@@ -423,17 +437,26 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   @override
   Future<MatexPipValueCalculatorDocument>
       retrieveDefaultCalculatorDocument() async {
-    // final bloc = FastAppDictBloc.instance;
+    final bloc = FastAppDictBloc.instance;
+    final json = bloc.getValue<Map<dynamic, dynamic>?>(
+      MatexCalculatorDefaultValueKeys.matexCalculatorFinancialInstrument.name,
+    );
 
-    // FIXME: get default instrument from the settings
-    // final pipDecimalPlaces = await getPipPrecision(
-    //   baseCurrency: document.baseCurrency,
-    //   counterCurrency: document.counterCurrency,
-    // );
+    debugLog(
+      'retrieveDefaultCalculatorDocument: $json',
+      debugLabel: debugLabel,
+    );
+
+    MatexFinancialInstrument? instrument;
+
+    if (json != null) {
+      instrument = MatexFinancialInstrument.fromJson(json);
+    }
 
     return MatexPipValueCalculatorDocument(
-      // FIXME: add default values here
       accountCurrency: getUserCurrencyCode(),
+      counterCurrency: instrument?.counterCode,
+      baseCurrency: instrument?.baseCode,
     );
   }
 

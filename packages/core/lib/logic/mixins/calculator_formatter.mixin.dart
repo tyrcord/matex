@@ -22,17 +22,7 @@ mixin MatexCalculatorFormatterMixin {
   @protected
   String getUserLocaleCode() {
     String? localeCode = delegate?.getUserLocaleCode();
-
-    if (localeCode == null) {
-      final appSettingsBloc = FastAppSettingsBloc.instance;
-
-      localeCode = toIos3166Code(
-        appSettingsBloc.currentState.languageCode,
-        countryCode: getDeviceCountryCode(),
-      );
-
-      return localeCode ?? kFastSettingsDefaultLanguageCode;
-    }
+    localeCode ??= FastAppSettingsBloc.instance.currentState.localeCode;
 
     return localeCode;
   }
@@ -57,10 +47,9 @@ mixin MatexCalculatorFormatterMixin {
   @protected
   String getUserCurrencyCode() {
     final currencyCode = delegate?.getUserCurrencyCode();
-    final appSettingsBloc = FastAppSettingsBloc.instance;
+    final appSettings = FastAppSettingsBloc.instance.currentState;
 
-    return currencyCode ??
-        appSettingsBloc.currentState.primaryCurrencyCode.toUpperCase();
+    return currencyCode ?? appSettings.primaryCurrencyCode.toUpperCase();
   }
 
   /// Retrieves the user's currency symbol using the provided locale and

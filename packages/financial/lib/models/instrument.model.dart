@@ -6,6 +6,13 @@ class MatexFinancialInstrument extends TModel {
 
   const MatexFinancialInstrument({this.counterCode, this.baseCode});
 
+  factory MatexFinancialInstrument.fromJson(Map<dynamic, dynamic> json) {
+    return MatexFinancialInstrument(
+      counterCode: json['counterCode'] as String?,
+      baseCode: json['baseCode'] as String?,
+    );
+  }
+
   bool isValid() {
     return counterCode != null &&
         baseCode != null &&
@@ -33,6 +40,13 @@ class MatexFinancialInstrument extends TModel {
       counterCode: model.counterCode,
       baseCode: model.baseCode,
     );
+  }
+
+  Map<String, String?> toJson() {
+    return {
+      'counterCode': counterCode,
+      'baseCode': baseCode,
+    };
   }
 
   @override
