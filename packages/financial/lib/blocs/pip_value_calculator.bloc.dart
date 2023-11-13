@@ -72,7 +72,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       addEvent(FastCalculatorBlocEvent.patchValue(
         key: MatexPipValueCalculatorBlocKey.accountCurrency,
-        value: state.primaryCurrencyCode,
+        value: getUserCurrencyCode(),
       ));
     }
   }
@@ -119,7 +119,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     final instrumentMetadata = await getInstrumentMetadata();
     final instrumentPairRate = calculator.instrumentPairRate ?? 0;
 
-    if (instrumentPairRate > 0) {
+    if (instrumentPairRate > 0 && await isMandatoryFieldValid()) {
       metadata.putIfAbsent('formattedInstrumentExchangeRate', () {
         final formatted = localizeQuote(
           rate: calculator.instrumentPairRate,
@@ -461,6 +461,10 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexFinancialInstrument? instrument,
   ) async {
     late final MatexPipValueCalculatorBlocFields fields;
+
+    calculator
+      ..counterToAccountCurrencyRate = 0
+      ..instrumentPairRate = 0;
 
     // Note: Loads default metadata values from the super class.
     // instrument metadata will be loaded in the willCompute method.
