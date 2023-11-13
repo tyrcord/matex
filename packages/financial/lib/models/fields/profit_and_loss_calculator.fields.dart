@@ -86,7 +86,7 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
     String? taxRate,
     String? buyingCostsPerUnitType,
     String? sellingCostsPerUnitType,
-    MatexCalculatorBlocDelegate? delegate,
+    FastCalculatorBlocDelegate? delegate,
   }) {
     this.expectedSaleUnits = assignValue(expectedSaleUnits);
     this.buyingPrice = assignValue(buyingPrice);
@@ -120,7 +120,7 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
     String? taxRate,
     String? buyingCostsPerUnitType,
     String? sellingCostsPerUnitType,
-    MatexCalculatorBlocDelegate? delegate,
+    FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexProfitAndLossCalculatorBlocFields(
       expectedSaleUnits: expectedSaleUnits ?? this.expectedSaleUnits,

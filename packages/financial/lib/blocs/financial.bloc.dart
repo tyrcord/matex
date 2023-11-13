@@ -22,8 +22,10 @@ abstract class MatexFinancialCalculatorBloc<
 
   MatexFinancialCalculatorBloc({
     required super.dataProvider,
+    super.debouceComputeEvents = false,
+    super.isAutoRefreshEnabled = false,
     super.showExportPdfDialog,
-    super.debouceComputeEvents,
+    super.autoRefreshPeriod,
     super.initialState,
     super.debugLabel,
     super.delegate,

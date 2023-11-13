@@ -78,11 +78,13 @@ abstract class MatexCalculatorBloc<
   /// The `debugLabel` parameter specifies a label to use for debugging.
   MatexCalculatorBloc({
     required super.dataProvider,
-    super.initialState,
     super.debouceComputeEvents = false,
-    super.debugLabel,
+    super.isAutoRefreshEnabled = false,
+    super.autoRefreshPeriod,
     this.showExportPdfDialog,
-    MatexCalculatorBlocDelegate? delegate,
+    super.initialState,
+    super.debugLabel,
+    FastCalculatorBlocDelegate? delegate,
   }) {
     this.delegate = delegate;
   }

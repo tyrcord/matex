@@ -86,7 +86,7 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
     String? tipAmount,
     String? tipFieldType,
     String? discountFieldType,
-    MatexCalculatorBlocDelegate? delegate,
+    FastCalculatorBlocDelegate? delegate,
   }) {
     this.regionalVatRate = assignValue(regionalVatRate);
     this.federalVatRate = assignValue(federalVatRate);
@@ -118,7 +118,7 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
     String? tipAmount,
     String? tipFieldType,
     String? discountFieldType,
-    MatexCalculatorBlocDelegate? delegate,
+    FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexVatCalculatorBlocFields(
       federalVatRate: federalVatRate ?? this.federalVatRate,

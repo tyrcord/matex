@@ -61,7 +61,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     String? numberOfPips,
     String? pipDecimalPlaces,
     String? positionSizeFieldType,
-    MatexCalculatorBlocDelegate? delegate,
+    FastCalculatorBlocDelegate? delegate,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
     this.baseCurrency = assignValue(baseCurrency);
@@ -108,7 +108,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     String? numberOfPips,
     String? pipDecimalPlaces,
     String? positionSizeFieldType,
-    MatexCalculatorBlocDelegate? delegate,
+    FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexPipValueCalculatorBlocFields(
       accountCurrency: accountCurrency ?? this.accountCurrency,

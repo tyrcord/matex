@@ -5,16 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:intl/intl.dart';
 import 'package:t_helpers/helpers.dart';
-
-// Project imports:
-import 'package:matex_core/core.dart';
+import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 mixin MatexCalculatorFormatterMixin {
   /// An optional delegate for handling MatexCalculatorBloc-specific tasks.
   /// This delegate can be used to load metadata, retrieve user information...
   ///
   /// If not provided, it will be `null`.
-  late final MatexCalculatorBlocDelegate? delegate;
+  late final FastCalculatorBlocDelegate? delegate;
 
   /// Retrieves the user's locale code.
   ///

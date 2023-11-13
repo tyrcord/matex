@@ -95,7 +95,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
     String? exitFees,
     String? riskFieldType,
     String? position,
-    MatexCalculatorBlocDelegate? delegate,
+    FastCalculatorBlocDelegate? delegate,
   }) {
     this.accountSize = assignValue(accountSize);
     this.entryPrice = assignValue(entryPrice);
@@ -127,7 +127,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
     String? exitFees,
     String? riskFieldType,
     String? position,
-    MatexCalculatorBlocDelegate? delegate,
+    FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexStockPositionSizeCalculatorBlocFields(
       accountSize: accountSize ?? this.accountSize,
