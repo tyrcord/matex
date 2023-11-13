@@ -529,9 +529,19 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-// FIXME: implement the toPdf method
-//   @override
-//   Future<Uint8List> toPdf(BuildContext context) async {
+  @override
+  Future<Uint8List> toPdf(BuildContext context) async {
+    final pdfGenerator = MatexPipValueCalculatorPdfGenerator();
+    final fields = currentState.fields;
+    final results = await compute();
+    final metadata = currentState.metadata;
 
-//   }
+    // ignore: use_build_context_synchronously
+    return pdfGenerator.generate(
+      context,
+      fields,
+      results,
+      metadata,
+    );
+  }
 }
