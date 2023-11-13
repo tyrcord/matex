@@ -16,7 +16,7 @@ dependencies:
   collection: ^1.17.2
 
   # Fastyle
-  fastyle_core: ^0.0.33
+  fastyle_core: ^0.0.34
 
   # T
   tmodel: ^0.5.11+6

@@ -36,12 +36,13 @@ dependencies:
   lingua_core: ^0.0.31
   lingua_settings: ^0.0.12
   lingua_finance_forex: ^0.0.5
+  lingua_units: ^0.0.5
 
   # Fastyle
-  fastyle_forms: ^0.0.32
-  fastyle_core: ^0.0.33
-  fastyle_calculator: ^1.42.0
-  fastyle_financial: ^0.0.27
+  fastyle_forms: ^0.0.32+1
+  fastyle_core: ^0.0.34
+  fastyle_calculator: ^1.43.0
+  fastyle_financial: ^0.0.28
 
 dev_dependencies:
   flutter_test:
@@ -49,3 +50,7 @@ dev_dependencies:
   flutter_lints: ^3.0.1
   import_sorter: ^4.6.0
   dependency_validator: ^3.2.3
+
+dependency_overrides:
+  lingua_units:
+    path: /Users/thibaultzanini/Dev/tyrcord/librairies/dart/lingua/packages/units
