@@ -386,6 +386,8 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
           counter: true,
           base: true,
         );
+      case MatexPipValueCalculatorBlocKey.numberOfPips:
+        return document.copyWithDefaults(numberOfPips: true);
     }
 
     return null;
@@ -401,6 +403,9 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       case MatexPipValueCalculatorBlocKey.instrument:
         return patchInstrument(null);
+
+      case MatexPipValueCalculatorBlocKey.numberOfPips:
+        return patchNumberOfPips(null);
     }
 
     return null;
@@ -421,8 +426,8 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexPipValueCalculatorDocument document,
   ) async {
     final pipDecimalPlaces = await getPipPrecision(
-      base: document.base,
       counter: document.counter,
+      base: document.base,
     );
 
     return _kDefaultPipValueBlocState.copyWith(
@@ -451,11 +456,19 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     MatexFinancialInstrument? instrument;
 
+    int pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+
     if (json != null) {
       instrument = MatexFinancialInstrument.fromJson(json);
+
+      pipDecimalPlaces = await getPipPrecision(
+        counter: instrument.counter,
+        base: instrument.base,
+      );
     }
 
     return MatexPipValueCalculatorDocument(
+      pipDecimalPlaces: pipDecimalPlaces.toString(),
       accountCurrency: getUserCurrencyCode(),
       counter: instrument?.counter,
       base: instrument?.base,
@@ -530,8 +543,14 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexPipValueCalculatorBlocState patchNumberOfPips(String value) {
-    final fields = currentState.fields.copyWith(numberOfPips: value);
+  MatexPipValueCalculatorBlocState patchNumberOfPips(String? value) {
+    late final MatexPipValueCalculatorBlocFields fields;
+
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(numberOfPips: true);
+    } else {
+      fields = currentState.fields.copyWith(numberOfPips: value);
+    }
 
     return currentState.copyWith(fields: fields);
   }
