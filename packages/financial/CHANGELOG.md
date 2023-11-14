@@ -1,3 +1,11 @@
+## 0.0.27
+
+ - **FIX**: bunch of fixes.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: move away from matex_dart.
+ - **FEAT**: clean up.
+
 ## 0.0.26
 
  - **REFACTOR**: MatexFinancialInstrumentsBloc.

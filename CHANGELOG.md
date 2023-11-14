@@ -15,6 +15,42 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_core` - `v0.0.21`](#matex_core---v0021)
+ - [`matex_data` - `v0.0.15`](#matex_data---v0015)
+ - [`matex_financial` - `v0.0.27`](#matex_financial---v0027)
+
+---
+
+#### `matex_core` - `v0.0.21`
+
+ - **FIX**: bunch of fixes.
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.15`
+
+ - **FEAT**: move away from matex_dart.
+
+#### `matex_financial` - `v0.0.27`
+
+ - **FIX**: bunch of fixes.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: move away from matex_dart.
+ - **FEAT**: clean up.
+
+
+## 2023-11-14
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_core` - `v0.0.20`](#matex_core---v0020)
  - [`matex_data` - `v0.0.14`](#matex_data---v0014)
  - [`matex_financial` - `v0.0.26`](#matex_financial---v0026)

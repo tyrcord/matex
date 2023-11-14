@@ -1,3 +1,8 @@
+## 0.0.21
+
+ - **FIX**: bunch of fixes.
+ - **FEAT**: update dependencies.
+
 ## 0.0.20
 
  - **FIX**: wrong initial validity.
