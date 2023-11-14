@@ -53,8 +53,8 @@ class MatexPipValueCalculator extends MatexCalculator<
     setState(state.copyWith(pipDecimalPlaces: value));
   }
 
-  set isAccountCurrencyCounterCurrency(bool? value) {
-    setState(state.copyWith(isAccountCurrencyCounterCurrency: value));
+  set isAccountCurrencyCounter(bool? value) {
+    setState(state.copyWith(isAccountCurrencyCounter: value));
   }
 
   set counterToAccountCurrencyRate(double? value) {
@@ -116,8 +116,7 @@ class MatexPipValueCalculator extends MatexCalculator<
 
   Decimal computePipValue() {
     final counterToAccountCurrencyRate = state.counterToAccountCurrencyRate;
-    final isAccountCurrencyCounterCurrency =
-        state.isAccountCurrencyCounterCurrency;
+    final isAccountCurrencyCounter = state.isAccountCurrencyCounter;
     final dPositionSize = toDecimal(state.positionSize) ?? dZero;
     final pipDecimalPlaces = state.pipDecimalPlaces ?? 0;
     final decimalMultiplicator = pow(10, pipDecimalPlaces);
@@ -125,7 +124,7 @@ class MatexPipValueCalculator extends MatexCalculator<
     final dDecimalPip = decimalFromRational(dOne / dDecimalMultiplicator);
     final pipValue = dPositionSize * dDecimalPip;
 
-    if (isAccountCurrencyCounterCurrency) return pipValue;
+    if (isAccountCurrencyCounter) return pipValue;
 
     if (counterToAccountCurrencyRate == 0) {
       final dInstrumentPairRate = toDecimal(state.instrumentPairRate) ?? dOne;

@@ -40,15 +40,12 @@ abstract class MatexFinancialCalculatorBloc<
     return calculator.isValid;
   }
 
-  Future<int> getPipPrecision({
-    String? baseCurrency,
-    String? counterCurrency,
-  }) async {
-    if (baseCurrency == null || counterCurrency == null) {
+  Future<int> getPipPrecision({String? base, String? counter}) async {
+    if (base == null || counter == null) {
       return defaultPipDecimalPlaces;
     }
 
-    final pair = baseCurrency + counterCurrency;
+    final pair = base + counter;
     final tradingPairMetadata = await instrumentsProvider.metadata(pair);
     final pipMetadata = tradingPairMetadata?.pip;
 
@@ -56,19 +53,19 @@ abstract class MatexFinancialCalculatorBloc<
   }
 
   Future<MatexPairMetadata?> getInstrumentMetadata({
-    String? baseCurrency,
-    String? counterCode,
+    String? base,
+    String? counter,
   }) async {
     if (currentState.fields is MatexFinancialInstrumentCalculatorBlocFields) {
       final fields =
           currentState.fields as MatexFinancialInstrumentCalculatorBlocFields;
-      baseCurrency ??= fields.baseCurrency;
-      counterCode ??= fields.counterCurrency;
+      base ??= fields.base;
+      counter ??= fields.counter;
     }
 
-    if (baseCurrency == null || counterCode == null) return null;
+    if (base == null || counter == null) return null;
 
-    return instrumentsProvider.metadata(baseCurrency + counterCode);
+    return instrumentsProvider.metadata(base + counter);
   }
 
   Future<int> getStandardLotValue() async {

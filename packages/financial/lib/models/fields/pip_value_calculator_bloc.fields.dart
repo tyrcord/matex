@@ -12,9 +12,9 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
   @override
-  late final String? baseCurrency;
+  late final String? base;
   @override
-  late final String? counterCurrency;
+  late final String? counter;
 
   late final String? accountCurrency;
   late final String? positionSize;
@@ -35,28 +35,28 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   }
 
   String get formattedFinancialInstrument {
-    if (baseCurrency == null || counterCurrency == null) return '';
+    if (base == null || counter == null) return '';
 
     return formatCurrencyPair(
-      baseCurrency: baseCurrency!,
-      quoteCurrency: counterCurrency!,
+      counter: counter!,
       delimiter: '/',
+      base: base!,
     );
   }
 
   MatexFinancialInstrument? get financialInstrument {
-    if (baseCurrency == null || counterCurrency == null) return null;
+    if (base == null || counter == null) return null;
 
     return MatexFinancialInstrument(
-      baseCode: baseCurrency!,
-      counterCode: counterCurrency!,
+      base: base!,
+      counter: counter!,
     );
   }
 
   MatexPipValueCalculatorBlocFields({
     String? accountCurrency,
-    String? baseCurrency,
-    String? counterCurrency,
+    String? base,
+    String? counter,
     String? positionSize,
     String? numberOfPips,
     String? pipDecimalPlaces,
@@ -64,8 +64,8 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     FastCalculatorBlocDelegate? delegate,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
-    this.baseCurrency = assignValue(baseCurrency);
-    this.counterCurrency = assignValue(counterCurrency);
+    this.base = assignValue(base);
+    this.counter = assignValue(counter);
     this.positionSize = assignValue(positionSize);
     this.numberOfPips = assignValue(numberOfPips);
     this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
@@ -80,8 +80,8 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   @override
   MatexPipValueCalculatorBlocFields copyWithDefaults({
     bool accountCurrency = false,
-    bool baseCurrency = false,
-    bool counterCurrency = false,
+    bool base = false,
+    bool counter = false,
     bool positionSize = false,
     bool numberOfPips = false,
     bool pipDecimalPlaces = false,
@@ -89,8 +89,8 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   }) {
     return MatexPipValueCalculatorBlocFields(
       accountCurrency: accountCurrency ? null : this.accountCurrency,
-      baseCurrency: baseCurrency ? null : this.baseCurrency,
-      counterCurrency: counterCurrency ? null : this.counterCurrency,
+      base: base ? null : this.base,
+      counter: counter ? null : this.counter,
       positionSize: positionSize ? null : this.positionSize,
       numberOfPips: numberOfPips ? null : this.numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces ? null : this.pipDecimalPlaces,
@@ -102,8 +102,8 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   @override
   MatexPipValueCalculatorBlocFields copyWith({
     String? accountCurrency,
-    String? baseCurrency,
-    String? counterCurrency,
+    String? base,
+    String? counter,
     String? positionSize,
     String? numberOfPips,
     String? pipDecimalPlaces,
@@ -112,8 +112,8 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   }) {
     return MatexPipValueCalculatorBlocFields(
       accountCurrency: accountCurrency ?? this.accountCurrency,
-      baseCurrency: baseCurrency ?? this.baseCurrency,
-      counterCurrency: counterCurrency ?? this.counterCurrency,
+      base: base ?? this.base,
+      counter: counter ?? this.counter,
       positionSize: positionSize ?? this.positionSize,
       numberOfPips: numberOfPips ?? this.numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
@@ -129,8 +129,8 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   ) {
     return copyWith(
       accountCurrency: model.accountCurrency,
-      baseCurrency: model.baseCurrency,
-      counterCurrency: model.counterCurrency,
+      base: model.base,
+      counter: model.counter,
       positionSize: model.positionSize,
       numberOfPips: model.numberOfPips,
       pipDecimalPlaces: model.pipDecimalPlaces,
@@ -142,8 +142,8 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   @override
   List<Object?> get props => [
         accountCurrency,
-        baseCurrency,
-        counterCurrency,
+        base,
+        counter,
         positionSize,
         numberOfPips,
         pipDecimalPlaces,

@@ -83,8 +83,8 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   @override
   Future<bool> isMandatoryFieldValid() async {
     return currentState.fields.accountCurrency != null &&
-        currentState.fields.baseCurrency != null &&
-        currentState.fields.counterCurrency != null;
+        currentState.fields.base != null &&
+        currentState.fields.counter != null;
   }
 
   @override
@@ -265,14 +265,14 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       switch (key) {
         case MatexPipValueCalculatorBlocKey.instrument:
           final pipDecimalPlaces = await getPipPrecision(
-            counterCurrency: value.counterCode,
-            baseCurrency: value.baseCode,
+            counter: value.counter,
+            base: value.base,
           );
 
           return document.copyWith(
             pipDecimalPlaces: pipDecimalPlaces.toString(),
-            counterCurrency: value.counterCode,
-            baseCurrency: value.baseCode,
+            counter: value.counter,
+            base: value.base,
           );
       }
     }
@@ -327,10 +327,10 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
   Future<MatexQuote?> patchExchangeRates() async {
     final accountCurrency = currentState.fields.accountCurrency!;
-    final counterCurrency = currentState.fields.counterCurrency!;
-    final baseCurrency = currentState.fields.baseCurrency!;
+    final counter = currentState.fields.counter!;
+    final base = currentState.fields.base!;
     final pipDecimalPlaces = currentState.fields.pipDecimalPlaces;
-    final symbol = baseCurrency + counterCurrency;
+    final symbol = base + counter;
     final instrumentQuoteFuture = exchangeProvider.rate(symbol);
 
     if (pipDecimalPlaces == null) {
@@ -353,12 +353,12 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     calculator
       ..instrumentPairRate = instrumentQuote.price
       ..counterToAccountCurrencyRate = 0
-      ..isAccountCurrencyCounterCurrency = false;
+      ..isAccountCurrencyCounter = false;
 
-    if (accountCurrency == counterCurrency) {
-      calculator.isAccountCurrencyCounterCurrency = true;
+    if (accountCurrency == counter) {
+      calculator.isAccountCurrencyCounter = true;
     } else {
-      final symbol = counterCurrency + accountCurrency;
+      final symbol = counter + accountCurrency;
       final accountBaseQuote = await exchangeProvider.rate(symbol);
 
       if (accountBaseQuote == null) {
@@ -382,8 +382,8 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       case MatexPipValueCalculatorBlocKey.instrument:
         return document.copyWithDefaults(
-          counterCurrency: true,
-          baseCurrency: true,
+          counter: true,
+          base: true,
         );
     }
 
@@ -420,16 +420,16 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexPipValueCalculatorDocument document,
   ) async {
     final pipDecimalPlaces = await getPipPrecision(
-      baseCurrency: document.baseCurrency,
-      counterCurrency: document.counterCurrency,
+      base: document.base,
+      counter: document.counter,
     );
 
     return _kDefaultPipValueBlocState.copyWith(
       fields: MatexPipValueCalculatorBlocFields(
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         accountCurrency: document.accountCurrency,
-        counterCurrency: document.counterCurrency,
-        baseCurrency: document.baseCurrency,
+        counter: document.counter,
+        base: document.base,
       ),
     );
   }
@@ -455,8 +455,8 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     return MatexPipValueCalculatorDocument(
       accountCurrency: getUserCurrencyCode(),
-      counterCurrency: instrument?.counterCode,
-      baseCurrency: instrument?.baseCode,
+      counter: instrument?.counter,
+      base: instrument?.base,
     );
   }
 
@@ -496,21 +496,21 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     if (instrument == null) {
       fields = currentState.fields.copyWithDefaults(
         pipDecimalPlaces: true,
-        counterCurrency: true,
-        baseCurrency: true,
+        counter: true,
+        base: true,
       );
 
       calculator.pipDecimalPlaces = defaultPipDecimalPlaces;
     } else {
       final pipDecimalPlaces = await getPipPrecision(
-        counterCurrency: instrument.counterCode,
-        baseCurrency: instrument.baseCode,
+        counter: instrument.counter,
+        base: instrument.base,
       );
 
       fields = currentState.fields.copyWith(
         pipDecimalPlaces: pipDecimalPlaces.toString(),
-        counterCurrency: instrument.counterCode,
-        baseCurrency: instrument.baseCode,
+        counter: instrument.counter,
+        base: instrument.base,
       );
 
       calculator.pipDecimalPlaces = pipDecimalPlaces;

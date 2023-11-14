@@ -1,23 +1,23 @@
 import 'package:tmodel/tmodel.dart';
 
 class MatexFinancialInstrument extends TModel {
-  final String? counterCode;
-  final String? baseCode;
+  final String? counter;
+  final String? base;
 
-  const MatexFinancialInstrument({this.counterCode, this.baseCode});
+  const MatexFinancialInstrument({this.counter, this.base});
 
   factory MatexFinancialInstrument.fromJson(Map<dynamic, dynamic> json) {
     return MatexFinancialInstrument(
-      counterCode: json['counterCode'] as String?,
-      baseCode: json['baseCode'] as String?,
+      counter: json['counter'] as String?,
+      base: json['base'] as String?,
     );
   }
 
   bool isValid() {
-    return counterCode != null &&
-        baseCode != null &&
-        counterCode!.isNotEmpty &&
-        baseCode!.isNotEmpty;
+    return counter != null &&
+        base != null &&
+        counter!.isNotEmpty &&
+        base!.isNotEmpty;
   }
 
   @override
@@ -25,30 +25,24 @@ class MatexFinancialInstrument extends TModel {
 
   @override
   MatexFinancialInstrument copyWith({
-    String? counterCode,
-    String? baseCode,
+    String? counter,
+    String? base,
   }) {
     return MatexFinancialInstrument(
-      counterCode: counterCode ?? this.counterCode,
-      baseCode: baseCode ?? this.baseCode,
+      counter: counter ?? this.counter,
+      base: base ?? this.base,
     );
   }
 
   @override
   MatexFinancialInstrument merge(covariant MatexFinancialInstrument model) {
-    return copyWith(
-      counterCode: model.counterCode,
-      baseCode: model.baseCode,
-    );
+    return copyWith(counter: model.counter, base: model.base);
   }
 
   Map<String, String?> toJson() {
-    return {
-      'counterCode': counterCode,
-      'baseCode': baseCode,
-    };
+    return {'counter': counter, 'base': base};
   }
 
   @override
-  List<Object?> get props => [baseCode, counterCode];
+  List<Object?> get props => [base, counter];
 }

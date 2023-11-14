@@ -1,13 +1,17 @@
-/// An abstract class representing the fields required for a financial
-/// instrument calculator in the Matex package. This class serves as a
-/// base to ensure consistency in calculator implementations which
-/// require a base and a counter currency.
+/// An abstract class representing fields for a financial instrument
+/// calculator in a Bloc pattern. This class provides the foundation
+/// for handling calculations related to various financial instruments
+/// like currency pairs or stocks against a currency.
 abstract class MatexFinancialInstrumentCalculatorBlocFields {
-  /// The base currency is the first currency in a currency pair
-  /// and is used to set the amount to convert from.
-  late final String? baseCurrency;
+  /// The 'base' part of a financial instrument. In the context of
+  /// currency pairs, this represents the base currency. For example,
+  /// in a currency pair 'EUR/USD', 'EUR' is the base currency.
+  late final String? base;
 
-  /// The counter currency is the second currency in the currency pair
-  /// and is used to set the amount to convert to.
-  late final String? counterCurrency;
+  /// The 'counter' part of a financial instrument. In currency pairs,
+  /// this is the quote currency. For instance, in 'EUR/USD', 'USD'
+  /// would be the counter or quote currency. It represents the amount
+  /// of the counter currency required to buy one unit of the base
+  /// currency.
+  late final String? counter;
 }

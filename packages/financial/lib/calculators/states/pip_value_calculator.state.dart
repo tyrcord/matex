@@ -5,7 +5,7 @@ import 'package:matex_dart/matex_dart.dart' show MatexLotDescriptors;
 class MatexPipValueCalculatorState extends MatexCalculatorState {
   final double? positionSize;
   final int? pipDecimalPlaces;
-  final bool isAccountCurrencyCounterCurrency;
+  final bool isAccountCurrencyCounter;
   final double counterToAccountCurrencyRate;
   final double instrumentPairRate;
   final MatexLotDescriptors? lotDescriptors;
@@ -13,7 +13,7 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
   const MatexPipValueCalculatorState({
     this.positionSize,
     this.pipDecimalPlaces,
-    this.isAccountCurrencyCounterCurrency = false,
+    this.isAccountCurrencyCounter = false,
     this.counterToAccountCurrencyRate = 0,
     this.instrumentPairRate = 0,
     this.lotDescriptors,
@@ -26,7 +26,7 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
   MatexPipValueCalculatorState copyWith({
     double? positionSize,
     int? pipDecimalPlaces,
-    bool? isAccountCurrencyCounterCurrency,
+    bool? isAccountCurrencyCounter,
     double? counterToAccountCurrencyRate,
     double? instrumentPairRate,
     MatexLotDescriptors? lotDescriptors,
@@ -34,8 +34,8 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
     return MatexPipValueCalculatorState(
       positionSize: positionSize ?? this.positionSize,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
-      isAccountCurrencyCounterCurrency: isAccountCurrencyCounterCurrency ??
-          this.isAccountCurrencyCounterCurrency,
+      isAccountCurrencyCounter:
+          isAccountCurrencyCounter ?? this.isAccountCurrencyCounter,
       counterToAccountCurrencyRate:
           counterToAccountCurrencyRate ?? this.counterToAccountCurrencyRate,
       instrumentPairRate: instrumentPairRate ?? this.instrumentPairRate,
@@ -50,7 +50,7 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
     return copyWith(
       positionSize: model.positionSize,
       pipDecimalPlaces: model.pipDecimalPlaces,
-      isAccountCurrencyCounterCurrency: model.isAccountCurrencyCounterCurrency,
+      isAccountCurrencyCounter: model.isAccountCurrencyCounter,
       counterToAccountCurrencyRate: model.counterToAccountCurrencyRate,
       instrumentPairRate: model.instrumentPairRate,
       lotDescriptors: model.lotDescriptors,
@@ -61,7 +61,7 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
   List<Object?> get props => [
         positionSize,
         pipDecimalPlaces,
-        isAccountCurrencyCounterCurrency,
+        isAccountCurrencyCounter,
         counterToAccountCurrencyRate,
         instrumentPairRate,
         lotDescriptors,

@@ -86,12 +86,12 @@ void main() {
     });
 
     group('#computePipValue()', () {
-      test('returns pipValue for isAccountCurrencyCounterCurrency', () {
+      test('returns pipValue for isAccountCurrencyCounter', () {
         calculator
           ..positionSize = 10000
           ..pipDecimalPlaces = 4
           ..instrumentPairRate = 1
-          ..isAccountCurrencyCounterCurrency = true;
+          ..isAccountCurrencyCounter = true;
 
         final results = calculator.value();
 
@@ -160,12 +160,11 @@ void main() {
       });
     });
 
-    group('#isAccountCurrencyCounterCurrency', () {
-      test('should update isAccountCurrencyCounterCurrency in the state', () {
-        calculator.isAccountCurrencyCounterCurrency = true;
+    group('#isAccountCurrencyCounter', () {
+      test('should update isAccountCurrencyCounter in the state', () {
+        calculator.isAccountCurrencyCounter = true;
 
-        expect(calculator.getState().isAccountCurrencyCounterCurrency,
-            equals(true));
+        expect(calculator.getState().isAccountCurrencyCounter, equals(true));
       });
     });
 

@@ -10,8 +10,8 @@ final String _kDefaultPositionSizeFieldType =
 
 class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   late final String? accountCurrency;
-  late final String? baseCurrency;
-  late final String? counterCurrency;
+  late final String? base;
+  late final String? counter;
   late final String? positionSize;
   late final String? numberOfPips;
   late final String? pipDecimalPlaces;
@@ -19,16 +19,16 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
 
   MatexPipValueCalculatorDocument({
     String? accountCurrency,
-    String? baseCurrency,
-    String? counterCurrency,
+    String? base,
+    String? counter,
     String? positionSize,
     String? numberOfPips,
     String? pipDecimalPlaces,
     String? positionSizeFieldType,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
-    this.baseCurrency = assignValue(baseCurrency);
-    this.counterCurrency = assignValue(counterCurrency);
+    this.base = assignValue(base);
+    this.counter = assignValue(counter);
     this.positionSize = assignValue(positionSize);
     this.numberOfPips = assignValue(numberOfPips);
     this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
@@ -42,8 +42,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   @override
   MatexPipValueCalculatorDocument copyWith({
     String? accountCurrency,
-    String? baseCurrency,
-    String? counterCurrency,
+    String? base,
+    String? counter,
     String? positionSize,
     String? numberOfPips,
     String? pipDecimalPlaces,
@@ -51,8 +51,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   }) {
     return MatexPipValueCalculatorDocument(
       accountCurrency: accountCurrency ?? this.accountCurrency,
-      baseCurrency: baseCurrency ?? this.baseCurrency,
-      counterCurrency: counterCurrency ?? this.counterCurrency,
+      base: base ?? this.base,
+      counter: counter ?? this.counter,
       positionSize: positionSize ?? this.positionSize,
       numberOfPips: numberOfPips ?? this.numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
@@ -64,8 +64,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   @override
   MatexPipValueCalculatorDocument copyWithDefaults({
     bool accountCurrency = false,
-    bool baseCurrency = false,
-    bool counterCurrency = false,
+    bool base = false,
+    bool counter = false,
     bool positionSize = false,
     bool numberOfPips = false,
     bool pipDecimalPlaces = false,
@@ -73,8 +73,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   }) {
     return MatexPipValueCalculatorDocument(
       accountCurrency: accountCurrency ? null : this.accountCurrency,
-      baseCurrency: baseCurrency ? null : this.baseCurrency,
-      counterCurrency: counterCurrency ? null : this.counterCurrency,
+      base: base ? null : this.base,
+      counter: counter ? null : this.counter,
       positionSize: positionSize ? null : this.positionSize,
       numberOfPips: numberOfPips ? null : this.numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces ? null : this.pipDecimalPlaces,
@@ -89,8 +89,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   ) {
     return copyWith(
       accountCurrency: model.accountCurrency,
-      baseCurrency: model.baseCurrency,
-      counterCurrency: model.counterCurrency,
+      base: model.base,
+      counter: model.counter,
       positionSize: model.positionSize,
       numberOfPips: model.numberOfPips,
       pipDecimalPlaces: model.pipDecimalPlaces,
@@ -102,8 +102,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   MatexPipValueCalculatorBlocFields toFields() {
     return MatexPipValueCalculatorBlocFields(
       accountCurrency: accountCurrency,
-      baseCurrency: baseCurrency,
-      counterCurrency: counterCurrency,
+      base: base,
+      counter: counter,
       positionSize: positionSize,
       numberOfPips: numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces,
@@ -115,8 +115,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   Map<String, dynamic> toJson() {
     return {
       'accountCurrency': accountCurrency,
-      'baseCurrency': baseCurrency,
-      'counterCurrency': counterCurrency,
+      'base': base,
+      'counter': counter,
       'positionSize': positionSize,
       'numberOfPips': numberOfPips,
       'pipDecimalPlaces': pipDecimalPlaces,
@@ -130,8 +130,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   ) {
     return MatexPipValueCalculatorDocument(
       accountCurrency: json['accountCurrency'] as String?,
-      baseCurrency: json['baseCurrency'] as String?,
-      counterCurrency: json['counterCurrency'] as String?,
+      base: json['base'] as String?,
+      counter: json['counter'] as String?,
       positionSize: json['positionSize'] as String?,
       numberOfPips: json['numberOfPips'] as String?,
       pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
@@ -142,8 +142,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   @override
   List<Object?> get props => [
         accountCurrency,
-        baseCurrency,
-        counterCurrency,
+        base,
+        counter,
         positionSize,
         numberOfPips,
         pipDecimalPlaces,

@@ -35,8 +35,8 @@ List<FastItem<MatexFinancialInstrument>> findFavoriteInstuments(
 
     if (item.value == null) return false;
 
-    final base = instrumentPair!.baseCode;
-    final counter = instrumentPair.counterCode;
+    final base = instrumentPair!.base;
+    final counter = instrumentPair.counter;
 
     if (base == null || counter == null) return false;
 
