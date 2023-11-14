@@ -1,0 +1,1976 @@
+{
+  "BZ": {
+    "code": "BZ",
+    "format": {
+      "round": 3
+    },
+    "icon": "oil",
+    "name": {
+      "key": "brent_crude_oil",
+      "localized": "Brent Crude Oil"
+    },
+    "symbol": {
+      "long": "BZ",
+      "short": "BZ",
+      "ticker": "BZ"
+    },
+    "type": "commodity_energy"
+  },
+  "CL": {
+    "code": "CL",
+    "format": {
+      "round": 3
+    },
+    "icon": "oil",
+    "name": {
+      "key": "crude_oil",
+      "localized": "Crude Oil"
+    },
+    "symbol": {
+      "long": "CL",
+      "short": "CL",
+      "ticker": "CL"
+    },
+    "type": "commodity_energy"
+  },
+  "NG": {
+    "code": "NG",
+    "format": {
+      "round": 3
+    },
+    "icon": "gas",
+    "name": {
+      "key": "natural_gas",
+      "localized": "Natural Gas"
+    },
+    "symbol": {
+      "long": "NG",
+      "short": "NG",
+      "ticker": "NG"
+    },
+    "type": "commodity_energy"
+  },
+  "XAG": {
+    "code": "XAG",
+    "format": {
+      "round": 3
+    },
+    "icon": "silver",
+    "name": {
+      "key": "silver",
+      "localized": "Silver"
+    },
+    "symbol": {
+      "long": "XAG",
+      "short": "XAG",
+      "ticker": "XAG"
+    },
+    "type": "commodity_metal"
+  },
+  "XAU": {
+    "code": "XAU",
+    "format": {
+      "round": 3
+    },
+    "icon": "gold",
+    "name": {
+      "key": "gold",
+      "localized": "gold"
+    },
+    "symbol": {
+      "long": "XAU",
+      "short": "XAU",
+      "ticker": "XAU"
+    },
+    "type": "commodity_metal"
+  },
+  "XPT": {
+    "code": "XPT",
+    "format": {
+      "round": 3
+    },
+    "icon": "platinum",
+    "name": {
+      "key": "platinum",
+      "localized": "platinum"
+    },
+    "symbol": {
+      "long": "XPT",
+      "short": "XPT",
+      "ticker": "XPT"
+    },
+    "type": "commodity_metal"
+  },
+  "BCH": {
+    "code": "BCH",
+    "format": {
+      "round": 3
+    },
+    "icon": "bitcoin_cash",
+    "name": {
+      "key": "bitcoin_cash",
+      "localized": "Bitcoin Cash"
+    },
+    "symbol": {
+      "long": "BCH",
+      "short": "BCH",
+      "ticker": "BCH"
+    },
+    "type": "crypto"
+  },
+  "BTC": {
+    "code": "BTC",
+    "format": {
+      "round": 3
+    },
+    "icon": "bitcoin",
+    "name": {
+      "key": "bitcoin",
+      "localized": "Bitcoin"
+    },
+    "symbol": {
+      "long": "BTC",
+      "short": "₿",
+      "ticker": "BTC"
+    },
+    "type": "crypto"
+  },
+  "DSH": {
+    "code": "DSH",
+    "format": {
+      "round": 3
+    },
+    "icon": "dash",
+    "name": {
+      "key": "dash",
+      "localized": "Dash"
+    },
+    "symbol": {
+      "long": "DSH",
+      "short": "DSH",
+      "ticker": "DSH"
+    },
+    "type": "crypto"
+  },
+  "ETH": {
+    "code": "ETH",
+    "format": {
+      "round": 3
+    },
+    "icon": "ethereum",
+    "name": {
+      "key": "ethereum",
+      "localized": "Ethereum"
+    },
+    "symbol": {
+      "long": "ETH",
+      "short": "ETH",
+      "ticker": "ETH"
+    },
+    "type": "crypto"
+  },
+  "LTC": {
+    "code": "LTC",
+    "format": {
+      "round": 3
+    },
+    "icon": "litecoin",
+    "name": {
+      "key": "litecoin",
+      "localized": "Litecoin"
+    },
+    "symbol": {
+      "long": "LTC",
+      "short": "LTC",
+      "ticker": "LTC"
+    },
+    "type": "crypto"
+  },
+  "XRP": {
+    "code": "XRP",
+    "format": {
+      "round": 6
+    },
+    "icon": "ripple",
+    "name": {
+      "key": "ripple",
+      "localized": "Ripple"
+    },
+    "symbol": {
+      "long": "XRP",
+      "short": "XRP",
+      "ticker": "XRP"
+    },
+    "type": "crypto"
+  },
+  "AED": {
+    "code": "AED",
+    "format": {
+      "round": 3
+    },
+    "icon": "united_arab_emirates",
+    "name": {
+      "key": "united_arab_emirates_dirham",
+      "localized": "United Arab Emirates dirham"
+    },
+    "symbol": {
+      "long": "AED",
+      "short": "AED",
+      "ticker": "AED"
+    },
+    "type": "currency"
+  },
+  "ARS": {
+    "code": "ARS",
+    "format": {
+      "round": 3
+    },
+    "icon": "argentina",
+    "name": {
+      "key": "argentine_peso",
+      "localized": "Argentine peso"
+    },
+    "symbol": {
+      "long": "ARS",
+      "short": "ARS",
+      "ticker": "ARS"
+    },
+    "type": "currency"
+  },
+  "AUD": {
+    "code": "AUD",
+    "format": {
+      "round": 3
+    },
+    "icon": "australia",
+    "name": {
+      "key": "australian_dollar",
+      "localized": "Australian Dollar"
+    },
+    "symbol": {
+      "long": "A$",
+      "short": "$",
+      "ticker": "AUD"
+    },
+    "type": "currency"
+  },
+  "BRL": {
+    "code": "BRL",
+    "format": {
+      "round": 3
+    },
+    "icon": "brazil",
+    "name": {
+      "key": "brazilian_real",
+      "localized": "Brazilian real"
+    },
+    "pip": {
+      "pipette": 4,
+      "precision": 4,
+      "round": 4
+    },
+    "symbol": {
+      "long": "R$",
+      "short": "R$",
+      "ticker": "BRL"
+    },
+    "type": "currency"
+  },
+  "CAD": {
+    "code": "CAD",
+    "format": {
+      "round": 3
+    },
+    "icon": "canada",
+    "name": {
+      "key": "canadian_dollar",
+      "localized": "Canadian Dollar"
+    },
+    "symbol": {
+      "long": "CA$",
+      "short": "$",
+      "ticker": "CAD"
+    },
+    "type": "currency"
+  },
+  "CHF": {
+    "code": "CHF",
+    "format": {
+      "round": 3
+    },
+    "icon": "switzerland",
+    "name": {
+      "key": "swiss_franc",
+      "localized": "Swiss franc"
+    },
+    "symbol": {
+      "long": "CHF",
+      "short": "CHF",
+      "ticker": "CHF"
+    },
+    "type": "currency"
+  },
+  "CLP": {
+    "code": "CLP",
+    "format": {
+      "round": 3
+    },
+    "icon": "chile",
+    "name": {
+      "key": "chilean_peso",
+      "localized": "Chilean peso"
+    },
+    "symbol": {
+      "long": "CLP",
+      "short": "CLP",
+      "ticker": "CLP"
+    },
+    "type": "currency"
+  },
+  "CNH": {
+    "code": "CNH",
+    "format": {
+      "round": 3
+    },
+    "icon": "china",
+    "name": {
+      "key": "chinese_yuan_renminbi",
+      "localized": "Chinese Yuan Renminbi"
+    },
+    "symbol": {
+      "long": "¥",
+      "short": "¥",
+      "ticker": "CNH"
+    },
+    "type": "currency"
+  },
+  "COP": {
+    "code": "COP",
+    "format": {
+      "round": 3
+    },
+    "icon": "colombia",
+    "name": {
+      "key": "colombian_peso",
+      "localized": "Colombian peso"
+    },
+    "symbol": {
+      "long": "COP",
+      "short": "COP",
+      "ticker": "COP"
+    },
+    "type": "currency"
+  },
+  "CZK": {
+    "code": "CZK",
+    "format": {
+      "round": 3
+    },
+    "icon": "czech",
+    "name": {
+      "key": "czech_koruna",
+      "localized": "Czech koruna"
+    },
+    "symbol": {
+      "long": "Kč",
+      "short": "Kč",
+      "ticker": "CZK"
+    },
+    "type": "currency"
+  },
+  "DKK": {
+    "code": "DKK",
+    "format": {
+      "round": 3
+    },
+    "icon": "denmark",
+    "name": {
+      "key": "danish_krone",
+      "localized": "Danish krone"
+    },
+    "symbol": {
+      "long": "Kr.",
+      "short": "Kr.",
+      "ticker": "DKK"
+    },
+    "type": "currency"
+  },
+  "DZD": {
+    "code": "DZD",
+    "format": {
+      "round": 3
+    },
+    "icon": "algeria",
+    "name": {
+      "key": "algerian_dinar",
+      "localized": "Algerian dinar"
+    },
+    "symbol": {
+      "long": "DZD",
+      "short": "DZD",
+      "ticker": "DZD"
+    },
+    "type": "currency"
+  },
+  "EGP": {
+    "code": "EGP",
+    "format": {
+      "round": 3
+    },
+    "icon": "egypt",
+    "name": {
+      "key": "egyptian_pound",
+      "localized": "Egyptian pound"
+    },
+    "symbol": {
+      "long": "EGP",
+      "short": "EGP",
+      "ticker": "EGP"
+    },
+    "type": "currency"
+  },
+  "ETB": {
+    "code": "ETB",
+    "format": {
+      "round": 3
+    },
+    "icon": "ethiopia",
+    "name": {
+      "key": "ethiopian_birr",
+      "localized": "Ethiopian birr"
+    },
+    "symbol": {
+      "long": "ETB",
+      "short": "ETB",
+      "ticker": "ETB"
+    },
+    "type": "currency"
+  },
+  "EUR": {
+    "code": "EUR",
+    "format": {
+      "round": 3
+    },
+    "icon": "euro",
+    "name": {
+      "key": "euro",
+      "localized": "Euro"
+    },
+    "symbol": {
+      "long": "€",
+      "short": "€",
+      "ticker": "EUR"
+    },
+    "type": "currency"
+  },
+  "FJD": {
+    "code": "FJD",
+    "format": {
+      "round": 3
+    },
+    "icon": "fiji",
+    "name": {
+      "key": "fiji_dollar",
+      "localized": "Fiji dollar"
+    },
+    "symbol": {
+      "long": "FJD",
+      "short": "FJD",
+      "ticker": "FJD"
+    },
+    "type": "currency"
+  },
+  "GBP": {
+    "code": "GBP",
+    "format": {
+      "round": 3
+    },
+    "icon": "uk",
+    "name": {
+      "key": "pound_sterling",
+      "localized": "Pound sterling"
+    },
+    "symbol": {
+      "long": "£",
+      "short": "£",
+      "ticker": "GBP"
+    },
+    "type": "currency"
+  },
+  "HKD": {
+    "code": "HKD",
+    "format": {
+      "round": 3
+    },
+    "icon": "hong_kong",
+    "name": {
+      "key": "hong_kong_dollar",
+      "localized": "Hong Kong dollar"
+    },
+    "symbol": {
+      "long": "HK$",
+      "short": "$",
+      "ticker": "HKD"
+    },
+    "type": "currency"
+  },
+  "HRK": {
+    "code": "HRK",
+    "format": {
+      "round": 3
+    },
+    "icon": "croatia",
+    "name": {
+      "key": "croatian_kuna",
+      "localized": "Croatian kuna"
+    },
+    "symbol": {
+      "long": "HRK",
+      "short": "HRK",
+      "ticker": "HRK"
+    },
+    "type": "currency"
+  },
+  "HUF": {
+    "code": "HUF",
+    "format": {
+      "round": 3
+    },
+    "icon": "hungary",
+    "name": {
+      "key": "hungarian_forint",
+      "localized": "Hungarian forint"
+    },
+    "symbol": {
+      "long": "Ft",
+      "short": "Ft",
+      "ticker": "HUF"
+    },
+    "type": "currency"
+  },
+  "IDR": {
+    "code": "IDR",
+    "format": {
+      "round": 3
+    },
+    "icon": "indonesia",
+    "name": {
+      "key": "indonesian_rupiah",
+      "localized": "Indonesian rupiah"
+    },
+    "symbol": {
+      "long": "IDR",
+      "short": "IDR",
+      "ticker": "IDR"
+    },
+    "type": "currency"
+  },
+  "ILS": {
+    "code": "ILS",
+    "format": {
+      "round": 3
+    },
+    "icon": "israel",
+    "name": {
+      "key": "israeli_new_shekel",
+      "localized": "Israeli new shekel"
+    },
+    "symbol": {
+      "long": "₪",
+      "short": "₪",
+      "ticker": "ILS"
+    },
+    "type": "currency"
+  },
+  "INR": {
+    "code": "INR",
+    "format": {
+      "round": 3
+    },
+    "icon": "india",
+    "name": {
+      "key": "indian_rupee",
+      "localized": "Indian rupee"
+    },
+    "symbol": {
+      "long": "₹",
+      "short": "₹",
+      "ticker": "INR"
+    },
+    "type": "currency"
+  },
+  "IQD": {
+    "code": "IQD",
+    "format": {
+      "round": 3
+    },
+    "icon": "iraq",
+    "name": {
+      "key": "iraqi_dinar",
+      "localized": "Iraqi dinar"
+    },
+    "symbol": {
+      "long": "IQD",
+      "short": "IQD",
+      "ticker": "IQD"
+    },
+    "type": "currency"
+  },
+  "IRR": {
+    "code": "IRR",
+    "format": {
+      "round": 3
+    },
+    "icon": "iran",
+    "name": {
+      "key": "iranian_rial",
+      "localized": "Iranian rial"
+    },
+    "symbol": {
+      "long": "IRR",
+      "short": "IRR",
+      "ticker": "IRR"
+    },
+    "type": "currency"
+  },
+  "ISK": {
+    "code": "ISK",
+    "format": {
+      "round": 3
+    },
+    "icon": "iceland",
+    "name": {
+      "key": "icelandic_krona",
+      "localized": "Icelandic króna"
+    },
+    "symbol": {
+      "long": "ISK",
+      "short": "ISK",
+      "ticker": "ISK"
+    },
+    "type": "currency"
+  },
+  "JPY": {
+    "code": "JPY",
+    "format": {
+      "round": 3
+    },
+    "icon": "japan",
+    "name": {
+      "key": "japanese_yen",
+      "localized": "Japanese yen"
+    },
+    "symbol": {
+      "long": "¥",
+      "short": "¥",
+      "ticker": "JPY"
+    },
+    "type": "currency"
+  },
+  "KHR": {
+    "code": "KHR",
+    "format": {
+      "round": 3
+    },
+    "icon": "cambodia",
+    "name": {
+      "key": "cambodian_riel",
+      "localized": "Cambodian riel"
+    },
+    "symbol": {
+      "long": "KHR",
+      "short": "KHR",
+      "ticker": "KHR"
+    },
+    "type": "currency"
+  },
+  "KRW": {
+    "code": "KRW",
+    "format": {
+      "round": 3
+    },
+    "icon": "south_korea",
+    "name": {
+      "key": "south_korean_won",
+      "localized": "South Korean won"
+    },
+    "symbol": {
+      "long": "₩",
+      "short": "₩",
+      "ticker": "KRW"
+    },
+    "type": "currency"
+  },
+  "KWD": {
+    "code": "KWD",
+    "format": {
+      "round": 3
+    },
+    "icon": "kuwait",
+    "name": {
+      "key": "kuwaiti_dinar",
+      "localized": "Kuwaiti dinar"
+    },
+    "symbol": {
+      "long": "KD",
+      "short": "د.ك",
+      "ticker": "KWD"
+    },
+    "type": "currency"
+  },
+  "KYD": {
+    "code": "KYD",
+    "format": {
+      "round": 3
+    },
+    "icon": "cayman_islands",
+    "name": {
+      "key": "cayman_islands_dollar",
+      "localized": "Cayman Islands dollar"
+    },
+    "symbol": {
+      "long": "KYD",
+      "short": "KYD",
+      "ticker": "KYD"
+    },
+    "type": "currency"
+  },
+  "KZT": {
+    "code": "KZT",
+    "format": {
+      "round": 3
+    },
+    "icon": "kazakhstan",
+    "name": {
+      "key": "kazakhstani_tenge",
+      "localized": "Kazakhstani tenge"
+    },
+    "symbol": {
+      "long": "KZT",
+      "short": "KZT",
+      "ticker": "KZT"
+    },
+    "type": "currency"
+  },
+  "MAD": {
+    "code": "MAD",
+    "format": {
+      "round": 3
+    },
+    "icon": "morocco",
+    "name": {
+      "key": "moroccan_dirham",
+      "localized": "Moroccan dirham"
+    },
+    "symbol": {
+      "long": "MAD",
+      "short": "MAD",
+      "ticker": "MAD"
+    },
+    "type": "currency"
+  },
+  "MMK": {
+    "code": "MMK",
+    "format": {
+      "round": 3
+    },
+    "icon": "myanmar",
+    "name": {
+      "key": "myanmar_kyat",
+      "localized": "Myanma kyat"
+    },
+    "symbol": {
+      "long": "MMK",
+      "short": "MMK",
+      "ticker": "MMK"
+    },
+    "type": "currency"
+  },
+  "MXN": {
+    "code": "MXN",
+    "format": {
+      "round": 3
+    },
+    "icon": "mexico",
+    "name": {
+      "key": "mexican_peso",
+      "localized": "Mexican peso"
+    },
+    "symbol": {
+      "long": "Mex$",
+      "short": "$",
+      "ticker": "MXN"
+    },
+    "type": "currency"
+  },
+  "MYR": {
+    "code": "MYR",
+    "format": {
+      "round": 3
+    },
+    "icon": "malaysia",
+    "name": {
+      "key": "malaysian_ringgit",
+      "localized": "Malaysian ringgit"
+    },
+    "symbol": {
+      "long": "MYR",
+      "short": "MYR",
+      "ticker": "MYR"
+    },
+    "type": "currency"
+  },
+  "NAD": {
+    "code": "NAD",
+    "format": {
+      "round": 3
+    },
+    "icon": "namibia",
+    "name": {
+      "key": "namibian_dollar",
+      "localized": "Namibian dollar"
+    },
+    "symbol": {
+      "long": "NAD",
+      "short": "NAD",
+      "ticker": "NAD"
+    },
+    "type": "currency"
+  },
+  "NGN": {
+    "code": "NGN",
+    "format": {
+      "round": 3
+    },
+    "icon": "nigeria",
+    "name": {
+      "key": "nigerian_naira",
+      "localized": "Nigerian naira"
+    },
+    "symbol": {
+      "long": "₦",
+      "short": "₦",
+      "ticker": "NGN"
+    },
+    "type": "currency"
+  },
+  "NOK": {
+    "code": "NOK",
+    "format": {
+      "round": 3
+    },
+    "icon": "norway",
+    "name": {
+      "key": "norwegian_krone",
+      "localized": "Norwegian krone"
+    },
+    "symbol": {
+      "long": "kr",
+      "short": "kr",
+      "ticker": "NOK"
+    },
+    "type": "currency"
+  },
+  "NZD": {
+    "code": "NZD",
+    "format": {
+      "round": 3
+    },
+    "icon": "new_zealand",
+    "name": {
+      "key": "new_zealand_dollar",
+      "localized": "New Zealand dollar"
+    },
+    "symbol": {
+      "long": "$",
+      "short": "$",
+      "ticker": "NZD"
+    },
+    "type": "currency"
+  },
+  "PEN": {
+    "code": "PEN",
+    "format": {
+      "round": 3
+    },
+    "icon": "peru",
+    "name": {
+      "key": "peruvian_nuevo_sol",
+      "localized": "Peruvian nuevo sol"
+    },
+    "symbol": {
+      "long": "PEN",
+      "short": "PEN",
+      "ticker": "PEN"
+    },
+    "type": "currency"
+  },
+  "PHP": {
+    "code": "PHP",
+    "format": {
+      "round": 3
+    },
+    "icon": "philippines",
+    "name": {
+      "key": "philippine_peso",
+      "localized": "Philippine peso"
+    },
+    "symbol": {
+      "long": "PHP",
+      "short": "PHP",
+      "ticker": "PHP"
+    },
+    "type": "currency"
+  },
+  "PKR": {
+    "code": "PKR",
+    "format": {
+      "round": 3
+    },
+    "icon": "pakistan",
+    "name": {
+      "key": "pakistani_rupee",
+      "localized": "Pakistani rupee"
+    },
+    "symbol": {
+      "long": "PKR",
+      "short": "PKR",
+      "ticker": "PKR"
+    },
+    "type": "currency"
+  },
+  "PLN": {
+    "code": "PLN",
+    "format": {
+      "round": 3
+    },
+    "icon": "poland",
+    "name": {
+      "key": "polish_zloty",
+      "localized": "Polish złoty"
+    },
+    "symbol": {
+      "long": "zł",
+      "short": "zł",
+      "ticker": "PLN"
+    },
+    "type": "currency"
+  },
+  "QAR": {
+    "code": "QAR",
+    "format": {
+      "round": 3
+    },
+    "icon": "qatar",
+    "name": {
+      "key": "qatari_riyal",
+      "localized": "Qatari riyal"
+    },
+    "symbol": {
+      "long": "QAR",
+      "short": "QAR",
+      "ticker": "QAR"
+    },
+    "type": "currency"
+  },
+  "RON": {
+    "code": "RON",
+    "format": {
+      "round": 3
+    },
+    "icon": "romania",
+    "name": {
+      "key": "romanian_leu",
+      "localized": "Romanian leu"
+    },
+    "symbol": {
+      "long": "lei",
+      "short": "lei",
+      "ticker": "RON"
+    },
+    "type": "currency"
+  },
+  "RUB": {
+    "code": "RUB",
+    "format": {
+      "round": 3
+    },
+    "icon": "russia",
+    "name": {
+      "key": "russian_ruble",
+      "localized": "Russian Ruble"
+    },
+    "symbol": {
+      "long": "₽",
+      "short": "₽",
+      "ticker": "RUB"
+    },
+    "type": "currency"
+  },
+  "SAR": {
+    "code": "SAR",
+    "format": {
+      "round": 3
+    },
+    "icon": "saudi_arabia",
+    "name": {
+      "key": "saudi_riyal",
+      "localized": "Saudi riyal"
+    },
+    "symbol": {
+      "long": "SِAR",
+      "short": "SِAR",
+      "ticker": "SAR"
+    },
+    "type": "currency"
+  },
+  "SCR": {
+    "code": "SCR",
+    "format": {
+      "round": 3
+    },
+    "icon": "seychelles",
+    "name": {
+      "key": "seychelles_rupee",
+      "localized": "Seychelles rupee"
+    },
+    "symbol": {
+      "long": "SCR",
+      "short": "SCR",
+      "ticker": "SCR"
+    },
+    "type": "currency"
+  },
+  "SEK": {
+    "code": "SEK",
+    "format": {
+      "round": 3
+    },
+    "icon": "sweden",
+    "name": {
+      "key": "swedish_krona",
+      "localized": "Swedish krona"
+    },
+    "symbol": {
+      "long": "kr",
+      "short": "kr",
+      "ticker": "SEK"
+    },
+    "type": "currency"
+  },
+  "SGD": {
+    "code": "SGD",
+    "format": {
+      "round": 3
+    },
+    "icon": "singapore",
+    "name": {
+      "key": "singapore_dollar",
+      "localized": "Singapore dollar"
+    },
+    "symbol": {
+      "long": "S$",
+      "short": "$",
+      "ticker": "SGD"
+    },
+    "type": "currency"
+  },
+  "SOS": {
+    "code": "SOS",
+    "format": {
+      "round": 3
+    },
+    "icon": "somalia",
+    "name": {
+      "key": "somali_shilling",
+      "localized": "Somali shilling"
+    },
+    "symbol": {
+      "long": "SOS",
+      "short": "SOS",
+      "ticker": "SOS"
+    },
+    "type": "currency"
+  },
+  "THB": {
+    "code": "THB",
+    "format": {
+      "round": 3
+    },
+    "icon": "thailand",
+    "name": {
+      "key": "thai_baht",
+      "localized": "Thai baht"
+    },
+    "symbol": {
+      "long": "฿",
+      "short": "฿",
+      "ticker": "THB"
+    },
+    "type": "currency"
+  },
+  "TND": {
+    "code": "TND",
+    "format": {
+      "round": 3
+    },
+    "icon": "tunisia",
+    "name": {
+      "key": "tunisian_dinar",
+      "localized": "Tunisian dinar"
+    },
+    "symbol": {
+      "long": "TND",
+      "short": "TND",
+      "ticker": "TND"
+    },
+    "type": "currency"
+  },
+  "TRY": {
+    "code": "TRY",
+    "format": {
+      "round": 3
+    },
+    "icon": "turkey",
+    "name": {
+      "key": "turkish_lira",
+      "localized": "Turkish lira"
+    },
+    "symbol": {
+      "long": "₺",
+      "short": "₺",
+      "ticker": "TRY"
+    },
+    "type": "currency"
+  },
+  "TWD": {
+    "code": "TWD",
+    "format": {
+      "round": 3
+    },
+    "icon": "taiwan",
+    "name": {
+      "key": "new_taiwan_dollar",
+      "localized": "New Taiwan dollar"
+    },
+    "symbol": {
+      "long": "TWD",
+      "short": "TWD",
+      "ticker": "TWD"
+    },
+    "type": "currency"
+  },
+  "UAH": {
+    "code": "UAH",
+    "format": {
+      "round": 3
+    },
+    "icon": "ukraine",
+    "name": {
+      "key": "ukrainian_hryvnia",
+      "localized": "Ukrainian hryvnia"
+    },
+    "symbol": {
+      "long": "UAH",
+      "short": "UAH",
+      "ticker": "UAH"
+    },
+    "type": "currency"
+  },
+  "USD": {
+    "code": "USD",
+    "format": {
+      "round": 3
+    },
+    "icon": "usa",
+    "name": {
+      "key": "american_dollar",
+      "localized": "American Dollar"
+    },
+    "symbol": {
+      "long": "US$",
+      "short": "$",
+      "ticker": "USD"
+    },
+    "type": "currency"
+  },
+  "UYU": {
+    "code": "UYU",
+    "format": {
+      "round": 3
+    },
+    "icon": "uruguay",
+    "name": {
+      "key": "uruguayan_peso",
+      "localized": "Uruguayan peso"
+    },
+    "symbol": {
+      "long": "UYU",
+      "short": "UYU",
+      "ticker": "UYU"
+    },
+    "type": "currency"
+  },
+  "VND": {
+    "code": "VND",
+    "format": {
+      "round": 3
+    },
+    "icon": "vietnam",
+    "name": {
+      "key": "vietnamese_dong",
+      "localized": "Vietnamese dong"
+    },
+    "symbol": {
+      "long": "VND",
+      "short": "VND",
+      "ticker": "VND"
+    },
+    "type": "currency"
+  },
+  "ZAR": {
+    "code": "ZAR",
+    "format": {
+      "round": 3
+    },
+    "icon": "south_africa",
+    "name": {
+      "key": "south_african_rand",
+      "localized": "South African rand"
+    },
+    "symbol": {
+      "long": "R",
+      "short": "R",
+      "ticker": "ZAR"
+    },
+    "type": "currency"
+  },
+  "ZMW": {
+    "code": "ZMW",
+    "format": {
+      "round": 3
+    },
+    "icon": "zambia",
+    "name": {
+      "key": "zambian_kwacha",
+      "localized": "Zambian kwacha"
+    },
+    "symbol": {
+      "long": "ZMW",
+      "short": "ZMW",
+      "ticker": "ZMW"
+    },
+    "type": "currency"
+  },
+  "ZWD": {
+    "code": "ZWD",
+    "format": {
+      "round": 3
+    },
+    "icon": "zimbabwe",
+    "name": {
+      "key": "zimbabwe_dollar",
+      "localized": "Zimbabwe dollar"
+    },
+    "symbol": {
+      "long": "ZWD",
+      "short": "ZWD",
+      "ticker": "ZWD"
+    },
+    "type": "currency"
+  },
+  "instrument_types": {
+    "commodity_energy": {
+      "key": "commodities",
+      "main": "commodity",
+      "sub": "energy",
+      "subKey": "energy",
+      "weight": 50
+    },
+    "commodity_metal": {
+      "key": "commodities",
+      "main": "commodity",
+      "sub": "metal",
+      "subKey": "metal",
+      "weight": 50
+    },
+    "crypto": {
+      "key": "cryptos",
+      "main": "crypto",
+      "weight": 25
+    },
+    "currency": {
+      "key": "currencies",
+      "main": "currency",
+      "weight": 100
+    },
+    "index": {
+      "key": "indices",
+      "main": "index",
+      "weight": 75
+    }
+  },
+  "AEX": {
+    "code": "AEX",
+    "format": {
+      "round": 1
+    },
+    "icon": "netherlands",
+    "name": {
+      "key": "aex",
+      "localized": "Amsterdam Exchange index"
+    },
+    "symbol": {
+      "long": "AEX",
+      "short": "AEX",
+      "ticker": "AEX"
+    },
+    "type": "index"
+  },
+  "AORD": {
+    "code": "AORD",
+    "format": {
+      "round": 1
+    },
+    "icon": "australia",
+    "name": {
+      "key": "aord",
+      "localized": "ALL ORDINARIES"
+    },
+    "symbol": {
+      "long": "AORD",
+      "short": "AORD",
+      "ticker": "AORD"
+    },
+    "type": "index"
+  },
+  "AXJO": {
+    "code": "AXJO",
+    "format": {
+      "round": 1
+    },
+    "icon": "australia",
+    "name": {
+      "key": "axjo",
+      "localized": "S&P/ASX 200"
+    },
+    "symbol": {
+      "long": "AXJO",
+      "short": "AXJO",
+      "ticker": "AXJO"
+    },
+    "type": "index"
+  },
+  "BFX": {
+    "code": "BFX",
+    "format": {
+      "round": 1
+    },
+    "icon": "belgium",
+    "name": {
+      "key": "bfx",
+      "localized": "BEL 20"
+    },
+    "symbol": {
+      "long": "BFX",
+      "short": "BFX",
+      "ticker": "BFX"
+    },
+    "type": "index"
+  },
+  "BVSP": {
+    "code": "BVSP",
+    "format": {
+      "round": 1
+    },
+    "icon": "brazil",
+    "name": {
+      "key": "bvsp",
+      "localized": "BOVESPA"
+    },
+    "symbol": {
+      "long": "BVSP",
+      "short": "BVSP",
+      "ticker": "BVSP"
+    },
+    "type": "index"
+  },
+  "CASE30": {
+    "code": "CASE30",
+    "format": {
+      "round": 1
+    },
+    "icon": "egypt",
+    "name": {
+      "key": "case30",
+      "localized": "EGX 30"
+    },
+    "symbol": {
+      "long": "CASE30",
+      "short": "CASE30",
+      "ticker": "CASE30"
+    },
+    "type": "index"
+  },
+  "DJI": {
+    "code": "DJI",
+    "format": {
+      "round": 1
+    },
+    "icon": "usa",
+    "name": {
+      "key": "us_30",
+      "localized": "Dow Jones Industrial Average"
+    },
+    "symbol": {
+      "long": "DJI",
+      "short": "DJI",
+      "ticker": "DJI"
+    },
+    "type": "index"
+  },
+  "FCHI": {
+    "code": "FCHI",
+    "format": {
+      "round": 1
+    },
+    "icon": "france",
+    "name": {
+      "key": "cac_40",
+      "localized": "CAC 40"
+    },
+    "symbol": {
+      "long": "FCHI",
+      "short": "FCHI",
+      "ticker": "FCHI"
+    },
+    "type": "index"
+  },
+  "FTMC": {
+    "code": "FTMC",
+    "format": {
+      "round": 1
+    },
+    "icon": "uk",
+    "name": {
+      "key": "uk_250",
+      "localized": "UK Mid 250"
+    },
+    "symbol": {
+      "long": "FTMC",
+      "short": "FTMC",
+      "ticker": "FTMC"
+    },
+    "type": "index"
+  },
+  "FTSE": {
+    "code": "FTSE",
+    "format": {
+      "round": 1
+    },
+    "icon": "uk",
+    "name": {
+      "key": "uk_100",
+      "localized": "UK 100"
+    },
+    "symbol": {
+      "long": "FTSE",
+      "short": "FTSE",
+      "ticker": "FTSE"
+    },
+    "type": "index"
+  },
+  "FVX": {
+    "code": "FVX",
+    "format": {
+      "round": 2
+    },
+    "icon": "usa",
+    "name": {
+      "key": "us5y",
+      "localized": "Treasury Yield 5 Years"
+    },
+    "symbol": {
+      "long": "FVX",
+      "short": "FVX",
+      "ticker": "FVX"
+    },
+    "type": "index"
+  },
+  "GDAXI": {
+    "code": "GDAXI",
+    "format": {
+      "round": 1
+    },
+    "icon": "germany",
+    "name": {
+      "key": "dax_30",
+      "localized": "DAX 30"
+    },
+    "symbol": {
+      "long": "GDAXI",
+      "short": "GDAXI",
+      "ticker": "GDAXI"
+    },
+    "type": "index"
+  },
+  "GSPC": {
+    "code": "GSPC",
+    "format": {
+      "round": 1
+    },
+    "icon": "usa",
+    "name": {
+      "key": "s&p_500",
+      "localized": "S&P 500"
+    },
+    "symbol": {
+      "long": "GSPC",
+      "short": "GSPC",
+      "ticker": "GSPC"
+    },
+    "type": "index"
+  },
+  "GSPTSE": {
+    "code": "GSPTSE",
+    "format": {
+      "round": 1
+    },
+    "icon": "canada",
+    "name": {
+      "key": "tsx",
+      "localized": "S&P/TSX Composite index"
+    },
+    "symbol": {
+      "long": "GSPTSE",
+      "short": "GSPTSE",
+      "ticker": "GSPTSE"
+    },
+    "type": "index"
+  },
+  "HSI": {
+    "code": "HSI",
+    "format": {
+      "round": 1
+    },
+    "icon": "hong_kong",
+    "name": {
+      "key": "hsi",
+      "localized": "HANG SENG INDEX"
+    },
+    "symbol": {
+      "long": "HSI",
+      "short": "HSI",
+      "ticker": "HSI"
+    },
+    "type": "index"
+  },
+  "IBEX": {
+    "code": "IBEX",
+    "format": {
+      "round": 1
+    },
+    "icon": "spain",
+    "name": {
+      "key": "ibex",
+      "localized": "IBEX 35"
+    },
+    "symbol": {
+      "long": "IBEX",
+      "short": "IBEX",
+      "ticker": "IBEX"
+    },
+    "type": "index"
+  },
+  "IMOEX_ME": {
+    "code": "IMOEX_ME",
+    "format": {
+      "round": 1
+    },
+    "icon": "russia",
+    "name": {
+      "key": "IMOEX_ME",
+      "localized": "MOEX Russia Index"
+    },
+    "symbol": {
+      "long": "IMOEX_ME",
+      "short": "IMOEX_ME",
+      "ticker": "IMOEX.ME"
+    },
+    "type": "index"
+  },
+  "JKSE": {
+    "code": "JKSE",
+    "format": {
+      "round": 1
+    },
+    "icon": "indonesia",
+    "name": {
+      "key": "jkse",
+      "localized": "Jakarta Composite Index"
+    },
+    "symbol": {
+      "long": "JKSE",
+      "short": "JKSE",
+      "ticker": "JKSE"
+    },
+    "type": "index"
+  },
+  "KLSE": {
+    "code": "KLSE",
+    "format": {
+      "round": 1
+    },
+    "icon": "malaysia",
+    "name": {
+      "key": "klse",
+      "localized": "Bursa Malaysia KLCI Index"
+    },
+    "symbol": {
+      "long": "KLSE",
+      "short": "KLSE",
+      "ticker": "KLSE"
+    },
+    "type": "index"
+  },
+  "KS11": {
+    "code": "KS11",
+    "format": {
+      "round": 1
+    },
+    "icon": "south_korea",
+    "name": {
+      "key": "KS11",
+      "localized": "KOSPI Composite Index"
+    },
+    "symbol": {
+      "long": "KS11",
+      "short": "KS11",
+      "ticker": "KS11"
+    },
+    "type": "index"
+  },
+  "MXX": {
+    "code": "MXX",
+    "format": {
+      "round": 1
+    },
+    "icon": "mexico",
+    "name": {
+      "key": "mxx",
+      "localized": "Mexico S&P/BMV IPC"
+    },
+    "symbol": {
+      "long": "MXX",
+      "short": "MXX",
+      "ticker": "MXX"
+    },
+    "type": "index"
+  },
+  "N100": {
+    "code": "N100",
+    "format": {
+      "round": 1
+    },
+    "icon": "euro",
+    "name": {
+      "key": "n100",
+      "localized": "Euronext 100"
+    },
+    "symbol": {
+      "long": "N100",
+      "short": "N100",
+      "ticker": "N100"
+    },
+    "type": "index"
+  },
+  "N225": {
+    "code": "N225",
+    "format": {
+      "round": 1
+    },
+    "icon": "japan",
+    "name": {
+      "key": "n_225",
+      "localized": "Nikkei 225"
+    },
+    "symbol": {
+      "long": "N225",
+      "short": "N225",
+      "ticker": "N225"
+    },
+    "type": "index"
+  },
+  "NDX": {
+    "code": "NDX",
+    "format": {
+      "round": 1
+    },
+    "icon": "usa",
+    "name": {
+      "key": "nasdaq_100",
+      "localized": "NASDAQ 100"
+    },
+    "symbol": {
+      "long": "NDX",
+      "short": "NDX",
+      "ticker": "NDX"
+    },
+    "type": "index"
+  },
+  "NSEI": {
+    "code": "NSEI",
+    "format": {
+      "round": 1
+    },
+    "icon": "india",
+    "name": {
+      "key": "nifty_50",
+      "localized": "NIFTY 50"
+    },
+    "symbol": {
+      "long": "NSEI",
+      "short": "NSEI",
+      "ticker": "NSEI"
+    },
+    "type": "index"
+  },
+  "NZ50": {
+    "code": "NZ50",
+    "format": {
+      "round": 1
+    },
+    "icon": "new_zealand",
+    "name": {
+      "key": "nzx_50",
+      "localized": "NZX 50"
+    },
+    "symbol": {
+      "long": "NZ50",
+      "short": "NZ50",
+      "ticker": "NZ50"
+    },
+    "type": "index"
+  },
+  "RUA": {
+    "code": "RUA",
+    "format": {
+      "round": 1
+    },
+    "icon": "usa",
+    "name": {
+      "key": "russel_3000",
+      "localized": "Russell 3000"
+    },
+    "symbol": {
+      "long": "RUA",
+      "short": "RUA",
+      "ticker": "RUA"
+    },
+    "type": "index"
+  },
+  "RUI": {
+    "code": "RUI",
+    "format": {
+      "round": 1
+    },
+    "icon": "usa",
+    "name": {
+      "key": "russel_1000",
+      "localized": "Russell 1000"
+    },
+    "symbol": {
+      "long": "RUI",
+      "short": "RUI",
+      "ticker": "RUI"
+    },
+    "type": "index"
+  },
+  "RUT": {
+    "code": "RUT",
+    "format": {
+      "round": 1
+    },
+    "icon": "usa",
+    "name": {
+      "key": "russel_2000",
+      "localized": "Russell 2000"
+    },
+    "symbol": {
+      "long": "RUT",
+      "short": "RUT",
+      "ticker": "RUT"
+    },
+    "type": "index"
+  },
+  "SPGNRUP": {
+    "code": "SPGNRUP",
+    "format": {
+      "round": 1
+    },
+    "icon": "usa",
+    "name": {
+      "key": "spgnrup",
+      "localized": "S&P Global Natural Resources Index"
+    },
+    "symbol": {
+      "long": "SPGNRUP",
+      "short": "SPGNRUP",
+      "ticker": "SPGNRUP"
+    },
+    "type": "index"
+  },
+  "SPGSCI": {
+    "code": "SPGSCI",
+    "format": {
+      "round": 1
+    },
+    "icon": "usa",
+    "name": {
+      "key": "spgsci",
+      "localized": "S&P GSCI"
+    },
+    "symbol": {
+      "long": "SPGSCI",
+      "short": "SPGSCI",
+      "ticker": "SPGSCI"
+    },
+    "type": "index"
+  },
+  "SSMI": {
+    "code": "SSMI",
+    "format": {
+      "round": 1
+    },
+    "icon": "switzerland",
+    "name": {
+      "key": "ssmi",
+      "localized": "Swiss Market Index"
+    },
+    "symbol": {
+      "long": "SSMI",
+      "short": "SSMI",
+      "ticker": "SSMI"
+    },
+    "type": "index"
+  },
+  "STI": {
+    "code": "STI",
+    "format": {
+      "round": 1
+    },
+    "icon": "singapore",
+    "name": {
+      "key": "sti",
+      "localized": "Straits Times Index"
+    },
+    "symbol": {
+      "long": "STI",
+      "short": "STI",
+      "ticker": "STI"
+    },
+    "type": "index"
+  },
+  "STOXX50E": {
+    "code": "STOXX50E",
+    "format": {
+      "round": 1
+    },
+    "icon": "euro",
+    "name": {
+      "key": "eu_50",
+      "localized": "EURO STOXX 50"
+    },
+    "symbol": {
+      "long": "STOXX50E",
+      "short": "STOXX50E",
+      "ticker": "STOXX50E"
+    },
+    "type": "index"
+  },
+  "TA125_TA": {
+    "code": "TA125_TA",
+    "format": {
+      "round": 1
+    },
+    "icon": "israel",
+    "name": {
+      "key": "TA_125",
+      "localized": "TA-125"
+    },
+    "symbol": {
+      "long": "TA125_TA",
+      "short": "TA125_TA",
+      "ticker": "TA125.TA"
+    },
+    "type": "index"
+  },
+  "TNX": {
+    "code": "TNX",
+    "format": {
+      "round": 2
+    },
+    "icon": "usa",
+    "name": {
+      "key": "us10y",
+      "localized": "Treasury Yield 10 Years"
+    },
+    "symbol": {
+      "long": "TNX",
+      "short": "TNX",
+      "ticker": "TNX"
+    },
+    "type": "index"
+  },
+  "TYX": {
+    "code": "TYX",
+    "format": {
+      "round": 2
+    },
+    "icon": "usa",
+    "name": {
+      "key": "us30y",
+      "localized": "Treasury Yield 30 Years"
+    },
+    "symbol": {
+      "long": "TYX",
+      "short": "TYX",
+      "ticker": "TYX"
+    },
+    "type": "index"
+  },
+  "VIX": {
+    "code": "VIX",
+    "format": {
+      "round": 2
+    },
+    "icon": "usa",
+    "name": {
+      "key": "vix",
+      "localized": "CBOE Volatility Index"
+    },
+    "symbol": {
+      "long": "VIX",
+      "short": "VIX",
+      "ticker": "VIX"
+    },
+    "type": "index"
+  },
+  "XU100_IS": {
+    "code": "XU100_IS",
+    "format": {
+      "round": 1
+    },
+    "icon": "turkey",
+    "name": {
+      "key": "ise_100",
+      "localized": "ISE-100"
+    },
+    "symbol": {
+      "long": "XU100_IS",
+      "short": "XU100_IS",
+      "ticker": "XU100.IS"
+    },
+    "type": "index"
+  }
+}

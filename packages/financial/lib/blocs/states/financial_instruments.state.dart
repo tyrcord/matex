@@ -1,5 +1,5 @@
 // Package imports:
-import 'package:matex_dart/matex_dart.dart' show MatexPairMetadata;
+import 'package:matex_financial/financial.dart';
 import 'package:tbloc/tbloc.dart';
 
 /// The state of the `MatexFinancialInstrumentBloc`.

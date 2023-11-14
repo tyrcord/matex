@@ -1,0 +1,1924 @@
+{
+  "BZUSD": {
+    "base": "BZ",
+    "counter": "USD",
+    "lots": {
+      "micro": 10,
+      "mini": 100,
+      "normalized": false,
+      "standard": 1000,
+      "unit": "barrel"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_energy"
+  },
+  "CLUSD": {
+    "base": "CL",
+    "counter": "USD",
+    "lots": {
+      "micro": 10,
+      "mini": 100,
+      "normalized": false,
+      "standard": 1000,
+      "unit": "barrel"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_energy"
+  },
+  "NGUSD": {
+    "base": "NG",
+    "counter": "USD",
+    "lots": {
+      "micro": 1250,
+      "mini": 2500,
+      "normalized": true,
+      "standard": 10000,
+      "unit": "mmbtu"
+    },
+    "pip": {
+      "pipette": 4,
+      "precision": 3,
+      "round": 4
+    },
+    "type": "commodity_energy"
+  },
+  "XAGAUD": {
+    "base": "XAG",
+    "counter": "AUD",
+    "default_silver_lots": {
+      "micro": 50,
+      "mini": 500,
+      "normalized": true,
+      "standard": 5000,
+      "unit": "ounce"
+    },
+    "type": "commodity_metal"
+  },
+  "XAGCAD": {
+    "base": "XAG",
+    "counter": "CAD",
+    "type": "commodity_metal"
+  },
+  "XAGCHF": {
+    "base": "XAG",
+    "counter": "CHF",
+    "default_silver_lots": {
+      "micro": 50,
+      "mini": 500,
+      "normalized": true,
+      "standard": 5000,
+      "unit": "ounce"
+    },
+    "type": "commodity_metal"
+  },
+  "XAGEUR": {
+    "base": "XAG",
+    "counter": "EUR",
+    "default_silver_lots": {
+      "micro": 50,
+      "mini": 500,
+      "normalized": true,
+      "standard": 5000,
+      "unit": "ounce"
+    },
+    "type": "commodity_metal"
+  },
+  "XAGGBP": {
+    "base": "XAG",
+    "counter": "GBP",
+    "default_silver_lots": {
+      "micro": 50,
+      "mini": 500,
+      "normalized": true,
+      "standard": 5000,
+      "unit": "ounce"
+    },
+    "type": "commodity_metal"
+  },
+  "XAGHKD": {
+    "base": "XAG",
+    "counter": "HKD",
+    "default_silver_lots": {
+      "micro": 50,
+      "mini": 500,
+      "normalized": true,
+      "standard": 5000,
+      "unit": "ounce"
+    },
+    "type": "commodity_metal"
+  },
+  "XAGJPY": {
+    "base": "XAG",
+    "counter": "JPY",
+    "default_silver_lots": {
+      "micro": 50,
+      "mini": 500,
+      "normalized": true,
+      "standard": 5000,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "commodity_metal"
+  },
+  "XAGNZD": {
+    "base": "XAG",
+    "counter": "NZD",
+    "default_silver_lots": {
+      "micro": 50,
+      "mini": 500,
+      "normalized": true,
+      "standard": 5000,
+      "unit": "ounce"
+    },
+    "type": "commodity_metal"
+  },
+  "XAGSGD": {
+    "base": "XAG",
+    "counter": "SGD",
+    "default_silver_lots": {
+      "micro": 50,
+      "mini": 500,
+      "normalized": true,
+      "standard": 5000,
+      "unit": "ounce"
+    },
+    "type": "commodity_metal"
+  },
+  "XAGUSD": {
+    "base": "XAG",
+    "counter": "USD",
+    "default_silver_lots": {
+      "micro": 50,
+      "mini": 500,
+      "normalized": true,
+      "standard": 5000,
+      "unit": "ounce"
+    },
+    "type": "commodity_metal"
+  },
+  "XAUAUD": {
+    "base": "XAU",
+    "counter": "AUD",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "XAUCAD": {
+    "base": "XAU",
+    "counter": "CAD",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "XAUCHF": {
+    "base": "XAU",
+    "counter": "CHF",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "XAUEUR": {
+    "base": "XAU",
+    "counter": "EUR",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "XAUGBP": {
+    "base": "XAU",
+    "counter": "GBP",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "XAUHKD": {
+    "base": "XAU",
+    "counter": "HKD",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "XAUJPY": {
+    "base": "XAU",
+    "counter": "JPY",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 0,
+      "precision": -1,
+      "round": 0
+    },
+    "type": "commodity_metal"
+  },
+  "XAUNZD": {
+    "base": "XAU",
+    "counter": "NZD",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "XAUSGD": {
+    "base": "XAU",
+    "counter": "SGD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "XAUUSD": {
+    "base": "XAU",
+    "counter": "USD",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "XAUXAG": {
+    "base": "XAU",
+    "counter": "XAG",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "XPTUSD": {
+    "base": "XPT",
+    "counter": "USD",
+    "lots": {
+      "micro": 1,
+      "mini": 10,
+      "normalized": true,
+      "standard": 100,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "commodity_metal"
+  },
+  "BCHUSD": {
+    "base": "BCH",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "BTCUSD": {
+    "base": "BTC",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "DSHUSD": {
+    "base": "DSH",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "ETHUSD": {
+    "base": "ETH",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "LTCUSD": {
+    "base": "LTC",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "XRPUSD": {
+    "base": "XRP",
+    "counter": "USD",
+    "pip": {
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
+    },
+    "type": "crypto"
+  },
+  "AUDCZK": {
+    "base": "AUD",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "AUDDKK": {
+    "base": "AUD",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "AUDHKD": {
+    "base": "AUD",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "AUDHUF": {
+    "base": "AUD",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "AUDMXN": {
+    "base": "AUD",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "AUDNOK": {
+    "base": "AUD",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "AUDPLN": {
+    "base": "AUD",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "AUDSEK": {
+    "base": "AUD",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "AUDSGD": {
+    "base": "AUD",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "AUDZAR": {
+    "base": "AUD",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "CADCZK": {
+    "base": "CAD",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "CADDKK": {
+    "base": "CAD",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "CADHKD": {
+    "base": "CAD",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "CADHUF": {
+    "base": "CAD",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "CADMXN": {
+    "base": "CAD",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "CADNOK": {
+    "base": "CAD",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "CADPLN": {
+    "base": "CAD",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "CADSEK": {
+    "base": "CAD",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "CADSGD": {
+    "base": "CAD",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "CADZAR": {
+    "base": "CAD",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "CHFCZK": {
+    "base": "CHF",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "CHFDKK": {
+    "base": "CHF",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "CHFHKD": {
+    "base": "CHF",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "CHFHUF": {
+    "base": "CHF",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "CHFMXN": {
+    "base": "CHF",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "CHFNOK": {
+    "base": "CHF",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "CHFPLN": {
+    "base": "CHF",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "CHFSEK": {
+    "base": "CHF",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "CHFSGD": {
+    "base": "CHF",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "CHFTRY": {
+    "base": "CHF",
+    "counter": "TRY",
+    "type": "currency_exotic"
+  },
+  "CHFZAR": {
+    "base": "CHF",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "DKKCZK": {
+    "base": "DKK",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "DKKHKD": {
+    "base": "DKK",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "DKKHUF": {
+    "base": "DKK",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "DKKMXN": {
+    "base": "DKK",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "DKKNOK": {
+    "base": "DKK",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "DKKPLN": {
+    "base": "DKK",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "DKKSEK": {
+    "base": "DKK",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "DKKSGD": {
+    "base": "DKK",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "DKKZAR": {
+    "base": "DKK",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "EURCZK": {
+    "base": "EUR",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "EURDKK": {
+    "base": "EUR",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "EURHKD": {
+    "base": "EUR",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "EURHUF": {
+    "base": "EUR",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "EURMXN": {
+    "base": "EUR",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "EURNOK": {
+    "base": "EUR",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "EURPLN": {
+    "base": "EUR",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "EURRON": {
+    "base": "EUR",
+    "counter": "RON",
+    "type": "currency_exotic"
+  },
+  "EURRUB": {
+    "base": "EUR",
+    "counter": "RUB",
+    "type": "currency_exotic"
+  },
+  "EURSEK": {
+    "base": "EUR",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "EURSGD": {
+    "base": "EUR",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "EURTRY": {
+    "base": "EUR",
+    "counter": "TRY",
+    "type": "currency_exotic"
+  },
+  "EURZAR": {
+    "base": "EUR",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "GBPCZK": {
+    "base": "GBP",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "GBPDKK": {
+    "base": "GBP",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "GBPHKD": {
+    "base": "GBP",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "GBPHUF": {
+    "base": "GBP",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "GBPMXN": {
+    "base": "GBP",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "GBPNOK": {
+    "base": "GBP",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "GBPPLN": {
+    "base": "GBP",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "GBPRON": {
+    "base": "GBP",
+    "counter": "RON",
+    "type": "currency_exotic"
+  },
+  "GBPSEK": {
+    "base": "GBP",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "GBPSGD": {
+    "base": "GBP",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "GBPTRY": {
+    "base": "GBP",
+    "counter": "TRY",
+    "type": "currency_exotic"
+  },
+  "GBPZAR": {
+    "base": "GBP",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "HKDJPY": {
+    "base": "HKD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "JPYCZK": {
+    "base": "JPY",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "JPYDKK": {
+    "base": "JPY",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "JPYHKD": {
+    "base": "JPY",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "JPYHUF": {
+    "base": "JPY",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "JPYMXN": {
+    "base": "JPY",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "JPYNOK": {
+    "base": "JPY",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "JPYPLN": {
+    "base": "JPY",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "JPYSEK": {
+    "base": "JPY",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "JPYSGD": {
+    "base": "JPY",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "JPYZAR": {
+    "base": "JPY",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "MXNJPY": {
+    "base": "MXN",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "NOKCZK": {
+    "base": "NOK",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "NOKHKD": {
+    "base": "NOK",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "NOKHUF": {
+    "base": "NOK",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "NOKJPY": {
+    "base": "NOK",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "NOKMXN": {
+    "base": "NOK",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "NOKPLN": {
+    "base": "NOK",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "NOKSEK": {
+    "base": "NOK",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "NOKSGD": {
+    "base": "NOK",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "NOKZAR": {
+    "base": "NOK",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "NZDCZK": {
+    "base": "NZD",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "NZDDKK": {
+    "base": "NZD",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "NZDHKD": {
+    "base": "NZD",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "NZDHUF": {
+    "base": "NZD",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "NZDMXN": {
+    "base": "NZD",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "NZDNOK": {
+    "base": "NZD",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "NZDPLN": {
+    "base": "NZD",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "NZDSEK": {
+    "base": "NZD",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "NZDSGD": {
+    "base": "NZD",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "NZDZAR": {
+    "base": "NZD",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "SEKJPY": {
+    "base": "SEK",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "SGDCHF": {
+    "base": "SGD",
+    "counter": "CHF",
+    "type": "currency_exotic"
+  },
+  "SGDHKD": {
+    "base": "SGD",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "SGDJPY": {
+    "base": "SGD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "TRYJPY": {
+    "base": "TRY",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDBRL": {
+    "base": "USD",
+    "counter": "BRL",
+    "pip": {
+      "pipette": 4,
+      "precision": 4,
+      "round": 4
+    },
+    "type": "currency_exotic"
+  },
+  "USDCNH": {
+    "base": "USD",
+    "counter": "CNH",
+    "type": "currency_exotic"
+  },
+  "USDCZK": {
+    "base": "USD",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "USDDKK": {
+    "base": "USD",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "USDHKD": {
+    "base": "USD",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "USDHRK": {
+    "base": "USD",
+    "counter": "HRK",
+    "type": "currency_exotic"
+  },
+  "USDHUF": {
+    "base": "USD",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDIDR": {
+    "base": "USD",
+    "counter": "IDR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "currency_exotic"
+  },
+  "USDILS": {
+    "base": "USD",
+    "counter": "ILS",
+    "type": "currency_exotic"
+  },
+  "USDINR": {
+    "base": "USD",
+    "counter": "INR",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDKRW": {
+    "base": "USD",
+    "counter": "KRW",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDKWD": {
+    "base": "USD",
+    "counter": "KWD",
+    "type": "currency_exotic"
+  },
+  "USDMXN": {
+    "base": "USD",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "USDMYR": {
+    "base": "USD",
+    "counter": "MYR",
+    "type": "currency_exotic"
+  },
+  "USDNGN": {
+    "base": "USD",
+    "counter": "NGN",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDNOK": {
+    "base": "USD",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "USDPLN": {
+    "base": "USD",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "USDRON": {
+    "base": "USD",
+    "counter": "RON",
+    "type": "currency_exotic"
+  },
+  "USDRUB": {
+    "base": "USD",
+    "counter": "RUB",
+    "type": "currency_exotic"
+  },
+  "USDSAR": {
+    "base": "USD",
+    "counter": "SAR",
+    "type": "currency_exotic"
+  },
+  "USDSEK": {
+    "base": "USD",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "USDSGD": {
+    "base": "USD",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "USDTHB": {
+    "base": "USD",
+    "counter": "THB",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDTRY": {
+    "base": "USD",
+    "counter": "TRY",
+    "type": "currency_exotic"
+  },
+  "USDZAR": {
+    "base": "USD",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "ZARJPY": {
+    "base": "ZAR",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "AUDUSD": {
+    "base": "AUD",
+    "counter": "USD",
+    "type": "currency_major"
+  },
+  "EURUSD": {
+    "base": "EUR",
+    "counter": "USD",
+    "type": "currency_major"
+  },
+  "GBPUSD": {
+    "base": "GBP",
+    "counter": "USD",
+    "type": "currency_major"
+  },
+  "NZDUSD": {
+    "base": "NZD",
+    "counter": "USD",
+    "type": "currency_major"
+  },
+  "USDCAD": {
+    "base": "USD",
+    "counter": "CAD",
+    "type": "currency_major"
+  },
+  "USDCHF": {
+    "base": "USD",
+    "counter": "CHF",
+    "type": "currency_major"
+  },
+  "USDJPY": {
+    "base": "USD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_major"
+  },
+  "AUDCAD": {
+    "base": "AUD",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "AUDCHF": {
+    "base": "AUD",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "AUDEUR": {
+    "base": "AUD",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "AUDGBP": {
+    "base": "AUD",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "AUDJPY": {
+    "base": "AUD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "AUDNZD": {
+    "base": "AUD",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "CADAUD": {
+    "base": "CAD",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "CADCHF": {
+    "base": "CAD",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "CADEUR": {
+    "base": "CAD",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "CADGBP": {
+    "base": "CAD",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "CADJPY": {
+    "base": "CAD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "CADNZD": {
+    "base": "CAD",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "CHFAUD": {
+    "base": "CHF",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "CHFCAD": {
+    "base": "CHF",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "CHFEUR": {
+    "base": "CHF",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "CHFGBP": {
+    "base": "CHF",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "CHFJPY": {
+    "base": "CHF",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "CHFNZD": {
+    "base": "CHF",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "EURAUD": {
+    "base": "EUR",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "EURCAD": {
+    "base": "EUR",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "EURCHF": {
+    "base": "EUR",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "EURGBP": {
+    "base": "EUR",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "EURJPY": {
+    "base": "EUR",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "EURNZD": {
+    "base": "EUR",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "GBPAUD": {
+    "base": "GBP",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "GBPCAD": {
+    "base": "GBP",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "GBPCHF": {
+    "base": "GBP",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "GBPEUR": {
+    "base": "GBP",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "GBPJPY": {
+    "base": "GBP",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "GBPNZD": {
+    "base": "GBP",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "JPYAUD": {
+    "base": "JPY",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "JPYCAD": {
+    "base": "JPY",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "JPYCHF": {
+    "base": "JPY",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "JPYEUR": {
+    "base": "JPY",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "JPYGBP": {
+    "base": "JPY",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "JPYNZD": {
+    "base": "JPY",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "NZDAUD": {
+    "base": "NZD",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "NZDCAD": {
+    "base": "NZD",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "NZDCHF": {
+    "base": "NZD",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "NZDEUR": {
+    "base": "NZD",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "NZDGBP": {
+    "base": "NZD",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "NZDJPY": {
+    "base": "NZD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "default_forex_lots": {
+    "micro": 1000,
+    "mini": 10000,
+    "nano": 100,
+    "normalized": true,
+    "standard": 100000,
+    "unit": "forex"
+  },
+  "default_pip": {
+    "pipette": 5,
+    "precision": 4,
+    "round": 5
+  },
+  "lot_units": {
+    "barrel": {
+      "key": "barrel",
+      "long": "barrel",
+      "short": "bbl"
+    },
+    "forex": {
+      "key": "forex",
+      "long": "unit",
+      "short": "unit"
+    },
+    "mmbtu": {
+      "key": "mmbtu",
+      "long": "metric million british Thermal unit",
+      "short": "MMBtu"
+    },
+    "ounce": {
+      "key": "ounce",
+      "long": "ounce",
+      "short": "oz"
+    }
+  },
+  "pair_types": {
+    "commodity_energy": {
+      "key": "commodities",
+      "main": "commodity",
+      "sub": "energy",
+      "subKey": "energy",
+      "weight": 20
+    },
+    "commodity_metal": {
+      "key": "commodities",
+      "main": "commodity",
+      "sub": "metal",
+      "subKey": "metal",
+      "weight": 20
+    },
+    "crypto": {
+      "key": "cryptos",
+      "main": "crypto",
+      "weight": 0
+    },
+    "currency_exotic": {
+      "key": "exotics",
+      "main": "exotic",
+      "weight": 60
+    },
+    "currency_major": {
+      "key": "majors",
+      "main": "major",
+      "weight": 100
+    },
+    "currency_minor": {
+      "key": "minors",
+      "main": "minor",
+      "weight": 80
+    },
+    "index": {
+      "key": "indices",
+      "main": "index",
+      "weight": 40
+    }
+  },
+  "AEXEUR": {
+    "base": "AEX",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "AORDAUD": {
+    "base": "AORD",
+    "counter": "AUD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "AXJOAUD": {
+    "base": "AXJO",
+    "counter": "AUD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "BFXEUR": {
+    "base": "BFX",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "BVSPBRL": {
+    "base": "BVSP",
+    "counter": "BRL",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "CASE30EGP": {
+    "base": "CASE30",
+    "counter": "EGP",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "DJIUSD": {
+    "base": "DJI",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "FCHIEUR": {
+    "base": "FCHI",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "FTMCGBP": {
+    "base": "FTMC",
+    "counter": "GBP",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "FTSEGBP": {
+    "base": "FTSE",
+    "counter": "GBP",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "FVXUSD": {
+    "base": "FVX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 2
+    },
+    "type": "index"
+  },
+  "GDAXIEUR": {
+    "base": "GDAXI",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "GSPCUSD": {
+    "base": "GSPC",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "GSPTSECAD": {
+    "base": "GSPTSE",
+    "counter": "CAD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "HSIHKD": {
+    "base": "HSI",
+    "counter": "HKD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "IBEXEUR": {
+    "base": "IBEX",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "IMOEX_MERUB": {
+    "base": "IMOEX_ME",
+    "counter": "RUB",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "JKSEIDR": {
+    "base": "JKSE",
+    "counter": "IDR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "KLSEMYR": {
+    "base": "KLSE",
+    "counter": "MYR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "KS11KRW": {
+    "base": "KS11",
+    "counter": "KRW",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "MXXMXN": {
+    "base": "MXX",
+    "counter": "MXN",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "N100EUR": {
+    "base": "N100",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "N225JPY": {
+    "base": "N225",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "NDXUSD": {
+    "base": "NDX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "NSEIINR": {
+    "base": "NSEI",
+    "counter": "INR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "NZ50NZD": {
+    "base": "NZ50",
+    "counter": "NZD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "RUAUSD": {
+    "base": "RUA",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "RUIUSD": {
+    "base": "RUI",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "RUTUSD": {
+    "base": "RUT",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "SPGNRUPUSD": {
+    "base": "SPGNRUP",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "SPGSCIUSD": {
+    "base": "SPGSCI",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "SSMICHF": {
+    "base": "SSMI",
+    "counter": "CHF",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "STISGD": {
+    "base": "STI",
+    "counter": "SGD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "STOXX50EEUR": {
+    "base": "STOXX50E",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "TA125_TAILS": {
+    "base": "TA125_TA",
+    "counter": "ILS",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "TNXUSD": {
+    "base": "TNX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 2
+    },
+    "type": "index"
+  },
+  "TYXUSD": {
+    "base": "TYX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 2
+    },
+    "type": "index"
+  },
+  "VIXUSD": {
+    "base": "VIX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 2
+    },
+    "type": "index"
+  },
+  "XU100_ISTRY": {
+    "base": "XU100_IS",
+    "counter": "TRY",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  }
+}

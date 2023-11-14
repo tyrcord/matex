@@ -1,6 +1,5 @@
 import 'package:matex_core/core.dart';
-import 'package:matex_dart/matex_dart.dart'
-    show MatexPairMetadata, MatexPairPipMetadata;
+import 'package:matex_financial/financial.dart';
 
 mixin MatexFinancialCalculatorFormatterMixin on MatexCalculatorFormatterMixin {
   String localizeQuote({

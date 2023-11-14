@@ -1,6 +1,6 @@
 // Package imports:
 import 'package:matex_core/core.dart';
-import 'package:matex_dart/matex_dart.dart' show MatexLotDescriptors;
+import 'package:matex_financial/financial.dart';
 
 class MatexPipValueCalculatorState extends MatexCalculatorState {
   final double? positionSize;

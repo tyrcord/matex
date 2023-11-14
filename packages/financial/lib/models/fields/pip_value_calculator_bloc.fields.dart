@@ -1,12 +1,10 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_financial/fastyle_financial.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 
-final String _kDefaultPositionSizeFieldType =
-    FastPositionSizeSwitchFieldType.unit.name;
+const String _kDefaultPositionSizeFieldType = 'unit';
 
 class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin

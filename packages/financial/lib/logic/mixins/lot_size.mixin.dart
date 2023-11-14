@@ -1,6 +1,6 @@
-import 'package:fastyle_financial/fastyle_financial.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:matex_dart/matex_dart.dart' show MatexPairMetadata;
+import 'package:matex_financial/financial.dart';
+import 'package:lingua_units/lingua_units.dart';
 
 mixin MatexLotSizeMixin {
   static const matadataKeys = {
@@ -18,6 +18,7 @@ mixin MatexLotSizeMixin {
   String? localizeLotSizeCaption<B extends FastCalculatorBloc>({
     required B bloc,
     required key,
+    String? localeCode,
   }) {
     final metadata = bloc.currentState.metadata;
     final instrument = metadata[instrumentMetadataKey] as MatexPairMetadata?;
@@ -25,10 +26,13 @@ mixin MatexLotSizeMixin {
     final lotSize = metadata[lotMetadataKey] as int?;
     String? captionText;
 
-    if (instrument != null && lotSize != null) {
-      captionText = localizeLotSize(
-        metadata: instrument,
-        lotSize: lotSize,
+    if (instrument != null && lotSize != null && instrument.lots != null) {
+      final unitKey = instrument.lots!.unit.key;
+
+      captionText = localizeUnitSize(
+        localeCode: localeCode,
+        unitKey: unitKey,
+        value: lotSize,
       );
     }
 

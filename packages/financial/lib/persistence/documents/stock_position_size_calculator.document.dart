@@ -1,7 +1,6 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
-import 'package:matex_dart/matex_dart.dart' show MatexPosition;
 
 // Project imports:
 import 'package:matex_financial/financial.dart';

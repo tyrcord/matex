@@ -1,12 +1,10 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_financial/fastyle_financial.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-final String _kDefaultPositionSizeFieldType =
-    FastPositionSizeSwitchFieldType.unit.name;
+const String _kDefaultPositionSizeFieldType = 'unit';
 
 class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   late final String? accountCurrency;

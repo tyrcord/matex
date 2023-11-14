@@ -1,6 +1,4 @@
 // Package imports:
-import 'package:matex_dart/matex_dart.dart'
-    show MatexInstrumentProvider, MatexInstrumentMetadata;
 import 'package:tbloc/tbloc.dart';
 
 // Project imports:
@@ -11,7 +9,7 @@ class MatexCurrencyBloc
     extends BidirectionalBloc<MatexCurrencyBlocEvent, MatexCurrencyBlocState> {
   static MatexCurrencyBloc? _singleton;
 
-  final _instrumentProvider = MatexInstrumentProvider();
+  final _instrumentMetadataService = MatexFinancialInstrumentMedatataService();
 
   /// Private constructor for enforcing the singleton pattern.
   MatexCurrencyBloc._({MatexCurrencyBlocState? initialState})
@@ -46,7 +44,7 @@ class MatexCurrencyBloc
       isInitializing = true;
       yield currentState.copyWith(isInitializing: true);
 
-      final instrumentsMetadata = await _instrumentProvider.list();
+      final instrumentsMetadata = await _instrumentMetadataService.list();
       final instrumentsMetadataList = instrumentsMetadata.values;
 
       final currencies = instrumentsMetadataList.where(

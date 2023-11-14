@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:matex_core/core.dart';
-import 'package:matex_dart/matex_dart.dart' show MatexPosition;
 import 'package:t_helpers/helpers.dart';
 
 // Project imports:

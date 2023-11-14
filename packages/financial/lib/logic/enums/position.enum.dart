@@ -1,0 +1,4 @@
+enum MatexPosition {
+  long,
+  short,
+}

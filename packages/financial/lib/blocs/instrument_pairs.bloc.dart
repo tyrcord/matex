@@ -1,5 +1,4 @@
 // Package imports:
-import 'package:matex_dart/matex_dart.dart';
 import 'package:tbloc/tbloc.dart';
 
 // Project imports:
@@ -9,8 +8,10 @@ class MatexFinancialInstrumentsBloc extends BidirectionalBloc<
     MatexFinancialInstrumentsBlocEvent, MatexFinancialInstrumentsBlocState> {
   static MatexFinancialInstrumentsBloc? _singleton;
 
-  final _instrumentIairProvider = MatexPairMetadataProvider();
-  final _instrumentProvider = MatexInstrumentProvider();
+  final _instrumentMetadataService = MatexFinancialInstrumentMedatataService();
+
+  final _instrumentPairMetadataService =
+      MatexFinancialInstrumentPairMetadataService();
 
   MatexFinancialInstrumentsBloc._({
     MatexFinancialInstrumentsBlocState? initialState,
@@ -67,15 +68,15 @@ class MatexFinancialInstrumentsBloc extends BidirectionalBloc<
   }
 
   Future<List<MatexPairMetadata>> _loadInstrumentPairsMetadata() async {
-    final instrumentsMetadata = await _instrumentIairProvider.list();
+    final instrumentsMetadata = await _instrumentPairMetadataService.list();
     final instruments = <MatexPairMetadata>[];
 
     for (final instrument in instrumentsMetadata.values.toList()) {
       instruments.add(instrument.copyWith(
         baseInstrumentMetadata:
-            await _instrumentProvider.metadata(instrument.baseCode),
+            await _instrumentMetadataService.metadata(instrument.baseCode),
         counterInstrumentMetadata:
-            await _instrumentProvider.metadata(instrument.counterCode),
+            await _instrumentMetadataService.metadata(instrument.counterCode),
       ));
     }
 

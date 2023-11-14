@@ -1,8 +1,6 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:matex_core/core.dart';
-import 'package:matex_dart/matex_dart.dart'
-    show MatexPairMetadata, MatexPairMetadataProvider;
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 
@@ -14,7 +12,8 @@ abstract class MatexFinancialCalculatorBloc<
         R extends FastCalculatorResults>
     extends MatexCalculatorBloc<C, E, S, D, R> {
   @protected
-  final instrumentsProvider = MatexPairMetadataProvider();
+  final instrumentPairMetadataService =
+      MatexFinancialInstrumentPairMetadataService();
 
   MatexFinancialCalculatorBloc({
     required super.dataProvider,
@@ -42,7 +41,8 @@ abstract class MatexFinancialCalculatorBloc<
     }
 
     final pair = base + counter;
-    final tradingPairMetadata = await instrumentsProvider.metadata(pair);
+    final tradingPairMetadata =
+        await instrumentPairMetadataService.metadata(pair);
     final pipMetadata = tradingPairMetadata?.pip;
 
     return pipMetadata?.precision ?? kDefaultPipPipDecimalPlaces;
@@ -61,7 +61,7 @@ abstract class MatexFinancialCalculatorBloc<
 
     if (base == null || counter == null) return null;
 
-    return instrumentsProvider.metadata(base + counter);
+    return instrumentPairMetadataService.metadata(base + counter);
   }
 
   Future<int> getStandardLotValue() async {

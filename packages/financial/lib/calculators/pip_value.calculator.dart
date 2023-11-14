@@ -9,9 +9,6 @@ import 'package:t_helpers/helpers.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-import 'package:matex_dart/matex_dart.dart'
-    show MatexLotDescriptors, MatexLotDescriptor;
-
 class MatexPipValueCalculator extends MatexCalculator<
     MatexPipValueCalculatorState, MatexPipValueCalculatorResults> {
   MatexPipValueCalculator({
