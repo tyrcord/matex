@@ -35,7 +35,7 @@ dependencies:
   lingua_core: ^0.0.31
   lingua_settings: ^0.0.12
   lingua_finance_forex: ^0.0.5
-  lingua_units: ^0.0.5
+  lingua_units: ^0.0.6
 
   # Fastyle
   fastyle_forms: ^0.0.32+1
