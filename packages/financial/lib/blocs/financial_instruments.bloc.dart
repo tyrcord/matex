@@ -84,8 +84,6 @@ class MatexFinancialInstrumentsBloc extends BidirectionalBloc<
       ));
     }
 
-    print('instruments: $instruments');
-
     return instruments;
   }
 }
