@@ -1,6 +1,6 @@
 name: matex_core
 description: The core tool of the Matex packages.
-version: 0.0.19
+version: 0.0.20
 repository: https://github.com/tyrcord/matex/tree/main/packages/core
 
 environment:

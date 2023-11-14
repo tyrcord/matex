@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-11-14
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.20`](#matex_core---v0020)
+ - [`matex_data` - `v0.0.14`](#matex_data---v0014)
+ - [`matex_financial` - `v0.0.26`](#matex_financial---v0026)
+
+---
+
+#### `matex_core` - `v0.0.20`
+
+ - **FIX**: wrong initial validity.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add default financial instrument to pip value calculator.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add parseStringToInt.
+
+#### `matex_data` - `v0.0.14`
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.26`
+
+ - **REFACTOR**: MatexFinancialInstrumentsBloc.
+ - **FIX**: use24HourFormat.
+ - **FIX**: minor improvement.
+ - **FIX**: minor fixes.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add default financial instrument to pip value calculator.
+ - **FEAT**: add pdf generator for pip value.
+ - **FEAT**: update dependencies.
+ - **FEAT**: debounce compute events.
+ - **FEAT**: implement pip value results.
+ - **FEAT**: add MatexFinancialInstrumentExchangeService.
+ - **FEAT**: update dependencies.
+ - **FEAT**: added MatexFinancialInstrumentCalculatorBlocFields interface.
+ - **FEAT**: add quote model.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add favorite instrument logic.
+ - **FEAT**: minor improvements.
+ - **FEAT**: implement MatexPipValueCalculator.
+ - **FEAT**: add MatexInstrumentPairsBloc.
+ - **FEAT**: initial structure for pip calculator.
+
+
 ## 2023-10-27
 
 ### Changes

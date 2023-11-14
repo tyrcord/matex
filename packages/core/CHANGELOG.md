@@ -1,3 +1,13 @@
+## 0.0.20
+
+ - **FIX**: wrong initial validity.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add default financial instrument to pip value calculator.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add parseStringToInt.
+
 ## 0.0.19
 
  - **FEAT**: update dependencies.

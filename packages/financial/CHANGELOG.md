@@ -1,3 +1,26 @@
+## 0.0.26
+
+ - **REFACTOR**: MatexFinancialInstrumentsBloc.
+ - **FIX**: use24HourFormat.
+ - **FIX**: minor improvement.
+ - **FIX**: minor fixes.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add default financial instrument to pip value calculator.
+ - **FEAT**: add pdf generator for pip value.
+ - **FEAT**: update dependencies.
+ - **FEAT**: debounce compute events.
+ - **FEAT**: implement pip value results.
+ - **FEAT**: add MatexFinancialInstrumentExchangeService.
+ - **FEAT**: update dependencies.
+ - **FEAT**: added MatexFinancialInstrumentCalculatorBlocFields interface.
+ - **FEAT**: add quote model.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add favorite instrument logic.
+ - **FEAT**: minor improvements.
+ - **FEAT**: implement MatexPipValueCalculator.
+ - **FEAT**: add MatexInstrumentPairsBloc.
+ - **FEAT**: initial structure for pip calculator.
+
 ## 0.0.25
 
  - **FEAT**(MatexProfitAndLossCalculatorPdfGenerator): add additional metrics category.
