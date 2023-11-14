@@ -177,10 +177,17 @@ abstract class MatexCalculatorBloc<
     FastAppDictBlocState state,
   ) {
     addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
-    addEvent(FastCalculatorBlocEvent.patchValue(
-      value: state.getValue(defaultValueKey),
-      key: stateKey,
-    ));
+
+    final value = state.getValue(defaultValueKey);
+
+    if (value == null) {
+      addEvent(FastCalculatorBlocEvent.resetValue(key: stateKey));
+    } else {
+      addEvent(FastCalculatorBlocEvent.patchValue(
+        value: state.getValue(defaultValueKey),
+        key: stateKey,
+      ));
+    }
   }
 
   @override

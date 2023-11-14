@@ -2,7 +2,7 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_dart/matex_dart.dart'
-    show MatexPairPipMetadata, MatexPairMetadata, MatexPairMetadataProvider;
+    show MatexPairMetadata, MatexPairMetadataProvider;
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 
@@ -15,10 +15,6 @@ abstract class MatexFinancialCalculatorBloc<
     extends MatexCalculatorBloc<C, E, S, D, R> {
   @protected
   final instrumentsProvider = MatexPairMetadataProvider();
-
-  int get defaultPipDecimalPlaces {
-    return MatexPairPipMetadata.defaultMetatada().precision;
-  }
 
   MatexFinancialCalculatorBloc({
     required super.dataProvider,
@@ -42,14 +38,14 @@ abstract class MatexFinancialCalculatorBloc<
 
   Future<int> getPipPrecision({String? base, String? counter}) async {
     if (base == null || counter == null) {
-      return defaultPipDecimalPlaces;
+      return kDefaultPipPipDecimalPlaces;
     }
 
     final pair = base + counter;
     final tradingPairMetadata = await instrumentsProvider.metadata(pair);
     final pipMetadata = tradingPairMetadata?.pip;
 
-    return pipMetadata?.precision ?? defaultPipDecimalPlaces;
+    return pipMetadata?.precision ?? kDefaultPipPipDecimalPlaces;
   }
 
   Future<MatexPairMetadata?> getInstrumentMetadata({

@@ -339,7 +339,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       if (pairMetadata != null) {
         calculator.pipDecimalPlaces = pairMetadata.pip.precision;
       } else {
-        calculator.pipDecimalPlaces = defaultPipDecimalPlaces;
+        calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
       }
     }
 
@@ -487,6 +487,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     calculator
       ..counterToAccountCurrencyRate = 0
+      ..isAccountCurrencyCounter = false
       ..instrumentPairRate = 0;
 
     // Note: Loads default metadata values from the super class.
@@ -500,7 +501,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
         base: true,
       );
 
-      calculator.pipDecimalPlaces = defaultPipDecimalPlaces;
+      calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
     } else {
       final pipDecimalPlaces = await getPipPrecision(
         counter: instrument.counter,

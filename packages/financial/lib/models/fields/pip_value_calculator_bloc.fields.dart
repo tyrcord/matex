@@ -93,7 +93,9 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
       counter: counter ? null : this.counter,
       positionSize: positionSize ? null : this.positionSize,
       numberOfPips: numberOfPips ? null : this.numberOfPips,
-      pipDecimalPlaces: pipDecimalPlaces ? null : this.pipDecimalPlaces,
+      pipDecimalPlaces: pipDecimalPlaces
+          ? kDefaultPipPipDecimalPlaces.toString()
+          : this.pipDecimalPlaces,
       positionSizeFieldType:
           positionSizeFieldType ? null : this.positionSizeFieldType,
     );
