@@ -1,6 +1,7 @@
 import 'package:tmodel/tmodel.dart';
 import 'package:matex_financial/models/models.dart';
 
+// FIXME: needs review from matex_dart
 class MatexInstrumentMetadata extends TModel {
   final MatexInstrumentFormatMetadata? format;
   final MatexInstrumentSymbolMetadata? symbol;

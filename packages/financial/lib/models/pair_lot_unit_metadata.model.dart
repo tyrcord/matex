@@ -1,12 +1,13 @@
-import 'package:equatable/equatable.dart';
+import 'package:tmodel/tmodel.dart';
 
+// FIXME: needs review from matex_dart
 const kMatexForexPairLotUnitMetadata = MatexPairLotUnitMetadata(
   key: 'forex',
   long: 'unit',
   short: 'unit',
 );
 
-class MatexPairLotUnitMetadata extends Equatable {
+class MatexPairLotUnitMetadata extends TModel {
   static const Map<String, MatexPairLotUnitMetadata> _cacheMap = {
     'forex': kMatexForexPairLotUnitMetadata,
     'barrel': MatexPairLotUnitMetadata(
@@ -48,4 +49,29 @@ class MatexPairLotUnitMetadata extends Equatable {
 
   @override
   List<Object> get props => [key, long, short];
+
+  @override
+  MatexPairLotUnitMetadata clone() => copyWith();
+
+  @override
+  MatexPairLotUnitMetadata copyWith({
+    String? key,
+    String? long,
+    String? short,
+  }) {
+    return MatexPairLotUnitMetadata(
+      key: key ?? this.key,
+      long: long ?? this.long,
+      short: short ?? this.short,
+    );
+  }
+
+  @override
+  MatexPairLotUnitMetadata merge(covariant MatexPairLotUnitMetadata model) {
+    return MatexPairLotUnitMetadata(
+      key: model.key,
+      long: model.long,
+      short: model.short,
+    );
+  }
 }

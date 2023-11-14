@@ -1,5 +1,6 @@
 import 'package:tmodel/tmodel.dart';
 
+// FIXME: needs review from matex_dart
 class MatexInstrumentNameMetadata extends TModel {
   final String key;
   final String localized;

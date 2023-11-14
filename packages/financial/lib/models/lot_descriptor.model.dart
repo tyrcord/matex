@@ -1,9 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:tmodel/tmodel.dart';
 
 const _kExists = true;
 const _kMultiplier = 1;
 
-class MatexLotDescriptor extends Equatable {
+// FIXME: needs review from matex_dart
+class MatexLotDescriptor extends TModel {
   final num multiplier;
   final bool exists;
 
@@ -26,9 +27,31 @@ class MatexLotDescriptor extends Equatable {
 
   @override
   List<Object?> get props => [exists, multiplier];
+
+  @override
+  MatexLotDescriptor clone() => copyWith();
+
+  @override
+  MatexLotDescriptor copyWith({
+    bool? exists,
+    num? multiplier,
+  }) {
+    return MatexLotDescriptor(
+      exists: exists ?? this.exists,
+      multiplier: multiplier ?? this.multiplier,
+    );
+  }
+
+  @override
+  MatexLotDescriptor merge(covariant MatexLotDescriptor model) {
+    return copyWith(
+      exists: model.exists,
+      multiplier: model.multiplier,
+    );
+  }
 }
 
-class MatexLotDescriptors extends Equatable {
+class MatexLotDescriptors extends TModel {
   final MatexLotDescriptor? standard;
   final MatexLotDescriptor? micro;
   final MatexLotDescriptor? mini;
@@ -41,6 +64,7 @@ class MatexLotDescriptors extends Equatable {
     this.nano,
   });
 
+  @override
   MatexLotDescriptors copyWith({
     MatexLotDescriptor? standard,
     MatexLotDescriptor? micro,
@@ -75,6 +99,19 @@ class MatexLotDescriptors extends Equatable {
 
   @override
   List<Object?> get props => [standard, micro, mini, nano];
+
+  @override
+  MatexLotDescriptors clone() => copyWith();
+
+  @override
+  MatexLotDescriptors merge(covariant MatexLotDescriptors model) {
+    return copyWith(
+      standard: model.standard,
+      micro: model.micro,
+      mini: model.mini,
+      nano: model.nano,
+    );
+  }
 }
 
 const kDefaultLotDescriptors = MatexLotDescriptors(

@@ -1,8 +1,9 @@
-import 'package:equatable/equatable.dart';
+import 'package:tmodel/tmodel.dart';
 
 const _kWeight = 0.0;
 
-class MatexPairTypeMetadata extends Equatable {
+// FIXME: needs review from matex_dart
+class MatexPairTypeMetadata extends TModel {
   static final Map<String, MatexPairTypeMetadata> _cacheMap = {};
   final String key;
   final String main;
@@ -50,4 +51,35 @@ class MatexPairTypeMetadata extends Equatable {
 
   @override
   List<Object?> get props => [key, main, subKey, sub, weight];
+
+  @override
+  MatexPairTypeMetadata clone() => copyWith();
+
+  @override
+  MatexPairTypeMetadata copyWith({
+    String? key,
+    String? main,
+    String? subKey,
+    String? sub,
+    double? weight,
+  }) {
+    return MatexPairTypeMetadata(
+      key: key ?? this.key,
+      main: main ?? this.main,
+      subKey: subKey ?? this.subKey,
+      sub: sub ?? this.sub,
+      weight: weight ?? this.weight,
+    );
+  }
+
+  @override
+  MatexPairTypeMetadata merge(covariant MatexPairTypeMetadata model) {
+    return copyWith(
+      key: model.key,
+      main: model.main,
+      subKey: model.subKey,
+      sub: model.sub,
+      weight: model.weight,
+    );
+  }
 }
