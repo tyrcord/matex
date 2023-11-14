@@ -233,6 +233,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     MatexStockPositionSizeCalculatorBlocDocument document,
   ) async {
     return _kDefaultStockPositionSizeBlocState.copyWith(
+      results: await retrieveDefaultResult(),
       fields: MatexStockPositionSizeCalculatorBlocFields(
         riskPercent: document.riskPercent,
         riskReward: document.riskReward,

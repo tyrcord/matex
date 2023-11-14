@@ -426,6 +426,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     );
 
     return _kDefaultPipValueBlocState.copyWith(
+      results: await retrieveDefaultResult(),
       fields: MatexPipValueCalculatorBlocFields(
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         accountCurrency: document.accountCurrency,

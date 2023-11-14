@@ -212,6 +212,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     MatexProfitAndLossCalculatorDocument document,
   ) async {
     return _kDefaultProfitAndLossBlocState.copyWith(
+      results: await retrieveDefaultResult(),
       fields: MatexProfitAndLossCalculatorBlocFields(
         taxRate: document.taxRate,
       ),

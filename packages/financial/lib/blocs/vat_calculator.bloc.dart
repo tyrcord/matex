@@ -225,6 +225,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     MatexVatCalculatorBlocDocument document,
   ) async {
     return _kDefaultVatBlocState.copyWith(
+      results: await retrieveDefaultResult(),
       fields: document.toFields(),
     );
   }
