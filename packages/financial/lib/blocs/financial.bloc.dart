@@ -26,11 +26,9 @@ abstract class MatexFinancialCalculatorBloc<
     super.delegate,
   });
 
-  Future<bool> isMandatoryFieldValid() async => true;
-
   @override
   Future<bool> isCalculatorStateValid() async {
-    if (!await isMandatoryFieldValid()) return false;
+    if (!isMandatoryFieldValid) return false;
 
     return calculator.isValid;
   }

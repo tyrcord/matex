@@ -81,10 +81,11 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  Future<bool> isMandatoryFieldValid() async {
+  bool get isMandatoryFieldValid {
     return currentState.fields.accountCurrency != null &&
         currentState.fields.base != null &&
-        currentState.fields.counter != null;
+        currentState.fields.counter != null &&
+        currentState.fields.positionSize != null;
   }
 
   @override
@@ -95,7 +96,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexQuote? quote;
     String? updatedOn;
 
-    if (await isMandatoryFieldValid()) {
+    if (isMandatoryFieldValid) {
       quote = await patchExchangeRates();
 
       if (quote != null) {
@@ -122,7 +123,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     final instrumentMetadata = await getInstrumentMetadata();
     final instrumentPairRate = calculator.instrumentPairRate ?? 0;
 
-    if (instrumentPairRate > 0 && await isMandatoryFieldValid()) {
+    if (instrumentPairRate > 0 && isMandatoryFieldValid) {
       metadata.putIfAbsent('formattedInstrumentExchangeRate', () {
         final formatted = localizeQuote(
           rate: calculator.instrumentPairRate,
