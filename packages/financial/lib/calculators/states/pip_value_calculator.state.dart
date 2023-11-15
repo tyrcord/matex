@@ -8,7 +8,10 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
   final bool isAccountCurrencyCounter;
   final double counterToAccountCurrencyRate;
   final double instrumentPairRate;
-  final MatexLotDescriptors? lotDescriptors;
+  final double? microLot;
+  final double? miniLot;
+  final double? standardLot;
+  final double? nanoLot;
 
   const MatexPipValueCalculatorState({
     this.positionSize,
@@ -16,7 +19,10 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
     this.isAccountCurrencyCounter = false,
     this.counterToAccountCurrencyRate = 0,
     this.instrumentPairRate = 0,
-    this.lotDescriptors,
+    this.microLot,
+    this.miniLot,
+    this.standardLot,
+    this.nanoLot,
   });
 
   @override
@@ -30,6 +36,10 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
     double? counterToAccountCurrencyRate,
     double? instrumentPairRate,
     MatexLotDescriptors? lotDescriptors,
+    double? microLot,
+    double? miniLot,
+    double? standardLot,
+    double? nanoLot,
   }) {
     return MatexPipValueCalculatorState(
       positionSize: positionSize ?? this.positionSize,
@@ -39,7 +49,10 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
       counterToAccountCurrencyRate:
           counterToAccountCurrencyRate ?? this.counterToAccountCurrencyRate,
       instrumentPairRate: instrumentPairRate ?? this.instrumentPairRate,
-      lotDescriptors: lotDescriptors ?? this.lotDescriptors,
+      microLot: microLot ?? this.microLot,
+      miniLot: miniLot ?? this.miniLot,
+      standardLot: standardLot ?? this.standardLot,
+      nanoLot: nanoLot ?? this.nanoLot,
     );
   }
 
@@ -53,7 +66,10 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
       isAccountCurrencyCounter: model.isAccountCurrencyCounter,
       counterToAccountCurrencyRate: model.counterToAccountCurrencyRate,
       instrumentPairRate: model.instrumentPairRate,
-      lotDescriptors: model.lotDescriptors,
+      microLot: model.microLot,
+      miniLot: model.miniLot,
+      standardLot: model.standardLot,
+      nanoLot: model.nanoLot,
     );
   }
 
@@ -64,6 +80,9 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
         isAccountCurrencyCounter,
         counterToAccountCurrencyRate,
         instrumentPairRate,
-        lotDescriptors,
+        microLot,
+        miniLot,
+        standardLot,
+        nanoLot,
       ];
 }

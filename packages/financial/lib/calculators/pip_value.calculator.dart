@@ -23,23 +23,17 @@ class MatexPipValueCalculator extends MatexCalculator<
   @override
   MatexPipValueCalculatorState initializeDefaultState() => initializeState();
 
-  double getPositionSizeFromLotDescriptor({
-    MatexLotDescriptor? descriptor,
-    num? value = 0,
-  }) {
-    if (descriptor != null && descriptor.exists) {
-      final multiplier = descriptor.multiplier;
+  bool? get isAccountCurrencyCounter => state.isAccountCurrencyCounter;
+  double? get instrumentPairRate => state.instrumentPairRate;
+  int? get pipDecimalPlaces => state.pipDecimalPlaces;
+  double? get positionSize => state.positionSize;
+  double? get standardLot => state.standardLot;
+  double? get microLot => state.microLot;
+  double? get miniLot => state.miniLot;
+  double? get nanoLot => state.nanoLot;
 
-      if (value != null) {
-        return (toDecimal(value)! * toDecimal(multiplier)!).toDouble();
-      }
-    }
-
-    return 0;
-  }
-
-  set lotDescriptors(MatexLotDescriptors lotDescriptors) {
-    setState(state.copyWith(lotDescriptors: lotDescriptors));
+  double? get counterToAccountCurrencyRate {
+    return state.counterToAccountCurrencyRate;
   }
 
   set positionSize(double? value) {
@@ -58,42 +52,24 @@ class MatexPipValueCalculator extends MatexCalculator<
     setState(state.copyWith(counterToAccountCurrencyRate: value));
   }
 
-  double? get counterToAccountCurrencyRate {
-    return state.counterToAccountCurrencyRate;
-  }
-
   set instrumentPairRate(double? value) {
     setState(state.copyWith(instrumentPairRate: value));
   }
 
-  double? get instrumentPairRate => state.instrumentPairRate;
-
-  set lot(double lot) {
-    positionSize = getPositionSizeFromLotDescriptor(
-      descriptor: state.lotDescriptors?.standard,
-      value: lot,
-    );
+  set standardLot(double? lot) {
+    setState(state.copyWith(standardLot: lot));
   }
 
-  set microLot(double microLot) {
-    positionSize = getPositionSizeFromLotDescriptor(
-      descriptor: state.lotDescriptors?.micro,
-      value: microLot,
-    );
+  set microLot(double? microLot) {
+    setState(state.copyWith(standardLot: microLot));
   }
 
-  set miniLot(double miniLot) {
-    positionSize = getPositionSizeFromLotDescriptor(
-      descriptor: state.lotDescriptors?.mini,
-      value: miniLot,
-    );
+  set miniLot(double? miniLot) {
+    setState(state.copyWith(standardLot: miniLot));
   }
 
-  set nanoLot(double nanoLot) {
-    positionSize = getPositionSizeFromLotDescriptor(
-      descriptor: state.lotDescriptors?.nano,
-      value: nanoLot,
-    );
+  set nanoLot(double? nanoLot) {
+    setState(state.copyWith(standardLot: nanoLot));
   }
 
   static const defaultResults = MatexPipValueCalculatorResults(

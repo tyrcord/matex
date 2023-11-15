@@ -4,8 +4,6 @@ import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 
-const String _kDefaultPositionSizeFieldType = 'unit';
-
 class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
@@ -19,6 +17,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   late final String? numberOfPips;
   late final String? pipDecimalPlaces;
   late final String positionSizeFieldType;
+  late final String? lotSize;
 
   String get formattedPositionSize {
     final value = parseFieldValueToDouble(positionSize);
@@ -60,6 +59,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     String? pipDecimalPlaces,
     String? positionSizeFieldType,
     FastCalculatorBlocDelegate? delegate,
+    String? lotSize,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
     this.base = assignValue(base);
@@ -67,9 +67,10 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     this.positionSize = assignValue(positionSize);
     this.numberOfPips = assignValue(numberOfPips);
     this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
+    this.lotSize = assignValue(lotSize);
     this.delegate = delegate;
     this.positionSizeFieldType =
-        positionSizeFieldType ?? _kDefaultPositionSizeFieldType;
+        positionSizeFieldType ?? MatexPositionSizeType.unit.name;
   }
 
   @override
@@ -84,6 +85,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     bool numberOfPips = false,
     bool pipDecimalPlaces = false,
     bool positionSizeFieldType = false,
+    bool lotSize = false,
   }) {
     return MatexPipValueCalculatorBlocFields(
       accountCurrency: accountCurrency ? null : this.accountCurrency,
@@ -96,6 +98,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
           : this.pipDecimalPlaces,
       positionSizeFieldType:
           positionSizeFieldType ? null : this.positionSizeFieldType,
+      lotSize: lotSize ? null : this.lotSize,
     );
   }
 
@@ -109,6 +112,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     String? pipDecimalPlaces,
     String? positionSizeFieldType,
     FastCalculatorBlocDelegate? delegate,
+    String? lotSize,
   }) {
     return MatexPipValueCalculatorBlocFields(
       accountCurrency: accountCurrency ?? this.accountCurrency,
@@ -120,6 +124,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
       positionSizeFieldType:
           positionSizeFieldType ?? this.positionSizeFieldType,
       delegate: delegate ?? this.delegate,
+      lotSize: lotSize ?? this.lotSize,
     );
   }
 
@@ -136,6 +141,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
       pipDecimalPlaces: model.pipDecimalPlaces,
       positionSizeFieldType: model.positionSizeFieldType,
       delegate: model.delegate,
+      lotSize: model.lotSize,
     );
   }
 
@@ -149,5 +155,6 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
         pipDecimalPlaces,
         positionSizeFieldType,
         delegate,
+        lotSize,
       ];
 }

@@ -120,18 +120,6 @@ void main() {
       });
     });
 
-    group('#lotDescriptors', () {
-      test('should update lotDescriptors in the state', () {
-        const lotDescriptors = MatexLotDescriptors(
-          standard: MatexLotDescriptor(multiplier: 100000),
-        );
-
-        calculator.lotDescriptors = lotDescriptors;
-
-        expect(calculator.getState().lotDescriptors, equals(lotDescriptors));
-      });
-    });
-
     group('#pipDecimalPlaces', () {
       test('should update pipDecimalPlaces in the state', () {
         calculator.pipDecimalPlaces = 4;
@@ -179,62 +167,6 @@ void main() {
         calculator.instrumentPairRate = 1.8;
 
         expect(calculator.getState().instrumentPairRate, equals(1.8));
-      });
-    });
-
-    group('#lot', () {
-      test('should update positionSize based on standard lot descriptor', () {
-        calculator
-          ..lotDescriptors = const MatexLotDescriptors(
-            standard: MatexLotDescriptor(multiplier: 100000),
-          )
-          ..lot = 2;
-
-        expect(calculator.getState().positionSize, equals(200000));
-
-        calculator
-          ..lotDescriptors = const MatexLotDescriptors(
-            standard: MatexLotDescriptor(multiplier: 100000, exists: false),
-          )
-          ..lot = 2;
-
-        expect(calculator.getState().positionSize, equals(0));
-      });
-    });
-
-    group('#microLot', () {
-      test('should update positionSize based on micro lot descriptor', () {
-        calculator
-          ..lotDescriptors = const MatexLotDescriptors(
-            micro: MatexLotDescriptor(multiplier: 1000),
-          )
-          ..microLot = 3;
-
-        expect(calculator.getState().positionSize, equals(3000));
-      });
-    });
-
-    group('#miniLot', () {
-      test('should update positionSize based on mini lot descriptor', () {
-        calculator
-          ..lotDescriptors = const MatexLotDescriptors(
-            mini: MatexLotDescriptor(multiplier: 10000),
-          )
-          ..miniLot = 4;
-
-        expect(calculator.getState().positionSize, equals(40000));
-      });
-    });
-
-    group('#nanoLot', () {
-      test('should update positionSize based on nano lot descriptor', () {
-        calculator
-          ..lotDescriptors = const MatexLotDescriptors(
-            nano: MatexLotDescriptor(multiplier: 100),
-          )
-          ..nanoLot = 5;
-
-        expect(calculator.getState().positionSize, equals(500));
       });
     });
   });

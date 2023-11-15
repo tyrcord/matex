@@ -85,7 +85,8 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState.fields.accountCurrency != null &&
         currentState.fields.base != null &&
         currentState.fields.counter != null &&
-        currentState.fields.positionSize != null;
+        (currentState.fields.positionSize != null ||
+            currentState.fields.lotSize != null);
   }
 
   @override
@@ -93,6 +94,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   Stream<MatexPipValueCalculatorBlocState> willCompute() async* {
     yield* super.willCompute();
 
+    var fields = currentState.fields;
     MatexQuote? quote;
     String? updatedOn;
 
@@ -104,7 +106,25 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       }
     }
 
+    if (fields.positionSizeFieldType != MatexPositionSizeType.unit.name &&
+        fields.lotSize != null &&
+        fields.lotSize!.isNotEmpty) {
+      final positionSize = await getPositionSizeForLotSize(
+        lotSize: getPositionSizeTypeFromString(fields.positionSizeFieldType),
+        positionSize: parseFieldValueToDouble(fields.lotSize),
+      );
+
+      final isInt = isDoubleInteger(positionSize);
+
+      calculator.positionSize = positionSize;
+      fields = fields.copyWith(
+        positionSize:
+            isInt ? positionSize.toInt().toString() : positionSize.toString(),
+      );
+    }
+
     yield currentState.copyWith(
+      fields: fields,
       metadata: {
         ...await loadMetadata(),
         'updatedOn': updatedOn,
@@ -138,8 +158,8 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       ...metadata,
       'instrumentMetadata': instrumentMetadata,
       'standardLotSize': standardLotSize,
-      'miniLotSize': miniLotSize,
       'microLotSize': microLotSize,
+      'miniLotSize': miniLotSize,
     };
   }
 
@@ -155,7 +175,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       final customPipValue = dCustomPipValue.toDouble();
       final pipValue = dPipValue.toDouble();
-      final positionSize = fields.positionSize;
+      final positionSize = calculator.positionSize;
 
       final standard = await getStandardLotValue();
       final mini = await getMiniLotValue();
@@ -164,19 +184,19 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       final standardLotValue = computePipValueForLotSize(
         standard,
         pipValue,
-        parseStringToDouble(positionSize),
+        positionSize,
       );
 
       final miniLotValue = computePipValueForLotSize(
         mini,
         pipValue,
-        parseStringToDouble(positionSize),
+        positionSize,
       );
 
       final microLotValue = computePipValueForLotSize(
         micro,
         pipValue,
-        parseStringToDouble(positionSize),
+        positionSize,
       );
 
       return MatexPipValueCalculatorBlocResults(
@@ -196,7 +216,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
           value: computePipValueForLotSize(
             standard,
             pipValue,
-            parseStringToDouble(positionSize),
+            positionSize,
           ),
         ),
         formattedMiniLotValue: localizeCurrency(
@@ -205,7 +225,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
           value: computePipValueForLotSize(
             mini,
             pipValue,
-            parseStringToDouble(positionSize),
+            positionSize,
           ),
         ),
         formattedMicroLotValue: localizeCurrency(
@@ -214,7 +234,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
           value: computePipValueForLotSize(
             micro,
             pipValue,
-            parseStringToDouble(positionSize),
+            positionSize,
           ),
         ),
         standardLotValue: standardLotValue.toDouble(),
@@ -251,6 +271,9 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
         case MatexPipValueCalculatorBlocKey.pipDecimalPlaces:
           return document.copyWith(pipDecimalPlaces: value);
+
+        case MatexPipValueCalculatorBlocKey.lotSize:
+          return document.copyWith(lotSize: value);
       }
     } else if (value is Enum) {
       value = describeEnum(value);
@@ -260,6 +283,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
           return document.copyWith(
             positionSizeFieldType: value,
             positionSize: '',
+            lotSize: '',
           );
       }
     } else if (value is MatexFinancialInstrument) {
@@ -304,6 +328,9 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
         case MatexPipValueCalculatorBlocKey.pipDecimalPlaces:
           return patchPipDecimalPlaces(value);
+
+        case MatexPipValueCalculatorBlocKey.lotSize:
+          return patchLotSize(value);
       }
     } else if (value is Enum) {
       value = describeEnum(value);
@@ -324,53 +351,6 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     }
 
     return null;
-  }
-
-  Future<MatexQuote?> patchExchangeRates() async {
-    final accountCurrency = currentState.fields.accountCurrency!;
-    final counter = currentState.fields.counter!;
-    final base = currentState.fields.base!;
-    final pipDecimalPlaces = currentState.fields.pipDecimalPlaces;
-    final symbol = base + counter;
-    final instrumentQuoteFuture = exchangeProvider.rate(symbol);
-
-    if (pipDecimalPlaces == null) {
-      final pairMetadata = await getInstrumentMetadata();
-
-      if (pairMetadata != null) {
-        calculator.pipDecimalPlaces = pairMetadata.pip.precision;
-      } else {
-        calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
-      }
-    }
-
-    final instrumentQuote = await instrumentQuoteFuture;
-
-    if (instrumentQuote == null) {
-      // FIXME: display an error message
-      return null;
-    }
-
-    calculator
-      ..instrumentPairRate = instrumentQuote.price
-      ..counterToAccountCurrencyRate = 0
-      ..isAccountCurrencyCounter = false;
-
-    if (accountCurrency == counter) {
-      calculator.isAccountCurrencyCounter = true;
-    } else {
-      final symbol = counter + accountCurrency;
-      final accountBaseQuote = await exchangeProvider.rate(symbol);
-
-      if (accountBaseQuote == null) {
-        // FIXME: display an error message
-        return null;
-      }
-
-      calculator.counterToAccountCurrencyRate = accountBaseQuote.price;
-    }
-
-    return instrumentQuote;
   }
 
   @override
@@ -536,11 +516,31 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   MatexPipValueCalculatorBlocState patchPositionSize(String value) {
-    final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(positionSize: value);
-    calculator.positionSize = dValue.toDouble();
+    final positionSizeFieldType = fields.positionSizeFieldType;
 
-    return currentState.copyWith(fields: fields);
+    if (positionSizeFieldType == MatexPositionSizeType.unit.name) {
+      final dValue = toDecimal(value) ?? dZero;
+      calculator.positionSize = dValue.toDouble();
+
+      return currentState.copyWith(fields: fields);
+    }
+
+    return currentState;
+  }
+
+  MatexPipValueCalculatorBlocState patchLotSize(String value) {
+    final fields = currentState.fields.copyWith(lotSize: value);
+    final positionSizeFieldType = fields.positionSizeFieldType;
+
+    if (positionSizeFieldType != MatexPositionSizeType.unit.name) {
+      final dValue = toDecimal(value) ?? dZero;
+      calculator.positionSize = dValue.toDouble();
+
+      return currentState.copyWith(fields: fields);
+    }
+
+    return currentState;
   }
 
   MatexPipValueCalculatorBlocState patchNumberOfPips(String? value) {
@@ -567,11 +567,59 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     final fields = currentState.fields.copyWith(
       positionSizeFieldType: value,
       positionSize: '',
+      lotSize: '',
     );
 
     calculator.positionSize = 0;
 
     return currentState.copyWith(fields: fields);
+  }
+
+  Future<MatexQuote?> patchExchangeRates() async {
+    final accountCurrency = currentState.fields.accountCurrency!;
+    final counter = currentState.fields.counter!;
+    final base = currentState.fields.base!;
+    final pipDecimalPlaces = currentState.fields.pipDecimalPlaces;
+    final symbol = base + counter;
+    final instrumentQuoteFuture = exchangeProvider.rate(symbol);
+
+    if (pipDecimalPlaces == null) {
+      final pairMetadata = await getInstrumentMetadata();
+
+      if (pairMetadata != null) {
+        calculator.pipDecimalPlaces = pairMetadata.pip.precision;
+      } else {
+        calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+      }
+    }
+
+    final instrumentQuote = await instrumentQuoteFuture;
+
+    if (instrumentQuote == null) {
+      // FIXME: display an error message
+      return null;
+    }
+
+    calculator
+      ..instrumentPairRate = instrumentQuote.price
+      ..counterToAccountCurrencyRate = 0
+      ..isAccountCurrencyCounter = false;
+
+    if (accountCurrency == counter) {
+      calculator.isAccountCurrencyCounter = true;
+    } else {
+      final symbol = counter + accountCurrency;
+      final accountBaseQuote = await exchangeProvider.rate(symbol);
+
+      if (accountBaseQuote == null) {
+        // FIXME: display an error message
+        return null;
+      }
+
+      calculator.counterToAccountCurrencyRate = accountBaseQuote.price;
+    }
+
+    return instrumentQuote;
   }
 
   @override

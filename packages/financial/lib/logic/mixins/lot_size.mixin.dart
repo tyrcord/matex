@@ -8,12 +8,22 @@ mixin MatexLotSizeMixin {
     'standard': 'standardLotSize',
     'micro': 'microLotSize',
     'mini': 'miniLotSize',
+    'nano': 'nanoLotSize',
   };
 
   String get instrumentMetadataKey => matadataKeys['instrument']!;
-  String get standardLotSizeMatadataKey => matadataKeys['standard']!;
-  String get microLotSizeMatadataKey => matadataKeys['micro']!;
-  String get miniLotSizeMatadataKey => matadataKeys['mini']!;
+
+  String get standardLotSizeMatadataKey =>
+      matadataKeys[MatexPositionSizeType.standard.name]!;
+
+  String get microLotSizeMatadataKey =>
+      matadataKeys[MatexPositionSizeType.micro.name]!;
+
+  String get miniLotSizeMatadataKey =>
+      matadataKeys[MatexPositionSizeType.mini.name]!;
+
+  String get nanoLotSizeMatadataKey =>
+      matadataKeys[MatexPositionSizeType.nano.name]!;
 
   String? localizeLotSizeCaption<B extends FastCalculatorBloc>({
     required B bloc,

@@ -63,21 +63,38 @@ abstract class MatexFinancialCalculatorBloc<
   }
 
   Future<int> getStandardLotValue() async {
-    final baseMetadata = await getInstrumentMetadata();
+    final metadata = await getInstrumentMetadata();
 
-    return baseMetadata?.lots!.standard ?? 0;
+    return metadata?.lots?.standard ?? 0;
   }
 
   Future<int> getMiniLotValue() async {
-    final baseMetadata = await getInstrumentMetadata();
+    final metadata = await getInstrumentMetadata();
 
-    return baseMetadata?.lots!.mini ?? 0;
+    return metadata?.lots?.mini ?? 0;
   }
 
   Future<int> getMicroLotValue() async {
-    final baseMetadata = await getInstrumentMetadata();
+    final metadata = await getInstrumentMetadata();
 
-    return baseMetadata?.lots!.micro ?? 0;
+    return metadata?.lots?.micro ?? 0;
+  }
+
+  Future<double> getPositionSizeForLotSize({
+    required MatexPositionSizeType lotSize,
+    double positionSize = 0,
+  }) async {
+    final metadata = await getInstrumentMetadata();
+
+    if (metadata != null && metadata.lots != null) {
+      final multiplier = metadata.lots![lotSize];
+
+      if (multiplier != 0) {
+        return (toDecimal(positionSize)! * toDecimal(multiplier)!).toDouble();
+      }
+    }
+
+    return positionSize;
   }
 
   @protected

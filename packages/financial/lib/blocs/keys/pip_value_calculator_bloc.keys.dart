@@ -6,6 +6,7 @@ class MatexPipValueCalculatorBlocKey {
   static const String numberOfPips = 'numberOfPips';
   static const String pipDecimalPlaces = 'pipDecimalPlaces';
   static const String positionSizeFieldType = 'positionSizeFieldType';
+  static const String lotSize = 'lotSize';
 
   // Prevent the creation of instances of this class
   MatexPipValueCalculatorBlocKey._();
