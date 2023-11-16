@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-11-16
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.22`](#matex_core---v0022)
+ - [`matex_data` - `v0.0.16`](#matex_data---v0016)
+ - [`matex_financial` - `v0.0.28`](#matex_financial---v0028)
+
+---
+
+#### `matex_core` - `v0.0.22`
+
+ - **REFACTOR**: isMandatoryFieldValid.
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.16`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.28`
+
+ - **REFACTOR**: isMandatoryFieldValid.
+ - **FIX**: deprecated use of describeEnum.
+ - **FIX**: show the defaults results when resetting.
+ - **FEAT**: update dependencies.
+ - **FEAT**: support lot sizes.
+
+
 ## 2023-11-14
 
 ### Changes

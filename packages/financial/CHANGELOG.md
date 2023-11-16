@@ -1,3 +1,11 @@
+## 0.0.28
+
+ - **REFACTOR**: isMandatoryFieldValid.
+ - **FIX**: deprecated use of describeEnum.
+ - **FIX**: show the defaults results when resetting.
+ - **FEAT**: update dependencies.
+ - **FEAT**: support lot sizes.
+
 ## 0.0.27
 
  - **FIX**: bunch of fixes.

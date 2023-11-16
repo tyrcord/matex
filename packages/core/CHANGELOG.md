@@ -1,3 +1,8 @@
+## 0.0.22
+
+ - **REFACTOR**: isMandatoryFieldValid.
+ - **FEAT**: update dependencies.
+
 ## 0.0.21
 
  - **FIX**: bunch of fixes.
