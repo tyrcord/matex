@@ -4,8 +4,8 @@ version: 0.0.15
 repository: https://github.com/tyrcord/matex/tree/main/packages/data
 
 environment:
-  sdk: ">=3.1.2 <4.0.0"
-  flutter: ">=3.13.0"
+  sdk: ">=3.2.0 <4.0.0"
+  flutter: ">=3.16.0"
 
 dependencies:
   flutter:
@@ -13,16 +13,16 @@ dependencies:
 
   # Public
   rxdart: ^0.27.7
-  collection: ^1.17.2
+  collection: ^1.18.0
 
   # Fastyle
-  fastyle_core: ^0.0.34
+  fastyle_core: ^0.0.36
 
   # T
-  tmodel: ^0.5.11+7
-  t_helpers: ^0.0.40+1
-  t_cache: ^0.0.10
-  tbloc: ^0.21.7+7
+  tmodel: ^0.5.12
+  t_helpers: ^0.0.42
+  t_cache: ^0.0.11
+  tbloc: ^0.21.8
 
 dev_dependencies:
   flutter_test:

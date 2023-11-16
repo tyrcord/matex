@@ -4,8 +4,8 @@ version: 0.0.27
 repository: https://github.com/tyrcord/matex/tree/main/packages/financial
 
 environment:
-  sdk: ">=3.1.0 <4.0.0"
-  flutter: ">=3.13.0"
+  sdk: ">=3.2.0 <4.0.0"
+  flutter: ">=3.16.0"
 
 dependencies:
   flutter:
@@ -24,10 +24,10 @@ dependencies:
   matex_data: ^0.0.15
 
   # T
-  tbloc: ^0.21.7+7
-  t_helpers: ^0.0.40+1
-  tmodel: ^0.5.11+7
-  tstore: ^0.8.20+7
+  tbloc: ^0.21.8
+  t_helpers: ^0.0.42
+  tmodel: ^0.5.12
+  tstore: ^0.8.21
 
   # Lingua
   lingua_finance: ^0.0.22
@@ -38,9 +38,9 @@ dependencies:
   lingua_units: ^0.0.6
 
   # Fastyle
-  fastyle_forms: ^0.0.32+1
-  fastyle_core: ^0.0.34
-  fastyle_calculator: ^1.43.0
+  fastyle_forms: ^0.0.34
+  fastyle_core: ^0.0.36
+  fastyle_calculator: ^1.44.0
 
 dev_dependencies:
   flutter_test:

@@ -4,8 +4,8 @@ version: 0.0.21
 repository: https://github.com/tyrcord/matex/tree/main/packages/core
 
 environment:
-  sdk: ">=3.1.0 <4.0.0"
-  flutter: ">=3.13.0"
+  sdk: ">=3.2.0 <4.0.0"
+  flutter: ">=3.16.0"
 
 dependencies:
   flutter:
@@ -13,25 +13,25 @@ dependencies:
 
   # Public
   decimal: ^2.3.3
-  collection: ^1.17.2
+  collection: ^1.18.0
   share_plus: ^7.2.1
   intl: ^0.18.1
   easy_localization: ^3.0.3
 
   # T
-  tstore: ^0.8.20+7
-  tbloc: ^0.21.7+7
-  t_helpers: ^0.0.40+1
-  tmodel: ^0.5.11+7
+  tstore: ^0.8.21
+  tbloc: ^0.21.8
+  t_helpers: ^0.0.42
+  tmodel: ^0.5.12
 
   # Lingua
   lingua_core: ^0.0.31
   lingua_calculator: ^0.0.4
 
   # Fastyle
-  fastyle_settings: ^0.0.37+1
-  fastyle_core: ^0.0.34
-  fastyle_calculator: ^1.43.0
+  fastyle_settings: ^0.0.39
+  fastyle_core: ^0.0.36
+  fastyle_calculator: ^1.44.0
 
 dev_dependencies:
   flutter_test:
