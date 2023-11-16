@@ -276,12 +276,10 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
           return document.copyWith(lotSize: value);
       }
     } else if (value is Enum) {
-      value = describeEnum(value);
-
       switch (key) {
         case MatexPipValueCalculatorBlocKey.positionSizeFieldType:
           return document.copyWith(
-            positionSizeFieldType: value,
+            positionSizeFieldType: value.name,
             positionSize: '',
             lotSize: '',
           );
@@ -333,11 +331,9 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
           return patchLotSize(value);
       }
     } else if (value is Enum) {
-      value = describeEnum(value);
-
       switch (key) {
         case MatexPipValueCalculatorBlocKey.positionSizeFieldType:
-          return patchPositionSizeFieldType(value);
+          return patchPositionSizeFieldType(value.name);
 
         default:
           debugLog('Invalid key: $key', debugLabel: debugLabel);

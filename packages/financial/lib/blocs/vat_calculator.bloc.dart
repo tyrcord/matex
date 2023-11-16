@@ -131,17 +131,15 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWith(discountRate: value, discountAmount: '');
       }
     } else if (value is Enum) {
-      value = describeEnum(value);
-
       if (key == MatexVatCalculatorBlocKey.tipFieldType) {
         return document.copyWith(
-          tipFieldType: value.toString(),
+          tipFieldType: value.name,
           tipAmount: '',
           tipRate: '',
         );
       } else if (key == MatexVatCalculatorBlocKey.discountFieldType) {
         return document.copyWith(
-          discountFieldType: value.toString(),
+          discountFieldType: value.name,
           discountAmount: '',
           discountRate: '',
         );
@@ -186,12 +184,10 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
         return patchDiscountFieldType(value);
       }
     } else if (value is Enum) {
-      value = describeEnum(value);
-
       if (key == MatexVatCalculatorBlocKey.tipFieldType) {
-        return patchTipFieldType(value);
+        return patchTipFieldType(value.name);
       } else if (key == MatexVatCalculatorBlocKey.discountFieldType) {
-        return patchDiscountFieldType(value);
+        return patchDiscountFieldType(value.name);
       }
     }
 
@@ -356,9 +352,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexVatCalculatorBlocState patchTipFieldType(dynamic value) {
+  MatexVatCalculatorBlocState patchTipFieldType(String value) {
     final fields = currentState.fields.copyWith(
-      tipFieldType: value.toString(),
+      tipFieldType: value,
       tipAmount: '',
       tipRate: '',
     );
@@ -371,7 +367,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
 
   MatexVatCalculatorBlocState patchDiscountFieldType(String value) {
     final fields = currentState.fields.copyWith(
-      discountFieldType: value.toString(),
+      discountFieldType: value,
       discountAmount: '',
       discountRate: '',
     );

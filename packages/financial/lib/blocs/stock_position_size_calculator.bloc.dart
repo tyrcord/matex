@@ -146,17 +146,15 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWith(riskFieldType: value);
       }
     } else if (value is Enum) {
-      value = describeEnum(value);
-
       if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
         return document.copyWith(
-          riskFieldType: value.toString(),
+          riskFieldType: value.name,
           stopLossAmount: '',
           riskPercent: '',
         );
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.position) {
         return document.copyWith(
-          position: value.toString(),
+          position: value.name,
           stopLossPrice: '',
         );
       }
@@ -193,12 +191,10 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         return patchExitFees(value);
       }
     } else if (value is Enum) {
-      value = describeEnum(value);
-
       if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
-        return patchRiskFieldType(value);
+        return patchRiskFieldType(value.name);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.position) {
-        return patchPosition(value);
+        return patchPosition(value.name);
       }
     }
 

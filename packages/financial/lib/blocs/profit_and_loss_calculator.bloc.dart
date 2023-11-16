@@ -110,18 +110,16 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWith(taxRate: value);
       }
     } else if (value is Enum) {
-      value = describeEnum(value);
-
       if (key == MatexProfitAndLossCalculatorBlocKey.buyingCostsPerUnitType) {
         return document.copyWith(
-          buyingCostsPerUnitType: value.toString(),
+          buyingCostsPerUnitType: value.name,
           buyingExpensePerUnitAmount: '',
           buyingExpensePerUnitRate: '',
         );
       } else if (key ==
           MatexProfitAndLossCalculatorBlocKey.sellingCostsPerUnitType) {
         return document.copyWith(
-          sellingCostsPerUnitType: value.toString(),
+          sellingCostsPerUnitType: value.name,
           sellingExpensePerUnitAmount: '',
           sellingExpensePerUnitRate: '',
         );
@@ -161,13 +159,11 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
         return patchTaxRate(value);
       }
     } else if (value is Enum) {
-      value = describeEnum(value);
-
       if (key == MatexProfitAndLossCalculatorBlocKey.buyingCostsPerUnitType) {
-        return patchBuyingCostsPerUnitType(value);
+        return patchBuyingCostsPerUnitType(value.name);
       } else if (key ==
           MatexProfitAndLossCalculatorBlocKey.sellingCostsPerUnitType) {
-        return patchSellingCostsPerUnitType(value);
+        return patchSellingCostsPerUnitType(value.name);
       }
     }
 
