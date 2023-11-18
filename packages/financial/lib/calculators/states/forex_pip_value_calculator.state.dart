@@ -1,6 +1,5 @@
 // Package imports:
 import 'package:matex_core/core.dart';
-import 'package:matex_financial/financial.dart';
 
 class MatexForexPipValueCalculatorState extends MatexCalculatorState {
   final double? positionSize;
@@ -35,7 +34,6 @@ class MatexForexPipValueCalculatorState extends MatexCalculatorState {
     bool? isAccountCurrencyCounter,
     double? counterToAccountCurrencyRate,
     double? instrumentPairRate,
-    MatexLotDescriptors? lotDescriptors,
     double? microLot,
     double? miniLot,
     double? standardLot,
