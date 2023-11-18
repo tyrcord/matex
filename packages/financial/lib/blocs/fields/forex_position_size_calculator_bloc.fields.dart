@@ -13,24 +13,17 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
   late final String? counter;
 
   late final String? accountCurrency;
-  late final String? positionSize;
-  late final String? numberOfPips;
   late final String? pipDecimalPlaces;
-  late final String positionSizeFieldType;
-  late final String? lotSize;
+  late final String? accountSizeFieldType;
+  late final String? riskFieldType;
+  late final String? stopLossFieldType;
+  late final String? accountSize;
+  late final String? riskAmount;
+  late final String? riskPercent;
+  late final String? stopLossPrice;
+  late final String? stopLossPips;
 
-  String get formattedPositionSize {
-    final value = parseFieldValueToDouble(positionSize);
-
-    return localizeNumber(value: value);
-  }
-
-  String get formattedNumberOfPips {
-    final value = parseFieldValueToDouble(numberOfPips);
-
-    return localizeNumber(value: value);
-  }
-
+  // FIXME: Move to a abstract class
   String get formattedFinancialInstrument {
     if (base == null || counter == null) return '';
 
@@ -41,6 +34,7 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     );
   }
 
+  // FIXME: Move to a abstract class
   MatexFinancialInstrument? get financialInstrument {
     if (base == null || counter == null) return null;
 
@@ -54,77 +48,99 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     String? accountCurrency,
     String? base,
     String? counter,
-    String? positionSize,
-    String? numberOfPips,
     String? pipDecimalPlaces,
-    String? positionSizeFieldType,
+    String? accountSizeFieldType,
+    String? riskFieldType,
+    String? stopLossFieldType,
+    String? accountSize,
+    String? riskAmount,
+    String? riskPercent,
+    String? stopLossPrice,
+    String? stopLossPips,
     FastCalculatorBlocDelegate? delegate,
-    String? lotSize,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
     this.base = assignValue(base);
     this.counter = assignValue(counter);
-    this.positionSize = assignValue(positionSize);
-    this.numberOfPips = assignValue(numberOfPips);
     this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
-    this.lotSize = assignValue(lotSize);
+    this.accountSizeFieldType = assignValue(accountSizeFieldType);
+    this.riskFieldType = assignValue(riskFieldType);
+    this.stopLossFieldType = assignValue(stopLossFieldType);
+    this.accountSize = assignValue(accountSize);
+    this.riskAmount = assignValue(riskAmount);
+    this.riskPercent = assignValue(riskPercent);
+    this.stopLossPrice = assignValue(stopLossPrice);
+    this.stopLossPips = assignValue(stopLossPips);
     this.delegate = delegate;
-    this.positionSizeFieldType =
-        positionSizeFieldType ?? MatexPositionSizeType.unit.name;
   }
 
   @override
   MatexForexPositionSizeCalculatorBlocFields clone() => copyWith();
 
   @override
-  MatexForexPositionSizeCalculatorBlocFields copyWithDefaults({
-    bool accountCurrency = false,
-    bool base = false,
-    bool counter = false,
-    bool positionSize = false,
-    bool numberOfPips = false,
-    bool pipDecimalPlaces = false,
-    bool positionSizeFieldType = false,
-    bool lotSize = false,
-  }) {
-    return MatexForexPositionSizeCalculatorBlocFields(
-      accountCurrency: accountCurrency ? null : this.accountCurrency,
-      base: base ? null : this.base,
-      counter: counter ? null : this.counter,
-      positionSize: positionSize ? null : this.positionSize,
-      numberOfPips: numberOfPips ? null : this.numberOfPips,
-      pipDecimalPlaces: pipDecimalPlaces
-          ? kDefaultPipPipDecimalPlaces.toString()
-          : this.pipDecimalPlaces,
-      positionSizeFieldType:
-          positionSizeFieldType ? null : this.positionSizeFieldType,
-      lotSize: lotSize ? null : this.lotSize,
-    );
-  }
-
-  @override
   MatexForexPositionSizeCalculatorBlocFields copyWith({
     String? accountCurrency,
     String? base,
     String? counter,
-    String? positionSize,
-    String? numberOfPips,
     String? pipDecimalPlaces,
-    String? positionSizeFieldType,
+    String? accountSizeFieldType,
+    String? riskFieldType,
+    String? stopLossFieldType,
+    String? accountSize,
+    String? riskAmount,
+    String? riskPercent,
+    String? stopLossPrice,
+    String? stopLossPips,
     FastCalculatorBlocDelegate? delegate,
-    String? lotSize,
   }) {
     return MatexForexPositionSizeCalculatorBlocFields(
       accountCurrency: accountCurrency ?? this.accountCurrency,
       base: base ?? this.base,
       counter: counter ?? this.counter,
-      positionSize: positionSize ?? this.positionSize,
-      numberOfPips: numberOfPips ?? this.numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
-      positionSizeFieldType:
-          positionSizeFieldType ?? this.positionSizeFieldType,
+      accountSizeFieldType: accountSizeFieldType ?? this.accountSizeFieldType,
+      riskFieldType: riskFieldType ?? this.riskFieldType,
+      stopLossFieldType: stopLossFieldType ?? this.stopLossFieldType,
+      accountSize: accountSize ?? this.accountSize,
+      riskAmount: riskAmount ?? this.riskAmount,
+      riskPercent: riskPercent ?? this.riskPercent,
+      stopLossPrice: stopLossPrice ?? this.stopLossPrice,
+      stopLossPips: stopLossPips ?? this.stopLossPips,
       delegate: delegate ?? this.delegate,
-      lotSize: lotSize ?? this.lotSize,
+    );
+  }
+
+  @override
+  MatexForexPositionSizeCalculatorBlocFields copyWithDefaults({
+    bool accountCurrency = false,
+    bool base = false,
+    bool counter = false,
+    bool pipDecimalPlaces = false,
+    bool accountSizeFieldType = false,
+    bool riskFieldType = false,
+    bool stopLossFieldType = false,
+    bool accountSize = false,
+    bool riskAmount = false,
+    bool riskPercent = false,
+    bool stopLossPrice = false,
+    bool stopLossPips = false,
+  }) {
+    return MatexForexPositionSizeCalculatorBlocFields(
+      accountCurrency: accountCurrency ? null : this.accountCurrency,
+      base: base ? null : this.base,
+      counter: counter ? null : this.counter,
+      pipDecimalPlaces: pipDecimalPlaces
+          ? kDefaultPipPipDecimalPlaces.toString()
+          : this.pipDecimalPlaces,
+      accountSizeFieldType:
+          accountSizeFieldType ? null : this.accountSizeFieldType,
+      riskFieldType: riskFieldType ? null : this.riskFieldType,
+      stopLossFieldType: stopLossFieldType ? null : this.stopLossFieldType,
+      accountSize: accountSize ? null : this.accountSize,
+      riskAmount: riskAmount ? null : this.riskAmount,
+      riskPercent: riskPercent ? null : this.riskPercent,
+      stopLossPrice: stopLossPrice ? null : this.stopLossPrice,
+      stopLossPips: stopLossPips ? null : this.stopLossPips,
     );
   }
 
@@ -136,12 +152,16 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
       accountCurrency: model.accountCurrency,
       base: model.base,
       counter: model.counter,
-      positionSize: model.positionSize,
-      numberOfPips: model.numberOfPips,
       pipDecimalPlaces: model.pipDecimalPlaces,
-      positionSizeFieldType: model.positionSizeFieldType,
+      accountSizeFieldType: model.accountSizeFieldType,
+      riskFieldType: model.riskFieldType,
+      stopLossFieldType: model.stopLossFieldType,
+      accountSize: model.accountSize,
+      riskAmount: model.riskAmount,
+      riskPercent: model.riskPercent,
+      stopLossPrice: model.stopLossPrice,
+      stopLossPips: model.stopLossPips,
       delegate: model.delegate,
-      lotSize: model.lotSize,
     );
   }
 
@@ -150,11 +170,15 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
         accountCurrency,
         base,
         counter,
-        positionSize,
-        numberOfPips,
         pipDecimalPlaces,
-        positionSizeFieldType,
+        accountSizeFieldType,
+        riskFieldType,
+        stopLossFieldType,
+        accountSize,
+        riskAmount,
+        riskPercent,
+        stopLossPrice,
+        stopLossPips,
         delegate,
-        lotSize,
       ];
 }

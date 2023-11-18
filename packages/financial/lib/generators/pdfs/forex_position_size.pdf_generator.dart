@@ -11,9 +11,7 @@ import 'package:fastyle_core/fastyle_core.dart';
 import 'package:lingua_core/generated/locale_keys.g.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:lingua_finance_forex/generated/locale_keys.g.dart';
-import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
-import 'package:lingua_units/lingua_units.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -52,8 +50,6 @@ class MatexForexPositionSizeCalculatorPdfGenerator {
     MatexForexPositionSizeCalculatorBlocResults results,
     Map<String, dynamic> metadata,
   ) {
-    final numberOfPips = parseFieldValueToDouble(fields.numberOfPips);
-    final positionSize = parseFieldValueToDouble(fields.positionSize);
     final updatedOn = metadata['updatedOn'] as String?;
     final formattedInstrumentExchangeRate =
         metadata['formattedInstrumentExchangeRate'] as String?;
@@ -67,20 +63,6 @@ class MatexForexPositionSizeCalculatorPdfGenerator {
         name: FinanceLocaleKeys.finance_label_financial_instrument.tr(),
         value: fields.formattedFinancialInstrument,
       ),
-      if (positionSize > 0)
-        FastReportEntry(
-          name: FinanceLocaleKeys.finance_label_position_size.tr(),
-          value: localizeUnitSize(
-            localeCode: FastAppSettingsBloc.instance.currentState.localeCode,
-            unitKey: LinguaUnits.unit.name,
-            value: positionSize,
-          )!,
-        ),
-      if (numberOfPips > 0)
-        FastReportEntry(
-          name: FinanceForexLocaleKeys.forex_label_pips_number.tr(),
-          value: fields.formattedNumberOfPips,
-        ),
       if (formattedInstrumentExchangeRate != null)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_rate.tr(),
@@ -100,30 +82,15 @@ class MatexForexPositionSizeCalculatorPdfGenerator {
     MatexForexPositionSizeCalculatorBlocResults results,
   ) {
     final pipValue = results.pipValue;
-    final customPipValue = results.customPipValue;
     final standardLotValue = results.standardLotValue;
     final miniLotValue = results.miniLotValue;
     final microLotValue = results.microLotValue;
-    final numberOfPips = parseFieldValueToDouble(
-      fields.numberOfPips,
-    );
 
     return [
       if (pipValue != null && pipValue > 0)
         FastReportEntry(
           name: FinanceForexLocaleKeys.forex_label_pip_value.tr(),
           value: results.formattedPipValue!,
-        ),
-      if (customPipValue != null && customPipValue > 0)
-        FastReportEntry(
-          name: FinanceForexLocaleKeys.forex_label_count_pips.plural(
-            numberOfPips,
-            format: getDecimalNumberFormat(
-              locale: FastAppSettingsBloc.instance.currentState.localeCode,
-              value: numberOfPips,
-            ),
-          ),
-          value: results.formattedCustomPipValue!,
         ),
       if (standardLotValue != null && standardLotValue > 0)
         FastReportEntry(

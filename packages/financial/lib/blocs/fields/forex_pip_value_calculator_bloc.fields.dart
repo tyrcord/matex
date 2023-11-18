@@ -25,12 +25,14 @@ class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
     return localizeNumber(value: value);
   }
 
+  // FIXME: Move to a abstract class
   String get formattedNumberOfPips {
     final value = parseFieldValueToDouble(numberOfPips);
 
     return localizeNumber(value: value);
   }
 
+  // FIXME: Move to a abstract class
   String get formattedFinancialInstrument {
     if (base == null || counter == null) return '';
 

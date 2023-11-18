@@ -29,6 +29,7 @@ class MatexStockPositionSizeCalculatorBlocDocument
       accountSize: json['accountSize'] as String?,
       entryPrice: json['entryPrice'] as String?,
       stopLossPrice: json['stopLossPrice'] as String?,
+      // TODO: rename stopLossAmount to riskAmount
       stopLossAmount: json['stopLossAmount'] as String?,
       slippagePercent: json['slippagePercent'] as String?,
       riskPercent: json['riskPercent'] as String?,
