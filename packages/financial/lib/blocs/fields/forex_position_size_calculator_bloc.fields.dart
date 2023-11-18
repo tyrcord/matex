@@ -7,6 +7,10 @@ import 'package:t_helpers/helpers.dart';
 class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
+  // FIXME: Use constants
+  static const String _kDefaultRiskFieldType = 'percent';
+  static const String _kDefaultStopLossFieldType = 'price';
+
   @override
   late final String? base;
   @override
@@ -14,7 +18,6 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
 
   late final String? accountCurrency;
   late final String? pipDecimalPlaces;
-  late final String? accountSizeFieldType;
   late final String? riskFieldType;
   late final String? stopLossFieldType;
   late final String? accountSize;
@@ -22,6 +25,7 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
   late final String? riskPercent;
   late final String? stopLossPrice;
   late final String? stopLossPips;
+  late final String? entryPrice;
 
   // FIXME: Move to a abstract class
   String get formattedFinancialInstrument {
@@ -49,7 +53,6 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     String? base,
     String? counter,
     String? pipDecimalPlaces,
-    String? accountSizeFieldType,
     String? riskFieldType,
     String? stopLossFieldType,
     String? accountSize,
@@ -58,20 +61,22 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     String? stopLossPrice,
     String? stopLossPips,
     FastCalculatorBlocDelegate? delegate,
+    String? entryPrice,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
     this.base = assignValue(base);
     this.counter = assignValue(counter);
     this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
-    this.accountSizeFieldType = assignValue(accountSizeFieldType);
-    this.riskFieldType = assignValue(riskFieldType);
-    this.stopLossFieldType = assignValue(stopLossFieldType);
     this.accountSize = assignValue(accountSize);
     this.riskAmount = assignValue(riskAmount);
     this.riskPercent = assignValue(riskPercent);
     this.stopLossPrice = assignValue(stopLossPrice);
     this.stopLossPips = assignValue(stopLossPips);
+    this.entryPrice = assignValue(entryPrice);
     this.delegate = delegate;
+
+    this.stopLossFieldType = stopLossFieldType ?? _kDefaultStopLossFieldType;
+    this.riskFieldType = riskFieldType ?? _kDefaultRiskFieldType;
   }
 
   @override
@@ -83,7 +88,6 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     String? base,
     String? counter,
     String? pipDecimalPlaces,
-    String? accountSizeFieldType,
     String? riskFieldType,
     String? stopLossFieldType,
     String? accountSize,
@@ -91,6 +95,7 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     String? riskPercent,
     String? stopLossPrice,
     String? stopLossPips,
+    String? entryPrice,
     FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexForexPositionSizeCalculatorBlocFields(
@@ -98,7 +103,6 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
       base: base ?? this.base,
       counter: counter ?? this.counter,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
-      accountSizeFieldType: accountSizeFieldType ?? this.accountSizeFieldType,
       riskFieldType: riskFieldType ?? this.riskFieldType,
       stopLossFieldType: stopLossFieldType ?? this.stopLossFieldType,
       accountSize: accountSize ?? this.accountSize,
@@ -107,6 +111,7 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
       stopLossPrice: stopLossPrice ?? this.stopLossPrice,
       stopLossPips: stopLossPips ?? this.stopLossPips,
       delegate: delegate ?? this.delegate,
+      entryPrice: entryPrice ?? this.entryPrice,
     );
   }
 
@@ -116,7 +121,6 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     bool base = false,
     bool counter = false,
     bool pipDecimalPlaces = false,
-    bool accountSizeFieldType = false,
     bool riskFieldType = false,
     bool stopLossFieldType = false,
     bool accountSize = false,
@@ -124,6 +128,7 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     bool riskPercent = false,
     bool stopLossPrice = false,
     bool stopLossPips = false,
+    bool entryPrice = false,
   }) {
     return MatexForexPositionSizeCalculatorBlocFields(
       accountCurrency: accountCurrency ? null : this.accountCurrency,
@@ -132,8 +137,6 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
       pipDecimalPlaces: pipDecimalPlaces
           ? kDefaultPipPipDecimalPlaces.toString()
           : this.pipDecimalPlaces,
-      accountSizeFieldType:
-          accountSizeFieldType ? null : this.accountSizeFieldType,
       riskFieldType: riskFieldType ? null : this.riskFieldType,
       stopLossFieldType: stopLossFieldType ? null : this.stopLossFieldType,
       accountSize: accountSize ? null : this.accountSize,
@@ -141,6 +144,7 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
       riskPercent: riskPercent ? null : this.riskPercent,
       stopLossPrice: stopLossPrice ? null : this.stopLossPrice,
       stopLossPips: stopLossPips ? null : this.stopLossPips,
+      entryPrice: entryPrice ? null : this.entryPrice,
     );
   }
 
@@ -153,7 +157,6 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
       base: model.base,
       counter: model.counter,
       pipDecimalPlaces: model.pipDecimalPlaces,
-      accountSizeFieldType: model.accountSizeFieldType,
       riskFieldType: model.riskFieldType,
       stopLossFieldType: model.stopLossFieldType,
       accountSize: model.accountSize,
@@ -162,6 +165,7 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
       stopLossPrice: model.stopLossPrice,
       stopLossPips: model.stopLossPips,
       delegate: model.delegate,
+      entryPrice: model.entryPrice,
     );
   }
 
@@ -171,7 +175,6 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
         base,
         counter,
         pipDecimalPlaces,
-        accountSizeFieldType,
         riskFieldType,
         stopLossFieldType,
         accountSize,
@@ -180,5 +183,6 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
         stopLossPrice,
         stopLossPips,
         delegate,
+        entryPrice,
       ];
 }

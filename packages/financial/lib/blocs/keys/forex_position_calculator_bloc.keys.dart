@@ -10,6 +10,7 @@ class MatexForexPositionSizeCalculatorBlocKey {
   static const String riskPercent = 'riskPercent';
   static const String stopLossPrice = 'stopLossPrice';
   static const String stopLossPips = 'stopLossPips';
+  static const String entryPrice = 'entryPrice';
 
   // Prevent the creation of instances of this class
   MatexForexPositionSizeCalculatorBlocKey._();

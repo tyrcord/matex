@@ -3,29 +3,41 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexForexPositionSizeCalculatorBlocResults
     extends FastCalculatorResults {
+  final double? positionSize;
+  final double? standardLotSize;
+  final double? miniLotSize;
+  final double? microLotSize;
+  final double? stopLossPips;
+  final double? amountAtRisk;
+  final double? riskRatio;
   final double? pipValue;
-  final double? customPipValue;
-  final double? standardLotValue;
-  final double? miniLotValue;
-  final double? microLotValue;
 
+  final String? formattedPositionSize;
+  final String? formattedStandardLotSize;
+  final String? formattedMiniLotSize;
+  final String? formattedMicroLotSize;
+  final String? formattedStopLossPips;
+  final String? formattedAmountAtRisk;
+  final String? formattedRiskRatio;
   final String? formattedPipValue;
-  final String? formattedCustomPipValue;
-  final String? formattedStandardLotValue;
-  final String? formattedMiniLotValue;
-  final String? formattedMicroLotValue;
 
   const MatexForexPositionSizeCalculatorBlocResults({
+    this.positionSize,
+    this.formattedPositionSize,
+    this.standardLotSize,
+    this.formattedStandardLotSize,
+    this.miniLotSize,
+    this.formattedMiniLotSize,
+    this.microLotSize,
+    this.formattedMicroLotSize,
+    this.stopLossPips,
+    this.formattedStopLossPips,
+    this.amountAtRisk,
+    this.formattedAmountAtRisk,
+    this.riskRatio,
+    this.formattedRiskRatio,
     this.pipValue,
-    this.customPipValue,
-    this.standardLotValue,
-    this.miniLotValue,
-    this.microLotValue,
     this.formattedPipValue,
-    this.formattedCustomPipValue,
-    this.formattedStandardLotValue,
-    this.formattedMiniLotValue,
-    this.formattedMicroLotValue,
   });
 
   @override
@@ -33,32 +45,45 @@ class MatexForexPositionSizeCalculatorBlocResults
 
   @override
   MatexForexPositionSizeCalculatorBlocResults copyWith({
+    double? positionSize,
+    double? standardLotSize,
+    double? miniLotSize,
+    double? microLotSize,
+    String? formattedPositionSize,
+    String? formattedStandardLotSize,
+    String? formattedMiniLotSize,
+    String? formattedMicroLotSize,
+    double? stopLossPips,
+    String? formattedStopLossPips,
+    double? amountAtRisk,
+    String? formattedAmountAtRisk,
+    double? riskRatio,
+    String? formattedRiskRatio,
     double? pipValue,
-    double? customPipValue,
-    double? standardLotValue,
-    double? miniLotValue,
-    double? microLotValue,
     String? formattedPipValue,
-    String? formattedCustomPipValue,
-    String? formattedStandardLotValue,
-    String? formattedMiniLotValue,
-    String? formattedMicroLotValue,
   }) {
     return MatexForexPositionSizeCalculatorBlocResults(
+      positionSize: positionSize ?? this.positionSize,
+      formattedPositionSize:
+          formattedPositionSize ?? this.formattedPositionSize,
+      standardLotSize: standardLotSize ?? this.standardLotSize,
+      formattedStandardLotSize:
+          formattedStandardLotSize ?? this.formattedStandardLotSize,
+      miniLotSize: miniLotSize ?? this.miniLotSize,
+      formattedMiniLotSize: formattedMiniLotSize ?? this.formattedMiniLotSize,
+      microLotSize: microLotSize ?? this.microLotSize,
+      formattedMicroLotSize:
+          formattedMicroLotSize ?? this.formattedMicroLotSize,
+      stopLossPips: stopLossPips ?? this.stopLossPips,
+      formattedStopLossPips:
+          formattedStopLossPips ?? this.formattedStopLossPips,
+      amountAtRisk: amountAtRisk ?? this.amountAtRisk,
+      formattedAmountAtRisk:
+          formattedAmountAtRisk ?? this.formattedAmountAtRisk,
+      riskRatio: riskRatio ?? this.riskRatio,
+      formattedRiskRatio: formattedRiskRatio ?? this.formattedRiskRatio,
       pipValue: pipValue ?? this.pipValue,
-      customPipValue: customPipValue ?? this.customPipValue,
-      standardLotValue: standardLotValue ?? this.standardLotValue,
-      miniLotValue: miniLotValue ?? this.miniLotValue,
-      microLotValue: microLotValue ?? this.microLotValue,
       formattedPipValue: formattedPipValue ?? this.formattedPipValue,
-      formattedCustomPipValue:
-          formattedCustomPipValue ?? this.formattedCustomPipValue,
-      formattedStandardLotValue:
-          formattedStandardLotValue ?? this.formattedStandardLotValue,
-      formattedMiniLotValue:
-          formattedMiniLotValue ?? this.formattedMiniLotValue,
-      formattedMicroLotValue:
-          formattedMicroLotValue ?? this.formattedMicroLotValue,
     );
   }
 
@@ -67,30 +92,42 @@ class MatexForexPositionSizeCalculatorBlocResults
     covariant MatexForexPositionSizeCalculatorBlocResults model,
   ) {
     return copyWith(
+      positionSize: model.positionSize,
+      formattedPositionSize: model.formattedPositionSize,
+      standardLotSize: model.standardLotSize,
+      formattedStandardLotSize: model.formattedStandardLotSize,
+      miniLotSize: model.miniLotSize,
+      formattedMiniLotSize: model.formattedMiniLotSize,
+      microLotSize: model.microLotSize,
+      formattedMicroLotSize: model.formattedMicroLotSize,
+      stopLossPips: model.stopLossPips,
+      formattedStopLossPips: model.formattedStopLossPips,
+      amountAtRisk: model.amountAtRisk,
+      formattedAmountAtRisk: model.formattedAmountAtRisk,
+      riskRatio: model.riskRatio,
+      formattedRiskRatio: model.formattedRiskRatio,
       pipValue: model.pipValue,
-      customPipValue: model.customPipValue,
-      standardLotValue: model.standardLotValue,
-      miniLotValue: model.miniLotValue,
-      microLotValue: model.microLotValue,
       formattedPipValue: model.formattedPipValue,
-      formattedCustomPipValue: model.formattedCustomPipValue,
-      formattedStandardLotValue: model.formattedStandardLotValue,
-      formattedMiniLotValue: model.formattedMiniLotValue,
-      formattedMicroLotValue: model.formattedMicroLotValue,
     );
   }
 
   @override
   List<Object?> get props => [
+        positionSize,
+        formattedPositionSize,
+        standardLotSize,
+        formattedStandardLotSize,
+        miniLotSize,
+        formattedMiniLotSize,
+        microLotSize,
+        formattedMicroLotSize,
+        stopLossPips,
+        formattedStopLossPips,
+        amountAtRisk,
+        formattedAmountAtRisk,
+        riskRatio,
+        formattedRiskRatio,
         pipValue,
-        customPipValue,
-        standardLotValue,
-        miniLotValue,
-        microLotValue,
         formattedPipValue,
-        formattedCustomPipValue,
-        formattedStandardLotValue,
-        formattedMiniLotValue,
-        formattedMicroLotValue,
       ];
 }

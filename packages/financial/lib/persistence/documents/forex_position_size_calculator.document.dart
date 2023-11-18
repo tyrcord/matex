@@ -5,11 +5,14 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
+  // FIXME: Use constants
+  static const String _kDefaultRiskFieldType = 'percent';
+  static const String _kDefaultStopLossFieldType = 'price';
+
   late final String? accountCurrency;
   late final String? base;
   late final String? counter;
   late final String? pipDecimalPlaces;
-  late final String? accountSizeFieldType;
   late final String? riskFieldType;
   late final String? stopLossFieldType;
   late final String? accountSize;
@@ -17,13 +20,13 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
   late final String? riskPercent;
   late final String? stopLossPrice;
   late final String? stopLossPips;
+  late final String? entryPrice;
 
   MatexForexPositionSizeCalculatorDocument({
     String? accountCurrency,
     String? base,
     String? counter,
     String? pipDecimalPlaces,
-    String? accountSizeFieldType,
     String? riskFieldType,
     String? stopLossFieldType,
     String? accountSize,
@@ -31,19 +34,21 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
     String? riskPercent,
     String? stopLossPrice,
     String? stopLossPips,
+    String? entryPrice,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
     this.base = assignValue(base);
     this.counter = assignValue(counter);
     this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
-    this.accountSizeFieldType = assignValue(accountSizeFieldType);
-    this.riskFieldType = assignValue(riskFieldType);
-    this.stopLossFieldType = assignValue(stopLossFieldType);
     this.accountSize = assignValue(accountSize);
     this.riskAmount = assignValue(riskAmount);
     this.riskPercent = assignValue(riskPercent);
     this.stopLossPrice = assignValue(stopLossPrice);
     this.stopLossPips = assignValue(stopLossPips);
+    this.entryPrice = assignValue(entryPrice);
+
+    this.stopLossFieldType = stopLossFieldType ?? _kDefaultStopLossFieldType;
+    this.riskFieldType = riskFieldType ?? _kDefaultRiskFieldType;
   }
 
   @override
@@ -55,7 +60,6 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
     bool base = false,
     bool counter = false,
     bool pipDecimalPlaces = false,
-    bool accountSizeFieldType = false,
     bool riskFieldType = false,
     bool stopLossFieldType = false,
     bool accountSize = false,
@@ -63,6 +67,7 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
     bool riskPercent = false,
     bool stopLossPrice = false,
     bool stopLossPips = false,
+    bool entryPrice = false,
   }) {
     return MatexForexPositionSizeCalculatorDocument(
       accountCurrency: accountCurrency ? null : this.accountCurrency,
@@ -71,8 +76,6 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       pipDecimalPlaces: pipDecimalPlaces
           ? kDefaultPipPipDecimalPlaces.toString()
           : this.pipDecimalPlaces,
-      accountSizeFieldType:
-          accountSizeFieldType ? null : this.accountSizeFieldType,
       riskFieldType: riskFieldType ? null : this.riskFieldType,
       stopLossFieldType: stopLossFieldType ? null : this.stopLossFieldType,
       accountSize: accountSize ? null : this.accountSize,
@@ -80,6 +83,7 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       riskPercent: riskPercent ? null : this.riskPercent,
       stopLossPrice: stopLossPrice ? null : this.stopLossPrice,
       stopLossPips: stopLossPips ? null : this.stopLossPips,
+      entryPrice: entryPrice ? null : this.entryPrice,
     );
   }
 
@@ -89,7 +93,6 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
     String? base,
     String? counter,
     String? pipDecimalPlaces,
-    String? accountSizeFieldType,
     String? riskFieldType,
     String? stopLossFieldType,
     String? accountSize,
@@ -97,13 +100,13 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
     String? riskPercent,
     String? stopLossPrice,
     String? stopLossPips,
+    String? entryPrice,
   }) {
     return MatexForexPositionSizeCalculatorDocument(
       accountCurrency: accountCurrency ?? this.accountCurrency,
       base: base ?? this.base,
       counter: counter ?? this.counter,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
-      accountSizeFieldType: accountSizeFieldType ?? this.accountSizeFieldType,
       riskFieldType: riskFieldType ?? this.riskFieldType,
       stopLossFieldType: stopLossFieldType ?? this.stopLossFieldType,
       accountSize: accountSize ?? this.accountSize,
@@ -111,6 +114,7 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       riskPercent: riskPercent ?? this.riskPercent,
       stopLossPrice: stopLossPrice ?? this.stopLossPrice,
       stopLossPips: stopLossPips ?? this.stopLossPips,
+      entryPrice: entryPrice ?? this.entryPrice,
     );
   }
 
@@ -123,7 +127,6 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       base: model.base,
       counter: model.counter,
       pipDecimalPlaces: model.pipDecimalPlaces,
-      accountSizeFieldType: model.accountSizeFieldType,
       riskFieldType: model.riskFieldType,
       stopLossFieldType: model.stopLossFieldType,
       accountSize: model.accountSize,
@@ -131,6 +134,7 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       riskPercent: model.riskPercent,
       stopLossPrice: model.stopLossPrice,
       stopLossPips: model.stopLossPips,
+      entryPrice: model.entryPrice,
     );
   }
 
@@ -141,7 +145,6 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       base: base,
       counter: counter,
       pipDecimalPlaces: pipDecimalPlaces,
-      accountSizeFieldType: accountSizeFieldType,
       riskFieldType: riskFieldType,
       stopLossFieldType: stopLossFieldType,
       accountSize: accountSize,
@@ -149,6 +152,7 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       riskPercent: riskPercent,
       stopLossPrice: stopLossPrice,
       stopLossPips: stopLossPips,
+      entryPrice: entryPrice,
     );
   }
 
@@ -159,7 +163,6 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       'base': base,
       'counter': counter,
       'pipDecimalPlaces': pipDecimalPlaces,
-      'accountSizeFieldType': accountSizeFieldType,
       'riskFieldType': riskFieldType,
       'stopLossFieldType': stopLossFieldType,
       'accountSize': accountSize,
@@ -167,6 +170,7 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       'riskPercent': riskPercent,
       'stopLossPrice': stopLossPrice,
       'stopLossPips': stopLossPips,
+      'entryPrice': entryPrice,
       ...super.toJson(),
     };
   }
@@ -179,7 +183,6 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       base: json['base'] as String?,
       counter: json['counter'] as String?,
       pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
-      accountSizeFieldType: json['accountSizeFieldType'] as String?,
       riskFieldType: json['riskFieldType'] as String?,
       stopLossFieldType: json['stopLossFieldType'] as String?,
       accountSize: json['accountSize'] as String?,
@@ -187,6 +190,7 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
       riskPercent: json['riskPercent'] as String?,
       stopLossPrice: json['stopLossPrice'] as String?,
       stopLossPips: json['stopLossPips'] as String?,
+      entryPrice: json['entryPrice'] as String?,
     );
   }
 
@@ -196,7 +200,6 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
         base,
         counter,
         pipDecimalPlaces,
-        accountSizeFieldType,
         riskFieldType,
         stopLossFieldType,
         accountSize,
@@ -204,5 +207,6 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
         riskPercent,
         stopLossPrice,
         stopLossPips,
+        entryPrice,
       ];
 }

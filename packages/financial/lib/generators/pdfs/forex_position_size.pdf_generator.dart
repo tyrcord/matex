@@ -81,31 +81,13 @@ class MatexForexPositionSizeCalculatorPdfGenerator {
     MatexForexPositionSizeCalculatorBlocFields fields,
     MatexForexPositionSizeCalculatorBlocResults results,
   ) {
-    final pipValue = results.pipValue;
-    final standardLotValue = results.standardLotValue;
-    final miniLotValue = results.miniLotValue;
-    final microLotValue = results.microLotValue;
+    final pipValue = results.positionSize;
 
     return [
       if (pipValue != null && pipValue > 0)
         FastReportEntry(
           name: FinanceForexLocaleKeys.forex_label_pip_value.tr(),
-          value: results.formattedPipValue!,
-        ),
-      if (standardLotValue != null && standardLotValue > 0)
-        FastReportEntry(
-          name: FinanceForexLocaleKeys.forex_label_lot_standard.tr(),
-          value: results.formattedStandardLotValue!,
-        ),
-      if (miniLotValue != null && miniLotValue > 0)
-        FastReportEntry(
-          name: FinanceForexLocaleKeys.forex_label_lot_mini.tr(),
-          value: results.formattedMiniLotValue!,
-        ),
-      if (microLotValue != null && microLotValue > 0)
-        FastReportEntry(
-          name: FinanceForexLocaleKeys.forex_label_lot_micro.tr(),
-          value: results.formattedMicroLotValue!,
+          value: results.formattedPositionSize!,
         ),
     ];
   }

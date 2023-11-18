@@ -152,67 +152,14 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       final dPipValue = toDecimal(results.pipValue) ?? dZero;
 
       final pipValue = dPipValue.toDouble();
-      final positionSize = calculator.positionSize;
-
-      final standard = await getStandardLotValue();
-      final mini = await getMiniLotValue();
-      final micro = await getMicroLotValue();
-
-      final standardLotValue = computePipValueForLotSize(
-        standard,
-        pipValue,
-        positionSize,
-      );
-
-      final miniLotValue = computePipValueForLotSize(
-        mini,
-        pipValue,
-        positionSize,
-      );
-
-      final microLotValue = computePipValueForLotSize(
-        micro,
-        pipValue,
-        positionSize,
-      );
 
       return MatexForexPositionSizeCalculatorBlocResults(
-        formattedPipValue: localizeCurrency(
+        formattedPositionSize: localizeCurrency(
           minimumFractionDigits: 3,
           symbol: accountCurrency,
           value: pipValue,
         ),
-        formattedStandardLotValue: localizeCurrency(
-          symbol: accountCurrency,
-          minimumFractionDigits: 3,
-          value: computePipValueForLotSize(
-            standard,
-            pipValue,
-            positionSize,
-          ),
-        ),
-        formattedMiniLotValue: localizeCurrency(
-          symbol: accountCurrency,
-          minimumFractionDigits: 3,
-          value: computePipValueForLotSize(
-            mini,
-            pipValue,
-            positionSize,
-          ),
-        ),
-        formattedMicroLotValue: localizeCurrency(
-          symbol: accountCurrency,
-          minimumFractionDigits: 3,
-          value: computePipValueForLotSize(
-            micro,
-            pipValue,
-            positionSize,
-          ),
-        ),
-        standardLotValue: standardLotValue.toDouble(),
-        microLotValue: microLotValue.toDouble(),
-        miniLotValue: miniLotValue.toDouble(),
-        pipValue: pipValue,
+        positionSize: pipValue,
       );
     }
 
@@ -394,8 +341,8 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   Future<MatexForexPositionSizeCalculatorBlocResults>
       retrieveDefaultResult() async {
     return MatexForexPositionSizeCalculatorBlocResults(
-      formattedPipValue: localizeCurrency(value: 0),
-      pipValue: 0,
+      formattedPositionSize: localizeCurrency(value: 0),
+      positionSize: 0,
     );
   }
 
