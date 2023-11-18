@@ -1,7 +1,8 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
-class MatexPipValueCalculatorBlocResults extends FastCalculatorResults {
+class MatexForexPositionSizeCalculatorBlocResults
+    extends FastCalculatorResults {
   final double? pipValue;
   final double? customPipValue;
   final double? standardLotValue;
@@ -14,7 +15,7 @@ class MatexPipValueCalculatorBlocResults extends FastCalculatorResults {
   final String? formattedMiniLotValue;
   final String? formattedMicroLotValue;
 
-  const MatexPipValueCalculatorBlocResults({
+  const MatexForexPositionSizeCalculatorBlocResults({
     this.pipValue,
     this.customPipValue,
     this.standardLotValue,
@@ -28,10 +29,10 @@ class MatexPipValueCalculatorBlocResults extends FastCalculatorResults {
   });
 
   @override
-  MatexPipValueCalculatorBlocResults clone() => copyWith();
+  MatexForexPositionSizeCalculatorBlocResults clone() => copyWith();
 
   @override
-  MatexPipValueCalculatorBlocResults copyWith({
+  MatexForexPositionSizeCalculatorBlocResults copyWith({
     double? pipValue,
     double? customPipValue,
     double? standardLotValue,
@@ -43,7 +44,7 @@ class MatexPipValueCalculatorBlocResults extends FastCalculatorResults {
     String? formattedMiniLotValue,
     String? formattedMicroLotValue,
   }) {
-    return MatexPipValueCalculatorBlocResults(
+    return MatexForexPositionSizeCalculatorBlocResults(
       pipValue: pipValue ?? this.pipValue,
       customPipValue: customPipValue ?? this.customPipValue,
       standardLotValue: standardLotValue ?? this.standardLotValue,
@@ -62,8 +63,8 @@ class MatexPipValueCalculatorBlocResults extends FastCalculatorResults {
   }
 
   @override
-  MatexPipValueCalculatorBlocResults merge(
-    covariant MatexPipValueCalculatorBlocResults model,
+  MatexForexPositionSizeCalculatorBlocResults merge(
+    covariant MatexForexPositionSizeCalculatorBlocResults model,
   ) {
     return copyWith(
       pipValue: model.pipValue,

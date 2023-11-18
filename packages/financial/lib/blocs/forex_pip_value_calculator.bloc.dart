@@ -12,23 +12,23 @@ import 'package:t_helpers/helpers.dart';
 import 'package:matex_financial/financial.dart';
 
 // Initialize default state for the Pip Value Calculator
-final _kDefaultPipValueBlocState = MatexPipValueCalculatorBlocState(
-  fields: MatexPipValueCalculatorBlocFields(),
-  results: const MatexPipValueCalculatorBlocResults(),
+final _kDefaultPipValueBlocState = MatexForexPipValueCalculatorBlocState(
+  fields: MatexForexPipValueCalculatorBlocFields(),
+  results: const MatexForexPipValueCalculatorBlocResults(),
 );
 
-class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
-        MatexPipValueCalculator,
+class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
+        MatexForexPipValueCalculator,
         FastCalculatorBlocEvent,
-        MatexPipValueCalculatorBlocState,
-        MatexPipValueCalculatorDocument,
-        MatexPipValueCalculatorBlocResults>
+        MatexForexPipValueCalculatorBlocState,
+        MatexForexPipValueCalculatorDocument,
+        MatexForexPipValueCalculatorBlocResults>
     with MatexFinancialCalculatorFormatterMixin {
   final MatexFinancialInstrumentExchangeService exchangeProvider;
 
-  MatexPipValueCalculatorBloc({
-    MatexPipValueCalculatorBlocState? initialState,
-    MatexPipValueCalculatorDataProvider? dataProvider,
+  MatexForexPipValueCalculatorBloc({
+    MatexForexPipValueCalculatorBlocState? initialState,
+    MatexForexPipValueCalculatorDataProvider? dataProvider,
     required this.exchangeProvider,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,
@@ -37,14 +37,15 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     super.delegate,
   }) : super(
           initialState: initialState ?? _kDefaultPipValueBlocState,
-          dataProvider: dataProvider ?? MatexPipValueCalculatorDataProvider(),
-          debugLabel: 'MatexPipValueCalculatorBloc',
+          dataProvider:
+              dataProvider ?? MatexForexPipValueCalculatorDataProvider(),
+          debugLabel: 'MatexForexPipValueCalculatorBloc',
         ) {
-    calculator = MatexPipValueCalculator();
+    calculator = MatexForexPipValueCalculator();
 
     listenOnDefaultValueChanges(
       MatexCalculatorDefaultValueKeys.matexCalculatorFinancialInstrument.name,
-      MatexPipValueCalculatorBlocKey.instrument,
+      MatexForexPipValueCalculatorBlocKey.instrument,
     );
 
     _listenToPrimaryCurrencyCodeChanges();
@@ -74,7 +75,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
 
       addEvent(FastCalculatorBlocEvent.patchValue(
-        key: MatexPipValueCalculatorBlocKey.accountCurrency,
+        key: MatexForexPipValueCalculatorBlocKey.accountCurrency,
         value: getUserCurrencyCode(),
       ));
     }
@@ -91,7 +92,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
   @override
   @protected
-  Stream<MatexPipValueCalculatorBlocState> willCompute() async* {
+  Stream<MatexForexPipValueCalculatorBlocState> willCompute() async* {
     yield* super.willCompute();
 
     var fields = currentState.fields;
@@ -164,7 +165,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  Future<MatexPipValueCalculatorBlocResults> compute() async {
+  Future<MatexForexPipValueCalculatorBlocResults> compute() async {
     if (await isCalculatorStateValid()) {
       final results = calculator.value();
       final fields = currentState.fields;
@@ -199,7 +200,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
         positionSize,
       );
 
-      return MatexPipValueCalculatorBlocResults(
+      return MatexForexPipValueCalculatorBlocResults(
         formattedPipValue: localizeCurrency(
           minimumFractionDigits: 3,
           symbol: accountCurrency,
@@ -249,35 +250,35 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  Future<MatexPipValueCalculatorDocument?> patchCalculatorDocument(
+  Future<MatexForexPipValueCalculatorDocument?> patchCalculatorDocument(
     String key,
     dynamic value,
   ) async {
     if (value is Map<dynamic, dynamic> &&
-        key == MatexPipValueCalculatorBlocKey.instrument) {
+        key == MatexForexPipValueCalculatorBlocKey.instrument) {
       value = MatexFinancialInstrument.fromJson(value);
     }
 
     if (value is String) {
       switch (key) {
-        case MatexPipValueCalculatorBlocKey.accountCurrency:
+        case MatexForexPipValueCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
 
-        case MatexPipValueCalculatorBlocKey.positionSize:
+        case MatexForexPipValueCalculatorBlocKey.positionSize:
           return document.copyWith(positionSize: value);
 
-        case MatexPipValueCalculatorBlocKey.numberOfPips:
+        case MatexForexPipValueCalculatorBlocKey.numberOfPips:
           return document.copyWith(numberOfPips: value);
 
-        case MatexPipValueCalculatorBlocKey.pipDecimalPlaces:
+        case MatexForexPipValueCalculatorBlocKey.pipDecimalPlaces:
           return document.copyWith(pipDecimalPlaces: value);
 
-        case MatexPipValueCalculatorBlocKey.lotSize:
+        case MatexForexPipValueCalculatorBlocKey.lotSize:
           return document.copyWith(lotSize: value);
       }
     } else if (value is Enum) {
       switch (key) {
-        case MatexPipValueCalculatorBlocKey.positionSizeFieldType:
+        case MatexForexPipValueCalculatorBlocKey.positionSizeFieldType:
           return document.copyWith(
             positionSizeFieldType: value.name,
             positionSize: '',
@@ -286,7 +287,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       }
     } else if (value is MatexFinancialInstrument) {
       switch (key) {
-        case MatexPipValueCalculatorBlocKey.instrument:
+        case MatexForexPipValueCalculatorBlocKey.instrument:
           final pipDecimalPlaces = await getPipPrecision(
             counter: value.counter,
             base: value.base,
@@ -304,35 +305,35 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  Future<MatexPipValueCalculatorBlocState?> patchCalculatorState(
+  Future<MatexForexPipValueCalculatorBlocState?> patchCalculatorState(
     String key,
     dynamic value,
   ) async {
     if (value is Map<dynamic, dynamic> &&
-        key == MatexPipValueCalculatorBlocKey.instrument) {
+        key == MatexForexPipValueCalculatorBlocKey.instrument) {
       value = MatexFinancialInstrument.fromJson(value);
     }
 
     if (value is String) {
       switch (key) {
-        case MatexPipValueCalculatorBlocKey.accountCurrency:
+        case MatexForexPipValueCalculatorBlocKey.accountCurrency:
           return patchAccountCurrency(value);
 
-        case MatexPipValueCalculatorBlocKey.positionSize:
+        case MatexForexPipValueCalculatorBlocKey.positionSize:
           return patchPositionSize(value);
 
-        case MatexPipValueCalculatorBlocKey.numberOfPips:
+        case MatexForexPipValueCalculatorBlocKey.numberOfPips:
           return patchNumberOfPips(value);
 
-        case MatexPipValueCalculatorBlocKey.pipDecimalPlaces:
+        case MatexForexPipValueCalculatorBlocKey.pipDecimalPlaces:
           return patchPipDecimalPlaces(value);
 
-        case MatexPipValueCalculatorBlocKey.lotSize:
+        case MatexForexPipValueCalculatorBlocKey.lotSize:
           return patchLotSize(value);
       }
     } else if (value is Enum) {
       switch (key) {
-        case MatexPipValueCalculatorBlocKey.positionSizeFieldType:
+        case MatexForexPipValueCalculatorBlocKey.positionSizeFieldType:
           return patchPositionSizeFieldType(value.name);
 
         default:
@@ -341,7 +342,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       }
     } else if (value is MatexFinancialInstrument) {
       switch (key) {
-        case MatexPipValueCalculatorBlocKey.instrument:
+        case MatexForexPipValueCalculatorBlocKey.instrument:
           return patchInstrument(value);
       }
     }
@@ -350,19 +351,19 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  Future<MatexPipValueCalculatorDocument?> resetCalculatorDocument(
+  Future<MatexForexPipValueCalculatorDocument?> resetCalculatorDocument(
     String key,
   ) async {
     switch (key) {
-      case MatexPipValueCalculatorBlocKey.accountCurrency:
+      case MatexForexPipValueCalculatorBlocKey.accountCurrency:
         return document.copyWithDefaults(accountCurrency: true);
 
-      case MatexPipValueCalculatorBlocKey.instrument:
+      case MatexForexPipValueCalculatorBlocKey.instrument:
         return document.copyWithDefaults(
           counter: true,
           base: true,
         );
-      case MatexPipValueCalculatorBlocKey.numberOfPips:
+      case MatexForexPipValueCalculatorBlocKey.numberOfPips:
         return document.copyWithDefaults(numberOfPips: true);
     }
 
@@ -370,17 +371,17 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  Future<MatexPipValueCalculatorBlocState?> resetCalculatorState(
+  Future<MatexForexPipValueCalculatorBlocState?> resetCalculatorState(
     String key,
   ) async {
     switch (key) {
-      case MatexPipValueCalculatorBlocKey.accountCurrency:
+      case MatexForexPipValueCalculatorBlocKey.accountCurrency:
         return patchAccountCurrency(null);
 
-      case MatexPipValueCalculatorBlocKey.instrument:
+      case MatexForexPipValueCalculatorBlocKey.instrument:
         return patchInstrument(null);
 
-      case MatexPipValueCalculatorBlocKey.numberOfPips:
+      case MatexForexPipValueCalculatorBlocKey.numberOfPips:
         return patchNumberOfPips(null);
     }
 
@@ -389,17 +390,17 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
   @override
   Future<void> resetCalculator(
-    MatexPipValueCalculatorDocument document,
+    MatexForexPipValueCalculatorDocument document,
   ) async {
-    calculator.setState(MatexPipValueCalculatorState(
+    calculator.setState(MatexForexPipValueCalculatorState(
       pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
       positionSize: parseStringToDouble(document.positionSize),
     ));
   }
 
   @override
-  Future<MatexPipValueCalculatorBlocState> resetCalculatorBlocState(
-    MatexPipValueCalculatorDocument document,
+  Future<MatexForexPipValueCalculatorBlocState> resetCalculatorBlocState(
+    MatexForexPipValueCalculatorDocument document,
   ) async {
     final pipDecimalPlaces = await getPipPrecision(
       counter: document.counter,
@@ -408,7 +409,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     return _kDefaultPipValueBlocState.copyWith(
       results: await retrieveDefaultResult(),
-      fields: MatexPipValueCalculatorBlocFields(
+      fields: MatexForexPipValueCalculatorBlocFields(
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         accountCurrency: document.accountCurrency,
         counter: document.counter,
@@ -418,7 +419,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  Future<MatexPipValueCalculatorDocument>
+  Future<MatexForexPipValueCalculatorDocument>
       retrieveDefaultCalculatorDocument() async {
     final bloc = FastAppDictBloc.instance;
     final json = bloc.getValue<Map<dynamic, dynamic>?>(
@@ -443,7 +444,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       );
     }
 
-    return MatexPipValueCalculatorDocument(
+    return MatexForexPipValueCalculatorDocument(
       pipDecimalPlaces: pipDecimalPlaces.toString(),
       accountCurrency: getUserCurrencyCode(),
       counter: instrument?.counter,
@@ -452,15 +453,16 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  Future<MatexPipValueCalculatorBlocResults> retrieveDefaultResult() async {
-    return MatexPipValueCalculatorBlocResults(
+  Future<MatexForexPipValueCalculatorBlocResults>
+      retrieveDefaultResult() async {
+    return MatexForexPipValueCalculatorBlocResults(
       formattedPipValue: localizeCurrency(value: 0),
       pipValue: 0,
     );
   }
 
-  MatexPipValueCalculatorBlocState patchAccountCurrency(String? value) {
-    late final MatexPipValueCalculatorBlocFields fields;
+  MatexForexPipValueCalculatorBlocState patchAccountCurrency(String? value) {
+    late final MatexForexPipValueCalculatorBlocFields fields;
 
     if (value == null) {
       fields = currentState.fields.copyWithDefaults(accountCurrency: true);
@@ -471,10 +473,10 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  Future<MatexPipValueCalculatorBlocState> patchInstrument(
+  Future<MatexForexPipValueCalculatorBlocState> patchInstrument(
     MatexFinancialInstrument? instrument,
   ) async {
-    late final MatexPipValueCalculatorBlocFields fields;
+    late final MatexForexPipValueCalculatorBlocFields fields;
 
     calculator
       ..counterToAccountCurrencyRate = 0
@@ -511,7 +513,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState.copyWith(fields: fields, metadata: metadata);
   }
 
-  MatexPipValueCalculatorBlocState patchPositionSize(String value) {
+  MatexForexPipValueCalculatorBlocState patchPositionSize(String value) {
     final fields = currentState.fields.copyWith(positionSize: value);
     final positionSizeFieldType = fields.positionSizeFieldType;
 
@@ -525,7 +527,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState;
   }
 
-  MatexPipValueCalculatorBlocState patchLotSize(String value) {
+  MatexForexPipValueCalculatorBlocState patchLotSize(String value) {
     final fields = currentState.fields.copyWith(lotSize: value);
     final positionSizeFieldType = fields.positionSizeFieldType;
 
@@ -539,8 +541,8 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState;
   }
 
-  MatexPipValueCalculatorBlocState patchNumberOfPips(String? value) {
-    late final MatexPipValueCalculatorBlocFields fields;
+  MatexForexPipValueCalculatorBlocState patchNumberOfPips(String? value) {
+    late final MatexForexPipValueCalculatorBlocFields fields;
 
     if (value == null) {
       fields = currentState.fields.copyWithDefaults(numberOfPips: true);
@@ -551,7 +553,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexPipValueCalculatorBlocState patchPipDecimalPlaces(String value) {
+  MatexForexPipValueCalculatorBlocState patchPipDecimalPlaces(String value) {
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(pipDecimalPlaces: value);
     calculator.pipDecimalPlaces = dValue.toDouble().toInt();
@@ -559,7 +561,8 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexPipValueCalculatorBlocState patchPositionSizeFieldType(String value) {
+  MatexForexPipValueCalculatorBlocState patchPositionSizeFieldType(
+      String value) {
     final fields = currentState.fields.copyWith(
       positionSizeFieldType: value,
       positionSize: '',
@@ -620,7 +623,7 @@ class MatexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
   @override
   Future<Uint8List> toPdf(BuildContext context) async {
-    final pdfGenerator = MatexPipValueCalculatorPdfGenerator();
+    final pdfGenerator = MatexForexPipValueCalculatorPdfGenerator();
     final fields = currentState.fields;
     final results = await compute();
     final metadata = currentState.metadata;

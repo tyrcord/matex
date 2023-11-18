@@ -1,4 +1,4 @@
-class MatexPipValueCalculatorBlocKey {
+class MatexForexPositionSizeCalculatorBlocKey {
   // Define all the keys as static constants
   static const String accountCurrency = 'accountCurrency';
   static const String instrument = 'instrument';
@@ -9,5 +9,5 @@ class MatexPipValueCalculatorBlocKey {
   static const String lotSize = 'lotSize';
 
   // Prevent the creation of instances of this class
-  MatexPipValueCalculatorBlocKey._();
+  MatexForexPositionSizeCalculatorBlocKey._();
 }

@@ -9,19 +9,20 @@ import 'package:t_helpers/helpers.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-class MatexPipValueCalculator extends MatexCalculator<
-    MatexPipValueCalculatorState, MatexPipValueCalculatorResults> {
-  MatexPipValueCalculator({
+class MatexForexPipValueCalculator extends MatexCalculator<
+    MatexForexPipValueCalculatorState, MatexForexPipValueCalculatorResults> {
+  MatexForexPipValueCalculator({
     super.defaultState,
     super.state,
   }) : super(validators: pipValueValidators);
 
   @override
-  MatexPipValueCalculatorState initializeState() =>
-      const MatexPipValueCalculatorState();
+  MatexForexPipValueCalculatorState initializeState() =>
+      const MatexForexPipValueCalculatorState();
 
   @override
-  MatexPipValueCalculatorState initializeDefaultState() => initializeState();
+  MatexForexPipValueCalculatorState initializeDefaultState() =>
+      initializeState();
 
   bool? get isAccountCurrencyCounter => state.isAccountCurrencyCounter;
   double? get instrumentPairRate => state.instrumentPairRate;
@@ -72,17 +73,17 @@ class MatexPipValueCalculator extends MatexCalculator<
     setState(state.copyWith(standardLot: nanoLot));
   }
 
-  static const defaultResults = MatexPipValueCalculatorResults(
+  static const defaultResults = MatexForexPipValueCalculatorResults(
     pipValue: 0,
   );
 
   @override
-  MatexPipValueCalculatorResults value() {
+  MatexForexPipValueCalculatorResults value() {
     if (!isValid) return defaultResults;
 
     final pipValue = computePipValue();
 
-    return MatexPipValueCalculatorResults(
+    return MatexForexPipValueCalculatorResults(
       pipValue: pipValue.toDouble(),
     );
   }

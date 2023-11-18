@@ -4,7 +4,7 @@ import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 
-class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
+class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
   @override
@@ -50,7 +50,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     );
   }
 
-  MatexPipValueCalculatorBlocFields({
+  MatexForexPipValueCalculatorBlocFields({
     String? accountCurrency,
     String? base,
     String? counter,
@@ -74,10 +74,10 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   }
 
   @override
-  MatexPipValueCalculatorBlocFields clone() => copyWith();
+  MatexForexPipValueCalculatorBlocFields clone() => copyWith();
 
   @override
-  MatexPipValueCalculatorBlocFields copyWithDefaults({
+  MatexForexPipValueCalculatorBlocFields copyWithDefaults({
     bool accountCurrency = false,
     bool base = false,
     bool counter = false,
@@ -87,7 +87,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     bool positionSizeFieldType = false,
     bool lotSize = false,
   }) {
-    return MatexPipValueCalculatorBlocFields(
+    return MatexForexPipValueCalculatorBlocFields(
       accountCurrency: accountCurrency ? null : this.accountCurrency,
       base: base ? null : this.base,
       counter: counter ? null : this.counter,
@@ -103,7 +103,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   }
 
   @override
-  MatexPipValueCalculatorBlocFields copyWith({
+  MatexForexPipValueCalculatorBlocFields copyWith({
     String? accountCurrency,
     String? base,
     String? counter,
@@ -114,7 +114,7 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
     FastCalculatorBlocDelegate? delegate,
     String? lotSize,
   }) {
-    return MatexPipValueCalculatorBlocFields(
+    return MatexForexPipValueCalculatorBlocFields(
       accountCurrency: accountCurrency ?? this.accountCurrency,
       base: base ?? this.base,
       counter: counter ?? this.counter,
@@ -129,8 +129,8 @@ class MatexPipValueCalculatorBlocFields extends FastCalculatorFields
   }
 
   @override
-  MatexPipValueCalculatorBlocFields merge(
-    covariant MatexPipValueCalculatorBlocFields model,
+  MatexForexPipValueCalculatorBlocFields merge(
+    covariant MatexForexPipValueCalculatorBlocFields model,
   ) {
     return copyWith(
       accountCurrency: model.accountCurrency,

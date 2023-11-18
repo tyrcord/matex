@@ -5,10 +5,10 @@ import 'package:matex_financial/financial.dart';
 
 void main() {
   group('PipValueCalculator', () {
-    late MatexPipValueCalculator calculator;
+    late MatexForexPipValueCalculator calculator;
 
     setUp(() {
-      calculator = MatexPipValueCalculator();
+      calculator = MatexForexPipValueCalculator();
     });
 
     group('#isDirty', () {
@@ -18,8 +18,9 @@ void main() {
       });
 
       test('returns false when calculator state is reset to default', () {
-        calculator = MatexPipValueCalculator(
-          defaultState: const MatexPipValueCalculatorState(positionSize: 100),
+        calculator = MatexForexPipValueCalculator(
+          defaultState:
+              const MatexForexPipValueCalculatorState(positionSize: 100),
         )..positionSize = 5000;
 
         expect(calculator.isDirty, equals(true));
@@ -75,7 +76,7 @@ void main() {
       test('returns default result without configurations', () {
         final results = calculator.value();
 
-        const defaultResults = MatexPipValueCalculatorResults(
+        const defaultResults = MatexForexPipValueCalculatorResults(
           pipValue: 0,
         );
 

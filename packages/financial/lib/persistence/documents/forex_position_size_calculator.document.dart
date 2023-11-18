@@ -6,7 +6,7 @@ import 'package:matex_financial/financial.dart';
 
 const String _kDefaultPositionSizeFieldType = 'unit';
 
-class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
+class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
   late final String? accountCurrency;
   late final String? base;
   late final String? counter;
@@ -16,7 +16,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   late final String positionSizeFieldType;
   late final String? lotSize;
 
-  MatexPipValueCalculatorDocument({
+  MatexForexPositionSizeCalculatorDocument({
     String? accountCurrency,
     String? base,
     String? counter,
@@ -38,10 +38,10 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   }
 
   @override
-  MatexPipValueCalculatorDocument clone() => copyWith();
+  MatexForexPositionSizeCalculatorDocument clone() => copyWith();
 
   @override
-  MatexPipValueCalculatorDocument copyWith({
+  MatexForexPositionSizeCalculatorDocument copyWith({
     String? accountCurrency,
     String? base,
     String? counter,
@@ -51,7 +51,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
     String? positionSizeFieldType,
     String? lotSize,
   }) {
-    return MatexPipValueCalculatorDocument(
+    return MatexForexPositionSizeCalculatorDocument(
       accountCurrency: accountCurrency ?? this.accountCurrency,
       base: base ?? this.base,
       counter: counter ?? this.counter,
@@ -65,7 +65,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   }
 
   @override
-  MatexPipValueCalculatorDocument copyWithDefaults({
+  MatexForexPositionSizeCalculatorDocument copyWithDefaults({
     bool accountCurrency = false,
     bool base = false,
     bool counter = false,
@@ -75,7 +75,7 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
     bool positionSizeFieldType = false,
     bool lotSize = false,
   }) {
-    return MatexPipValueCalculatorDocument(
+    return MatexForexPositionSizeCalculatorDocument(
       accountCurrency: accountCurrency ? null : this.accountCurrency,
       base: base ? null : this.base,
       counter: counter ? null : this.counter,
@@ -89,8 +89,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   }
 
   @override
-  MatexPipValueCalculatorDocument merge(
-    covariant MatexPipValueCalculatorDocument model,
+  MatexForexPositionSizeCalculatorDocument merge(
+    covariant MatexForexPositionSizeCalculatorDocument model,
   ) {
     return copyWith(
       accountCurrency: model.accountCurrency,
@@ -105,8 +105,8 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
   }
 
   @override
-  MatexPipValueCalculatorBlocFields toFields() {
-    return MatexPipValueCalculatorBlocFields(
+  MatexForexPositionSizeCalculatorBlocFields toFields() {
+    return MatexForexPositionSizeCalculatorBlocFields(
       accountCurrency: accountCurrency,
       base: base,
       counter: counter,
@@ -133,10 +133,10 @@ class MatexPipValueCalculatorDocument extends FastCalculatorDocument {
     };
   }
 
-  static MatexPipValueCalculatorDocument fromJson(
+  static MatexForexPositionSizeCalculatorDocument fromJson(
     Map<String, dynamic> json,
   ) {
-    return MatexPipValueCalculatorDocument(
+    return MatexForexPositionSizeCalculatorDocument(
       accountCurrency: json['accountCurrency'] as String?,
       base: json['base'] as String?,
       counter: json['counter'] as String?,

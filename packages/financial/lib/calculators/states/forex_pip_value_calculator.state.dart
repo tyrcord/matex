@@ -2,7 +2,7 @@
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 
-class MatexPipValueCalculatorState extends MatexCalculatorState {
+class MatexForexPipValueCalculatorState extends MatexCalculatorState {
   final double? positionSize;
   final int? pipDecimalPlaces;
   final bool isAccountCurrencyCounter;
@@ -13,7 +13,7 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
   final double? standardLot;
   final double? nanoLot;
 
-  const MatexPipValueCalculatorState({
+  const MatexForexPipValueCalculatorState({
     this.positionSize,
     this.pipDecimalPlaces,
     this.isAccountCurrencyCounter = false,
@@ -26,10 +26,10 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
   });
 
   @override
-  MatexPipValueCalculatorState clone() => copyWith();
+  MatexForexPipValueCalculatorState clone() => copyWith();
 
   @override
-  MatexPipValueCalculatorState copyWith({
+  MatexForexPipValueCalculatorState copyWith({
     double? positionSize,
     int? pipDecimalPlaces,
     bool? isAccountCurrencyCounter,
@@ -41,7 +41,7 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
     double? standardLot,
     double? nanoLot,
   }) {
-    return MatexPipValueCalculatorState(
+    return MatexForexPipValueCalculatorState(
       positionSize: positionSize ?? this.positionSize,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
       isAccountCurrencyCounter:
@@ -57,8 +57,8 @@ class MatexPipValueCalculatorState extends MatexCalculatorState {
   }
 
   @override
-  MatexPipValueCalculatorState merge(
-    covariant MatexPipValueCalculatorState model,
+  MatexForexPipValueCalculatorState merge(
+    covariant MatexForexPipValueCalculatorState model,
   ) {
     return copyWith(
       positionSize: model.positionSize,

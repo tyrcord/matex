@@ -18,14 +18,14 @@ import 'package:lingua_units/lingua_units.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-class MatexPipValueCalculatorPdfGenerator {
+class MatexForexPipValueCalculatorPdfGenerator {
   final appSettingsBloc = FastAppSettingsBloc();
   final appInfoBloc = FastAppInfoBloc();
 
   Future<Uint8List> generate(
     BuildContext context,
-    MatexPipValueCalculatorBlocFields fields,
-    MatexPipValueCalculatorBlocResults results,
+    MatexForexPipValueCalculatorBlocFields fields,
+    MatexForexPipValueCalculatorBlocResults results,
     Map<String, dynamic> metadata,
   ) async {
     final reporter = FastPdfCalculatorReporter();
@@ -48,8 +48,8 @@ class MatexPipValueCalculatorPdfGenerator {
 
   List<FastReportEntry> _buildInputReportEntries(
     BuildContext context,
-    MatexPipValueCalculatorBlocFields fields,
-    MatexPipValueCalculatorBlocResults results,
+    MatexForexPipValueCalculatorBlocFields fields,
+    MatexForexPipValueCalculatorBlocResults results,
     Map<String, dynamic> metadata,
   ) {
     final numberOfPips = parseFieldValueToDouble(fields.numberOfPips);
@@ -96,8 +96,8 @@ class MatexPipValueCalculatorPdfGenerator {
 
   List<FastReportEntry> _buildResults(
     BuildContext context,
-    MatexPipValueCalculatorBlocFields fields,
-    MatexPipValueCalculatorBlocResults results,
+    MatexForexPipValueCalculatorBlocFields fields,
+    MatexForexPipValueCalculatorBlocResults results,
   ) {
     final pipValue = results.pipValue;
     final customPipValue = results.customPipValue;
