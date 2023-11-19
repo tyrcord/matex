@@ -39,17 +39,8 @@ abstract class MatexCalculator<S extends MatexCalculatorState, R> {
     S? defaultState,
     this.validators,
   }) {
-    if (state != null) {
-      this.state = state;
-    } else {
-      this.state = initializeState();
-    }
-
-    if (defaultState != null) {
-      this.defaultState = defaultState;
-    } else {
-      this.defaultState = initializeDefaultState();
-    }
+    this.state = state ?? initializeState();
+    this.defaultState = defaultState ?? initializeDefaultState();
 
     checkValidity();
   }
@@ -69,8 +60,10 @@ abstract class MatexCalculator<S extends MatexCalculatorState, R> {
     checkValidity();
   }
 
+  /// Returns a clone of the current state.
   S getState() => state.clone() as S;
 
+  /// Checks the validity of the current state.
   @protected
   bool checkValidity() {
     var validity = true;
@@ -83,4 +76,7 @@ abstract class MatexCalculator<S extends MatexCalculatorState, R> {
 
     return validity;
   }
+
+  /// Resets the state of the calculator to the default state.
+  void reset() => setState(defaultState);
 }

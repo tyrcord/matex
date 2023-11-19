@@ -2,7 +2,6 @@
 import 'package:matex_core/core.dart';
 
 class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
-  final double? positionSize;
   final int? pipDecimalPlaces;
   final bool isAccountCurrencyCounter;
   final double counterToAccountCurrencyRate;
@@ -15,7 +14,6 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
   final double? accountSize;
 
   const MatexForexPositionSizeCalculatorState({
-    this.positionSize,
     this.pipDecimalPlaces,
     this.isAccountCurrencyCounter = false,
     this.counterToAccountCurrencyRate = 0,
@@ -33,7 +31,6 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
 
   @override
   MatexForexPositionSizeCalculatorState copyWith({
-    double? positionSize,
     int? pipDecimalPlaces,
     bool? isAccountCurrencyCounter,
     double? counterToAccountCurrencyRate,
@@ -46,7 +43,6 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
     double? accountSize,
   }) {
     return MatexForexPositionSizeCalculatorState(
-      positionSize: positionSize ?? this.positionSize,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
       isAccountCurrencyCounter:
           isAccountCurrencyCounter ?? this.isAccountCurrencyCounter,
@@ -67,7 +63,6 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
     covariant MatexForexPositionSizeCalculatorState model,
   ) {
     return copyWith(
-      positionSize: model.positionSize,
       pipDecimalPlaces: model.pipDecimalPlaces,
       isAccountCurrencyCounter: model.isAccountCurrencyCounter,
       counterToAccountCurrencyRate: model.counterToAccountCurrencyRate,
@@ -83,7 +78,6 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
 
   @override
   List<Object?> get props => [
-        positionSize,
         pipDecimalPlaces,
         isAccountCurrencyCounter,
         counterToAccountCurrencyRate,

@@ -29,7 +29,6 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
   bool? get isAccountCurrencyCounter => state.isAccountCurrencyCounter;
   double? get instrumentPairRate => state.instrumentPairRate;
   int? get pipDecimalPlaces => state.pipDecimalPlaces;
-  double? get positionSize => state.positionSize;
   double? get stopLossPrice => state.stopLossPrice;
   double? get riskAmount => state.riskAmount;
   double? get riskPercent => state.riskPercent;
@@ -39,10 +38,6 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
 
   double? get counterToAccountCurrencyRate {
     return state.counterToAccountCurrencyRate;
-  }
-
-  set positionSize(double? value) {
-    setState(state.copyWith(positionSize: value));
   }
 
   set pipDecimalPlaces(int? value) {
@@ -62,23 +57,27 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
   }
 
   set stopLossPrice(double? value) {
-    setState(state.copyWith(stopLossPrice: value));
+    setState(state.copyWith(stopLossPrice: value, stopLossPips: 0));
   }
 
   set riskAmount(double? value) {
-    setState(state.copyWith(riskAmount: value));
+    setState(state.copyWith(riskAmount: value, riskPercent: 0));
   }
 
   set riskPercent(double? value) {
-    setState(state.copyWith(riskPercent: value));
+    setState(state.copyWith(riskPercent: value, riskAmount: 0));
   }
 
   set stopLossPips(double? value) {
-    setState(state.copyWith(stopLossPips: value));
+    setState(state.copyWith(
+      stopLossPips: value,
+      stopLossPrice: 0,
+      entryPrice: 0,
+    ));
   }
 
   set entryPrice(double? value) {
-    setState(state.copyWith(entryPrice: value));
+    setState(state.copyWith(entryPrice: value, stopLossPips: 0));
   }
 
   set accountSize(double? value) {
@@ -105,7 +104,7 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
 
     return (result = MatexForexPositionSizeCalculatorResults(
       pipValue: (dPipValue * size).toDouble(),
-      riskRatio: dRiskRatio.toDouble(),
+      riskPercent: dRiskRatio.toDouble(),
       positionSize: size.toDouble(),
       amountAtRisk: amountAtRisk,
       stopLossPips: stopLossPips,
@@ -133,9 +132,8 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
   Decimal computeRiskPercent(double amountAtRisk, double? accountSize) {
     final riskPercent = state.riskPercent ?? 0.0;
 
-    if (riskPercent == 0 || accountSize == null || accountSize > 0) {
-      return dZero;
-    }
+    if (accountSize == null || accountSize <= 0) return dZero;
+    if (riskPercent > 0) return toDecimal(riskPercent)!;
 
     final dAccountSize = toDecimal(accountSize) ?? dZero;
 
@@ -143,11 +141,15 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
 
     final dAmountAtRisk = toDecimal(amountAtRisk) ?? dZero;
 
-    return decimalFromRational(dAmountAtRisk * dHundred / dAccountSize);
+    return decimalFromRational(dAmountAtRisk / dAccountSize);
   }
 
   @protected
   Decimal computeAmountAtRisk() {
+    final riskAmount = state.riskAmount ?? 0.0;
+
+    if (riskAmount > 0) return toDecimal(riskAmount)!;
+
     final riskRatio = state.riskPercent;
     final accountSize = state.accountSize;
 
@@ -155,12 +157,12 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
         riskRatio == null ||
         accountSize < 0 ||
         riskRatio < 0 ||
-        riskRatio > 100) return dZero;
+        riskRatio > 1) return dZero;
 
     final dRiskRatio = toDecimal(riskRatio) ?? dZero;
     final dAccountSize = toDecimal(accountSize) ?? dZero;
 
-    return decimalFromRational(dRiskRatio * dAccountSize / dHundred);
+    return dRiskRatio * dAccountSize;
   }
 
   @protected
@@ -168,12 +170,13 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
     if (pipPrecision == null) return dZero;
 
     final stopLossPips = state.stopLossPips ?? 0.0;
+
+    if (stopLossPips > 0) return toDecimal(stopLossPips)!;
+
     final stopLossPrice = state.stopLossPrice ?? 0.0;
     final entryPrice = state.entryPrice ?? 0.0;
 
-    if (stopLossPips == 0 || entryPrice == 0 || stopLossPrice == 0) {
-      return dZero;
-    }
+    if (entryPrice <= 0 || stopLossPrice <= 0) return dZero;
 
     final decimalMultiplicator = pow(10, pipPrecision).toString();
     final dDecimalMultiplicator = toDecimal(decimalMultiplicator)!;
@@ -184,10 +187,10 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
     return deltaPrice * dDecimalMultiplicator;
   }
 
-  Decimal computePipValue() {
+  Decimal computePipValue({double? positionSize = 1}) {
     final counterToAccountCurrencyRate = state.counterToAccountCurrencyRate;
     final isAccountCurrencyCounter = state.isAccountCurrencyCounter;
-    final dPositionSize = toDecimal(state.positionSize) ?? dZero;
+    final dPositionSize = toDecimal(positionSize) ?? dZero;
     final pipDecimalPlaces = state.pipDecimalPlaces ?? 0;
     final decimalMultiplicator = pow(10, pipDecimalPlaces);
     final dDecimalMultiplicator = toDecimal(decimalMultiplicator)!;

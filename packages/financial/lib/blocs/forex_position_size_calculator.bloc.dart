@@ -191,16 +191,16 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
           return document.copyWith(riskPercent: value);
 
         case MatexForexPositionSizeCalculatorBlocKey.riskAmount:
-          return document.copyWith(riskPercent: value);
+          return document.copyWith(riskAmount: value);
 
         case MatexForexPositionSizeCalculatorBlocKey.entryPrice:
-          return document.copyWith(stopLossPips: value);
+          return document.copyWith(entryPrice: value);
 
         case MatexForexPositionSizeCalculatorBlocKey.stopLossPips:
           return document.copyWith(stopLossPips: value);
 
         case MatexForexPositionSizeCalculatorBlocKey.stopLossPrice:
-          return document.copyWith(stopLossPips: value);
+          return document.copyWith(stopLossPrice: value);
       }
     } else if (value is Enum) {
       switch (key) {

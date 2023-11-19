@@ -9,7 +9,7 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
   final double? microLotSize;
   final double? stopLossPips;
   final double? amountAtRisk;
-  final double? riskRatio;
+  final double? riskPercent;
 
   const MatexForexPositionSizeCalculatorResults({
     this.pipValue,
@@ -19,7 +19,7 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
     this.microLotSize,
     this.stopLossPips,
     this.amountAtRisk,
-    this.riskRatio,
+    this.riskPercent,
   });
 
   @override
@@ -34,7 +34,7 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
     double? microLotSize,
     double? stopLossPips,
     double? amountAtRisk,
-    double? riskRatio,
+    double? riskPercent,
   }) {
     return MatexForexPositionSizeCalculatorResults(
       pipValue: pipValue ?? this.pipValue,
@@ -44,7 +44,7 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
       microLotSize: microLotSize ?? this.microLotSize,
       stopLossPips: stopLossPips ?? this.stopLossPips,
       amountAtRisk: amountAtRisk ?? this.amountAtRisk,
-      riskRatio: riskRatio ?? this.riskRatio,
+      riskPercent: riskPercent ?? this.riskPercent,
     );
   }
 
@@ -60,7 +60,7 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
       microLotSize: model.microLotSize ?? microLotSize,
       stopLossPips: model.stopLossPips ?? stopLossPips,
       amountAtRisk: model.amountAtRisk ?? amountAtRisk,
-      riskRatio: model.riskRatio ?? riskRatio,
+      riskPercent: model.riskPercent ?? riskPercent,
     );
   }
 
@@ -73,6 +73,6 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
         microLotSize,
         stopLossPips,
         amountAtRisk,
-        riskRatio,
+        riskPercent,
       ];
 }
