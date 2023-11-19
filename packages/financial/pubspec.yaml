@@ -30,17 +30,17 @@ dependencies:
   tstore: ^0.8.21
 
   # Lingua
-  lingua_finance: ^0.0.22
-  lingua_finance_stock: ^0.0.7
-  lingua_core: ^0.0.31
-  lingua_settings: ^0.0.12
-  lingua_finance_forex: ^0.0.5
-  lingua_units: ^0.0.6
+  lingua_finance: ^0.0.23
+  lingua_finance_stock: ^0.0.8
+  lingua_core: ^0.0.32
+  lingua_settings: ^0.0.13
+  lingua_finance_forex: ^0.0.6
+  lingua_units: ^0.0.7
 
   # Fastyle
-  fastyle_forms: ^0.0.34
-  fastyle_core: ^0.0.36
-  fastyle_calculator: ^1.44.0
+  fastyle_forms: ^0.0.35
+  fastyle_core: ^0.0.36+1
+  fastyle_calculator: ^1.46.0
 
 dev_dependencies:
   flutter_test:
