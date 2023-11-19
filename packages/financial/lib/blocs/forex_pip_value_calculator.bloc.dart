@@ -562,7 +562,8 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   MatexForexPipValueCalculatorBlocState patchPositionSizeFieldType(
-      String value) {
+    String value,
+  ) {
     final fields = currentState.fields.copyWith(
       positionSizeFieldType: value,
       positionSize: '',

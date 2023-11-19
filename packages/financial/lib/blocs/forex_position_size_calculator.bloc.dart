@@ -183,10 +183,32 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
         case MatexForexPositionSizeCalculatorBlocKey.pipDecimalPlaces:
           return document.copyWith(pipDecimalPlaces: value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.accountSize:
+          return document.copyWith(accountSize: value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.riskPercent:
+          return document.copyWith(riskPercent: value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.riskAmount:
+          return document.copyWith(riskPercent: value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.entryPrice:
+          return document.copyWith(stopLossPips: value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.stopLossPips:
+          return document.copyWith(stopLossPips: value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.stopLossPrice:
+          return document.copyWith(stopLossPips: value);
       }
     } else if (value is Enum) {
       switch (key) {
-        // FIXME: implement
+        case MatexForexPositionSizeCalculatorBlocKey.riskFieldType:
+          return document.copyWith(riskFieldType: value.name);
+
+        case MatexForexPositionSizeCalculatorBlocKey.stopLossFieldType:
+          return document.copyWith(riskFieldType: value.name);
       }
     } else if (value is MatexFinancialInstrument) {
       switch (key) {
@@ -224,9 +246,33 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
         case MatexForexPositionSizeCalculatorBlocKey.pipDecimalPlaces:
           return patchPipDecimalPlaces(value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.accountSize:
+          return patchAccountSize(value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.riskPercent:
+          return patchRiskPercent(value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.riskAmount:
+          return patchRiskAmount(value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.entryPrice:
+          return patchEntryPrice(value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.stopLossPips:
+          return patchStopLossPips(value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.stopLossPrice:
+          return patchStopLossPrice(value);
       }
     } else if (value is Enum) {
       switch (key) {
+        case MatexForexPositionSizeCalculatorBlocKey.riskFieldType:
+          return patchRiskFieldType(value.name);
+
+        case MatexForexPositionSizeCalculatorBlocKey.stopLossFieldType:
+          return patchStopLossFieldType(value.name);
+
         default:
           debugLog('Invalid key: $key', debugLabel: debugLabel);
           break;
@@ -347,7 +393,8 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   MatexForexPositionSizeCalculatorBlocState patchAccountCurrency(
-      String? value) {
+    String? value,
+  ) {
     late final MatexForexPositionSizeCalculatorBlocFields fields;
 
     if (value == null) {
@@ -404,6 +451,84 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(pipDecimalPlaces: value);
     calculator.pipDecimalPlaces = dValue.toDouble().toInt();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexPositionSizeCalculatorBlocState patchAccountSize(String value) {
+    final dValue = toDecimal(value) ?? dZero;
+    final fields = currentState.fields.copyWith(accountSize: value);
+    calculator.accountSize = dValue.toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexPositionSizeCalculatorBlocState patchRiskPercent(String value) {
+    final dValue = toDecimal(value) ?? dZero;
+    final fields = currentState.fields.copyWith(riskPercent: value);
+    calculator.riskPercent = dValue.toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexPositionSizeCalculatorBlocState patchRiskAmount(String value) {
+    final dValue = toDecimal(value) ?? dZero;
+    final fields = currentState.fields.copyWith(riskAmount: value);
+    calculator.riskAmount = dValue.toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexPositionSizeCalculatorBlocState patchEntryPrice(String value) {
+    final dValue = toDecimal(value) ?? dZero;
+    final fields = currentState.fields.copyWith(entryPrice: value);
+    calculator.entryPrice = dValue.toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexPositionSizeCalculatorBlocState patchStopLossPips(String value) {
+    final dValue = toDecimal(value) ?? dZero;
+    final fields = currentState.fields.copyWith(stopLossPips: value);
+    calculator.stopLossPips = dValue.toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexPositionSizeCalculatorBlocState patchStopLossPrice(String value) {
+    final dValue = toDecimal(value) ?? dZero;
+    final fields = currentState.fields.copyWith(stopLossPrice: value);
+    calculator.stopLossPrice = dValue.toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexPositionSizeCalculatorBlocState patchRiskFieldType(String value) {
+    final fields = currentState.fields.copyWith(
+      riskFieldType: value,
+      riskPercent: '',
+      riskAmount: '',
+    );
+
+    calculator
+      ..riskPercent = 0
+      ..riskAmount = 0;
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexPositionSizeCalculatorBlocState patchStopLossFieldType(
+    String value,
+  ) {
+    final fields = currentState.fields.copyWith(
+      stopLossFieldType: value,
+      stopLossPips: '',
+      stopLossPrice: '',
+    );
+
+    calculator
+      ..stopLossPips = 0
+      ..stopLossPrice = 0;
 
     return currentState.copyWith(fields: fields);
   }

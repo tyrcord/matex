@@ -7,10 +7,12 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
   final bool isAccountCurrencyCounter;
   final double counterToAccountCurrencyRate;
   final double instrumentPairRate;
-  final double? microLot;
-  final double? miniLot;
-  final double? standardLot;
-  final double? nanoLot;
+  final double? stopLossPrice;
+  final double? riskAmount;
+  final double? riskPercent;
+  final double? stopLossPips;
+  final double? entryPrice;
+  final double? accountSize;
 
   const MatexForexPositionSizeCalculatorState({
     this.positionSize,
@@ -18,10 +20,12 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
     this.isAccountCurrencyCounter = false,
     this.counterToAccountCurrencyRate = 0,
     this.instrumentPairRate = 0,
-    this.microLot,
-    this.miniLot,
-    this.standardLot,
-    this.nanoLot,
+    this.stopLossPrice,
+    this.riskAmount,
+    this.riskPercent,
+    this.stopLossPips,
+    this.entryPrice,
+    this.accountSize,
   });
 
   @override
@@ -34,10 +38,12 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
     bool? isAccountCurrencyCounter,
     double? counterToAccountCurrencyRate,
     double? instrumentPairRate,
-    double? microLot,
-    double? miniLot,
-    double? standardLot,
-    double? nanoLot,
+    double? stopLossPrice,
+    double? riskAmount,
+    double? riskPercent,
+    double? stopLossPips,
+    double? entryPrice,
+    double? accountSize,
   }) {
     return MatexForexPositionSizeCalculatorState(
       positionSize: positionSize ?? this.positionSize,
@@ -47,10 +53,12 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
       counterToAccountCurrencyRate:
           counterToAccountCurrencyRate ?? this.counterToAccountCurrencyRate,
       instrumentPairRate: instrumentPairRate ?? this.instrumentPairRate,
-      microLot: microLot ?? this.microLot,
-      miniLot: miniLot ?? this.miniLot,
-      standardLot: standardLot ?? this.standardLot,
-      nanoLot: nanoLot ?? this.nanoLot,
+      stopLossPrice: stopLossPrice ?? this.stopLossPrice,
+      riskAmount: riskAmount ?? this.riskAmount,
+      riskPercent: riskPercent ?? this.riskPercent,
+      stopLossPips: stopLossPips ?? this.stopLossPips,
+      entryPrice: entryPrice ?? this.entryPrice,
+      accountSize: accountSize ?? this.accountSize,
     );
   }
 
@@ -64,10 +72,12 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
       isAccountCurrencyCounter: model.isAccountCurrencyCounter,
       counterToAccountCurrencyRate: model.counterToAccountCurrencyRate,
       instrumentPairRate: model.instrumentPairRate,
-      microLot: model.microLot,
-      miniLot: model.miniLot,
-      standardLot: model.standardLot,
-      nanoLot: model.nanoLot,
+      stopLossPrice: model.stopLossPrice,
+      riskAmount: model.riskAmount,
+      riskPercent: model.riskPercent,
+      stopLossPips: model.stopLossPips,
+      entryPrice: model.entryPrice,
+      accountSize: model.accountSize,
     );
   }
 
@@ -78,9 +88,11 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
         isAccountCurrencyCounter,
         counterToAccountCurrencyRate,
         instrumentPairRate,
-        microLot,
-        miniLot,
-        standardLot,
-        nanoLot,
+        stopLossPrice,
+        riskAmount,
+        riskPercent,
+        stopLossPips,
+        entryPrice,
+        accountSize,
       ];
 }

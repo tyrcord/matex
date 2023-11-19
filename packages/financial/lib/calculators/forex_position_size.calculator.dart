@@ -29,10 +29,12 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
   double? get instrumentPairRate => state.instrumentPairRate;
   int? get pipDecimalPlaces => state.pipDecimalPlaces;
   double? get positionSize => state.positionSize;
-  double? get standardLot => state.standardLot;
-  double? get microLot => state.microLot;
-  double? get miniLot => state.miniLot;
-  double? get nanoLot => state.nanoLot;
+  double? get stopLossPrice => state.stopLossPrice;
+  double? get riskAmount => state.riskAmount;
+  double? get riskPercent => state.riskPercent;
+  double? get stopLossPips => state.stopLossPips;
+  double? get entryPrice => state.entryPrice;
+  double? get accountSize => state.accountSize;
 
   double? get counterToAccountCurrencyRate {
     return state.counterToAccountCurrencyRate;
@@ -58,20 +60,28 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
     setState(state.copyWith(instrumentPairRate: value));
   }
 
-  set standardLot(double? lot) {
-    setState(state.copyWith(standardLot: lot));
+  set stopLossPrice(double? value) {
+    setState(state.copyWith(stopLossPrice: value));
   }
 
-  set microLot(double? microLot) {
-    setState(state.copyWith(standardLot: microLot));
+  set riskAmount(double? value) {
+    setState(state.copyWith(riskAmount: value));
   }
 
-  set miniLot(double? miniLot) {
-    setState(state.copyWith(standardLot: miniLot));
+  set riskPercent(double? value) {
+    setState(state.copyWith(riskPercent: value));
   }
 
-  set nanoLot(double? nanoLot) {
-    setState(state.copyWith(standardLot: nanoLot));
+  set stopLossPips(double? value) {
+    setState(state.copyWith(stopLossPips: value));
+  }
+
+  set entryPrice(double? value) {
+    setState(state.copyWith(entryPrice: value));
+  }
+
+  set accountSize(double? value) {
+    setState(state.copyWith(accountSize: value));
   }
 
   static const defaultResults = MatexForexPositionSizeCalculatorResults(
