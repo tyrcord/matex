@@ -27,6 +27,42 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
   late final String? stopLossPips;
   late final String? entryPrice;
 
+  String get formattedAccountSize {
+    final accountBalance = parseFieldValueToDouble(accountSize);
+
+    return localizeCurrency(value: accountBalance);
+  }
+
+  String get formattedEntryPrice {
+    final entryPriceValue = parseFieldValueToDouble(entryPrice);
+
+    return localizeCurrency(value: entryPriceValue);
+  }
+
+  String get formattedStopLossPrice {
+    final stopLossPriceValue = parseFieldValueToDouble(stopLossPrice);
+
+    return localizeCurrency(value: stopLossPriceValue);
+  }
+
+  String get formattedRiskPercent {
+    final riskPercentValue = parseFieldValueToDouble(riskPercent);
+
+    return '${localizeNumber(value: riskPercentValue)}%';
+  }
+
+  String get formattedRiskAmount {
+    final riskAmountValue = parseFieldValueToDouble(riskAmount);
+
+    return localizeCurrency(value: riskAmountValue);
+  }
+
+  String get formattedStopLossPips {
+    final stopLossPipsValue = parseFieldValueToDouble(stopLossPips);
+
+    return localizeNumber(value: stopLossPipsValue);
+  }
+
   // FIXME: Move to a abstract class
   String get formattedFinancialInstrument {
     if (base == null || counter == null) return '';

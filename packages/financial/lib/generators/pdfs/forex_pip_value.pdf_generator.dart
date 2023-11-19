@@ -33,6 +33,8 @@ class MatexForexPipValueCalculatorPdfGenerator {
 
     return reporter.report(
       use24HourFormat: appSettingsBloc.currentState.use24HourFormat,
+      disclaimerText:
+          FinanceLocaleKeys.finance_disclaimer_intervening_markets.tr(),
       subtitle: FinanceForexLocaleKeys.forex_label_pip_value.tr(),
       inputs: _buildInputReportEntries(context, fields, results, metadata),
       languageCode: appSettingsBloc.currentState.languageCode,
