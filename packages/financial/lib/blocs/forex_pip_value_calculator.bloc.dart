@@ -178,6 +178,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       final pipValue = dPipValue.toDouble();
       final positionSize = calculator.positionSize;
 
+      // FIXME: review naming
       final standard = await getStandardLotValue();
       final mini = await getMiniLotValue();
       final micro = await getMicroLotValue();

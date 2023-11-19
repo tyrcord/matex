@@ -150,16 +150,61 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       final fields = currentState.fields;
       final accountCurrency = fields.accountCurrency;
       final dPipValue = toDecimal(results.pipValue) ?? dZero;
-
       final pipValue = dPipValue.toDouble();
+      final positionSize = results.positionSize?.toDouble() ?? 0;
+
+      // FIXME: review naming
+      final standard = await getStandardLotValue();
+      final mini = await getMiniLotValue();
+      final micro = await getMicroLotValue();
+
+      // FIXME: use decimal and helper
+      final standardLotSize = positionSize / standard;
+      final miniLotSize = positionSize / mini;
+      final microLotSize = positionSize / micro;
 
       return MatexForexPositionSizeCalculatorBlocResults(
-        formattedPositionSize: localizeCurrency(
-          minimumFractionDigits: 3,
-          symbol: accountCurrency,
+        formattedPipValue: localizeCurrency(
           value: pipValue,
+          symbol: accountCurrency,
         ),
-        positionSize: pipValue,
+        pipValue: pipValue,
+        formattedPositionSize: localizeNumber(
+          minimumFractionDigits: 3,
+          value: results.positionSize,
+        ),
+        positionSize: results.positionSize,
+        formattedAmountAtRisk: localizeCurrency(
+          value: results.amountAtRisk,
+          symbol: accountCurrency,
+        ),
+        amountAtRisk: results.amountAtRisk,
+        formattedStandardLotSize: localizeNumber(
+          minimumFractionDigits: 3,
+          value: standardLotSize,
+        ),
+        standardLotSize: standardLotSize,
+        formattedMiniLotSize: localizeNumber(
+          minimumFractionDigits: 3,
+          value: miniLotSize,
+        ),
+        miniLotSize: miniLotSize,
+        formattedMicroLotSize: localizeNumber(
+          minimumFractionDigits: 3,
+          value: microLotSize,
+        ),
+        microLotSize: microLotSize,
+        formattedStopLossPips: localizeNumber(
+          minimumFractionDigits: 3,
+          value: results.stopLossPips,
+        ),
+        stopLossPips: results.stopLossPips,
+        // FIXME: review naming
+        formattedRiskRatio: localizePercentage(
+          minimumFractionDigits: 3,
+          value: results.riskPercent,
+        ),
+        riskRatio: results.riskPercent,
       );
     }
 
@@ -324,8 +369,16 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   Future<void> resetCalculator(
     MatexForexPositionSizeCalculatorDocument document,
   ) async {
+    final riskPercent = toDecimal(document.riskPercent) ?? dZero;
+
     calculator.setState(MatexForexPositionSizeCalculatorState(
       pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
+      accountSize: parseStringToDouble(document.accountSize),
+      riskPercent: (riskPercent / dHundred).toDouble(),
+      riskAmount: parseStringToDouble(document.riskAmount),
+      entryPrice: parseStringToDouble(document.entryPrice),
+      stopLossPips: parseStringToDouble(document.stopLossPips),
+      stopLossPrice: parseStringToDouble(document.stopLossPrice),
     ));
   }
 
@@ -466,7 +519,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   MatexForexPositionSizeCalculatorBlocState patchRiskPercent(String value) {
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(riskPercent: value);
-    calculator.riskPercent = dValue.toDouble();
+    calculator.riskPercent = (dValue / dHundred).toDouble();
 
     return currentState.copyWith(fields: fields);
   }

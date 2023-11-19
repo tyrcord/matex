@@ -4,9 +4,6 @@ import 'package:matex_core/core.dart';
 class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
   final double? pipValue;
   final double? positionSize;
-  final double? standardLotSize;
-  final double? miniLotSize;
-  final double? microLotSize;
   final double? stopLossPips;
   final double? amountAtRisk;
   final double? riskPercent;
@@ -14,9 +11,6 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
   const MatexForexPositionSizeCalculatorResults({
     this.pipValue,
     this.positionSize,
-    this.standardLotSize,
-    this.miniLotSize,
-    this.microLotSize,
     this.stopLossPips,
     this.amountAtRisk,
     this.riskPercent,
@@ -29,9 +23,6 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
   MatexForexPositionSizeCalculatorResults copyWith({
     double? pipValue,
     double? positionSize,
-    double? standardLotSize,
-    double? miniLotSize,
-    double? microLotSize,
     double? stopLossPips,
     double? amountAtRisk,
     double? riskPercent,
@@ -39,9 +30,6 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
     return MatexForexPositionSizeCalculatorResults(
       pipValue: pipValue ?? this.pipValue,
       positionSize: positionSize ?? this.positionSize,
-      standardLotSize: standardLotSize ?? this.standardLotSize,
-      miniLotSize: miniLotSize ?? this.miniLotSize,
-      microLotSize: microLotSize ?? this.microLotSize,
       stopLossPips: stopLossPips ?? this.stopLossPips,
       amountAtRisk: amountAtRisk ?? this.amountAtRisk,
       riskPercent: riskPercent ?? this.riskPercent,
@@ -55,9 +43,6 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
     return copyWith(
       pipValue: model.pipValue ?? pipValue,
       positionSize: model.positionSize ?? positionSize,
-      standardLotSize: model.standardLotSize ?? standardLotSize,
-      miniLotSize: model.miniLotSize ?? miniLotSize,
-      microLotSize: model.microLotSize ?? microLotSize,
       stopLossPips: model.stopLossPips ?? stopLossPips,
       amountAtRisk: model.amountAtRisk ?? amountAtRisk,
       riskPercent: model.riskPercent ?? riskPercent,
@@ -68,9 +53,6 @@ class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
   List<Object?> get props => [
         pipValue,
         positionSize,
-        standardLotSize,
-        miniLotSize,
-        microLotSize,
         stopLossPips,
         amountAtRisk,
         riskPercent,
