@@ -198,6 +198,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
           minimumFractionDigits: 3,
           value: results.stopLossPips,
         ),
+        //TODO: add stop loss price (use delta helper)
         stopLossPips: results.stopLossPips,
         // FIXME: review naming
         formattedRiskRatio: localizePercentage(
@@ -250,10 +251,18 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     } else if (value is Enum) {
       switch (key) {
         case MatexForexPositionSizeCalculatorBlocKey.riskFieldType:
-          return document.copyWith(riskFieldType: value.name);
+          return document.copyWith(
+            riskFieldType: value.name,
+            riskAmount: '',
+            riskPercent: '',
+          );
 
         case MatexForexPositionSizeCalculatorBlocKey.stopLossFieldType:
-          return document.copyWith(riskFieldType: value.name);
+          return document.copyWith(
+            stopLossFieldType: value.name,
+            stopLossPips: '',
+            stopLossPrice: '',
+          );
       }
     } else if (value is MatexFinancialInstrument) {
       switch (key) {
