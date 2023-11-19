@@ -3,6 +3,7 @@ import 'dart:math';
 
 // Package imports:
 import 'package:decimal/decimal.dart';
+import 'package:flutter/material.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
 
@@ -92,11 +93,95 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
   MatexForexPositionSizeCalculatorResults value() {
     if (!isValid) return defaultResults;
 
-    final pipValue = computePipValue();
+    final dStopLossPips = computeStopLossPip(state.pipDecimalPlaces);
+    final stopLossPips = dStopLossPips.toDouble();
+    final dAmountAtRisk = computeAmountAtRisk();
+    final amountAtRisk = dAmountAtRisk.toDouble();
+    final dRiskRatio = computeRiskPercent(amountAtRisk, state.accountSize);
+    final dPipValue = computePipValue();
+    final size = dPipValue > dZero && stopLossPips > 0
+        ? computePositionSize(amountAtRisk, dPipValue.toDouble(), stopLossPips)
+        : dZero;
 
-    return MatexForexPositionSizeCalculatorResults(
-      pipValue: pipValue.toDouble(),
-    );
+    return (result = MatexForexPositionSizeCalculatorResults(
+      pipValue: (dPipValue * size).toDouble(),
+      riskRatio: dRiskRatio.toDouble(),
+      positionSize: size.toDouble(),
+      amountAtRisk: amountAtRisk,
+      stopLossPips: stopLossPips,
+    ));
+  }
+
+  @protected
+  Decimal computePositionSize(
+    double amountAtRisk,
+    double pipValue,
+    double stopLossPip,
+  ) {
+    final dPipValue = toDecimal(pipValue) ?? dZero;
+    final dStopLossPip = toDecimal(stopLossPip) ?? dZero;
+    final divider = dPipValue * dStopLossPip;
+
+    if (divider == dZero) return dZero;
+
+    final dAmountAtRisk = toDecimal(amountAtRisk) ?? dZero;
+
+    return decimalFromRational(dAmountAtRisk / divider);
+  }
+
+  @protected
+  Decimal computeRiskPercent(double amountAtRisk, double? accountSize) {
+    final riskPercent = state.riskPercent ?? 0.0;
+
+    if (riskPercent == 0 || accountSize == null || accountSize > 0) {
+      return dZero;
+    }
+
+    final dAccountSize = toDecimal(accountSize) ?? dZero;
+
+    if (dAccountSize == dZero) return dZero;
+
+    final dAmountAtRisk = toDecimal(amountAtRisk) ?? dZero;
+
+    return decimalFromRational(dAmountAtRisk * dHundred / dAccountSize);
+  }
+
+  @protected
+  Decimal computeAmountAtRisk() {
+    final riskRatio = state.riskPercent;
+    final accountSize = state.accountSize;
+
+    if (accountSize == null ||
+        riskRatio == null ||
+        accountSize < 0 ||
+        riskRatio < 0 ||
+        riskRatio > 100) return dZero;
+
+    final dRiskRatio = toDecimal(riskRatio) ?? dZero;
+    final dAccountSize = toDecimal(accountSize) ?? dZero;
+
+    return decimalFromRational(dRiskRatio * dAccountSize / dHundred);
+  }
+
+  @protected
+  Decimal computeStopLossPip(int? pipPrecision) {
+    if (pipPrecision == null) return dZero;
+
+    final stopLossPips = state.stopLossPips ?? 0.0;
+    final stopLossPrice = state.stopLossPrice ?? 0.0;
+    final entryPrice = state.entryPrice ?? 0.0;
+
+    if (stopLossPips == 0 || entryPrice == 0 || stopLossPrice == 0) {
+      return dZero;
+    }
+
+    final decimalMultiplicator = pow(10, pipPrecision).toString();
+    final dDecimalMultiplicator = toDecimal(decimalMultiplicator)!;
+    final dStopLossPrice = toDecimal(stopLossPrice) ?? dZero;
+    final dEntryPrice = toDecimal(entryPrice) ?? dZero;
+    final deltaPrice = (dEntryPrice - dStopLossPrice).abs();
+
+    return deltaPrice * dDecimalMultiplicator;
   }
 
   Decimal computePipValue() {
