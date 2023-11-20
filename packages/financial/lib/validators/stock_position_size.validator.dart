@@ -1,57 +1,65 @@
-// Package imports:
+// Package imports
 import 'package:matex_core/core.dart';
-
-// Project imports:
+// Project imports
 import 'package:matex_financial/financial.dart';
 
-List<MatexCalculatorValidator<MatexStockPositionSizeCalculatorState>>
+// Validators for stock position size calculation
+final List<MatexCalculatorValidator<MatexStockPositionSizeCalculatorState>>
     stockPositionSizeValidators = [
-  // Account size must be greater than 0
-  (state) => state.accountSize != null && state.accountSize! > 0,
+  isAccountSizeValid,
+  isEntryPriceValid,
+  isStopLossPriceValidForPosition,
+  isRiskPercentOrStopLossAmountValid,
+  areEntryExitFeesAndSlippagePercentValid,
+];
 
-  // Entry price must be greater than 0
-  (state) => state.entryPrice != null && state.entryPrice! > 0,
+// Validator: Check if the account size is valid
+bool isAccountSizeValid(MatexStockPositionSizeCalculatorState state) {
+  return state.accountSize != null && state.accountSize! > 0;
+}
 
-  // Stop loss price must be greater than 0 and less than entry price
-  (state) {
-    if (state.isShortPosition) {
-      // Short position
-      return state.stopLossPrice != null &&
-          state.stopLossPrice! > 0 &&
-          state.stopLossPrice! > state.entryPrice!;
-    }
+// Validator: Check if the entry price is valid
+bool isEntryPriceValid(MatexStockPositionSizeCalculatorState state) {
+  return state.entryPrice != null && state.entryPrice! > 0;
+}
 
+// Validator: Check if the stop loss price is valid for the position type
+bool isStopLossPriceValidForPosition(
+  MatexStockPositionSizeCalculatorState state,
+) {
+  if (state.isShortPosition) {
     return state.stopLossPrice != null &&
         state.stopLossPrice! > 0 &&
-        state.stopLossPrice! < state.entryPrice!;
-  },
+        state.stopLossPrice! > state.entryPrice!;
+  }
 
-  // Risk percent must be greater than 0 and less than 100
-  // Or stop loss amount must be greater than 0 and less than account size
-  (state) {
-    if (state.riskPercent != null &&
-        state.riskPercent! > 0 &&
-        state.riskPercent! <= 1) {
-      return true;
-    } else if (state.stopLossAmount != null &&
-        state.stopLossAmount! > 0 &&
-        state.stopLossAmount! <= state.accountSize!) {
-      return true;
-    }
+  return state.stopLossPrice != null &&
+      state.stopLossPrice! > 0 &&
+      state.stopLossPrice! < state.entryPrice!;
+}
 
-    return false;
-  },
-
-  // Entry fees must be greater than or equal to 0 and less than 100
-  // Exit fees must be greater than or equal to 0 and less than 100
-  // Slippage percent must be greater than or equal to 0 and less than 100
-  (state) {
-    if ((state.entryFees != null && state.entryFees! >= 1) ||
-        (state.exitFees != null && state.exitFees! >= 1) ||
-        (state.slippagePercent != null && state.slippagePercent! >= 1)) {
-      return false;
-    }
-
+// Validator: Check if the risk percent or stop loss amount is valid
+bool isRiskPercentOrStopLossAmountValid(
+  MatexStockPositionSizeCalculatorState state,
+) {
+  if (state.riskPercent != null &&
+      state.riskPercent! > 0 &&
+      state.riskPercent! <= 1) {
     return true;
-  },
-];
+  } else if (state.stopLossAmount != null &&
+      state.stopLossAmount! > 0 &&
+      state.stopLossAmount! <= state.accountSize!) {
+    return true;
+  }
+
+  return false;
+}
+
+// Validator: Ensure that entry fees, exit fees, and slippage percent are valid
+bool areEntryExitFeesAndSlippagePercentValid(
+  MatexStockPositionSizeCalculatorState state,
+) {
+  return (state.entryFees == null || state.entryFees! < 1) &&
+      (state.exitFees == null || state.exitFees! < 1) &&
+      (state.slippagePercent == null || state.slippagePercent! < 1);
+}

@@ -1,48 +1,41 @@
-// Package imports:
+// Package imports
 import 'package:matex_core/core.dart';
-
-// Project imports:
+// Project imports
 import 'package:matex_financial/financial.dart';
 
-List<MatexCalculatorValidator<MatexVatCalculatorState>> vatValidators = [
-  // Price before vat must be greater than 0
-  (state) => state.priceBeforeVat != null && state.priceBeforeVat! > 0,
-
-  // Vat rate must be greater than 0 and less than 100
-  (state) {
-    if (state.vatRate != null && state.vatRate! > 0 && state.vatRate! < 1) {
-      return true;
-    } else if (state.federalVatRate != null &&
-        state.federalVatRate! > 0 &&
-        state.federalVatRate! < 1) {
-      return true;
-    } else if (state.regionalVatRate != null &&
-        state.regionalVatRate! > 0 &&
-        state.regionalVatRate! < 1) {
-      return true;
-    }
-
-    return false;
-  },
-
-  // Discount amount must be greater than 0 and less than price before vat
-  (state) {
-    if (state.discountAmount != null &&
-        (state.discountAmount! >= state.priceBeforeVat! ||
-            state.discountAmount! < 0)) {
-      return false;
-    }
-
-    return true;
-  },
-
-  // Discount rate must be greater than 0 and less than 100
-  (state) {
-    if (state.discountRate != null &&
-        (state.discountRate! >= 1 || state.discountRate! < 0)) {
-      return false;
-    }
-
-    return true;
-  },
+// Validators for VAT calculation
+final List<MatexCalculatorValidator<MatexVatCalculatorState>> vatValidators = [
+  isPriceBeforeVatValid,
+  isVatRateValid,
+  isDiscountAmountValid,
+  isDiscountRateValid,
 ];
+
+// Validator: Check if the price before VAT is valid
+bool isPriceBeforeVatValid(MatexVatCalculatorState state) {
+  return state.priceBeforeVat != null && state.priceBeforeVat! > 0;
+}
+
+// Validator: Check if any VAT rate (general, federal, regional) is valid
+bool isVatRateValid(MatexVatCalculatorState state) {
+  return (state.vatRate != null && state.vatRate! > 0 && state.vatRate! < 1) ||
+      (state.federalVatRate != null &&
+          state.federalVatRate! > 0 &&
+          state.federalVatRate! < 1) ||
+      (state.regionalVatRate != null &&
+          state.regionalVatRate! > 0 &&
+          state.regionalVatRate! < 1);
+}
+
+// Validator: Ensure that the discount amount is valid
+bool isDiscountAmountValid(MatexVatCalculatorState state) {
+  return state.discountAmount == null ||
+      (state.discountAmount! < state.priceBeforeVat! &&
+          state.discountAmount! >= 0);
+}
+
+// Validator: Ensure that the discount rate is valid
+bool isDiscountRateValid(MatexVatCalculatorState state) {
+  return state.discountRate == null ||
+      (state.discountRate! < 1 && state.discountRate! >= 0);
+}

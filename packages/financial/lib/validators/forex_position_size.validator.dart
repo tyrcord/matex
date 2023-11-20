@@ -6,31 +6,48 @@ import 'package:matex_financial/financial.dart';
 
 final List<MatexCalculatorValidator<MatexForexPositionSizeCalculatorState>>
     forexPositionSizeValidators = [
-  (state) => state.instrumentPairRate > 0,
-  (state) =>
-      (state.riskAmount != null && state.riskAmount! > 0) ||
+  isInstrumentPairRateValid,
+  isRiskAmountOrPercentValid,
+  isRiskWithinAccountLimits,
+];
+
+// Validator: Check if the instrument pair rate is valid
+bool isInstrumentPairRateValid(MatexForexPositionSizeCalculatorState state) {
+  return state.instrumentPairRate > 0;
+}
+
+// Validator: Check if either the risk amount or percent is valid
+bool isRiskAmountOrPercentValid(MatexForexPositionSizeCalculatorState state) {
+  return (state.riskAmount != null && state.riskAmount! > 0) ||
       (state.riskPercent != null &&
           state.accountSize != null &&
           state.riskPercent! > 0 &&
-          state.accountSize! > 0),
-  (state) {
-    final riskAmount = state.riskAmount;
-    final accountSize = state.accountSize;
+          state.accountSize! > 0);
+}
 
-    if (riskAmount != null && riskAmount > 0) {
-      if (accountSize != null && accountSize > 0) {
-        return riskAmount <= accountSize;
-      }
+// Validator: Ensure that the risk amount/percent is within account limits
+bool isRiskWithinAccountLimits(MatexForexPositionSizeCalculatorState state) {
+  if (state.riskAmount != null && state.riskAmount! > 0) {
+    return isRiskAmountWithinAccountSize(state);
+  }
 
-      return true;
-    }
+  return isRiskPercentWithinRange(state);
+}
 
-    final riskPercent = state.riskPercent!;
+// Helper: Check if risk amount does not exceed account size
+bool isRiskAmountWithinAccountSize(
+  MatexForexPositionSizeCalculatorState state,
+) {
+  if (state.accountSize != null && state.accountSize! > 0) {
+    return state.riskAmount! <= state.accountSize!;
+  }
 
-    if (riskPercent > 0 && accountSize! > 0) {
-      return riskPercent > 0 && riskPercent <= 1;
-    }
+  return true;
+}
 
-    return false;
-  },
-];
+// Helper: Check if risk percent is within the valid range (0-1)
+bool isRiskPercentWithinRange(MatexForexPositionSizeCalculatorState state) {
+  final riskPercent = state.riskPercent!;
+
+  return riskPercent > 0 && riskPercent <= 1;
+}
