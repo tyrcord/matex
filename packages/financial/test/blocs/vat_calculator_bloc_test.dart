@@ -335,6 +335,8 @@ void main() async {
       ),
     );
 
+    await Future.delayed(const Duration(milliseconds: 100));
+
     // Patch the tipAmount
     vatCalculatorBloc.addEvent(
       FastCalculatorBlocEvent.patchValue(
@@ -357,7 +359,7 @@ void main() async {
         value: rateValue,
       ),
     );
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 300));
 
     // Verify that the tipRate field is updated
     expect(vatCalculatorBloc.currentState.fields.tipRate, rateValue);
@@ -382,6 +384,8 @@ void main() async {
       ),
     );
 
+    await Future.delayed(const Duration(milliseconds: 100));
+
     // Set the discountFieldType to percentage initially
     vatCalculatorBloc.addEvent(
       FastCalculatorBlocEvent.patchValue(
@@ -397,6 +401,7 @@ void main() async {
       vatCalculatorBloc.currentState.fields.discountFieldType,
       'percent',
     );
+
     // Verify that the discountAmount field is empty
     expect(vatCalculatorBloc.currentState.fields.discountAmount, isNull);
 
@@ -423,6 +428,8 @@ void main() async {
         value: rateValue,
       ),
     );
+
+    await Future.delayed(const Duration(milliseconds: 100));
 
     // Patch the discountAmount
     vatCalculatorBloc.addEvent(
@@ -464,12 +471,18 @@ void main() async {
         value: '100',
       ),
     );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
     vatCalculatorBloc.addEvent(
       FastCalculatorBlocEvent.patchValue(
         key: MatexVatCalculatorBlocKey.vatRate,
         value: '10',
       ),
     );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
     vatCalculatorBloc.addEvent(
       FastCalculatorBlocEvent.patchValue(
         key: MatexVatCalculatorBlocKey.discountAmount,
@@ -594,6 +607,36 @@ void main() async {
 
   test('VAT calculation with language set to English and currency to USD',
       () async {
+    final delegate = FrenchMatexVatCalculatorBlocDelegate();
+
+    final bloc = MatexVatCalculatorBloc(delegate: delegate);
+
+    bloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.priceBeforeVat,
+        value: '10',
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 300));
+
+    bloc.addEvent(
+      FastCalculatorBlocEvent.patchValue(
+        key: MatexVatCalculatorBlocKey.vatRate,
+        value: '5',
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    final results = await bloc.compute();
+
+    expect(results.formattedTotal, '10,50 €');
+    expect(results.formattedTotalTaxes, '0,50 €');
+  });
+
+  test('VAT calculation with language set to English and currency to USD',
+      () async {
     await clearCalculator();
 
     vatCalculatorBloc.addEvent(
@@ -602,6 +645,8 @@ void main() async {
         value: '10',
       ),
     );
+
+    await Future.delayed(const Duration(milliseconds: 100));
 
     // Assuming a VAT rate of 5%
     vatCalculatorBloc.addEvent(
@@ -617,34 +662,5 @@ void main() async {
 
     expect(results.formattedTotal, '\$10.50');
     expect(results.formattedTotalTaxes, '\$0.50');
-  });
-
-  test('VAT calculation with language set to English and currency to USD',
-      () async {
-    final delegate = FrenchMatexVatCalculatorBlocDelegate();
-
-    final bloc = MatexVatCalculatorBloc(delegate: delegate);
-
-    bloc.addEvent(
-      FastCalculatorBlocEvent.patchValue(
-        key: MatexVatCalculatorBlocKey.priceBeforeVat,
-        value: '10',
-      ),
-    );
-
-    // Assuming a VAT rate of 5%
-    bloc.addEvent(
-      FastCalculatorBlocEvent.patchValue(
-        key: MatexVatCalculatorBlocKey.vatRate,
-        value: '5',
-      ),
-    );
-
-    await Future.delayed(const Duration(milliseconds: 100));
-
-    final results = await bloc.compute();
-
-    expect(results.formattedTotal, '10,50 €');
-    expect(results.formattedTotalTaxes, '0,50 €');
   });
 }
