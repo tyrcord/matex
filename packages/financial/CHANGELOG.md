@@ -1,3 +1,19 @@
+## 0.0.29
+
+ - **FIX**: attempts to fix tests.
+ - **FIX**: typo.
+ - **FEAT**: add fastyle financial dependencies.
+ - **FEAT**: refactor validators.
+ - **FEAT**: implement MatexForexPositionSizeCalculatorPdfGenerator.
+ - **FEAT**: implement ForexPositionSize Results.
+ - **FEAT**: update dependencies.
+ - **FEAT**: implement position calculator.
+ - **FEAT**: implement MatexForexPositionSizeCalculator results.
+ - **FEAT**: missing MatexForexPositionSizeCalculatorBloc results.
+ - **FEAT**: implement fx pos cal fields.
+ - **FEAT**: clean up.
+ - **FEAT**: add structure for forex position size calculator.
+
 ## 0.0.28
 
  - **REFACTOR**: isMandatoryFieldValid.

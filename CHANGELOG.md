@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-11-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.23`](#matex_core---v0023)
+ - [`matex_data` - `v0.0.17`](#matex_data---v0017)
+ - [`matex_financial` - `v0.0.29`](#matex_financial---v0029)
+
+---
+
+#### `matex_core` - `v0.0.23`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.17`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.29`
+
+ - **FIX**: attempts to fix tests.
+ - **FIX**: typo.
+ - **FEAT**: add fastyle financial dependencies.
+ - **FEAT**: refactor validators.
+ - **FEAT**: implement MatexForexPositionSizeCalculatorPdfGenerator.
+ - **FEAT**: implement ForexPositionSize Results.
+ - **FEAT**: update dependencies.
+ - **FEAT**: implement position calculator.
+ - **FEAT**: implement MatexForexPositionSizeCalculator results.
+ - **FEAT**: missing MatexForexPositionSizeCalculatorBloc results.
+ - **FEAT**: implement fx pos cal fields.
+ - **FEAT**: clean up.
+ - **FEAT**: add structure for forex position size calculator.
+
+
 ## 2023-11-16
 
 ### Changes
