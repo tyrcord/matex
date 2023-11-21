@@ -19,19 +19,19 @@ dependencies:
   easy_localization: ^3.0.3
 
   # T
-  tstore: ^0.8.21
-  tbloc: ^0.21.8
-  t_helpers: ^0.0.42
-  tmodel: ^0.5.12
+  tstore: ^0.8.21+3
+  tbloc: ^0.21.8+3
+  t_helpers: ^0.0.45
+  tmodel: ^0.5.12+3
 
   # Lingua
   lingua_core: ^0.0.32
   lingua_calculator: ^0.0.5
 
   # Fastyle
-  fastyle_settings: ^0.0.40
-  fastyle_core: ^0.0.36+1
-  fastyle_calculator: ^1.46.0
+  fastyle_settings: ^0.0.41
+  fastyle_core: ^0.0.37
+  fastyle_calculator: ^1.47.0
 
 dev_dependencies:
   flutter_test:
