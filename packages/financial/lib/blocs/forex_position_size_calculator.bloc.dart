@@ -136,6 +136,11 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     return {
       ...metadata,
+      if (currentState.fields.counter != null)
+        'counterSymbol': getCurrencySymbol(
+          currencyCode: currentState.fields.counter,
+          localeCode: getUserLocaleCode(),
+        ),
       'instrumentMetadata': instrumentMetadata,
       'standardLotSize': standardLotSize,
       'microLotSize': microLotSize,
