@@ -96,6 +96,11 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexQuote? quote;
     String? updatedOn;
 
+    // dispatch in advance to avoid UI flickering
+    yield currentState.copyWith(metadata: {
+      ...await loadMetadata(),
+    });
+
     if (isMandatoryFieldValid) {
       quote = await patchExchangeRates();
 
