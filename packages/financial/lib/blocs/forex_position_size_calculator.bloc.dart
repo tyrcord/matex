@@ -144,6 +144,14 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
+  String getUserCurrencyCode() {
+    String? localeCode = currentState.fields.accountCurrency?.toUpperCase();
+    localeCode ??= super.getUserCurrencyCode();
+
+    return localeCode;
+  }
+
+  @override
   Future<MatexForexPositionSizeCalculatorBlocResults> compute() async {
     if (await isCalculatorStateValid()) {
       final results = calculator.value();
