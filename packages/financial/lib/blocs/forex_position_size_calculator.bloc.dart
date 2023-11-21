@@ -262,6 +262,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
             stopLossFieldType: value.name,
             stopLossPips: '',
             stopLossPrice: '',
+            entryPrice: '',
           );
       }
     } else if (value is MatexFinancialInstrument) {
@@ -584,11 +585,13 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   ) {
     final fields = currentState.fields.copyWith(
       stopLossFieldType: value,
+      entryPrice: '',
       stopLossPips: '',
       stopLossPrice: '',
     );
 
     calculator
+      ..entryPrice = 0
       ..stopLossPips = 0
       ..stopLossPrice = 0;
 
