@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 
 // Package imports:
 import 'package:fastyle_core/fastyle_core.dart';
-import 'package:intl/intl.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
@@ -60,12 +59,10 @@ mixin MatexCalculatorFormatterMixin {
   /// device information.
   @protected
   String getUserCurrencySymbol() {
-    final format = NumberFormat.simpleCurrency(
-      locale: getUserLocaleCode(),
-      name: getUserCurrencyCode(),
+    return getCurrencySymbol(
+      localeCode: getUserLocaleCode(),
+      currencyCode: getUserCurrencyCode(),
     );
-
-    return format.currencySymbol;
   }
 
   @protected
