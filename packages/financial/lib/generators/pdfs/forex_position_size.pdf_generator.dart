@@ -126,7 +126,10 @@ class MatexForexPositionSizeCalculatorPdfGenerator {
     final riskRatio = results.riskRatio;
     final amountAtRisk = results.amountAtRisk;
     final stopLossPips = results.stopLossPips;
+    final stopLossPrice = results.stopLossPrice;
     final pipValue = results.pipValue;
+    final stopLossFieldType = fields.stopLossFieldType;
+    final riskFieldType = fields.riskFieldType;
 
     return [
       if (positionSize != null && positionSize > 0)
@@ -149,19 +152,32 @@ class MatexForexPositionSizeCalculatorPdfGenerator {
           name: FinanceForexLocaleKeys.forex_label_lot_micro.tr(),
           value: results.formattedMicroLotSize!,
         ),
-      if (riskRatio != null && riskRatio > 0)
+      if (riskRatio != null &&
+          riskRatio > 0 &&
+          riskFieldType == FastAmountSwitchFieldType.amount.name)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_risk_ratio.tr(),
           value: results.formattedRiskRatio!,
         ),
-      if (amountAtRisk != null && amountAtRisk > 0)
+      if (amountAtRisk != null &&
+          amountAtRisk > 0 &&
+          riskFieldType == FastAmountSwitchFieldType.percent.name)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_amount_at_risk.tr(),
           value: results.formattedAmountAtRisk!,
         ),
-      if (stopLossPips != null && stopLossPips > 0)
+      if (stopLossPips != null &&
+          stopLossPips > 0 &&
+          stopLossFieldType == FastFinancialAmountSwitchFieldType.price.name)
         FastReportEntry(
           name: FinanceForexLocaleKeys.forex_label_stop_loss_pips.tr(),
+          value: results.formattedStopLossPips!,
+        ),
+      if (stopLossPrice != null &&
+          stopLossPrice > 0 &&
+          stopLossFieldType == FastFinancialAmountSwitchFieldType.pip.name)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_stop_loss_price_text.tr(),
           value: results.formattedStopLossPips!,
         ),
       if (pipValue != null && pipValue > 0)
