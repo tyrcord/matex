@@ -171,6 +171,36 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
+  Future<MatexProfitAndLossCalculatorDocument?> resetCalculatorDocument(
+    String key,
+  ) async {
+    switch (key) {
+      case MatexProfitAndLossCalculatorBlocKey.operatingExpenses:
+        return document.copyWithDefaults(operatingExpenses: true);
+
+      case MatexProfitAndLossCalculatorBlocKey.expectedSaleUnits:
+        return document.copyWithDefaults(expectedSaleUnits: true);
+    }
+
+    return null;
+  }
+
+  @override
+  Future<MatexProfitAndLossCalculatorBlocState?> resetCalculatorState(
+    String key,
+  ) async {
+    switch (key) {
+      case MatexProfitAndLossCalculatorBlocKey.operatingExpenses:
+        return patchOperatingExpenses(null);
+
+      case MatexProfitAndLossCalculatorBlocKey.expectedSaleUnits:
+        return patchExpectedSaleUnits(null);
+    }
+
+    return null;
+  }
+
+  @override
   Future<void> resetCalculator(
     MatexProfitAndLossCalculatorDocument document,
   ) async {
@@ -238,7 +268,16 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     );
   }
 
-  MatexProfitAndLossCalculatorBlocState patchExpectedSaleUnits(String value) {
+  MatexProfitAndLossCalculatorBlocState patchExpectedSaleUnits(String? value) {
+    if (value == null) {
+      final fields = currentState.fields.copyWithDefaults(
+        expectedSaleUnits: true,
+      );
+      calculator.expectedSaleUnits = 0;
+
+      return currentState.copyWith(fields: fields);
+    }
+
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(expectedSaleUnits: value);
     calculator.expectedSaleUnits = dValue.toDouble();
@@ -310,7 +349,16 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchOperatingExpenses(String value) {
+  MatexProfitAndLossCalculatorBlocState patchOperatingExpenses(String? value) {
+    if (value == null) {
+      final fields = currentState.fields.copyWithDefaults(
+        operatingExpenses: true,
+      );
+      calculator.operatingExpenses = 0;
+
+      return currentState.copyWith(fields: fields);
+    }
+
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(operatingExpenses: value);
     calculator.operatingExpenses = dValue.toDouble();

@@ -108,6 +108,43 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
   MatexProfitAndLossCalculatorBlocFields clone() => copyWith();
 
   @override
+  MatexProfitAndLossCalculatorBlocFields copyWithDefaults({
+    bool expectedSaleUnits = false,
+    bool buyingPrice = false,
+    bool sellingPrice = false,
+    bool operatingExpenses = false,
+    bool buyingExpensePerUnitRate = false,
+    bool buyingExpensePerUnitAmount = false,
+    bool sellingExpensePerUnitRate = false,
+    bool sellingExpensePerUnitAmount = false,
+    bool taxRate = false,
+    bool buyingCostsPerUnitType = false,
+    bool sellingCostsPerUnitType = false,
+  }) {
+    return MatexProfitAndLossCalculatorBlocFields(
+      expectedSaleUnits: expectedSaleUnits ? null : this.expectedSaleUnits,
+      buyingPrice: buyingPrice ? null : this.buyingPrice,
+      sellingPrice: sellingPrice ? null : this.sellingPrice,
+      operatingExpenses: operatingExpenses ? null : this.operatingExpenses,
+      buyingExpensePerUnitRate:
+          buyingExpensePerUnitRate ? null : this.buyingExpensePerUnitRate,
+      buyingExpensePerUnitAmount:
+          buyingExpensePerUnitAmount ? null : this.buyingExpensePerUnitAmount,
+      sellingExpensePerUnitRate:
+          sellingExpensePerUnitRate ? null : this.sellingExpensePerUnitRate,
+      sellingExpensePerUnitAmount:
+          sellingExpensePerUnitAmount ? null : this.sellingExpensePerUnitAmount,
+      taxRate: taxRate ? null : this.taxRate,
+      buyingCostsPerUnitType: buyingCostsPerUnitType
+          ? _kDefaultEntryFeeType
+          : this.buyingCostsPerUnitType,
+      sellingCostsPerUnitType: sellingCostsPerUnitType
+          ? _kDefaultExitFeeType
+          : this.sellingCostsPerUnitType,
+    );
+  }
+
+  @override
   MatexProfitAndLossCalculatorBlocFields copyWith({
     String? expectedSaleUnits,
     String? buyingPrice,
