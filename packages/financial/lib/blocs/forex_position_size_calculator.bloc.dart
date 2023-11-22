@@ -184,6 +184,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       return MatexForexPositionSizeCalculatorBlocResults(
         formattedPipValue: localizeCurrency(
+          minimumFractionDigits: 3,
           value: pipValue,
           symbol: accountCurrency,
         ),
@@ -194,6 +195,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
         ),
         positionSize: results.positionSize,
         formattedAmountAtRisk: localizeCurrency(
+          minimumFractionDigits: 3,
           value: results.amountAtRisk,
           symbol: accountCurrency,
         ),
