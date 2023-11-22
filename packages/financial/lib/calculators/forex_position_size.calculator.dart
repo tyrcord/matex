@@ -94,6 +94,12 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
 
     final dStopLossPips = computeStopLossPip(state.pipDecimalPlaces);
     final stopLossPips = dStopLossPips.toDouble();
+    var stopLossPrice = state.stopLossPrice ?? 0.0;
+
+    if (stopLossPrice <= 0) {
+      stopLossPrice = computeStopPrice(state.pipDecimalPlaces).toDouble();
+    }
+
     final dAmountAtRisk = computeAmountAtRisk();
     final amountAtRisk = dAmountAtRisk.toDouble();
     final dRiskRatio = computeRiskPercent(amountAtRisk, state.accountSize);
@@ -108,6 +114,7 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
       positionSize: size.toDouble(),
       amountAtRisk: amountAtRisk,
       stopLossPips: stopLossPips,
+      stopLossPrice: stopLossPrice,
     ));
   }
 
@@ -166,8 +173,36 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
   }
 
   @protected
-  Decimal computeStopLossPip(int? pipPrecision) {
-    if (pipPrecision == null) return dZero;
+  Decimal computeStopPrice(int? pipDecimalPlaces) {
+    if (pipDecimalPlaces == null) return dZero;
+
+    final dPipDecimalPlaces = toDecimal(pipDecimalPlaces) ?? dZero;
+    final dEntryPrice = toDecimal(state.instrumentPairRate) ?? dZero;
+    final dStopLossPips = toDecimal(state.stopLossPips) ?? dZero;
+    // fixme: add support for short positions
+    const isBuyPosition = true;
+
+    if (dEntryPrice <= dZero ||
+        dStopLossPips <= dZero ||
+        dPipDecimalPlaces < dZero) {
+      return dZero;
+    }
+
+    final decimalMultiplicator = 1 / pow(10, pipDecimalPlaces);
+    final dDecimalMultiplicator = toDecimal(decimalMultiplicator)!;
+
+    if (isBuyPosition) {
+      // For a buy position, the stop price is below the entry price
+      return dEntryPrice - (dStopLossPips * dDecimalMultiplicator);
+    }
+
+    // ignore: dead_code
+    return dEntryPrice + (dStopLossPips * dDecimalMultiplicator);
+  }
+
+  @protected
+  Decimal computeStopLossPip(int? pipDecimalPlaces) {
+    if (pipDecimalPlaces == null) return dZero;
 
     final stopLossPips = state.stopLossPips ?? 0.0;
 
@@ -178,7 +213,7 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
 
     if (entryPrice <= 0 || stopLossPrice <= 0) return dZero;
 
-    final decimalMultiplicator = pow(10, pipPrecision).toString();
+    final decimalMultiplicator = pow(10, pipDecimalPlaces).toString();
     final dDecimalMultiplicator = toDecimal(decimalMultiplicator)!;
     final dStopLossPrice = toDecimal(stopLossPrice) ?? dZero;
     final dEntryPrice = toDecimal(entryPrice) ?? dZero;

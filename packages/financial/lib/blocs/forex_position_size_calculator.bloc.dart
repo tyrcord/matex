@@ -172,6 +172,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       final positionSize = results.positionSize?.toDouble() ?? 0;
 
       // FIXME: review naming
+      final instrumentMetadata = await getInstrumentMetadata();
       final standard = await getStandardLotValue();
       final mini = await getMiniLotValue();
       final micro = await getMicroLotValue();
@@ -216,7 +217,6 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
           minimumFractionDigits: 3,
           value: results.stopLossPips,
         ),
-        //TODO: add stop loss price (use delta helper)
         stopLossPips: results.stopLossPips,
         // FIXME: review naming
         formattedRiskRatio: localizePercentage(
@@ -224,6 +224,11 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
           value: results.riskPercent,
         ),
         riskRatio: results.riskPercent,
+        formattedStopLossPrice: localizeQuote(
+          rate: results.stopLossPrice,
+          metadata: instrumentMetadata,
+        ),
+        stopLossPrice: results.stopLossPrice,
       );
     }
 

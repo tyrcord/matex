@@ -8,6 +8,7 @@ class MatexForexPositionSizeCalculatorBlocResults
   final double? miniLotSize;
   final double? microLotSize;
   final double? stopLossPips;
+  final double? stopLossPrice;
   final double? amountAtRisk;
   final double? riskRatio;
   final double? pipValue;
@@ -17,6 +18,7 @@ class MatexForexPositionSizeCalculatorBlocResults
   final String? formattedMiniLotSize;
   final String? formattedMicroLotSize;
   final String? formattedStopLossPips;
+  final String? formattedStopLossPrice;
   final String? formattedAmountAtRisk;
   final String? formattedRiskRatio;
   final String? formattedPipValue;
@@ -32,6 +34,8 @@ class MatexForexPositionSizeCalculatorBlocResults
     this.formattedMicroLotSize,
     this.stopLossPips,
     this.formattedStopLossPips,
+    this.stopLossPrice,
+    this.formattedStopLossPrice,
     this.amountAtRisk,
     this.formattedAmountAtRisk,
     this.riskRatio,
@@ -49,12 +53,14 @@ class MatexForexPositionSizeCalculatorBlocResults
     double? standardLotSize,
     double? miniLotSize,
     double? microLotSize,
+    double? stopLossPips,
+    double? stopLossPrice,
     String? formattedPositionSize,
     String? formattedStandardLotSize,
     String? formattedMiniLotSize,
     String? formattedMicroLotSize,
-    double? stopLossPips,
     String? formattedStopLossPips,
+    String? formattedStopLossPrice,
     double? amountAtRisk,
     String? formattedAmountAtRisk,
     double? riskRatio,
@@ -77,6 +83,9 @@ class MatexForexPositionSizeCalculatorBlocResults
       stopLossPips: stopLossPips ?? this.stopLossPips,
       formattedStopLossPips:
           formattedStopLossPips ?? this.formattedStopLossPips,
+      stopLossPrice: stopLossPrice ?? this.stopLossPrice,
+      formattedStopLossPrice:
+          formattedStopLossPrice ?? this.formattedStopLossPrice,
       amountAtRisk: amountAtRisk ?? this.amountAtRisk,
       formattedAmountAtRisk:
           formattedAmountAtRisk ?? this.formattedAmountAtRisk,
@@ -102,6 +111,8 @@ class MatexForexPositionSizeCalculatorBlocResults
       formattedMicroLotSize: model.formattedMicroLotSize,
       stopLossPips: model.stopLossPips,
       formattedStopLossPips: model.formattedStopLossPips,
+      stopLossPrice: model.stopLossPrice,
+      formattedStopLossPrice: model.formattedStopLossPrice,
       amountAtRisk: model.amountAtRisk,
       formattedAmountAtRisk: model.formattedAmountAtRisk,
       riskRatio: model.riskRatio,
@@ -123,6 +134,8 @@ class MatexForexPositionSizeCalculatorBlocResults
         formattedMicroLotSize,
         stopLossPips,
         formattedStopLossPips,
+        stopLossPrice,
+        formattedStopLossPrice,
         amountAtRisk,
         formattedAmountAtRisk,
         riskRatio,
