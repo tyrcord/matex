@@ -1,3 +1,15 @@
+## 0.0.30
+
+ - **FIX**: minor improvements.
+ - **FIX**: dispatch metadata in advance to avoid UI flickering.
+ - **FIX**: override  getUserCurrencyCode.
+ - **FIX**: reset entry price when stop loss type change.
+ - **FEAT**: add default risk percent settings.
+ - **FEAT**: update MatexForexPositionSizeCalculatorPdfGenerator.
+ - **FEAT**: add stopLossPrice result to fx position calculator.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+
 ## 0.0.29
 
  - **FIX**: attempts to fix tests.

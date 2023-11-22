@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-11-22
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.24`](#matex_core---v0024)
+ - [`matex_data` - `v0.0.18`](#matex_data---v0018)
+ - [`matex_financial` - `v0.0.30`](#matex_financial---v0030)
+
+---
+
+#### `matex_core` - `v0.0.24`
+
+ - **PERF**: minor improvement.
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.18`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.30`
+
+ - **FIX**: minor improvements.
+ - **FIX**: dispatch metadata in advance to avoid UI flickering.
+ - **FIX**: override  getUserCurrencyCode.
+ - **FIX**: reset entry price when stop loss type change.
+ - **FEAT**: add default risk percent settings.
+ - **FEAT**: update MatexForexPositionSizeCalculatorPdfGenerator.
+ - **FEAT**: add stopLossPrice result to fx position calculator.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+
+
 ## 2023-11-20
 
 ### Changes
