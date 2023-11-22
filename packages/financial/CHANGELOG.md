@@ -1,3 +1,7 @@
+## 0.0.30+1
+
+ - **FIX**: Pdf for Forex position Calculator.
+
 ## 0.0.30
 
  - **FIX**: minor improvements.

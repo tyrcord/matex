@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_financial` - `v0.0.30+1`](#matex_financial---v00301)
+
+---
+
+#### `matex_financial` - `v0.0.30+1`
+
+ - **FIX**: Pdf for Forex position Calculator.
+
+
+## 2023-11-22
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_core` - `v0.0.24`](#matex_core---v0024)
  - [`matex_data` - `v0.0.18`](#matex_data---v0018)
  - [`matex_financial` - `v0.0.30`](#matex_financial---v0030)
