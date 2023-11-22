@@ -145,7 +145,7 @@ class MatexProfitAndLossCalculatorPdfGenerator {
       // Gross profit
       if (grossProfit != null && grossProfit != 0 && netProfit != grossProfit)
         FastReportEntry(
-          name: FinanceLocaleKeys.finance_label_gross_profit.tr(),
+          name: FinanceLocaleKeys.finance_label_gross_profit_text.tr(),
           value: results.formattedGrossProfit!,
         ),
       // Selling expenses
