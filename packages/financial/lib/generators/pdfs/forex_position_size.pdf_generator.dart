@@ -177,7 +177,7 @@ class MatexForexPositionSizeCalculatorPdfGenerator {
           stopLossPrice > 0 &&
           stopLossFieldType == FastFinancialAmountSwitchFieldType.pip.name)
         FastReportEntry(
-          name: FinanceLocaleKeys.finance_label_stop_loss_price_text.tr(),
+          name: FinanceLocaleKeys.finance_label_stop_loss_price_at.tr(),
           value: results.formattedStopLossPrice!,
         ),
       if (pipValue != null && pipValue > 0)
