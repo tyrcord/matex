@@ -48,6 +48,11 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       MatexForexPositionSizeCalculatorBlocKey.instrument,
     );
 
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.matexCalculatorRiskPercent.name,
+      MatexStockPositionSizeCalculatorBlocKey.riskPercent,
+    );
+
     _listenToPrimaryCurrencyCodeChanges();
   }
 
@@ -431,6 +436,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields: MatexForexPositionSizeCalculatorBlocFields(
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         accountCurrency: document.accountCurrency,
+        riskPercent: document.riskPercent,
         counter: document.counter,
         base: document.base,
       ),
@@ -468,6 +474,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       accountCurrency: getUserCurrencyCode(),
       counter: instrument?.counter,
       base: instrument?.base,
+      riskPercent: bloc.getValue<String?>(
+        MatexCalculatorDefaultValueKeys.matexCalculatorRiskPercent.name,
+      ),
     );
   }
 
