@@ -181,6 +181,7 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
       stopLossPrice: stopLossPrice ? null : this.stopLossPrice,
       stopLossPips: stopLossPips ? null : this.stopLossPips,
       entryPrice: entryPrice ? null : this.entryPrice,
+      delegate: delegate,
     );
   }
 

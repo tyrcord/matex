@@ -146,6 +146,37 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
   }
 
   @override
+  MatexStockPositionSizeCalculatorBlocFields copyWithDefaults({
+    bool accountSize = false,
+    bool entryPrice = false,
+    bool stopLossPrice = false,
+    bool stopLossAmount = false,
+    bool slippagePercent = false,
+    bool riskPercent = false,
+    bool riskReward = false,
+    bool entryFees = false,
+    bool exitFees = false,
+    bool riskFieldType = false,
+    bool position = false,
+  }) {
+    return MatexStockPositionSizeCalculatorBlocFields(
+      accountSize: accountSize ? null : this.accountSize,
+      entryPrice: entryPrice ? null : this.entryPrice,
+      stopLossPrice: stopLossPrice ? null : this.stopLossPrice,
+      stopLossAmount: stopLossAmount ? null : this.stopLossAmount,
+      slippagePercent: slippagePercent ? null : this.slippagePercent,
+      riskPercent: riskPercent ? null : this.riskPercent,
+      riskReward: riskReward ? null : this.riskReward,
+      entryFees: entryFees ? null : this.entryFees,
+      exitFees: exitFees ? null : this.exitFees,
+      riskFieldType:
+          riskFieldType ? _kDefaultRiskFieldType : this.riskFieldType,
+      position: position ? _kDefaultPosition : this.position,
+      delegate: delegate,
+    );
+  }
+
+  @override
   MatexStockPositionSizeCalculatorBlocFields merge(
     covariant MatexStockPositionSizeCalculatorBlocFields model,
   ) {

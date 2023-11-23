@@ -101,6 +101,7 @@ class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
       positionSizeFieldType:
           positionSizeFieldType ? null : this.positionSizeFieldType,
       lotSize: lotSize ? null : this.lotSize,
+      delegate: delegate,
     );
   }
 

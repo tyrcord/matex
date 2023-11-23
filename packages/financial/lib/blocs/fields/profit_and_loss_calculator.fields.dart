@@ -141,6 +141,7 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
       sellingCostsPerUnitType: sellingCostsPerUnitType
           ? _kDefaultExitFeeType
           : this.sellingCostsPerUnitType,
+      delegate: delegate,
     );
   }
 

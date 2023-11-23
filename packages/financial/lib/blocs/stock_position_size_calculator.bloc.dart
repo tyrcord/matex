@@ -202,6 +202,30 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
+  Future<MatexStockPositionSizeCalculatorBlocDocument?> resetCalculatorDocument(
+    String key,
+  ) async {
+    switch (key) {
+      case MatexStockPositionSizeCalculatorBlocKey.entryFees:
+        return document.copyWithDefaults(entryFees: true);
+    }
+
+    return null;
+  }
+
+  @override
+  Future<MatexStockPositionSizeCalculatorBlocState?> resetCalculatorState(
+    String key,
+  ) async {
+    switch (key) {
+      case MatexStockPositionSizeCalculatorBlocKey.entryFees:
+        return patchEntryFees(null);
+    }
+
+    return null;
+  }
+
+  @override
   Future<void> resetCalculator(
     MatexStockPositionSizeCalculatorBlocDocument document,
   ) async {
@@ -314,7 +338,14 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchEntryFees(String value) {
+  MatexStockPositionSizeCalculatorBlocState patchEntryFees(String? value) {
+    if (value == null) {
+      final fields = currentState.fields.copyWithDefaults(entryFees: true);
+      calculator.entryFees = 0;
+
+      return currentState.copyWith(fields: fields);
+    }
+
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(entryFees: value);
     calculator.entryFees = (dValue / dHundred).toDouble();
