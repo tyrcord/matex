@@ -1,3 +1,12 @@
+## 0.0.31
+
+ - **FIX**: allow to reset some fields.
+ - **FEAT**: allow to reset account size.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add more results to profit and loss.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor changes.
+
 ## 0.0.30+1
 
  - **FIX**: Pdf for Forex position Calculator.

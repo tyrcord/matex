@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-11-23
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_financial` - `v0.0.31`](#matex_financial---v0031)
+
+---
+
+#### `matex_financial` - `v0.0.31`
+
+ - **FIX**: allow to reset some fields.
+ - **FEAT**: allow to reset account size.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add more results to profit and loss.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor changes.
+
+
 ## 2023-11-22
 
 ### Changes
