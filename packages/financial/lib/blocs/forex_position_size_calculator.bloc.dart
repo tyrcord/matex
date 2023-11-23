@@ -385,6 +385,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
           counter: true,
           base: true,
         );
+
+      case MatexForexPositionSizeCalculatorBlocKey.accountSize:
+        return document.copyWithDefaults(accountSize: true);
     }
 
     return null;
@@ -400,6 +403,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       case MatexForexPositionSizeCalculatorBlocKey.instrument:
         return patchInstrument(null);
+
+      case MatexForexPositionSizeCalculatorBlocKey.accountSize:
+        return patchAccountSize(null);
     }
 
     return null;
@@ -552,7 +558,14 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexForexPositionSizeCalculatorBlocState patchAccountSize(String value) {
+  MatexForexPositionSizeCalculatorBlocState patchAccountSize(String? value) {
+    if (value == null) {
+      final fields = currentState.fields.copyWithDefaults(accountSize: true);
+      calculator.accountSize = 0;
+
+      return currentState.copyWith(fields: fields);
+    }
+
     final dValue = toDecimal(value) ?? dZero;
     final fields = currentState.fields.copyWith(accountSize: value);
     calculator.accountSize = dValue.toDouble();
