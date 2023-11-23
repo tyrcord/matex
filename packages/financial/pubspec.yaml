@@ -30,7 +30,7 @@ dependencies:
   tstore: ^0.8.21+3
 
   # Lingua
-  lingua_finance: ^0.0.25
+  lingua_finance: ^0.0.25+1
   lingua_finance_stock: ^0.0.8
   lingua_core: ^0.0.32
   lingua_settings: ^0.0.13

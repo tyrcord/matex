@@ -11,6 +11,9 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
   final double? returnOnInvestment;
   final int? breakEvenUnits;
   final double? costOfGoodsSold;
+  final double? costOfInvestment;
+  final double? grossProfitMargin;
+  final double? netProfitMargin;
 
   const MatexProfitAndLossCalculatorResults({
     this.revenue,
@@ -22,6 +25,9 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
     this.returnOnInvestment,
     this.breakEvenUnits,
     this.costOfGoodsSold,
+    this.costOfInvestment,
+    this.grossProfitMargin,
+    this.netProfitMargin,
   });
 
   @override
@@ -38,6 +44,9 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
     double? returnOnInvestment,
     int? breakEvenUnits,
     double? costOfGoodsSold,
+    double? costOfInvestment,
+    double? grossProfitMargin,
+    double? netProfitMargin,
   }) {
     return MatexProfitAndLossCalculatorResults(
       returnOnInvestment: returnOnInvestment ?? this.returnOnInvestment,
@@ -49,6 +58,9 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
       taxAmount: taxAmount ?? this.taxAmount,
       revenue: revenue ?? this.revenue,
       costOfGoodsSold: costOfGoodsSold ?? this.costOfGoodsSold,
+      costOfInvestment: costOfInvestment ?? this.costOfInvestment,
+      grossProfitMargin: grossProfitMargin ?? this.grossProfitMargin,
+      netProfitMargin: netProfitMargin ?? this.netProfitMargin,
     );
   }
 
@@ -66,6 +78,9 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
       returnOnInvestment: model.returnOnInvestment,
       breakEvenUnits: model.breakEvenUnits,
       costOfGoodsSold: model.costOfGoodsSold,
+      costOfInvestment: model.costOfInvestment,
+      grossProfitMargin: model.grossProfitMargin,
+      netProfitMargin: model.netProfitMargin,
     );
   }
 
@@ -80,5 +95,8 @@ class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
         returnOnInvestment,
         breakEvenUnits,
         costOfGoodsSold,
+        costOfInvestment,
+        grossProfitMargin,
+        netProfitMargin,
       ];
 }

@@ -11,6 +11,9 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
   final double? returnOnInvestment;
   final int? breakEvenUnits;
   final double? costOfGoodsSold;
+  final double? costOfInvestment;
+  final double? grossProfitMargin;
+  final double? netProfitMargin;
 
   final String? formattedRevenue;
   final String? formattedGrossProfit;
@@ -21,6 +24,9 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
   final String? formattedReturnOnInvestment;
   final String? formattedBreakEvenUnits;
   final String? formattedCostOfGoodsSold;
+  final String? formattedCostOfInvestment;
+  final String? formattedGrossProfitMargin;
+  final String? formattedNetProfitMargin;
 
   const MatexProfitAndLossCalculatorBlocResults({
     this.revenue,
@@ -41,6 +47,12 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
     this.formattedReturnOnInvestment,
     this.formattedBreakEvenUnits,
     this.formattedCostOfGoodsSold,
+    this.costOfInvestment,
+    this.grossProfitMargin,
+    this.netProfitMargin,
+    this.formattedCostOfInvestment,
+    this.formattedGrossProfitMargin,
+    this.formattedNetProfitMargin,
   });
 
   @override
@@ -66,6 +78,12 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
     String? formattedReturnOnInvestment,
     String? formattedBreakEvenUnits,
     String? formattedCostOfGoodsSold,
+    double? costOfInvestment,
+    double? grossProfitMargin,
+    double? netProfitMargin,
+    String? formattedCostOfInvestment,
+    String? formattedGrossProfitMargin,
+    String? formattedNetProfitMargin,
   }) {
     return MatexProfitAndLossCalculatorBlocResults(
       revenue: revenue ?? this.revenue,
@@ -91,6 +109,15 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
           formattedBreakEvenUnits ?? this.formattedBreakEvenUnits,
       formattedCostOfGoodsSold:
           formattedCostOfGoodsSold ?? this.formattedCostOfGoodsSold,
+      costOfInvestment: costOfInvestment ?? this.costOfInvestment,
+      grossProfitMargin: grossProfitMargin ?? this.grossProfitMargin,
+      netProfitMargin: netProfitMargin ?? this.netProfitMargin,
+      formattedCostOfInvestment:
+          formattedCostOfInvestment ?? this.formattedCostOfInvestment,
+      formattedGrossProfitMargin:
+          formattedGrossProfitMargin ?? this.formattedGrossProfitMargin,
+      formattedNetProfitMargin:
+          formattedNetProfitMargin ?? this.formattedNetProfitMargin,
     );
   }
 
@@ -117,6 +144,12 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
       formattedReturnOnInvestment: model.formattedReturnOnInvestment,
       formattedBreakEvenUnits: model.formattedBreakEvenUnits,
       formattedCostOfGoodsSold: model.formattedCostOfGoodsSold,
+      costOfInvestment: model.costOfInvestment,
+      grossProfitMargin: model.grossProfitMargin,
+      netProfitMargin: model.netProfitMargin,
+      formattedCostOfInvestment: model.formattedCostOfInvestment,
+      formattedGrossProfitMargin: model.formattedGrossProfitMargin,
+      formattedNetProfitMargin: model.formattedNetProfitMargin,
     );
   }
 
@@ -140,5 +173,11 @@ class MatexProfitAndLossCalculatorBlocResults extends FastCalculatorResults {
         formattedReturnOnInvestment,
         formattedBreakEvenUnits,
         formattedCostOfGoodsSold,
+        costOfInvestment,
+        grossProfitMargin,
+        netProfitMargin,
+        formattedCostOfInvestment,
+        formattedGrossProfitMargin,
+        formattedNetProfitMargin,
       ];
 }

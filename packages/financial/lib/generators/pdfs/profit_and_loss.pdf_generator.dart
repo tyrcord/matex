@@ -126,6 +126,8 @@ class MatexProfitAndLossCalculatorPdfGenerator {
     final grossProfit = results.grossProfit;
     final sellingExpenses = results.sellingExpenses;
     final operatingProfit = results.operatingProfit;
+    final grossProfitMargin = results.grossProfitMargin;
+    final netProfitMargin = results.netProfitMargin;
     final taxAmount = results.taxAmount;
     final netProfit = results.netProfit;
 
@@ -148,6 +150,14 @@ class MatexProfitAndLossCalculatorPdfGenerator {
           name: FinanceLocaleKeys.finance_label_gross_profit_text.tr(),
           value: results.formattedGrossProfit!,
         ),
+      // Gross profit margin
+      if (grossProfitMargin != null &&
+          grossProfitMargin != 0 &&
+          grossProfit != netProfit)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_gross_profit_margin.tr(),
+          value: results.formattedGrossProfitMargin!,
+        ),
       // Selling expenses
       if (sellingExpenses != null && sellingExpenses != 0)
         FastReportEntry(
@@ -162,6 +172,12 @@ class MatexProfitAndLossCalculatorPdfGenerator {
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_operating_profit.tr(),
           value: results.formattedOperatingProfit!,
+        ),
+      // Net profit margin
+      if (netProfitMargin != null && netProfitMargin != 0)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_net_profit_margin.tr(),
+          value: results.formattedNetProfitMargin!,
         ),
       // Tax amount
       if (taxAmount != null && taxAmount != 0)
@@ -195,9 +211,11 @@ class MatexProfitAndLossCalculatorPdfGenerator {
   ) {
     final breakEvenUnits = results.breakEvenUnits;
     final returnOnInvestment = results.returnOnInvestment;
+    final costOfInvestment = results.costOfInvestment;
 
     return (breakEvenUnits != null && breakEvenUnits != 0) ||
-        (returnOnInvestment != null && returnOnInvestment != 0);
+        (returnOnInvestment != null && returnOnInvestment != 0) ||
+        (costOfInvestment != null && costOfInvestment != 0);
   }
 
   FastReportCategoryEntry _buildAdditionalMetricsCategory(
@@ -219,6 +237,13 @@ class MatexProfitAndLossCalculatorPdfGenerator {
       entries.add(FastReportEntry(
         name: FinanceLocaleKeys.finance_label_break_even_units.tr(),
         value: results.formattedBreakEvenUnits!,
+      ));
+    }
+
+    if (results.costOfInvestment != null && results.costOfInvestment != 0) {
+      entries.add(FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_cost_of_investment.tr(),
+        value: results.formattedCostOfInvestment!,
       ));
     }
 

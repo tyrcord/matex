@@ -27,6 +27,8 @@ void main() {
       expect(result.operatingProfit, 50000.0);
       expect(result.netProfit, 50000.0);
       expect(result.returnOnInvestment, 0.5);
+      expect(result.netProfitMargin, closeTo(0.3333, 0.0001));
+      expect(result.grossProfitMargin, closeTo(0.3333, 0.0001));
     });
 
     test('computes gross profit accurately', () {
@@ -95,7 +97,7 @@ void main() {
       expect(result.operatingProfit, 50000.0);
       expect(result.netProfit, 40000.0);
       expect(result.taxAmount, 10000.0);
-      expect(result.returnOnInvestment, closeTo(0.3636, 0.0001));
+      expect(result.returnOnInvestment, closeTo(0.4, 0.0001));
     });
 
     test('determines return on investment from net profit and total expenses',
@@ -129,8 +131,11 @@ void main() {
       expect(result.operatingProfit, 33000.0);
       expect(result.taxAmount, 6600.0);
       expect(result.netProfit, 26400.0);
-      expect(result.returnOnInvestment, closeTo(0.2136, 0.0001));
+      expect(result.returnOnInvestment, closeTo(0.2256, 0.0001));
       expect(result.breakEvenUnits, 58);
+      expect(result.costOfInvestment, 117000);
+      expect(result.netProfitMargin, closeTo(0.1760, 0.0001));
+      expect(result.grossProfitMargin, closeTo(0.2667, 0.0001));
     });
   });
 }

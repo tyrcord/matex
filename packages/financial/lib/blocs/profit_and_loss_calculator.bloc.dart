@@ -65,7 +65,19 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
         formattedCostOfGoodsSold: localizeCurrency(
           value: results.costOfGoodsSold,
         ),
+        formattedCostOfInvestment: localizeCurrency(
+          value: results.costOfInvestment,
+        ),
+        formattedGrossProfitMargin: localizePercentage(
+          value: results.grossProfitMargin,
+        ),
+        formattedNetProfitMargin: localizePercentage(
+          value: results.netProfitMargin,
+        ),
         returnOnInvestment: results.returnOnInvestment,
+        grossProfitMargin: results.grossProfitMargin,
+        costOfInvestment: results.costOfInvestment,
+        netProfitMargin: results.netProfitMargin,
         costOfGoodsSold: results.costOfGoodsSold,
         operatingProfit: results.operatingProfit,
         sellingExpenses: results.sellingExpenses,

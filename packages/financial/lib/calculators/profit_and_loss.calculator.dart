@@ -137,12 +137,10 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
     return operatingProfit - taxAmount;
   }
 
-  Decimal get totalExpenses => sellingExpenses + costOfGoodsSold;
+  Decimal get costOfInvestment => sellingExpenses + costOfGoodsSold;
 
 // Calculates the return on investment
   Decimal get returnOnInvestment {
-    final costOfInvestment = totalExpenses + taxAmount;
-
     if (costOfInvestment == dZero) return dZero; // Prevent division by zero
 
     return decimalFromRational(netProfit / costOfInvestment);
@@ -184,6 +182,20 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
     );
   }
 
+  // Calculates Gross Profit Margin
+  Decimal get grossProfitMargin {
+    if (revenue == dZero) return dZero; // Prevent division by zero
+
+    return decimalFromRational((grossProfit / revenue));
+  }
+
+  // Calculates Net Profit Margin
+  Decimal get netProfitMargin {
+    if (revenue == dZero) return dZero; // Prevent division by zero
+
+    return decimalFromRational((netProfit / revenue));
+  }
+
   @override
   MatexProfitAndLossCalculatorResults value() {
     if (!isValid) return defaultResults;
@@ -198,6 +210,9 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
       sellingExpenses: sellingExpenses.toDouble(),
       returnOnInvestment: returnOnInvestment.toDouble(),
       breakEvenUnits: breakEvenUnits.toDouble().ceil(),
+      costOfInvestment: costOfInvestment.toDouble(),
+      grossProfitMargin: grossProfitMargin.toDouble(),
+      netProfitMargin: netProfitMargin.toDouble(),
     );
   }
 }
