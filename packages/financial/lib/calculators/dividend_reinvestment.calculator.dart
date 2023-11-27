@@ -6,13 +6,12 @@ import 'package:t_helpers/helpers.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-class DividendReinvestmentCalculator extends MatexCalculator<
+class MatexDividendReinvestmentCalculator extends MatexCalculator<
     DividendReinvestmentCalculatorState,
     DividendReinvestmentCalculatorResults> {
-  DividendReinvestmentCalculator({
+  MatexDividendReinvestmentCalculator({
     super.defaultState,
     super.state,
-    // FIXME: add validators
   }) : super(validators: dividendReinvestmentValidators);
 
   @override
