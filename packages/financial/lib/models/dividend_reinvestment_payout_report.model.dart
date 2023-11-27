@@ -1,4 +1,6 @@
 import 'package:matex_financial/financial.dart';
+import 'package:t_helpers/helpers.dart';
+import 'package:decimal/decimal.dart';
 
 class MatexDividendReinvestementPayoutReport
     extends MatexDividendReinvestementPayout {
@@ -10,6 +12,21 @@ class MatexDividendReinvestementPayoutReport
   final double? numberOfShares;
   final double? endingBalance;
   final double? sharePrice;
+
+  Decimal get dAdditionalSharesFromAnnualContribution =>
+      toDecimal(additionalSharesFromAnnualContribution) ?? dZero;
+
+  Decimal get dAdditionalSharesFromDrip =>
+      toDecimal(additionalSharesFromDrip) ?? dZero;
+
+  Decimal get dCumulativeGrossAmount =>
+      toDecimal(cumulativeGrossAmount) ?? dZero;
+
+  Decimal get dCumulativeNetAmount => toDecimal(cumulativeNetAmount) ?? dZero;
+  Decimal get dAverageSharePrice => toDecimal(averageSharePrice) ?? dZero;
+  Decimal get dNumberOfShares => toDecimal(numberOfShares) ?? dZero;
+  Decimal get dEndingBalance => toDecimal(endingBalance) ?? dZero;
+  Decimal get dSharePrice => toDecimal(sharePrice) ?? dZero;
 
   const MatexDividendReinvestementPayoutReport({
     this.additionalSharesFromAnnualContribution,

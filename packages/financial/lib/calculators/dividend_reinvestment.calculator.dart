@@ -12,7 +12,8 @@ class DividendReinvestmentCalculator extends MatexCalculator<
   DividendReinvestmentCalculator({
     super.defaultState,
     super.state,
-  }) : super(validators: []);
+    // FIXME: add validators
+  }) : super(validators: dividendReinvestmentValidators);
 
   @override
   DividendReinvestmentCalculatorState initializeState() =>
@@ -78,26 +79,26 @@ class DividendReinvestmentCalculator extends MatexCalculator<
 
   // FIXME: move to helpers
   Decimal toPercentageDecimal(num? value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
 
     return decimalFromRational(dValue / dHundred);
   }
 
-  Decimal get dNumberOfShares => toDecimal(state.numberOfShares) ?? dZero;
-  Decimal get dSharePrice => toDecimal(state.sharePrice) ?? dZero;
+  Decimal toDecimalOrDefault(dynamic value) => toDecimal(value) ?? dZero;
+
+  Decimal get dNumberOfShares => toDecimalOrDefault(state.numberOfShares);
+  Decimal get dSharePrice => toDecimalOrDefault(state.sharePrice);
   Decimal get dStartingPrincipal => dNumberOfShares * dSharePrice;
-  Decimal get dYearsToGrow => toDecimal(state.yearsToGrow) ?? dZero;
+  Decimal get dYearsToGrow => toDecimalOrDefault(state.yearsToGrow);
   Decimal get dTotalContribution => dAnnualContribution * dYearsToGrow;
   Decimal get dDividendYield => toPercentageDecimal(state.dividendYield);
   Decimal get dTaxRate => toPercentageDecimal(state.taxRate);
 
-  Decimal get dDividendPaymentFrequency {
-    final paymentFrequency = getPaymentFrequency(
-      state.dividendPaymentFrequency,
-    );
-
-    return toDecimal(paymentFrequency) ?? dZero;
+  int get paymentFrequency {
+    return getPaymentFrequency(state.dividendPaymentFrequency);
   }
+
+  Decimal get dDividendPaymentFrequency => toDecimalOrDefault(paymentFrequency);
 
   Decimal get dAnnualDividendIncrease {
     return toPercentageDecimal(state.annualDividendIncrease);
@@ -108,14 +109,12 @@ class DividendReinvestmentCalculator extends MatexCalculator<
   }
 
   Decimal get dAnnualContribution =>
-      toDecimal(state.annualContribution) ?? dZero;
+      toDecimalOrDefault(state.annualContribution);
 
   // Default Results
   static const defaultResults = DividendReinvestmentCalculatorResults(
-      // Default result properties
-      // Example: property: 0,
-      // TODO: Define default result properties
-      );
+    endingBalance: 0,
+  );
 
   @override
   DividendReinvestmentCalculatorResults value() {
@@ -129,9 +128,9 @@ class DividendReinvestmentCalculator extends MatexCalculator<
     for (var i = 0; i <= state.yearsToGrow!; i++) {
       if (lastReport != null) {
         dividendAmountPerShare =
-            toDecimal(lastReport.dividendAmountPerShare) ?? dZero;
+            toDecimalOrDefault(lastReport.dividendAmountPerShare);
         dividendAmountPerShare =
-            dividendAmountPerShare * (Decimal.one + dAnnualDividendIncrease);
+            dividendAmountPerShare * (dOne + dAnnualDividendIncrease);
       }
 
       if (i < state.yearsToGrow!) {
@@ -157,40 +156,23 @@ class DividendReinvestmentCalculator extends MatexCalculator<
     );
   }
 
-  Decimal _computeTotalReturn(double endingBalance) {
-    final dEndingBalance = toDecimal(endingBalance) ?? dZero;
-    final denominator = dTotalContribution + dStartingPrincipal;
-    final dTotalReturn = decimalFromRational(dEndingBalance / denominator);
-
-    return (dTotalReturn * dHundred) - dHundred;
-  }
-
-  // ignore: long-method
   MatexDividendReinvestementYearlyPayoutReport _makeYearlyReport(
     MatexDividendReinvestementYearlyPayoutReport? lastReport,
     Decimal dDividendAmountPerShare,
   ) {
     final payoutReports = <MatexDividendReinvestementPayoutReport>[];
-
-    final dSharePrice =
-        toDecimal(lastReport?.sharePrice ?? state.sharePrice!) ?? dZero;
+    final dSharePrice = _getInitialSharePrice(lastReport: lastReport);
 
     final dividendAmount = decimalFromRational(
       dDividendAmountPerShare / dDividendPaymentFrequency,
     );
 
-    var dCumulativeShares = toDecimal(
-          lastReport?.numberOfShares ?? state.numberOfShares!,
-        ) ??
-        dZero;
-
-    var dCumulativeGrossAmount = toDecimal(
-          lastReport?.cumulativeGrossAmount ?? 0,
-        ) ??
-        dZero;
-
+    var dCumulativeShares =
+        toDecimalOrDefault(lastReport?.dNumberOfShares ?? state.numberOfShares);
+    var dCumulativeGrossAmount =
+        toDecimalOrDefault(lastReport?.dCumulativeContribution);
     var dCumulativeNetAmount =
-        toDecimal(lastReport?.cumulativeNetAmount) ?? dZero;
+        toDecimalOrDefault(lastReport?.dCumulativeNetAmount);
 
     var dEndingBalance = _computeEndingBalance(
       lastReport,
@@ -198,18 +180,18 @@ class DividendReinvestmentCalculator extends MatexCalculator<
       dCumulativeShares,
     );
 
-    var dCumulativeNetDividendPayout = Decimal.zero;
-    var dSharePriceIncreaseAmount = Decimal.zero;
+    var dCumulativeNetDividendPayout = dZero;
+    var dSharePriceIncreaseAmount = dZero;
     var dCurrentSharePrice = dSharePrice;
 
-    if (dAnnualSharePriceIncrease > Decimal.zero) {
+    if (dAnnualSharePriceIncrease > dZero) {
       dSharePriceIncreaseAmount = dSharePrice *
           decimalFromRational(
             dAnnualSharePriceIncrease / dDividendPaymentFrequency,
           );
     }
 
-    for (var i = 0; i < dDividendPaymentFrequency.toBigInt().toInt(); i++) {
+    for (var i = 0; i < paymentFrequency; i++) {
       final dividendPayout = _computeDividendPayout(
         MatexDividendReinvestementRecord(
           numberOfshares: dCumulativeShares.toDouble(),
@@ -218,15 +200,14 @@ class DividendReinvestmentCalculator extends MatexCalculator<
       );
 
       final dNetDividendPayout =
-          toDecimal(dividendPayout.netDividendPayout) ?? dZero;
+          toDecimalOrDefault(dividendPayout.netDividendPayout);
 
-      final dGrossDividendPayout = toDecimal(
-            dividendPayout.grossDividendPayout,
-          ) ??
-          dZero;
+      final dGrossDividendPayout = toDecimalOrDefault(
+        dividendPayout.grossDividendPayout,
+      );
 
-      var dAdditionalShareFromAnnualContribution = Decimal.zero;
-      var dAdditionalSharesFromDrip = Decimal.zero;
+      var dAdditionalShareFromAnnualContribution = dZero;
+      var dAdditionalSharesFromDrip = dZero;
 
       dCurrentSharePrice += dSharePriceIncreaseAmount;
       dEndingBalance += dCumulativeShares * dSharePriceIncreaseAmount;
@@ -247,7 +228,7 @@ class DividendReinvestmentCalculator extends MatexCalculator<
       dCumulativeNetAmount += dNetDividendPayout;
       dCumulativeNetDividendPayout += dNetDividendPayout;
 
-      if (i + 1 == dDividendPaymentFrequency.toBigInt().toInt()) {
+      if (_isAnnualContributionTime(i)) {
         dAdditionalShareFromAnnualContribution =
             _computeAdditionalShareFromAnnualContribution(
           dCurrentSharePrice,
@@ -286,19 +267,34 @@ class DividendReinvestmentCalculator extends MatexCalculator<
     );
   }
 
+  Decimal _computeTotalReturn(double endingBalance) {
+    final dEndingBalance = toDecimalOrDefault(endingBalance);
+    final denominator = dTotalContribution + dStartingPrincipal;
+    final dTotalReturn = decimalFromRational(dEndingBalance / denominator);
+
+    return (dTotalReturn * dHundred) - dHundred;
+  }
+
+  Decimal _getInitialSharePrice({
+    MatexDividendReinvestementYearlyPayoutReport? lastReport,
+  }) {
+    return toDecimalOrDefault(lastReport?.sharePrice ?? state.sharePrice);
+  }
+
+  bool _isAnnualContributionTime(int currentIndex) {
+    return currentIndex + 1 == paymentFrequency;
+  }
+
   Decimal _computeAdditionalShareFromAnnualContribution(
     Decimal dCurrentSharePrice,
   ) {
-    final dAnnualContribution = toDecimal(state.annualContribution) ?? dZero;
+    final dAnnualContribution = toDecimalOrDefault(state.annualContribution);
 
-    if (dAnnualContribution > Decimal.zero) {
-      return _computeAdditionalShare(
-        dAnnualContribution,
-        dCurrentSharePrice,
-      );
+    if (dAnnualContribution > dZero) {
+      return _computeAdditionalShare(dAnnualContribution, dCurrentSharePrice);
     }
 
-    return Decimal.zero;
+    return dZero;
   }
 
   Decimal _computeEndingBalance(
@@ -306,9 +302,7 @@ class DividendReinvestmentCalculator extends MatexCalculator<
     Decimal sharePrice,
     Decimal shares,
   ) {
-    if (lastReport != null) {
-      return toDecimal(lastReport.endingBalance) ?? dZero;
-    }
+    if (lastReport != null) toDecimalOrDefault(lastReport.endingBalance);
 
     return sharePrice * shares;
   }
@@ -316,10 +310,10 @@ class DividendReinvestmentCalculator extends MatexCalculator<
   MatexDividendReinvestementPayout _computeDividendPayout(
     MatexDividendReinvestementRecord record,
   ) {
-    final dDividendAmount = toDecimal(record.dividendAmount) ?? dZero;
-    final dShares = toDecimal(record.numberOfshares) ?? dZero;
+    final dDividendAmount = toDecimalOrDefault(record.dividendAmount);
+    final dShares = toDecimalOrDefault(record.numberOfshares);
     final dGrossAmount = dShares * dDividendAmount;
-    final netAmount = dGrossAmount * (Decimal.one - dTaxRate);
+    final netAmount = dGrossAmount * (dOne - dTaxRate);
 
     return MatexDividendReinvestementPayout(
       grossDividendPayout: dGrossAmount.toDouble(),

@@ -2,9 +2,9 @@ import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:matex_financial/financial.dart';
 
-class DividendPayoutRatioCalculatorFields extends MatexCalculator<
+class MatexDividendPayoutRatioCalculator extends MatexCalculator<
     DividendPayoutRatioCalculatorState, DividendPayoutRatioCalculatorResults> {
-  DividendPayoutRatioCalculatorFields({
+  MatexDividendPayoutRatioCalculator({
     super.defaultState,
     super.state,
   }) : super(validators: dividendPayoutRatioValidators);

@@ -5,3 +5,4 @@ export 'forex_pip_value.validator.dart';
 export 'forex_position_size.validator.dart';
 export 'dividend_payout_ratio.validator.dart';
 export 'dividend_yield.validator.dart';
+export 'dividend_reinvestment.validator.dart';
