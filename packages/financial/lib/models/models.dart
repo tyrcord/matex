@@ -11,3 +11,7 @@ export './pair_pip_metadata.model.dart';
 export './pair_type_metadata.model.dart';
 export 'instrument.model.dart';
 export 'quote.model.dart';
+export 'dividend_reinvestment_payout_report.model.dart';
+export 'dividend_reinvestment_payout_yearly_report.model.dart';
+export 'dividend_reinvestment_record.model.dart';
+export 'dividend_reinvestment_payout.model.dart';
