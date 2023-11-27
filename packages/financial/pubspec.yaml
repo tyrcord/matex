@@ -1,51 +1,39 @@
-name: matex_financial
-description: An assortment of helpful tools and calculators specifically designed for use within the financial sector.
-version: 0.0.32
-repository: https://github.com/tyrcord/matex/tree/main/packages/financial
-
-environment:
-  sdk: ">=3.2.0 <4.0.0"
-  flutter: ">=3.16.0"
-
 dependencies:
+  cross_file: ^0.3.3+6
+  decimal: ^2.3.3
+  easy_localization: ^3.0.3
+  fastyle_calculator: ^1.47.0
+  fastyle_core: ^0.0.37
+  fastyle_financial: ^0.0.32
+  fastyle_forms: ^0.0.36
   flutter:
     sdk: flutter
-
-  # Public
-  decimal: ^2.3.3
-  pdf: ^3.10.6
-  cross_file: ^0.3.3+6
-  printing: ^5.11.1
-  easy_localization: ^3.0.3
-  rxdart: ^0.27.7
-
-  # MateX
+  lingua_core: ^0.0.32
+  lingua_finance: ^0.0.26
+  lingua_finance_forex: ^0.0.8
+  lingua_finance_stock: ^0.0.9
+  lingua_settings: ^0.0.13
+  lingua_units: ^0.0.7
   matex_core: ^0.0.24
   matex_data: ^0.0.18
-
-  # T
-  tbloc: ^0.21.8+3
-  t_helpers: ^0.0.45
-  tmodel: ^0.5.12+3
-  tstore: ^0.8.21+3
-
-  # Lingua
-  lingua_finance: ^0.0.25+1
-  lingua_finance_stock: ^0.0.8
-  lingua_core: ^0.0.32
-  lingua_settings: ^0.0.13
-  lingua_finance_forex: ^0.0.8
-  lingua_units: ^0.0.7
-
-  # Fastyle
-  fastyle_forms: ^0.0.36
-  fastyle_core: ^0.0.37
-  fastyle_calculator: ^1.47.0
-  fastyle_financial: ^0.0.32
-
+  pdf: ^3.10.6
+  printing: ^5.11.1
+  rxdart: ^0.27.7
+  t_helpers: ^0.0.46
+  tbloc: ^0.21.8+4
+  tmodel: ^0.5.12+4
+  tstore: ^0.8.21+4
+description: An assortment of helpful tools and calculators specifically designed
+  for use within the financial sector.
 dev_dependencies:
+  dependency_validator: ^3.2.3
+  flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
   import_sorter: ^4.6.0
-  dependency_validator: ^3.2.3
+environment:
+  flutter: '>=3.16.0'
+  sdk: '>=3.2.0 <4.0.0'
+name: matex_financial
+repository: https://github.com/tyrcord/matex/tree/main/packages/financial
+version: 0.0.32

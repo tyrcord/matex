@@ -24,3 +24,6 @@ scripts:
     packageFilters:
       scope:
         - matex_data
+
+  update:dependencies:
+    exec: python3 $PWD/scripts/update_dependencies.py
