@@ -1,3 +1,7 @@
+## 0.0.32
+
+ - **FEAT**: added MatexFinancialFrequency.
+
 ## 0.0.31
 
  - **FIX**: allow to reset some fields.

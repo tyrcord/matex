@@ -1,6 +1,6 @@
 name: matex_financial
 description: An assortment of helpful tools and calculators specifically designed for use within the financial sector.
-version: 0.0.31
+version: 0.0.32
 repository: https://github.com/tyrcord/matex/tree/main/packages/financial
 
 environment:
