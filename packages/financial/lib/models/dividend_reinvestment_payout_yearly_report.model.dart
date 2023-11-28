@@ -30,6 +30,33 @@ class MatexDividendReinvestementYearlyPayoutReport
     super.sharePrice,
   });
 
+  // From JSON Factory
+  factory MatexDividendReinvestementYearlyPayoutReport.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final payouts = (json['payouts'] as List<Map<String, dynamic>>?);
+
+    return MatexDividendReinvestementYearlyPayoutReport(
+      grossDividendPayout: json['grossDividendPayout'] as double?,
+      netDividendPayout: json['netDividendPayout'] as double?,
+      additionalSharesFromAnnualContribution:
+          json['additionalSharesFromAnnualContribution'] as double?,
+      additionalSharesFromDrip: json['additionalSharesFromDrip'] as double?,
+      cumulativeGrossAmount: json['cumulativeGrossAmount'] as double?,
+      cumulativeNetAmount: json['cumulativeNetAmount'] as double?,
+      averageSharePrice: json['averageSharePrice'] as double?,
+      numberOfShares: json['numberOfShares'] as double?,
+      endingBalance: json['endingBalance'] as double?,
+      sharePrice: json['sharePrice'] as double?,
+      dividendAmountPerShare: json['dividendAmountPerShare'] as double?,
+      cumulativeContribution: json['cumulativeContribution'] as double?,
+      payouts: payouts?.map((Map<String, dynamic> e) {
+            return MatexDividendReinvestementPayoutReport.fromJson(e);
+          }).toList() ??
+          const <MatexDividendReinvestementPayoutReport>[],
+    );
+  }
+
   @override
   List<dynamic> get props => [
         additionalSharesFromAnnualContribution,
@@ -46,4 +73,25 @@ class MatexDividendReinvestementYearlyPayoutReport
         sharePrice,
         payouts,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      ...super.toJson(),
+      'additionalSharesFromAnnualContribution':
+          additionalSharesFromAnnualContribution,
+      'additionalSharesFromDrip': additionalSharesFromDrip,
+      'dividendAmountPerShare': dividendAmountPerShare,
+      'cumulativeContribution': cumulativeContribution,
+      'cumulativeGrossAmount': cumulativeGrossAmount,
+      'cumulativeNetAmount': cumulativeNetAmount,
+      'grossDividendPayout': grossDividendPayout,
+      'netDividendPayout': netDividendPayout,
+      'averageSharePrice': averageSharePrice,
+      'numberOfShares': numberOfShares,
+      'endingBalance': endingBalance,
+      'sharePrice': sharePrice,
+      'payouts': payouts,
+    };
+  }
 }

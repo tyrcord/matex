@@ -41,6 +41,25 @@ class MatexDividendReinvestementPayoutReport
     this.sharePrice,
   });
 
+  // From JSON Factory
+  factory MatexDividendReinvestementPayoutReport.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    return MatexDividendReinvestementPayoutReport(
+      grossDividendPayout: json['grossDividendPayout'] as double?,
+      netDividendPayout: json['netDividendPayout'] as double?,
+      additionalSharesFromAnnualContribution:
+          json['additionalSharesFromAnnualContribution'] as double?,
+      additionalSharesFromDrip: json['additionalSharesFromDrip'] as double?,
+      cumulativeGrossAmount: json['cumulativeGrossAmount'] as double?,
+      cumulativeNetAmount: json['cumulativeNetAmount'] as double?,
+      averageSharePrice: json['averageSharePrice'] as double?,
+      numberOfShares: json['numberOfShares'] as double?,
+      endingBalance: json['endingBalance'] as double?,
+      sharePrice: json['sharePrice'] as double?,
+    );
+  }
+
   @override
   List<dynamic> get props => [
         additionalSharesFromAnnualContribution,
@@ -106,5 +125,24 @@ class MatexDividendReinvestementPayoutReport
       grossDividendPayout: model.grossDividendPayout,
       netDividendPayout: model.netDividendPayout,
     );
+  }
+
+  // To JSON Method
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      ...super.toJson(),
+      'additionalSharesFromAnnualContribution':
+          additionalSharesFromAnnualContribution,
+      'additionalSharesFromDrip': additionalSharesFromDrip,
+      'cumulativeGrossAmount': cumulativeGrossAmount,
+      'cumulativeNetAmount': cumulativeNetAmount,
+      'averageSharePrice': averageSharePrice,
+      'numberOfShares': numberOfShares,
+      'endingBalance': endingBalance,
+      'sharePrice': sharePrice,
+      'grossDividendPayout': grossDividendPayout,
+      'netDividendPayout': netDividendPayout,
+    };
   }
 }

@@ -150,8 +150,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
       numberOfShares: lastReport.numberOfShares,
       endingBalance: lastReport.endingBalance,
       sharePrice: lastReport.sharePrice,
-      // FIXME:
-      // yearlyReports: reports,
+      reports: reports,
     );
   }
 
@@ -169,7 +168,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
     var dCumulativeShares =
         toDecimalOrDefault(lastReport?.dNumberOfShares ?? state.numberOfShares);
     var dCumulativeGrossAmount =
-        toDecimalOrDefault(lastReport?.dCumulativeContribution);
+        toDecimalOrDefault(lastReport?.dCumulativeGrossAmount);
     var dCumulativeNetAmount =
         toDecimalOrDefault(lastReport?.dCumulativeNetAmount);
 
@@ -190,7 +189,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
           );
     }
 
-    for (var i = 0; i < paymentFrequency; i++) {
+    for (var i = 0; i < dDividendPaymentFrequency.toBigInt().toInt(); i++) {
       final dividendPayout = _computeDividendPayout(
         MatexDividendReinvestementRecord(
           numberOfshares: dCumulativeShares.toDouble(),
@@ -227,7 +226,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
       dCumulativeNetAmount += dNetDividendPayout;
       dCumulativeNetDividendPayout += dNetDividendPayout;
 
-      if (_isAnnualContributionTime(i)) {
+      if (i + 1 == dDividendPaymentFrequency.toBigInt().toInt()) {
         dAdditionalShareFromAnnualContribution =
             _computeAdditionalShareFromAnnualContribution(
           dCurrentSharePrice,
@@ -301,7 +300,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
     Decimal sharePrice,
     Decimal shares,
   ) {
-    if (lastReport != null) toDecimalOrDefault(lastReport.endingBalance);
+    if (lastReport != null) return toDecimalOrDefault(lastReport.endingBalance);
 
     return sharePrice * shares;
   }

@@ -1,7 +1,9 @@
+import 'package:matex_financial/models/dividend_reinvestment_payout_yearly_report.model.dart';
 import 'package:tmodel/tmodel.dart';
 
 class DividendReinvestmentCalculatorResults extends TModel {
   // Define Properties
+  final List<MatexDividendReinvestementYearlyPayoutReport>? reports;
   final double? netDividendeIncome;
   final double? grossDividendPaid;
   final double? totalContribution;
@@ -23,6 +25,7 @@ class DividendReinvestmentCalculatorResults extends TModel {
     this.endingBalance,
     this.totalReturn,
     this.sharePrice,
+    this.reports,
   });
 
   // Clone Method
@@ -31,7 +34,10 @@ class DividendReinvestmentCalculatorResults extends TModel {
 
   // From JSON Factory
   factory DividendReinvestmentCalculatorResults.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
+    final reports = (json['reports'] as List<Map<String, dynamic>>?);
+
     return DividendReinvestmentCalculatorResults(
       netDividendeIncome: json['netDividendeIncome'] as double?,
       grossDividendPaid: json['grossDividendPaid'] as double?,
@@ -42,12 +48,16 @@ class DividendReinvestmentCalculatorResults extends TModel {
       endingBalance: json['endingBalance'] as double?,
       totalReturn: json['totalReturn'] as double?,
       sharePrice: json['sharePrice'] as double?,
+      reports: reports?.map((Map<String, dynamic> report) {
+        return MatexDividendReinvestementYearlyPayoutReport.fromJson(report);
+      }).toList(),
     );
   }
 
   // Copy With Method
   @override
   DividendReinvestmentCalculatorResults copyWith({
+    List<MatexDividendReinvestementYearlyPayoutReport>? reports,
     double? netDividendeIncome,
     double? grossDividendPaid,
     double? totalContribution,
@@ -68,6 +78,7 @@ class DividendReinvestmentCalculatorResults extends TModel {
       endingBalance: endingBalance ?? this.endingBalance,
       totalReturn: totalReturn ?? this.totalReturn,
       sharePrice: sharePrice ?? this.sharePrice,
+      reports: reports ?? this.reports,
     );
   }
 
@@ -83,6 +94,7 @@ class DividendReinvestmentCalculatorResults extends TModel {
     bool resetEndingBalance = false,
     bool resetTotalReturn = false,
     bool resetSharePrice = false,
+    bool resetReports = false,
   }) {
     return DividendReinvestmentCalculatorResults(
       netDividendeIncome: resetNetDividendeIncome ? null : netDividendeIncome,
@@ -94,6 +106,7 @@ class DividendReinvestmentCalculatorResults extends TModel {
       endingBalance: resetEndingBalance ? null : endingBalance,
       totalReturn: resetTotalReturn ? null : totalReturn,
       sharePrice: resetSharePrice ? null : sharePrice,
+      reports: resetReports ? null : reports,
     );
   }
 
@@ -111,6 +124,7 @@ class DividendReinvestmentCalculatorResults extends TModel {
       endingBalance: model.endingBalance,
       totalReturn: model.totalReturn,
       sharePrice: model.sharePrice,
+      reports: model.reports,
     );
   }
 
@@ -126,11 +140,13 @@ class DividendReinvestmentCalculatorResults extends TModel {
         endingBalance,
         totalReturn,
         sharePrice,
+        reports,
       ];
 
   // To JSON Method
   Map<String, dynamic> toJson() {
     return {
+      'reports': reports?.map((report) => report.toJson()).toList(),
       'netDividendeIncome': netDividendeIncome,
       'grossDividendPaid': grossDividendPaid,
       'totalContribution': totalContribution,

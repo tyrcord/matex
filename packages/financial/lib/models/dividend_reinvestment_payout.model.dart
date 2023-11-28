@@ -14,6 +14,16 @@ class MatexDividendReinvestementPayout extends TModel {
     this.netDividendPayout,
   });
 
+  // From JSON Factory
+  factory MatexDividendReinvestementPayout.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    return MatexDividendReinvestementPayout(
+      grossDividendPayout: json['grossDividendPayout'] as double?,
+      netDividendPayout: json['netDividendPayout'] as double?,
+    );
+  }
+
   @override
   MatexDividendReinvestementPayout clone() => copyWith();
 
@@ -40,4 +50,11 @@ class MatexDividendReinvestementPayout extends TModel {
 
   @override
   List<dynamic> get props => [grossDividendPayout, netDividendPayout];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'grossDividendPayout': grossDividendPayout,
+      'netDividendPayout': netDividendPayout,
+    };
+  }
 }
