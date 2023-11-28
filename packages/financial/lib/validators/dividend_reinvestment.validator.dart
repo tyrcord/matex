@@ -20,7 +20,7 @@ List<MatexCalculatorValidator<DividendReinvestmentCalculatorState>>
   },
   (state) {
     if (state.taxRate != null) {
-      return state.taxRate! >= 0 && state.taxRate! <= 100;
+      return state.taxRate! >= 0 && state.taxRate! <= 1;
     }
 
     return true;
@@ -28,7 +28,7 @@ List<MatexCalculatorValidator<DividendReinvestmentCalculatorState>>
   (state) {
     if (state.annualSharePriceIncrease != null) {
       return state.annualSharePriceIncrease! >= 0 &&
-          state.annualSharePriceIncrease! <= 100;
+          state.annualSharePriceIncrease! <= 1;
     }
 
     return true;
@@ -36,7 +36,7 @@ List<MatexCalculatorValidator<DividendReinvestmentCalculatorState>>
   (state) {
     if (state.annualDividendIncrease != null) {
       return state.annualDividendIncrease! >= 0 &&
-          state.annualDividendIncrease! <= 100;
+          state.annualDividendIncrease! <= 1;
     }
 
     return true;

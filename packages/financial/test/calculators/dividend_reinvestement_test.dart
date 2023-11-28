@@ -82,7 +82,7 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
           ..annualContribution = 100;
 
@@ -93,7 +93,7 @@ void main() {
         expect(results.endingBalance, closeTo(1420, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(174.40, 0.01));
@@ -113,7 +113,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..drip = false;
 
         results = calculator.value();
@@ -130,7 +130,7 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
           ..annualContribution = 100;
 
@@ -141,7 +141,7 @@ void main() {
         expect(results.endingBalance, closeTo(1425.76, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(178.02, 0.01));
@@ -161,7 +161,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..drip = false;
 
         results = calculator.value();
@@ -178,7 +178,7 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
           ..annualContribution = 100;
 
@@ -189,7 +189,7 @@ void main() {
         expect(results.endingBalance, closeTo(1428.78, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(179.90, 0.01));
@@ -209,7 +209,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..drip = false;
 
         results = calculator.value();
@@ -226,7 +226,7 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
           ..annualContribution = 100;
 
@@ -237,7 +237,7 @@ void main() {
         expect(results.endingBalance, closeTo(1430.86, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(181.19, 0.01));
@@ -257,7 +257,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..drip = false;
 
         results = calculator.value();
@@ -276,7 +276,7 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2;
 
         var results = calculator.value();
@@ -286,7 +286,7 @@ void main() {
         expect(results.endingBalance, closeTo(1210.00, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(166.40, 0.01));
@@ -306,7 +306,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..drip = false;
 
         results = calculator.value();
@@ -323,7 +323,7 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2;
 
         var results = calculator.value();
@@ -333,7 +333,7 @@ void main() {
         expect(results.endingBalance, closeTo(1215.51, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(169.86, 0.01));
@@ -353,7 +353,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..drip = false;
 
         results = calculator.value();
@@ -370,7 +370,7 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2;
 
         var results = calculator.value();
@@ -380,7 +380,7 @@ void main() {
         expect(results.endingBalance, closeTo(1218.40, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(171.66, 0.01));
@@ -400,7 +400,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..drip = false;
 
         results = calculator.value();
@@ -417,7 +417,7 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2;
 
         var results = calculator.value();
@@ -427,7 +427,7 @@ void main() {
         expect(results.endingBalance, closeTo(1220.39, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(172.89, 0.01));
@@ -447,7 +447,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..drip = false;
 
         results = calculator.value();
@@ -466,9 +466,9 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
-          ..annualSharePriceIncrease = 10;
+          ..annualSharePriceIncrease = 0.1;
 
         var results = calculator.value();
 
@@ -477,7 +477,7 @@ void main() {
         expect(results.endingBalance, closeTo(1429.09, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(165.82, 0.01));
@@ -496,7 +496,7 @@ void main() {
         expect(results.endingBalance, closeTo(1410.00, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(160.0, 0.01));
@@ -528,7 +528,7 @@ void main() {
         expect(results.endingBalance, closeTo(1629.09, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(167.27, 0.01));
@@ -537,7 +537,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..drip = true;
 
         results = calculator.value();
@@ -554,9 +554,9 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
-          ..annualSharePriceIncrease = 10;
+          ..annualSharePriceIncrease = 0.1;
 
         var results = calculator.value();
 
@@ -565,7 +565,7 @@ void main() {
         expect(results.endingBalance, closeTo(1439.74, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(169.08, 0.01));
@@ -584,7 +584,7 @@ void main() {
         expect(results.endingBalance, closeTo(1410.00, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(160.0, 0.01));
@@ -599,9 +599,9 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
-          ..annualSharePriceIncrease = 10;
+          ..annualSharePriceIncrease = 0.1;
 
         var results = calculator.value();
 
@@ -610,7 +610,7 @@ void main() {
         expect(results.endingBalance, closeTo(1445.46, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(170.82, 0.01));
@@ -629,7 +629,7 @@ void main() {
         expect(results.endingBalance, closeTo(1410.00, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(160.0, 0.01));
@@ -644,9 +644,9 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
-          ..annualSharePriceIncrease = 10;
+          ..annualSharePriceIncrease = 0.1;
 
         var results = calculator.value();
 
@@ -655,7 +655,7 @@ void main() {
         expect(results.endingBalance, closeTo(1449.43, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(172.02, 0.01));
@@ -674,7 +674,7 @@ void main() {
         expect(results.endingBalance, closeTo(1410.00, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(160.0, 0.01));
@@ -691,9 +691,9 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
-          ..annualDividendIncrease = 10;
+          ..annualDividendIncrease = 0.1;
 
         var results = calculator.value();
 
@@ -712,7 +712,7 @@ void main() {
 
         calculator
           ..annualContribution = 0
-          ..taxRate = 20;
+          ..taxRate = 0.2;
 
         results = calculator.value();
 
@@ -722,7 +722,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..annualSharePriceIncrease = 10
+          ..annualSharePriceIncrease = 0.1
           ..taxRate = 0;
         results = calculator.value();
 
@@ -733,7 +733,7 @@ void main() {
 
         calculator
           ..annualSharePriceIncrease = 0
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..annualContribution = 100;
 
         results = calculator.value();
@@ -755,7 +755,7 @@ void main() {
         expect(results.endingBalance, closeTo(1210.00, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(168.00, 0.01));
@@ -770,12 +770,13 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
-          ..annualDividendIncrease = 10;
+          ..annualDividendIncrease = 0.1;
 
         var results = calculator.value();
 
+        expect(calculator.isValid, isTrue);
         expect(results.netDividendPaid, closeTo(227.11, 0.01));
         expect(results.numberOfShares, closeTo(12.27, 0.01));
         expect(results.endingBalance, closeTo(1227.11, 0.01));
@@ -791,7 +792,7 @@ void main() {
 
         calculator
           ..annualContribution = 0
-          ..taxRate = 20;
+          ..taxRate = 0.2;
 
         results = calculator.value();
 
@@ -801,7 +802,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..annualSharePriceIncrease = 10
+          ..annualSharePriceIncrease = 0.1
           ..taxRate = 0;
         results = calculator.value();
 
@@ -812,7 +813,7 @@ void main() {
 
         calculator
           ..annualSharePriceIncrease = 0
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..annualContribution = 100;
 
         results = calculator.value();
@@ -834,7 +835,7 @@ void main() {
         expect(results.endingBalance, closeTo(1210.00, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(168.00, 0.01));
@@ -849,9 +850,9 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
-          ..annualDividendIncrease = 10;
+          ..annualDividendIncrease = 0.1;
 
         var results = calculator.value();
 
@@ -870,7 +871,7 @@ void main() {
 
         calculator
           ..annualContribution = 0
-          ..taxRate = 20;
+          ..taxRate = 0.2;
 
         results = calculator.value();
 
@@ -880,7 +881,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..annualSharePriceIncrease = 10
+          ..annualSharePriceIncrease = 0.1
           ..taxRate = 0;
         results = calculator.value();
 
@@ -891,7 +892,7 @@ void main() {
 
         calculator
           ..annualSharePriceIncrease = 0
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..annualContribution = 100;
 
         results = calculator.value();
@@ -913,7 +914,7 @@ void main() {
         expect(results.endingBalance, closeTo(1210.00, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(168.00, 0.01));
@@ -928,9 +929,9 @@ void main() {
           ..drip = true
           ..sharePrice = 100
           ..numberOfShares = 10
-          ..dividendYield = 10
+          ..dividendYield = 0.1
           ..yearsToGrow = 2
-          ..annualDividendIncrease = 10;
+          ..annualDividendIncrease = 0.1;
 
         var results = calculator.value();
 
@@ -949,7 +950,7 @@ void main() {
 
         calculator
           ..annualContribution = 0
-          ..taxRate = 20;
+          ..taxRate = 0.2;
 
         results = calculator.value();
 
@@ -959,7 +960,7 @@ void main() {
         expect(results.reports?.length, closeTo(2, 0.01));
 
         calculator
-          ..annualSharePriceIncrease = 10
+          ..annualSharePriceIncrease = 0.1
           ..taxRate = 0;
         results = calculator.value();
 
@@ -970,7 +971,7 @@ void main() {
 
         calculator
           ..annualSharePriceIncrease = 0
-          ..taxRate = 20
+          ..taxRate = 0.2
           ..annualContribution = 100;
 
         results = calculator.value();
@@ -992,7 +993,7 @@ void main() {
         expect(results.endingBalance, closeTo(1210.00, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
 
-        calculator.taxRate = 20;
+        calculator.taxRate = 0.2;
         results = calculator.value();
 
         expect(results.netDividendPaid, closeTo(168.00, 0.01));

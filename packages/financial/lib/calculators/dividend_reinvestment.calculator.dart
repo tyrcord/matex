@@ -76,13 +76,6 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
     setState(state.copyWith(drip: value));
   }
 
-  // FIXME: move to helpers
-  Decimal toPercentageDecimal(num? value) {
-    final dValue = toDecimalOrDefault(value);
-
-    return decimalFromRational(dValue / dHundred);
-  }
-
   Decimal toDecimalOrDefault(dynamic value) => toDecimal(value) ?? dZero;
 
   Decimal get dNumberOfShares => toDecimalOrDefault(state.numberOfShares);
@@ -90,8 +83,8 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
   Decimal get dStartingPrincipal => dNumberOfShares * dSharePrice;
   Decimal get dYearsToGrow => toDecimalOrDefault(state.yearsToGrow);
   Decimal get dTotalContribution => dAnnualContribution * dYearsToGrow;
-  Decimal get dDividendYield => toPercentageDecimal(state.dividendYield);
-  Decimal get dTaxRate => toPercentageDecimal(state.taxRate);
+  Decimal get dDividendYield => toDecimalOrDefault(state.dividendYield);
+  Decimal get dTaxRate => toDecimalOrDefault(state.taxRate);
 
   int get paymentFrequency {
     return getPaymentFrequency(state.dividendPaymentFrequency);
@@ -100,11 +93,11 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
   Decimal get dDividendPaymentFrequency => toDecimalOrDefault(paymentFrequency);
 
   Decimal get dAnnualDividendIncrease {
-    return toPercentageDecimal(state.annualDividendIncrease);
+    return toDecimalOrDefault(state.annualDividendIncrease);
   }
 
   Decimal get dAnnualSharePriceIncrease {
-    return toPercentageDecimal(state.annualSharePriceIncrease);
+    return toDecimalOrDefault(state.annualSharePriceIncrease);
   }
 
   Decimal get dAnnualContribution =>
@@ -189,7 +182,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
           );
     }
 
-    for (var i = 0; i < dDividendPaymentFrequency.toBigInt().toInt(); i++) {
+    for (var i = 0; i < paymentFrequency; i++) {
       final dividendPayout = _computeDividendPayout(
         MatexDividendReinvestementRecord(
           numberOfshares: dCumulativeShares.toDouble(),
@@ -226,7 +219,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
       dCumulativeNetAmount += dNetDividendPayout;
       dCumulativeNetDividendPayout += dNetDividendPayout;
 
-      if (i + 1 == dDividendPaymentFrequency.toBigInt().toInt()) {
+      if (_isAnnualContributionTime(i)) {
         dAdditionalShareFromAnnualContribution =
             _computeAdditionalShareFromAnnualContribution(
           dCurrentSharePrice,
