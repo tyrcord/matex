@@ -65,7 +65,7 @@ class MatexDividendReinvestmentCalculatorDocument
 
   @override
   MatexDividendReinvestmentCalculatorDocument copyWithDefaults({
-    bool resetDividendPaymentFrequency = false,
+    bool resetPaymentFrequency = false,
     bool resetSharePrice = false,
     bool resetNumberOfShares = false,
     bool resetDividendYield = false,
@@ -77,9 +77,8 @@ class MatexDividendReinvestmentCalculatorDocument
     bool resetDrip = false,
   }) {
     return MatexDividendReinvestmentCalculatorDocument(
-      dividendPaymentFrequency: resetDividendPaymentFrequency
-          ? defaultFrequency
-          : dividendPaymentFrequency,
+      dividendPaymentFrequency:
+          resetPaymentFrequency ? defaultFrequency : dividendPaymentFrequency,
       sharePrice: resetSharePrice ? null : sharePrice,
       numberOfShares: resetNumberOfShares ? null : numberOfShares,
       dividendYield: resetDividendYield ? null : dividendYield,
@@ -96,7 +95,7 @@ class MatexDividendReinvestmentCalculatorDocument
 
   @override
   MatexDividendReinvestmentCalculatorDocument copyWith({
-    MatexFinancialFrequency? dividendPaymentFrequency,
+    MatexFinancialFrequency? paymentFrequency,
     String? sharePrice,
     String? numberOfShares,
     String? dividendYield,
@@ -109,7 +108,7 @@ class MatexDividendReinvestmentCalculatorDocument
   }) {
     return MatexDividendReinvestmentCalculatorDocument(
       dividendPaymentFrequency:
-          dividendPaymentFrequency ?? this.dividendPaymentFrequency,
+          paymentFrequency ?? this.dividendPaymentFrequency,
       sharePrice: sharePrice ?? this.sharePrice,
       numberOfShares: numberOfShares ?? this.numberOfShares,
       dividendYield: dividendYield ?? this.dividendYield,
@@ -129,7 +128,7 @@ class MatexDividendReinvestmentCalculatorDocument
     covariant MatexDividendReinvestmentCalculatorDocument model,
   ) {
     return copyWith(
-      dividendPaymentFrequency: model.dividendPaymentFrequency,
+      paymentFrequency: model.dividendPaymentFrequency,
       sharePrice: model.sharePrice,
       numberOfShares: model.numberOfShares,
       dividendYield: model.dividendYield,

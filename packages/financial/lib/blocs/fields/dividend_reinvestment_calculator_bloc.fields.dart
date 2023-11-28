@@ -50,7 +50,7 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexDividendReinvestmentCalculatorBlocFields copyWith({
-    MatexFinancialFrequency? dividendPaymentFrequency,
+    MatexFinancialFrequency? paymentFrequency,
     String? sharePrice,
     String? numberOfShares,
     String? dividendYield,
@@ -64,7 +64,7 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
   }) {
     return MatexDividendReinvestmentCalculatorBlocFields(
       dividendPaymentFrequency:
-          dividendPaymentFrequency ?? this.dividendPaymentFrequency,
+          paymentFrequency ?? this.dividendPaymentFrequency,
       sharePrice: sharePrice ?? this.sharePrice,
       numberOfShares: numberOfShares ?? this.numberOfShares,
       dividendYield: dividendYield ?? this.dividendYield,
@@ -82,7 +82,7 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexDividendReinvestmentCalculatorBlocFields copyWithDefaults({
-    bool resetDividendPaymentFrequency = false,
+    bool resetPaymentFrequency = false,
     bool resetSharePrice = false,
     bool resetNumberOfShares = false,
     bool resetDividendYield = false,
@@ -94,9 +94,8 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
     bool resetDrip = false,
   }) {
     return MatexDividendReinvestmentCalculatorBlocFields(
-      dividendPaymentFrequency: resetDividendPaymentFrequency
-          ? defaultFrequency
-          : dividendPaymentFrequency,
+      dividendPaymentFrequency:
+          resetPaymentFrequency ? defaultFrequency : dividendPaymentFrequency,
       sharePrice: resetSharePrice ? null : sharePrice,
       numberOfShares: resetNumberOfShares ? null : numberOfShares,
       dividendYield: resetDividendYield ? null : dividendYield,
@@ -125,7 +124,7 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
       annualDividendIncrease: model.annualDividendIncrease,
       taxRate: model.taxRate,
       drip: model.drip,
-      dividendPaymentFrequency: model.dividendPaymentFrequency,
+      paymentFrequency: model.dividendPaymentFrequency,
       delegate: model.delegate,
     );
   }

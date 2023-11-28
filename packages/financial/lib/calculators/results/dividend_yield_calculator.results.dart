@@ -1,48 +1,49 @@
 import 'package:tmodel/tmodel.dart';
 
-class DividendYieldResultsModel extends TModel {
+class MatexDividendYieldResultsModel extends TModel {
   // Define Properties
   final double? dividendYield;
 
   // Constructor
-  const DividendYieldResultsModel({
+  const MatexDividendYieldResultsModel({
     this.dividendYield,
   });
 
   // Clone Method
   @override
-  DividendYieldResultsModel clone() => copyWith();
+  MatexDividendYieldResultsModel clone() => copyWith();
 
   // From JSON Factory
-  factory DividendYieldResultsModel.fromJson(Map<String, dynamic> json) {
-    return DividendYieldResultsModel(
+  factory MatexDividendYieldResultsModel.fromJson(Map<String, dynamic> json) {
+    return MatexDividendYieldResultsModel(
       dividendYield: json['dividendYield'] as double?,
     );
   }
 
   // Copy With Method
   @override
-  DividendYieldResultsModel copyWith({
+  MatexDividendYieldResultsModel copyWith({
     double? dividendYield,
   }) {
-    return DividendYieldResultsModel(
+    return MatexDividendYieldResultsModel(
       dividendYield: dividendYield ?? this.dividendYield,
     );
   }
 
   // Copy With Defaults Method
   @override
-  DividendYieldResultsModel copyWithDefaults({
+  MatexDividendYieldResultsModel copyWithDefaults({
     bool resetDividendYield = false,
   }) {
-    return DividendYieldResultsModel(
+    return MatexDividendYieldResultsModel(
       dividendYield: resetDividendYield ? null : dividendYield,
     );
   }
 
   // Merge Method
   @override
-  DividendYieldResultsModel merge(covariant DividendYieldResultsModel model) {
+  MatexDividendYieldResultsModel merge(
+      covariant MatexDividendYieldResultsModel model) {
     return copyWith(
       dividendYield: model.dividendYield,
     );

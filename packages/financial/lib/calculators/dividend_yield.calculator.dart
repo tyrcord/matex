@@ -5,25 +5,25 @@ import 'package:t_helpers/helpers.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-class DividendYieldCalculatorFields extends MatexCalculator<
-    DividendYieldCalculatorState, DividendYieldResultsModel> {
-  DividendYieldCalculatorFields({
+class MatexDividendYieldCalculator extends MatexCalculator<
+    MatexDividendYieldCalculatorState, MatexDividendYieldResultsModel> {
+  MatexDividendYieldCalculator({
     super.defaultState,
     super.state,
   }) : super(validators: dividendYieldValidators);
 
   @override
-  DividendYieldCalculatorState initializeState() =>
-      const DividendYieldCalculatorState();
+  MatexDividendYieldCalculatorState initializeState() =>
+      const MatexDividendYieldCalculatorState();
 
   @override
-  DividendYieldCalculatorState initializeDefaultState() => initializeState();
+  MatexDividendYieldCalculatorState initializeDefaultState() =>
+      initializeState();
 
   // Properties
   double? get sharePrice => state.sharePrice;
-  double? get totalDividend => state.totalDividend;
-  MatexFinancialFrequency get dividendPaymentFrequency =>
-      state.dividendPaymentFrequency;
+  double? get totalDividend => state.totalDividends;
+  MatexFinancialFrequency get paymentFrequency => state.paymentFrequency;
 
   // Setters
   set sharePrice(double? value) {
@@ -31,27 +31,27 @@ class DividendYieldCalculatorFields extends MatexCalculator<
   }
 
   set totalDividend(double? value) {
-    setState(state.copyWith(totalDividend: value));
+    setState(state.copyWith(totalDividends: value));
   }
 
-  set dividendPaymentFrequency(MatexFinancialFrequency value) {
-    setState(state.copyWith(dividendPaymentFrequency: value));
+  set paymentFrequency(MatexFinancialFrequency value) {
+    setState(state.copyWith(paymentFrequency: value));
   }
 
   // Default Results
-  static const defaultResults = DividendYieldResultsModel(
+  static const defaultResults = MatexDividendYieldResultsModel(
     dividendYield: 0,
   );
 
   @override
-  DividendYieldResultsModel value() {
+  MatexDividendYieldResultsModel value() {
     if (!isValid) return defaultResults;
 
     final dSharePrice = toDecimal(state.sharePrice) ?? dZero;
-    final dDividendAmount = toDecimal(state.totalDividend) ?? dZero;
+    final dDividendAmount = toDecimal(state.totalDividends) ?? dZero;
 
     final dFrequency =
-        toDecimal(getPaymentFrequency(state.dividendPaymentFrequency)) ?? dZero;
+        toDecimal(getPaymentFrequency(state.paymentFrequency)) ?? dZero;
 
     if (dSharePrice == dZero) return defaultResults;
 
@@ -59,7 +59,7 @@ class DividendYieldCalculatorFields extends MatexCalculator<
       (dDividendAmount * dFrequency) / dSharePrice,
     );
 
-    return DividendYieldResultsModel(
+    return MatexDividendYieldResultsModel(
       dividendYield: dDividendYield.toDouble(),
     );
   }

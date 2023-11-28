@@ -53,7 +53,7 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
 
   @override
   DividendReinvestmentCalculatorState copyWith({
-    MatexFinancialFrequency? dividendPaymentFrequency,
+    MatexFinancialFrequency? paymentFrequency,
     double? sharePrice,
     double? numberOfShares,
     double? dividendYield,
@@ -66,7 +66,7 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
   }) {
     return DividendReinvestmentCalculatorState(
       dividendPaymentFrequency:
-          dividendPaymentFrequency ?? this.dividendPaymentFrequency,
+          paymentFrequency ?? this.dividendPaymentFrequency,
       sharePrice: sharePrice ?? this.sharePrice,
       numberOfShares: numberOfShares ?? this.numberOfShares,
       dividendYield: dividendYield ?? this.dividendYield,
@@ -83,7 +83,7 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
 
   @override
   DividendReinvestmentCalculatorState copyWithDefaults({
-    bool resetDividendPaymentFrequency = false,
+    bool resetPaymentFrequency = false,
     bool resetSharePrice = false,
     bool resetNumberOfShares = false,
     bool resetDividendYield = false,
@@ -95,9 +95,8 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
     bool resetDrip = false,
   }) {
     return DividendReinvestmentCalculatorState(
-      dividendPaymentFrequency: resetDividendPaymentFrequency
-          ? defaultFrequency
-          : dividendPaymentFrequency,
+      dividendPaymentFrequency:
+          resetPaymentFrequency ? defaultFrequency : dividendPaymentFrequency,
       sharePrice: resetSharePrice ? null : sharePrice,
       numberOfShares: resetNumberOfShares ? null : numberOfShares,
       dividendYield: resetDividendYield ? null : dividendYield,
@@ -116,7 +115,7 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
   DividendReinvestmentCalculatorState merge(
       covariant DividendReinvestmentCalculatorState model) {
     return copyWith(
-      dividendPaymentFrequency: model.dividendPaymentFrequency,
+      paymentFrequency: model.dividendPaymentFrequency,
       sharePrice: model.sharePrice,
       numberOfShares: model.numberOfShares,
       dividendYield: model.dividendYield,

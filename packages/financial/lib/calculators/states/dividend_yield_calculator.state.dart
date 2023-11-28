@@ -1,77 +1,76 @@
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 
-class DividendYieldCalculatorState extends MatexCalculatorState {
+class MatexDividendYieldCalculatorState extends MatexCalculatorState {
   static const defaultFrequency = MatexFinancialFrequency.annually;
 
+  final MatexFinancialFrequency paymentFrequency;
+  final double? totalDividends;
   final double? sharePrice;
-  final double? totalDividend;
 
-  final MatexFinancialFrequency dividendPaymentFrequency;
-
-  const DividendYieldCalculatorState({
+  const MatexDividendYieldCalculatorState({
+    MatexFinancialFrequency? paymentFrequency,
+    this.totalDividends,
     this.sharePrice,
-    this.totalDividend,
-    MatexFinancialFrequency? dividendPaymentFrequency,
-  }) : dividendPaymentFrequency = dividendPaymentFrequency ?? defaultFrequency;
+  }) : paymentFrequency = paymentFrequency ?? defaultFrequency;
 
   @override
-  DividendYieldCalculatorState clone() => copyWith();
+  MatexDividendYieldCalculatorState clone() => copyWith();
 
-  factory DividendYieldCalculatorState.fromJson(Map<String, dynamic> json) {
-    return DividendYieldCalculatorState(
+  factory MatexDividendYieldCalculatorState.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    return MatexDividendYieldCalculatorState(
       sharePrice: json['sharePrice'] as double?,
-      totalDividend: json['totalDividend'] as double?,
-      dividendPaymentFrequency:
+      totalDividends: json['totalDividends'] as double?,
+      paymentFrequency:
           json['dividendPaymentFrequency'] as MatexFinancialFrequency? ??
               defaultFrequency,
     );
   }
 
   @override
-  DividendYieldCalculatorState copyWith({
+  MatexDividendYieldCalculatorState copyWith({
     double? sharePrice,
-    double? totalDividend,
-    MatexFinancialFrequency? dividendPaymentFrequency,
+    double? totalDividends,
+    MatexFinancialFrequency? paymentFrequency,
   }) {
-    return DividendYieldCalculatorState(
+    return MatexDividendYieldCalculatorState(
+      paymentFrequency: paymentFrequency ?? this.paymentFrequency,
+      totalDividends: totalDividends ?? this.totalDividends,
       sharePrice: sharePrice ?? this.sharePrice,
-      totalDividend: totalDividend ?? this.totalDividend,
-      dividendPaymentFrequency:
-          dividendPaymentFrequency ?? this.dividendPaymentFrequency,
     );
   }
 
   @override
-  DividendYieldCalculatorState copyWithDefaults({
-    bool resetSharePrice = false,
+  MatexDividendYieldCalculatorState copyWithDefaults({
+    bool resetPaymentFrequency = false,
     bool resetTotalDividend = false,
-    bool resetDividendPaymentFrequency = false,
+    bool resetSharePrice = false,
   }) {
-    return DividendYieldCalculatorState(
+    return MatexDividendYieldCalculatorState(
       sharePrice: resetSharePrice ? null : sharePrice,
-      totalDividend: resetTotalDividend ? null : totalDividend,
-      dividendPaymentFrequency: resetDividendPaymentFrequency
-          ? defaultFrequency
-          : dividendPaymentFrequency,
+      totalDividends: resetTotalDividend ? null : totalDividends,
+      paymentFrequency:
+          resetPaymentFrequency ? defaultFrequency : paymentFrequency,
     );
   }
 
   @override
-  DividendYieldCalculatorState merge(
-    covariant DividendYieldCalculatorState model,
+  MatexDividendYieldCalculatorState merge(
+    covariant MatexDividendYieldCalculatorState model,
   ) {
     return copyWith(
+      paymentFrequency: model.paymentFrequency,
+      totalDividends: model.totalDividends,
       sharePrice: model.sharePrice,
-      totalDividend: model.totalDividend,
-      dividendPaymentFrequency: model.dividendPaymentFrequency,
     );
   }
 
   @override
   List<Object?> get props => [
+        paymentFrequency,
+        totalDividends,
         sharePrice,
-        totalDividend,
-        dividendPaymentFrequency,
       ];
 }

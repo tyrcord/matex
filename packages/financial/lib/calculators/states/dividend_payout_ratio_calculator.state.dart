@@ -29,11 +29,11 @@ class DividendPayoutRatioCalculatorState extends MatexCalculatorState {
   @override
   DividendPayoutRatioCalculatorState copyWith({
     double? netIncome,
-    double? totalDividend,
+    double? totalDividends,
   }) {
     return DividendPayoutRatioCalculatorState(
       netIncome: netIncome ?? this.netIncome,
-      totalDividend: totalDividend ?? this.totalDividend,
+      totalDividend: totalDividends ?? this.totalDividend,
     );
   }
 
@@ -56,7 +56,7 @@ class DividendPayoutRatioCalculatorState extends MatexCalculatorState {
   ) {
     return copyWith(
       netIncome: model.netIncome,
-      totalDividend: model.totalDividend,
+      totalDividends: model.totalDividend,
     );
   }
 

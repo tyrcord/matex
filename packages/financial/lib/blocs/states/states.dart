@@ -6,3 +6,4 @@ export 'forex_pip_value_calculator.state.dart';
 export 'financial_instruments.state.dart';
 export 'instrument_favorite.state.dart';
 export 'forex_position_size_calculator.state.dart';
+export 'dividend_yield_calculator_bloc.state.dart';

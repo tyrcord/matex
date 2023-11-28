@@ -34,12 +34,12 @@ class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
   @override
   MatexDividendPayoutRatioCalculatorBlocFields copyWith({
     String? netIncome,
-    String? totalDividend,
+    String? totalDividends,
     FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexDividendPayoutRatioCalculatorBlocFields(
       netIncome: netIncome ?? this.netIncome,
-      totalDividend: totalDividend ?? this.totalDividend,
+      totalDividend: totalDividends ?? this.totalDividend,
       delegate: delegate,
     );
   }
@@ -62,7 +62,7 @@ class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
   ) {
     return copyWith(
       netIncome: model.netIncome,
-      totalDividend: model.totalDividend,
+      totalDividends: model.totalDividend,
       delegate: model.delegate,
     );
   }

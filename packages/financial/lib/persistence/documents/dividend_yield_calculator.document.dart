@@ -4,46 +4,44 @@ import 'package:matex_financial/financial.dart';
 class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   static const defaultFrequency = MatexFinancialFrequency.annually;
 
+  late final String? paymentFrequency;
+  late final String? totalDividends;
   late final String? sharePrice;
-  late final String? totalDividend;
-  late final MatexFinancialFrequency dividendPaymentFrequency;
 
   MatexDividendYieldCalculatorDocument({
+    String? paymentFrequency,
+    String? totalDividends,
     String? sharePrice,
-    String? totalDividend,
-    MatexFinancialFrequency? dividendPaymentFrequency,
   }) {
+    this.paymentFrequency = paymentFrequency ?? defaultFrequency.name;
+    this.totalDividends = assignValue(totalDividends);
     this.sharePrice = assignValue(sharePrice);
-    this.totalDividend = assignValue(totalDividend);
-    this.dividendPaymentFrequency =
-        dividendPaymentFrequency ?? defaultFrequency;
   }
 
   @override
   MatexDividendYieldCalculatorDocument clone() => copyWith();
 
   factory MatexDividendYieldCalculatorDocument.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     return MatexDividendYieldCalculatorDocument(
+      totalDividends: json['totalDividends'] as String?,
       sharePrice: json['sharePrice'] as String?,
-      totalDividend: json['totalDividend'] as String?,
-      dividendPaymentFrequency:
-          json['dividendPaymentFrequency'] as MatexFinancialFrequency? ??
-              defaultFrequency,
+      paymentFrequency:
+          json['dividendPaymentFrequency'] as String? ?? defaultFrequency.name,
     );
   }
 
   @override
   MatexDividendYieldCalculatorDocument copyWith({
     String? sharePrice,
-    String? totalDividend,
-    MatexFinancialFrequency? dividendPaymentFrequency,
+    String? totalDividends,
+    String? paymentFrequency,
   }) {
     return MatexDividendYieldCalculatorDocument(
+      paymentFrequency: paymentFrequency ?? this.paymentFrequency,
+      totalDividends: totalDividends ?? this.totalDividends,
       sharePrice: sharePrice ?? this.sharePrice,
-      totalDividend: totalDividend ?? this.totalDividend,
-      dividendPaymentFrequency:
-          dividendPaymentFrequency ?? this.dividendPaymentFrequency,
     );
   }
 
@@ -51,14 +49,13 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   MatexDividendYieldCalculatorDocument copyWithDefaults({
     bool resetSharePrice = false,
     bool resetTotalDividend = false,
-    bool resetDividendPaymentFrequency = false,
+    bool resetPaymentFrequency = false,
   }) {
     return MatexDividendYieldCalculatorDocument(
       sharePrice: resetSharePrice ? null : sharePrice,
-      totalDividend: resetTotalDividend ? null : totalDividend,
-      dividendPaymentFrequency: resetDividendPaymentFrequency
-          ? defaultFrequency
-          : dividendPaymentFrequency,
+      totalDividends: resetTotalDividend ? null : totalDividends,
+      paymentFrequency:
+          resetPaymentFrequency ? defaultFrequency.name : paymentFrequency,
     );
   }
 
@@ -67,34 +64,34 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
     covariant MatexDividendYieldCalculatorDocument model,
   ) {
     return copyWith(
+      paymentFrequency: model.paymentFrequency,
+      totalDividends: model.totalDividends,
       sharePrice: model.sharePrice,
-      totalDividend: model.totalDividend,
-      dividendPaymentFrequency: model.dividendPaymentFrequency,
     );
   }
 
   @override
   MatexDividendYieldCalculatorBlocFields toFields() {
     return MatexDividendYieldCalculatorBlocFields(
+      paymentFrequency: parseFinancialFrequencyFromString(paymentFrequency),
+      totalDividends: totalDividends,
       sharePrice: sharePrice,
-      totalDividend: totalDividend,
-      dividendPaymentFrequency: dividendPaymentFrequency,
     );
   }
 
   @override
   List<Object?> get props => [
+        paymentFrequency,
+        totalDividends,
         sharePrice,
-        totalDividend,
-        dividendPaymentFrequency,
       ];
 
   @override
   Map<String, dynamic> toJson() {
     return {
+      'paymentFrequency': paymentFrequency,
+      'totalDividends': totalDividends,
       'sharePrice': sharePrice,
-      'totalDividend': totalDividend,
-      'dividendPaymentFrequency': dividendPaymentFrequency,
       ...super.toJson(),
     };
   }

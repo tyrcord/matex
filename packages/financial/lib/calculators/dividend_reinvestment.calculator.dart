@@ -37,7 +37,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
 
   // Setters
   set dividendPaymentFrequency(MatexFinancialFrequency value) {
-    setState(state.copyWith(dividendPaymentFrequency: value));
+    setState(state.copyWith(paymentFrequency: value));
   }
 
   set sharePrice(double? value) {

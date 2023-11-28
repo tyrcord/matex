@@ -7,6 +7,7 @@ export 'financial_instruments.bloc.dart';
 export 'financial_instrument_favorites.bloc.dart';
 export 'financial.bloc.dart';
 export 'forex_position_size_calculator.bloc.dart';
+export 'dividend_yield_calculator.bloc.dart';
 
 export './states/states.dart';
 export './events/events.dart';

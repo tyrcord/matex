@@ -4,3 +4,7 @@ export './profit_and_loss.data_provider.dart';
 export 'forex_pip_value_calculator.data_provider.dart';
 export 'instrument_favorite.data_provider.dart';
 export 'forex_position_size_calculator.data_provider.dart';
+
+export 'dividend_yield.data_provider.dart';
+export 'dividend_payout_ratio.data_provider.dart';
+export 'dividend_reinvestment.data_provider.dart';
