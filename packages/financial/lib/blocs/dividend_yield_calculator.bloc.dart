@@ -47,6 +47,14 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
       formattedDividendYield: localizePercentage(
         value: results.dividendYield,
       ),
+      totalDividends: results.totalDividends,
+      formattedTotalDividends: localizeCurrency(
+        value: results.totalDividends,
+      ),
+      sharePrice: results.sharePrice,
+      formattedSharePrice: localizeCurrency(
+        value: results.sharePrice,
+      ),
     );
   }
 
@@ -62,6 +70,10 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWith(totalDividends: value);
       } else if (key == MatexDividendYieldCalculatorBlocKey.paymentFrequency) {
         return document.copyWith(paymentFrequency: value);
+      }
+    } else if (value is MatexFinancialFrequency) {
+      if (key == MatexDividendYieldCalculatorBlocKey.paymentFrequency) {
+        return document.copyWith(paymentFrequency: value.name);
       }
     }
 
@@ -108,6 +120,8 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
     MatexDividendYieldCalculatorDocument document,
   ) async {
     final paymentFrequency = document.paymentFrequency;
+
+    print(paymentFrequency);
 
     return _kDefaultDividendYieldBlocState.copyWith(
       results: await retrieveDefaultResult(),

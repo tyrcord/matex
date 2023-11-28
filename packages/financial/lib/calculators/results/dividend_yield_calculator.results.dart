@@ -3,10 +3,14 @@ import 'package:tmodel/tmodel.dart';
 class MatexDividendYieldResultsModel extends TModel {
   // Define Properties
   final double? dividendYield;
+  final double? totalDividends;
+  final double? sharePrice;
 
   // Constructor
   const MatexDividendYieldResultsModel({
     this.dividendYield,
+    this.totalDividends,
+    this.sharePrice,
   });
 
   // Clone Method
@@ -17,6 +21,8 @@ class MatexDividendYieldResultsModel extends TModel {
   factory MatexDividendYieldResultsModel.fromJson(Map<String, dynamic> json) {
     return MatexDividendYieldResultsModel(
       dividendYield: json['dividendYield'] as double?,
+      sharePrice: json['sharePrice'] as double?,
+      totalDividends: json['totalDividends'] as double?,
     );
   }
 
@@ -24,9 +30,13 @@ class MatexDividendYieldResultsModel extends TModel {
   @override
   MatexDividendYieldResultsModel copyWith({
     double? dividendYield,
+    double? totalDividends,
+    double? sharePrice,
   }) {
     return MatexDividendYieldResultsModel(
       dividendYield: dividendYield ?? this.dividendYield,
+      totalDividends: totalDividends ?? this.totalDividends,
+      sharePrice: sharePrice ?? this.sharePrice,
     );
   }
 
@@ -34,9 +44,13 @@ class MatexDividendYieldResultsModel extends TModel {
   @override
   MatexDividendYieldResultsModel copyWithDefaults({
     bool resetDividendYield = false,
+    bool resetTotalDividends = false,
+    bool resetSharePrice = false,
   }) {
     return MatexDividendYieldResultsModel(
       dividendYield: resetDividendYield ? null : dividendYield,
+      totalDividends: resetTotalDividends ? null : totalDividends,
+      sharePrice: resetSharePrice ? null : sharePrice,
     );
   }
 
@@ -46,6 +60,8 @@ class MatexDividendYieldResultsModel extends TModel {
       covariant MatexDividendYieldResultsModel model) {
     return copyWith(
       dividendYield: model.dividendYield,
+      totalDividends: model.totalDividends,
+      sharePrice: model.sharePrice,
     );
   }
 
@@ -57,6 +73,8 @@ class MatexDividendYieldResultsModel extends TModel {
   Map<String, dynamic> toJson() {
     return {
       'dividendYield': dividendYield,
+      'sharePrice': sharePrice,
+      'totalDividends': totalDividends,
     };
   }
 }

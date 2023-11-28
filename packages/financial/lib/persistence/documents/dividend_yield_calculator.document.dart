@@ -28,7 +28,7 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
       totalDividends: json['totalDividends'] as String?,
       sharePrice: json['sharePrice'] as String?,
       paymentFrequency:
-          json['dividendPaymentFrequency'] as String? ?? defaultFrequency.name,
+          json['paymentFrequency'] as String? ?? defaultFrequency.name,
     );
   }
 

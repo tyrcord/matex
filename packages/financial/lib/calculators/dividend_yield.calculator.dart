@@ -47,20 +47,20 @@ class MatexDividendYieldCalculator extends MatexCalculator<
   MatexDividendYieldResultsModel value() {
     if (!isValid) return defaultResults;
 
-    final dSharePrice = toDecimal(state.sharePrice) ?? dZero;
-    final dDividendAmount = toDecimal(state.totalDividends) ?? dZero;
-
-    final dFrequency =
-        toDecimal(getPaymentFrequency(state.paymentFrequency)) ?? dZero;
+    final dSharePrice = toDecimalOrDefault(state.sharePrice);
 
     if (dSharePrice == dZero) return defaultResults;
 
-    final dDividendYield = decimalFromRational(
-      (dDividendAmount * dFrequency) / dSharePrice,
-    );
+    final dDividendAmount = toDecimalOrDefault(state.totalDividends);
+    final paymentFrequency = getPaymentFrequency(state.paymentFrequency);
+    final dFrequency = toDecimalOrDefault(paymentFrequency);
+    final dTotalDividends = dDividendAmount * dFrequency;
+    final dDividendYield = decimalFromRational(dTotalDividends / dSharePrice);
 
     return MatexDividendYieldResultsModel(
+      totalDividends: dTotalDividends.toDouble(),
       dividendYield: dDividendYield.toDouble(),
+      sharePrice: dSharePrice.toDouble(),
     );
   }
 }
