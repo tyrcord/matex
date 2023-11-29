@@ -6,7 +6,7 @@ class MatexDividendReinvestmentCalculatorDocument
   static const defaultFrequency = MatexFinancialFrequency.annually;
   static const defaultDrip = true;
 
-  late final MatexFinancialFrequency dividendPaymentFrequency;
+  late final String? paymentFrequency;
   late final String? sharePrice;
   late final String? numberOfShares;
   late final String? dividendYield;
@@ -18,7 +18,7 @@ class MatexDividendReinvestmentCalculatorDocument
   late final bool drip;
 
   MatexDividendReinvestmentCalculatorDocument({
-    MatexFinancialFrequency? dividendPaymentFrequency,
+    String? paymentFrequency,
     String? sharePrice,
     String? numberOfShares,
     String? dividendYield,
@@ -38,8 +38,7 @@ class MatexDividendReinvestmentCalculatorDocument
     this.annualDividendIncrease = assignValue(annualDividendIncrease);
     this.taxRate = assignValue(taxRate);
     this.drip = drip ?? defaultDrip;
-    this.dividendPaymentFrequency =
-        dividendPaymentFrequency ?? defaultFrequency;
+    this.paymentFrequency = paymentFrequency ?? defaultFrequency.name;
   }
 
   @override
@@ -48,9 +47,8 @@ class MatexDividendReinvestmentCalculatorDocument
   factory MatexDividendReinvestmentCalculatorDocument.fromJson(
       Map<String, dynamic> json) {
     return MatexDividendReinvestmentCalculatorDocument(
-      dividendPaymentFrequency:
-          json['dividendPaymentFrequency'] as MatexFinancialFrequency? ??
-              defaultFrequency,
+      paymentFrequency:
+          json['paymentFrequency'] as String? ?? defaultFrequency.name,
       sharePrice: json['sharePrice'] as String?,
       numberOfShares: json['numberOfShares'] as String?,
       dividendYield: json['dividendYield'] as String?,
@@ -77,8 +75,6 @@ class MatexDividendReinvestmentCalculatorDocument
     bool resetDrip = false,
   }) {
     return MatexDividendReinvestmentCalculatorDocument(
-      dividendPaymentFrequency:
-          resetPaymentFrequency ? defaultFrequency : dividendPaymentFrequency,
       sharePrice: resetSharePrice ? null : sharePrice,
       numberOfShares: resetNumberOfShares ? null : numberOfShares,
       dividendYield: resetDividendYield ? null : dividendYield,
@@ -90,12 +86,14 @@ class MatexDividendReinvestmentCalculatorDocument
           resetAnnualDividendIncrease ? null : annualDividendIncrease,
       taxRate: resetTaxRate ? null : taxRate,
       drip: resetDrip ? defaultDrip : drip,
+      paymentFrequency:
+          resetPaymentFrequency ? defaultFrequency.name : paymentFrequency,
     );
   }
 
   @override
   MatexDividendReinvestmentCalculatorDocument copyWith({
-    MatexFinancialFrequency? paymentFrequency,
+    String? paymentFrequency,
     String? sharePrice,
     String? numberOfShares,
     String? dividendYield,
@@ -107,7 +105,7 @@ class MatexDividendReinvestmentCalculatorDocument
     bool? drip,
   }) {
     return MatexDividendReinvestmentCalculatorDocument(
-      dividendPaymentFrequency: paymentFrequency ?? dividendPaymentFrequency,
+      paymentFrequency: paymentFrequency ?? this.paymentFrequency,
       sharePrice: sharePrice ?? this.sharePrice,
       numberOfShares: numberOfShares ?? this.numberOfShares,
       dividendYield: dividendYield ?? this.dividendYield,
@@ -127,7 +125,7 @@ class MatexDividendReinvestmentCalculatorDocument
     covariant MatexDividendReinvestmentCalculatorDocument model,
   ) {
     return copyWith(
-      paymentFrequency: model.dividendPaymentFrequency,
+      paymentFrequency: model.paymentFrequency,
       sharePrice: model.sharePrice,
       numberOfShares: model.numberOfShares,
       dividendYield: model.dividendYield,
@@ -143,7 +141,7 @@ class MatexDividendReinvestmentCalculatorDocument
   @override
   MatexDividendReinvestmentCalculatorBlocFields toFields() {
     return MatexDividendReinvestmentCalculatorBlocFields(
-      dividendPaymentFrequency: dividendPaymentFrequency,
+      paymentFrequency: parseFinancialFrequencyFromString(paymentFrequency),
       sharePrice: sharePrice,
       numberOfShares: numberOfShares,
       dividendYield: dividendYield,
@@ -159,7 +157,7 @@ class MatexDividendReinvestmentCalculatorDocument
   @override
   Map<String, dynamic> toJson() {
     return {
-      'dividendPaymentFrequency': dividendPaymentFrequency,
+      'paymentFrequency': paymentFrequency,
       'sharePrice': sharePrice,
       'numberOfShares': numberOfShares,
       'dividendYield': dividendYield,
@@ -175,7 +173,7 @@ class MatexDividendReinvestmentCalculatorDocument
 
   @override
   List<Object?> get props => [
-        dividendPaymentFrequency,
+        paymentFrequency,
         sharePrice,
         numberOfShares,
         dividendYield,

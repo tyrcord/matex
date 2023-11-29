@@ -3,7 +3,7 @@ import 'package:matex_core/core.dart';
 // Project imports
 import 'package:matex_financial/financial.dart';
 
-List<MatexCalculatorValidator<DividendReinvestmentCalculatorState>>
+List<MatexCalculatorValidator<MatexDividendReinvestmentCalculatorState>>
     dividendReinvestmentValidators = [
   (state) {
     return state.numberOfShares != null &&

@@ -1,7 +1,7 @@
 import 'package:matex_financial/models/dividend_reinvestment_payout_yearly_report.model.dart';
 import 'package:tmodel/tmodel.dart';
 
-class DividendReinvestmentCalculatorResults extends TModel {
+class MatexDividendReinvestmentCalculatorResults extends TModel {
   // Define Properties
   final List<MatexDividendReinvestementYearlyPayoutReport>? reports;
   final double? netDividendeIncome;
@@ -15,7 +15,7 @@ class DividendReinvestmentCalculatorResults extends TModel {
   final double? sharePrice;
 
   // Constructor
-  const DividendReinvestmentCalculatorResults({
+  const MatexDividendReinvestmentCalculatorResults({
     this.netDividendeIncome,
     this.grossDividendPaid,
     this.totalContribution,
@@ -30,15 +30,15 @@ class DividendReinvestmentCalculatorResults extends TModel {
 
   // Clone Method
   @override
-  DividendReinvestmentCalculatorResults clone() => copyWith();
+  MatexDividendReinvestmentCalculatorResults clone() => copyWith();
 
   // From JSON Factory
-  factory DividendReinvestmentCalculatorResults.fromJson(
+  factory MatexDividendReinvestmentCalculatorResults.fromJson(
     Map<String, dynamic> json,
   ) {
     final reports = (json['reports'] as List<Map<String, dynamic>>?);
 
-    return DividendReinvestmentCalculatorResults(
+    return MatexDividendReinvestmentCalculatorResults(
       netDividendeIncome: json['netDividendeIncome'] as double?,
       grossDividendPaid: json['grossDividendPaid'] as double?,
       totalContribution: json['totalContribution'] as double?,
@@ -56,7 +56,7 @@ class DividendReinvestmentCalculatorResults extends TModel {
 
   // Copy With Method
   @override
-  DividendReinvestmentCalculatorResults copyWith({
+  MatexDividendReinvestmentCalculatorResults copyWith({
     List<MatexDividendReinvestementYearlyPayoutReport>? reports,
     double? netDividendeIncome,
     double? grossDividendPaid,
@@ -68,7 +68,7 @@ class DividendReinvestmentCalculatorResults extends TModel {
     double? totalReturn,
     double? sharePrice,
   }) {
-    return DividendReinvestmentCalculatorResults(
+    return MatexDividendReinvestmentCalculatorResults(
       netDividendeIncome: netDividendeIncome ?? this.netDividendeIncome,
       grossDividendPaid: grossDividendPaid ?? this.grossDividendPaid,
       totalContribution: totalContribution ?? this.totalContribution,
@@ -84,7 +84,7 @@ class DividendReinvestmentCalculatorResults extends TModel {
 
   // Copy With Defaults Method
   @override
-  DividendReinvestmentCalculatorResults copyWithDefaults({
+  MatexDividendReinvestmentCalculatorResults copyWithDefaults({
     bool resetNetDividendeIncome = false,
     bool resetGrossDividendPaid = false,
     bool resetTotalContribution = false,
@@ -96,7 +96,7 @@ class DividendReinvestmentCalculatorResults extends TModel {
     bool resetSharePrice = false,
     bool resetReports = false,
   }) {
-    return DividendReinvestmentCalculatorResults(
+    return MatexDividendReinvestmentCalculatorResults(
       netDividendeIncome: resetNetDividendeIncome ? null : netDividendeIncome,
       grossDividendPaid: resetGrossDividendPaid ? null : grossDividendPaid,
       totalContribution: resetTotalContribution ? null : totalContribution,
@@ -112,8 +112,8 @@ class DividendReinvestmentCalculatorResults extends TModel {
 
   // Merge Method
   @override
-  DividendReinvestmentCalculatorResults merge(
-      covariant DividendReinvestmentCalculatorResults model) {
+  MatexDividendReinvestmentCalculatorResults merge(
+      covariant MatexDividendReinvestmentCalculatorResults model) {
     return copyWith(
       netDividendeIncome: model.netDividendeIncome,
       grossDividendPaid: model.grossDividendPaid,

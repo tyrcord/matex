@@ -1,13 +1,14 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
   static const defaultFrequency = MatexFinancialFrequency.annually;
   static const defaultDrip = true;
 
-  late final MatexFinancialFrequency dividendPaymentFrequency;
+  late final MatexFinancialFrequency paymentFrequency;
   late final String? sharePrice;
   late final String? numberOfShares;
   late final String? dividendYield;
@@ -17,6 +18,16 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
   late final String? annualDividendIncrease;
   late final String? taxRate;
   late final bool drip;
+
+  String get formattedSharePrice {
+    final value = parseFieldValueToDouble(sharePrice);
+
+    return localizeCurrency(value: value);
+  }
+
+  String get formattedPaymentFrequency {
+    return getLocaleKeyForFinancialFrequency(paymentFrequency).tr();
+  }
 
   MatexDividendReinvestmentCalculatorBlocFields({
     String? sharePrice,
@@ -28,7 +39,7 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
     String? annualDividendIncrease,
     String? taxRate,
     bool? drip = defaultDrip,
-    MatexFinancialFrequency? dividendPaymentFrequency,
+    MatexFinancialFrequency? paymentFrequency,
     FastCalculatorBlocDelegate? delegate,
   }) {
     this.sharePrice = assignValue(sharePrice);
@@ -40,8 +51,7 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
     this.annualDividendIncrease = assignValue(annualDividendIncrease);
     this.taxRate = assignValue(taxRate);
     this.drip = drip ?? defaultDrip;
-    this.dividendPaymentFrequency =
-        dividendPaymentFrequency ?? defaultFrequency;
+    this.paymentFrequency = paymentFrequency ?? defaultFrequency;
     this.delegate = delegate;
   }
 
@@ -63,7 +73,7 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
     FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexDividendReinvestmentCalculatorBlocFields(
-      dividendPaymentFrequency: paymentFrequency ?? dividendPaymentFrequency,
+      paymentFrequency: paymentFrequency ?? paymentFrequency,
       sharePrice: sharePrice ?? this.sharePrice,
       numberOfShares: numberOfShares ?? this.numberOfShares,
       dividendYield: dividendYield ?? this.dividendYield,
@@ -93,8 +103,8 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
     bool resetDrip = false,
   }) {
     return MatexDividendReinvestmentCalculatorBlocFields(
-      dividendPaymentFrequency:
-          resetPaymentFrequency ? defaultFrequency : dividendPaymentFrequency,
+      paymentFrequency:
+          resetPaymentFrequency ? defaultFrequency : paymentFrequency,
       sharePrice: resetSharePrice ? null : sharePrice,
       numberOfShares: resetNumberOfShares ? null : numberOfShares,
       dividendYield: resetDividendYield ? null : dividendYield,
@@ -114,23 +124,23 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
     covariant MatexDividendReinvestmentCalculatorBlocFields model,
   ) {
     return copyWith(
-      sharePrice: model.sharePrice,
+      annualSharePriceIncrease: model.annualSharePriceIncrease,
+      annualDividendIncrease: model.annualDividendIncrease,
+      annualContribution: model.annualContribution,
+      paymentFrequency: model.paymentFrequency,
       numberOfShares: model.numberOfShares,
       dividendYield: model.dividendYield,
       yearsToGrow: model.yearsToGrow,
-      annualContribution: model.annualContribution,
-      annualSharePriceIncrease: model.annualSharePriceIncrease,
-      annualDividendIncrease: model.annualDividendIncrease,
+      sharePrice: model.sharePrice,
+      delegate: model.delegate,
       taxRate: model.taxRate,
       drip: model.drip,
-      paymentFrequency: model.dividendPaymentFrequency,
-      delegate: model.delegate,
     );
   }
 
   @override
   List<Object?> get props => [
-        dividendPaymentFrequency,
+        paymentFrequency,
         sharePrice,
         numberOfShares,
         dividendYield,

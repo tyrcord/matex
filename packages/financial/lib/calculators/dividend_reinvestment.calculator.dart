@@ -7,19 +7,19 @@ import 'package:t_helpers/helpers.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexDividendReinvestmentCalculator extends MatexCalculator<
-    DividendReinvestmentCalculatorState,
-    DividendReinvestmentCalculatorResults> {
+    MatexDividendReinvestmentCalculatorState,
+    MatexDividendReinvestmentCalculatorResults> {
   MatexDividendReinvestmentCalculator({
     super.defaultState,
     super.state,
   }) : super(validators: dividendReinvestmentValidators);
 
   @override
-  DividendReinvestmentCalculatorState initializeState() =>
-      const DividendReinvestmentCalculatorState();
+  MatexDividendReinvestmentCalculatorState initializeState() =>
+      const MatexDividendReinvestmentCalculatorState();
 
   @override
-  DividendReinvestmentCalculatorState initializeDefaultState() =>
+  MatexDividendReinvestmentCalculatorState initializeDefaultState() =>
       initializeState();
 
   // Properties
@@ -104,12 +104,12 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
       toDecimalOrDefault(state.annualContribution);
 
   // Default Results
-  static const defaultResults = DividendReinvestmentCalculatorResults(
+  static const defaultResults = MatexDividendReinvestmentCalculatorResults(
     endingBalance: 0,
   );
 
   @override
-  DividendReinvestmentCalculatorResults value() {
+  MatexDividendReinvestmentCalculatorResults value() {
     if (!isValid) return defaultResults;
 
     final reports = <MatexDividendReinvestementYearlyPayoutReport>[];
@@ -133,7 +133,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
       }
     }
 
-    return DividendReinvestmentCalculatorResults(
+    return MatexDividendReinvestmentCalculatorResults(
       totalReturn: _computeTotalReturn(lastReport!.endingBalance!).toDouble(),
       grossDividendPaid: lastReport.cumulativeGrossAmount,
       netDividendeIncome: futureReport!.netDividendPayout,

@@ -5,3 +5,4 @@ export 'forex_pip_value_calculator_bloc.results.dart';
 export 'forex_position_size_calculator_bloc.results.dart';
 export 'dividend_yield_calculator_bloc.results.dart';
 export 'dividend_payout_ratio_calculator_bloc.results.dart';
+export 'dividend_reinvestment_calculator_bloc.results.dart';

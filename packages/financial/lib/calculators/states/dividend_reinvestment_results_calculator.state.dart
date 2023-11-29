@@ -1,7 +1,7 @@
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 
-class DividendReinvestmentCalculatorState extends MatexCalculatorState {
+class MatexDividendReinvestmentCalculatorState extends MatexCalculatorState {
   static const defaultFrequency = MatexFinancialFrequency.annually;
   static const defaultDrip = true;
 
@@ -16,7 +16,7 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
   final double? taxRate;
   final bool drip;
 
-  const DividendReinvestmentCalculatorState({
+  const MatexDividendReinvestmentCalculatorState({
     this.dividendPaymentFrequency = defaultFrequency,
     this.sharePrice,
     this.numberOfShares,
@@ -30,12 +30,12 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
   });
 
   @override
-  DividendReinvestmentCalculatorState clone() => copyWith();
+  MatexDividendReinvestmentCalculatorState clone() => copyWith();
 
-  factory DividendReinvestmentCalculatorState.fromJson(
+  factory MatexDividendReinvestmentCalculatorState.fromJson(
     Map<String, dynamic> json,
   ) {
-    return DividendReinvestmentCalculatorState(
+    return MatexDividendReinvestmentCalculatorState(
       dividendPaymentFrequency:
           json['dividendPaymentFrequency'] as MatexFinancialFrequency? ??
               defaultFrequency,
@@ -52,7 +52,7 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
   }
 
   @override
-  DividendReinvestmentCalculatorState copyWith({
+  MatexDividendReinvestmentCalculatorState copyWith({
     MatexFinancialFrequency? paymentFrequency,
     double? sharePrice,
     double? numberOfShares,
@@ -64,7 +64,7 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
     double? taxRate,
     bool? drip,
   }) {
-    return DividendReinvestmentCalculatorState(
+    return MatexDividendReinvestmentCalculatorState(
       dividendPaymentFrequency: paymentFrequency ?? dividendPaymentFrequency,
       sharePrice: sharePrice ?? this.sharePrice,
       numberOfShares: numberOfShares ?? this.numberOfShares,
@@ -81,7 +81,7 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
   }
 
   @override
-  DividendReinvestmentCalculatorState copyWithDefaults({
+  MatexDividendReinvestmentCalculatorState copyWithDefaults({
     bool resetPaymentFrequency = false,
     bool resetSharePrice = false,
     bool resetNumberOfShares = false,
@@ -93,7 +93,7 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
     bool resetTaxRate = false,
     bool resetDrip = false,
   }) {
-    return DividendReinvestmentCalculatorState(
+    return MatexDividendReinvestmentCalculatorState(
       dividendPaymentFrequency:
           resetPaymentFrequency ? defaultFrequency : dividendPaymentFrequency,
       sharePrice: resetSharePrice ? null : sharePrice,
@@ -111,8 +111,8 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
   }
 
   @override
-  DividendReinvestmentCalculatorState merge(
-      covariant DividendReinvestmentCalculatorState model) {
+  MatexDividendReinvestmentCalculatorState merge(
+      covariant MatexDividendReinvestmentCalculatorState model) {
     return copyWith(
       paymentFrequency: model.dividendPaymentFrequency,
       sharePrice: model.sharePrice,
