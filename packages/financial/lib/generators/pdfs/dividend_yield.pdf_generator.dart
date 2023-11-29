@@ -57,7 +57,7 @@ class MatexDividendYieldCalculatorPdfGenerator {
       ),
       FastReportEntry(
         name: FinanceDividendLocaleKeys.dividend_label_dividend_amount.tr(),
-        value: fields.formattedTotalDividend,
+        value: fields.formattedDividendAmount,
       ),
       FastReportEntry(
         name: FinanceDividendLocaleKeys

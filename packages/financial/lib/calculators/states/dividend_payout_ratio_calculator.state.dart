@@ -29,11 +29,11 @@ class DividendPayoutRatioCalculatorState extends MatexCalculatorState {
   @override
   DividendPayoutRatioCalculatorState copyWith({
     double? netIncome,
-    double? totalDividends,
+    double? dividendAmount,
   }) {
     return DividendPayoutRatioCalculatorState(
       netIncome: netIncome ?? this.netIncome,
-      totalDividend: totalDividends ?? this.totalDividend,
+      totalDividend: dividendAmount ?? this.totalDividend,
     );
   }
 
@@ -41,11 +41,11 @@ class DividendPayoutRatioCalculatorState extends MatexCalculatorState {
   @override
   DividendPayoutRatioCalculatorState copyWithDefaults({
     bool resetNetIncome = false,
-    bool resetTotalDividend = false,
+    bool resetTotalDividends = false,
   }) {
     return DividendPayoutRatioCalculatorState(
       netIncome: resetNetIncome ? null : netIncome,
-      totalDividend: resetTotalDividend ? null : totalDividend,
+      totalDividend: resetTotalDividends ? null : totalDividend,
     );
   }
 
@@ -56,7 +56,7 @@ class DividendPayoutRatioCalculatorState extends MatexCalculatorState {
   ) {
     return copyWith(
       netIncome: model.netIncome,
-      totalDividends: model.totalDividend,
+      dividendAmount: model.totalDividend,
     );
   }
 

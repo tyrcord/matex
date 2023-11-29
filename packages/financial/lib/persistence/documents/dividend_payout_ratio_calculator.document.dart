@@ -4,14 +4,14 @@ import 'package:matex_financial/financial.dart';
 class MatexDividendPayoutRatioCalculatorDocument
     extends FastCalculatorDocument {
   late final String? netIncome;
-  late final String? totalDividend;
+  late final String? totalDividends;
 
   MatexDividendPayoutRatioCalculatorDocument({
     String? netIncome,
-    String? totalDividend,
+    String? totalDividends,
   }) {
     this.netIncome = assignValue(netIncome);
-    this.totalDividend = assignValue(totalDividend);
+    this.totalDividends = assignValue(totalDividends);
   }
 
   @override
@@ -21,18 +21,18 @@ class MatexDividendPayoutRatioCalculatorDocument
       Map<String, dynamic> json) {
     return MatexDividendPayoutRatioCalculatorDocument(
       netIncome: json['netIncome'] as String?,
-      totalDividend: json['totalDividend'] as String?,
+      totalDividends: json['totalDividends'] as String?,
     );
   }
 
   @override
   MatexDividendPayoutRatioCalculatorDocument copyWith({
     String? netIncome,
-    String? totalDividends,
+    String? dividendAmount,
   }) {
     return MatexDividendPayoutRatioCalculatorDocument(
       netIncome: netIncome ?? this.netIncome,
-      totalDividend: totalDividends ?? this.totalDividend,
+      totalDividends: dividendAmount ?? this.totalDividends,
     );
   }
 
@@ -42,19 +42,19 @@ class MatexDividendPayoutRatioCalculatorDocument
   ) {
     return copyWith(
       netIncome: model.netIncome,
-      totalDividends: model.totalDividend,
+      dividendAmount: model.totalDividends,
     );
   }
 
   @override
-  List<Object?> get props => [netIncome, totalDividend];
+  List<Object?> get props => [netIncome, totalDividends];
 
   // [toFields Method]
   @override
   MatexDividendPayoutRatioCalculatorBlocFields toFields() {
     return MatexDividendPayoutRatioCalculatorBlocFields(
       netIncome: netIncome,
-      totalDividend: totalDividend,
+      totalDividends: totalDividends,
     );
   }
 
@@ -62,11 +62,11 @@ class MatexDividendPayoutRatioCalculatorDocument
   @override
   MatexDividendPayoutRatioCalculatorDocument copyWithDefaults({
     bool resetNetIncome = false,
-    bool resetTotalDividend = false,
+    bool resetTotalDividends = false,
   }) {
     return MatexDividendPayoutRatioCalculatorDocument(
       netIncome: resetNetIncome ? null : netIncome,
-      totalDividend: resetTotalDividend ? null : totalDividend,
+      totalDividends: resetTotalDividends ? null : totalDividends,
     );
   }
 
@@ -74,7 +74,7 @@ class MatexDividendPayoutRatioCalculatorDocument
   Map<String, dynamic> toJson() {
     return {
       'netIncome': netIncome,
-      'totalDividend': totalDividend,
+      'totalDividends': totalDividends,
       ...super.toJson(),
     };
   }

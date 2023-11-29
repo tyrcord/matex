@@ -5,16 +5,16 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   static const defaultFrequency = MatexFinancialFrequency.annually;
 
   late final String? paymentFrequency;
-  late final String? totalDividends;
+  late final String? dividendAmount;
   late final String? sharePrice;
 
   MatexDividendYieldCalculatorDocument({
     String? paymentFrequency,
-    String? totalDividends,
+    String? dividendAmount,
     String? sharePrice,
   }) {
     this.paymentFrequency = paymentFrequency ?? defaultFrequency.name;
-    this.totalDividends = assignValue(totalDividends);
+    this.dividendAmount = assignValue(dividendAmount);
     this.sharePrice = assignValue(sharePrice);
   }
 
@@ -25,7 +25,7 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
     Map<String, dynamic> json,
   ) {
     return MatexDividendYieldCalculatorDocument(
-      totalDividends: json['totalDividends'] as String?,
+      dividendAmount: json['dividendAmount'] as String?,
       sharePrice: json['sharePrice'] as String?,
       paymentFrequency:
           json['paymentFrequency'] as String? ?? defaultFrequency.name,
@@ -35,12 +35,12 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   @override
   MatexDividendYieldCalculatorDocument copyWith({
     String? sharePrice,
-    String? totalDividends,
+    String? dividendAmount,
     String? paymentFrequency,
   }) {
     return MatexDividendYieldCalculatorDocument(
       paymentFrequency: paymentFrequency ?? this.paymentFrequency,
-      totalDividends: totalDividends ?? this.totalDividends,
+      dividendAmount: dividendAmount ?? this.dividendAmount,
       sharePrice: sharePrice ?? this.sharePrice,
     );
   }
@@ -48,12 +48,12 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   @override
   MatexDividendYieldCalculatorDocument copyWithDefaults({
     bool resetSharePrice = false,
-    bool resetTotalDividends = false,
+    bool resetDividendAmount = false,
     bool resetPaymentFrequency = false,
   }) {
     return MatexDividendYieldCalculatorDocument(
       sharePrice: resetSharePrice ? null : sharePrice,
-      totalDividends: resetTotalDividends ? null : totalDividends,
+      dividendAmount: resetDividendAmount ? null : dividendAmount,
       paymentFrequency:
           resetPaymentFrequency ? defaultFrequency.name : paymentFrequency,
     );
@@ -65,7 +65,7 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   ) {
     return copyWith(
       paymentFrequency: model.paymentFrequency,
-      totalDividends: model.totalDividends,
+      dividendAmount: model.dividendAmount,
       sharePrice: model.sharePrice,
     );
   }
@@ -74,7 +74,7 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   MatexDividendYieldCalculatorBlocFields toFields() {
     return MatexDividendYieldCalculatorBlocFields(
       paymentFrequency: parseFinancialFrequencyFromString(paymentFrequency),
-      totalDividends: totalDividends,
+      dividendAmount: dividendAmount,
       sharePrice: sharePrice,
     );
   }
@@ -82,7 +82,7 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   @override
   List<Object?> get props => [
         paymentFrequency,
-        totalDividends,
+        dividendAmount,
         sharePrice,
       ];
 
@@ -90,7 +90,7 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   Map<String, dynamic> toJson() {
     return {
       'paymentFrequency': paymentFrequency,
-      'totalDividends': totalDividends,
+      'dividendAmount': dividendAmount,
       'sharePrice': sharePrice,
       ...super.toJson(),
     };

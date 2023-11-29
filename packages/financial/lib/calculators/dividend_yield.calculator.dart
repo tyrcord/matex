@@ -22,7 +22,7 @@ class MatexDividendYieldCalculator extends MatexCalculator<
 
   // Properties
   double? get sharePrice => state.sharePrice;
-  double? get totalDividend => state.totalDividends;
+  double? get dividendAmount => state.dividendAmount;
   MatexFinancialFrequency get paymentFrequency => state.paymentFrequency;
 
   // Setters
@@ -30,8 +30,8 @@ class MatexDividendYieldCalculator extends MatexCalculator<
     setState(state.copyWith(sharePrice: value));
   }
 
-  set totalDividend(double? value) {
-    setState(state.copyWith(totalDividends: value));
+  set dividendAmount(double? value) {
+    setState(state.copyWith(dividendAmount: value));
   }
 
   set paymentFrequency(MatexFinancialFrequency value) {
@@ -51,7 +51,7 @@ class MatexDividendYieldCalculator extends MatexCalculator<
 
     if (dSharePrice == dZero) return defaultResults;
 
-    final dDividendAmount = toDecimalOrDefault(state.totalDividends);
+    final dDividendAmount = toDecimalOrDefault(state.dividendAmount);
     final paymentFrequency = getPaymentFrequency(state.paymentFrequency);
     final dFrequency = toDecimalOrDefault(paymentFrequency);
     final dTotalDividends = dDividendAmount * dFrequency;

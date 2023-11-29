@@ -26,7 +26,7 @@ class MatexDividendPayoutRatioCalculator extends MatexCalculator<
   double? get totalDividend => state.totalDividend;
 
   set totalDividend(double? value) {
-    setState(state.copyWith(totalDividends: value));
+    setState(state.copyWith(dividendAmount: value));
   }
 
   static const defaultResults = DividendPayoutRatioCalculatorResults(

@@ -5,12 +5,12 @@ class MatexDividendYieldCalculatorState extends MatexCalculatorState {
   static const defaultFrequency = MatexFinancialFrequency.annually;
 
   final MatexFinancialFrequency paymentFrequency;
-  final double? totalDividends;
+  final double? dividendAmount;
   final double? sharePrice;
 
   const MatexDividendYieldCalculatorState({
     MatexFinancialFrequency? paymentFrequency,
-    this.totalDividends,
+    this.dividendAmount,
     this.sharePrice,
   }) : paymentFrequency = paymentFrequency ?? defaultFrequency;
 
@@ -22,7 +22,7 @@ class MatexDividendYieldCalculatorState extends MatexCalculatorState {
   ) {
     return MatexDividendYieldCalculatorState(
       sharePrice: json['sharePrice'] as double?,
-      totalDividends: json['totalDividends'] as double?,
+      dividendAmount: json['dividendAmount'] as double?,
       paymentFrequency:
           json['dividendPaymentFrequency'] as MatexFinancialFrequency? ??
               defaultFrequency,
@@ -32,12 +32,12 @@ class MatexDividendYieldCalculatorState extends MatexCalculatorState {
   @override
   MatexDividendYieldCalculatorState copyWith({
     double? sharePrice,
-    double? totalDividends,
+    double? dividendAmount,
     MatexFinancialFrequency? paymentFrequency,
   }) {
     return MatexDividendYieldCalculatorState(
       paymentFrequency: paymentFrequency ?? this.paymentFrequency,
-      totalDividends: totalDividends ?? this.totalDividends,
+      dividendAmount: dividendAmount ?? this.dividendAmount,
       sharePrice: sharePrice ?? this.sharePrice,
     );
   }
@@ -45,12 +45,12 @@ class MatexDividendYieldCalculatorState extends MatexCalculatorState {
   @override
   MatexDividendYieldCalculatorState copyWithDefaults({
     bool resetPaymentFrequency = false,
-    bool resetTotalDividends = false,
+    bool resetDividendAmount = false,
     bool resetSharePrice = false,
   }) {
     return MatexDividendYieldCalculatorState(
       sharePrice: resetSharePrice ? null : sharePrice,
-      totalDividends: resetTotalDividends ? null : totalDividends,
+      dividendAmount: resetDividendAmount ? null : dividendAmount,
       paymentFrequency:
           resetPaymentFrequency ? defaultFrequency : paymentFrequency,
     );
@@ -62,7 +62,7 @@ class MatexDividendYieldCalculatorState extends MatexCalculatorState {
   ) {
     return copyWith(
       paymentFrequency: model.paymentFrequency,
-      totalDividends: model.totalDividends,
+      dividendAmount: model.dividendAmount,
       sharePrice: model.sharePrice,
     );
   }
@@ -70,7 +70,7 @@ class MatexDividendYieldCalculatorState extends MatexCalculatorState {
   @override
   List<Object?> get props => [
         paymentFrequency,
-        totalDividends,
+        dividendAmount,
         sharePrice,
       ];
 }
