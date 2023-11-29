@@ -1,7 +1,9 @@
 // Dart imports:
 import 'dart:async';
+import 'dart:io';
 
 // Flutter imports:
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
 
 // Project imports:
 import 'package:matex_core/core.dart';
@@ -220,13 +223,37 @@ abstract class MatexCalculatorBloc<
     }
   }
 
+  @protected
+  String getReportFilename() => 'report';
+
+  @protected
   Future<XFile> toPdfFile(BuildContext context) async {
     final pdfBytes = await toPdf(context);
 
-    return XFile.fromData(pdfBytes, mimeType: 'application/pdf');
+    return createPdfXFile(pdfBytes, getReportFilename());
   }
 
+  @protected
   Future<Uint8List> toPdf(BuildContext context) async {
     throw UnimplementedError('toPdf() is not implemented');
+  }
+
+  // Function to write bytes to a file and return an XFile
+  @protected
+  Future<XFile> createPdfXFile(List<int> bytes, String newFileName) async {
+    // Get temporary directory
+    final directory = await getTemporaryDirectory();
+
+    // Format the current date
+    final now = DateTime.now();
+    final String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+
+    final filePath = '${directory.path}/${newFileName}_$formattedDate.pdf';
+    // Write bytes to the file
+    final file = File(filePath);
+    await file.writeAsBytes(bytes);
+
+    // Create an XFile from the file path
+    return XFile(file.path, mimeType: 'application/pdf');
   }
 }

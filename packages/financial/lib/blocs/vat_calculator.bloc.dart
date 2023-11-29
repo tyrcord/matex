@@ -379,6 +379,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
+  String getReportFilename() => 'vat_report';
+
+  @override
   Future<Uint8List> toPdf(BuildContext context) async {
     final pdfGenerator = MatexVatCalculatorPdfGenerator();
     final fields = currentState.fields;

@@ -624,6 +624,9 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
+  String getReportFilename() => 'forex_pip_value_calculator_report';
+
+  @override
   Future<Uint8List> toPdf(BuildContext context) async {
     final pdfGenerator = MatexForexPipValueCalculatorPdfGenerator();
     final fields = currentState.fields;

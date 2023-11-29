@@ -693,6 +693,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
+  String getReportFilename() => 'forex_position_size_calculator_report';
+
+  @override
   Future<Uint8List> toPdf(BuildContext context) async {
     final pdfGenerator = MatexForexPositionSizeCalculatorPdfGenerator();
     final fields = currentState.fields;

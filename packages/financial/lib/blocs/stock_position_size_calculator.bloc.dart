@@ -403,6 +403,9 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
+  String getReportFilename() => 'stock_position_size_report';
+
+  @override
   Future<Uint8List> toPdf(BuildContext context) async {
     final pdfGenerator = MatexStockPositionSizeCalculatorPdfGenerator();
     final fields = currentState.fields;

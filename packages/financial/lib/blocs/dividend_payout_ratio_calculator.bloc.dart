@@ -178,6 +178,9 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
+  String getReportFilename() => 'dividend_payout_ratio_report';
+
+  @override
   Future<Uint8List> toPdf(BuildContext context) async {
     final pdfGenerator = MatexDividendPayoutRatioCalculatorPdfGenerator();
     final fields = currentState.fields;

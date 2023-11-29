@@ -203,6 +203,9 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
+  String getReportFilename() => 'dividend_yield_report';
+
+  @override
   Future<Uint8List> toPdf(BuildContext context) async {
     final pdfGenerator = MatexDividendYieldCalculatorPdfGenerator();
     final fields = currentState.fields;

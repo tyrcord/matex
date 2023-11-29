@@ -419,6 +419,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
+  String getReportFilename() => 'profit_and_loss_report';
+
+  @override
   Future<Uint8List> toPdf(BuildContext context) async {
     final pdfGenerator = MatexProfitAndLossCalculatorPdfGenerator();
     final fields = currentState.fields;
