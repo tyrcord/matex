@@ -2,20 +2,20 @@ dependencies:
   collection: ^1.18.0
   decimal: ^2.3.3
   easy_localization: ^3.0.3
-  fastyle_calculator: ^1.47.0
-  fastyle_core: ^0.0.37
-  fastyle_settings: ^0.0.41
+  fastyle_calculator: ^1.48.0
+  fastyle_core: ^0.0.38
+  fastyle_settings: ^0.0.42
   flutter:
     sdk: flutter
   intl: ^0.18.1
   lingua_calculator: ^0.0.5
   lingua_core: ^0.0.32
+  path_provider: ^2.1.1
   share_plus: ^7.2.1
   t_helpers: ^0.0.46
   tbloc: ^0.21.8+4
   tmodel: ^0.5.12+4
   tstore: ^0.8.21+4
-  path_provider: ^2.1.1
 description: The core tool of the Matex packages.
 dev_dependencies:
   dependency_validator: ^3.2.3
@@ -24,8 +24,8 @@ dev_dependencies:
     sdk: flutter
   import_sorter: ^4.6.0
 environment:
-  flutter: ">=3.16.0"
-  sdk: ">=3.2.0 <4.0.0"
+  flutter: '>=3.16.0'
+  sdk: '>=3.2.0 <4.0.0'
 name: matex_core
 repository: https://github.com/tyrcord/matex/tree/main/packages/core
 version: 0.0.24
