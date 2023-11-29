@@ -26,4 +26,4 @@ scripts:
         - matex_data
 
   update:dependencies:
-    exec: python3 $PWD/scripts/update_dependencies.py
+    exec: python3 $PWD/scripts/update_pubspec.py
