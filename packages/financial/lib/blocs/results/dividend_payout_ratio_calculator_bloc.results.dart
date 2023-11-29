@@ -5,10 +5,12 @@ class MatexDividendPayoutRatioCalculatorBlocResults
     extends FastCalculatorResults {
   final double? dividendPayoutRatio;
   final String? formattedDividendPayoutRatio;
+  final String? dividendPayoutLevel;
 
   const MatexDividendPayoutRatioCalculatorBlocResults({
     this.dividendPayoutRatio,
     this.formattedDividendPayoutRatio,
+    this.dividendPayoutLevel,
   });
 
   @override
@@ -18,11 +20,13 @@ class MatexDividendPayoutRatioCalculatorBlocResults
   MatexDividendPayoutRatioCalculatorBlocResults copyWith({
     double? dividendPayoutRatio,
     String? formattedDividendPayoutRatio,
+    String? dividendPayoutLevel,
   }) {
     return MatexDividendPayoutRatioCalculatorBlocResults(
       dividendPayoutRatio: dividendPayoutRatio ?? this.dividendPayoutRatio,
       formattedDividendPayoutRatio:
           formattedDividendPayoutRatio ?? this.formattedDividendPayoutRatio,
+      dividendPayoutLevel: dividendPayoutLevel ?? this.dividendPayoutLevel,
     );
   }
 
@@ -33,6 +37,7 @@ class MatexDividendPayoutRatioCalculatorBlocResults
     return copyWith(
       dividendPayoutRatio: model.dividendPayoutRatio,
       formattedDividendPayoutRatio: model.formattedDividendPayoutRatio,
+      dividendPayoutLevel: model.dividendPayoutLevel,
     );
   }
 
@@ -40,5 +45,6 @@ class MatexDividendPayoutRatioCalculatorBlocResults
   List<Object?> get props => [
         dividendPayoutRatio,
         formattedDividendPayoutRatio,
+        dividendPayoutLevel,
       ];
 }

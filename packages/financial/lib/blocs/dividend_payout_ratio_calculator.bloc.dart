@@ -5,6 +5,8 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:lingua_finance_dividend/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -45,13 +47,30 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<MatexDividendPayoutRatioCalculatorBlocResults> compute() async {
     final results = calculator.value();
+    final dividendPayoutRatio = results.dividendPayoutRatio;
 
     return MatexDividendPayoutRatioCalculatorBlocResults(
-      dividendPayoutRatio: results.dividendPayoutRatio,
+      dividendPayoutLevel: determineDividendPayoutLevel(dividendPayoutRatio),
+      dividendPayoutRatio: dividendPayoutRatio,
       formattedDividendPayoutRatio: localizePercentage(
-        value: results.dividendPayoutRatio,
+        value: dividendPayoutRatio,
       ),
     );
+  }
+
+  String? determineDividendPayoutLevel(double? dividendPayoutRatio) {
+    if (dividendPayoutRatio == null) return null;
+
+    if (dividendPayoutRatio > 0 && dividendPayoutRatio <= 0.1) {
+      return FinanceDividendLocaleKeys.dividend_label_low_dividend.tr();
+    } else if (dividendPayoutRatio > 0.1 && dividendPayoutRatio <= 0.6) {
+      return FinanceDividendLocaleKeys.dividend_label_normal_dividend.tr();
+    } else if (dividendPayoutRatio > 0.6 && dividendPayoutRatio <= 0.9) {
+      return FinanceDividendLocaleKeys.dividend_label_high_dividend.tr();
+    }
+
+    return FinanceDividendLocaleKeys.dividend_label_unsustainable_high_dividend
+        .tr();
   }
 
   @override
