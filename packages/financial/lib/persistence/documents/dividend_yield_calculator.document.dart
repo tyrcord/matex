@@ -48,12 +48,12 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   @override
   MatexDividendYieldCalculatorDocument copyWithDefaults({
     bool resetSharePrice = false,
-    bool resetTotalDividend = false,
+    bool resetTotalDividends = false,
     bool resetPaymentFrequency = false,
   }) {
     return MatexDividendYieldCalculatorDocument(
       sharePrice: resetSharePrice ? null : sharePrice,
-      totalDividends: resetTotalDividend ? null : totalDividends,
+      totalDividends: resetTotalDividends ? null : totalDividends,
       paymentFrequency:
           resetPaymentFrequency ? defaultFrequency.name : paymentFrequency,
     );

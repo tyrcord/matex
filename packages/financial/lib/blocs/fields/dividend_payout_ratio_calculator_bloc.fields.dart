@@ -4,7 +4,7 @@ import 'package:matex_core/core.dart';
 class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
   late final String? netIncome;
-  late final String? totalDividend;
+  late final String? totalDividends;
 
   String get formattedNetIncome {
     final value = parseFieldValueToDouble(netIncome);
@@ -13,18 +13,18 @@ class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
   }
 
   String get formattedTotalDividend {
-    final value = parseFieldValueToDouble(totalDividend);
+    final value = parseFieldValueToDouble(totalDividends);
 
     return localizeNumber(value: value);
   }
 
   MatexDividendPayoutRatioCalculatorBlocFields({
     String? netIncome,
-    String? totalDividend,
+    String? totalDividends,
     FastCalculatorBlocDelegate? delegate,
   }) {
     this.netIncome = assignValue(netIncome);
-    this.totalDividend = assignValue(totalDividend);
+    this.totalDividends = assignValue(totalDividends);
     this.delegate = delegate;
   }
 
@@ -39,7 +39,7 @@ class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
   }) {
     return MatexDividendPayoutRatioCalculatorBlocFields(
       netIncome: netIncome ?? this.netIncome,
-      totalDividend: totalDividends ?? this.totalDividend,
+      totalDividends: totalDividends ?? this.totalDividends,
       delegate: delegate,
     );
   }
@@ -47,11 +47,11 @@ class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
   @override
   MatexDividendPayoutRatioCalculatorBlocFields copyWithDefaults({
     bool resetNetIncome = false,
-    bool resetTotalDividend = false,
+    bool resetTotalDividends = false,
   }) {
     return MatexDividendPayoutRatioCalculatorBlocFields(
       netIncome: resetNetIncome ? null : netIncome,
-      totalDividend: resetTotalDividend ? null : totalDividend,
+      totalDividends: resetTotalDividends ? null : totalDividends,
       delegate: delegate,
     );
   }
@@ -62,7 +62,7 @@ class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
   ) {
     return copyWith(
       netIncome: model.netIncome,
-      totalDividends: model.totalDividend,
+      totalDividends: model.totalDividends,
       delegate: model.delegate,
     );
   }
@@ -70,7 +70,7 @@ class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
   @override
   List<Object?> get props => [
         netIncome,
-        totalDividend,
+        totalDividends,
         delegate,
       ];
 }

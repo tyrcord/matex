@@ -45,12 +45,12 @@ class MatexDividendYieldCalculatorState extends MatexCalculatorState {
   @override
   MatexDividendYieldCalculatorState copyWithDefaults({
     bool resetPaymentFrequency = false,
-    bool resetTotalDividend = false,
+    bool resetTotalDividends = false,
     bool resetSharePrice = false,
   }) {
     return MatexDividendYieldCalculatorState(
       sharePrice: resetSharePrice ? null : sharePrice,
-      totalDividends: resetTotalDividend ? null : totalDividends,
+      totalDividends: resetTotalDividends ? null : totalDividends,
       paymentFrequency:
           resetPaymentFrequency ? defaultFrequency : paymentFrequency,
     );

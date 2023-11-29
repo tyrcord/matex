@@ -60,12 +60,12 @@ class MatexDividendYieldCalculatorBlocFields extends FastCalculatorFields
   @override
   MatexDividendYieldCalculatorBlocFields copyWithDefaults({
     bool resetSharePrice = false,
-    bool resetTotalDividend = false,
+    bool resetTotalDividends = false,
     bool resetPaymentFrequency = false,
   }) {
     return MatexDividendYieldCalculatorBlocFields(
       sharePrice: resetSharePrice ? null : sharePrice,
-      totalDividends: resetTotalDividend ? null : totalDividends,
+      totalDividends: resetTotalDividends ? null : totalDividends,
       paymentFrequency:
           resetPaymentFrequency ? defaultFrequency : paymentFrequency,
       delegate: delegate,
