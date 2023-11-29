@@ -1,3 +1,14 @@
+## 0.0.33
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: allow to change the filename of a PDF report.
+ - **FEAT**: minor improvements.
+ - **FEAT**: added MatexDividendPayoutRatioCalculatorBloc.
+ - **FEAT**: add MatexDividendYieldCalculatorPdfGenerator.
+ - **FEAT**: implement dividend yield calculator bloc.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add dividend calculators.
+
 ## 0.0.32
 
  - **FEAT**: added MatexFinancialFrequency.

@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-11-29
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.25`](#matex_core---v0025)
+ - [`matex_data` - `v0.0.19`](#matex_data---v0019)
+ - [`matex_financial` - `v0.0.33`](#matex_financial---v0033)
+
+---
+
+#### `matex_core` - `v0.0.25`
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: allow to change the filename of a PDF report.
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.19`
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.33`
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: allow to change the filename of a PDF report.
+ - **FEAT**: minor improvements.
+ - **FEAT**: added MatexDividendPayoutRatioCalculatorBloc.
+ - **FEAT**: add MatexDividendYieldCalculatorPdfGenerator.
+ - **FEAT**: implement dividend yield calculator bloc.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add dividend calculators.
+
+
 ## 2023-11-27
 
 ### Changes

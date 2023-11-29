@@ -28,4 +28,4 @@ environment:
   sdk: '>=3.2.0 <4.0.0'
 name: matex_core
 repository: https://github.com/tyrcord/matex/tree/main/packages/core
-version: 0.0.24
+version: 0.0.25

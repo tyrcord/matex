@@ -1,3 +1,9 @@
+## 0.0.25
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: allow to change the filename of a PDF report.
+ - **FEAT**: update dependencies.
+
 ## 0.0.24
 
  - **PERF**: minor improvement.
