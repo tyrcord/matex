@@ -48,6 +48,37 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
 
     return MatexDividendReinvestmentCalculatorBlocResults(
       endingBalance: endingBalance,
+      formattedEndingBalance: localizeCurrency(
+        value: endingBalance,
+      ),
+      totalReturn: results.totalReturn,
+      formattedTotalReturn: localizeCurrency(
+        value: results.totalReturn,
+      ),
+      netDividendPaid: results.netDividendPaid,
+      formattedNetDividendPaid: localizeCurrency(
+        value: results.netDividendPaid,
+      ),
+      annualNetDividendPaid: results.netDividendPaid,
+      formattedAnnualNetDividendPaid: localizeCurrency(
+        value: results.netDividendPaid,
+      ),
+      sharesOwned: results.numberOfShares,
+      formattedSharesOwned: localizeCurrency(
+        value: results.numberOfShares,
+      ),
+      sharePrice: results.sharePrice,
+      formattedSharePrice: localizeCurrency(
+        value: results.sharePrice,
+      ),
+      totalAdditionalContribution: results.totalContribution,
+      formattedTotalAdditionalContribution: localizeCurrency(
+        value: results.totalContribution,
+      ),
+      // totalTaxAmount: results.totalTaxAmount,
+      // formattedTotalTaxAmount: localizeCurrency(
+      //   value: results.totalTaxAmount,
+      // ),
     );
   }
 
@@ -138,8 +169,23 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
   Future<void> resetCalculator(
     MatexDividendReinvestmentCalculatorDocument document,
   ) async {
+    final frequency = parseFinancialFrequencyFromString(
+      document.paymentFrequency,
+    );
+
     calculator.setState(MatexDividendReinvestmentCalculatorState(
       sharePrice: parseStringToDouble(document.sharePrice),
+      numberOfShares: parseStringToDouble(document.numberOfShares),
+      dividendPaymentFrequency: frequency,
+      dividendYield: parseStringToDouble(document.dividendYield),
+      yearsToGrow: parseStringToInt(document.yearsToGrow),
+      annualContribution: parseStringToDouble(document.annualContribution),
+      annualSharePriceIncrease:
+          parseStringToDouble(document.annualSharePriceIncrease),
+      annualDividendIncrease:
+          parseStringToDouble(document.annualDividendIncrease),
+      taxRate: parseStringToDouble(document.taxRate),
+      drip: document.drip,
     ));
   }
 
@@ -147,10 +193,23 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
   Future<MatexDividendReinvestmentCalculatorBlocState> resetCalculatorBlocState(
     MatexDividendReinvestmentCalculatorDocument document,
   ) async {
+    final frequency = parseFinancialFrequencyFromString(
+      document.paymentFrequency,
+    );
+
     return _kDefaultDividendPayoutRatioBlocState.copyWith(
       results: await retrieveDefaultResult(),
       fields: MatexDividendReinvestmentCalculatorBlocFields(
         sharePrice: document.sharePrice,
+        numberOfShares: document.numberOfShares,
+        paymentFrequency: frequency,
+        dividendYield: document.dividendYield,
+        yearsToGrow: document.yearsToGrow,
+        annualContribution: document.annualContribution,
+        annualSharePriceIncrease: document.annualSharePriceIncrease,
+        annualDividendIncrease: document.annualDividendIncrease,
+        taxRate: document.taxRate,
+        drip: document.drip,
       ),
     );
   }
