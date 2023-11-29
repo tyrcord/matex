@@ -1,42 +1,42 @@
 import 'package:tmodel/tmodel.dart';
 
-class DividendPayoutRatioCalculatorResults extends TModel {
+class MatexDividendPayoutRatioCalculatorResults extends TModel {
   // Define Properties
   final double? dividendPayoutRatio;
 
   // Constructor
-  const DividendPayoutRatioCalculatorResults({
+  const MatexDividendPayoutRatioCalculatorResults({
     this.dividendPayoutRatio,
   });
 
   // Clone Method
   @override
-  DividendPayoutRatioCalculatorResults clone() => copyWith();
+  MatexDividendPayoutRatioCalculatorResults clone() => copyWith();
 
   // From JSON Factory
-  factory DividendPayoutRatioCalculatorResults.fromJson(
+  factory MatexDividendPayoutRatioCalculatorResults.fromJson(
       Map<String, dynamic> json) {
-    return DividendPayoutRatioCalculatorResults(
+    return MatexDividendPayoutRatioCalculatorResults(
       dividendPayoutRatio: json['dividendPayoutRatio'] as double?,
     );
   }
 
   // Copy With Method
   @override
-  DividendPayoutRatioCalculatorResults copyWith({
+  MatexDividendPayoutRatioCalculatorResults copyWith({
     double? dividendPayoutRatio,
   }) {
-    return DividendPayoutRatioCalculatorResults(
+    return MatexDividendPayoutRatioCalculatorResults(
       dividendPayoutRatio: dividendPayoutRatio ?? this.dividendPayoutRatio,
     );
   }
 
   // Copy With Defaults Method
   @override
-  DividendPayoutRatioCalculatorResults copyWithDefaults({
+  MatexDividendPayoutRatioCalculatorResults copyWithDefaults({
     bool resetDividendPayoutRatio = false,
   }) {
-    return DividendPayoutRatioCalculatorResults(
+    return MatexDividendPayoutRatioCalculatorResults(
       dividendPayoutRatio:
           resetDividendPayoutRatio ? null : dividendPayoutRatio,
     );
@@ -44,8 +44,8 @@ class DividendPayoutRatioCalculatorResults extends TModel {
 
   // Merge Method
   @override
-  DividendPayoutRatioCalculatorResults merge(
-      covariant DividendPayoutRatioCalculatorResults model) {
+  MatexDividendPayoutRatioCalculatorResults merge(
+      covariant MatexDividendPayoutRatioCalculatorResults model) {
     return copyWith(
       dividendPayoutRatio: model.dividendPayoutRatio,
     );

@@ -107,8 +107,7 @@ class MatexDividendReinvestmentCalculatorDocument
     bool? drip,
   }) {
     return MatexDividendReinvestmentCalculatorDocument(
-      dividendPaymentFrequency:
-          paymentFrequency ?? this.dividendPaymentFrequency,
+      dividendPaymentFrequency: paymentFrequency ?? dividendPaymentFrequency,
       sharePrice: sharePrice ?? this.sharePrice,
       numberOfShares: numberOfShares ?? this.numberOfShares,
       dividendYield: dividendYield ?? this.dividendYield,

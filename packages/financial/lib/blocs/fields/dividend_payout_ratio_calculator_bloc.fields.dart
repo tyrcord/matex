@@ -12,7 +12,7 @@ class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
     return localizeCurrency(value: value);
   }
 
-  String get formattedTotalDividend {
+  String get formattedTotalDividends {
     final value = parseFieldValueToDouble(totalDividends);
 
     return localizeNumber(value: value);

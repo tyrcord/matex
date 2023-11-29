@@ -63,8 +63,7 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
     FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexDividendReinvestmentCalculatorBlocFields(
-      dividendPaymentFrequency:
-          paymentFrequency ?? this.dividendPaymentFrequency,
+      dividendPaymentFrequency: paymentFrequency ?? dividendPaymentFrequency,
       sharePrice: sharePrice ?? this.sharePrice,
       numberOfShares: numberOfShares ?? this.numberOfShares,
       dividendYield: dividendYield ?? this.dividendYield,

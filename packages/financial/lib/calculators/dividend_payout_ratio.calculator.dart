@@ -3,18 +3,19 @@ import 'package:t_helpers/helpers.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexDividendPayoutRatioCalculator extends MatexCalculator<
-    DividendPayoutRatioCalculatorState, DividendPayoutRatioCalculatorResults> {
+    MatexDividendPayoutRatioCalculatorState,
+    MatexDividendPayoutRatioCalculatorResults> {
   MatexDividendPayoutRatioCalculator({
     super.defaultState,
     super.state,
   }) : super(validators: dividendPayoutRatioValidators);
 
   @override
-  DividendPayoutRatioCalculatorState initializeState() =>
-      const DividendPayoutRatioCalculatorState();
+  MatexDividendPayoutRatioCalculatorState initializeState() =>
+      const MatexDividendPayoutRatioCalculatorState();
 
   @override
-  DividendPayoutRatioCalculatorState initializeDefaultState() =>
+  MatexDividendPayoutRatioCalculatorState initializeDefaultState() =>
       initializeState();
 
   double? get netIncome => state.netIncome;
@@ -23,21 +24,21 @@ class MatexDividendPayoutRatioCalculator extends MatexCalculator<
     setState(state.copyWith(netIncome: value));
   }
 
-  double? get totalDividend => state.totalDividend;
+  double? get totalDividends => state.totalDividends;
 
-  set totalDividend(double? value) {
-    setState(state.copyWith(dividendAmount: value));
+  set totalDividends(double? value) {
+    setState(state.copyWith(totalDividends: value));
   }
 
-  static const defaultResults = DividendPayoutRatioCalculatorResults(
+  static const defaultResults = MatexDividendPayoutRatioCalculatorResults(
     dividendPayoutRatio: 0,
   );
 
   @override
-  DividendPayoutRatioCalculatorResults value() {
+  MatexDividendPayoutRatioCalculatorResults value() {
     if (!isValid) return defaultResults;
 
-    final dTotalDividend = toDecimal(state.totalDividend) ?? dZero;
+    final dTotalDividend = toDecimal(state.totalDividends) ?? dZero;
     final dNetIncome = toDecimal(state.netIncome) ?? dZero;
 
     if (dNetIncome == dZero) return defaultResults;
@@ -45,7 +46,7 @@ class MatexDividendPayoutRatioCalculator extends MatexCalculator<
     final dDividendPayoutRatio =
         decimalFromRational(dTotalDividend / dNetIncome);
 
-    return DividendPayoutRatioCalculatorResults(
+    return MatexDividendPayoutRatioCalculatorResults(
       dividendPayoutRatio: dDividendPayoutRatio.toDouble(),
     );
   }

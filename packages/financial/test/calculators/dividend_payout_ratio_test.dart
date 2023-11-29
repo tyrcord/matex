@@ -60,7 +60,7 @@ void main() {
       test('should calculate correct payout ratio with given net income', () {
         calculator
           ..netIncome = 1000000
-          ..totalDividend = 500000;
+          ..totalDividends = 500000;
 
         var results = calculator.value();
 
@@ -87,7 +87,7 @@ void main() {
           () {
         calculator
           ..netIncome = 1000000
-          ..totalDividend = 500000;
+          ..totalDividends = 500000;
 
         var results = calculator.value();
 
@@ -97,7 +97,7 @@ void main() {
           reason: "Payout ratio should be 0.5 for given dividend",
         );
 
-        calculator.totalDividend = 600000;
+        calculator.totalDividends = 600000;
         results = calculator.value();
 
         expect(

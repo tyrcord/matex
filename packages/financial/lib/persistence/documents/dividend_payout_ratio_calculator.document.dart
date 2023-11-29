@@ -28,11 +28,11 @@ class MatexDividendPayoutRatioCalculatorDocument
   @override
   MatexDividendPayoutRatioCalculatorDocument copyWith({
     String? netIncome,
-    String? dividendAmount,
+    String? totalDividends,
   }) {
     return MatexDividendPayoutRatioCalculatorDocument(
       netIncome: netIncome ?? this.netIncome,
-      totalDividends: dividendAmount ?? this.totalDividends,
+      totalDividends: totalDividends ?? this.totalDividends,
     );
   }
 
@@ -42,7 +42,7 @@ class MatexDividendPayoutRatioCalculatorDocument
   ) {
     return copyWith(
       netIncome: model.netIncome,
-      dividendAmount: model.totalDividends,
+      totalDividends: model.totalDividends,
     );
   }
 

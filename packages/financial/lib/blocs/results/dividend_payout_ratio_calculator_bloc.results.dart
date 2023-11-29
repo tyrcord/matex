@@ -3,12 +3,12 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexDividendPayoutRatioCalculatorBlocResults
     extends FastCalculatorResults {
-  final double? dividendRatioPayout;
-  final String? formattedRatioPayout;
+  final double? dividendPayoutRatio;
+  final String? formattedDividendPayoutRatio;
 
   const MatexDividendPayoutRatioCalculatorBlocResults({
-    this.dividendRatioPayout,
-    this.formattedRatioPayout,
+    this.dividendPayoutRatio,
+    this.formattedDividendPayoutRatio,
   });
 
   @override
@@ -16,12 +16,13 @@ class MatexDividendPayoutRatioCalculatorBlocResults
 
   @override
   MatexDividendPayoutRatioCalculatorBlocResults copyWith({
-    double? dividendRatioPayout,
-    String? formattedRatioPayout,
+    double? dividendPayoutRatio,
+    String? formattedDividendPayoutRatio,
   }) {
     return MatexDividendPayoutRatioCalculatorBlocResults(
-      dividendRatioPayout: dividendRatioPayout ?? this.dividendRatioPayout,
-      formattedRatioPayout: formattedRatioPayout ?? this.formattedRatioPayout,
+      dividendPayoutRatio: dividendPayoutRatio ?? this.dividendPayoutRatio,
+      formattedDividendPayoutRatio:
+          formattedDividendPayoutRatio ?? this.formattedDividendPayoutRatio,
     );
   }
 
@@ -30,14 +31,14 @@ class MatexDividendPayoutRatioCalculatorBlocResults
     covariant MatexDividendPayoutRatioCalculatorBlocResults model,
   ) {
     return copyWith(
-      dividendRatioPayout: model.dividendRatioPayout,
-      formattedRatioPayout: model.formattedRatioPayout,
+      dividendPayoutRatio: model.dividendPayoutRatio,
+      formattedDividendPayoutRatio: model.formattedDividendPayoutRatio,
     );
   }
 
   @override
   List<Object?> get props => [
-        dividendRatioPayout,
-        formattedRatioPayout,
+        dividendPayoutRatio,
+        formattedDividendPayoutRatio,
       ];
 }

@@ -1,66 +1,66 @@
 // Project imports:
 import 'package:matex_core/core.dart';
 
-class DividendPayoutRatioCalculatorState extends MatexCalculatorState {
+class MatexDividendPayoutRatioCalculatorState extends MatexCalculatorState {
   // Define Properties
   final double? netIncome;
-  final double? totalDividend;
+  final double? totalDividends;
 
   // Constructor
-  const DividendPayoutRatioCalculatorState({
+  const MatexDividendPayoutRatioCalculatorState({
     this.netIncome,
-    this.totalDividend,
+    this.totalDividends,
   });
 
   // Clone Method
   @override
-  DividendPayoutRatioCalculatorState clone() => copyWith();
+  MatexDividendPayoutRatioCalculatorState clone() => copyWith();
 
   // From JSON Factory
-  factory DividendPayoutRatioCalculatorState.fromJson(
+  factory MatexDividendPayoutRatioCalculatorState.fromJson(
       Map<String, dynamic> json) {
-    return DividendPayoutRatioCalculatorState(
+    return MatexDividendPayoutRatioCalculatorState(
       netIncome: json['netIncome'] as double?,
-      totalDividend: json['totalDividend'] as double?,
+      totalDividends: json['totalDividend'] as double?,
     );
   }
 
   // Copy With Method
   @override
-  DividendPayoutRatioCalculatorState copyWith({
+  MatexDividendPayoutRatioCalculatorState copyWith({
     double? netIncome,
-    double? dividendAmount,
+    double? totalDividends,
   }) {
-    return DividendPayoutRatioCalculatorState(
+    return MatexDividendPayoutRatioCalculatorState(
       netIncome: netIncome ?? this.netIncome,
-      totalDividend: dividendAmount ?? this.totalDividend,
+      totalDividends: totalDividends ?? this.totalDividends,
     );
   }
 
   // Copy With Defaults Method
   @override
-  DividendPayoutRatioCalculatorState copyWithDefaults({
+  MatexDividendPayoutRatioCalculatorState copyWithDefaults({
     bool resetNetIncome = false,
     bool resetTotalDividends = false,
   }) {
-    return DividendPayoutRatioCalculatorState(
+    return MatexDividendPayoutRatioCalculatorState(
       netIncome: resetNetIncome ? null : netIncome,
-      totalDividend: resetTotalDividends ? null : totalDividend,
+      totalDividends: resetTotalDividends ? null : totalDividends,
     );
   }
 
   // Merge Method
   @override
-  DividendPayoutRatioCalculatorState merge(
-    covariant DividendPayoutRatioCalculatorState model,
+  MatexDividendPayoutRatioCalculatorState merge(
+    covariant MatexDividendPayoutRatioCalculatorState model,
   ) {
     return copyWith(
       netIncome: model.netIncome,
-      dividendAmount: model.totalDividend,
+      totalDividends: model.totalDividends,
     );
   }
 
   // Props Getter
   @override
-  List<Object?> get props => [netIncome, totalDividend];
+  List<Object?> get props => [netIncome, totalDividends];
 }

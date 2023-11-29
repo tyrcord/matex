@@ -65,8 +65,7 @@ class DividendReinvestmentCalculatorState extends MatexCalculatorState {
     bool? drip,
   }) {
     return DividendReinvestmentCalculatorState(
-      dividendPaymentFrequency:
-          paymentFrequency ?? this.dividendPaymentFrequency,
+      dividendPaymentFrequency: paymentFrequency ?? dividendPaymentFrequency,
       sharePrice: sharePrice ?? this.sharePrice,
       numberOfShares: numberOfShares ?? this.numberOfShares,
       dividendYield: dividendYield ?? this.dividendYield,
