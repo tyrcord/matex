@@ -1,6 +1,7 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MatexDividendYieldCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
@@ -19,7 +20,11 @@ class MatexDividendYieldCalculatorBlocFields extends FastCalculatorFields
   String get formattedTotalDividend {
     final value = parseFieldValueToDouble(totalDividends);
 
-    return localizeNumber(value: value);
+    return localizeCurrency(value: value);
+  }
+
+  String get formattedPaymentFrequency {
+    return getLocaleKeyForFinancialFrequency(paymentFrequency).tr();
   }
 
   MatexDividendYieldCalculatorBlocFields({

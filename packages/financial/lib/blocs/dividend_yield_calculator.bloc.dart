@@ -1,5 +1,8 @@
 // Package imports:
+import 'dart:typed_data';
+
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:flutter/material.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
 
@@ -201,13 +204,13 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  // @override
-  // Future<Uint8List> toPdf(BuildContext context) async {
-  //   final pdfGenerator = MatexDividendYieldCalculatorPdfGenerator();
-  //   final fields = currentState.fields;
-  //   final results = await compute();
+  @override
+  Future<Uint8List> toPdf(BuildContext context) async {
+    final pdfGenerator = MatexDividendYieldCalculatorPdfGenerator();
+    final fields = currentState.fields;
+    final results = await compute();
 
-  //   // ignore: use_build_context_synchronously
-  //   return pdfGenerator.generate(context, fields, results);
-  // }
+    // ignore: use_build_context_synchronously
+    return pdfGenerator.generate(context, fields, results);
+  }
 }
