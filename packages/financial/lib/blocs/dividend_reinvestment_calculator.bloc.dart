@@ -437,13 +437,13 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
   @override
   String getReportFilename() => 'dividend_reinvestment_calculator_report';
 
-  // @override
-  // Future<Uint8List> toPdf(BuildContext context) async {
-  //   final pdfGenerator = MatexDividendReinvestmentCalculatorPdfGenerator();
-  //   final fields = currentState.fields;
-  //   final results = await compute();
+  @override
+  Future<Uint8List> toPdf(BuildContext context) async {
+    final pdfGenerator = MatexDividendReinvestmentCalculatorPdfGenerator();
+    final fields = currentState.fields;
+    final results = await compute();
 
-  //   // ignore: use_build_context_synchronously
-  //   return pdfGenerator.generate(context, fields, results);
-  // }
+    // ignore: use_build_context_synchronously
+    return pdfGenerator.generate(context, fields, results);
+  }
 }

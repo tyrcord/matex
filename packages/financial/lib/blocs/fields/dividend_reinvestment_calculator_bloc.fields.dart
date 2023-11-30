@@ -1,4 +1,5 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:lingua_core/generated/locale_keys.g.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -27,6 +28,54 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
 
   String get formattedPaymentFrequency {
     return getLocaleKeyForFinancialFrequency(paymentFrequency).tr();
+  }
+
+  String get formattedNumberOfShares {
+    final value = parseFieldValueToDouble(numberOfShares);
+
+    return localizeNumber(value: value);
+  }
+
+  String get formattedDividendYield {
+    final value = parseFieldValueToDouble(dividendYield);
+
+    return localizePercentage(value: value);
+  }
+
+  String get formattedYearsToGrow {
+    final value = parseFieldValueToDouble(yearsToGrow);
+
+    return localizeNumber(value: value);
+  }
+
+  String get formattedAnnualContribution {
+    final value = parseFieldValueToDouble(annualContribution);
+
+    return localizeCurrency(value: value);
+  }
+
+  String get formattedAnnualSharePriceIncrease {
+    final value = parseFieldValueToDouble(annualSharePriceIncrease);
+
+    return localizePercentage(value: value);
+  }
+
+  String get formattedAnnualDividendIncrease {
+    final value = parseFieldValueToDouble(annualDividendIncrease);
+
+    return localizePercentage(value: value);
+  }
+
+  String get formattedTaxRate {
+    final value = parseFieldValueToDouble(taxRate);
+
+    return localizePercentage(value: value);
+  }
+
+  String get formattedDrip {
+    return drip
+        ? CoreLocaleKeys.core_label_yes.tr()
+        : CoreLocaleKeys.core_label_no.tr();
   }
 
   MatexDividendReinvestmentCalculatorBlocFields({
