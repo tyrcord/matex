@@ -137,7 +137,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
       totalReturn: _computeTotalReturn(lastReport!.endingBalance!).toDouble(),
       totalTaxAmount: _computeTotalTaxAmount(lastReport).toDouble(),
       grossDividendPaid: lastReport.cumulativeGrossAmount,
-      netDividendeIncome: futureReport!.netDividendPayout,
+      netDividendIncome: futureReport!.netDividendPayout,
       netDividendPaid: lastReport.cumulativeNetAmount,
       totalContribution: dTotalContribution.toDouble(),
       startingBalance: dStartingPrincipal.toDouble(),

@@ -63,9 +63,9 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
       formattedNetDividendPaid: localizeCurrency(
         value: results.netDividendPaid,
       ),
-      annualNetDividendPaid: results.netDividendeIncome,
-      formattedAnnualNetDividendPaid: localizeCurrency(
-        value: results.netDividendeIncome,
+      netDividendIncome: results.netDividendIncome,
+      formattedNetDividendIncome: localizeCurrency(
+        value: results.netDividendIncome,
       ),
       sharesOwned: results.numberOfShares,
       formattedSharesOwned: localizeNumber(
@@ -82,6 +82,10 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
       totalTaxAmount: results.totalTaxAmount,
       formattedTotalTaxAmount: localizeCurrency(
         value: results.totalTaxAmount,
+      ),
+      startingBalance: results.startingBalance,
+      formattedStartingBalance: localizeCurrency(
+        value: results.startingBalance,
       ),
     );
   }

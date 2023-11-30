@@ -4,7 +4,7 @@ import 'package:tmodel/tmodel.dart';
 class MatexDividendReinvestmentCalculatorResults extends TModel {
   // Define Properties
   final List<MatexDividendReinvestementYearlyPayoutReport>? reports;
-  final double? netDividendeIncome;
+  final double? netDividendIncome;
   final double? grossDividendPaid;
   final double? totalContribution;
   final double? netDividendPaid;
@@ -17,7 +17,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
 
   // Constructor
   const MatexDividendReinvestmentCalculatorResults({
-    this.netDividendeIncome,
+    this.netDividendIncome,
     this.grossDividendPaid,
     this.totalContribution,
     this.netDividendPaid,
@@ -41,7 +41,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
     final reports = (json['reports'] as List<Map<String, dynamic>>?);
 
     return MatexDividendReinvestmentCalculatorResults(
-      netDividendeIncome: json['netDividendeIncome'] as double?,
+      netDividendIncome: json['netDividendIncome'] as double?,
       grossDividendPaid: json['grossDividendPaid'] as double?,
       totalContribution: json['totalContribution'] as double?,
       netDividendPaid: json['netDividendPaid'] as double?,
@@ -61,7 +61,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
   @override
   MatexDividendReinvestmentCalculatorResults copyWith({
     List<MatexDividendReinvestementYearlyPayoutReport>? reports,
-    double? netDividendeIncome,
+    double? netDividendIncome,
     double? grossDividendPaid,
     double? totalContribution,
     double? netDividendPaid,
@@ -73,7 +73,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
     double? sharePrice,
   }) {
     return MatexDividendReinvestmentCalculatorResults(
-      netDividendeIncome: netDividendeIncome ?? this.netDividendeIncome,
+      netDividendIncome: netDividendIncome ?? this.netDividendIncome,
       grossDividendPaid: grossDividendPaid ?? this.grossDividendPaid,
       totalContribution: totalContribution ?? this.totalContribution,
       netDividendPaid: netDividendPaid ?? this.netDividendPaid,
@@ -90,7 +90,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
   // Copy With Defaults Method
   @override
   MatexDividendReinvestmentCalculatorResults copyWithDefaults({
-    bool resetNetDividendeIncome = false,
+    bool resetNetDividendIncome = false,
     bool resetGrossDividendPaid = false,
     bool resetTotalContribution = false,
     bool resetNetDividendPaid = false,
@@ -103,7 +103,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
     bool resetReports = false,
   }) {
     return MatexDividendReinvestmentCalculatorResults(
-      netDividendeIncome: resetNetDividendeIncome ? null : netDividendeIncome,
+      netDividendIncome: resetNetDividendIncome ? null : netDividendIncome,
       grossDividendPaid: resetGrossDividendPaid ? null : grossDividendPaid,
       totalContribution: resetTotalContribution ? null : totalContribution,
       netDividendPaid: resetNetDividendPaid ? null : netDividendPaid,
@@ -122,7 +122,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
   MatexDividendReinvestmentCalculatorResults merge(
       covariant MatexDividendReinvestmentCalculatorResults model) {
     return copyWith(
-      netDividendeIncome: model.netDividendeIncome,
+      netDividendIncome: model.netDividendIncome,
       grossDividendPaid: model.grossDividendPaid,
       totalContribution: model.totalContribution,
       netDividendPaid: model.netDividendPaid,
@@ -139,7 +139,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
   // Props Getter
   @override
   List<Object?> get props => [
-        netDividendeIncome,
+        netDividendIncome,
         grossDividendPaid,
         totalContribution,
         netDividendPaid,
@@ -156,7 +156,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
   Map<String, dynamic> toJson() {
     return {
       'reports': reports?.map((report) => report.toJson()).toList(),
-      'netDividendeIncome': netDividendeIncome,
+      'netDividendIncome': netDividendIncome,
       'grossDividendPaid': grossDividendPaid,
       'totalContribution': totalContribution,
       'netDividendPaid': netDividendPaid,

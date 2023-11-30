@@ -9,8 +9,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
   final String? formattedTotalReturn;
   final double? netDividendPaid;
   final String? formattedNetDividendPaid;
-  final double? annualNetDividendPaid;
-  final String? formattedAnnualNetDividendPaid;
+  final double? netDividendIncome;
+  final String? formattedNetDividendIncome;
   final double? sharesOwned;
   final String? formattedSharesOwned;
   final double? sharePrice;
@@ -21,6 +21,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
   final String? formattedTotalTaxAmount;
   final double? grossDividendPaid;
   final String? formattedGrossDividendPaid;
+  final double? startingBalance;
+  final String? formattedStartingBalance;
 
   const MatexDividendReinvestmentCalculatorBlocResults({
     this.endingBalance,
@@ -29,8 +31,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
     this.formattedTotalReturn,
     this.netDividendPaid,
     this.formattedNetDividendPaid,
-    this.annualNetDividendPaid,
-    this.formattedAnnualNetDividendPaid,
+    this.netDividendIncome,
+    this.formattedNetDividendIncome,
     this.sharesOwned,
     this.formattedSharesOwned,
     this.sharePrice,
@@ -41,6 +43,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
     this.formattedTotalTaxAmount,
     this.grossDividendPaid,
     this.formattedGrossDividendPaid,
+    this.startingBalance,
+    this.formattedStartingBalance,
   });
 
   @override
@@ -54,8 +58,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
     String? formattedTotalReturn,
     double? netDividendPaid,
     String? formattedNetDividendPaid,
-    double? annualNetDividendPaid,
-    String? formattedAnnualNetDividendPaid,
+    double? netDividendIncome,
+    String? formattedNetDividendIncome,
     double? sharesOwned,
     String? formattedSharesOwned,
     double? sharePrice,
@@ -66,6 +70,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
     String? formattedTotalTaxAmount,
     double? grossDividendPaid,
     String? formattedGrossDividendPaid,
+    double? startingBalance,
+    String? formattedStartingBalance,
   }) {
     return MatexDividendReinvestmentCalculatorBlocResults(
       endingBalance: endingBalance ?? this.endingBalance,
@@ -76,10 +82,9 @@ class MatexDividendReinvestmentCalculatorBlocResults
       netDividendPaid: netDividendPaid ?? this.netDividendPaid,
       formattedNetDividendPaid:
           formattedNetDividendPaid ?? this.formattedNetDividendPaid,
-      annualNetDividendPaid:
-          annualNetDividendPaid ?? this.annualNetDividendPaid,
-      formattedAnnualNetDividendPaid:
-          formattedAnnualNetDividendPaid ?? this.formattedAnnualNetDividendPaid,
+      netDividendIncome: netDividendIncome ?? this.netDividendIncome,
+      formattedNetDividendIncome:
+          formattedNetDividendIncome ?? this.formattedNetDividendIncome,
       sharesOwned: sharesOwned ?? this.sharesOwned,
       formattedSharesOwned: formattedSharesOwned ?? this.formattedSharesOwned,
       sharePrice: sharePrice ?? this.sharePrice,
@@ -109,8 +114,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
       formattedTotalReturn: model.formattedTotalReturn,
       netDividendPaid: model.netDividendPaid,
       formattedNetDividendPaid: model.formattedNetDividendPaid,
-      annualNetDividendPaid: model.annualNetDividendPaid,
-      formattedAnnualNetDividendPaid: model.formattedAnnualNetDividendPaid,
+      netDividendIncome: model.netDividendIncome,
+      formattedNetDividendIncome: model.formattedNetDividendIncome,
       sharesOwned: model.sharesOwned,
       formattedSharesOwned: model.formattedSharesOwned,
       sharePrice: model.sharePrice,
@@ -122,6 +127,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
       formattedTotalTaxAmount: model.formattedTotalTaxAmount,
       grossDividendPaid: model.grossDividendPaid,
       formattedGrossDividendPaid: model.formattedGrossDividendPaid,
+      startingBalance: model.startingBalance,
+      formattedStartingBalance: model.formattedStartingBalance,
     );
   }
 
@@ -133,8 +140,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
         formattedTotalReturn,
         netDividendPaid,
         formattedNetDividendPaid,
-        annualNetDividendPaid,
-        formattedAnnualNetDividendPaid,
+        netDividendIncome,
+        formattedNetDividendIncome,
         sharesOwned,
         formattedSharesOwned,
         sharePrice,
@@ -145,5 +152,7 @@ class MatexDividendReinvestmentCalculatorBlocResults
         formattedTotalTaxAmount,
         grossDividendPaid,
         formattedGrossDividendPaid,
+        startingBalance,
+        formattedStartingBalance,
       ];
 }
