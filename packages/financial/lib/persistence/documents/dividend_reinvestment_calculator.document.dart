@@ -6,6 +6,10 @@ class MatexDividendReinvestmentCalculatorDocument
   static const defaultFrequency = MatexFinancialFrequency.annually;
   static const defaultDrip = true;
 
+  /// The version of the document.
+  @override
+  int get version => 1;
+
   late final String? paymentFrequency;
   late final String? sharePrice;
   late final String? numberOfShares;

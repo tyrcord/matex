@@ -8,6 +8,10 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   late final String? dividendAmount;
   late final String? sharePrice;
 
+  /// The version of the document.
+  @override
+  int get version => 1;
+
   MatexDividendYieldCalculatorDocument({
     String? paymentFrequency,
     String? dividendAmount,

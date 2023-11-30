@@ -4,7 +4,7 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-const _kStoreName = 'matexDividendPayoutRatioCalculatorDataProvider';
+const _kStoreName = 'matexDividendPayoutRatioCalculator';
 
 class MatexDividendPayoutRatioCalculatorDataProvider
     extends FastCalculatorDataProvider<

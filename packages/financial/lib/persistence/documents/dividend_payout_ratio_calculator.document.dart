@@ -6,6 +6,10 @@ class MatexDividendPayoutRatioCalculatorDocument
   late final String? netIncome;
   late final String? totalDividends;
 
+  /// The version of the document.
+  @override
+  int get version => 1;
+
   MatexDividendPayoutRatioCalculatorDocument({
     String? netIncome,
     String? totalDividends,
