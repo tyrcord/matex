@@ -135,6 +135,7 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
 
     return MatexDividendReinvestmentCalculatorResults(
       totalReturn: _computeTotalReturn(lastReport!.endingBalance!).toDouble(),
+      totalTaxAmount: _computeTotalTaxAmount(lastReport).toDouble(),
       grossDividendPaid: lastReport.cumulativeGrossAmount,
       netDividendeIncome: futureReport!.netDividendPayout,
       netDividendPaid: lastReport.cumulativeNetAmount,
@@ -258,12 +259,22 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
     );
   }
 
+  Decimal _computeTotalTaxAmount(
+    MatexDividendReinvestementYearlyPayoutReport? lastReport,
+  ) {
+    final dCumulativeGrossAmount =
+        toDecimalOrDefault(lastReport?.dCumulativeGrossAmount);
+    final dCumulativeNetAmount =
+        toDecimalOrDefault(lastReport?.dCumulativeNetAmount);
+
+    return dCumulativeGrossAmount - dCumulativeNetAmount;
+  }
+
   Decimal _computeTotalReturn(double endingBalance) {
     final dEndingBalance = toDecimalOrDefault(endingBalance);
     final denominator = dTotalContribution + dStartingPrincipal;
-    final dTotalReturn = decimalFromRational(dEndingBalance / denominator);
 
-    return (dTotalReturn * dHundred) - dHundred;
+    return decimalFromRational(dEndingBalance / denominator) - dOne;
   }
 
   Decimal _getInitialSharePrice({

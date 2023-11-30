@@ -19,6 +19,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
   final String? formattedTotalAdditionalContribution;
   final double? totalTaxAmount;
   final String? formattedTotalTaxAmount;
+  final double? grossDividendPaid;
+  final String? formattedGrossDividendPaid;
 
   const MatexDividendReinvestmentCalculatorBlocResults({
     this.endingBalance,
@@ -37,6 +39,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
     this.formattedTotalAdditionalContribution,
     this.totalTaxAmount,
     this.formattedTotalTaxAmount,
+    this.grossDividendPaid,
+    this.formattedGrossDividendPaid,
   });
 
   @override
@@ -60,6 +64,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
     String? formattedTotalAdditionalContribution,
     double? totalTaxAmount,
     String? formattedTotalTaxAmount,
+    double? grossDividendPaid,
+    String? formattedGrossDividendPaid,
   }) {
     return MatexDividendReinvestmentCalculatorBlocResults(
       endingBalance: endingBalance ?? this.endingBalance,
@@ -86,6 +92,9 @@ class MatexDividendReinvestmentCalculatorBlocResults
       totalTaxAmount: totalTaxAmount ?? this.totalTaxAmount,
       formattedTotalTaxAmount:
           formattedTotalTaxAmount ?? this.formattedTotalTaxAmount,
+      grossDividendPaid: grossDividendPaid ?? this.grossDividendPaid,
+      formattedGrossDividendPaid:
+          formattedGrossDividendPaid ?? this.formattedGrossDividendPaid,
     );
   }
 
@@ -111,6 +120,8 @@ class MatexDividendReinvestmentCalculatorBlocResults
           model.formattedTotalAdditionalContribution,
       totalTaxAmount: model.totalTaxAmount,
       formattedTotalTaxAmount: model.formattedTotalTaxAmount,
+      grossDividendPaid: model.grossDividendPaid,
+      formattedGrossDividendPaid: model.formattedGrossDividendPaid,
     );
   }
 
@@ -132,5 +143,7 @@ class MatexDividendReinvestmentCalculatorBlocResults
         formattedTotalAdditionalContribution,
         totalTaxAmount,
         formattedTotalTaxAmount,
+        grossDividendPaid,
+        formattedGrossDividendPaid,
       ];
 }

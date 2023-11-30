@@ -47,24 +47,28 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     final endingBalance = results.endingBalance;
 
     return MatexDividendReinvestmentCalculatorBlocResults(
+      grossDividendPaid: results.grossDividendPaid,
+      formattedGrossDividendPaid: localizeCurrency(
+        value: results.grossDividendPaid,
+      ),
       endingBalance: endingBalance,
       formattedEndingBalance: localizeCurrency(
         value: endingBalance,
       ),
       totalReturn: results.totalReturn,
-      formattedTotalReturn: localizeCurrency(
+      formattedTotalReturn: localizePercentage(
         value: results.totalReturn,
       ),
       netDividendPaid: results.netDividendPaid,
       formattedNetDividendPaid: localizeCurrency(
         value: results.netDividendPaid,
       ),
-      annualNetDividendPaid: results.netDividendPaid,
+      annualNetDividendPaid: results.netDividendeIncome,
       formattedAnnualNetDividendPaid: localizeCurrency(
-        value: results.netDividendPaid,
+        value: results.netDividendeIncome,
       ),
       sharesOwned: results.numberOfShares,
-      formattedSharesOwned: localizeCurrency(
+      formattedSharesOwned: localizeNumber(
         value: results.numberOfShares,
       ),
       sharePrice: results.sharePrice,
@@ -75,10 +79,10 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
       formattedTotalAdditionalContribution: localizeCurrency(
         value: results.totalContribution,
       ),
-      // totalTaxAmount: results.totalTaxAmount,
-      // formattedTotalTaxAmount: localizeCurrency(
-      //   value: results.totalTaxAmount,
-      // ),
+      totalTaxAmount: results.totalTaxAmount,
+      formattedTotalTaxAmount: localizeCurrency(
+        value: results.totalTaxAmount,
+      ),
     );
   }
 
@@ -169,6 +173,13 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
   Future<void> resetCalculator(
     MatexDividendReinvestmentCalculatorDocument document,
   ) async {
+    final dDividendYield = toDecimalOrDefault(document.dividendYield);
+    final dTaxRate = toDecimalOrDefault(document.taxRate);
+    final dAnnualDividendIncrease =
+        toDecimalOrDefault(document.annualDividendIncrease);
+    final dAnnualSharePriceIncrease =
+        toDecimalOrDefault(document.annualSharePriceIncrease);
+
     final frequency = parseFinancialFrequencyFromString(
       document.paymentFrequency,
     );
@@ -177,14 +188,13 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
       sharePrice: parseStringToDouble(document.sharePrice),
       numberOfShares: parseStringToDouble(document.numberOfShares),
       dividendPaymentFrequency: frequency,
-      dividendYield: parseStringToDouble(document.dividendYield),
+      dividendYield: (dDividendYield / dHundred).toDouble(),
       yearsToGrow: parseStringToInt(document.yearsToGrow),
       annualContribution: parseStringToDouble(document.annualContribution),
       annualSharePriceIncrease:
-          parseStringToDouble(document.annualSharePriceIncrease),
-      annualDividendIncrease:
-          parseStringToDouble(document.annualDividendIncrease),
-      taxRate: parseStringToDouble(document.taxRate),
+          (dAnnualSharePriceIncrease / dHundred).toDouble(),
+      annualDividendIncrease: (dAnnualDividendIncrease / dHundred).toDouble(),
+      taxRate: (dTaxRate / dHundred).toDouble(),
       drip: document.drip,
     ));
   }
@@ -302,7 +312,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimal(value) ?? dZero;
       fields = currentState.fields.copyWith(dividendYield: value);
-      calculator.dividendYield = dValue.toDouble();
+      calculator.dividendYield = (dValue / dHundred).toDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -362,7 +372,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimal(value) ?? dZero;
       fields = currentState.fields.copyWith(annualSharePriceIncrease: value);
-      calculator.annualSharePriceIncrease = dValue.toDouble();
+      calculator.annualSharePriceIncrease = (dValue / dHundred).toDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -382,7 +392,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimal(value) ?? dZero;
       fields = currentState.fields.copyWith(annualDividendIncrease: value);
-      calculator.annualDividendIncrease = dValue.toDouble();
+      calculator.annualDividendIncrease = (dValue / dHundred).toDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -400,7 +410,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimal(value) ?? dZero;
       fields = currentState.fields.copyWith(taxRate: value);
-      calculator.taxRate = dValue.toDouble();
+      calculator.taxRate = (dValue / dHundred).toDouble();
     }
 
     return currentState.copyWith(fields: fields);

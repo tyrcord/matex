@@ -13,6 +13,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
   final double? endingBalance;
   final double? totalReturn;
   final double? sharePrice;
+  final double? totalTaxAmount;
 
   // Constructor
   const MatexDividendReinvestmentCalculatorResults({
@@ -22,6 +23,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
     this.netDividendPaid,
     this.startingBalance,
     this.numberOfShares,
+    this.totalTaxAmount,
     this.endingBalance,
     this.totalReturn,
     this.sharePrice,
@@ -45,6 +47,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
       netDividendPaid: json['netDividendPaid'] as double?,
       startingBalance: json['startingBalance'] as double?,
       numberOfShares: json['numberOfShares'] as double?,
+      totalTaxAmount: json['totalTaxAmount'] as double?,
       endingBalance: json['endingBalance'] as double?,
       totalReturn: json['totalReturn'] as double?,
       sharePrice: json['sharePrice'] as double?,
@@ -63,6 +66,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
     double? totalContribution,
     double? netDividendPaid,
     double? startingBalance,
+    double? totalTaxAmount,
     double? numberOfShares,
     double? endingBalance,
     double? totalReturn,
@@ -75,6 +79,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
       netDividendPaid: netDividendPaid ?? this.netDividendPaid,
       startingBalance: startingBalance ?? this.startingBalance,
       numberOfShares: numberOfShares ?? this.numberOfShares,
+      totalTaxAmount: totalTaxAmount ?? this.totalTaxAmount,
       endingBalance: endingBalance ?? this.endingBalance,
       totalReturn: totalReturn ?? this.totalReturn,
       sharePrice: sharePrice ?? this.sharePrice,
@@ -90,6 +95,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
     bool resetTotalContribution = false,
     bool resetNetDividendPaid = false,
     bool resetStartingBalance = false,
+    bool resetTotalTaxAmount = false,
     bool resetNumberOfShares = false,
     bool resetEndingBalance = false,
     bool resetTotalReturn = false,
@@ -103,6 +109,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
       netDividendPaid: resetNetDividendPaid ? null : netDividendPaid,
       startingBalance: resetStartingBalance ? null : startingBalance,
       numberOfShares: resetNumberOfShares ? null : numberOfShares,
+      totalTaxAmount: resetTotalTaxAmount ? null : totalTaxAmount,
       endingBalance: resetEndingBalance ? null : endingBalance,
       totalReturn: resetTotalReturn ? null : totalReturn,
       sharePrice: resetSharePrice ? null : sharePrice,
@@ -121,6 +128,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
       netDividendPaid: model.netDividendPaid,
       startingBalance: model.startingBalance,
       numberOfShares: model.numberOfShares,
+      totalTaxAmount: model.totalTaxAmount,
       endingBalance: model.endingBalance,
       totalReturn: model.totalReturn,
       sharePrice: model.sharePrice,
@@ -137,6 +145,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
         netDividendPaid,
         startingBalance,
         numberOfShares,
+        totalTaxAmount,
         endingBalance,
         totalReturn,
         sharePrice,
@@ -152,6 +161,7 @@ class MatexDividendReinvestmentCalculatorResults extends TModel {
       'totalContribution': totalContribution,
       'netDividendPaid': netDividendPaid,
       'startingBalance': startingBalance,
+      'totalTaxAmount': totalTaxAmount,
       'numberOfShares': numberOfShares,
       'endingBalance': endingBalance,
       'totalReturn': totalReturn,
