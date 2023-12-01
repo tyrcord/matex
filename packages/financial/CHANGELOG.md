@@ -1,3 +1,11 @@
+## 0.0.34
+
+ - **FEAT**: localize text.
+ - **FEAT**: set dividend document versions.
+ - **FEAT**: add MatexDividendReinvestmentCalculatorPdfGenerator.
+ - **FEAT**: more results.
+ - **FEAT**: added MatexDividendReinvestmentCalculatorBloc.
+
 ## 0.0.33
 
  - **FEAT**: update dependencies.

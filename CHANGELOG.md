@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-12-01
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_financial` - `v0.0.34`](#matex_financial---v0034)
+
+---
+
+#### `matex_financial` - `v0.0.34`
+
+ - **FEAT**: localize text.
+ - **FEAT**: set dividend document versions.
+ - **FEAT**: add MatexDividendReinvestmentCalculatorPdfGenerator.
+ - **FEAT**: more results.
+ - **FEAT**: added MatexDividendReinvestmentCalculatorBloc.
+
+
 ## 2023-11-29
 
 ### Changes
