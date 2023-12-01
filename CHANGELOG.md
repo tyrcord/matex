@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_financial` - `v0.0.35`](#matex_financial---v0035)
+
+---
+
+#### `matex_financial` - `v0.0.35`
+
+ - **FEAT**: minor improvements.
+
+
+## 2023-12-01
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_financial` - `v0.0.34`](#matex_financial---v0034)
 
 ---

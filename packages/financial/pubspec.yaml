@@ -37,4 +37,4 @@ environment:
   sdk: '>=3.2.0 <4.0.0'
 name: matex_financial
 repository: https://github.com/tyrcord/matex/tree/main/packages/financial
-version: 0.0.34
+version: 0.0.35
