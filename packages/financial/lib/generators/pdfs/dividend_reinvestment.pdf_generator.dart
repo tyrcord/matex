@@ -62,7 +62,7 @@ class MatexDividendReinvestmentCalculatorPdfGenerator {
 
     return [
       FastReportEntry(
-        name: FinanceDividendLocaleKeys.dividend_label_total_dividends.tr(),
+        name: FinanceStockLocaleKeys.stock_label_share_price.tr(),
         value: fields.formattedSharePrice,
       ),
       FastReportEntry(
@@ -81,7 +81,7 @@ class MatexDividendReinvestmentCalculatorPdfGenerator {
         name: FinanceDividendLocaleKeys
             .dividend_label_dividend_payment_frequency
             .tr(),
-        value: fields.formattedDividendYield,
+        value: fields.formattedPaymentFrequency,
       ),
       FastReportEntry(
         name: FinanceDividendLocaleKeys
@@ -130,6 +130,7 @@ class MatexDividendReinvestmentCalculatorPdfGenerator {
     final sharePrice = results.sharePrice;
     final sharesOwned = results.sharesOwned;
     final totalAdditionalContribution = results.totalAdditionalContribution;
+    final palette = ThemeHelper.getPaletteColors(context);
 
     return [
       if (endingBalance != null && endingBalance > 0)
@@ -142,7 +143,9 @@ class MatexDividendReinvestmentCalculatorPdfGenerator {
           name: FinanceLocaleKeys.finance_label_total_return.tr(),
           value: results.formattedTotalReturn!,
         ),
-      if (grossDividendPaid != null && grossDividendPaid > 0)
+      if (grossDividendPaid != null &&
+          grossDividendPaid > 0 &&
+          netDividendPaid != grossDividendPaid)
         FastReportEntry(
           name:
               FinanceDividendLocaleKeys.dividend_label_gross_dividend_paid.tr(),
@@ -152,11 +155,13 @@ class MatexDividendReinvestmentCalculatorPdfGenerator {
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_tax_amount.tr(),
           value: results.formattedTotalTaxAmount!,
+          color: palette.red.mid,
         ),
       if (netDividendPaid != null && netDividendPaid > 0)
         FastReportEntry(
           name: FinanceDividendLocaleKeys.dividend_label_net_dividend_paid.tr(),
           value: results.formattedNetDividendPaid!,
+          color: palette.green.mid,
         ),
       if (netDividendIncome != null && netDividendIncome > 0)
         FastReportEntry(

@@ -39,7 +39,7 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
   String get formattedDividendYield {
     final value = parseFieldValueToDouble(dividendYield);
 
-    return localizePercentage(value: value);
+    return '${localizeNumber(value: value)}%';
   }
 
   String get formattedYearsToGrow {
@@ -57,19 +57,19 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
   String get formattedAnnualSharePriceIncrease {
     final value = parseFieldValueToDouble(annualSharePriceIncrease);
 
-    return localizePercentage(value: value);
+    return '${localizeNumber(value: value)}%';
   }
 
   String get formattedAnnualDividendIncrease {
     final value = parseFieldValueToDouble(annualDividendIncrease);
 
-    return localizePercentage(value: value);
+    return '${localizeNumber(value: value)}%';
   }
 
   String get formattedTaxRate {
     final value = parseFieldValueToDouble(taxRate);
 
-    return localizePercentage(value: value);
+    return '${localizeNumber(value: value)}%';
   }
 
   String get formattedDrip {
