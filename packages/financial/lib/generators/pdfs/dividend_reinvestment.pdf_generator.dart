@@ -178,7 +178,7 @@ class MatexDividendReinvestmentCalculatorPdfGenerator {
       if (totalAdditionalContribution != null &&
           totalAdditionalContribution > 0)
         FastReportEntry(
-          name: 'Total additional contribution',
+          name: FinanceLocaleKeys.finance_label_total_contributions.tr(),
           value: results.formattedTotalAdditionalContribution!,
         ),
     ];

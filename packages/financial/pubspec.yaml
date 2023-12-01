@@ -9,10 +9,10 @@ dependencies:
   flutter:
     sdk: flutter
   lingua_core: ^0.0.32
-  lingua_finance: ^0.0.26
-  lingua_finance_dividend: ^0.0.6
+  lingua_finance: ^0.0.27
+  lingua_finance_dividend: ^0.0.7
   lingua_finance_forex: ^0.0.8
-  lingua_finance_stock: ^0.0.9
+  lingua_finance_stock: ^0.0.10
   lingua_settings: ^0.0.13
   lingua_units: ^0.0.7
   matex_core: ^0.0.25
