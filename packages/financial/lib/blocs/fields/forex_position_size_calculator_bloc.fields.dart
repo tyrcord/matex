@@ -34,15 +34,25 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
   }
 
   String get formattedEntryPrice {
-    final entryPriceValue = parseFieldValueToDouble(entryPrice);
+    final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
+    final value = parseFieldValueToDouble(entryPrice);
 
-    return localizeCurrency(value: entryPriceValue);
+    return localizeCurrency(
+      minimumFractionDigits: pipDecimalPlacesValue.toInt(),
+      maximumFractionDigits: kMatexQuoteMaxFractionDigits,
+      value: value,
+    );
   }
 
   String get formattedStopLossPrice {
-    final stopLossPriceValue = parseFieldValueToDouble(stopLossPrice);
+    final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
+    final value = parseFieldValueToDouble(stopLossPrice);
 
-    return localizeCurrency(value: stopLossPriceValue);
+    return localizeCurrency(
+      minimumFractionDigits: pipDecimalPlacesValue.toInt(),
+      maximumFractionDigits: kMatexQuoteMaxFractionDigits,
+      value: value,
+    );
   }
 
   String get formattedRiskPercent {

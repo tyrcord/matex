@@ -14,7 +14,8 @@ class MatexForexPipValueCalculatorResults extends MatexCalculatorState {
     double? pipValue,
   }) {
     return MatexForexPipValueCalculatorResults(
-        pipValue: pipValue ?? this.pipValue);
+      pipValue: pipValue ?? this.pipValue,
+    );
   }
 
   @override

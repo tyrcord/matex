@@ -10,6 +10,7 @@ export 'forex_position_size_calculator.bloc.dart';
 export 'dividend_yield_calculator.bloc.dart';
 export 'dividend_payout_ratio_calculator.bloc.dart';
 export 'dividend_reinvestment_calculator.bloc.dart';
+export 'forex_pip_delta_calculator.bloc.dart';
 
 export './states/states.dart';
 export './events/events.dart';

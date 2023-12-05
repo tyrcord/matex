@@ -14,10 +14,10 @@ mixin MatexFinancialCalculatorFormatterMixin on MatexCalculatorFormatterMixin {
         metadata?.pip.round ?? MatexPairPipMetadata.defaultMetatada().round;
 
     return localizeNumber(
-      value: rate,
-      locale: locale,
       minimumFractionDigits: minimumFractionDigits ?? round,
       maximumFractionDigits: maximumFractionDigits ?? round,
+      locale: locale ?? getUserLocaleCode(),
+      value: rate,
     );
   }
 }

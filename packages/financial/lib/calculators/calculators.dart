@@ -8,3 +8,4 @@ export 'forex_position_size.calculator.dart';
 export 'dividend_yield.calculator.dart';
 export 'dividend_payout_ratio.calculator.dart';
 export 'dividend_reinvestment.calculator.dart';
+export 'forex_pip_delta.calculator.dart';
