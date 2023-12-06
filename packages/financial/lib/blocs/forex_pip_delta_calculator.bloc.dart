@@ -23,16 +23,11 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
         MatexForexPipDeltaCalculatorDocument,
         MatexForexPipDeltaCalculatorBlocResults>
     with MatexFinancialCalculatorFormatterMixin {
-  final MatexFinancialInstrumentExchangeService exchangeProvider;
-
   MatexForexPipDeltaCalculatorBloc({
     MatexForexPipDeltaCalculatorBlocState? initialState,
     MatexForexPipDeltaCalculatorDataProvider? dataProvider,
-    required this.exchangeProvider,
     super.debouceComputeEvents = true,
-    super.isAutoRefreshEnabled = false,
     super.showExportPdfDialog,
-    super.autoRefreshPeriod,
     super.delegate,
   }) : super(
           initialState: initialState ?? _kDefaultPipValueBlocState,
@@ -46,14 +41,6 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
       MatexCalculatorDefaultValueKeys.matexCalculatorFinancialInstrument.name,
       MatexForexPipDeltaCalculatorBlocKey.instrument,
     );
-  }
-
-  @override
-  void close() {
-    if (!isClosed && canClose()) {
-      exchangeProvider.dispose();
-      super.close();
-    }
   }
 
   @override

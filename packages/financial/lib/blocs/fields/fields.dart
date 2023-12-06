@@ -7,3 +7,4 @@ export 'dividend_payout_ratio_calculator_bloc.fields.dart';
 export 'dividend_yield_calculator_bloc.fields.dart';
 export 'dividend_reinvestment_calculator_bloc.fields.dart';
 export 'forex_pip_delta_calculator_bloc.fields.dart';
+export 'fibonnaci_levels_calculator.fields.dart';

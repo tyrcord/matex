@@ -7,3 +7,4 @@ export 'dividend_yield.pdf_generator.dart';
 export 'dividend_payout_ratio.pdf_generator.dart';
 export 'dividend_reinvestment.pdf_generator.dart';
 export 'forex_pip_delta.pdf_generator.dart';
+export 'fibonnaci_levels.pdf_generator.dart';
