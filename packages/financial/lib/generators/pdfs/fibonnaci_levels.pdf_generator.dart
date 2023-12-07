@@ -34,7 +34,8 @@ class MatexFibonnaciLevelsCalculatorPdfGenerator {
       inputs: _buildInputReportEntries(context, fields, results),
       languageCode: appSettingsBloc.currentState.languageCode,
       title: CoreLocaleKeys.core_label_report_text.tr(),
-      results: _buildResults(context, fields, results),
+      results: const [],
+      categories: _buildCategoryEntries(context, fields, results),
       countryCode: appInfo.deviceCountryCode,
       categoryColumns: 3,
       author: CoreLocaleKeys.core_message_pdf_generated_by.tr(
@@ -64,12 +65,43 @@ class MatexFibonnaciLevelsCalculatorPdfGenerator {
     ];
   }
 
-  List<FastReportEntry> _buildResults(
+  List<FastReportCategoryEntry> _buildCategoryEntries(
     BuildContext context,
     MatexFibonnaciLevelsCalculatorBlocFields fields,
     MatexFibonnaciLevelsCalculatorBlocResults results,
   ) {
-    // FIXME: implement this
-    return [];
+    return [
+      _buildRetracementCategory(results, fields),
+      _buildExtensionCategory(results, fields),
+    ];
+  }
+
+  FastReportCategoryEntry _buildRetracementCategory(
+    MatexFibonnaciLevelsCalculatorBlocResults results,
+    MatexFibonnaciLevelsCalculatorBlocFields fields,
+  ) {
+    return FastReportCategoryEntry(
+      name: FinanceLocaleKeys.finance_label_retracement.tr(),
+      entries: _buildLevelEntries(results.retracementLevels),
+    );
+  }
+
+  FastReportCategoryEntry _buildExtensionCategory(
+    MatexFibonnaciLevelsCalculatorBlocResults results,
+    MatexFibonnaciLevelsCalculatorBlocFields fields,
+  ) {
+    return FastReportCategoryEntry(
+      name: FinanceLocaleKeys.finance_label_extension.tr(),
+      entries: _buildLevelEntries(results.extensionLevels),
+    );
+  }
+
+  List<FastReportEntry> _buildLevelEntries(List<MatexFibonacciLevel> levels) {
+    return levels.map((MatexFibonacciLevel fibonacciLevel) {
+      return FastReportEntry(
+        value: fibonacciLevel.formattedValue,
+        name: fibonacciLevel.level,
+      );
+    }).toList();
   }
 }
