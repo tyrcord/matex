@@ -1,3 +1,10 @@
+## 0.0.36
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: implement fibonnaci levels pdf generator.
+ - **FEAT**: add fibonacci levels.
+ - **FEAT**: added pip delta calculator.
+
 ## 0.0.35
 
  - **FEAT**: minor improvements.

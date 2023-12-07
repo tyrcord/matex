@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-12-07
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.26`](#matex_core---v0026)
+ - [`matex_data` - `v0.0.20`](#matex_data---v0020)
+ - [`matex_financial` - `v0.0.36`](#matex_financial---v0036)
+
+---
+
+#### `matex_core` - `v0.0.26`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.20`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.36`
+
+ - **FEAT**: update dependencies.
+ - **FEAT**: implement fibonnaci levels pdf generator.
+ - **FEAT**: add fibonacci levels.
+ - **FEAT**: added pip delta calculator.
+
+
 ## 2023-12-01
 
 ### Changes
