@@ -1,10 +1,14 @@
-name: Flutter
+name: Fastyle Test
 
 on:
   push:
     branches: ["main"]
+    paths:
+      - "**.dart"
   pull_request:
     branches: ["main"]
+    paths:
+      - "**.dart"
 
 jobs:
   build:

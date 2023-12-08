@@ -15,6 +15,8 @@ scripts:
         - matex_data
         - matex_financial
 
+  check:dependencies:
+    exec: python3 $PWD/scripts/check_dependencies.py
   update:analysis_options:
     exec: $PWD/scripts/update_analysis_options.sh
   sort_imports:
