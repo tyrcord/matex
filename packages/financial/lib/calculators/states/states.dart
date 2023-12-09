@@ -9,3 +9,4 @@ export 'dividend_reinvestment_results_calculator.state.dart';
 export 'forex_pip_delta_calculator.state.dart';
 export 'fibonnaci_levels_calculator.state.dart';
 export 'pivot_points_calculator.state.dart';
+export 'forex_profit_loss_calculator.state.dart';

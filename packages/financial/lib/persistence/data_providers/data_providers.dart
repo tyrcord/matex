@@ -11,3 +11,4 @@ export 'dividend_reinvestment.data_provider.dart';
 export 'forex_pip_delta_calculator.data_provider.dart';
 export 'fibonnaci_levels.data_provider.dart';
 export 'pivot_points.data_provider.dart';
+export 'forex_profit_loss_calculator.data_provider.dart';

@@ -9,3 +9,4 @@ export 'dividend_reinvestment.validator.dart';
 export 'forex_pip_delta.validator.dart';
 export 'fibonnaci_levels.validator.dart';
 export 'pivot_points.validator.dart';
+export 'forex_profit_and_loss.validator.dart';
