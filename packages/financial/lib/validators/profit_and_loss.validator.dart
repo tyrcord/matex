@@ -9,7 +9,6 @@ final List<MatexCalculatorValidator<MatexProfitAndLossCalculatorState>>
   isBuyingPriceValid,
   isSellingPriceValid,
   areExpectedSaleUnitsValid,
-  isSellingPriceGreaterThanBuyingPrice,
 ];
 
 // Validator: Check if the buying price is valid
@@ -25,11 +24,4 @@ bool isSellingPriceValid(MatexProfitAndLossCalculatorState state) {
 // Validator: Check if the expected sale units are valid
 bool areExpectedSaleUnitsValid(MatexProfitAndLossCalculatorState state) {
   return state.expectedSaleUnits != null && state.expectedSaleUnits! > 0;
-}
-
-// Validator: Ensure that the selling price is greater than the buying price
-bool isSellingPriceGreaterThanBuyingPrice(
-  MatexProfitAndLossCalculatorState state,
-) {
-  return state.sellingPrice! > state.buyingPrice!;
 }
