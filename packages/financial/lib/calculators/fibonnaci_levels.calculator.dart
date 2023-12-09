@@ -60,7 +60,10 @@ class MatexFibonnaciLevelsCalculator extends MatexCalculator<
         final dLevelRate = decimalFromRational(dLevel / dHundred);
         final parsedValue = isValid ? dLevelRate * dDelta + dHighPrice : dOne;
 
-        return _makeFibonacciLevel(level, parsedValue.toDouble());
+        return _makeFibonacciLevel(
+          dLevelRate.toDouble(),
+          parsedValue.toDouble(),
+        );
       }).toList();
     }
 
@@ -69,7 +72,7 @@ class MatexFibonnaciLevelsCalculator extends MatexCalculator<
       final dLevelRate = decimalFromRational(dLevel / dHundred);
       final parsedValue = isValid ? -(dLevelRate * dDelta) + dLowPrice : dOne;
 
-      return _makeFibonacciLevel(level, parsedValue.toDouble());
+      return _makeFibonacciLevel(dLevelRate.toDouble(), parsedValue.toDouble());
     }).toList();
   }
 
@@ -85,7 +88,10 @@ class MatexFibonnaciLevelsCalculator extends MatexCalculator<
         final dLevelRate = decimalFromRational(dLevel / dHundred);
         final parsedValue = isValid ? dLevelRate * dDelta + dLowPrice : dOne;
 
-        return _makeFibonacciLevel(level, parsedValue.toDouble());
+        return _makeFibonacciLevel(
+          dLevelRate.toDouble(),
+          parsedValue.toDouble(),
+        );
       }).toList();
     }
 
@@ -94,28 +100,11 @@ class MatexFibonnaciLevelsCalculator extends MatexCalculator<
       final dLevelRate = decimalFromRational(dLevel / dHundred);
       final parsedValue = isValid ? -(dLevelRate * dDelta) + dHighPrice : dOne;
 
-      return _makeFibonacciLevel(level, parsedValue.toDouble());
+      return _makeFibonacciLevel(dLevelRate.toDouble(), parsedValue.toDouble());
     }).toList();
   }
 
   MatexFibonacciLevel _makeFibonacciLevel(double level, double value) {
-    return MatexFibonacciLevel(
-      level: _formatLevelLabel(level),
-      value: _formatLevelValue(value),
-    );
-  }
-
-  String _formatLevelLabel(double level) {
-    final dLevel = toDecimalOrDefault(level);
-    final fixedValue = dLevel.toStringAsFixed(level % 1 == 0 ? 0 : 1);
-
-    return '$fixedValue%';
-  }
-
-  double _formatLevelValue(double value) {
-    final dValue = toDecimalOrDefault(value);
-    final sValue = dValue.toStringAsFixed(MatexFibonacciLevel.defaultPrecision);
-
-    return toDecimalOrDefault(sValue).toDouble();
+    return MatexFibonacciLevel(level: level, value: value);
   }
 }

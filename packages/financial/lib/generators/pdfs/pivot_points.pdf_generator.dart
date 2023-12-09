@@ -30,11 +30,11 @@ class MatexPivotPointsCalculatorPdfGenerator {
       use24HourFormat: appSettingsBloc.currentState.use24HourFormat,
       disclaimerText:
           FinanceLocaleKeys.finance_disclaimer_intervening_markets.tr(),
-      subtitle: FinanceLocaleKeys.finance_label_fibonacci_levels.tr(),
+      subtitle: FinanceLocaleKeys.finance_label_pivot_points.tr(),
       inputs: _buildInputReportEntries(context, fields, results),
       languageCode: appSettingsBloc.currentState.languageCode,
       title: CoreLocaleKeys.core_label_report_text.tr(),
-      results: const [],
+      results: _buildResultReportEntries(context, fields, results),
       categories: _buildCategoryEntries(context, fields, results),
       countryCode: appInfo.deviceCountryCode,
       categoryColumns: 3,
@@ -51,12 +51,12 @@ class MatexPivotPointsCalculatorPdfGenerator {
   ) {
     return [
       FastReportEntry(
-        name: FinanceLocaleKeys.finance_label_high_price.tr(),
-        value: fields.formattedHighPrice,
-      ),
-      FastReportEntry(
         name: FinanceLocaleKeys.finance_label_low_price.tr(),
         value: fields.formattedLowPrice,
+      ),
+      FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_high_price.tr(),
+        value: fields.formattedHighPrice,
       ),
       FastReportEntry(
         name: FinanceLocaleKeys.finance_label_close_price.tr(),
@@ -74,13 +74,91 @@ class MatexPivotPointsCalculatorPdfGenerator {
     ];
   }
 
-  List<FastReportCategoryEntry> _buildCategoryEntries(
+  List<FastReportEntry> _buildResultReportEntries(
     BuildContext context,
     MatexPivotPointsCalculatorBlocFields fields,
     MatexPivotPointsCalculatorBlocResults results,
   ) {
     return [
-      // FIXME: implement
+      if (fields.method != MatexPivotPointsMethods.deMark &&
+          fields.method != MatexPivotPointsMethods.camarilla)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_pivot_point_text.tr(),
+          value: results.formattedPivotPoint.toString(),
+        ),
     ];
+  }
+
+  List<FastReportCategoryEntry> _buildCategoryEntries(
+    BuildContext context,
+    MatexPivotPointsCalculatorBlocFields fields,
+    MatexPivotPointsCalculatorBlocResults results,
+  ) {
+    final palette = ThemeHelper.getPaletteColors(context);
+
+    return [
+      _buildResistancesCategory(results, palette.red.mid),
+      _buildSupportsCategory(results, palette.green.mid),
+    ];
+  }
+
+  FastReportCategoryEntry _buildResistancesCategory(
+    MatexPivotPointsCalculatorBlocResults results,
+    Color color,
+  ) {
+    return FastReportCategoryEntry(
+      // FIXME: use locale key
+      name: 'Resistances',
+      entries: _buildResistanceEntries(results, color),
+    );
+  }
+
+  List<FastReportEntry> _buildResistanceEntries(
+    MatexPivotPointsCalculatorBlocResults results,
+    Color color,
+  ) {
+    const labelKey = FinanceLocaleKeys.finance_label_resistance_level;
+    final values = results.formattedResistances ?? [];
+
+    return _buildEntries(values, labelKey, color);
+  }
+
+  FastReportCategoryEntry _buildSupportsCategory(
+    MatexPivotPointsCalculatorBlocResults results,
+    Color color,
+  ) {
+    return FastReportCategoryEntry(
+      // FIXME: use locale key
+      name: 'Supports',
+      entries: _buildSupportEntries(results, color),
+    );
+  }
+
+  List<FastReportEntry> _buildSupportEntries(
+    MatexPivotPointsCalculatorBlocResults results,
+    Color color,
+  ) {
+    const labelKey = FinanceLocaleKeys.finance_label_support_level;
+    final values = results.formattedSupports ?? [];
+
+    return _buildEntries(values, labelKey, color);
+  }
+
+  List<FastReportEntry> _buildEntries(
+    List<String> values,
+    String labelKey,
+    Color color,
+  ) {
+    var level = values.length;
+
+    return values.reversed.map((String value) {
+      final label = labelKey.tr(namedArgs: {'level': (level--).toString()});
+
+      return _buildEntry(value, label, color);
+    }).toList();
+  }
+
+  FastReportEntry _buildEntry(String valueText, String labelText, Color color) {
+    return FastReportEntry(color: color, name: labelText, value: valueText);
   }
 }

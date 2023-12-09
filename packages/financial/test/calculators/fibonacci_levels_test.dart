@@ -64,84 +64,84 @@ void main() {
 
         expect(
           retracements[0],
-          equals(const MatexFibonacciLevel(level: '23.6%', value: 1.3264)),
+          equals(MatexFibonacciLevel(level: 0.236, value: 1.3264)),
         );
 
         expect(
           retracements[1],
-          equals(const MatexFibonacciLevel(level: '38.2%', value: 1.31180)),
+          equals(MatexFibonacciLevel(level: 0.382, value: 1.31180)),
         );
 
         expect(
           retracements[2],
-          equals(const MatexFibonacciLevel(level: '50%', value: 1.3)),
+          equals(MatexFibonacciLevel(level: 0.5, value: 1.3)),
         );
 
         expect(
           retracements[3],
-          equals(const MatexFibonacciLevel(level: '61.8%', value: 1.28820)),
+          equals(MatexFibonacciLevel(level: 0.618, value: 1.28820)),
         );
 
         expect(
           retracements[4],
-          equals(const MatexFibonacciLevel(level: '78.6%', value: 1.27140)),
+          equals(MatexFibonacciLevel(level: 0.786, value: 1.27140)),
         );
 
         // extensions
 
         expect(
           extensions[0],
-          equals(const MatexFibonacciLevel(level: '261.8%', value: 1.61180)),
+          equals(MatexFibonacciLevel(level: 2.618, value: 1.61180)),
         );
 
         expect(
           extensions[1],
-          equals(const MatexFibonacciLevel(level: '200%', value: 1.55)),
+          equals(MatexFibonacciLevel(level: 2, value: 1.55)),
         );
 
         expect(
           extensions[2],
-          equals(const MatexFibonacciLevel(level: '161.8%', value: 1.5118)),
+          equals(MatexFibonacciLevel(level: 1.618, value: 1.5118)),
         );
 
         expect(
           extensions[3],
-          equals(const MatexFibonacciLevel(level: '150%', value: 1.5)),
+          equals(MatexFibonacciLevel(level: 1.5, value: 1.5)),
         );
 
         expect(
           extensions[4],
-          equals(const MatexFibonacciLevel(level: '138.2%', value: 1.48820)),
+          equals(MatexFibonacciLevel(level: 1.382, value: 1.48820)),
         );
 
         expect(
           extensions[5],
-          equals(const MatexFibonacciLevel(level: '123.6%', value: 1.4736)),
+          equals(MatexFibonacciLevel(level: 1.236, value: 1.4736)),
         );
 
         expect(
           extensions[6],
-          equals(const MatexFibonacciLevel(level: '100%', value: 1.45)),
+          equals(MatexFibonacciLevel(level: 1, value: 1.45)),
         );
 
         expect(
           extensions[7],
-          equals(const MatexFibonacciLevel(level: '61.8%', value: 1.4118)),
+          equals(MatexFibonacciLevel(level: 0.618, value: 1.4118)),
         );
 
         expect(
           extensions[8],
-          equals(const MatexFibonacciLevel(level: '50%', value: 1.4)),
+          equals(MatexFibonacciLevel(level: 0.5, value: 1.4)),
         );
 
         expect(
           extensions[9],
-          equals(const MatexFibonacciLevel(level: '38.2%', value: 1.38820)),
+          equals(MatexFibonacciLevel(level: 0.382, value: 1.38820)),
         );
 
         expect(
           extensions[10],
-          equals(const MatexFibonacciLevel(level: '23.6%', value: 1.3736)),
+          equals(MatexFibonacciLevel(level: 0.236, value: 1.3736)),
         );
       });
 
@@ -159,84 +159,84 @@ void main() {
 
         expect(
           retracements[0],
-          equals(const MatexFibonacciLevel(level: '78.6%', value: 1.3286)),
+          equals(MatexFibonacciLevel(level: 0.786, value: 1.3286)),
         );
 
         expect(
           retracements[1],
-          equals(const MatexFibonacciLevel(level: '61.8%', value: 1.3118)),
+          equals(MatexFibonacciLevel(level: 0.618, value: 1.3118)),
         );
 
         expect(
           retracements[2],
-          equals(const MatexFibonacciLevel(level: '50%', value: 1.3)),
+          equals(MatexFibonacciLevel(level: 0.5, value: 1.3)),
         );
 
         expect(
           retracements[3],
-          equals(const MatexFibonacciLevel(level: '38.2%', value: 1.2882)),
+          equals(MatexFibonacciLevel(level: 0.382, value: 1.2882)),
         );
 
         expect(
           retracements[4],
-          equals(const MatexFibonacciLevel(level: '23.6%', value: 1.2736)),
+          equals(MatexFibonacciLevel(level: 0.236, value: 1.2736)),
         );
 
         // extensions
 
         expect(
           extensions[0],
-          equals(const MatexFibonacciLevel(level: '23.6%', value: 1.22640)),
+          equals(MatexFibonacciLevel(level: 0.236, value: 1.22640)),
         );
 
         expect(
           extensions[1],
-          equals(const MatexFibonacciLevel(level: '38.2%', value: 1.2118)),
+          equals(MatexFibonacciLevel(level: 0.382, value: 1.2118)),
         );
 
         expect(
           extensions[2],
-          equals(const MatexFibonacciLevel(level: '50%', value: 1.2)),
+          equals(MatexFibonacciLevel(level: 0.5, value: 1.2)),
         );
 
         expect(
           extensions[3],
-          equals(const MatexFibonacciLevel(level: '61.8%', value: 1.18820)),
+          equals(MatexFibonacciLevel(level: 0.618, value: 1.18820)),
         );
 
         expect(
           extensions[4],
-          equals(const MatexFibonacciLevel(level: '100%', value: 1.15)),
+          equals(MatexFibonacciLevel(level: 1, value: 1.15)),
         );
 
         expect(
           extensions[5],
-          equals(const MatexFibonacciLevel(level: '123.6%', value: 1.1264)),
+          equals(MatexFibonacciLevel(level: 1.236, value: 1.1264)),
         );
 
         expect(
           extensions[6],
-          equals(const MatexFibonacciLevel(level: '138.2%', value: 1.1118)),
+          equals(MatexFibonacciLevel(level: 1.382, value: 1.1118)),
         );
 
         expect(
           extensions[7],
-          equals(const MatexFibonacciLevel(level: '150%', value: 1.1)),
+          equals(MatexFibonacciLevel(level: 1.5, value: 1.1)),
         );
 
         expect(
           extensions[8],
-          equals(const MatexFibonacciLevel(level: '161.8%', value: 1.0882)),
+          equals(MatexFibonacciLevel(level: 1.618, value: 1.0882)),
         );
 
         expect(
           extensions[9],
-          equals(const MatexFibonacciLevel(level: '200%', value: 1.05)),
+          equals(MatexFibonacciLevel(level: 2, value: 1.05)),
         );
 
         expect(
           extensions[10],
-          equals(const MatexFibonacciLevel(level: '261.8%', value: 0.9882)),
+          equals(MatexFibonacciLevel(level: 2.618, value: 0.9882)),
         );
       });
     });

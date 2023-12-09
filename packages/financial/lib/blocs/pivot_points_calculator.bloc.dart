@@ -58,7 +58,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
 
   String _localizeQuote(double? value) {
     return localizeNumber(
-      maximumFractionDigits: defaultPrecision,
+      minimumFractionDigits: defaultPrecision,
       value: value,
     );
   }

@@ -100,7 +100,7 @@ class MatexFibonnaciLevelsCalculatorPdfGenerator {
     return levels.map((MatexFibonacciLevel fibonacciLevel) {
       return FastReportEntry(
         value: fibonacciLevel.formattedValue,
-        name: fibonacciLevel.level,
+        name: fibonacciLevel.formattedLevel,
       );
     }).toList();
   }

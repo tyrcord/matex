@@ -18,11 +18,12 @@ final _kDefaultFibonnaciLevelsBlocState =
 );
 
 class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
-    MatexFibonnaciLevelsCalculator,
-    FastCalculatorBlocEvent,
-    MatexFibonnaciLevelsCalculatorBlocState,
-    MatexFibonnaciLevelsCalculatorDocument,
-    MatexFibonnaciLevelsCalculatorBlocResults> {
+        MatexFibonnaciLevelsCalculator,
+        FastCalculatorBlocEvent,
+        MatexFibonnaciLevelsCalculatorBlocState,
+        MatexFibonnaciLevelsCalculatorDocument,
+        MatexFibonnaciLevelsCalculatorBlocResults>
+    implements FastCalculatorBlocDelegate {
   MatexFibonnaciLevelsCalculatorBloc({
     MatexFibonnaciLevelsCalculatorBlocState? initialState,
     MatexFibonnaciLevelsCalculatorDataProvider? dataProvider,
@@ -39,13 +40,22 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
+  Future<bool> canAutoRefreshComputations() async => true;
+
+  @override
   Future<MatexFibonnaciLevelsCalculatorBlocResults> compute() async {
     final results = calculator.value();
 
     return MatexFibonnaciLevelsCalculatorBlocResults(
-      extensionLevels: results.extensionLevels,
-      retracementLevels: results.retracementLevels,
+      retracementLevels: formatFibonnaciLevels(results.retracementLevels),
+      extensionLevels: formatFibonnaciLevels(results.extensionLevels),
     );
+  }
+
+  List<MatexFibonacciLevel> formatFibonnaciLevels(
+    List<MatexFibonacciLevel> levels,
+  ) {
+    return levels.map((e) => e.copyWith(delegate: this)).toList();
   }
 
   @override
