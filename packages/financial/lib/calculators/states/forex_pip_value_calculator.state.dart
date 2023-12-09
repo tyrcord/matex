@@ -1,19 +1,20 @@
 // Package imports:
 import 'package:matex_core/core.dart';
+import 'package:matex_financial/financial.dart';
 
 class MatexForexPipValueCalculatorState extends MatexCalculatorState {
   final double? positionSize;
-  final int? pipDecimalPlaces;
+  final int pipDecimalPlaces;
   final bool isAccountCurrencyCounter;
   final double counterToAccountCurrencyRate;
   final double instrumentPairRate;
 
   const MatexForexPipValueCalculatorState({
-    this.positionSize,
-    this.pipDecimalPlaces,
+    this.pipDecimalPlaces = kDefaultPipPipDecimalPlaces,
     this.isAccountCurrencyCounter = false,
     this.counterToAccountCurrencyRate = 0,
     this.instrumentPairRate = 0,
+    this.positionSize,
   });
 
   @override

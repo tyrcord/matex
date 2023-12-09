@@ -1,9 +1,5 @@
-// Dart imports:
-import 'dart:math';
-
 // Package imports:
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -48,16 +44,14 @@ class MatexForexPipDeltaCalculator extends MatexCalculator<
   MatexForexPipDeltaCalculatorResults value() {
     if (!isValid) return defaultResults;
 
-    final pipDecimalPlaces = state.pipDecimalPlaces;
-    final dPriceA = toDecimalOrDefault(state.priceA);
-    final dPriceB = toDecimalOrDefault(state.priceB);
-    final decimalMultiplicator = pow(10, pipDecimalPlaces).toString();
-    final dDelta = dPriceA - dPriceB;
-    final dDecimalMultiplicator = toDecimalOrDefault(decimalMultiplicator);
-    final dResult = dDelta * dDecimalMultiplicator;
+    final dPipDelta = computePipDelta(
+      pipDecimalPlaces: state.pipDecimalPlaces,
+      entryPrice: state.priceA,
+      exitPrice: state.priceB,
+    );
 
     return MatexForexPipDeltaCalculatorResults(
-      numberOfPips: dResult.toDouble().abs(),
+      numberOfPips: dPipDelta.toDouble().abs(),
     );
   }
 }

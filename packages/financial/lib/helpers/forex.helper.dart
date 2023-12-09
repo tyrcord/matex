@@ -32,3 +32,17 @@ Decimal computePipValue({
 
   return pipValue * dCounterToAccountCurrencyRate;
 }
+
+Decimal computePipDelta({
+  double? entryPrice = 0,
+  double? exitPrice = 0,
+  num pipDecimalPlaces = 0,
+}) {
+  final dEntryPrice = toDecimalOrDefault(entryPrice);
+  final dExitPrice = toDecimalOrDefault(exitPrice);
+  final decimalMultiplicator = pow(10, pipDecimalPlaces);
+  final dDecimalMultiplicator = toDecimalOrDefault(decimalMultiplicator);
+  final dDelta = (dEntryPrice - dExitPrice) * dDecimalMultiplicator;
+
+  return dDelta;
+}
