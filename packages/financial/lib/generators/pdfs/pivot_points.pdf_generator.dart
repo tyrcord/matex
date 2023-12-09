@@ -107,8 +107,7 @@ class MatexPivotPointsCalculatorPdfGenerator {
     Color color,
   ) {
     return FastReportCategoryEntry(
-      // FIXME: use locale key
-      name: 'Resistances',
+      name: FinanceLocaleKeys.finance_label_resistances.tr(),
       entries: _buildResistanceEntries(results, color),
     );
   }
@@ -128,8 +127,7 @@ class MatexPivotPointsCalculatorPdfGenerator {
     Color color,
   ) {
     return FastReportCategoryEntry(
-      // FIXME: use locale key
-      name: 'Supports',
+      name: FinanceLocaleKeys.finance_label_supports.tr(),
       entries: _buildSupportEntries(results, color),
     );
   }
