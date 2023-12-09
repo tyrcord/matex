@@ -7,10 +7,6 @@ class MatexForexPipValueCalculatorState extends MatexCalculatorState {
   final bool isAccountCurrencyCounter;
   final double counterToAccountCurrencyRate;
   final double instrumentPairRate;
-  final double? microLot;
-  final double? miniLot;
-  final double? standardLot;
-  final double? nanoLot;
 
   const MatexForexPipValueCalculatorState({
     this.positionSize,
@@ -18,10 +14,6 @@ class MatexForexPipValueCalculatorState extends MatexCalculatorState {
     this.isAccountCurrencyCounter = false,
     this.counterToAccountCurrencyRate = 0,
     this.instrumentPairRate = 0,
-    this.microLot,
-    this.miniLot,
-    this.standardLot,
-    this.nanoLot,
   });
 
   @override
@@ -34,10 +26,6 @@ class MatexForexPipValueCalculatorState extends MatexCalculatorState {
     bool? isAccountCurrencyCounter,
     double? counterToAccountCurrencyRate,
     double? instrumentPairRate,
-    double? microLot,
-    double? miniLot,
-    double? standardLot,
-    double? nanoLot,
   }) {
     return MatexForexPipValueCalculatorState(
       positionSize: positionSize ?? this.positionSize,
@@ -47,10 +35,6 @@ class MatexForexPipValueCalculatorState extends MatexCalculatorState {
       counterToAccountCurrencyRate:
           counterToAccountCurrencyRate ?? this.counterToAccountCurrencyRate,
       instrumentPairRate: instrumentPairRate ?? this.instrumentPairRate,
-      microLot: microLot ?? this.microLot,
-      miniLot: miniLot ?? this.miniLot,
-      standardLot: standardLot ?? this.standardLot,
-      nanoLot: nanoLot ?? this.nanoLot,
     );
   }
 
@@ -64,10 +48,6 @@ class MatexForexPipValueCalculatorState extends MatexCalculatorState {
       isAccountCurrencyCounter: model.isAccountCurrencyCounter,
       counterToAccountCurrencyRate: model.counterToAccountCurrencyRate,
       instrumentPairRate: model.instrumentPairRate,
-      microLot: model.microLot,
-      miniLot: model.miniLot,
-      standardLot: model.standardLot,
-      nanoLot: model.nanoLot,
     );
   }
 
@@ -78,9 +58,5 @@ class MatexForexPipValueCalculatorState extends MatexCalculatorState {
         isAccountCurrencyCounter,
         counterToAccountCurrencyRate,
         instrumentPairRate,
-        microLot,
-        miniLot,
-        standardLot,
-        nanoLot,
       ];
 }

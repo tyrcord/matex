@@ -1,10 +1,5 @@
-// Dart imports:
-import 'dart:math';
-
 // Package imports:
-import 'package:decimal/decimal.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -28,10 +23,6 @@ class MatexForexPipValueCalculator extends MatexCalculator<
   double? get instrumentPairRate => state.instrumentPairRate;
   int? get pipDecimalPlaces => state.pipDecimalPlaces;
   double? get positionSize => state.positionSize;
-  double? get standardLot => state.standardLot;
-  double? get microLot => state.microLot;
-  double? get miniLot => state.miniLot;
-  double? get nanoLot => state.nanoLot;
 
   double? get counterToAccountCurrencyRate {
     return state.counterToAccountCurrencyRate;
@@ -57,22 +48,6 @@ class MatexForexPipValueCalculator extends MatexCalculator<
     setState(state.copyWith(instrumentPairRate: value));
   }
 
-  set standardLot(double? lot) {
-    setState(state.copyWith(standardLot: lot));
-  }
-
-  set microLot(double? microLot) {
-    setState(state.copyWith(standardLot: microLot));
-  }
-
-  set miniLot(double? miniLot) {
-    setState(state.copyWith(standardLot: miniLot));
-  }
-
-  set nanoLot(double? nanoLot) {
-    setState(state.copyWith(standardLot: nanoLot));
-  }
-
   static const defaultResults = MatexForexPipValueCalculatorResults(
     pipValue: 0,
   );
@@ -81,34 +56,16 @@ class MatexForexPipValueCalculator extends MatexCalculator<
   MatexForexPipValueCalculatorResults value() {
     if (!isValid) return defaultResults;
 
-    final pipValue = computePipValue();
+    final dPipValue = computePipValue(
+      counterToAccountCurrencyRate: state.counterToAccountCurrencyRate,
+      isAccountCurrencyCounter: state.isAccountCurrencyCounter,
+      instrumentPairRate: state.instrumentPairRate,
+      pipDecimalPlaces: state.pipDecimalPlaces,
+      positionSize: state.positionSize,
+    );
 
     return MatexForexPipValueCalculatorResults(
-      pipValue: pipValue.toDouble(),
+      pipValue: dPipValue.toDouble(),
     );
-  }
-
-  Decimal computePipValue() {
-    final counterToAccountCurrencyRate = state.counterToAccountCurrencyRate;
-    final isAccountCurrencyCounter = state.isAccountCurrencyCounter;
-    final dPositionSize = toDecimal(state.positionSize) ?? dZero;
-    final pipDecimalPlaces = state.pipDecimalPlaces ?? 0;
-    final decimalMultiplicator = pow(10, pipDecimalPlaces);
-    final dDecimalMultiplicator = toDecimal(decimalMultiplicator)!;
-    final dDecimalPip = decimalFromRational(dOne / dDecimalMultiplicator);
-    final pipValue = dPositionSize * dDecimalPip;
-
-    if (isAccountCurrencyCounter) return pipValue;
-
-    if (counterToAccountCurrencyRate == 0) {
-      final dInstrumentPairRate = toDecimal(state.instrumentPairRate) ?? dOne;
-
-      return decimalFromRational(pipValue / dInstrumentPairRate);
-    }
-
-    final dCounterToAccountCurrencyRate =
-        toDecimal(counterToAccountCurrencyRate) ?? dOne;
-
-    return pipValue * dCounterToAccountCurrencyRate;
   }
 }

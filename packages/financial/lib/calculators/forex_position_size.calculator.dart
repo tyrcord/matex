@@ -103,7 +103,14 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
     final dAmountAtRisk = computeAmountAtRisk();
     final amountAtRisk = dAmountAtRisk.toDouble();
     final dRiskRatio = computeRiskPercent(amountAtRisk, state.accountSize);
-    final dPipValue = computePipValue();
+    final dPipValue = computePipValue(
+      counterToAccountCurrencyRate: state.counterToAccountCurrencyRate,
+      isAccountCurrencyCounter: state.isAccountCurrencyCounter,
+      instrumentPairRate: state.instrumentPairRate,
+      pipDecimalPlaces: state.pipDecimalPlaces,
+      positionSize: 1,
+    );
+
     final size = dPipValue > dZero && stopLossPips > 0
         ? computePositionSize(amountAtRisk, dPipValue.toDouble(), stopLossPips)
         : dZero;
@@ -220,29 +227,5 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
     final deltaPrice = (dEntryPrice - dStopLossPrice).abs();
 
     return deltaPrice * dDecimalMultiplicator;
-  }
-
-  Decimal computePipValue({double? positionSize = 1}) {
-    final counterToAccountCurrencyRate = state.counterToAccountCurrencyRate;
-    final isAccountCurrencyCounter = state.isAccountCurrencyCounter;
-    final dPositionSize = toDecimal(positionSize) ?? dZero;
-    final pipDecimalPlaces = state.pipDecimalPlaces ?? 0;
-    final decimalMultiplicator = pow(10, pipDecimalPlaces);
-    final dDecimalMultiplicator = toDecimal(decimalMultiplicator)!;
-    final dDecimalPip = decimalFromRational(dOne / dDecimalMultiplicator);
-    final pipValue = dPositionSize * dDecimalPip;
-
-    if (isAccountCurrencyCounter) return pipValue;
-
-    if (counterToAccountCurrencyRate == 0) {
-      final dInstrumentPairRate = toDecimal(state.instrumentPairRate) ?? dOne;
-
-      return decimalFromRational(pipValue / dInstrumentPairRate);
-    }
-
-    final dCounterToAccountCurrencyRate =
-        toDecimal(counterToAccountCurrencyRate) ?? dOne;
-
-    return pipValue * dCounterToAccountCurrencyRate;
   }
 }
