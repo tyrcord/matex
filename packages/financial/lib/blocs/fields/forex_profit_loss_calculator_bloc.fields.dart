@@ -1,25 +1,75 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
-
-// Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:t_helpers/helpers.dart';
 
 class MatexForexProfitLossCalculatorBlocFields extends FastCalculatorFields
-    with MatexCalculatorFormatterMixin {
+    with MatexCalculatorFormatterMixin
+    implements MatexFinancialInstrumentCalculatorBlocFields {
   static const String defaultPositionSizeFieldType = 'unit';
   final defaultPosition = MatexPosition.long;
 
-  late final String? accountCurrency;
+  @override
   late final String? base;
+  @override
   late final String? counter;
+
+  late final String? accountCurrency;
+
   late final String? positionSize;
   late final String? pipDecimalPlaces;
   late final String positionSizeFieldType;
   late final String? lotSize;
   late final String? entryPrice;
   late final String? exitPrice;
-  late final MatexPosition? position;
+  late final MatexPosition position;
+
+  String get formattedEntryPrice {
+    final value = parseFieldValueToDouble(entryPrice);
+
+    return localizeNumber(
+      maximumFractionDigits: kMatexQuoteMaxFractionDigits,
+      value: value,
+    );
+  }
+
+  String get formattedExitPrice {
+    final value = parseFieldValueToDouble(exitPrice);
+
+    return localizeNumber(
+      maximumFractionDigits: kMatexQuoteMaxFractionDigits,
+      value: value,
+    );
+  }
+
+  String get formattedPosition => position.localizedName;
+
+  String get formattedPositionSize {
+    final value = parseFieldValueToDouble(positionSize);
+
+    return localizeNumber(value: value);
+  }
+
+  // FIXME: Move to a abstract class
+  String get formattedFinancialInstrument {
+    if (base == null || counter == null) return '';
+
+    return formatCurrencyPair(
+      counter: counter!,
+      delimiter: '/',
+      base: base!,
+    );
+  }
+
+  MatexFinancialInstrument? get financialInstrument {
+    if (base == null || counter == null) return null;
+
+    return MatexFinancialInstrument(
+      base: base!,
+      counter: counter!,
+    );
+  }
 
   MatexForexProfitLossCalculatorBlocFields({
     String? accountCurrency,
@@ -79,27 +129,27 @@ class MatexForexProfitLossCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexForexProfitLossCalculatorBlocFields copyWithDefaults({
-    bool accountCurrency = false,
-    bool base = false,
-    bool counter = false,
-    bool positionSize = false,
-    bool entryPrice = false,
-    bool pipDecimalPlaces = false,
-    bool positionSizeFieldType = false,
-    bool lotSize = false,
+    bool resetAccountCurrency = false,
+    bool resetBase = false,
+    bool resetCounter = false,
+    bool resetPositionSize = false,
+    bool resetEntryPrice = false,
+    bool resetPipDecimalPlaces = false,
+    bool resetPositionSizeFieldType = false,
+    bool resetLotSize = false,
     bool resetExitPrice = false,
     bool resetPosition = false,
   }) {
     return MatexForexProfitLossCalculatorBlocFields(
-      accountCurrency: accountCurrency ? null : this.accountCurrency,
-      base: base ? null : this.base,
-      counter: counter ? null : this.counter,
-      positionSize: positionSize ? null : this.positionSize,
-      entryPrice: entryPrice ? null : this.entryPrice,
-      pipDecimalPlaces: pipDecimalPlaces ? null : this.pipDecimalPlaces,
-      lotSize: lotSize ? null : this.lotSize,
+      accountCurrency: resetAccountCurrency ? null : accountCurrency,
+      base: resetBase ? null : base,
+      counter: resetCounter ? null : counter,
+      positionSize: resetPositionSize ? null : positionSize,
+      entryPrice: resetEntryPrice ? null : entryPrice,
+      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
+      lotSize: resetLotSize ? null : lotSize,
       positionSizeFieldType:
-          positionSizeFieldType ? null : this.positionSizeFieldType,
+          resetPositionSizeFieldType ? null : positionSizeFieldType,
       exitPrice: resetExitPrice ? null : exitPrice,
       position: resetPosition ? null : position,
     );

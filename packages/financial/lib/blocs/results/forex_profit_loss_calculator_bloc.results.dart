@@ -1,17 +1,17 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexForexProfitLossCalculatorBlocResults extends FastCalculatorResults {
-  final double? profitAndLoss;
-  final double? roi;
+  final double? netProfit;
+  final double? returnOnInvestment;
 
-  final String? formattedProfitAndLoss;
-  final String? formattedRoi;
+  final String? formattedNetProfit;
+  final String? formattedReturnOnInvestment;
 
   const MatexForexProfitLossCalculatorBlocResults({
-    this.formattedProfitAndLoss,
-    this.profitAndLoss,
-    this.formattedRoi,
-    this.roi,
+    this.formattedNetProfit,
+    this.formattedReturnOnInvestment,
+    this.netProfit,
+    this.returnOnInvestment,
   });
 
   @override
@@ -19,17 +19,17 @@ class MatexForexProfitLossCalculatorBlocResults extends FastCalculatorResults {
 
   @override
   MatexForexProfitLossCalculatorBlocResults copyWith({
-    String? formattedProfitAndLoss,
-    double? profitAndLoss,
-    String? formattedRoi,
-    double? roi,
+    String? formattedNetProfit,
+    String? formattedReturnOnInvestment,
+    double? netProfit,
+    double? returnOnInvestment,
   }) {
     return MatexForexProfitLossCalculatorBlocResults(
-      formattedProfitAndLoss:
-          formattedProfitAndLoss ?? this.formattedProfitAndLoss,
-      profitAndLoss: profitAndLoss ?? this.profitAndLoss,
-      formattedRoi: formattedRoi ?? this.formattedRoi,
-      roi: roi ?? this.roi,
+      formattedNetProfit: formattedNetProfit ?? this.formattedNetProfit,
+      formattedReturnOnInvestment:
+          formattedReturnOnInvestment ?? this.formattedReturnOnInvestment,
+      netProfit: netProfit ?? this.netProfit,
+      returnOnInvestment: returnOnInvestment ?? this.returnOnInvestment,
     );
   }
 
@@ -38,18 +38,18 @@ class MatexForexProfitLossCalculatorBlocResults extends FastCalculatorResults {
     covariant MatexForexProfitLossCalculatorBlocResults model,
   ) {
     return copyWith(
-      formattedProfitAndLoss: model.formattedProfitAndLoss,
-      profitAndLoss: model.profitAndLoss,
-      formattedRoi: model.formattedRoi,
-      roi: model.roi,
+      formattedNetProfit: model.formattedNetProfit,
+      formattedReturnOnInvestment: model.formattedReturnOnInvestment,
+      netProfit: model.netProfit,
+      returnOnInvestment: model.returnOnInvestment,
     );
   }
 
   @override
   List<Object?> get props => [
-        formattedProfitAndLoss,
-        profitAndLoss,
-        formattedRoi,
-        roi,
+        formattedNetProfit,
+        formattedReturnOnInvestment,
+        netProfit,
+        returnOnInvestment,
       ];
 }
