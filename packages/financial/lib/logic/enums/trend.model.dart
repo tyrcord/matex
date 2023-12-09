@@ -7,7 +7,7 @@ enum MatexTrend {
 }
 
 extension MatexTrendX on MatexTrend {
-  static MatexTrend fromString(String str) {
+  static MatexTrend fromName(String str) {
     switch (str.toLowerCase()) {
       case 'up':
         return MatexTrend.up;
@@ -18,12 +18,14 @@ extension MatexTrendX on MatexTrend {
     }
   }
 
-  static String toLocalizedString(MatexTrend trend) {
-    switch (trend) {
+  String get localizedName {
+    switch (this) {
       case MatexTrend.up:
         return FinanceLocaleKeys.finance_label_trend_up.tr();
       case MatexTrend.down:
         return FinanceLocaleKeys.finance_label_trend_down.tr();
+      default:
+        throw ArgumentError('Invalid value for MatexPivotPointsMethods: $this');
     }
   }
 }

@@ -69,12 +69,12 @@ class MatexFibonnaciLevelsCalculatorDocument extends FastCalculatorDocument {
   MatexFibonnaciLevelsCalculatorDocument copyWithDefaults({
     bool resetHighPrice = false,
     bool resetLowPrice = false,
-    bool resetTrend = false,
+    bool resetMethod = false,
   }) {
     return MatexFibonnaciLevelsCalculatorDocument(
       highPrice: resetHighPrice ? null : highPrice,
       lowPrice: resetLowPrice ? null : lowPrice,
-      trend: resetTrend ? null : trend,
+      trend: resetMethod ? null : trend,
     );
   }
 

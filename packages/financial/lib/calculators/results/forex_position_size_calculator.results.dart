@@ -1,7 +1,7 @@
 // Package imports:
-import 'package:matex_core/core.dart';
+import 'package:tmodel/tmodel.dart';
 
-class MatexForexPositionSizeCalculatorResults extends MatexCalculatorState {
+class MatexForexPositionSizeCalculatorResults extends TModel {
   final double? pipValue;
   final double? positionSize;
   final double? stopLossPips;

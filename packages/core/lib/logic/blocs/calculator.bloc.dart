@@ -196,7 +196,7 @@ abstract class MatexCalculatorBloc<
   }
 
   @override
-  Future<void> shareCalculatorState(BuildContext context) async {
+  Future<void> exportToPdf(BuildContext context) async {
     if (calculator.isValid) {
       XFile? file;
 

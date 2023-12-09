@@ -14,7 +14,7 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
   String get formattedLowPrice {
     final value = parseFieldValueToDouble(lowPrice);
 
-    return localizeCurrency(
+    return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,
       value: value,
     );
@@ -23,16 +23,16 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
   String get formattedHighPrice {
     final value = parseFieldValueToDouble(highPrice);
 
-    return localizeCurrency(
+    return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,
       value: value,
     );
   }
 
   String get formattedTrend {
-    final value = MatexTrendX.fromString(trend);
+    final value = MatexTrendX.fromName(trend);
 
-    return MatexTrendX.toLocalizedString(value);
+    return value.localizedName;
   }
 
   MatexFibonnaciLevelsCalculatorBlocFields({
@@ -50,20 +50,6 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
   @override
   MatexFibonnaciLevelsCalculatorBlocFields clone() => copyWith();
 
-// [Copy With Defaults Method]
-  @override
-  MatexFibonnaciLevelsCalculatorBlocFields copyWithDefaults({
-    bool resetHighPrice = false,
-    bool resetLowPrice = false,
-    bool resetTrend = false,
-  }) {
-    return MatexFibonnaciLevelsCalculatorBlocFields(
-      highPrice: resetHighPrice ? null : highPrice,
-      lowPrice: resetLowPrice ? null : lowPrice,
-      trend: resetTrend ? null : trend,
-    );
-  }
-
   @override
   MatexFibonnaciLevelsCalculatorBlocFields copyWith({
     String? highPrice,
@@ -74,6 +60,22 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
       highPrice: highPrice ?? this.highPrice,
       lowPrice: lowPrice ?? this.lowPrice,
       trend: trend ?? this.trend,
+      delegate: delegate,
+    );
+  }
+
+  // [Copy With Defaults Method]
+  @override
+  MatexFibonnaciLevelsCalculatorBlocFields copyWithDefaults({
+    bool resetHighPrice = false,
+    bool resetLowPrice = false,
+    bool resetMethod = false,
+  }) {
+    return MatexFibonnaciLevelsCalculatorBlocFields(
+      highPrice: resetHighPrice ? null : highPrice,
+      lowPrice: resetLowPrice ? null : lowPrice,
+      trend: resetMethod ? null : trend,
+      delegate: delegate,
     );
   }
 

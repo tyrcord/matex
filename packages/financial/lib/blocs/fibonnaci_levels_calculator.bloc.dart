@@ -95,7 +95,7 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
     calculator.setState(MatexFibonnaciLevelsCalculatorState(
       lowPrice: parseStringToDouble(document.lowPrice),
       highPrice: parseStringToDouble(document.highPrice),
-      trend: MatexTrendX.fromString(document.trend),
+      trend: MatexTrendX.fromName(document.trend),
     ));
   }
 
@@ -166,13 +166,13 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
 
     if (value == null) {
       fields = currentState.fields.copyWithDefaults(
-        resetTrend: true,
+        resetMethod: true,
       );
 
       calculator.trend = MatexTrend.up;
     } else {
       fields = currentState.fields.copyWith(trend: value);
-      calculator.trend = MatexTrendX.fromString(value);
+      calculator.trend = MatexTrendX.fromName(value);
     }
 
     return currentState.copyWith(fields: fields);

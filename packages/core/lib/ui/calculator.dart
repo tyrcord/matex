@@ -14,7 +14,7 @@ import 'package:matex_core/core.dart';
 class MatexCalculatorWidget<B extends MatexCalculatorBloc,
     R extends FastCalculatorResults> extends StatefulWidget {
   final bool Function(FastCalculatorBlocState state)?
-      canEnableShareInteractions;
+      canEnableExportToPdfInteractions;
   final List<Widget>? calculatorActions;
   final List<Widget>? resultsActions;
   final WidgetBuilder? dividerBuilder;
@@ -30,7 +30,7 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
   final Widget? refreshIcon;
   final bool showClearIcon;
   final Widget? backButton;
-  final Widget? shareIcon;
+  final Widget? exportToPdfIcon;
   final Widget? clearIcon;
   final bool showInfoIcon;
   final Widget? infoIcon;
@@ -43,7 +43,7 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
     required this.calculatorBloc,
     required this.resultsBuilder,
     required this.fieldsBuilder,
-    this.canEnableShareInteractions,
+    this.canEnableExportToPdfInteractions,
     this.requestFullApp = false,
     this.showRefreshIcon = true,
     this.showClearIcon = true,
@@ -58,7 +58,7 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
     this.pageTitleText,
     this.refreshIcon,
     this.backButton,
-    this.shareIcon,
+    this.exportToPdfIcon,
     this.clearIcon,
     this.infoIcon,
     this.leading,
@@ -90,7 +90,8 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
     return FastAppSettingsLanguageBuilder(
       builder: (context, state) {
         return FastCalculatorPageLayout(
-          canEnableShareInteractions: widget.canEnableShareInteractions,
+          canEnableExportToPdfInteractions:
+              widget.canEnableExportToPdfInteractions,
           calculatorBloc: widget.calculatorBloc,
           calculatorActions: widget.calculatorActions,
           resultsActions: widget.resultsActions,
@@ -109,7 +110,7 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
           refreshIcon: widget.refreshIcon,
           showClearIcon: widget.showClearIcon,
           backButton: widget.backButton,
-          shareIcon: widget.shareIcon,
+          exportToPdfIcon: widget.exportToPdfIcon,
           clearIcon: widget.clearIcon,
           showInfoIcon: widget.showInfoIcon,
           infoIcon: widget.infoIcon,

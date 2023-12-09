@@ -1,7 +1,7 @@
 // Package imports:
-import 'package:matex_core/core.dart';
+import 'package:tmodel/tmodel.dart';
 
-class MatexForexPipDeltaCalculatorResults extends MatexCalculatorState {
+class MatexForexPipDeltaCalculatorResults extends TModel {
   final double? numberOfPips;
 
   const MatexForexPipDeltaCalculatorResults({this.numberOfPips});

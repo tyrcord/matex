@@ -8,3 +8,4 @@ export 'dividend_yield_calculator.results.dart';
 export 'dividend_reinvestment_calculator.results.dart';
 export 'forex_pip_delta_calculator.results.dart';
 export 'fibonnaci_levels_calculator.results.dart';
+export 'pivot_points_calculator.results.dart';

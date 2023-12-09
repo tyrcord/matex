@@ -10,3 +10,4 @@ export 'dividend_payout_ratio.data_provider.dart';
 export 'dividend_reinvestment.data_provider.dart';
 export 'forex_pip_delta_calculator.data_provider.dart';
 export 'fibonnaci_levels.data_provider.dart';
+export 'pivot_points.data_provider.dart';

@@ -1,7 +1,7 @@
 // Package imports:
-import 'package:matex_core/core.dart';
+import 'package:tmodel/tmodel.dart';
 
-class MatexForexPipValueCalculatorResults extends MatexCalculatorState {
+class MatexForexPipValueCalculatorResults extends TModel {
   final double? pipValue;
 
   const MatexForexPipValueCalculatorResults({this.pipValue});

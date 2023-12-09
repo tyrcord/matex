@@ -1,7 +1,7 @@
 // Package imports:
-import 'package:matex_core/core.dart';
+import 'package:tmodel/tmodel.dart';
 
-class MatexProfitAndLossCalculatorResults extends MatexCalculatorState {
+class MatexProfitAndLossCalculatorResults extends TModel {
   final double? revenue;
   final double? grossProfit;
   final double? operatingProfit;
