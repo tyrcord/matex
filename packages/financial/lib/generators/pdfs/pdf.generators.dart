@@ -10,3 +10,4 @@ export 'forex_pip_delta.pdf_generator.dart';
 export 'fibonnaci_levels.pdf_generator.dart';
 export 'pivot_points.pdf_generator.dart';
 export 'forex_profit_loss.pdf_generator.dart';
+export 'forex_required_margin.pdf_generator.dart';

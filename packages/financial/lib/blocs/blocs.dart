@@ -14,6 +14,7 @@ export 'forex_pip_delta_calculator.bloc.dart';
 export 'fibonnaci_levels_calculator.bloc.dart';
 export 'pivot_points_calculator.bloc.dart';
 export 'forex_profit_loss_calculator.bloc.dart';
+export 'forex_required_margin_calculator.bloc.dart';
 
 export './states/states.dart';
 export './events/events.dart';

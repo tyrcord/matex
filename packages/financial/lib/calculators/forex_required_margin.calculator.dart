@@ -23,7 +23,6 @@ class MatexForexRequiredMarginCalculator extends MatexCalculator<
 
   bool get isAccountCurrencyCounter => state.isAccountCurrencyCounter;
   double? get instrumentPairRate => state.instrumentPairRate;
-  int? get pipDecimalPlaces => state.pipDecimalPlaces;
   double? get positionSize => state.positionSize;
   double? get leverage => state.leverage;
 
@@ -45,10 +44,6 @@ class MatexForexRequiredMarginCalculator extends MatexCalculator<
     }
 
     setState(nextState);
-  }
-
-  set pipDecimalPlaces(int? value) {
-    setState(state.copyWith(pipDecimalPlaces: value));
   }
 
   set isAccountCurrencyCounter(bool? value) {

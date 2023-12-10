@@ -13,7 +13,6 @@ class MatexForexRequiredMarginCalculatorDocument
   late final String? counter;
   late final String? positionSize;
   late final String? leverage;
-  late final String? pipDecimalPlaces;
   late final String positionSizeFieldType;
   late final String? lotSize;
 
@@ -23,7 +22,6 @@ class MatexForexRequiredMarginCalculatorDocument
     String? counter,
     String? positionSize,
     String? leverage,
-    String? pipDecimalPlaces,
     String? positionSizeFieldType,
     String? lotSize,
   }) {
@@ -32,7 +30,6 @@ class MatexForexRequiredMarginCalculatorDocument
     this.counter = assignValue(counter);
     this.positionSize = assignValue(positionSize);
     this.leverage = assignValue(leverage);
-    this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
     this.lotSize = assignValue(lotSize);
     this.positionSizeFieldType =
         positionSizeFieldType ?? _kDefaultPositionSizeFieldType;
@@ -48,7 +45,6 @@ class MatexForexRequiredMarginCalculatorDocument
     String? counter,
     String? positionSize,
     String? leverage,
-    String? pipDecimalPlaces,
     String? positionSizeFieldType,
     String? lotSize,
   }) {
@@ -58,7 +54,6 @@ class MatexForexRequiredMarginCalculatorDocument
       counter: counter ?? this.counter,
       positionSize: positionSize ?? this.positionSize,
       leverage: leverage ?? this.leverage,
-      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
       lotSize: lotSize ?? this.lotSize,
       positionSizeFieldType:
           positionSizeFieldType ?? this.positionSizeFieldType,
@@ -72,7 +67,6 @@ class MatexForexRequiredMarginCalculatorDocument
     bool resetCounter = false,
     bool resetPositionSize = false,
     bool resetLeverage = false,
-    bool resetPipDecimalPlaces = false,
     bool resetPositionSizeFieldType = false,
     bool resetLotSize = false,
   }) {
@@ -82,7 +76,6 @@ class MatexForexRequiredMarginCalculatorDocument
       counter: resetCounter ? null : counter,
       positionSize: resetPositionSize ? null : positionSize,
       leverage: resetLeverage ? null : leverage,
-      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
       lotSize: resetLotSize ? null : lotSize,
       positionSizeFieldType:
           resetPositionSizeFieldType ? null : positionSizeFieldType,
@@ -99,7 +92,6 @@ class MatexForexRequiredMarginCalculatorDocument
       counter: model.counter,
       positionSize: model.positionSize,
       leverage: model.leverage,
-      pipDecimalPlaces: model.pipDecimalPlaces,
       positionSizeFieldType: model.positionSizeFieldType,
       lotSize: model.lotSize,
     );
@@ -113,7 +105,6 @@ class MatexForexRequiredMarginCalculatorDocument
       counter: counter,
       positionSize: positionSize,
       leverage: leverage,
-      pipDecimalPlaces: pipDecimalPlaces,
       positionSizeFieldType: positionSizeFieldType,
       lotSize: lotSize,
     );
@@ -127,7 +118,6 @@ class MatexForexRequiredMarginCalculatorDocument
       'counter': counter,
       'positionSize': positionSize,
       'leverage': leverage,
-      'pipDecimalPlaces': pipDecimalPlaces,
       'positionSizeFieldType': positionSizeFieldType,
       'lotSize': lotSize,
       ...super.toJson(),
@@ -143,7 +133,6 @@ class MatexForexRequiredMarginCalculatorDocument
       counter: json['counter'] as String?,
       positionSize: json['positionSize'] as String?,
       leverage: json['leverage'] as String?,
-      pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
       positionSizeFieldType: json['positionSizeFieldType'] as String?,
       lotSize: json['lotSize'] as String?,
     );
@@ -156,7 +145,6 @@ class MatexForexRequiredMarginCalculatorDocument
         counter,
         positionSize,
         leverage,
-        pipDecimalPlaces,
         positionSizeFieldType,
         lotSize,
       ];

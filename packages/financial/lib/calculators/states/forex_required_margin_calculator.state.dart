@@ -1,17 +1,14 @@
 // Package imports:
 import 'package:matex_core/core.dart';
-import 'package:matex_financial/financial.dart';
 
 class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
   final double? positionSize;
-  final int pipDecimalPlaces;
   final bool isAccountCurrencyCounter;
   final double counterToAccountCurrencyRate;
   final double instrumentPairRate;
   final double leverage;
 
   const MatexForexRequiredMarginCalculatorState({
-    this.pipDecimalPlaces = kDefaultPipPipDecimalPlaces,
     this.isAccountCurrencyCounter = false,
     this.counterToAccountCurrencyRate = 0,
     this.instrumentPairRate = 0,
@@ -25,7 +22,6 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
   @override
   MatexForexRequiredMarginCalculatorState copyWith({
     double? positionSize,
-    int? pipDecimalPlaces,
     bool? isAccountCurrencyCounter,
     double? counterToAccountCurrencyRate,
     double? instrumentPairRate,
@@ -33,7 +29,6 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
   }) {
     return MatexForexRequiredMarginCalculatorState(
       positionSize: positionSize ?? this.positionSize,
-      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
       isAccountCurrencyCounter:
           isAccountCurrencyCounter ?? this.isAccountCurrencyCounter,
       counterToAccountCurrencyRate:
@@ -46,7 +41,6 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
   @override
   MatexForexRequiredMarginCalculatorState copyWithDefaults({
     bool resetPositionSize = false,
-    bool resetPipDecimalPlaces = false,
     bool resetIsAccountCurrencyCounter = false,
     bool resetCounterToAccountCurrencyRate = false,
     bool resetInstrumentPairRate = false,
@@ -54,9 +48,6 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
   }) {
     return MatexForexRequiredMarginCalculatorState(
       positionSize: resetPositionSize ? null : positionSize,
-      pipDecimalPlaces: resetPipDecimalPlaces
-          ? kDefaultPipPipDecimalPlaces
-          : pipDecimalPlaces,
       isAccountCurrencyCounter:
           resetIsAccountCurrencyCounter ? false : isAccountCurrencyCounter,
       counterToAccountCurrencyRate:
@@ -72,7 +63,6 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
   ) {
     return copyWith(
       positionSize: model.positionSize,
-      pipDecimalPlaces: model.pipDecimalPlaces,
       isAccountCurrencyCounter: model.isAccountCurrencyCounter,
       counterToAccountCurrencyRate: model.counterToAccountCurrencyRate,
       instrumentPairRate: model.instrumentPairRate,
@@ -83,7 +73,6 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
   @override
   List<Object?> get props => [
         positionSize,
-        pipDecimalPlaces,
         isAccountCurrencyCounter,
         counterToAccountCurrencyRate,
         instrumentPairRate,
