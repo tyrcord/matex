@@ -10,3 +10,4 @@ export 'forex_pip_delta_calculator.results.dart';
 export 'fibonnaci_levels_calculator_bloc.results.dart';
 export 'pivot_points_calculator_bloc.results.dart';
 export 'forex_profit_loss_calculator_bloc.results.dart';
+export 'forex_required_margin_calculator_bloc.results.dart';
