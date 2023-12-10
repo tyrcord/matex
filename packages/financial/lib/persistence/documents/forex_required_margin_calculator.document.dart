@@ -12,7 +12,7 @@ class MatexForexRequiredMarginCalculatorDocument
   late final String? base;
   late final String? counter;
   late final String? positionSize;
-  late final String? leverage;
+  late final String leverage;
   late final String positionSizeFieldType;
   late final String? lotSize;
 
@@ -29,7 +29,7 @@ class MatexForexRequiredMarginCalculatorDocument
     this.base = assignValue(base);
     this.counter = assignValue(counter);
     this.positionSize = assignValue(positionSize);
-    this.leverage = assignValue(leverage);
+    this.leverage = assignValue(leverage) ?? '1';
     this.lotSize = assignValue(lotSize);
     this.positionSizeFieldType =
         positionSizeFieldType ?? _kDefaultPositionSizeFieldType;

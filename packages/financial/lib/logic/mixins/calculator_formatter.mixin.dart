@@ -20,4 +20,18 @@ mixin MatexFinancialCalculatorFormatterMixin on MatexCalculatorFormatterMixin {
       value: rate,
     );
   }
+
+  String localizeLeverage(
+    num leverage, {
+    String? locale,
+    int? minimumFractionDigits,
+    int? maximumFractionDigits,
+  }) {
+    return formatLeverage(
+      leverage,
+      minimumFractionDigits: minimumFractionDigits,
+      maximumFractionDigits: maximumFractionDigits,
+      locale: locale ?? getUserLocaleCode(),
+    );
+  }
 }

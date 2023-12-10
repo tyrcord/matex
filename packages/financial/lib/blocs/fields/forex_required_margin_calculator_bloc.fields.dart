@@ -5,7 +5,7 @@ import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 
 class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
-    with MatexCalculatorFormatterMixin
+    with MatexCalculatorFormatterMixin, MatexFinancialCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
   static const String defaultPositionSizeFieldType = 'unit';
 
@@ -19,6 +19,14 @@ class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
   late final String? positionSize;
   late final String? leverage;
   late final String? lotSize;
+
+  List<double>? get leverages => kMatexLeverages;
+
+  List<String>? get formattedLeverages {
+    if (leverages == null) return null;
+
+    return leverages!.map((leverage) => localizeLeverage(leverage)).toList();
+  }
 
   String get formattedLeverage {
     final value = parseFieldValueToDouble(leverage);

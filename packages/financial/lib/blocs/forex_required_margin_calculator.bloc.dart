@@ -304,6 +304,7 @@ class MatexForexRequiredMarginCalculatorBloc
   ) async {
     calculator.setState(MatexForexRequiredMarginCalculatorState(
       positionSize: parseStringToDouble(document.positionSize),
+      leverage: parseStringToDouble(document.leverage) ?? 1,
     ));
   }
 
@@ -315,6 +316,7 @@ class MatexForexRequiredMarginCalculatorBloc
       results: await retrieveDefaultResult(),
       fields: MatexForexRequiredMarginCalculatorBlocFields(
         accountCurrency: document.accountCurrency,
+        leverage: document.leverage,
         counter: document.counter,
         base: document.base,
       ),
