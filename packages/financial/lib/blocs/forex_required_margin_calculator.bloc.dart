@@ -407,7 +407,6 @@ class MatexForexRequiredMarginCalculatorBloc
 
   MatexForexRequiredMarginCalculatorBlocState patchPositionSize(String? value) {
     late MatexForexRequiredMarginCalculatorBlocFields fields;
-
     final positionSizeFieldType = currentState.fields.positionSizeFieldType;
 
     if (value == null) {

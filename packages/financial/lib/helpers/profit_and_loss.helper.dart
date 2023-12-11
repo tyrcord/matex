@@ -205,3 +205,22 @@ Decimal computeBreakEvenUnits({
     dFixedCosts / (dSellingPrice - totalVariableCostPerUnit),
   );
 }
+
+double computeRiskRewardRatio({
+  double? rewardAmount,
+  double? riskAmount,
+}) {
+  final dStopLossAmount = toDecimalOrDefault(riskAmount);
+  final dTakeProfitAmount = toDecimalOrDefault(rewardAmount);
+  var ratio = 0.0;
+
+  if (dStopLossAmount == dZero) return ratio; // Prevent division by zero
+
+  if (dTakeProfitAmount != dStopLossAmount) {
+    ratio = (dTakeProfitAmount / dStopLossAmount).toDouble();
+  } else {
+    ratio = 1.0;
+  }
+
+  return ratio;
+}

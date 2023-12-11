@@ -21,3 +21,4 @@ export './events/events.dart';
 export './keys/keys.dart';
 export './fields/fields.dart';
 export './results/results.dart';
+export 'forex_stop_loss_take_profit_calculator.bloc.dart';

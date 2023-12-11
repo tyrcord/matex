@@ -13,3 +13,6 @@ export 'fibonnaci_levels.calculator.dart';
 export 'pivot_points.calculator.dart';
 export 'forex_profit_loss.calculator.dart';
 export 'forex_required_margin.calculator.dart';
+export 'forex_stop_loss_take_profit.calculator.dart';
+export 'forex_take_profit.calculator.dart';
+export 'forex_stop_loss.calculator.dart';
