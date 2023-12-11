@@ -139,6 +139,9 @@ class MatexForexRequiredMarginCalculatorBloc
   @mustCallSuper
   Future<Map<String, dynamic>> loadMetadata() async {
     final metadata = await super.loadMetadata();
+
+    if (!isMandatoryFieldValid) return metadata;
+
     final instrumentMetadata = await getInstrumentMetadata();
     final instrumentPairRate = calculator.instrumentPairRate ?? 0;
 
@@ -379,6 +382,7 @@ class MatexForexRequiredMarginCalculatorBloc
 
     calculator
       ..counterToAccountCurrencyRate = 0
+      ..isAccountCurrencyBase = false
       ..isAccountCurrencyCounter = false
       ..instrumentPairRate = 0;
 
@@ -471,6 +475,8 @@ class MatexForexRequiredMarginCalculatorBloc
     return currentState.copyWith(fields: fields);
   }
 
+  // FIXME: take a look at pip value calculator
+  // to see how to refactor this method and combine them
   Future<MatexQuote?> patchExchangeRates() async {
     final accountCurrency = currentState.fields.accountCurrency!;
     final counter = currentState.fields.counter!;
@@ -487,6 +493,7 @@ class MatexForexRequiredMarginCalculatorBloc
     calculator
       ..instrumentPairRate = instrumentQuote.price
       ..counterToAccountCurrencyRate = 0
+      ..isAccountCurrencyBase = accountCurrency == base
       ..isAccountCurrencyCounter = false;
 
     if (accountCurrency == counter) {

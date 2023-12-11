@@ -87,15 +87,32 @@ void main() {
       test('should correctly calculate margin with account currency as base',
           () {
         calculator
-          ..isAccountCurrencyCounter = false
+          ..isAccountCurrencyBase = true
           ..instrumentPairRate = 1.1
-          ..positionSize = 1000
+          ..positionSize = 10000
           ..leverage = 10
           ..counterToAccountCurrencyRate = 1.5;
 
         expect(
           calculator.value().requiredMargin,
-          closeTo(165.0, 0.001),
+          closeTo(1000.0, 0.001),
+        );
+      });
+
+      test(
+          'should correctly calculate margin '
+          'when account currency is not base and not counter', () {
+        calculator
+          ..isAccountCurrencyBase = false
+          ..isAccountCurrencyBase = false
+          ..instrumentPairRate = 1.1
+          ..positionSize = 10000
+          ..leverage = 10
+          ..counterToAccountCurrencyRate = 0.8;
+
+        expect(
+          calculator.value().requiredMargin,
+          closeTo(880.0, 0.001),
         );
       });
     });

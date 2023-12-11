@@ -7,9 +7,11 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
   final double counterToAccountCurrencyRate;
   final double instrumentPairRate;
   final double leverage;
+  final bool isAccountCurrencyBase;
 
   const MatexForexRequiredMarginCalculatorState({
     this.isAccountCurrencyCounter = false,
+    this.isAccountCurrencyBase = false,
     this.counterToAccountCurrencyRate = 0,
     this.instrumentPairRate = 0,
     this.leverage = 1,
@@ -25,6 +27,7 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
     bool? isAccountCurrencyCounter,
     double? counterToAccountCurrencyRate,
     double? instrumentPairRate,
+    bool? isAccountCurrencyBase,
     double? leverage,
   }) {
     return MatexForexRequiredMarginCalculatorState(
@@ -35,6 +38,8 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
           counterToAccountCurrencyRate ?? this.counterToAccountCurrencyRate,
       instrumentPairRate: instrumentPairRate ?? this.instrumentPairRate,
       leverage: leverage ?? this.leverage,
+      isAccountCurrencyBase:
+          isAccountCurrencyBase ?? this.isAccountCurrencyBase,
     );
   }
 
@@ -45,6 +50,7 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
     bool resetCounterToAccountCurrencyRate = false,
     bool resetInstrumentPairRate = false,
     bool resetLeverage = false,
+    bool resetIsAccountCurrencyBase = false,
   }) {
     return MatexForexRequiredMarginCalculatorState(
       positionSize: resetPositionSize ? null : positionSize,
@@ -54,6 +60,8 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
           resetCounterToAccountCurrencyRate ? 0 : counterToAccountCurrencyRate,
       instrumentPairRate: resetInstrumentPairRate ? 0 : instrumentPairRate,
       leverage: resetLeverage ? 1 : leverage,
+      isAccountCurrencyBase:
+          resetIsAccountCurrencyBase ? false : isAccountCurrencyBase,
     );
   }
 
@@ -67,6 +75,7 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
       counterToAccountCurrencyRate: model.counterToAccountCurrencyRate,
       instrumentPairRate: model.instrumentPairRate,
       leverage: model.leverage,
+      isAccountCurrencyBase: model.isAccountCurrencyBase,
     );
   }
 
@@ -77,5 +86,6 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
         counterToAccountCurrencyRate,
         instrumentPairRate,
         leverage,
+        isAccountCurrencyBase,
       ];
 }

@@ -22,12 +22,17 @@ class MatexForexRequiredMarginCalculator extends MatexCalculator<
       initializeState();
 
   bool get isAccountCurrencyCounter => state.isAccountCurrencyCounter;
+  bool get isAccountCurrencyBase => state.isAccountCurrencyBase;
   double? get instrumentPairRate => state.instrumentPairRate;
   double? get positionSize => state.positionSize;
   double? get leverage => state.leverage;
 
   double? get counterToAccountCurrencyRate {
     return state.counterToAccountCurrencyRate;
+  }
+
+  set isAccountCurrencyBase(bool? value) {
+    setState(state.copyWith(isAccountCurrencyBase: value));
   }
 
   set leverage(double? value) {
@@ -70,6 +75,7 @@ class MatexForexRequiredMarginCalculator extends MatexCalculator<
       requiredMargin: computeRequiredMargin(
         counterToAccountCurrencyRate: state.counterToAccountCurrencyRate,
         isAccountCurrencyCounter: state.isAccountCurrencyCounter,
+        isAccountCurrencyBase: state.isAccountCurrencyBase,
         instrumentPairRate: state.instrumentPairRate,
         positionSize: state.positionSize,
         leverage: state.leverage,
@@ -80,6 +86,7 @@ class MatexForexRequiredMarginCalculator extends MatexCalculator<
   Decimal computeRequiredMargin({
     bool isAccountCurrencyCounter = false,
     double? counterToAccountCurrencyRate,
+    bool isAccountCurrencyBase = false,
     double? instrumentPairRate,
     double? positionSize,
     double? leverage,
@@ -93,15 +100,16 @@ class MatexForexRequiredMarginCalculator extends MatexCalculator<
     if (dLeverage == dZero) return dZero;
 
     // Calculate the required margin
-    if (!isAccountCurrencyCounter) {
-      final dMultiplier = decimalFromRational(dInstrumentPairRate / dLeverage);
-      final dRate = dCounterToAccountCurrencyRate > dZero
-          ? dCounterToAccountCurrencyRate
-          : dOne;
-
-      return dPositionSize * dMultiplier * dRate;
+    if (isAccountCurrencyBase) {
+      return decimalFromRational(dPositionSize / dLeverage);
+    } else if (isAccountCurrencyCounter) {
+      return decimalFromRational(
+        dPositionSize * dInstrumentPairRate / dLeverage,
+      );
     }
 
-    return decimalFromRational(dPositionSize * dInstrumentPairRate / dLeverage);
+    final dMultiplier = decimalFromRational(dInstrumentPairRate / dLeverage);
+
+    return dPositionSize * dMultiplier * dCounterToAccountCurrencyRate;
   }
 }
