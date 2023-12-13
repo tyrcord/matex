@@ -650,6 +650,23 @@
     },
     "type": "currency"
   },
+  "JMD": {
+    "code": "JMD",
+    "format": {
+      "round": 3
+    },
+    "icon": "jamaica",
+    "name": {
+      "key": "jamaica_dollar",
+      "localized": "Jamaican dollar"
+    },
+    "symbol": {
+      "long": "JMD",
+      "short": "JMD",
+      "ticker": "JMD"
+    },
+    "type": "currency"
+  },
   "JPY": {
     "code": "JPY",
     "format": {
