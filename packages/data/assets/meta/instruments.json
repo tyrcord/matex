@@ -1989,5 +1989,158 @@
       "ticker": "XU100.IS"
     },
     "type": "index"
+  },
+  "BYN": {
+    "code": "BYN",
+    "format": {
+      "round": 3
+    },
+    "icon": "belarus",
+    "name": {
+      "key": "belarusian_ruble",
+      "localized": "Belarusian Ruble"
+    },
+    "symbol": {
+      "long": "Br",
+      "short": "Br",
+      "ticker": "BYN"
+    },
+    "type": "currency"
+  },
+  "KES": {
+    "code": "KES",
+    "format": {
+      "round": 3
+    },
+    "icon": "kenya",
+    "name": {
+      "key": "kenyan_shilling",
+      "localized": "Kenyan Shilling"
+    },
+    "symbol": {
+      "long": "KSh",
+      "short": "KSh",
+      "ticker": "KES"
+    },
+    "type": "currency"
+  },
+  "GHS": {
+    "code": "GHS",
+    "format": {
+      "round": 3
+    },
+    "icon": "ghana",
+    "name": {
+      "key": "ghanaian_cedi",
+      "localized": "Ghanaian Cedi"
+    },
+    "symbol": {
+      "long": "GH₵",
+      "short": "GH₵",
+      "ticker": "GHS"
+    },
+    "type": "currency"
+  },
+  "LKR": {
+    "code": "LKR",
+    "format": {
+      "round": 3
+    },
+    "icon": "sri_lanka",
+    "name": {
+      "key": "sri_lankan_rupee",
+      "localized": "Sri Lankan Rupee"
+    },
+    "symbol": {
+      "long": "Rs",
+      "short": "Rs",
+      "ticker": "LKR"
+    },
+    "type": "currency"
+  },
+  "BGN": {
+    "code": "BGN",
+    "format": {
+      "round": 3
+    },
+    "icon": "bulgaria",
+    "name": {
+      "key": "bulgarian_lev",
+      "localized": "Bulgarian Lev"
+    },
+    "symbol": {
+      "long": "лв",
+      "short": "лв",
+      "ticker": "BGN"
+    },
+    "type": "currency"
+  },
+  "TZS": {
+    "code": "TZS",
+    "format": {
+      "round": 3
+    },
+    "icon": "tanzania",
+    "name": {
+      "key": "tanzanian_shilling",
+      "localized": "Tanzanian Shilling"
+    },
+    "symbol": {
+      "long": "TSh",
+      "short": "TSh",
+      "ticker": "TZS"
+    },
+    "type": "currency"
+  },
+  "YER": {
+    "code": "YER",
+    "format": {
+      "round": 3
+    },
+    "icon": "yemen",
+    "name": {
+      "key": "yemeni_rial",
+      "localized": "Yemeni Rial"
+    },
+    "symbol": {
+      "long": "﷼",
+      "short": "﷼",
+      "ticker": "YER"
+    },
+    "type": "currency"
+  },
+  "BDT": {
+    "code": "BDT",
+    "format": {
+      "round": 3
+    },
+    "icon": "bangladesh",
+    "name": {
+      "key": "bangladeshi_taka",
+      "localized": "Bangladeshi Taka"
+    },
+    "symbol": {
+      "long": "৳",
+      "short": "৳",
+      "ticker": "BDT"
+    },
+    "type": "currency"
+  },
+  "JOD": {
+    "code": "JOD",
+    "format": {
+      "round": 3
+    },
+    "icon": "jordan",
+    "name": {
+      "key": "jordanian_dinar",
+      "localized": "Jordanian Dinar"
+    },
+    "symbol": {
+      "long": "JD",
+      "short": "JD",
+      "ticker": "JOD"
+    },
+    "type": "currency"
   }
 }
