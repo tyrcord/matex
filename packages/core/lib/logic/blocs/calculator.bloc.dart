@@ -151,14 +151,19 @@ abstract class MatexCalculatorBloc<
   @override
   @mustCallSuper
   Future<Map<String, dynamic>> loadMetadata() async {
-    final metadata = await delegate?.loadMetadata();
+    Map<String, dynamic>? metadata = await delegate?.loadMetadata();
 
-    return metadata ??
-        <String, dynamic>{
-          'userCurrencySymbol': getUserCurrencySymbol(),
-          'userCurrencyCode': getUserCurrencyCode(),
-          'userLocaleCode': getUserLocaleCode(),
-        };
+    if (metadata == null) {
+      metadata = await super.loadMetadata();
+
+      return {
+        'userCurrencySymbol': getUserCurrencySymbol(),
+        'userCurrencyCode': getUserCurrencyCode(),
+        'userLocaleCode': getUserLocaleCode(),
+      };
+    }
+
+    return metadata;
   }
 
   void listenOnDefaultValueChanges(String defaultValueKey, String stateKey) {
@@ -183,16 +188,10 @@ abstract class MatexCalculatorBloc<
   ) {
     addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
 
-    final value = state.getValue(defaultValueKey);
-
-    if (value == null) {
-      addEvent(FastCalculatorBlocEvent.resetValue(key: stateKey));
-    } else {
-      addEvent(FastCalculatorBlocEvent.patchValue(
-        value: state.getValue(defaultValueKey),
-        key: stateKey,
-      ));
-    }
+    addEvent(FastCalculatorBlocEvent.patchValue(
+      value: state.getValue(defaultValueKey),
+      key: stateKey,
+    ));
   }
 
   @override

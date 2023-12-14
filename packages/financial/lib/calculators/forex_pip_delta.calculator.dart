@@ -20,7 +20,6 @@ class MatexForexPipDeltaCalculator extends MatexCalculator<
       initializeState();
 
   int? get pipDecimalPlaces => state.pipDecimalPlaces;
-
   double? get priceA => state.priceA;
   double? get priceB => state.priceB;
 

@@ -1,3 +1,4 @@
+import 'package:t_helpers/helpers.dart';
 import 'package:tmodel/tmodel.dart';
 
 class MatexFinancialInstrument extends TModel {
@@ -18,6 +19,18 @@ class MatexFinancialInstrument extends TModel {
         base != null &&
         counter!.isNotEmpty &&
         base!.isNotEmpty;
+  }
+
+  String? get symbol {
+    if (counter == null || base == null) return null;
+
+    return base! + counter!;
+  }
+
+  String? get formattedSymbol {
+    if (base == null || counter == null) return null;
+
+    return formatCurrencyPair(counter: counter!, delimiter: '/', base: base!);
   }
 
   @override

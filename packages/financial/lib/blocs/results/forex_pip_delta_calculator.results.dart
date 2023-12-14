@@ -1,9 +1,8 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexForexPipDeltaCalculatorBlocResults extends FastCalculatorResults {
-  final double? numberOfPips;
-
   final String? formattedNumberOfPips;
+  final double? numberOfPips;
 
   const MatexForexPipDeltaCalculatorBlocResults({
     this.formattedNumberOfPips,
@@ -19,9 +18,9 @@ class MatexForexPipDeltaCalculatorBlocResults extends FastCalculatorResults {
     double? numberOfPips,
   }) {
     return MatexForexPipDeltaCalculatorBlocResults(
+      numberOfPips: numberOfPips ?? this.numberOfPips,
       formattedNumberOfPips:
           formattedNumberOfPips ?? this.formattedNumberOfPips,
-      numberOfPips: numberOfPips ?? this.numberOfPips,
     );
   }
 
@@ -35,8 +34,5 @@ class MatexForexPipDeltaCalculatorBlocResults extends FastCalculatorResults {
   }
 
   @override
-  List<Object?> get props => [
-        formattedNumberOfPips,
-        numberOfPips,
-      ];
+  List<Object?> get props => [formattedNumberOfPips, numberOfPips];
 }

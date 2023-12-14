@@ -56,10 +56,11 @@ class MatexForexPipDeltaCalculatorPdfGenerator {
     final priceB = parseFieldValueToDouble(fields.priceB);
 
     return [
-      FastReportEntry(
-        name: FinanceLocaleKeys.finance_label_financial_instrument.tr(),
-        value: fields.formattedFinancialInstrument,
-      ),
+      if (fields.financialInstrument != null)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_financial_instrument.tr(),
+          value: fields.formattedFinancialInstrument,
+        ),
       if (priceA > 0)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_price_a.tr(),

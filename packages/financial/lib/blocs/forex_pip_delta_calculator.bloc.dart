@@ -45,8 +45,7 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
 
   @override
   bool get isMandatoryFieldValid {
-    return currentState.fields.base != null &&
-        currentState.fields.counter != null;
+    return currentState.fields.financialInstrument != null;
   }
 
   @override
@@ -77,7 +76,25 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
       value = MatexFinancialInstrument.fromJson(value);
     }
 
-    if (value is String) {
+    if (value == null) {
+      switch (key) {
+        case MatexForexPipDeltaCalculatorBlocKey.priceA:
+          return document.copyWithDefaults(resetPriceA: true);
+
+        case MatexForexPipDeltaCalculatorBlocKey.priceB:
+          return document.copyWithDefaults(resetPriceB: true);
+
+        case MatexForexPipDeltaCalculatorBlocKey.instrument:
+          return document.copyWithDefaults(
+            resetPipDecimalPlaces: true,
+            resetCounter: true,
+            resetBase: true,
+          );
+
+        case MatexForexPipDeltaCalculatorBlocKey.pipDecimalPlaces:
+          return document.copyWithDefaults(resetPipDecimalPlaces: true);
+      }
+    } else if (value is String) {
       switch (key) {
         case MatexForexPipDeltaCalculatorBlocKey.priceA:
           return document.copyWith(priceA: value);
@@ -89,18 +106,17 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
           return document.copyWith(pipDecimalPlaces: value);
       }
     } else if (value is MatexFinancialInstrument) {
-      switch (key) {
-        case MatexForexPipDeltaCalculatorBlocKey.instrument:
-          final pipDecimalPlaces = await getPipPrecision(
-            counter: value.counter,
-            base: value.base,
-          );
+      if (key == MatexForexPipDeltaCalculatorBlocKey.instrument) {
+        final pipDecimalPlaces = await getPipPrecision(
+          counter: value.counter,
+          base: value.base,
+        );
 
-          return document.copyWith(
-            pipDecimalPlaces: pipDecimalPlaces.toString(),
-            counter: value.counter,
-            base: value.base,
-          );
+        return document.copyWith(
+          pipDecimalPlaces: pipDecimalPlaces.toString(),
+          counter: value.counter,
+          base: value.base,
+        );
       }
     }
 
@@ -117,7 +133,7 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
       value = MatexFinancialInstrument.fromJson(value);
     }
 
-    if (value is String) {
+    if (value is String?) {
       switch (key) {
         case MatexForexPipDeltaCalculatorBlocKey.priceA:
           return patchPriceA(value);
@@ -127,56 +143,14 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
 
         case MatexForexPipDeltaCalculatorBlocKey.pipDecimalPlaces:
           return patchPipDecimalPlaces(value);
+
+        case MatexForexPipDeltaCalculatorBlocKey.instrument:
+          return patchInstrument(null);
       }
     } else if (value is MatexFinancialInstrument) {
-      switch (key) {
-        case MatexForexPipDeltaCalculatorBlocKey.instrument:
-          return patchInstrument(value);
+      if (key == MatexForexPipDeltaCalculatorBlocKey.instrument) {
+        return patchInstrument(value);
       }
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexForexPipDeltaCalculatorDocument?> resetCalculatorDocument(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexForexPipDeltaCalculatorBlocKey.priceA:
-        return document.copyWithDefaults(resetPriceA: true);
-
-      case MatexForexPipDeltaCalculatorBlocKey.priceB:
-        return document.copyWithDefaults(resetPriceB: true);
-
-      case MatexForexPipDeltaCalculatorBlocKey.instrument:
-        return document.copyWithDefaults(
-          resetBase: true,
-          resetCounter: true,
-        );
-      case MatexForexPipDeltaCalculatorBlocKey.pipDecimalPlaces:
-        return document.copyWithDefaults(resetPipDecimalPlaces: true);
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexForexPipDeltaCalculatorBlocState?> resetCalculatorState(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexForexPipDeltaCalculatorBlocKey.priceA:
-        return patchPriceA(null);
-
-      case MatexForexPipDeltaCalculatorBlocKey.priceB:
-        return patchPriceB(null);
-
-      case MatexForexPipDeltaCalculatorBlocKey.instrument:
-        return patchInstrument(null);
-
-      case MatexForexPipDeltaCalculatorBlocKey.pipDecimalPlaces:
-        return patchPipDecimalPlaces(null);
     }
 
     return null;
@@ -187,8 +161,7 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexForexPipDeltaCalculatorDocument document,
   ) async {
     calculator.setState(MatexForexPipDeltaCalculatorState(
-      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces) ??
-          kDefaultPipPipDecimalPlaces,
+      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
       priceA: parseStringToDouble(document.priceA),
       priceB: parseStringToDouble(document.priceB),
     ));
@@ -208,6 +181,8 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields: MatexForexPipDeltaCalculatorBlocFields(
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         counter: document.counter,
+        priceA: document.priceA,
+        priceB: document.priceB,
         base: document.base,
       ),
     );
@@ -226,9 +201,8 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
       debugLabel: debugLabel,
     );
 
-    MatexFinancialInstrument? instrument;
-
     int pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+    MatexFinancialInstrument? instrument;
 
     if (json != null) {
       instrument = MatexFinancialInstrument.fromJson(json);
@@ -250,22 +224,33 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
   Future<MatexForexPipDeltaCalculatorBlocResults>
       retrieveDefaultResult() async {
     return MatexForexPipDeltaCalculatorBlocResults(
-      formattedNumberOfPips: localizeCurrency(value: 0),
+      formattedNumberOfPips: localizeNumber(value: 0),
       numberOfPips: 0,
     );
   }
 
   MatexForexPipDeltaCalculatorBlocState patchPriceA(String? value) {
-    late final MatexForexPipDeltaCalculatorBlocFields fields;
+    final dValue = toDecimalOrDefault(value);
+    var fields = currentState.fields;
 
-    if (value == null) {
-      fields = currentState.fields.copyWithDefaults(resetPriceA: true);
-      calculator.priceA = 0;
-    } else {
-      fields = currentState.fields.copyWith(priceA: value);
-      final dValue = toDecimal(value) ?? dZero;
-      calculator.priceA = dValue.toDouble();
-    }
+    fields = value == null
+        ? fields.copyWithDefaults(resetPriceA: true)
+        : fields.copyWith(priceA: value);
+
+    calculator.priceA = dValue.toDouble();
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexPipDeltaCalculatorBlocState patchPriceB(String? value) {
+    final dValue = toDecimalOrDefault(value);
+    var fields = currentState.fields;
+
+    fields = value == null
+        ? fields.copyWithDefaults(resetPriceB: true)
+        : fields.copyWith(priceB: value);
+
+    calculator.priceB = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
@@ -274,10 +259,6 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexFinancialInstrument? instrument,
   ) async {
     late final MatexForexPipDeltaCalculatorBlocFields fields;
-
-    // Note: Loads default metadata values from the super class.
-    // instrument metadata will be loaded in the willCompute method.
-    final metadata = await super.loadMetadata();
 
     if (instrument == null) {
       fields = currentState.fields.copyWithDefaults(
@@ -302,36 +283,18 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
       calculator.pipDecimalPlaces = pipDecimalPlaces;
     }
 
-    return currentState.copyWith(fields: fields, metadata: metadata);
-  }
-
-  MatexForexPipDeltaCalculatorBlocState patchPriceB(String? value) {
-    late final MatexForexPipDeltaCalculatorBlocFields fields;
-
-    if (value == null) {
-      fields = currentState.fields.copyWithDefaults(resetPriceB: true);
-      calculator.priceB = 0;
-    } else {
-      fields = currentState.fields.copyWith(priceB: value);
-      final dValue = toDecimal(value) ?? dZero;
-      calculator.priceB = dValue.toDouble();
-    }
-
     return currentState.copyWith(fields: fields);
   }
 
   MatexForexPipDeltaCalculatorBlocState patchPipDecimalPlaces(String? value) {
-    late final MatexForexPipDeltaCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetPipDecimalPlaces: true,
-      );
-
+      fields = fields.copyWithDefaults(resetPipDecimalPlaces: true);
       calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
       fields = currentState.fields.copyWith(pipDecimalPlaces: value);
+      final dValue = toDecimalOrDefault(value);
       calculator.pipDecimalPlaces = dValue.toDouble().toInt();
     }
 
@@ -349,11 +312,6 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
     final metadata = currentState.metadata;
 
     // ignore: use_build_context_synchronously
-    return pdfGenerator.generate(
-      context,
-      fields,
-      results,
-      metadata,
-    );
+    return pdfGenerator.generate(context, fields, results, metadata);
   }
 }

@@ -2,7 +2,6 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
-import 'package:t_helpers/helpers.dart';
 
 class MatexForexPipDeltaCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin
@@ -12,9 +11,9 @@ class MatexForexPipDeltaCalculatorBlocFields extends FastCalculatorFields
   @override
   late final String? counter;
 
+  late final String? pipDecimalPlaces;
   late final String? priceA;
   late final String? priceB;
-  late final String? pipDecimalPlaces;
 
   String get formattedPriceA {
     final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
@@ -38,40 +37,33 @@ class MatexForexPipDeltaCalculatorBlocFields extends FastCalculatorFields
     );
   }
 
-  // FIXME: Move to a abstract class
   String get formattedFinancialInstrument {
     if (base == null || counter == null) return '';
 
-    return formatCurrencyPair(
-      counter: counter!,
-      delimiter: '/',
-      base: base!,
-    );
+    return financialInstrument?.formattedSymbol ?? '';
   }
 
   MatexFinancialInstrument? get financialInstrument {
     if (base == null || counter == null) return null;
 
-    return MatexFinancialInstrument(
-      base: base!,
-      counter: counter!,
-    );
+    return MatexFinancialInstrument(counter: counter!, base: base!);
   }
 
   MatexForexPipDeltaCalculatorBlocFields({
-    String? base,
+    FastCalculatorBlocDelegate? delegate,
+    String? pipDecimalPlaces,
     String? counter,
     String? priceA,
     String? priceB,
-    String? pipDecimalPlaces,
-    FastCalculatorBlocDelegate? delegate,
+    String? base,
   }) {
-    this.base = assignValue(base);
     this.counter = assignValue(counter);
     this.priceA = assignValue(priceA);
     this.priceB = assignValue(priceB);
-    this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
+    this.base = assignValue(base);
     this.delegate = delegate;
+    this.pipDecimalPlaces =
+        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
   }
 
   @override
@@ -79,40 +71,38 @@ class MatexForexPipDeltaCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexForexPipDeltaCalculatorBlocFields copyWithDefaults({
-    bool resetPriceA = false,
-    bool resetBase = false,
-    bool resetCounter = false,
-    bool resetPriceB = false,
     bool resetPipDecimalPlaces = false,
+    bool resetCounter = false,
+    bool resetPriceA = false,
+    bool resetPriceB = false,
+    bool resetBase = false,
   }) {
     return MatexForexPipDeltaCalculatorBlocFields(
-      priceA: resetPriceA ? null : priceA,
-      base: resetBase ? null : base,
+      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
       counter: resetCounter ? null : counter,
+      priceA: resetPriceA ? null : priceA,
       priceB: resetPriceB ? null : priceB,
-      pipDecimalPlaces: resetPipDecimalPlaces
-          ? kDefaultPipPipDecimalPlaces.toString()
-          : pipDecimalPlaces,
+      base: resetBase ? null : base,
       delegate: delegate,
     );
   }
 
   @override
   MatexForexPipDeltaCalculatorBlocFields copyWith({
-    String? priceA,
-    String? base,
-    String? counter,
-    String? priceB,
-    String? pipDecimalPlaces,
     FastCalculatorBlocDelegate? delegate,
+    String? pipDecimalPlaces,
+    String? priceA,
+    String? priceB,
+    String? counter,
+    String? base,
   }) {
     return MatexForexPipDeltaCalculatorBlocFields(
-      priceA: priceA ?? this.priceA,
-      base: base ?? this.base,
-      counter: counter ?? this.counter,
-      priceB: priceB ?? this.priceB,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
       delegate: delegate ?? this.delegate,
+      counter: counter ?? this.counter,
+      priceA: priceA ?? this.priceA,
+      priceB: priceB ?? this.priceB,
+      base: base ?? this.base,
     );
   }
 
@@ -121,22 +111,21 @@ class MatexForexPipDeltaCalculatorBlocFields extends FastCalculatorFields
     covariant MatexForexPipDeltaCalculatorBlocFields model,
   ) {
     return copyWith(
-      priceA: model.priceA,
-      base: model.base,
-      counter: model.counter,
-      priceB: model.priceB,
       pipDecimalPlaces: model.pipDecimalPlaces,
       delegate: model.delegate,
+      counter: model.counter,
+      priceA: model.priceA,
+      priceB: model.priceB,
+      base: model.base,
     );
   }
 
   @override
   List<Object?> get props => [
-        priceA,
-        base,
-        counter,
-        priceB,
         pipDecimalPlaces,
-        delegate,
+        counter,
+        priceA,
+        priceB,
+        base,
       ];
 }
