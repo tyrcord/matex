@@ -12,10 +12,7 @@ import 'package:t_helpers/helpers.dart';
 
 class MatexForexTakeProfitCalculator extends MatexCalculator<
     MatexForexStopLossTakeProfitCalculatorState, MatexForexTradeOutcome> {
-  MatexForexTakeProfitCalculator({
-    super.defaultState,
-    super.state,
-  });
+  MatexForexTakeProfitCalculator({super.defaultState, super.state});
 
   @override
   MatexForexStopLossTakeProfitCalculatorState initializeState() =>
@@ -43,54 +40,57 @@ class MatexForexTakeProfitCalculator extends MatexCalculator<
   }
 
   MatexForexTradeOutcome _computeTakeProfitLevels(Decimal pipValue) {
-    final takeProfitAmount = state.takeProfitAmount!;
-    final takeProfitPips = state.takeProfitPips!;
-    final takeProfitPrice = state.takeProfitPrice!;
+    final dTakeProfitAmount = toDecimalOrDefault(state.takeProfitAmount);
+    final dTakeProfitPips = toDecimalOrDefault(state.takeProfitPips);
+    final dTakeProfitPrice = toDecimalOrDefault(state.takeProfitPrice);
     final divider = pow(10, state.pipDecimalPlaces).toDouble();
+    final dDivider = toDecimalOrDefault(divider);
 
-    if (takeProfitAmount > 0) {
-      return _computeTakeProfitWithAmount(takeProfitAmount, pipValue, divider);
-    } else if (takeProfitPips > 0) {
-      return _computeTakeProfitWithPips(takeProfitPips, pipValue, divider);
-    } else if (takeProfitPrice > 0) {
-      return _computeTakeProfitWithPrice(takeProfitPrice, pipValue, divider);
+    if (dTakeProfitAmount > dZero) {
+      return _computeTakeProfitWithAmount(
+        dTakeProfitAmount,
+        pipValue,
+        dDivider,
+      );
+    } else if (dTakeProfitPips > dZero) {
+      return _computeTakeProfitWithPips(dTakeProfitPips, pipValue, dDivider);
+    } else if (dTakeProfitPrice > dZero) {
+      return _computeTakeProfitWithPrice(dTakeProfitPrice, pipValue, dDivider);
     }
 
     return _buildTakeProfitResult();
   }
 
   MatexForexTradeOutcome _computeTakeProfitWithAmount(
-    double takeProfitAmount,
+    Decimal takeProfitAmount,
     Decimal pipValue,
-    double divider,
+    Decimal divider,
   ) {
     final dTakeProfitAmount = toDecimalOrDefault(takeProfitAmount);
-    final takeProfitPips = (dTakeProfitAmount / pipValue).toDouble();
+    final dTakeProfitPips = decimalFromRational(dTakeProfitAmount / pipValue);
 
     return _buildTakeProfitResult(
-      price: _computeTakeProfitPrice(takeProfitPips, divider),
+      price: _computeTakeProfitPrice(dTakeProfitPips, divider),
       amount: takeProfitAmount,
-      pips: takeProfitPips,
+      pips: dTakeProfitPips,
     );
   }
 
   MatexForexTradeOutcome _computeTakeProfitWithPrice(
-    double takeProfitPrice,
+    Decimal takeProfitPrice,
     Decimal pipValue,
-    double divider,
+    Decimal divider,
   ) {
-    final dTakeProfitPrice = toDecimalOrDefault(takeProfitPrice);
     final dEntryPrice = toDecimalOrDefault(state.entryPrice);
-    final dDivider = toDecimalOrDefault(divider);
     final position = state.position;
-    var takeProfitPips = 0.0;
+    var takeProfitPips = dZero;
 
-    if (position == MatexPosition.long && dTakeProfitPrice > dEntryPrice) {
-      takeProfitPips = ((dTakeProfitPrice - dEntryPrice) * dDivider).toDouble();
+    if (position == MatexPosition.long && takeProfitPrice > dEntryPrice) {
+      takeProfitPips = (takeProfitPrice - dEntryPrice) * divider;
     }
 
-    if (position == MatexPosition.short && dTakeProfitPrice < dEntryPrice) {
-      takeProfitPips = ((dEntryPrice - dTakeProfitPrice) * dDivider).toDouble();
+    if (position == MatexPosition.short && takeProfitPrice < dEntryPrice) {
+      takeProfitPips = (dEntryPrice - takeProfitPrice) * divider;
     }
 
     return _buildTakeProfitResult(
@@ -101,9 +101,9 @@ class MatexForexTakeProfitCalculator extends MatexCalculator<
   }
 
   MatexForexTradeOutcome _computeTakeProfitWithPips(
-    double takeProfitPips,
+    Decimal takeProfitPips,
     Decimal pipValue,
-    double divider,
+    Decimal divider,
   ) {
     final takeProfitPrice = _computeTakeProfitPrice(takeProfitPips, divider);
 
@@ -114,30 +114,29 @@ class MatexForexTakeProfitCalculator extends MatexCalculator<
     );
   }
 
-  double _computeTakeProfitAmount(double takeProfitPips, Decimal pipValue) {
-    final dTakeProfitPips = toDecimalOrDefault(takeProfitPips);
-
-    return (dTakeProfitPips * pipValue).toDouble();
+  Decimal _computeTakeProfitAmount(Decimal takeProfitPips, Decimal pipValue) {
+    return takeProfitPips * pipValue;
   }
 
-  double _computeTakeProfitPrice(double takeProfitPips, double divider) {
+  Decimal _computeTakeProfitPrice(Decimal takeProfitPips, Decimal divider) {
     final dEntryPrice = toDecimalOrDefault(state.entryPrice);
-    final dTakeProfitPips = toDecimalOrDefault(takeProfitPips);
-    final dDivider = toDecimalOrDefault(divider);
-    final deltaPrice = decimalFromRational(dTakeProfitPips / dDivider);
+    final deltaPrice = decimalFromRational(takeProfitPips / divider);
     final position = state.position;
 
-    return (position == MatexPosition.long
-            ? dEntryPrice + deltaPrice
-            : dEntryPrice - deltaPrice)
-        .toDouble();
+    return position == MatexPosition.long
+        ? dEntryPrice + deltaPrice
+        : dEntryPrice - deltaPrice;
   }
 
   MatexForexTradeOutcome _buildTakeProfitResult({
-    double amount = 0,
-    double pips = 0,
-    double price = 0,
+    Decimal? amount,
+    Decimal? pips,
+    Decimal? price,
   }) {
-    return MatexForexTradeOutcome(amount: amount, pips: pips, price: price);
+    return MatexForexTradeOutcome(
+      amount: toDecimalOrDefault(amount).toDouble(),
+      pips: toDecimalOrDefault(pips).toDouble(),
+      price: toDecimalOrDefault(price).toDouble(),
+    );
   }
 }
