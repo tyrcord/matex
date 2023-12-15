@@ -2,12 +2,11 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
-import 'package:t_helpers/helpers.dart';
 
 class MatexForexProfitLossCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
-  static const String defaultPositionSizeFieldType = 'unit';
+  static const defaultPositionSizeFieldType = MatexPositionSizeType.unit;
   final defaultPosition = MatexPosition.long;
 
   @override
@@ -15,15 +14,14 @@ class MatexForexProfitLossCalculatorBlocFields extends FastCalculatorFields
   @override
   late final String? counter;
 
-  late final String? accountCurrency;
-
-  late final String? positionSize;
+  late final MatexPositionSizeType positionSizeFieldType;
   late final String? pipDecimalPlaces;
-  late final String positionSizeFieldType;
-  late final String? lotSize;
+  late final String? accountCurrency;
+  late final MatexPosition position;
+  late final String? positionSize;
   late final String? entryPrice;
   late final String? exitPrice;
-  late final MatexPosition position;
+  late final String? lotSize;
 
   String get formattedEntryPrice {
     final value = parseFieldValueToDouble(entryPrice);
@@ -51,49 +49,43 @@ class MatexForexProfitLossCalculatorBlocFields extends FastCalculatorFields
     return localizeNumber(value: value);
   }
 
-  // FIXME: Move to a abstract class
   String get formattedFinancialInstrument {
     if (base == null || counter == null) return '';
 
-    return formatCurrencyPair(
-      counter: counter!,
-      delimiter: '/',
-      base: base!,
-    );
+    return financialInstrument?.formattedSymbol ?? '';
   }
 
   MatexFinancialInstrument? get financialInstrument {
     if (base == null || counter == null) return null;
 
-    return MatexFinancialInstrument(
-      base: base!,
-      counter: counter!,
-    );
+    return MatexFinancialInstrument(base: base!, counter: counter!);
   }
 
   MatexForexProfitLossCalculatorBlocFields({
+    MatexPositionSizeType? positionSizeFieldType,
+    FastCalculatorBlocDelegate? delegate,
+    String? pipDecimalPlaces,
     String? accountCurrency,
-    String? base,
-    String? counter,
+    MatexPosition? position,
     String? positionSize,
     String? entryPrice,
-    String? pipDecimalPlaces,
-    String? positionSizeFieldType,
-    String? lotSize,
     String? exitPrice,
-    MatexPosition? position,
+    String? lotSize,
+    String? counter,
+    String? base,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
-    this.base = assignValue(base);
-    this.counter = assignValue(counter);
-    this.positionSize = assignValue(positionSize);
-    this.entryPrice = assignValue(entryPrice);
     this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
-    this.lotSize = assignValue(lotSize);
+    this.positionSize = assignValue(positionSize);
+    this.position = position ?? defaultPosition;
+    this.entryPrice = assignValue(entryPrice);
     this.exitPrice = assignValue(exitPrice);
+    this.lotSize = assignValue(lotSize);
+    this.counter = assignValue(counter);
+    this.base = assignValue(base);
+    this.delegate = delegate;
     this.positionSizeFieldType =
         positionSizeFieldType ?? defaultPositionSizeFieldType;
-    this.position = position ?? defaultPosition;
   }
 
   @override
@@ -101,29 +93,31 @@ class MatexForexProfitLossCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexForexProfitLossCalculatorBlocFields copyWith({
+    MatexPositionSizeType? positionSizeFieldType,
+    FastCalculatorBlocDelegate? delegate,
+    String? pipDecimalPlaces,
     String? accountCurrency,
-    String? base,
-    String? counter,
+    MatexPosition? position,
     String? positionSize,
     String? entryPrice,
-    String? pipDecimalPlaces,
-    String? positionSizeFieldType,
-    String? lotSize,
     String? exitPrice,
-    MatexPosition? position,
+    String? counter,
+    String? lotSize,
+    String? base,
   }) {
     return MatexForexProfitLossCalculatorBlocFields(
+      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
       accountCurrency: accountCurrency ?? this.accountCurrency,
-      base: base ?? this.base,
-      counter: counter ?? this.counter,
       positionSize: positionSize ?? this.positionSize,
       entryPrice: entryPrice ?? this.entryPrice,
-      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
-      lotSize: lotSize ?? this.lotSize,
-      positionSizeFieldType:
-          positionSizeFieldType ?? this.positionSizeFieldType,
       exitPrice: exitPrice ?? this.exitPrice,
       position: position ?? this.position,
+      delegate: delegate ?? this.delegate,
+      lotSize: lotSize ?? this.lotSize,
+      counter: counter ?? this.counter,
+      base: base ?? this.base,
+      positionSizeFieldType:
+          positionSizeFieldType ?? this.positionSizeFieldType,
     );
   }
 
@@ -141,17 +135,18 @@ class MatexForexProfitLossCalculatorBlocFields extends FastCalculatorFields
     bool resetPosition = false,
   }) {
     return MatexForexProfitLossCalculatorBlocFields(
+      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
       accountCurrency: resetAccountCurrency ? null : accountCurrency,
-      base: resetBase ? null : base,
-      counter: resetCounter ? null : counter,
       positionSize: resetPositionSize ? null : positionSize,
       entryPrice: resetEntryPrice ? null : entryPrice,
-      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
-      lotSize: resetLotSize ? null : lotSize,
-      positionSizeFieldType:
-          resetPositionSizeFieldType ? null : positionSizeFieldType,
       exitPrice: resetExitPrice ? null : exitPrice,
       position: resetPosition ? null : position,
+      lotSize: resetLotSize ? null : lotSize,
+      counter: resetCounter ? null : counter,
+      base: resetBase ? null : base,
+      delegate: delegate,
+      positionSizeFieldType:
+          resetPositionSizeFieldType ? null : positionSizeFieldType,
     );
   }
 
@@ -160,30 +155,31 @@ class MatexForexProfitLossCalculatorBlocFields extends FastCalculatorFields
     covariant MatexForexProfitLossCalculatorBlocFields model,
   ) {
     return copyWith(
+      positionSizeFieldType: model.positionSizeFieldType,
+      pipDecimalPlaces: model.pipDecimalPlaces,
       accountCurrency: model.accountCurrency,
-      base: model.base,
-      counter: model.counter,
       positionSize: model.positionSize,
       entryPrice: model.entryPrice,
-      pipDecimalPlaces: model.pipDecimalPlaces,
-      positionSizeFieldType: model.positionSizeFieldType,
-      lotSize: model.lotSize,
       exitPrice: model.exitPrice,
+      delegate: model.delegate,
       position: model.position,
+      lotSize: model.lotSize,
+      counter: model.counter,
+      base: model.base,
     );
   }
 
   @override
   List<Object?> get props => [
+        positionSizeFieldType,
+        pipDecimalPlaces,
         accountCurrency,
-        base,
-        counter,
         positionSize,
         entryPrice,
-        pipDecimalPlaces,
-        positionSizeFieldType,
-        lotSize,
         exitPrice,
         position,
+        counter,
+        lotSize,
+        base,
       ];
 }

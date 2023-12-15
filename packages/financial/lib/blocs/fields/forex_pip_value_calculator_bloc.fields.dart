@@ -2,21 +2,22 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
-import 'package:t_helpers/helpers.dart';
 
 class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
+  static const defaultPositionSizeFieldType = MatexPositionSizeType.unit;
+
   @override
   late final String? base;
   @override
   late final String? counter;
 
+  late final MatexPositionSizeType positionSizeFieldType;
+  late final String? pipDecimalPlaces;
   late final String? accountCurrency;
   late final String? positionSize;
   late final String? numberOfPips;
-  late final String? pipDecimalPlaces;
-  late final String positionSizeFieldType;
   late final String? lotSize;
 
   String get formattedPositionSize {
@@ -25,54 +26,46 @@ class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
     return localizeNumber(value: value);
   }
 
-  // FIXME: Move to a abstract class
   String get formattedNumberOfPips {
     final value = parseFieldValueToDouble(numberOfPips);
 
     return localizeNumber(value: value);
   }
 
-  // FIXME: Move to a abstract class
   String get formattedFinancialInstrument {
     if (base == null || counter == null) return '';
 
-    return formatCurrencyPair(
-      counter: counter!,
-      delimiter: '/',
-      base: base!,
-    );
+    return financialInstrument?.formattedSymbol ?? '';
   }
 
   MatexFinancialInstrument? get financialInstrument {
     if (base == null || counter == null) return null;
 
-    return MatexFinancialInstrument(
-      base: base!,
-      counter: counter!,
-    );
+    return MatexFinancialInstrument(base: base!, counter: counter!);
   }
 
   MatexForexPipValueCalculatorBlocFields({
+    MatexPositionSizeType? positionSizeFieldType,
+    FastCalculatorBlocDelegate? delegate,
+    String? pipDecimalPlaces,
     String? accountCurrency,
-    String? base,
-    String? counter,
     String? positionSize,
     String? numberOfPips,
-    String? pipDecimalPlaces,
-    String? positionSizeFieldType,
-    FastCalculatorBlocDelegate? delegate,
+    String? counter,
     String? lotSize,
+    String? base,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
-    this.base = assignValue(base);
-    this.counter = assignValue(counter);
     this.positionSize = assignValue(positionSize);
     this.numberOfPips = assignValue(numberOfPips);
-    this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
+    this.counter = assignValue(counter);
     this.lotSize = assignValue(lotSize);
+    this.base = assignValue(base);
     this.delegate = delegate;
     this.positionSizeFieldType =
-        positionSizeFieldType ?? MatexPositionSizeType.unit.name;
+        positionSizeFieldType ?? defaultPositionSizeFieldType;
+    this.pipDecimalPlaces =
+        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
   }
 
   @override
@@ -80,54 +73,52 @@ class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexForexPipValueCalculatorBlocFields copyWithDefaults({
-    bool accountCurrency = false,
-    bool base = false,
-    bool counter = false,
-    bool positionSize = false,
-    bool numberOfPips = false,
-    bool pipDecimalPlaces = false,
-    bool positionSizeFieldType = false,
-    bool lotSize = false,
+    bool resetPositionSizeFieldType = false,
+    bool resetPipDecimalPlaces = false,
+    bool resetAccountCurrency = false,
+    bool resetPositionSize = false,
+    bool resetNumberOfPips = false,
+    bool resetCounter = false,
+    bool resetLotSize = false,
+    bool resetBase = false,
   }) {
     return MatexForexPipValueCalculatorBlocFields(
-      accountCurrency: accountCurrency ? null : this.accountCurrency,
-      base: base ? null : this.base,
-      counter: counter ? null : this.counter,
-      positionSize: positionSize ? null : this.positionSize,
-      numberOfPips: numberOfPips ? null : this.numberOfPips,
-      pipDecimalPlaces: pipDecimalPlaces
-          ? kDefaultPipPipDecimalPlaces.toString()
-          : this.pipDecimalPlaces,
-      positionSizeFieldType:
-          positionSizeFieldType ? null : this.positionSizeFieldType,
-      lotSize: lotSize ? null : this.lotSize,
+      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
+      accountCurrency: resetAccountCurrency ? null : accountCurrency,
+      numberOfPips: resetNumberOfPips ? null : numberOfPips,
+      positionSize: resetPositionSize ? null : positionSize,
+      lotSize: resetLotSize ? null : lotSize,
+      counter: resetCounter ? null : counter,
+      base: resetBase ? null : base,
       delegate: delegate,
+      positionSizeFieldType:
+          resetPositionSizeFieldType ? null : positionSizeFieldType,
     );
   }
 
   @override
   MatexForexPipValueCalculatorBlocFields copyWith({
+    MatexPositionSizeType? positionSizeFieldType,
+    FastCalculatorBlocDelegate? delegate,
+    String? pipDecimalPlaces,
     String? accountCurrency,
-    String? base,
-    String? counter,
     String? positionSize,
     String? numberOfPips,
-    String? pipDecimalPlaces,
-    String? positionSizeFieldType,
-    FastCalculatorBlocDelegate? delegate,
     String? lotSize,
+    String? counter,
+    String? base,
   }) {
     return MatexForexPipValueCalculatorBlocFields(
+      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
       accountCurrency: accountCurrency ?? this.accountCurrency,
-      base: base ?? this.base,
-      counter: counter ?? this.counter,
       positionSize: positionSize ?? this.positionSize,
       numberOfPips: numberOfPips ?? this.numberOfPips,
-      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
-      positionSizeFieldType:
-          positionSizeFieldType ?? this.positionSizeFieldType,
       delegate: delegate ?? this.delegate,
       lotSize: lotSize ?? this.lotSize,
+      counter: counter ?? this.counter,
+      base: base ?? this.base,
+      positionSizeFieldType:
+          positionSizeFieldType ?? this.positionSizeFieldType,
     );
   }
 
@@ -136,28 +127,27 @@ class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
     covariant MatexForexPipValueCalculatorBlocFields model,
   ) {
     return copyWith(
+      positionSizeFieldType: model.positionSizeFieldType,
+      pipDecimalPlaces: model.pipDecimalPlaces,
       accountCurrency: model.accountCurrency,
-      base: model.base,
-      counter: model.counter,
       positionSize: model.positionSize,
       numberOfPips: model.numberOfPips,
-      pipDecimalPlaces: model.pipDecimalPlaces,
-      positionSizeFieldType: model.positionSizeFieldType,
       delegate: model.delegate,
       lotSize: model.lotSize,
+      counter: model.counter,
+      base: model.base,
     );
   }
 
   @override
   List<Object?> get props => [
+        positionSizeFieldType,
+        pipDecimalPlaces,
         accountCurrency,
-        base,
-        counter,
         positionSize,
         numberOfPips,
-        pipDecimalPlaces,
-        positionSizeFieldType,
-        delegate,
         lotSize,
+        counter,
+        base,
       ];
 }

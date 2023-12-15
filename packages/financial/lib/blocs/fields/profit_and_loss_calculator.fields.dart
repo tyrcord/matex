@@ -1,24 +1,23 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_forms/fastyle_forms.dart';
 import 'package:matex_core/core.dart';
-
-final String _kDefaultEntryFeeType = FastAmountSwitchFieldType.amount.name;
-final String _kDefaultExitFeeType = FastAmountSwitchFieldType.amount.name;
 
 class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
-  late final String? expectedSaleUnits;
-  late final String? buyingPrice;
-  late final String? sellingPrice;
-  late final String? operatingExpenses;
-  late final String? buyingExpensePerUnitRate;
+  final String defaultEntryFeeType = 'amount';
+  final String defaultExitFeeType = 'amount';
+
+  late final String? sellingExpensePerUnitAmount;
   late final String? buyingExpensePerUnitAmount;
   late final String? sellingExpensePerUnitRate;
-  late final String? sellingExpensePerUnitAmount;
-  late final String? taxRate;
-  late final String? buyingCostsPerUnitType;
+  late final String? buyingExpensePerUnitRate;
   late final String? sellingCostsPerUnitType;
+  late final String? buyingCostsPerUnitType;
+  late final String? operatingExpenses;
+  late final String? expectedSaleUnits;
+  late final String? sellingPrice;
+  late final String? buyingPrice;
+  late final String? taxRate;
 
   String get formattedBuyingPrice {
     final value = parseFieldValueToDouble(buyingPrice);
@@ -75,33 +74,33 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
   }
 
   MatexProfitAndLossCalculatorBlocFields({
-    String? expectedSaleUnits,
-    String? buyingPrice,
-    String? sellingPrice,
-    String? operatingExpenses,
-    String? buyingExpensePerUnitRate,
+    FastCalculatorBlocDelegate? delegate,
+    String? sellingExpensePerUnitAmount,
     String? buyingExpensePerUnitAmount,
     String? sellingExpensePerUnitRate,
-    String? sellingExpensePerUnitAmount,
-    String? taxRate,
-    String? buyingCostsPerUnitType,
+    String? buyingExpensePerUnitRate,
     String? sellingCostsPerUnitType,
-    FastCalculatorBlocDelegate? delegate,
+    String? buyingCostsPerUnitType,
+    String? expectedSaleUnits,
+    String? operatingExpenses,
+    String? sellingPrice,
+    String? buyingPrice,
+    String? taxRate,
   }) {
-    this.expectedSaleUnits = assignValue(expectedSaleUnits);
-    this.buyingPrice = assignValue(buyingPrice);
-    this.sellingPrice = assignValue(sellingPrice);
-    this.operatingExpenses = assignValue(operatingExpenses);
-    this.buyingExpensePerUnitRate = assignValue(buyingExpensePerUnitRate);
+    this.sellingExpensePerUnitAmount = assignValue(sellingExpensePerUnitAmount);
     this.buyingExpensePerUnitAmount = assignValue(buyingExpensePerUnitAmount);
     this.sellingExpensePerUnitRate = assignValue(sellingExpensePerUnitRate);
-    this.sellingExpensePerUnitAmount = assignValue(sellingExpensePerUnitAmount);
+    this.buyingExpensePerUnitRate = assignValue(buyingExpensePerUnitRate);
+    this.expectedSaleUnits = assignValue(expectedSaleUnits);
+    this.operatingExpenses = assignValue(operatingExpenses);
+    this.sellingPrice = assignValue(sellingPrice);
+    this.buyingPrice = assignValue(buyingPrice);
     this.taxRate = assignValue(taxRate);
-    this.buyingCostsPerUnitType =
-        assignValue(buyingCostsPerUnitType) ?? _kDefaultEntryFeeType;
-    this.sellingCostsPerUnitType =
-        assignValue(sellingCostsPerUnitType) ?? _kDefaultExitFeeType;
     this.delegate = delegate;
+    this.buyingCostsPerUnitType =
+        assignValue(buyingCostsPerUnitType) ?? defaultEntryFeeType;
+    this.sellingCostsPerUnitType =
+        assignValue(sellingCostsPerUnitType) ?? defaultExitFeeType;
   }
 
   @override
@@ -109,76 +108,74 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexProfitAndLossCalculatorBlocFields copyWithDefaults({
-    bool expectedSaleUnits = false,
-    bool buyingPrice = false,
-    bool sellingPrice = false,
-    bool operatingExpenses = false,
-    bool buyingExpensePerUnitRate = false,
+    bool sellingExpensePerUnitAmount = false,
     bool buyingExpensePerUnitAmount = false,
     bool sellingExpensePerUnitRate = false,
-    bool sellingExpensePerUnitAmount = false,
-    bool taxRate = false,
-    bool buyingCostsPerUnitType = false,
+    bool buyingExpensePerUnitRate = false,
     bool sellingCostsPerUnitType = false,
+    bool buyingCostsPerUnitType = false,
+    bool expectedSaleUnits = false,
+    bool operatingExpenses = false,
+    bool sellingPrice = false,
+    bool buyingPrice = false,
+    bool taxRate = false,
   }) {
     return MatexProfitAndLossCalculatorBlocFields(
       expectedSaleUnits: expectedSaleUnits ? null : this.expectedSaleUnits,
-      buyingPrice: buyingPrice ? null : this.buyingPrice,
-      sellingPrice: sellingPrice ? null : this.sellingPrice,
       operatingExpenses: operatingExpenses ? null : this.operatingExpenses,
-      buyingExpensePerUnitRate:
-          buyingExpensePerUnitRate ? null : this.buyingExpensePerUnitRate,
+      sellingPrice: sellingPrice ? null : this.sellingPrice,
+      buyingPrice: buyingPrice ? null : this.buyingPrice,
+      taxRate: taxRate ? null : this.taxRate,
+      delegate: delegate,
+      sellingExpensePerUnitAmount:
+          sellingExpensePerUnitAmount ? null : this.sellingExpensePerUnitAmount,
       buyingExpensePerUnitAmount:
           buyingExpensePerUnitAmount ? null : this.buyingExpensePerUnitAmount,
       sellingExpensePerUnitRate:
           sellingExpensePerUnitRate ? null : this.sellingExpensePerUnitRate,
-      sellingExpensePerUnitAmount:
-          sellingExpensePerUnitAmount ? null : this.sellingExpensePerUnitAmount,
-      taxRate: taxRate ? null : this.taxRate,
-      buyingCostsPerUnitType: buyingCostsPerUnitType
-          ? _kDefaultEntryFeeType
-          : this.buyingCostsPerUnitType,
-      sellingCostsPerUnitType: sellingCostsPerUnitType
-          ? _kDefaultExitFeeType
-          : this.sellingCostsPerUnitType,
-      delegate: delegate,
+      buyingExpensePerUnitRate:
+          buyingExpensePerUnitRate ? null : this.buyingExpensePerUnitRate,
+      sellingCostsPerUnitType:
+          sellingCostsPerUnitType ? null : this.sellingCostsPerUnitType,
+      buyingCostsPerUnitType:
+          buyingCostsPerUnitType ? null : this.buyingCostsPerUnitType,
     );
   }
 
   @override
   MatexProfitAndLossCalculatorBlocFields copyWith({
-    String? expectedSaleUnits,
-    String? buyingPrice,
-    String? sellingPrice,
-    String? operatingExpenses,
-    String? buyingExpensePerUnitRate,
+    FastCalculatorBlocDelegate? delegate,
+    String? sellingExpensePerUnitAmount,
     String? buyingExpensePerUnitAmount,
     String? sellingExpensePerUnitRate,
-    String? sellingExpensePerUnitAmount,
-    String? taxRate,
-    String? buyingCostsPerUnitType,
+    String? buyingExpensePerUnitRate,
     String? sellingCostsPerUnitType,
-    FastCalculatorBlocDelegate? delegate,
+    String? buyingCostsPerUnitType,
+    String? operatingExpenses,
+    String? expectedSaleUnits,
+    String? sellingPrice,
+    String? buyingPrice,
+    String? taxRate,
   }) {
     return MatexProfitAndLossCalculatorBlocFields(
       expectedSaleUnits: expectedSaleUnits ?? this.expectedSaleUnits,
-      buyingPrice: buyingPrice ?? this.buyingPrice,
-      sellingPrice: sellingPrice ?? this.sellingPrice,
       operatingExpenses: operatingExpenses ?? this.operatingExpenses,
-      buyingExpensePerUnitRate:
-          buyingExpensePerUnitRate ?? this.buyingExpensePerUnitRate,
+      sellingPrice: sellingPrice ?? this.sellingPrice,
+      buyingPrice: buyingPrice ?? this.buyingPrice,
+      delegate: delegate ?? this.delegate,
+      taxRate: taxRate ?? this.taxRate,
+      sellingExpensePerUnitAmount:
+          sellingExpensePerUnitAmount ?? this.sellingExpensePerUnitAmount,
       buyingExpensePerUnitAmount:
           buyingExpensePerUnitAmount ?? this.buyingExpensePerUnitAmount,
       sellingExpensePerUnitRate:
           sellingExpensePerUnitRate ?? this.sellingExpensePerUnitRate,
-      sellingExpensePerUnitAmount:
-          sellingExpensePerUnitAmount ?? this.sellingExpensePerUnitAmount,
-      taxRate: taxRate ?? this.taxRate,
+      buyingExpensePerUnitRate:
+          buyingExpensePerUnitRate ?? this.buyingExpensePerUnitRate,
       sellingCostsPerUnitType:
           sellingCostsPerUnitType ?? this.sellingCostsPerUnitType,
       buyingCostsPerUnitType:
           buyingCostsPerUnitType ?? this.buyingCostsPerUnitType,
-      delegate: delegate ?? this.delegate,
     );
   }
 
@@ -187,34 +184,33 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
     covariant MatexProfitAndLossCalculatorBlocFields model,
   ) {
     return copyWith(
-      expectedSaleUnits: model.expectedSaleUnits,
-      buyingPrice: model.buyingPrice,
-      sellingPrice: model.sellingPrice,
-      operatingExpenses: model.operatingExpenses,
-      buyingExpensePerUnitRate: model.buyingExpensePerUnitRate,
+      sellingExpensePerUnitAmount: model.sellingExpensePerUnitAmount,
       buyingExpensePerUnitAmount: model.buyingExpensePerUnitAmount,
       sellingExpensePerUnitRate: model.sellingExpensePerUnitRate,
-      sellingExpensePerUnitAmount: model.sellingExpensePerUnitAmount,
-      taxRate: model.taxRate,
+      buyingExpensePerUnitRate: model.buyingExpensePerUnitRate,
       sellingCostsPerUnitType: model.sellingCostsPerUnitType,
       buyingCostsPerUnitType: model.buyingCostsPerUnitType,
+      expectedSaleUnits: model.expectedSaleUnits,
+      operatingExpenses: model.operatingExpenses,
+      sellingPrice: model.sellingPrice,
+      buyingPrice: model.buyingPrice,
       delegate: model.delegate,
+      taxRate: model.taxRate,
     );
   }
 
   @override
   List<Object?> get props => [
-        expectedSaleUnits,
-        buyingPrice,
-        sellingPrice,
-        operatingExpenses,
-        buyingExpensePerUnitRate,
+        sellingExpensePerUnitAmount,
         buyingExpensePerUnitAmount,
         sellingExpensePerUnitRate,
-        sellingExpensePerUnitAmount,
-        taxRate,
+        buyingExpensePerUnitRate,
         sellingCostsPerUnitType,
         buyingCostsPerUnitType,
-        delegate,
+        operatingExpenses,
+        expectedSaleUnits,
+        sellingPrice,
+        buyingPrice,
+        taxRate,
       ];
 }

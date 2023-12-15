@@ -5,11 +5,11 @@ import 'package:matex_financial/financial.dart';
 
 class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
-  static final String defaultTrend = MatexTrend.up.name;
+  static const MatexTrend defaultTrend = MatexTrend.up;
 
   late final String? highPrice;
   late final String? lowPrice;
-  late final String trend;
+  late final MatexTrend trend;
 
   String get formattedLowPrice {
     final value = parseFieldValueToDouble(lowPrice);
@@ -29,21 +29,17 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
     );
   }
 
-  String get formattedTrend {
-    final value = MatexTrendX.fromName(trend);
-
-    return value.localizedName;
-  }
+  String get formattedTrend => trend.localizedName;
 
   MatexFibonnaciLevelsCalculatorBlocFields({
+    FastCalculatorBlocDelegate? delegate,
+    MatexTrend? trend,
     String? highPrice,
     String? lowPrice,
-    String? trend,
-    FastCalculatorBlocDelegate? delegate,
   }) {
     this.highPrice = assignValue(highPrice);
     this.lowPrice = assignValue(lowPrice);
-    this.trend = assignValue(trend) ?? defaultTrend;
+    this.trend = trend ?? defaultTrend;
     this.delegate = delegate;
   }
 
@@ -52,15 +48,16 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexFibonnaciLevelsCalculatorBlocFields copyWith({
+    FastCalculatorBlocDelegate? delegate,
+    MatexTrend? trend,
     String? highPrice,
     String? lowPrice,
-    String? trend,
   }) {
     return MatexFibonnaciLevelsCalculatorBlocFields(
       highPrice: highPrice ?? this.highPrice,
       lowPrice: lowPrice ?? this.lowPrice,
+      delegate: delegate ?? this.delegate,
       trend: trend ?? this.trend,
-      delegate: delegate,
     );
   }
 
@@ -86,14 +83,11 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
     return copyWith(
       highPrice: model.highPrice,
       lowPrice: model.lowPrice,
+      delegate: model.delegate,
       trend: model.trend,
     );
   }
 
   @override
-  List<Object?> get props => [
-        highPrice,
-        lowPrice,
-        trend,
-      ];
+  List<Object?> get props => [highPrice, lowPrice, trend];
 }

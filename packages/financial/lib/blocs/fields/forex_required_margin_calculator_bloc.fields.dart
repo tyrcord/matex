@@ -2,19 +2,18 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
-import 'package:t_helpers/helpers.dart';
 
 class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin, MatexFinancialCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
-  static const String defaultPositionSizeFieldType = 'unit';
+  static const defaultPositionSizeFieldType = MatexPositionSizeType.unit;
 
   @override
   late final String? counter;
   @override
   late final String? base;
 
-  late final String positionSizeFieldType;
+  late final MatexPositionSizeType positionSizeFieldType;
   late final String? accountCurrency;
   late final String? positionSize;
   late final String? leverage;
@@ -40,41 +39,36 @@ class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
     return localizeNumber(value: value);
   }
 
-  // FIXME: Move to a abstract class
   String get formattedFinancialInstrument {
     if (base == null || counter == null) return '';
 
-    return formatCurrencyPair(
-      counter: counter!,
-      delimiter: '/',
-      base: base!,
-    );
+    return financialInstrument?.formattedSymbol ?? '';
   }
 
   MatexFinancialInstrument? get financialInstrument {
     if (base == null || counter == null) return null;
 
-    return MatexFinancialInstrument(
-      base: base!,
-      counter: counter!,
-    );
+    return MatexFinancialInstrument(base: base!, counter: counter!);
   }
 
   MatexForexRequiredMarginCalculatorBlocFields({
+    MatexPositionSizeType? positionSizeFieldType,
+    FastCalculatorBlocDelegate? delegate,
     String? accountCurrency,
-    String? base,
-    String? counter,
     String? positionSize,
     String? leverage,
-    String? positionSizeFieldType,
+    String? counter,
     String? lotSize,
+    String? base,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
-    this.base = assignValue(base);
-    this.counter = assignValue(counter);
     this.positionSize = assignValue(positionSize);
     this.leverage = assignValue(leverage);
+    this.counter = assignValue(counter);
     this.lotSize = assignValue(lotSize);
+    this.base = assignValue(base);
+    this.delegate = delegate;
+
     this.positionSizeFieldType =
         positionSizeFieldType ?? defaultPositionSizeFieldType;
   }
@@ -84,21 +78,23 @@ class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexForexRequiredMarginCalculatorBlocFields copyWith({
+    MatexPositionSizeType? positionSizeFieldType,
+    FastCalculatorBlocDelegate? delegate,
     String? accountCurrency,
-    String? base,
-    String? counter,
     String? positionSize,
     String? leverage,
-    String? positionSizeFieldType,
     String? lotSize,
+    String? counter,
+    String? base,
   }) {
     return MatexForexRequiredMarginCalculatorBlocFields(
       accountCurrency: accountCurrency ?? this.accountCurrency,
-      base: base ?? this.base,
-      counter: counter ?? this.counter,
       positionSize: positionSize ?? this.positionSize,
       leverage: leverage ?? this.leverage,
+      delegate: delegate ?? this.delegate,
       lotSize: lotSize ?? this.lotSize,
+      counter: counter ?? this.counter,
+      base: base ?? this.base,
       positionSizeFieldType:
           positionSizeFieldType ?? this.positionSizeFieldType,
     );
@@ -106,21 +102,22 @@ class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexForexRequiredMarginCalculatorBlocFields copyWithDefaults({
+    bool resetPositionSizeFieldType = false,
     bool resetAccountCurrency = false,
-    bool resetBase = false,
-    bool resetCounter = false,
     bool resetPositionSize = false,
     bool resetLeverage = false,
-    bool resetPositionSizeFieldType = false,
     bool resetLotSize = false,
+    bool resetCounter = false,
+    bool resetBase = false,
   }) {
     return MatexForexRequiredMarginCalculatorBlocFields(
       accountCurrency: resetAccountCurrency ? null : accountCurrency,
-      base: resetBase ? null : base,
-      counter: resetCounter ? null : counter,
       positionSize: resetPositionSize ? null : positionSize,
       leverage: resetLeverage ? null : leverage,
       lotSize: resetLotSize ? null : lotSize,
+      counter: resetCounter ? null : counter,
+      base: resetBase ? null : base,
+      delegate: delegate,
       positionSizeFieldType:
           resetPositionSizeFieldType ? null : positionSizeFieldType,
     );
@@ -131,24 +128,24 @@ class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
     covariant MatexForexRequiredMarginCalculatorBlocFields model,
   ) {
     return copyWith(
+      positionSizeFieldType: model.positionSizeFieldType,
       accountCurrency: model.accountCurrency,
-      base: model.base,
-      counter: model.counter,
       positionSize: model.positionSize,
       leverage: model.leverage,
-      positionSizeFieldType: model.positionSizeFieldType,
       lotSize: model.lotSize,
+      counter: model.counter,
+      base: model.base,
     );
   }
 
   @override
   List<Object?> get props => [
+        positionSizeFieldType,
         accountCurrency,
-        base,
-        counter,
         positionSize,
         leverage,
-        positionSizeFieldType,
         lotSize,
+        counter,
+        base,
       ];
 }

@@ -77,27 +77,27 @@ class MatexForexProfitLossCalculatorDocument extends FastCalculatorDocument {
 
   @override
   MatexForexProfitLossCalculatorDocument copyWithDefaults({
-    bool accountCurrency = false,
-    bool base = false,
-    bool counter = false,
-    bool positionSize = false,
-    bool entryPrice = false,
-    bool pipDecimalPlaces = false,
-    bool positionSizeFieldType = false,
-    bool lotSize = false,
+    bool resetAccountCurrency = false,
+    bool resetBase = false,
+    bool resetCounter = false,
+    bool resetPositionSize = false,
+    bool resetEntryPrice = false,
+    bool resetPipDecimalPlaces = false,
+    bool resetPositionSizeFieldType = false,
+    bool resetLotSize = false,
     bool resetExitPrice = false,
     bool resetPosition = false,
   }) {
     return MatexForexProfitLossCalculatorDocument(
-      accountCurrency: accountCurrency ? null : this.accountCurrency,
-      base: base ? null : this.base,
-      counter: counter ? null : this.counter,
-      positionSize: positionSize ? null : this.positionSize,
-      entryPrice: entryPrice ? null : this.entryPrice,
-      pipDecimalPlaces: pipDecimalPlaces ? null : this.pipDecimalPlaces,
-      lotSize: lotSize ? null : this.lotSize,
+      accountCurrency: resetAccountCurrency ? null : accountCurrency,
+      base: resetBase ? null : base,
+      counter: resetCounter ? null : counter,
+      positionSize: resetPositionSize ? null : positionSize,
+      entryPrice: resetEntryPrice ? null : entryPrice,
+      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
+      lotSize: resetLotSize ? null : lotSize,
       positionSizeFieldType:
-          positionSizeFieldType ? null : this.positionSizeFieldType,
+          resetPositionSizeFieldType ? null : positionSizeFieldType,
       exitPrice: resetExitPrice ? null : exitPrice,
       position: resetPosition ? null : position,
     );
@@ -130,10 +130,11 @@ class MatexForexProfitLossCalculatorDocument extends FastCalculatorDocument {
       positionSize: positionSize,
       entryPrice: entryPrice,
       pipDecimalPlaces: pipDecimalPlaces,
-      positionSizeFieldType: positionSizeFieldType,
       lotSize: lotSize,
       exitPrice: exitPrice,
       position: MatexPositionX.fromName(position),
+      positionSizeFieldType:
+          MatexPositionSizeTypeX.fromName(positionSizeFieldType),
     );
   }
 

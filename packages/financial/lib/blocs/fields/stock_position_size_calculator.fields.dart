@@ -1,27 +1,24 @@
 // Package imports:
-import 'package:easy_localization/easy_localization.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_forms/fastyle_forms.dart';
-import 'package:lingua_finance/generated/locale_keys.g.dart';
-import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
-
-final String _kDefaultRiskFieldType = FastAmountSwitchFieldType.percent.name;
-final String _kDefaultPosition = MatexPosition.long.name;
+import 'package:matex_core/core.dart';
 
 class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
+  static const MatexPosition defaultPosition = MatexPosition.long;
+  static const String defaultRiskFieldType = 'percent';
+
+  late final String? slippagePercent;
+  late final String? stopLossAmount;
+  late final MatexPosition position;
+  late final String? stopLossPrice;
+  late final String? riskFieldType;
+  late final String? riskPercent;
   late final String? accountSize;
   late final String? entryPrice;
-  late final String? stopLossPrice;
-  late final String? stopLossAmount;
-  late final String? slippagePercent;
-  late final String? riskPercent;
   late final String? riskReward;
   late final String? entryFees;
   late final String? exitFees;
-  late final String? riskFieldType;
-  late final String position;
 
   String get formattedAccountSize {
     final accountBalance = parseFieldValueToDouble(accountSize);
@@ -77,37 +74,33 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
     return '${localizeNumber(value: exitFeesValue)}%';
   }
 
-  String get formattedPosition {
-    return position == MatexPosition.short.name
-        ? FinanceLocaleKeys.finance_label_position_short.tr()
-        : FinanceLocaleKeys.finance_label_position_long.tr();
-  }
+  String get formattedPosition => position.localizedName;
 
   MatexStockPositionSizeCalculatorBlocFields({
-    String? accountSize,
-    String? entryPrice,
-    String? stopLossPrice,
-    String? stopLossAmount,
+    FastCalculatorBlocDelegate? delegate,
     String? slippagePercent,
+    MatexPosition? position,
+    String? stopLossAmount,
+    String? riskFieldType,
+    String? stopLossPrice,
+    String? accountSize,
     String? riskPercent,
+    String? entryPrice,
     String? riskReward,
     String? entryFees,
     String? exitFees,
-    String? riskFieldType,
-    String? position,
-    FastCalculatorBlocDelegate? delegate,
   }) {
-    this.accountSize = assignValue(accountSize);
-    this.entryPrice = assignValue(entryPrice);
-    this.stopLossPrice = assignValue(stopLossPrice);
-    this.stopLossAmount = assignValue(stopLossAmount);
+    this.riskFieldType = riskFieldType ?? defaultRiskFieldType;
     this.slippagePercent = assignValue(slippagePercent);
+    this.stopLossAmount = assignValue(stopLossAmount);
+    this.stopLossPrice = assignValue(stopLossPrice);
+    this.accountSize = assignValue(accountSize);
     this.riskPercent = assignValue(riskPercent);
+    this.position = position ?? defaultPosition;
+    this.entryPrice = assignValue(entryPrice);
     this.riskReward = assignValue(riskReward);
     this.entryFees = assignValue(entryFees);
     this.exitFees = assignValue(exitFees);
-    this.riskFieldType = riskFieldType ?? _kDefaultRiskFieldType;
-    this.position = position ?? _kDefaultPosition;
     this.delegate = delegate;
   }
 
@@ -116,30 +109,30 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexStockPositionSizeCalculatorBlocFields copyWith({
-    String? accountSize,
-    String? entryPrice,
-    String? stopLossPrice,
-    String? stopLossAmount,
+    FastCalculatorBlocDelegate? delegate,
+    MatexPosition? position,
     String? slippagePercent,
+    String? stopLossAmount,
+    String? stopLossPrice,
+    String? riskFieldType,
+    String? accountSize,
     String? riskPercent,
+    String? entryPrice,
     String? riskReward,
     String? entryFees,
     String? exitFees,
-    String? riskFieldType,
-    String? position,
-    FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexStockPositionSizeCalculatorBlocFields(
-      accountSize: accountSize ?? this.accountSize,
-      entryPrice: entryPrice ?? this.entryPrice,
-      stopLossPrice: stopLossPrice ?? this.stopLossPrice,
-      stopLossAmount: stopLossAmount ?? this.stopLossAmount,
       slippagePercent: slippagePercent ?? this.slippagePercent,
+      stopLossAmount: stopLossAmount ?? this.stopLossAmount,
+      stopLossPrice: stopLossPrice ?? this.stopLossPrice,
+      riskFieldType: riskFieldType ?? this.riskFieldType,
+      accountSize: accountSize ?? this.accountSize,
       riskPercent: riskPercent ?? this.riskPercent,
+      entryPrice: entryPrice ?? this.entryPrice,
       riskReward: riskReward ?? this.riskReward,
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
-      riskFieldType: riskFieldType ?? this.riskFieldType,
       position: position ?? this.position,
       delegate: delegate,
     );
@@ -147,31 +140,30 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexStockPositionSizeCalculatorBlocFields copyWithDefaults({
-    bool accountSize = false,
-    bool entryPrice = false,
-    bool stopLossPrice = false,
-    bool stopLossAmount = false,
-    bool slippagePercent = false,
-    bool riskPercent = false,
-    bool riskReward = false,
-    bool entryFees = false,
-    bool exitFees = false,
-    bool riskFieldType = false,
-    bool position = false,
+    bool resetSlippagePercent = false,
+    bool resetStopLossAmount = false,
+    bool resetRiskFieldType = false,
+    bool resetStopLossPrice = false,
+    bool resetRiskPercent = false,
+    bool resetAccountSize = false,
+    bool resetRiskReward = false,
+    bool resetEntryPrice = false,
+    bool resetEntryFees = false,
+    bool resetExitFees = false,
+    bool resetPosition = false,
   }) {
     return MatexStockPositionSizeCalculatorBlocFields(
-      accountSize: accountSize ? null : this.accountSize,
-      entryPrice: entryPrice ? null : this.entryPrice,
-      stopLossPrice: stopLossPrice ? null : this.stopLossPrice,
-      stopLossAmount: stopLossAmount ? null : this.stopLossAmount,
-      slippagePercent: slippagePercent ? null : this.slippagePercent,
-      riskPercent: riskPercent ? null : this.riskPercent,
-      riskReward: riskReward ? null : this.riskReward,
-      entryFees: entryFees ? null : this.entryFees,
-      exitFees: exitFees ? null : this.exitFees,
-      riskFieldType:
-          riskFieldType ? _kDefaultRiskFieldType : this.riskFieldType,
-      position: position ? _kDefaultPosition : this.position,
+      slippagePercent: resetSlippagePercent ? null : slippagePercent,
+      stopLossAmount: resetStopLossAmount ? null : stopLossAmount,
+      riskFieldType: resetRiskFieldType ? null : riskFieldType,
+      stopLossPrice: resetStopLossPrice ? null : stopLossPrice,
+      accountSize: resetAccountSize ? null : accountSize,
+      riskPercent: resetRiskPercent ? null : riskPercent,
+      riskReward: resetRiskReward ? null : riskReward,
+      entryPrice: resetEntryPrice ? null : entryPrice,
+      entryFees: resetEntryFees ? null : entryFees,
+      exitFees: resetExitFees ? null : exitFees,
+      position: resetPosition ? null : position,
       delegate: delegate,
     );
   }
@@ -181,16 +173,16 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
     covariant MatexStockPositionSizeCalculatorBlocFields model,
   ) {
     return copyWith(
-      accountSize: model.accountSize,
-      entryPrice: model.entryPrice,
-      stopLossPrice: model.stopLossPrice,
-      stopLossAmount: model.stopLossAmount,
       slippagePercent: model.slippagePercent,
+      stopLossAmount: model.stopLossAmount,
+      stopLossPrice: model.stopLossPrice,
+      riskFieldType: model.riskFieldType,
+      accountSize: model.accountSize,
       riskPercent: model.riskPercent,
+      entryPrice: model.entryPrice,
       riskReward: model.riskReward,
       entryFees: model.entryFees,
       exitFees: model.exitFees,
-      riskFieldType: model.riskFieldType,
       position: model.position,
       delegate: model.delegate,
     );
@@ -198,17 +190,16 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
 
   @override
   List<Object?> get props => [
-        accountSize,
-        entryPrice,
-        stopLossPrice,
-        stopLossAmount,
         slippagePercent,
+        stopLossAmount,
+        stopLossPrice,
+        riskFieldType,
+        accountSize,
         riskPercent,
+        entryPrice,
         riskReward,
         entryFees,
         exitFees,
-        riskFieldType,
         position,
-        delegate,
       ];
 }

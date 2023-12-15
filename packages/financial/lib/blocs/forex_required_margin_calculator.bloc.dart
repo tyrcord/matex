@@ -108,12 +108,12 @@ class MatexForexRequiredMarginCalculatorBloc
       }
     }
 
-    if (fields.positionSizeFieldType != MatexPositionSizeType.unit.name &&
+    if (fields.positionSizeFieldType != MatexPositionSizeType.unit &&
         fields.lotSize != null &&
         fields.lotSize!.isNotEmpty) {
       final positionSize = await getPositionSizeForLotSize(
-        lotSize: getPositionSizeTypeFromString(fields.positionSizeFieldType),
         positionSize: parseFieldValueToDouble(fields.lotSize),
+        lotSize: fields.positionSizeFieldType,
       );
 
       final isInt = isDoubleInteger(positionSize);
@@ -249,53 +249,15 @@ class MatexForexRequiredMarginCalculatorBloc
         case MatexForexRequiredMarginCalculatorBlocKey.lotSize:
           return patchLotSize(value);
       }
-    } else if (value is Enum) {
-      switch (key) {
-        case MatexForexRequiredMarginCalculatorBlocKey.positionSizeFieldType:
-          return patchPositionSizeFieldType(value.name);
-
-        default:
-          debugLog('Invalid key: $key', debugLabel: debugLabel);
-          break;
+    } else if (value is MatexPositionSizeType) {
+      if (key ==
+          MatexForexRequiredMarginCalculatorBlocKey.positionSizeFieldType) {
+        return patchPositionSizeFieldType(value);
       }
     } else if (value is MatexFinancialInstrument) {
-      switch (key) {
-        case MatexForexRequiredMarginCalculatorBlocKey.instrument:
-          return patchInstrument(value);
+      if (key == MatexForexRequiredMarginCalculatorBlocKey.instrument) {
+        return patchInstrument(value);
       }
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexForexRequiredMarginCalculatorDocument?> resetCalculatorDocument(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexForexRequiredMarginCalculatorBlocKey.accountCurrency:
-        return document.copyWithDefaults(resetAccountCurrency: true);
-
-      case MatexForexRequiredMarginCalculatorBlocKey.instrument:
-        return document.copyWithDefaults(
-          resetCounter: true,
-          resetBase: true,
-        );
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexForexRequiredMarginCalculatorBlocState?> resetCalculatorState(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexForexRequiredMarginCalculatorBlocKey.accountCurrency:
-        return patchAccountCurrency(null);
-
-      case MatexForexRequiredMarginCalculatorBlocKey.instrument:
-        return patchInstrument(null);
     }
 
     return null;
@@ -461,7 +423,7 @@ class MatexForexRequiredMarginCalculatorBloc
   }
 
   MatexForexRequiredMarginCalculatorBlocState patchPositionSizeFieldType(
-    String value,
+    MatexPositionSizeType value,
   ) {
     final fields = currentState.fields.copyWith(
       positionSizeFieldType: value,

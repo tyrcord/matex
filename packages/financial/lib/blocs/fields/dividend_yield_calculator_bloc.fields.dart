@@ -1,15 +1,14 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class MatexDividendYieldCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
   static const defaultFrequency = MatexFinancialFrequency.annually;
 
-  late final String? sharePrice;
-  late final String? dividendAmount;
   late final MatexFinancialFrequency paymentFrequency;
+  late final String? dividendAmount;
+  late final String? sharePrice;
 
   String get formattedSharePrice {
     final value = parseFieldValueToDouble(sharePrice);
@@ -23,19 +22,17 @@ class MatexDividendYieldCalculatorBlocFields extends FastCalculatorFields
     return localizeCurrency(value: value);
   }
 
-  String get formattedPaymentFrequency {
-    return getLocaleKeyForFinancialFrequency(paymentFrequency).tr();
-  }
+  String get formattedPaymentFrequency => paymentFrequency.localizedName;
 
   MatexDividendYieldCalculatorBlocFields({
-    String? sharePrice,
-    String? dividendAmount,
     MatexFinancialFrequency? paymentFrequency,
     FastCalculatorBlocDelegate? delegate,
+    String? dividendAmount,
+    String? sharePrice,
   }) {
-    this.sharePrice = assignValue(sharePrice);
-    this.dividendAmount = assignValue(dividendAmount);
     this.paymentFrequency = paymentFrequency ?? defaultFrequency;
+    this.dividendAmount = assignValue(dividendAmount);
+    this.sharePrice = assignValue(sharePrice);
     this.delegate = delegate;
   }
 
@@ -44,30 +41,29 @@ class MatexDividendYieldCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexDividendYieldCalculatorBlocFields copyWith({
-    String? sharePrice,
-    String? dividendAmount,
     MatexFinancialFrequency? paymentFrequency,
     FastCalculatorBlocDelegate? delegate,
+    String? dividendAmount,
+    String? sharePrice,
   }) {
     return MatexDividendYieldCalculatorBlocFields(
-      sharePrice: sharePrice ?? this.sharePrice,
-      dividendAmount: dividendAmount ?? this.dividendAmount,
       paymentFrequency: paymentFrequency ?? this.paymentFrequency,
+      dividendAmount: dividendAmount ?? this.dividendAmount,
+      sharePrice: sharePrice ?? this.sharePrice,
       delegate: delegate ?? this.delegate,
     );
   }
 
   @override
   MatexDividendYieldCalculatorBlocFields copyWithDefaults({
-    bool resetSharePrice = false,
-    bool resetDividendAmount = false,
     bool resetPaymentFrequency = false,
+    bool resetDividendAmount = false,
+    bool resetSharePrice = false,
   }) {
     return MatexDividendYieldCalculatorBlocFields(
-      sharePrice: resetSharePrice ? null : sharePrice,
+      paymentFrequency: resetPaymentFrequency ? null : paymentFrequency,
       dividendAmount: resetDividendAmount ? null : dividendAmount,
-      paymentFrequency:
-          resetPaymentFrequency ? defaultFrequency : paymentFrequency,
+      sharePrice: resetSharePrice ? null : sharePrice,
       delegate: delegate,
     );
   }
@@ -85,10 +81,5 @@ class MatexDividendYieldCalculatorBlocFields extends FastCalculatorFields
   }
 
   @override
-  List<Object?> get props => [
-        sharePrice,
-        dividendAmount,
-        paymentFrequency,
-        delegate,
-      ];
+  List<Object?> get props => [paymentFrequency, dividendAmount, sharePrice];
 }

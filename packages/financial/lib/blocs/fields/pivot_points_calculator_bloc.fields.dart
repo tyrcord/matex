@@ -6,11 +6,11 @@ class MatexPivotPointsCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
   static const defaultMethod = MatexPivotPointsMethods.standard;
 
-  late final String? highPrice;
-  late final String? lowPrice;
-  late final String? closePrice;
-  late final String? openPrice;
   late final MatexPivotPointsMethods method;
+  late final String? closePrice;
+  late final String? highPrice;
+  late final String? openPrice;
+  late final String? lowPrice;
 
   String get formattedLowPrice {
     final value = parseFieldValueToDouble(lowPrice);
@@ -51,17 +51,17 @@ class MatexPivotPointsCalculatorBlocFields extends FastCalculatorFields
   String get formattedMethod => method.localizedName;
 
   MatexPivotPointsCalculatorBlocFields({
-    String? highPrice,
-    String? lowPrice,
-    String? closePrice,
-    String? openPrice,
-    MatexPivotPointsMethods? method,
     FastCalculatorBlocDelegate? delegate,
+    MatexPivotPointsMethods? method,
+    String? closePrice,
+    String? highPrice,
+    String? openPrice,
+    String? lowPrice,
   }) {
-    this.highPrice = assignValue(highPrice);
-    this.lowPrice = assignValue(lowPrice);
     this.closePrice = assignValue(closePrice);
+    this.highPrice = assignValue(highPrice);
     this.openPrice = assignValue(openPrice);
+    this.lowPrice = assignValue(lowPrice);
     this.method = method ?? defaultMethod;
     this.delegate = delegate;
   }
@@ -71,36 +71,37 @@ class MatexPivotPointsCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexPivotPointsCalculatorBlocFields copyWith({
-    String? highPrice,
-    String? lowPrice,
-    String? closePrice,
-    String? openPrice,
+    FastCalculatorBlocDelegate? delegate,
     MatexPivotPointsMethods? method,
+    String? closePrice,
+    String? highPrice,
+    String? openPrice,
+    String? lowPrice,
   }) {
     return MatexPivotPointsCalculatorBlocFields(
-      highPrice: highPrice ?? this.highPrice,
-      lowPrice: lowPrice ?? this.lowPrice,
       closePrice: closePrice ?? this.closePrice,
       openPrice: openPrice ?? this.openPrice,
+      highPrice: highPrice ?? this.highPrice,
+      lowPrice: lowPrice ?? this.lowPrice,
+      delegate: delegate ?? this.delegate,
       method: method ?? this.method,
-      delegate: delegate,
     );
   }
 
   @override
   MatexPivotPointsCalculatorBlocFields copyWithDefaults({
-    bool resetHighPrice = false,
-    bool resetLowPrice = false,
     bool resetClosePrice = false,
+    bool resetHighPrice = false,
     bool resetOpenPrice = false,
+    bool resetLowPrice = false,
     bool resetMethod = false,
   }) {
     return MatexPivotPointsCalculatorBlocFields(
-      highPrice: resetHighPrice ? null : highPrice,
-      lowPrice: resetLowPrice ? null : lowPrice,
       closePrice: resetClosePrice ? null : closePrice,
+      highPrice: resetHighPrice ? null : highPrice,
       openPrice: resetOpenPrice ? null : openPrice,
-      method: resetMethod ? defaultMethod : method,
+      lowPrice: resetLowPrice ? null : lowPrice,
+      method: resetMethod ? null : method,
       delegate: delegate,
     );
   }
@@ -110,20 +111,21 @@ class MatexPivotPointsCalculatorBlocFields extends FastCalculatorFields
     covariant MatexPivotPointsCalculatorBlocFields model,
   ) {
     return copyWith(
-      highPrice: model.highPrice,
-      lowPrice: model.lowPrice,
       closePrice: model.closePrice,
+      highPrice: model.highPrice,
       openPrice: model.openPrice,
+      lowPrice: model.lowPrice,
+      delegate: model.delegate,
       method: model.method,
     );
   }
 
   @override
   List<Object?> get props => [
-        highPrice,
-        lowPrice,
         closePrice,
+        highPrice,
         openPrice,
+        lowPrice,
         method,
       ];
 }

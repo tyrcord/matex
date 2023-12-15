@@ -10,13 +10,13 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
   static const defaultDrip = true;
 
   late final MatexFinancialFrequency paymentFrequency;
-  late final String? sharePrice;
+  late final String? annualSharePriceIncrease;
+  late final String? annualDividendIncrease;
+  late final String? annualContribution;
   late final String? numberOfShares;
   late final String? dividendYield;
   late final String? yearsToGrow;
-  late final String? annualContribution;
-  late final String? annualSharePriceIncrease;
-  late final String? annualDividendIncrease;
+  late final String? sharePrice;
   late final String? taxRate;
   late final bool drip;
 
@@ -26,9 +26,7 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
     return localizeCurrency(value: value);
   }
 
-  String get formattedPaymentFrequency {
-    return getLocaleKeyForFinancialFrequency(paymentFrequency).tr();
-  }
+  String get formattedPaymentFrequency => paymentFrequency.localizedName;
 
   String get formattedNumberOfShares {
     final value = parseFieldValueToDouble(numberOfShares);
@@ -79,28 +77,28 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
   }
 
   MatexDividendReinvestmentCalculatorBlocFields({
-    String? sharePrice,
+    MatexFinancialFrequency? paymentFrequency,
+    FastCalculatorBlocDelegate? delegate,
+    String? annualSharePriceIncrease,
+    String? annualDividendIncrease,
+    String? annualContribution,
+    bool? drip = defaultDrip,
     String? numberOfShares,
     String? dividendYield,
     String? yearsToGrow,
-    String? annualContribution,
-    String? annualSharePriceIncrease,
-    String? annualDividendIncrease,
+    String? sharePrice,
     String? taxRate,
-    bool? drip = defaultDrip,
-    MatexFinancialFrequency? paymentFrequency,
-    FastCalculatorBlocDelegate? delegate,
   }) {
-    this.sharePrice = assignValue(sharePrice);
+    this.annualSharePriceIncrease = assignValue(annualSharePriceIncrease);
+    this.annualDividendIncrease = assignValue(annualDividendIncrease);
+    this.paymentFrequency = paymentFrequency ?? defaultFrequency;
+    this.annualContribution = assignValue(annualContribution);
     this.numberOfShares = assignValue(numberOfShares);
     this.dividendYield = assignValue(dividendYield);
     this.yearsToGrow = assignValue(yearsToGrow);
-    this.annualContribution = assignValue(annualContribution);
-    this.annualSharePriceIncrease = assignValue(annualSharePriceIncrease);
-    this.annualDividendIncrease = assignValue(annualDividendIncrease);
+    this.sharePrice = assignValue(sharePrice);
     this.taxRate = assignValue(taxRate);
     this.drip = drip ?? defaultDrip;
-    this.paymentFrequency = paymentFrequency ?? defaultFrequency;
     this.delegate = delegate;
   }
 
@@ -110,61 +108,60 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
   @override
   MatexDividendReinvestmentCalculatorBlocFields copyWith({
     MatexFinancialFrequency? paymentFrequency,
-    String? sharePrice,
+    FastCalculatorBlocDelegate? delegate,
+    String? annualSharePriceIncrease,
+    String? annualDividendIncrease,
+    String? annualContribution,
     String? numberOfShares,
     String? dividendYield,
     String? yearsToGrow,
-    String? annualContribution,
-    String? annualSharePriceIncrease,
-    String? annualDividendIncrease,
+    String? sharePrice,
     String? taxRate,
     bool? drip,
-    FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexDividendReinvestmentCalculatorBlocFields(
+      annualContribution: annualContribution ?? this.annualContribution,
       paymentFrequency: paymentFrequency ?? paymentFrequency,
-      sharePrice: sharePrice ?? this.sharePrice,
       numberOfShares: numberOfShares ?? this.numberOfShares,
       dividendYield: dividendYield ?? this.dividendYield,
       yearsToGrow: yearsToGrow ?? this.yearsToGrow,
-      annualContribution: annualContribution ?? this.annualContribution,
+      sharePrice: sharePrice ?? this.sharePrice,
+      delegate: delegate ?? this.delegate,
+      taxRate: taxRate ?? this.taxRate,
+      drip: drip ?? this.drip,
       annualSharePriceIncrease:
           annualSharePriceIncrease ?? this.annualSharePriceIncrease,
       annualDividendIncrease:
           annualDividendIncrease ?? this.annualDividendIncrease,
-      taxRate: taxRate ?? this.taxRate,
-      drip: drip ?? this.drip,
-      delegate: delegate ?? this.delegate,
     );
   }
 
   @override
   MatexDividendReinvestmentCalculatorBlocFields copyWithDefaults({
+    bool resetAnnualSharePriceIncrease = false,
+    bool resetAnnualDividendIncrease = false,
+    bool resetAnnualContribution = false,
     bool resetPaymentFrequency = false,
-    bool resetSharePrice = false,
     bool resetNumberOfShares = false,
     bool resetDividendYield = false,
     bool resetYearsToGrow = false,
-    bool resetAnnualContribution = false,
-    bool resetAnnualSharePriceIncrease = false,
-    bool resetAnnualDividendIncrease = false,
+    bool resetSharePrice = false,
     bool resetTaxRate = false,
     bool resetDrip = false,
   }) {
     return MatexDividendReinvestmentCalculatorBlocFields(
-      paymentFrequency:
-          resetPaymentFrequency ? defaultFrequency : paymentFrequency,
-      sharePrice: resetSharePrice ? null : sharePrice,
+      annualContribution: resetAnnualContribution ? null : annualContribution,
+      paymentFrequency: resetPaymentFrequency ? null : paymentFrequency,
       numberOfShares: resetNumberOfShares ? null : numberOfShares,
       dividendYield: resetDividendYield ? null : dividendYield,
       yearsToGrow: resetYearsToGrow ? null : yearsToGrow,
-      annualContribution: resetAnnualContribution ? null : annualContribution,
+      sharePrice: resetSharePrice ? null : sharePrice,
+      taxRate: resetTaxRate ? null : taxRate,
+      drip: resetDrip ? null : drip,
       annualSharePriceIncrease:
           resetAnnualSharePriceIncrease ? null : annualSharePriceIncrease,
       annualDividendIncrease:
           resetAnnualDividendIncrease ? null : annualDividendIncrease,
-      taxRate: resetTaxRate ? null : taxRate,
-      drip: resetDrip ? defaultDrip : drip,
     );
   }
 
@@ -189,16 +186,15 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
 
   @override
   List<Object?> get props => [
+        annualSharePriceIncrease,
+        annualDividendIncrease,
+        annualContribution,
         paymentFrequency,
-        sharePrice,
         numberOfShares,
         dividendYield,
         yearsToGrow,
-        annualContribution,
-        annualSharePriceIncrease,
-        annualDividendIncrease,
+        sharePrice,
         taxRate,
         drip,
-        delegate,
       ];
 }

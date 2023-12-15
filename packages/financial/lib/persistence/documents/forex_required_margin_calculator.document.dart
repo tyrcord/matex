@@ -105,8 +105,9 @@ class MatexForexRequiredMarginCalculatorDocument
       counter: counter,
       positionSize: positionSize,
       leverage: leverage,
-      positionSizeFieldType: positionSizeFieldType,
       lotSize: lotSize,
+      positionSizeFieldType:
+          MatexPositionSizeTypeX.fromName(positionSizeFieldType),
     );
   }
 

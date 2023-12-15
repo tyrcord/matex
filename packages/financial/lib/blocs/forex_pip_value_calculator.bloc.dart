@@ -107,12 +107,12 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       }
     }
 
-    if (fields.positionSizeFieldType != MatexPositionSizeType.unit.name &&
+    if (fields.positionSizeFieldType != MatexPositionSizeType.unit &&
         fields.lotSize != null &&
         fields.lotSize!.isNotEmpty) {
       final positionSize = await getPositionSizeForLotSize(
-        lotSize: getPositionSizeTypeFromString(fields.positionSizeFieldType),
         positionSize: parseFieldValueToDouble(fields.lotSize),
+        lotSize: fields.positionSizeFieldType,
       );
 
       final isInt = isDoubleInteger(positionSize);
@@ -332,19 +332,13 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
         case MatexForexPipValueCalculatorBlocKey.lotSize:
           return patchLotSize(value);
       }
-    } else if (value is Enum) {
-      switch (key) {
-        case MatexForexPipValueCalculatorBlocKey.positionSizeFieldType:
-          return patchPositionSizeFieldType(value.name);
-
-        default:
-          debugLog('Invalid key: $key', debugLabel: debugLabel);
-          break;
+    } else if (value is MatexPositionSizeType) {
+      if (key == MatexForexPipValueCalculatorBlocKey.positionSizeFieldType) {
+        return patchPositionSizeFieldType(value);
       }
     } else if (value is MatexFinancialInstrument) {
-      switch (key) {
-        case MatexForexPipValueCalculatorBlocKey.instrument:
-          return patchInstrument(value);
+      if (key == MatexForexPipValueCalculatorBlocKey.instrument) {
+        return patchInstrument(value);
       }
     }
 
@@ -357,15 +351,15 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   ) async {
     switch (key) {
       case MatexForexPipValueCalculatorBlocKey.accountCurrency:
-        return document.copyWithDefaults(accountCurrency: true);
+        return document.copyWithDefaults(resetAccountCurrency: true);
 
       case MatexForexPipValueCalculatorBlocKey.instrument:
         return document.copyWithDefaults(
-          counter: true,
-          base: true,
+          resetCounter: true,
+          resetBase: true,
         );
       case MatexForexPipValueCalculatorBlocKey.numberOfPips:
-        return document.copyWithDefaults(numberOfPips: true);
+        return document.copyWithDefaults(resetNumberOfPips: true);
     }
 
     return null;
@@ -467,7 +461,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     late final MatexForexPipValueCalculatorBlocFields fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(accountCurrency: true);
+      fields = currentState.fields.copyWithDefaults(resetAccountCurrency: true);
     } else {
       fields = currentState.fields.copyWith(accountCurrency: value);
     }
@@ -491,9 +485,9 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     if (instrument == null) {
       fields = currentState.fields.copyWithDefaults(
-        pipDecimalPlaces: true,
-        counter: true,
-        base: true,
+        resetPipDecimalPlaces: true,
+        resetCounter: true,
+        resetBase: true,
       );
 
       calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
@@ -547,7 +541,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     late final MatexForexPipValueCalculatorBlocFields fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(numberOfPips: true);
+      fields = currentState.fields.copyWithDefaults(resetNumberOfPips: true);
     } else {
       fields = currentState.fields.copyWith(numberOfPips: value);
     }
@@ -564,7 +558,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   MatexForexPipValueCalculatorBlocState patchPositionSizeFieldType(
-    String value,
+    MatexPositionSizeType? value,
   ) {
     final fields = currentState.fields.copyWith(
       positionSizeFieldType: value,

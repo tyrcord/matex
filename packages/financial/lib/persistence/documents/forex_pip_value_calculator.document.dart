@@ -66,25 +66,25 @@ class MatexForexPipValueCalculatorDocument extends FastCalculatorDocument {
 
   @override
   MatexForexPipValueCalculatorDocument copyWithDefaults({
-    bool accountCurrency = false,
-    bool base = false,
-    bool counter = false,
-    bool positionSize = false,
-    bool numberOfPips = false,
-    bool pipDecimalPlaces = false,
-    bool positionSizeFieldType = false,
-    bool lotSize = false,
+    bool resetAccountCurrency = false,
+    bool resetBase = false,
+    bool resetCounter = false,
+    bool resetPositionSize = false,
+    bool resetNumberOfPips = false,
+    bool resetPipDecimalPlaces = false,
+    bool resetPositionSizeFieldType = false,
+    bool resetLotSize = false,
   }) {
     return MatexForexPipValueCalculatorDocument(
-      accountCurrency: accountCurrency ? null : this.accountCurrency,
-      base: base ? null : this.base,
-      counter: counter ? null : this.counter,
-      positionSize: positionSize ? null : this.positionSize,
-      numberOfPips: numberOfPips ? null : this.numberOfPips,
-      pipDecimalPlaces: pipDecimalPlaces ? null : this.pipDecimalPlaces,
-      lotSize: lotSize ? null : this.lotSize,
+      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
+      accountCurrency: resetAccountCurrency ? null : accountCurrency,
+      positionSize: resetPositionSize ? null : positionSize,
+      numberOfPips: resetNumberOfPips ? null : numberOfPips,
+      counter: resetCounter ? null : counter,
+      lotSize: resetLotSize ? null : lotSize,
+      base: resetBase ? null : base,
       positionSizeFieldType:
-          positionSizeFieldType ? null : this.positionSizeFieldType,
+          resetPositionSizeFieldType ? null : positionSizeFieldType,
     );
   }
 
@@ -113,8 +113,9 @@ class MatexForexPipValueCalculatorDocument extends FastCalculatorDocument {
       positionSize: positionSize,
       numberOfPips: numberOfPips,
       pipDecimalPlaces: pipDecimalPlaces,
-      positionSizeFieldType: positionSizeFieldType,
       lotSize: lotSize,
+      positionSizeFieldType:
+          MatexPositionSizeTypeX.fromName(positionSizeFieldType),
     );
   }
 

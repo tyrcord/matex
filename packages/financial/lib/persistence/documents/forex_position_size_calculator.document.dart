@@ -56,34 +56,34 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
 
   @override
   MatexForexPositionSizeCalculatorDocument copyWithDefaults({
-    bool accountCurrency = false,
-    bool base = false,
-    bool counter = false,
-    bool pipDecimalPlaces = false,
-    bool riskFieldType = false,
-    bool stopLossFieldType = false,
-    bool accountSize = false,
-    bool riskAmount = false,
-    bool riskPercent = false,
-    bool stopLossPrice = false,
-    bool stopLossPips = false,
-    bool entryPrice = false,
+    bool resetAccountCurrency = false,
+    bool resetBase = false,
+    bool resetCounter = false,
+    bool resetPipDecimalPlaces = false,
+    bool resetRiskFieldType = false,
+    bool resetStopLossFieldType = false,
+    bool resetAccountSize = false,
+    bool resetRiskAmount = false,
+    bool resetRiskPercent = false,
+    bool resetStopLossPrice = false,
+    bool resetStopLossPips = false,
+    bool resetEntryPrice = false,
   }) {
     return MatexForexPositionSizeCalculatorDocument(
-      accountCurrency: accountCurrency ? null : this.accountCurrency,
-      base: base ? null : this.base,
-      counter: counter ? null : this.counter,
-      pipDecimalPlaces: pipDecimalPlaces
+      accountCurrency: resetAccountCurrency ? null : this.accountCurrency,
+      base: resetBase ? null : this.base,
+      counter: resetCounter ? null : this.counter,
+      pipDecimalPlaces: resetPipDecimalPlaces
           ? kDefaultPipPipDecimalPlaces.toString()
           : this.pipDecimalPlaces,
-      riskFieldType: riskFieldType ? null : this.riskFieldType,
-      stopLossFieldType: stopLossFieldType ? null : this.stopLossFieldType,
-      accountSize: accountSize ? null : this.accountSize,
-      riskAmount: riskAmount ? null : this.riskAmount,
-      riskPercent: riskPercent ? null : this.riskPercent,
-      stopLossPrice: stopLossPrice ? null : this.stopLossPrice,
-      stopLossPips: stopLossPips ? null : this.stopLossPips,
-      entryPrice: entryPrice ? null : this.entryPrice,
+      riskFieldType: resetRiskFieldType ? null : this.riskFieldType,
+      stopLossFieldType: resetStopLossFieldType ? null : this.stopLossFieldType,
+      accountSize: resetAccountSize ? null : this.accountSize,
+      riskAmount: resetRiskAmount ? null : this.riskAmount,
+      riskPercent: resetRiskPercent ? null : this.riskPercent,
+      stopLossPrice: resetStopLossPrice ? null : this.stopLossPrice,
+      stopLossPips: resetStopLossPips ? null : this.stopLossPips,
+      entryPrice: resetEntryPrice ? null : this.entryPrice,
     );
   }
 

@@ -190,11 +190,12 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.exitFees) {
         return patchExitFees(value);
       }
+    } else if (value is MatexPosition &&
+        key == MatexStockPositionSizeCalculatorBlocKey.position) {
+      return patchPosition(value);
     } else if (value is Enum) {
       if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
         return patchRiskFieldType(value.name);
-      } else if (key == MatexStockPositionSizeCalculatorBlocKey.position) {
-        return patchPosition(value.name);
       }
     }
 
@@ -207,7 +208,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   ) async {
     switch (key) {
       case MatexStockPositionSizeCalculatorBlocKey.entryFees:
-        return document.copyWithDefaults(entryFees: true);
+        return document.copyWithDefaults(resetEntryFees: true);
     }
 
     return null;
@@ -285,7 +286,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     );
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchPosition(String value) {
+  MatexStockPositionSizeCalculatorBlocState patchPosition(MatexPosition value) {
     final fields = currentState.fields.copyWith(
       position: value,
       stopLossPrice: '',
@@ -340,7 +341,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
   MatexStockPositionSizeCalculatorBlocState patchEntryFees(String? value) {
     if (value == null) {
-      final fields = currentState.fields.copyWithDefaults(entryFees: true);
+      final fields = currentState.fields.copyWithDefaults(resetEntryFees: true);
       calculator.entryFees = 0;
 
       return currentState.copyWith(fields: fields);

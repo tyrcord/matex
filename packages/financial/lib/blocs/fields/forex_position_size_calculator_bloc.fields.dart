@@ -2,29 +2,27 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
-import 'package:t_helpers/helpers.dart';
 
 class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
-  // FIXME: Use constants
-  static const String _kDefaultRiskFieldType = 'percent';
-  static const String _kDefaultStopLossFieldType = 'price';
+  static const String defaultStopLossFieldType = 'price';
+  static const String defaultRiskFieldType = 'percent';
 
   @override
   late final String? base;
   @override
   late final String? counter;
 
-  late final String? accountCurrency;
-  late final String? pipDecimalPlaces;
-  late final String? riskFieldType;
   late final String? stopLossFieldType;
-  late final String? accountSize;
-  late final String? riskAmount;
-  late final String? riskPercent;
+  late final String? pipDecimalPlaces;
+  late final String? accountCurrency;
+  late final String? riskFieldType;
   late final String? stopLossPrice;
   late final String? stopLossPips;
+  late final String? accountSize;
+  late final String? riskPercent;
+  late final String? riskAmount;
   late final String? entryPrice;
 
   String get formattedAccountSize {
@@ -73,56 +71,47 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     return localizeNumber(value: stopLossPipsValue);
   }
 
-  // FIXME: Move to a abstract class
   String get formattedFinancialInstrument {
     if (base == null || counter == null) return '';
 
-    return formatCurrencyPair(
-      counter: counter!,
-      delimiter: '/',
-      base: base!,
-    );
+    return financialInstrument?.formattedSymbol ?? '';
   }
 
-  // FIXME: Move to a abstract class
   MatexFinancialInstrument? get financialInstrument {
     if (base == null || counter == null) return null;
 
-    return MatexFinancialInstrument(
-      base: base!,
-      counter: counter!,
-    );
+    return MatexFinancialInstrument(base: base!, counter: counter!);
   }
 
   MatexForexPositionSizeCalculatorBlocFields({
-    String? accountCurrency,
-    String? base,
-    String? counter,
-    String? pipDecimalPlaces,
-    String? riskFieldType,
+    FastCalculatorBlocDelegate? delegate,
     String? stopLossFieldType,
-    String? accountSize,
-    String? riskAmount,
-    String? riskPercent,
+    String? pipDecimalPlaces,
+    String? accountCurrency,
+    String? riskFieldType,
     String? stopLossPrice,
     String? stopLossPips,
-    FastCalculatorBlocDelegate? delegate,
+    String? riskPercent,
+    String? accountSize,
+    String? riskAmount,
     String? entryPrice,
+    String? counter,
+    String? base,
   }) {
+    this.stopLossFieldType = stopLossFieldType ?? defaultStopLossFieldType;
+    this.riskFieldType = riskFieldType ?? defaultRiskFieldType;
     this.accountCurrency = assignValue(accountCurrency);
-    this.base = assignValue(base);
-    this.counter = assignValue(counter);
-    this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
-    this.accountSize = assignValue(accountSize);
-    this.riskAmount = assignValue(riskAmount);
-    this.riskPercent = assignValue(riskPercent);
     this.stopLossPrice = assignValue(stopLossPrice);
     this.stopLossPips = assignValue(stopLossPips);
+    this.accountSize = assignValue(accountSize);
+    this.riskPercent = assignValue(riskPercent);
+    this.riskAmount = assignValue(riskAmount);
     this.entryPrice = assignValue(entryPrice);
+    this.counter = assignValue(counter);
+    this.base = assignValue(base);
     this.delegate = delegate;
-
-    this.stopLossFieldType = stopLossFieldType ?? _kDefaultStopLossFieldType;
-    this.riskFieldType = riskFieldType ?? _kDefaultRiskFieldType;
+    this.pipDecimalPlaces =
+        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
   }
 
   @override
@@ -130,67 +119,65 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexForexPositionSizeCalculatorBlocFields copyWith({
-    String? accountCurrency,
-    String? base,
-    String? counter,
-    String? pipDecimalPlaces,
-    String? riskFieldType,
-    String? stopLossFieldType,
-    String? accountSize,
-    String? riskAmount,
-    String? riskPercent,
-    String? stopLossPrice,
-    String? stopLossPips,
-    String? entryPrice,
     FastCalculatorBlocDelegate? delegate,
+    String? stopLossFieldType,
+    String? pipDecimalPlaces,
+    String? accountCurrency,
+    String? stopLossPrice,
+    String? riskFieldType,
+    String? stopLossPips,
+    String? riskPercent,
+    String? accountSize,
+    String? entryPrice,
+    String? riskAmount,
+    String? counter,
+    String? base,
   }) {
     return MatexForexPositionSizeCalculatorBlocFields(
-      accountCurrency: accountCurrency ?? this.accountCurrency,
-      base: base ?? this.base,
-      counter: counter ?? this.counter,
-      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
-      riskFieldType: riskFieldType ?? this.riskFieldType,
       stopLossFieldType: stopLossFieldType ?? this.stopLossFieldType,
-      accountSize: accountSize ?? this.accountSize,
-      riskAmount: riskAmount ?? this.riskAmount,
-      riskPercent: riskPercent ?? this.riskPercent,
+      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
+      accountCurrency: accountCurrency ?? this.accountCurrency,
+      riskFieldType: riskFieldType ?? this.riskFieldType,
       stopLossPrice: stopLossPrice ?? this.stopLossPrice,
       stopLossPips: stopLossPips ?? this.stopLossPips,
-      delegate: delegate ?? this.delegate,
+      accountSize: accountSize ?? this.accountSize,
+      riskPercent: riskPercent ?? this.riskPercent,
+      riskAmount: riskAmount ?? this.riskAmount,
       entryPrice: entryPrice ?? this.entryPrice,
+      delegate: delegate ?? this.delegate,
+      counter: counter ?? this.counter,
+      base: base ?? this.base,
     );
   }
 
   @override
   MatexForexPositionSizeCalculatorBlocFields copyWithDefaults({
-    bool accountCurrency = false,
-    bool base = false,
-    bool counter = false,
-    bool pipDecimalPlaces = false,
-    bool riskFieldType = false,
-    bool stopLossFieldType = false,
-    bool accountSize = false,
-    bool riskAmount = false,
-    bool riskPercent = false,
-    bool stopLossPrice = false,
-    bool stopLossPips = false,
-    bool entryPrice = false,
+    bool resetStopLossFieldType = false,
+    bool resetPipDecimalPlaces = false,
+    bool resetAccountCurrency = false,
+    bool resetRiskFieldType = false,
+    bool resetStopLossPrice = false,
+    bool resetStopLossPips = false,
+    bool resetAccountSize = false,
+    bool resetRiskPercent = false,
+    bool resetRiskAmount = false,
+    bool resetEntryPrice = false,
+    bool resetCounter = false,
+    bool resetBase = false,
   }) {
     return MatexForexPositionSizeCalculatorBlocFields(
-      accountCurrency: accountCurrency ? null : this.accountCurrency,
-      base: base ? null : this.base,
-      counter: counter ? null : this.counter,
-      pipDecimalPlaces: pipDecimalPlaces
-          ? kDefaultPipPipDecimalPlaces.toString()
-          : this.pipDecimalPlaces,
-      riskFieldType: riskFieldType ? null : this.riskFieldType,
-      stopLossFieldType: stopLossFieldType ? null : this.stopLossFieldType,
-      accountSize: accountSize ? null : this.accountSize,
-      riskAmount: riskAmount ? null : this.riskAmount,
-      riskPercent: riskPercent ? null : this.riskPercent,
-      stopLossPrice: stopLossPrice ? null : this.stopLossPrice,
-      stopLossPips: stopLossPips ? null : this.stopLossPips,
-      entryPrice: entryPrice ? null : this.entryPrice,
+      stopLossFieldType: resetStopLossFieldType ? null : stopLossFieldType,
+      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
+      accountCurrency: resetAccountCurrency ? null : accountCurrency,
+      riskFieldType: resetRiskFieldType ? null : riskFieldType,
+      stopLossPrice: resetStopLossPrice ? null : stopLossPrice,
+      stopLossPips: resetStopLossPips ? null : stopLossPips,
+      accountSize: resetAccountSize ? null : accountSize,
+      riskPercent: resetRiskPercent ? null : riskPercent,
+      riskAmount: resetRiskAmount ? null : riskAmount,
+      entryPrice: resetEntryPrice ? null : entryPrice,
+      counter: resetCounter ? null : counter,
+      base: resetBase ? null : base,
       delegate: delegate,
     );
   }
@@ -200,36 +187,35 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     covariant MatexForexPositionSizeCalculatorBlocFields model,
   ) {
     return copyWith(
-      accountCurrency: model.accountCurrency,
-      base: model.base,
-      counter: model.counter,
-      pipDecimalPlaces: model.pipDecimalPlaces,
-      riskFieldType: model.riskFieldType,
       stopLossFieldType: model.stopLossFieldType,
-      accountSize: model.accountSize,
-      riskAmount: model.riskAmount,
-      riskPercent: model.riskPercent,
+      pipDecimalPlaces: model.pipDecimalPlaces,
+      accountCurrency: model.accountCurrency,
+      riskFieldType: model.riskFieldType,
       stopLossPrice: model.stopLossPrice,
       stopLossPips: model.stopLossPips,
-      delegate: model.delegate,
+      accountSize: model.accountSize,
+      riskPercent: model.riskPercent,
+      riskAmount: model.riskAmount,
       entryPrice: model.entryPrice,
+      delegate: model.delegate,
+      counter: model.counter,
+      base: model.base,
     );
   }
 
   @override
   List<Object?> get props => [
-        accountCurrency,
-        base,
-        counter,
-        pipDecimalPlaces,
-        riskFieldType,
         stopLossFieldType,
-        accountSize,
-        riskAmount,
-        riskPercent,
+        pipDecimalPlaces,
+        accountCurrency,
+        riskFieldType,
         stopLossPrice,
         stopLossPips,
-        delegate,
+        accountSize,
+        riskPercent,
         entryPrice,
+        riskAmount,
+        counter,
+        base,
       ];
 }

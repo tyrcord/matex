@@ -192,7 +192,6 @@ class MatexForexStopLossTakeProfitCalculatorDocument
       positionSize: positionSize,
       entryPrice: entryPrice,
       pipDecimalPlaces: pipDecimalPlaces,
-      positionSizeFieldType: positionSizeFieldType,
       lotSize: lotSize,
       stopLossPrice: stopLossPrice,
       stopLossPips: stopLossPips,
@@ -203,6 +202,8 @@ class MatexForexStopLossTakeProfitCalculatorDocument
       position: MatexPositionX.fromName(position),
       stopLossFieldType: stopLossFieldType,
       takeProfitFieldType: takeProfitFieldType,
+      positionSizeFieldType:
+          MatexPositionSizeTypeX.fromName(positionSizeFieldType),
     );
   }
 

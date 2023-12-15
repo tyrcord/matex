@@ -378,16 +378,16 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   ) async {
     switch (key) {
       case MatexForexPositionSizeCalculatorBlocKey.accountCurrency:
-        return document.copyWithDefaults(accountCurrency: true);
+        return document.copyWithDefaults(resetAccountCurrency: true);
 
       case MatexForexPositionSizeCalculatorBlocKey.instrument:
         return document.copyWithDefaults(
-          counter: true,
-          base: true,
+          resetCounter: true,
+          resetBase: true,
         );
 
       case MatexForexPositionSizeCalculatorBlocKey.accountSize:
-        return document.copyWithDefaults(accountSize: true);
+        return document.copyWithDefaults(resetAccountSize: true);
     }
 
     return null;
@@ -501,7 +501,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     late final MatexForexPositionSizeCalculatorBlocFields fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(accountCurrency: true);
+      fields = currentState.fields.copyWithDefaults(resetAccountCurrency: true);
     } else {
       fields = currentState.fields.copyWith(accountCurrency: value);
     }
@@ -525,9 +525,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     if (instrument == null) {
       fields = currentState.fields.copyWithDefaults(
-        pipDecimalPlaces: true,
-        counter: true,
-        base: true,
+        resetPipDecimalPlaces: true,
+        resetCounter: true,
+        resetBase: true,
       );
 
       calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
@@ -560,7 +560,8 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
   MatexForexPositionSizeCalculatorBlocState patchAccountSize(String? value) {
     if (value == null) {
-      final fields = currentState.fields.copyWithDefaults(accountSize: true);
+      final fields =
+          currentState.fields.copyWithDefaults(resetAccountSize: true);
       calculator.accountSize = 0;
 
       return currentState.copyWith(fields: fields);

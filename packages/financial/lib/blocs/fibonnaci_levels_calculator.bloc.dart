@@ -89,10 +89,10 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
       } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.highPrice) {
         return patchHighPrice(value);
       } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.trend) {
-        return patchTrend(value);
+        return patchTrend(null);
       }
     } else if (value is MatexTrend) {
-      return patchTrend(value.name);
+      return patchTrend(value);
     }
 
     return currentState;
@@ -116,9 +116,9 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
     return _kDefaultFibonnaciLevelsBlocState.copyWith(
       results: await retrieveDefaultResult(),
       fields: MatexFibonnaciLevelsCalculatorBlocFields(
+        trend: MatexTrendX.fromName(document.trend),
         lowPrice: document.lowPrice,
         highPrice: document.highPrice,
-        trend: document.trend,
       ),
     );
   }
@@ -171,18 +171,15 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexFibonnaciLevelsCalculatorBlocState patchTrend(String? value) {
+  MatexFibonnaciLevelsCalculatorBlocState patchTrend(MatexTrend? value) {
     late MatexFibonnaciLevelsCalculatorBlocFields fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetMethod: true,
-      );
-
+      fields = currentState.fields.copyWithDefaults(resetMethod: true);
       calculator.trend = MatexTrend.up;
     } else {
       fields = currentState.fields.copyWith(trend: value);
-      calculator.trend = MatexTrendX.fromName(value);
+      calculator.trend = value;
     }
 
     return currentState.copyWith(fields: fields);

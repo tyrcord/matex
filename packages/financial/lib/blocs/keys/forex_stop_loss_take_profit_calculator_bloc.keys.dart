@@ -15,6 +15,7 @@ class MatexForexStopLossTakeProfitCalculatorBlocKey {
   static const String takeProfitAmount = 'takeProfitAmount';
   static const String stopLossFieldType = 'stopLossFieldType';
   static const String takeProfitFieldType = 'takeProfitFieldType';
+  static const String position = 'position';
 
   // Prevent the creation of instances of this class
   MatexForexStopLossTakeProfitCalculatorBlocKey._();

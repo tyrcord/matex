@@ -107,12 +107,12 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       }
     }
 
-    if (fields.positionSizeFieldType != MatexPositionSizeType.unit.name &&
+    if (fields.positionSizeFieldType != MatexPositionSizeType.unit &&
         fields.lotSize != null &&
         fields.lotSize!.isNotEmpty) {
       final positionSize = await getPositionSizeForLotSize(
-        lotSize: getPositionSizeTypeFromString(fields.positionSizeFieldType),
         positionSize: parseFieldValueToDouble(fields.lotSize),
+        lotSize: fields.positionSizeFieldType,
       );
 
       final isInt = isDoubleInteger(positionSize);
@@ -263,7 +263,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       }
     } else if (value is MatexPositionSizeType &&
         key == MatexForexProfitLossCalculatorBlocKey.positionSizeFieldType) {
-      return patchPositionSizeFieldType(value.name);
+      return patchPositionSizeFieldType(value);
     } else if (value is MatexFinancialInstrument &&
         key == MatexForexProfitLossCalculatorBlocKey.instrument) {
       return patchInstrument(value);
@@ -281,12 +281,12 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
   ) async {
     switch (key) {
       case MatexForexProfitLossCalculatorBlocKey.accountCurrency:
-        return document.copyWithDefaults(accountCurrency: true);
+        return document.copyWithDefaults(resetAccountCurrency: true);
 
       case MatexForexProfitLossCalculatorBlocKey.instrument:
         return document.copyWithDefaults(
-          counter: true,
-          base: true,
+          resetCounter: true,
+          resetBase: true,
         );
     }
 
@@ -493,7 +493,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   MatexForexProfitLossCalculatorBlocState patchPositionSizeFieldType(
-    String value,
+    MatexPositionSizeType value,
   ) {
     final fields = currentState.fields.copyWith(
       positionSizeFieldType: value,

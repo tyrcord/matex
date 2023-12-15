@@ -1,24 +1,23 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_forms/fastyle_forms.dart';
 import 'package:matex_core/core.dart';
-
-final String _kDefaulTipFieldType = FastAmountSwitchFieldType.percent.name;
-final String _kDefaulDiscountFieldType = FastAmountSwitchFieldType.amount.name;
 
 class MatexVatCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
+  final String defaulDiscountFieldType = 'amount';
+  final String defaulTipFieldType = 'percent';
+
+  late final String discountFieldType;
   late final String? regionalVatRate;
   late final String? federalVatRate;
   late final String? discountAmount;
   late final String? priceBeforeVat;
   late final String? customVatRate;
+  late final String? discountRate;
+  late final String tipFieldType;
+  late final String? tipAmount;
   late final String? tipRate;
   late final String? vatRate;
-  late final String? discountRate;
-  late final String? tipAmount;
-  late final String tipFieldType;
-  late final String discountFieldType;
 
   String get formattedPriceBeforeVat {
     final priceBeforeVatValue = parseFieldValueToDouble(priceBeforeVat);
@@ -75,30 +74,30 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
   }
 
   MatexVatCalculatorBlocFields({
+    FastCalculatorBlocDelegate? delegate,
+    String? discountFieldType,
     String? regionalVatRate,
     String? federalVatRate,
     String? discountAmount,
     String? priceBeforeVat,
     String? customVatRate,
+    String? discountRate,
+    String? tipFieldType,
+    String? tipAmount,
     String? tipRate,
     String? vatRate,
-    String? discountRate,
-    String? tipAmount,
-    String? tipFieldType,
-    String? discountFieldType,
-    FastCalculatorBlocDelegate? delegate,
   }) {
+    this.discountFieldType = discountFieldType ?? defaulDiscountFieldType;
+    this.tipFieldType = tipFieldType ?? defaulTipFieldType;
     this.regionalVatRate = assignValue(regionalVatRate);
     this.federalVatRate = assignValue(federalVatRate);
     this.discountAmount = assignValue(discountAmount);
     this.priceBeforeVat = assignValue(priceBeforeVat);
     this.customVatRate = assignValue(customVatRate);
-    this.tipRate = assignValue(tipRate);
-    this.vatRate = assignValue(vatRate);
     this.discountRate = assignValue(discountRate);
     this.tipAmount = assignValue(tipAmount);
-    this.tipFieldType = tipFieldType ?? _kDefaulTipFieldType;
-    this.discountFieldType = discountFieldType ?? _kDefaulDiscountFieldType;
+    this.tipRate = assignValue(tipRate);
+    this.vatRate = assignValue(vatRate);
     this.delegate = delegate;
   }
 
@@ -107,32 +106,62 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexVatCalculatorBlocFields copyWith({
+    FastCalculatorBlocDelegate? delegate,
+    String? discountFieldType,
     String? regionalVatRate,
     String? federalVatRate,
     String? discountAmount,
     String? priceBeforeVat,
     String? customVatRate,
-    String? tipRate,
-    String? vatRate,
+    String? tipFieldType,
     String? discountRate,
     String? tipAmount,
-    String? tipFieldType,
-    String? discountFieldType,
-    FastCalculatorBlocDelegate? delegate,
+    String? tipRate,
+    String? vatRate,
   }) {
     return MatexVatCalculatorBlocFields(
-      federalVatRate: federalVatRate ?? this.federalVatRate,
+      discountFieldType: discountFieldType ?? this.discountFieldType,
       regionalVatRate: regionalVatRate ?? this.regionalVatRate,
+      federalVatRate: federalVatRate ?? this.federalVatRate,
       discountAmount: discountAmount ?? this.discountAmount,
       priceBeforeVat: priceBeforeVat ?? this.priceBeforeVat,
       customVatRate: customVatRate ?? this.customVatRate,
+      discountRate: discountRate ?? this.discountRate,
+      tipFieldType: tipFieldType ?? this.tipFieldType,
+      tipAmount: tipAmount ?? this.tipAmount,
+      delegate: delegate ?? this.delegate,
       tipRate: tipRate ?? this.tipRate,
       vatRate: vatRate ?? this.vatRate,
-      discountRate: discountRate ?? this.discountRate,
-      tipAmount: tipAmount ?? this.tipAmount,
-      tipFieldType: tipFieldType ?? this.tipFieldType,
-      discountFieldType: discountFieldType ?? this.discountFieldType,
-      delegate: delegate ?? this.delegate,
+    );
+  }
+
+  @override
+  MatexVatCalculatorBlocFields copyWithDefaults({
+    bool resetDiscountFieldType = false,
+    bool resetRegionalVatRate = false,
+    bool resetFederalVatRate = false,
+    bool resetDiscountAmount = false,
+    bool resetPriceBeforeVat = false,
+    bool resetCustomVatRate = false,
+    bool resetDiscountRate = false,
+    bool resetTipFieldType = false,
+    bool resetTipAmount = false,
+    bool resetTipRate = false,
+    bool resetVatRate = false,
+  }) {
+    return MatexVatCalculatorBlocFields(
+      discountFieldType: resetDiscountFieldType ? null : discountFieldType,
+      regionalVatRate: resetRegionalVatRate ? null : regionalVatRate,
+      federalVatRate: resetFederalVatRate ? null : federalVatRate,
+      discountAmount: resetDiscountAmount ? null : discountAmount,
+      priceBeforeVat: resetPriceBeforeVat ? null : priceBeforeVat,
+      customVatRate: resetCustomVatRate ? null : customVatRate,
+      discountRate: resetDiscountRate ? null : discountRate,
+      tipFieldType: resetTipFieldType ? null : tipFieldType,
+      tipAmount: resetTipAmount ? null : tipAmount,
+      tipRate: resetTipRate ? null : tipRate,
+      vatRate: resetVatRate ? null : vatRate,
+      delegate: delegate,
     );
   }
 
@@ -141,34 +170,33 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
     covariant MatexVatCalculatorBlocFields model,
   ) {
     return copyWith(
+      discountFieldType: model.discountFieldType,
       regionalVatRate: model.regionalVatRate,
       federalVatRate: model.federalVatRate,
       discountAmount: model.discountAmount,
       priceBeforeVat: model.priceBeforeVat,
       customVatRate: model.customVatRate,
+      discountRate: model.discountRate,
+      tipFieldType: model.tipFieldType,
+      tipAmount: model.tipAmount,
+      delegate: model.delegate,
       tipRate: model.tipRate,
       vatRate: model.vatRate,
-      discountRate: model.discountRate,
-      tipAmount: model.tipAmount,
-      tipFieldType: model.tipFieldType,
-      discountFieldType: model.discountFieldType,
-      delegate: model.delegate,
     );
   }
 
   @override
   List<Object?> get props => [
+        discountFieldType,
         regionalVatRate,
         federalVatRate,
         discountAmount,
         priceBeforeVat,
         customVatRate,
+        discountRate,
+        tipFieldType,
+        tipAmount,
         tipRate,
         vatRate,
-        discountRate,
-        tipAmount,
-        tipFieldType,
-        discountFieldType,
-        delegate,
       ];
 }

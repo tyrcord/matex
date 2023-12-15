@@ -58,9 +58,9 @@ class MatexFibonnaciLevelsCalculatorDocument extends FastCalculatorDocument {
   @override
   MatexFibonnaciLevelsCalculatorBlocFields toFields() {
     return MatexFibonnaciLevelsCalculatorBlocFields(
+      trend: MatexTrendX.fromName(trend),
       highPrice: highPrice,
       lowPrice: lowPrice,
-      trend: trend,
     );
   }
 
