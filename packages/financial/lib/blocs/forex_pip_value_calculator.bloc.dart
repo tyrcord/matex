@@ -48,7 +48,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       MatexForexPipValueCalculatorBlocKey.instrument,
     );
 
-    _listenToPrimaryCurrencyCodeChanges();
+    listenToPrimaryCurrencyCodeChanges();
   }
 
   @override
@@ -56,28 +56,6 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     if (!isClosed && canClose()) {
       exchangeProvider.dispose();
       super.close();
-    }
-  }
-
-  void _listenToPrimaryCurrencyCodeChanges() {
-    subxList.add(appSettingsBloc.onData
-        .where((event) => isInitialized)
-        .distinct((previous, next) {
-      final previousValue = previous.primaryCurrencyCode;
-      final nextValue = next.primaryCurrencyCode;
-
-      return previousValue == nextValue;
-    }).listen(handlePrimaryCurrencyCodeChanges));
-  }
-
-  void handlePrimaryCurrencyCodeChanges(FastAppSettingsBlocState state) {
-    if (isInitialized) {
-      addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
-
-      addEvent(FastCalculatorBlocEvent.patchValue(
-        key: MatexForexPipValueCalculatorBlocKey.accountCurrency,
-        value: getUserCurrencyCode(),
-      ));
     }
   }
 
@@ -262,7 +240,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     if (value is String) {
       switch (key) {
-        case MatexForexPipValueCalculatorBlocKey.accountCurrency:
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
 
         case MatexForexPipValueCalculatorBlocKey.positionSize:
@@ -317,7 +295,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     if (value is String) {
       switch (key) {
-        case MatexForexPipValueCalculatorBlocKey.accountCurrency:
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
           return patchAccountCurrency(value);
 
         case MatexForexPipValueCalculatorBlocKey.positionSize:
@@ -350,7 +328,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     String key,
   ) async {
     switch (key) {
-      case MatexForexPipValueCalculatorBlocKey.accountCurrency:
+      case MatexFiancialCalculatorBlocKey.accountCurrency:
         return document.copyWithDefaults(resetAccountCurrency: true);
 
       case MatexForexPipValueCalculatorBlocKey.instrument:
@@ -370,7 +348,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     String key,
   ) async {
     switch (key) {
-      case MatexForexPipValueCalculatorBlocKey.accountCurrency:
+      case MatexFiancialCalculatorBlocKey.accountCurrency:
         return patchAccountCurrency(null);
 
       case MatexForexPipValueCalculatorBlocKey.instrument:

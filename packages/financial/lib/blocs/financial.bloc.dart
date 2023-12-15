@@ -1,4 +1,5 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
@@ -25,6 +26,28 @@ abstract class MatexFinancialCalculatorBloc<
     super.debugLabel,
     super.delegate,
   });
+
+  void listenToPrimaryCurrencyCodeChanges() {
+    subxList.add(appSettingsBloc.onData
+        .where((event) => isInitialized)
+        .distinct((previous, next) {
+      final previousValue = previous.primaryCurrencyCode;
+      final nextValue = next.primaryCurrencyCode;
+
+      return previousValue == nextValue;
+    }).listen(handlePrimaryCurrencyCodeChanges));
+  }
+
+  void handlePrimaryCurrencyCodeChanges(FastAppSettingsBlocState state) {
+    if (isInitialized) {
+      addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
+
+      addEvent(FastCalculatorBlocEvent.patchValue(
+        key: MatexFiancialCalculatorBlocKey.accountCurrency,
+        value: getUserCurrencyCode(),
+      ));
+    }
+  }
 
   @override
   Future<bool> isCalculatorStateValid() async {

@@ -49,7 +49,7 @@ class MatexForexRequiredMarginCalculatorBloc
       MatexForexRequiredMarginCalculatorBlocKey.instrument,
     );
 
-    _listenToPrimaryCurrencyCodeChanges();
+    listenToPrimaryCurrencyCodeChanges();
   }
 
   @override
@@ -60,33 +60,10 @@ class MatexForexRequiredMarginCalculatorBloc
     }
   }
 
-  void _listenToPrimaryCurrencyCodeChanges() {
-    subxList.add(appSettingsBloc.onData
-        .where((event) => isInitialized)
-        .distinct((previous, next) {
-      final previousValue = previous.primaryCurrencyCode;
-      final nextValue = next.primaryCurrencyCode;
-
-      return previousValue == nextValue;
-    }).listen(handlePrimaryCurrencyCodeChanges));
-  }
-
-  void handlePrimaryCurrencyCodeChanges(FastAppSettingsBlocState state) {
-    if (isInitialized) {
-      addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
-
-      addEvent(FastCalculatorBlocEvent.patchValue(
-        key: MatexForexRequiredMarginCalculatorBlocKey.accountCurrency,
-        value: getUserCurrencyCode(),
-      ));
-    }
-  }
-
   @override
   bool get isMandatoryFieldValid {
     return currentState.fields.accountCurrency != null &&
-        currentState.fields.base != null &&
-        currentState.fields.counter != null &&
+        currentState.fields.financialInstrument != null &&
         (currentState.fields.positionSize != null ||
             currentState.fields.lotSize != null);
   }
@@ -191,7 +168,7 @@ class MatexForexRequiredMarginCalculatorBloc
 
     if (value is String) {
       switch (key) {
-        case MatexForexRequiredMarginCalculatorBlocKey.accountCurrency:
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
 
         case MatexForexRequiredMarginCalculatorBlocKey.positionSize:
@@ -237,7 +214,7 @@ class MatexForexRequiredMarginCalculatorBloc
 
     if (value is String?) {
       switch (key) {
-        case MatexForexRequiredMarginCalculatorBlocKey.accountCurrency:
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
           return patchAccountCurrency(value);
 
         case MatexForexRequiredMarginCalculatorBlocKey.positionSize:

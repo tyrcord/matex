@@ -48,7 +48,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       MatexForexProfitLossCalculatorBlocKey.instrument,
     );
 
-    _listenToPrimaryCurrencyCodeChanges();
+    listenToPrimaryCurrencyCodeChanges();
   }
 
   @override
@@ -56,28 +56,6 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     if (!isClosed && canClose()) {
       exchangeProvider.dispose();
       super.close();
-    }
-  }
-
-  void _listenToPrimaryCurrencyCodeChanges() {
-    subxList.add(appSettingsBloc.onData
-        .where((event) => isInitialized)
-        .distinct((previous, next) {
-      final previousValue = previous.primaryCurrencyCode;
-      final nextValue = next.primaryCurrencyCode;
-
-      return previousValue == nextValue;
-    }).listen(handlePrimaryCurrencyCodeChanges));
-  }
-
-  void handlePrimaryCurrencyCodeChanges(FastAppSettingsBlocState state) {
-    if (isInitialized) {
-      addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
-
-      addEvent(FastCalculatorBlocEvent.patchValue(
-        key: MatexForexProfitLossCalculatorBlocKey.accountCurrency,
-        value: getUserCurrencyCode(),
-      ));
     }
   }
 
@@ -188,7 +166,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     if (value is String) {
       switch (key) {
-        case MatexForexProfitLossCalculatorBlocKey.accountCurrency:
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
 
         case MatexForexProfitLossCalculatorBlocKey.positionSize:
@@ -243,7 +221,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     if (value is String?) {
       switch (key) {
-        case MatexForexProfitLossCalculatorBlocKey.accountCurrency:
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
           return patchAccountCurrency(value);
 
         case MatexForexProfitLossCalculatorBlocKey.positionSize:
@@ -280,7 +258,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     String key,
   ) async {
     switch (key) {
-      case MatexForexProfitLossCalculatorBlocKey.accountCurrency:
+      case MatexFiancialCalculatorBlocKey.accountCurrency:
         return document.copyWithDefaults(resetAccountCurrency: true);
 
       case MatexForexProfitLossCalculatorBlocKey.instrument:
@@ -298,7 +276,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     String key,
   ) async {
     switch (key) {
-      case MatexForexProfitLossCalculatorBlocKey.accountCurrency:
+      case MatexFiancialCalculatorBlocKey.accountCurrency:
         return patchAccountCurrency(null);
 
       case MatexForexProfitLossCalculatorBlocKey.instrument:
