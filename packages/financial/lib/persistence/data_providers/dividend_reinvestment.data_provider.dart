@@ -1,14 +1,14 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
-const _kStoreName = 'matexDividendReinvestmentCalculator';
-
 class MatexDividendReinvestmentCalculatorDataProvider
     extends FastCalculatorDataProvider<
         MatexDividendReinvestmentCalculatorDocument> {
+  static const defaultStoreName = 'matexDividendReinvestmentCalculator';
+
   MatexDividendReinvestmentCalculatorDataProvider({
     String? storeName,
-  }) : super(storeName: storeName ?? _kStoreName);
+  }) : super(storeName: storeName ?? defaultStoreName);
 
   @override
   Future<MatexDividendReinvestmentCalculatorDocument>

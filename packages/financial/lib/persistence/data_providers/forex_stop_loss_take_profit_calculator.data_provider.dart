@@ -4,14 +4,14 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-const _kStoreName = 'matexForexStopLossTakeProfitCalculator';
-
 class MatexForexStopLossTakeProfitCalculatorDataProvider
     extends FastCalculatorDataProvider<
         MatexForexStopLossTakeProfitCalculatorDocument> {
+  static const defaultStoreName = 'matexForexStopLossTakeProfitCalculator';
+
   MatexForexStopLossTakeProfitCalculatorDataProvider({
     String? storeName,
-  }) : super(storeName: storeName ?? _kStoreName);
+  }) : super(storeName: storeName ?? defaultStoreName);
 
   @override
   Future<MatexForexStopLossTakeProfitCalculatorDocument>

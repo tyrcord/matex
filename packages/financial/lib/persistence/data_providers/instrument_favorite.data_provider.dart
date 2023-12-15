@@ -1,19 +1,17 @@
 import 'package:matex_financial/financial.dart';
 import 'package:tstore/tstore.dart';
 
-/// The default name for the store that holds the favorite financial
-/// instruments.
-const _kStoreName = 'matexInstrumentFavorite';
-
 /// A provider for managing favorite financial instruments in a store.
 class MatexInstrumentFavoriteDataProvider extends TDocumentDataProvider {
+  static const defaultStoreName = 'matexInstrumentFavorite';
+
   /// Creates a new [MatexInstrumentFavoriteDataProvider] instance.
   ///
   /// The optional [storeName] parameter can be used to specify a custom name
   /// for the store.
   MatexInstrumentFavoriteDataProvider({
     String? storeName,
-  }) : super(storeName: storeName ?? _kStoreName);
+  }) : super(storeName: storeName ?? defaultStoreName);
 
   /// Retrieves the favorite financial instrument document from the store.
   ///

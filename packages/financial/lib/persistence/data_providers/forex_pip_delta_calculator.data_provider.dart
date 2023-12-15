@@ -4,13 +4,13 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-const _kStoreName = 'matexForexPipDeltaCalculator';
-
 class MatexForexPipDeltaCalculatorDataProvider
     extends FastCalculatorDataProvider<MatexForexPipDeltaCalculatorDocument> {
+  static const defaultStoreName = 'matexForexPipDeltaCalculator';
+
   MatexForexPipDeltaCalculatorDataProvider({
     String? storeName,
-  }) : super(storeName: storeName ?? _kStoreName);
+  }) : super(storeName: storeName ?? defaultStoreName);
 
   @override
   Future<MatexForexPipDeltaCalculatorDocument>

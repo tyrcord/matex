@@ -4,13 +4,13 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-const _kStoreName = 'matexForexPipValueCalculator';
-
 class MatexForexPipValueCalculatorDataProvider
     extends FastCalculatorDataProvider<MatexForexPipValueCalculatorDocument> {
+  static const defaultStoreName = 'matexForexPipValueCalculator';
+
   MatexForexPipValueCalculatorDataProvider({
     String? storeName,
-  }) : super(storeName: storeName ?? _kStoreName);
+  }) : super(storeName: storeName ?? defaultStoreName);
 
   @override
   Future<MatexForexPipValueCalculatorDocument>

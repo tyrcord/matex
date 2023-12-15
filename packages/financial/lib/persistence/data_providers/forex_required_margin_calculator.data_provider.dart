@@ -4,14 +4,14 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-const _kStoreName = 'matexForexRequiredMarginCalculator';
-
 class MatexForexRequiredMarginCalculatorDataProvider
     extends FastCalculatorDataProvider<
         MatexForexRequiredMarginCalculatorDocument> {
+  static const defaultStoreName = 'matexForexRequiredMarginCalculator';
+
   MatexForexRequiredMarginCalculatorDataProvider({
     String? storeName,
-  }) : super(storeName: storeName ?? _kStoreName);
+  }) : super(storeName: storeName ?? defaultStoreName);
 
   @override
   Future<MatexForexRequiredMarginCalculatorDocument>
