@@ -26,12 +26,10 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         MatexForexStopLossTakeProfitCalculatorDocument,
         MatexForexStopLossTakeProfitCalculatorBlocResults>
     with MatexFinancialCalculatorFormatterMixin {
-  final MatexFinancialInstrumentExchangeService exchangeProvider;
-
   MatexForexStopLossTakeProfitCalculatorBloc({
     MatexForexStopLossTakeProfitCalculatorBlocState? initialState,
     MatexForexStopLossTakeProfitCalculatorDataProvider? dataProvider,
-    required this.exchangeProvider,
+    required super.exchangeProvider,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,
     super.showExportPdfDialog,
@@ -50,46 +48,45 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       MatexForexStopLossTakeProfitCalculatorBlocKey.instrument,
     );
 
-    _listenToPrimaryCurrencyCodeChanges();
-  }
-
-  @override
-  void close() {
-    if (!isClosed && canClose()) {
-      exchangeProvider.dispose();
-      super.close();
-    }
-  }
-
-  void _listenToPrimaryCurrencyCodeChanges() {
-    subxList.add(appSettingsBloc.onData
-        .where((event) => isInitialized)
-        .distinct((previous, next) {
-      final previousValue = previous.primaryCurrencyCode;
-      final nextValue = next.primaryCurrencyCode;
-
-      return previousValue == nextValue;
-    }).listen(handlePrimaryCurrencyCodeChanges));
-  }
-
-  void handlePrimaryCurrencyCodeChanges(FastAppSettingsBlocState state) {
-    if (isInitialized) {
-      addEvent(FastCalculatorBlocEvent.retrieveDefaultValues());
-
-      addEvent(FastCalculatorBlocEvent.patchValue(
-        key: MatexForexStopLossTakeProfitCalculatorBlocKey.accountCurrency,
-        value: getUserCurrencyCode(),
-      ));
-    }
+    listenToPrimaryCurrencyCodeChanges();
   }
 
   @override
   bool get isMandatoryFieldValid {
-    return currentState.fields.accountCurrency != null &&
-        currentState.fields.base != null &&
-        currentState.fields.counter != null &&
-        (currentState.fields.positionSize != null ||
-            currentState.fields.lotSize != null);
+    final fields = currentState.fields;
+
+    return (fields.positionSize != null || fields.lotSize != null) &&
+        fields.financialInstrument != null &&
+        fields.accountCurrency != null;
+  }
+
+  @override
+  Stream<MatexForexStopLossTakeProfitCalculatorBlocState> mapEventToState(
+    FastCalculatorBlocEvent<FastCalculatorResults> event,
+  ) async* {
+    final instrument = currentState.fields.financialInstrument;
+
+    if (event.type == FastCalculatorBlocEventType.custom &&
+        event.payload!.key == 'fetchEntryPrice' &&
+        event.payload != null &&
+        instrument != null) {
+      var metadata = mergeMetadata({'isFetchingPriceEntry': true});
+
+      yield currentState.copyWith(metadata: metadata);
+
+      final quote = await fetchInstrumentExchangeRate(instrument);
+
+      metadata = mergeMetadata({'isFetchingPriceEntry': false});
+
+      yield currentState.copyWith(metadata: metadata);
+
+      addEvent(FastCalculatorBlocEvent.patchValue(
+        key: MatexForexStopLossTakeProfitCalculatorBlocKey.entryPrice,
+        value: quote?.price.toString(),
+      ));
+    }
+
+    yield* super.mapEventToState(event);
   }
 
   @override
@@ -97,73 +94,36 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   Stream<MatexForexStopLossTakeProfitCalculatorBlocState> willCompute() async* {
     yield* super.willCompute();
 
+    final instrument = currentState.fields.financialInstrument;
+
+    // update the state metadata with the latest instrument metadata
+    if (instrument != null) yield* patchInstrumentExchangeRate(instrument);
+
+    final quote = currentMetadata['instrumentExchangeRate'] as double?;
+
+    if (quote != null) await patchCalculatorExchangeRates(quote);
+
     var fields = currentState.fields;
-    MatexQuote? quote;
-    String? updatedOn;
 
-    if (isMandatoryFieldValid) {
-      quote = await patchExchangeRates();
-
-      if (quote != null) {
-        updatedOn = await localizeTimestampInMilliseconds(quote.timestamp);
-      }
-    }
-
-    if (fields.positionSizeFieldType != MatexPositionSizeType.unit.name &&
+    if (fields.positionSizeFieldType != MatexPositionSizeType.unit &&
         fields.lotSize != null &&
         fields.lotSize!.isNotEmpty) {
       final positionSize = await getPositionSizeForLotSize(
-        lotSize: getPositionSizeTypeFromString(fields.positionSizeFieldType),
+        lotSize: fields.positionSizeFieldType,
         positionSize: parseFieldValueToDouble(fields.lotSize),
       );
 
       final isInt = isDoubleInteger(positionSize);
 
       calculator.positionSize = positionSize;
-      fields = fields.copyWith(
+
+      fields = currentState.fields.copyWith(
         positionSize:
             isInt ? positionSize.toInt().toString() : positionSize.toString(),
       );
     }
 
-    yield currentState.copyWith(
-      fields: fields,
-      metadata: {
-        ...await loadMetadata(),
-        'updatedOn': updatedOn,
-      },
-    );
-  }
-
-  /// Loads the metadata of the calculator.
-  @override
-  @mustCallSuper
-  Future<Map<String, dynamic>> loadMetadata() async {
-    final metadata = await super.loadMetadata();
-    final standardLotSize = await getStandardLotValue();
-    final miniLotSize = await getMiniLotValue();
-    final microLotSize = await getMicroLotValue();
-    final instrumentMetadata = await getInstrumentMetadata();
-    final instrumentPairRate = calculator.instrumentPairRate ?? 0;
-
-    if (instrumentPairRate > 0 && isMandatoryFieldValid) {
-      metadata.putIfAbsent('formattedInstrumentExchangeRate', () {
-        final formatted = localizeQuote(
-          rate: calculator.instrumentPairRate,
-          metadata: instrumentMetadata,
-        );
-
-        return superscriptLastCharacter(formatted);
-      });
-    }
-
-    return {
-      ...metadata,
-      'instrumentMetadata': instrumentMetadata,
-      'standardLotSize': standardLotSize,
-      'microLotSize': microLotSize,
-      'miniLotSize': miniLotSize,
-    };
+    yield currentState.copyWith(fields: fields);
   }
 
   @override
@@ -233,7 +193,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
     if (value is String?) {
       switch (key) {
-        case MatexForexStopLossTakeProfitCalculatorBlocKey.accountCurrency:
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
 
         case MatexForexStopLossTakeProfitCalculatorBlocKey.positionSize:
@@ -339,7 +299,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
     if (value is String?) {
       switch (key) {
-        case MatexForexStopLossTakeProfitCalculatorBlocKey.accountCurrency:
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
           return patchAccountCurrency(value);
 
         case MatexForexStopLossTakeProfitCalculatorBlocKey.positionSize:
@@ -378,12 +338,13 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         case MatexForexStopLossTakeProfitCalculatorBlocKey.takeProfitFieldType:
           return patchTakeProfitFieldType(value);
       }
+    } else if (value is MatexPositionSizeType) {
+      if (key ==
+          MatexForexStopLossTakeProfitCalculatorBlocKey.positionSizeFieldType) {
+        return patchPositionSizeFieldType(value);
+      }
     } else if (value is Enum) {
       switch (key) {
-        case MatexForexStopLossTakeProfitCalculatorBlocKey
-              .positionSizeFieldType:
-          return patchPositionSizeFieldType(value.name);
-
         case MatexForexStopLossTakeProfitCalculatorBlocKey.stopLossFieldType:
           return patchStopLossFieldType(value.name);
 
@@ -410,7 +371,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     String key,
   ) async {
     switch (key) {
-      case MatexForexStopLossTakeProfitCalculatorBlocKey.accountCurrency:
+      case MatexFiancialCalculatorBlocKey.accountCurrency:
         return document.copyWithDefaults(resetAccountCurrency: true);
 
       case MatexForexStopLossTakeProfitCalculatorBlocKey.instrument:
@@ -428,7 +389,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     String key,
   ) async {
     switch (key) {
-      case MatexForexStopLossTakeProfitCalculatorBlocKey.accountCurrency:
+      case MatexFiancialCalculatorBlocKey.accountCurrency:
         return patchAccountCurrency(null);
 
       case MatexForexStopLossTakeProfitCalculatorBlocKey.instrument:
@@ -544,10 +505,6 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       ..isAccountCurrencyCounter = false
       ..instrumentPairRate = 0;
 
-    // Note: Loads default metadata values from the super class.
-    // instrument metadata will be loaded in the willCompute method.
-    final metadata = await super.loadMetadata();
-
     if (instrument == null) {
       fields = currentState.fields.copyWithDefaults(
         resetPipDecimalPlaces: true,
@@ -571,6 +528,9 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       calculator.pipDecimalPlaces = pipDecimalPlaces;
     }
 
+    // Note: Erase the previous instrument exchange rate metadata
+    final metadata = await super.loadMetadata();
+
     return currentState.copyWith(fields: fields, metadata: metadata);
   }
 
@@ -587,7 +547,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       );
 
       calculator.positionSize = 0;
-    } else if (positionSizeFieldType == MatexPositionSizeType.unit.name) {
+    } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(positionSize: value);
       calculator.positionSize = dValue.toDouble();
@@ -607,7 +567,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       );
 
       calculator.positionSize = 0;
-    } else if (positionSizeFieldType != MatexPositionSizeType.unit.name) {
+    } else if (positionSizeFieldType != MatexPositionSizeType.unit) {
       final dValue = toDecimal(value) ?? dZero;
       fields = currentState.fields.copyWith(positionSize: value);
       calculator.positionSize = dValue.toDouble();
@@ -813,7 +773,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   }
 
   MatexForexStopLossTakeProfitCalculatorBlocState patchPositionSizeFieldType(
-    String? value,
+    MatexPositionSizeType? value,
   ) {
     final fields = currentState.fields.copyWith(
       positionSizeFieldType: value,
@@ -826,33 +786,12 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     return currentState.copyWith(fields: fields);
   }
 
-  Future<MatexQuote?> patchExchangeRates() async {
+  Future<void> patchCalculatorExchangeRates(double instrumentPairRate) async {
     final accountCurrency = currentState.fields.accountCurrency!;
     final counter = currentState.fields.counter!;
-    final base = currentState.fields.base!;
-    final pipDecimalPlaces = currentState.fields.pipDecimalPlaces;
-    final symbol = base + counter;
-    final instrumentQuoteFuture = exchangeProvider.rate(symbol);
-
-    if (pipDecimalPlaces == null) {
-      final pairMetadata = await getInstrumentMetadata();
-
-      if (pairMetadata != null) {
-        calculator.pipDecimalPlaces = pairMetadata.pip.precision;
-      } else {
-        calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
-      }
-    }
-
-    final instrumentQuote = await instrumentQuoteFuture;
-
-    if (instrumentQuote == null) {
-      // FIXME: display an error message
-      return null;
-    }
 
     calculator
-      ..instrumentPairRate = instrumentQuote.price
+      ..instrumentPairRate = instrumentPairRate
       ..counterToAccountCurrencyRate = 0
       ..isAccountCurrencyCounter = false;
 
@@ -860,17 +799,13 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       calculator.isAccountCurrencyCounter = true;
     } else {
       final symbol = counter + accountCurrency;
-      final accountBaseQuote = await exchangeProvider.rate(symbol);
+      final accountBaseQuote = await exchangeProvider!.rate(symbol);
 
-      if (accountBaseQuote == null) {
-        // FIXME: display an error message
-        return null;
-      }
+      // FIXME: display an error message
+      if (accountBaseQuote == null) return;
 
       calculator.counterToAccountCurrencyRate = accountBaseQuote.price;
     }
-
-    return instrumentQuote;
   }
 
   @override
