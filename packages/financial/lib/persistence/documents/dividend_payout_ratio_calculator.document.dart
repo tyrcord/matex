@@ -3,40 +3,41 @@ import 'package:matex_financial/financial.dart';
 
 class MatexDividendPayoutRatioCalculatorDocument
     extends FastCalculatorDocument {
-  late final String? netIncome;
   late final String? totalDividends;
+  late final String? netIncome;
 
   /// The version of the document.
   @override
   int get version => 1;
 
   MatexDividendPayoutRatioCalculatorDocument({
-    String? netIncome,
     String? totalDividends,
+    String? netIncome,
   }) {
-    this.netIncome = assignValue(netIncome);
     this.totalDividends = assignValue(totalDividends);
+    this.netIncome = assignValue(netIncome);
   }
 
   @override
   MatexDividendPayoutRatioCalculatorDocument clone() => copyWith();
 
   factory MatexDividendPayoutRatioCalculatorDocument.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     return MatexDividendPayoutRatioCalculatorDocument(
-      netIncome: json['netIncome'] as String?,
       totalDividends: json['totalDividends'] as String?,
+      netIncome: json['netIncome'] as String?,
     );
   }
 
   @override
   MatexDividendPayoutRatioCalculatorDocument copyWith({
-    String? netIncome,
     String? totalDividends,
+    String? netIncome,
   }) {
     return MatexDividendPayoutRatioCalculatorDocument(
-      netIncome: netIncome ?? this.netIncome,
       totalDividends: totalDividends ?? this.totalDividends,
+      netIncome: netIncome ?? this.netIncome,
     );
   }
 
@@ -45,8 +46,8 @@ class MatexDividendPayoutRatioCalculatorDocument
     covariant MatexDividendPayoutRatioCalculatorDocument model,
   ) {
     return copyWith(
-      netIncome: model.netIncome,
       totalDividends: model.totalDividends,
+      netIncome: model.netIncome,
     );
   }
 
@@ -57,28 +58,28 @@ class MatexDividendPayoutRatioCalculatorDocument
   @override
   MatexDividendPayoutRatioCalculatorBlocFields toFields() {
     return MatexDividendPayoutRatioCalculatorBlocFields(
-      netIncome: netIncome,
       totalDividends: totalDividends,
+      netIncome: netIncome,
     );
   }
 
 // [Copy With Defaults Method]
   @override
   MatexDividendPayoutRatioCalculatorDocument copyWithDefaults({
-    bool resetNetIncome = false,
     bool resetTotalDividends = false,
+    bool resetNetIncome = false,
   }) {
     return MatexDividendPayoutRatioCalculatorDocument(
-      netIncome: resetNetIncome ? null : netIncome,
       totalDividends: resetTotalDividends ? null : totalDividends,
+      netIncome: resetNetIncome ? null : netIncome,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return {
-      'netIncome': netIncome,
       'totalDividends': totalDividends,
+      'netIncome': netIncome,
       ...super.toJson(),
     };
   }

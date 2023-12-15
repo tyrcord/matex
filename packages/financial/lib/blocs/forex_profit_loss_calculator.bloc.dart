@@ -554,7 +554,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     } else {
       final position = MatexPositionX.fromName(value);
       fields = currentState.fields.copyWith(position: position);
-      calculator.position = position;
+      calculator.position = position!;
     }
 
     return currentState.copyWith(fields: fields);

@@ -82,12 +82,12 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
     String? annualSharePriceIncrease,
     String? annualDividendIncrease,
     String? annualContribution,
-    bool? drip = defaultDrip,
     String? numberOfShares,
     String? dividendYield,
     String? yearsToGrow,
     String? sharePrice,
     String? taxRate,
+    bool? drip,
   }) {
     this.annualSharePriceIncrease = assignValue(annualSharePriceIncrease);
     this.annualDividendIncrease = assignValue(annualDividendIncrease);

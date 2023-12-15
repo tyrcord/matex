@@ -7,14 +7,16 @@ enum MatexTrend {
 }
 
 extension MatexTrendX on MatexTrend {
-  static MatexTrend fromName(String str) {
+  static MatexTrend? fromName(String? str) {
+    if (str == null) return null;
+
     switch (str.toLowerCase()) {
       case 'up':
         return MatexTrend.up;
       case 'down':
         return MatexTrend.down;
       default:
-        throw ArgumentError('Invalid value for MatexTrend: $str');
+        return null;
     }
   }
 

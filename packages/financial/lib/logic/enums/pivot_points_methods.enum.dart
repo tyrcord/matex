@@ -10,7 +10,9 @@ enum MatexPivotPointsMethods {
 }
 
 extension MatexPivotPointsMethodsX on MatexPivotPointsMethods {
-  static MatexPivotPointsMethods fromName(String str) {
+  static MatexPivotPointsMethods? fromName(String? str) {
+    if (str == null) return null;
+
     switch (str.toLowerCase()) {
       case 'camarilla':
         return MatexPivotPointsMethods.camarilla;
@@ -23,7 +25,7 @@ extension MatexPivotPointsMethodsX on MatexPivotPointsMethods {
       case 'woodie':
         return MatexPivotPointsMethods.woodie;
       default:
-        throw ArgumentError('Invalid value for MatexPivotPointsMethods: $str');
+        return null;
     }
   }
 

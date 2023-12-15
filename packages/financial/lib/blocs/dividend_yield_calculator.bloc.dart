@@ -94,7 +94,7 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
       } else if (key == MatexDividendYieldCalculatorBlocKey.dividendAmount) {
         return patchDividendAmount(value);
       } else if (key == MatexDividendYieldCalculatorBlocKey.paymentFrequency) {
-        return patchPaymentFrequency(parseFinancialFrequencyFromString(value));
+        return patchPaymentFrequency(MatexFinancialFrequencyX.fromName(value));
       }
     } else if (value is MatexFinancialFrequency) {
       if (key == MatexDividendYieldCalculatorBlocKey.paymentFrequency) {
@@ -112,7 +112,7 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
     final paymentFrequency = document.paymentFrequency;
 
     calculator.setState(MatexDividendYieldCalculatorState(
-      paymentFrequency: parseFinancialFrequencyFromString(paymentFrequency),
+      paymentFrequency: MatexFinancialFrequencyX.fromName(paymentFrequency),
       dividendAmount: parseStringToDouble(document.dividendAmount),
       sharePrice: parseStringToDouble(document.sharePrice),
     ));
@@ -127,7 +127,7 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
     return _kDefaultDividendYieldBlocState.copyWith(
       results: await retrieveDefaultResult(),
       fields: MatexDividendYieldCalculatorBlocFields(
-        paymentFrequency: parseFinancialFrequencyFromString(paymentFrequency),
+        paymentFrequency: MatexFinancialFrequencyX.fromName(paymentFrequency),
         dividendAmount: document.dividendAmount,
         sharePrice: document.sharePrice,
       ),

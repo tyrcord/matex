@@ -11,7 +11,9 @@ enum MatexFinancialFrequency {
 }
 
 extension MatexFinancialFrequencyX on MatexFinancialFrequency {
-  static MatexFinancialFrequency fromName(String str) {
+  static MatexFinancialFrequency? fromName(String? str) {
+    if (str == null) return null;
+
     switch (str.toLowerCase()) {
       case 'daily':
         return MatexFinancialFrequency.daily;
@@ -26,7 +28,7 @@ extension MatexFinancialFrequencyX on MatexFinancialFrequency {
       case 'annually':
         return MatexFinancialFrequency.annually;
       default:
-        throw ArgumentError('Invalid value for MatexFinancialFrequency: $str');
+        return null;
     }
   }
 

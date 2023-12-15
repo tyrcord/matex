@@ -3,46 +3,46 @@ import 'package:matex_financial/financial.dart';
 
 class MatexDividendReinvestmentCalculatorDocument
     extends FastCalculatorDocument {
-  static const defaultFrequency = MatexFinancialFrequency.annually;
+  static final defaultFrequency = MatexFinancialFrequency.annually.name;
   static const defaultDrip = true;
 
   /// The version of the document.
   @override
   int get version => 1;
 
-  late final String? paymentFrequency;
-  late final String? sharePrice;
+  late final String? annualSharePriceIncrease;
+  late final String? annualDividendIncrease;
+  late final String? annualContribution;
+  late final String paymentFrequency;
   late final String? numberOfShares;
   late final String? dividendYield;
   late final String? yearsToGrow;
-  late final String? annualContribution;
-  late final String? annualSharePriceIncrease;
-  late final String? annualDividendIncrease;
+  late final String? sharePrice;
   late final String? taxRate;
   late final bool drip;
 
   MatexDividendReinvestmentCalculatorDocument({
+    String? annualSharePriceIncrease,
+    String? annualDividendIncrease,
+    String? annualContribution,
     String? paymentFrequency,
-    String? sharePrice,
     String? numberOfShares,
     String? dividendYield,
     String? yearsToGrow,
-    String? annualContribution,
-    String? annualSharePriceIncrease,
-    String? annualDividendIncrease,
+    String? sharePrice,
     String? taxRate,
     bool? drip,
   }) {
-    this.sharePrice = assignValue(sharePrice);
+    this.annualSharePriceIncrease = assignValue(annualSharePriceIncrease);
+    this.annualDividendIncrease = assignValue(annualDividendIncrease);
+    this.paymentFrequency = paymentFrequency ?? defaultFrequency;
+    this.annualContribution = assignValue(annualContribution);
     this.numberOfShares = assignValue(numberOfShares);
     this.dividendYield = assignValue(dividendYield);
     this.yearsToGrow = assignValue(yearsToGrow);
-    this.annualContribution = assignValue(annualContribution);
-    this.annualSharePriceIncrease = assignValue(annualSharePriceIncrease);
-    this.annualDividendIncrease = assignValue(annualDividendIncrease);
+    this.sharePrice = assignValue(sharePrice);
     this.taxRate = assignValue(taxRate);
     this.drip = drip ?? defaultDrip;
-    this.paymentFrequency = paymentFrequency ?? defaultFrequency.name;
   }
 
   @override
@@ -51,76 +51,74 @@ class MatexDividendReinvestmentCalculatorDocument
   factory MatexDividendReinvestmentCalculatorDocument.fromJson(
       Map<String, dynamic> json) {
     return MatexDividendReinvestmentCalculatorDocument(
-      paymentFrequency:
-          json['paymentFrequency'] as String? ?? defaultFrequency.name,
-      sharePrice: json['sharePrice'] as String?,
+      annualSharePriceIncrease: json['annualSharePriceIncrease'] as String?,
+      annualDividendIncrease: json['annualDividendIncrease'] as String?,
+      annualContribution: json['annualContribution'] as String?,
+      paymentFrequency: json['paymentFrequency'] as String?,
       numberOfShares: json['numberOfShares'] as String?,
       dividendYield: json['dividendYield'] as String?,
       yearsToGrow: json['yearsToGrow'] as String?,
-      annualContribution: json['annualContribution'] as String?,
-      annualSharePriceIncrease: json['annualSharePriceIncrease'] as String?,
-      annualDividendIncrease: json['annualDividendIncrease'] as String?,
+      sharePrice: json['sharePrice'] as String?,
       taxRate: json['taxRate'] as String?,
-      drip: json['drip'] as bool? ?? defaultDrip,
-    );
-  }
-
-  @override
-  MatexDividendReinvestmentCalculatorDocument copyWithDefaults({
-    bool resetPaymentFrequency = false,
-    bool resetSharePrice = false,
-    bool resetNumberOfShares = false,
-    bool resetDividendYield = false,
-    bool resetYearsToGrow = false,
-    bool resetAnnualContribution = false,
-    bool resetAnnualSharePriceIncrease = false,
-    bool resetAnnualDividendIncrease = false,
-    bool resetTaxRate = false,
-    bool resetDrip = false,
-  }) {
-    return MatexDividendReinvestmentCalculatorDocument(
-      sharePrice: resetSharePrice ? null : sharePrice,
-      numberOfShares: resetNumberOfShares ? null : numberOfShares,
-      dividendYield: resetDividendYield ? null : dividendYield,
-      yearsToGrow: resetYearsToGrow ? null : yearsToGrow,
-      annualContribution: resetAnnualContribution ? null : annualContribution,
-      annualSharePriceIncrease:
-          resetAnnualSharePriceIncrease ? null : annualSharePriceIncrease,
-      annualDividendIncrease:
-          resetAnnualDividendIncrease ? null : annualDividendIncrease,
-      taxRate: resetTaxRate ? null : taxRate,
-      drip: resetDrip ? defaultDrip : drip,
-      paymentFrequency:
-          resetPaymentFrequency ? defaultFrequency.name : paymentFrequency,
+      drip: json['drip'] as bool?,
     );
   }
 
   @override
   MatexDividendReinvestmentCalculatorDocument copyWith({
+    String? annualSharePriceIncrease,
+    String? annualDividendIncrease,
+    String? annualContribution,
     String? paymentFrequency,
-    String? sharePrice,
     String? numberOfShares,
     String? dividendYield,
     String? yearsToGrow,
-    String? annualContribution,
-    String? annualSharePriceIncrease,
-    String? annualDividendIncrease,
+    String? sharePrice,
     String? taxRate,
     bool? drip,
   }) {
     return MatexDividendReinvestmentCalculatorDocument(
-      paymentFrequency: paymentFrequency ?? this.paymentFrequency,
-      sharePrice: sharePrice ?? this.sharePrice,
+      annualContribution: annualContribution ?? this.annualContribution,
+      paymentFrequency: paymentFrequency ?? paymentFrequency,
       numberOfShares: numberOfShares ?? this.numberOfShares,
       dividendYield: dividendYield ?? this.dividendYield,
       yearsToGrow: yearsToGrow ?? this.yearsToGrow,
-      annualContribution: annualContribution ?? this.annualContribution,
+      sharePrice: sharePrice ?? this.sharePrice,
+      taxRate: taxRate ?? this.taxRate,
+      drip: drip ?? this.drip,
       annualSharePriceIncrease:
           annualSharePriceIncrease ?? this.annualSharePriceIncrease,
       annualDividendIncrease:
           annualDividendIncrease ?? this.annualDividendIncrease,
-      taxRate: taxRate ?? this.taxRate,
-      drip: drip ?? this.drip,
+    );
+  }
+
+  @override
+  MatexDividendReinvestmentCalculatorDocument copyWithDefaults({
+    bool resetAnnualSharePriceIncrease = false,
+    bool resetAnnualDividendIncrease = false,
+    bool resetAnnualContribution = false,
+    bool resetPaymentFrequency = false,
+    bool resetNumberOfShares = false,
+    bool resetDividendYield = false,
+    bool resetYearsToGrow = false,
+    bool resetSharePrice = false,
+    bool resetTaxRate = false,
+    bool resetDrip = false,
+  }) {
+    return MatexDividendReinvestmentCalculatorDocument(
+      annualContribution: resetAnnualContribution ? null : annualContribution,
+      paymentFrequency: resetPaymentFrequency ? null : paymentFrequency,
+      numberOfShares: resetNumberOfShares ? null : numberOfShares,
+      dividendYield: resetDividendYield ? null : dividendYield,
+      yearsToGrow: resetYearsToGrow ? null : yearsToGrow,
+      sharePrice: resetSharePrice ? null : sharePrice,
+      taxRate: resetTaxRate ? null : taxRate,
+      drip: resetDrip ? null : drip,
+      annualSharePriceIncrease:
+          resetAnnualSharePriceIncrease ? null : annualSharePriceIncrease,
+      annualDividendIncrease:
+          resetAnnualDividendIncrease ? null : annualDividendIncrease,
     );
   }
 
@@ -129,14 +127,14 @@ class MatexDividendReinvestmentCalculatorDocument
     covariant MatexDividendReinvestmentCalculatorDocument model,
   ) {
     return copyWith(
+      annualSharePriceIncrease: model.annualSharePriceIncrease,
+      annualDividendIncrease: model.annualDividendIncrease,
+      annualContribution: model.annualContribution,
       paymentFrequency: model.paymentFrequency,
-      sharePrice: model.sharePrice,
       numberOfShares: model.numberOfShares,
       dividendYield: model.dividendYield,
       yearsToGrow: model.yearsToGrow,
-      annualContribution: model.annualContribution,
-      annualSharePriceIncrease: model.annualSharePriceIncrease,
-      annualDividendIncrease: model.annualDividendIncrease,
+      sharePrice: model.sharePrice,
       taxRate: model.taxRate,
       drip: model.drip,
     );
@@ -145,14 +143,14 @@ class MatexDividendReinvestmentCalculatorDocument
   @override
   MatexDividendReinvestmentCalculatorBlocFields toFields() {
     return MatexDividendReinvestmentCalculatorBlocFields(
-      paymentFrequency: parseFinancialFrequencyFromString(paymentFrequency),
-      sharePrice: sharePrice,
+      paymentFrequency: MatexFinancialFrequencyX.fromName(paymentFrequency),
+      annualSharePriceIncrease: annualSharePriceIncrease,
+      annualDividendIncrease: annualDividendIncrease,
+      annualContribution: annualContribution,
       numberOfShares: numberOfShares,
       dividendYield: dividendYield,
       yearsToGrow: yearsToGrow,
-      annualContribution: annualContribution,
-      annualSharePriceIncrease: annualSharePriceIncrease,
-      annualDividendIncrease: annualDividendIncrease,
+      sharePrice: sharePrice,
       taxRate: taxRate,
       drip: drip,
     );
@@ -161,14 +159,14 @@ class MatexDividendReinvestmentCalculatorDocument
   @override
   Map<String, dynamic> toJson() {
     return {
+      'annualSharePriceIncrease': annualSharePriceIncrease,
+      'annualDividendIncrease': annualDividendIncrease,
+      'annualContribution': annualContribution,
       'paymentFrequency': paymentFrequency,
-      'sharePrice': sharePrice,
       'numberOfShares': numberOfShares,
       'dividendYield': dividendYield,
       'yearsToGrow': yearsToGrow,
-      'annualContribution': annualContribution,
-      'annualSharePriceIncrease': annualSharePriceIncrease,
-      'annualDividendIncrease': annualDividendIncrease,
+      'sharePrice': sharePrice,
       'taxRate': taxRate,
       'drip': drip,
       ...super.toJson(),
@@ -177,14 +175,14 @@ class MatexDividendReinvestmentCalculatorDocument
 
   @override
   List<Object?> get props => [
+        annualSharePriceIncrease,
+        annualDividendIncrease,
+        annualContribution,
         paymentFrequency,
-        sharePrice,
         numberOfShares,
         dividendYield,
         yearsToGrow,
-        annualContribution,
-        annualSharePriceIncrease,
-        annualDividendIncrease,
+        sharePrice,
         taxRate,
         drip,
       ];

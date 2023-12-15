@@ -7,15 +7,16 @@ enum MatexPosition {
 }
 
 extension MatexPositionX on MatexPosition {
-  static MatexPosition fromName(String str) {
+  static MatexPosition? fromName(String? str) {
+    if (str == null) return null;
+
     switch (str.toLowerCase()) {
       case 'long':
         return MatexPosition.long;
       case 'short':
         return MatexPosition.short;
-
       default:
-        throw ArgumentError('Invalid value for MatexPosition: $str');
+        return null;
     }
   }
 

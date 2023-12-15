@@ -23,26 +23,6 @@ String getLocaleKeyForFinancialFrequency(MatexFinancialFrequency frequency) {
   }
 }
 
-/// Converts a string representation of a frequency to its corresponding enum
-/// value.
-///
-/// [key] - The string representation of a frequency.
-/// Returns the corresponding MatexFinancialFrequency enum value.
-/// Defaults to 'MatexFinancialFrequency.annually' if the key is not valid.
-MatexFinancialFrequency parseFinancialFrequencyFromString(String? key) {
-  if (key == null) return MatexFinancialFrequency.annually;
-
-  try {
-    return MatexFinancialFrequency.values.firstWhere(
-      (value) => value.name == key,
-      orElse: () => MatexFinancialFrequency.annually,
-    );
-  } on Exception {
-    // Handle specific exceptions if necessary
-    return MatexFinancialFrequency.annually;
-  }
-}
-
 /// Determines the number of payments per year based on the frequency.
 ///
 /// [frequency] - The financial frequency.

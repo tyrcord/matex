@@ -184,7 +184,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     final dAnnualSharePriceIncrease =
         toDecimalOrDefault(document.annualSharePriceIncrease);
 
-    final frequency = parseFinancialFrequencyFromString(
+    final frequency = MatexFinancialFrequencyX.fromName(
       document.paymentFrequency,
     );
 
@@ -207,7 +207,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
   Future<MatexDividendReinvestmentCalculatorBlocState> resetCalculatorBlocState(
     MatexDividendReinvestmentCalculatorDocument document,
   ) async {
-    final frequency = parseFinancialFrequencyFromString(
+    final frequency = MatexFinancialFrequencyX.fromName(
       document.paymentFrequency,
     );
 
@@ -284,9 +284,9 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     late MatexDividendReinvestmentCalculatorBlocFields fields;
 
     if (value is String) {
-      final frequency = parseFinancialFrequencyFromString(value);
+      final frequency = MatexFinancialFrequencyX.fromName(value);
       fields = currentState.fields.copyWith(paymentFrequency: frequency);
-      calculator.dividendPaymentFrequency = frequency;
+      calculator.dividendPaymentFrequency = frequency!;
     } else if (value is MatexFinancialFrequency) {
       fields = currentState.fields.copyWith(paymentFrequency: value);
       calculator.dividendPaymentFrequency = value;

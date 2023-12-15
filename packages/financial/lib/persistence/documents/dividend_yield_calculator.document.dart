@@ -29,18 +29,17 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
     Map<String, dynamic> json,
   ) {
     return MatexDividendYieldCalculatorDocument(
+      paymentFrequency: json['paymentFrequency'] as String?,
       dividendAmount: json['dividendAmount'] as String?,
       sharePrice: json['sharePrice'] as String?,
-      paymentFrequency:
-          json['paymentFrequency'] as String? ?? defaultFrequency.name,
     );
   }
 
   @override
   MatexDividendYieldCalculatorDocument copyWith({
-    String? sharePrice,
-    String? dividendAmount,
     String? paymentFrequency,
+    String? dividendAmount,
+    String? sharePrice,
   }) {
     return MatexDividendYieldCalculatorDocument(
       paymentFrequency: paymentFrequency ?? this.paymentFrequency,
@@ -51,15 +50,14 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
 
   @override
   MatexDividendYieldCalculatorDocument copyWithDefaults({
-    bool resetSharePrice = false,
-    bool resetDividendAmount = false,
     bool resetPaymentFrequency = false,
+    bool resetDividendAmount = false,
+    bool resetSharePrice = false,
   }) {
     return MatexDividendYieldCalculatorDocument(
-      sharePrice: resetSharePrice ? null : sharePrice,
+      paymentFrequency: resetPaymentFrequency ? null : paymentFrequency,
       dividendAmount: resetDividendAmount ? null : dividendAmount,
-      paymentFrequency:
-          resetPaymentFrequency ? defaultFrequency.name : paymentFrequency,
+      sharePrice: resetSharePrice ? null : sharePrice,
     );
   }
 
@@ -77,7 +75,7 @@ class MatexDividendYieldCalculatorDocument extends FastCalculatorDocument {
   @override
   MatexDividendYieldCalculatorBlocFields toFields() {
     return MatexDividendYieldCalculatorBlocFields(
-      paymentFrequency: parseFinancialFrequencyFromString(paymentFrequency),
+      paymentFrequency: MatexFinancialFrequencyX.fromName(paymentFrequency),
       dividendAmount: dividendAmount,
       sharePrice: sharePrice,
     );

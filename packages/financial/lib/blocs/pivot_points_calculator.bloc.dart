@@ -241,7 +241,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final method = MatexPivotPointsMethodsX.fromName(value);
       fields = currentState.fields.copyWith(method: method);
-      calculator.method = method;
+      calculator.method = method!;
     }
 
     return currentState.copyWith(fields: fields);

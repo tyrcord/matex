@@ -3,6 +3,8 @@ import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexFibonnaciLevelsCalculatorState extends MatexCalculatorState {
+  static const defaultTrend = MatexTrend.up;
+
   // Define Properties
   final double? highPrice;
   final double? lowPrice;
@@ -10,10 +12,10 @@ class MatexFibonnaciLevelsCalculatorState extends MatexCalculatorState {
 
   // Constructor
   const MatexFibonnaciLevelsCalculatorState({
+    MatexTrend? trend,
     this.highPrice,
     this.lowPrice,
-    this.trend = MatexTrend.up,
-  });
+  }) : trend = trend ?? defaultTrend;
 
   // Clone Method
   @override

@@ -17,7 +17,7 @@ class MatexDividendReinvestmentCalculatorState extends MatexCalculatorState {
   final bool drip;
 
   const MatexDividendReinvestmentCalculatorState({
-    this.dividendPaymentFrequency = defaultFrequency,
+    MatexFinancialFrequency? dividendPaymentFrequency,
     this.sharePrice,
     this.numberOfShares,
     this.dividendYield,
@@ -27,7 +27,7 @@ class MatexDividendReinvestmentCalculatorState extends MatexCalculatorState {
     this.annualDividendIncrease,
     this.taxRate,
     this.drip = true,
-  });
+  }) : dividendPaymentFrequency = dividendPaymentFrequency ?? defaultFrequency;
 
   @override
   MatexDividendReinvestmentCalculatorState clone() => copyWith();
