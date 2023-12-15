@@ -6,7 +6,7 @@ import 'package:matex_financial/financial.dart';
 
 class MatexForexRequiredMarginCalculatorDocument
     extends FastCalculatorDocument {
-  static const String defaultPositionSizeFieldType = 'unit';
+  static final defaultPositionSizeFieldType = MatexPositionSizeType.unit.name;
   static const String defaultLeverage = '1';
 
   late final String positionSizeFieldType;

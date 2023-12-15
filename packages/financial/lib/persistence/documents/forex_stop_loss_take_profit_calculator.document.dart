@@ -6,7 +6,7 @@ import 'package:matex_financial/financial.dart';
 
 class MatexForexStopLossTakeProfitCalculatorDocument
     extends FastCalculatorDocument {
-  static const String defaultPositionSizeFieldType = 'unit';
+  static final defaultPositionSizeFieldType = MatexPositionSizeType.unit.name;
   static const String defaultTakeProfitFieldType = 'price';
   static final defaultPosition = MatexPosition.long.name;
   static const String defaultStopLossFieldType = 'price';

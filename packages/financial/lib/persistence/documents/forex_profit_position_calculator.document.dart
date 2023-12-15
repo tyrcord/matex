@@ -5,7 +5,7 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexForexProfitLossCalculatorDocument extends FastCalculatorDocument {
-  static const String defaultPositionSizeFieldType = 'unit';
+  static final defaultPositionSizeFieldType = MatexPositionSizeType.unit.name;
   final String defaultPosition = MatexPosition.long.name;
 
   late final String positionSizeFieldType;
