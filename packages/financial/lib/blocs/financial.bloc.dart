@@ -11,10 +11,13 @@ abstract class MatexFinancialCalculatorBloc<
         S extends FastCalculatorBlocState,
         D extends FastCalculatorDocument,
         R extends FastCalculatorResults>
-    extends MatexCalculatorBloc<C, E, S, D, R> {
+    extends MatexCalculatorBloc<C, E, S, D, R>
+    with MatexFinancialCalculatorFormatterMixin {
   @protected
   final instrumentPairMetadataService =
       MatexFinancialInstrumentPairMetadataService();
+
+  final MatexFinancialInstrumentExchangeService? exchangeProvider;
 
   MatexFinancialCalculatorBloc({
     required super.dataProvider,
@@ -22,10 +25,82 @@ abstract class MatexFinancialCalculatorBloc<
     super.isAutoRefreshEnabled = false,
     super.showExportPdfDialog,
     super.autoRefreshPeriod,
+    this.exchangeProvider,
     super.initialState,
     super.debugLabel,
     super.delegate,
   });
+
+  @override
+  @mustCallSuper
+  void close() {
+    if (!isClosed && canClose()) {
+      exchangeProvider?.dispose();
+      super.close();
+    }
+  }
+
+  /// Loads the metadata
+  @override
+  @mustCallSuper
+  Future<Map<String, dynamic>> loadMetadata() async {
+    final metadata = await super.loadMetadata();
+
+    if (!isMandatoryFieldValid) return metadata;
+
+    final instrumentMetadata = await getInstrumentMetadata();
+
+    return {
+      ...metadata,
+      'instrumentMetadata': instrumentMetadata,
+    };
+  }
+
+  // TODO: catch errors
+  Future<MatexQuote?> fetchInstrumentExchangeRate(
+    MatexFinancialInstrument instrument,
+  ) async {
+    if (instrument.symbol == null || exchangeProvider == null) return null;
+
+    return retry(task: () => exchangeProvider!.rate(instrument.symbol!));
+  }
+
+  Stream<S> patchInstrumentExchangeRate(
+    MatexFinancialInstrument instrument,
+  ) async* {
+    if (isMandatoryFieldValid) {
+      var metadata = mergeMetadata({'isFetchingInstrumentExchangeRate': true});
+
+      yield currentState.copyWith(metadata: metadata) as S;
+
+      final quote = await fetchInstrumentExchangeRate(instrument);
+      Map<String, dynamic>? partialMetadata;
+
+      if (quote != null) {
+        final instrumentMetadata = await getInstrumentMetadata();
+
+        // await patchExchangeRates(quote);
+
+        partialMetadata = {
+          'formattedInstrumentExchangeRate': localizeQuote(
+            metadata: instrumentMetadata,
+            rate: quote.price,
+          ),
+          'rateUpdatedOn': await localizeTimestampInMilliseconds(
+            quote.timestamp,
+          ),
+          'instrumentExchangeRate': quote.price,
+        };
+      }
+
+      metadata = mergeMetadata({
+        ...?partialMetadata,
+        'isFetchingInstrumentExchangeRate': false,
+      });
+
+      yield currentState.copyWith(metadata: metadata) as S;
+    }
+  }
 
   void listenToPrimaryCurrencyCodeChanges() {
     subxList.add(appSettingsBloc.onData
@@ -57,13 +132,11 @@ abstract class MatexFinancialCalculatorBloc<
   }
 
   Future<int> getPipPrecision({String? base, String? counter}) async {
-    if (base == null || counter == null) {
-      return kDefaultPipPipDecimalPlaces;
-    }
+    if (base == null || counter == null) return kDefaultPipPipDecimalPlaces;
 
-    final pair = base + counter;
+    final symbol = base + counter;
     final tradingPairMetadata =
-        await instrumentPairMetadataService.metadata(pair);
+        await instrumentPairMetadataService.metadata(symbol);
     final pipMetadata = tradingPairMetadata?.pip;
 
     return pipMetadata?.precision ?? kDefaultPipPipDecimalPlaces;

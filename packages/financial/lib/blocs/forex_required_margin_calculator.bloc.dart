@@ -25,12 +25,10 @@ class MatexForexRequiredMarginCalculatorBloc
         MatexForexRequiredMarginCalculatorDocument,
         MatexForexRequiredMarginCalculatorBlocResults>
     with MatexFinancialCalculatorFormatterMixin {
-  final MatexFinancialInstrumentExchangeService exchangeProvider;
-
   MatexForexRequiredMarginCalculatorBloc({
     MatexForexRequiredMarginCalculatorBlocState? initialState,
     MatexForexRequiredMarginCalculatorDataProvider? dataProvider,
-    required this.exchangeProvider,
+    required super.exchangeProvider,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,
     super.showExportPdfDialog,
@@ -53,19 +51,12 @@ class MatexForexRequiredMarginCalculatorBloc
   }
 
   @override
-  void close() {
-    if (!isClosed && canClose()) {
-      exchangeProvider.dispose();
-      super.close();
-    }
-  }
-
-  @override
   bool get isMandatoryFieldValid {
-    return currentState.fields.accountCurrency != null &&
-        currentState.fields.financialInstrument != null &&
-        (currentState.fields.positionSize != null ||
-            currentState.fields.lotSize != null);
+    final fields = currentState.fields;
+
+    return (fields.positionSize != null || fields.lotSize != null) &&
+        fields.financialInstrument != null &&
+        fields.accountCurrency != null;
   }
 
   @override
@@ -73,70 +64,36 @@ class MatexForexRequiredMarginCalculatorBloc
   Stream<MatexForexRequiredMarginCalculatorBlocState> willCompute() async* {
     yield* super.willCompute();
 
+    final instrument = currentState.fields.financialInstrument;
+
+    // update the state metadata with the latest instrument metadata
+    if (instrument != null) yield* patchInstrumentExchangeRate(instrument);
+
+    final quote = currentMetadata['instrumentExchangeRate'] as double?;
+
+    if (quote != null) await patchCalculatorExchangeRates(quote);
+
     var fields = currentState.fields;
-    MatexQuote? quote;
-    String? updatedOn;
-
-    if (isMandatoryFieldValid) {
-      quote = await patchExchangeRates();
-
-      if (quote != null) {
-        updatedOn = await localizeTimestampInMilliseconds(quote.timestamp);
-      }
-    }
 
     if (fields.positionSizeFieldType != MatexPositionSizeType.unit &&
         fields.lotSize != null &&
         fields.lotSize!.isNotEmpty) {
       final positionSize = await getPositionSizeForLotSize(
-        positionSize: parseFieldValueToDouble(fields.lotSize),
         lotSize: fields.positionSizeFieldType,
+        positionSize: parseFieldValueToDouble(fields.lotSize),
       );
 
       final isInt = isDoubleInteger(positionSize);
 
       calculator.positionSize = positionSize;
-      fields = fields.copyWith(
+
+      fields = currentState.fields.copyWith(
         positionSize:
             isInt ? positionSize.toInt().toString() : positionSize.toString(),
       );
     }
 
-    yield currentState.copyWith(
-      fields: fields,
-      metadata: {
-        ...await loadMetadata(),
-        'updatedOn': updatedOn,
-      },
-    );
-  }
-
-  /// Loads the metadata of the calculator.
-  @override
-  @mustCallSuper
-  Future<Map<String, dynamic>> loadMetadata() async {
-    final metadata = await super.loadMetadata();
-
-    if (!isMandatoryFieldValid) return metadata;
-
-    final instrumentMetadata = await getInstrumentMetadata();
-    final instrumentPairRate = calculator.instrumentPairRate ?? 0;
-
-    if (instrumentPairRate > 0 && isMandatoryFieldValid) {
-      metadata.putIfAbsent('formattedInstrumentExchangeRate', () {
-        final formatted = localizeQuote(
-          rate: calculator.instrumentPairRate,
-          metadata: instrumentMetadata,
-        );
-
-        return superscriptLastCharacter(formatted);
-      });
-    }
-
-    return {
-      ...metadata,
-      'instrumentMetadata': instrumentMetadata,
-    };
+    yield currentState.copyWith(fields: fields);
   }
 
   @override
@@ -325,10 +282,6 @@ class MatexForexRequiredMarginCalculatorBloc
       ..isAccountCurrencyCounter = false
       ..instrumentPairRate = 0;
 
-    // Note: Loads default metadata values from the super class.
-    // instrument metadata will be loaded in the willCompute method.
-    final metadata = await super.loadMetadata();
-
     if (instrument == null) {
       fields = currentState.fields.copyWithDefaults(
         resetCounter: true,
@@ -340,6 +293,9 @@ class MatexForexRequiredMarginCalculatorBloc
         base: instrument.base,
       );
     }
+
+    // Note: Erase the previous instrument exchange rate metadata
+    final metadata = await super.loadMetadata();
 
     return currentState.copyWith(fields: fields, metadata: metadata);
   }
@@ -355,7 +311,7 @@ class MatexForexRequiredMarginCalculatorBloc
       );
 
       calculator.positionSize = 0;
-    } else if (positionSizeFieldType == MatexPositionSizeType.unit.name) {
+    } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(positionSize: value);
       calculator.positionSize = dValue.toDouble();
@@ -375,7 +331,7 @@ class MatexForexRequiredMarginCalculatorBloc
       );
 
       calculator.positionSize = 0;
-    } else if (positionSizeFieldType != MatexPositionSizeType.unit.name) {
+    } else if (positionSizeFieldType != MatexPositionSizeType.unit) {
       final dValue = toDecimal(value) ?? dZero;
       fields = currentState.fields.copyWith(positionSize: value);
       calculator.positionSize = dValue.toDouble();
@@ -413,46 +369,32 @@ class MatexForexRequiredMarginCalculatorBloc
     return currentState.copyWith(fields: fields);
   }
 
-  // FIXME: take a look at pip value calculator
-  // to see how to refactor this method and combine them
-  Future<MatexQuote?> patchExchangeRates() async {
+  Future<void> patchCalculatorExchangeRates(double instrumentPairRate) async {
     final accountCurrency = currentState.fields.accountCurrency!;
     final counter = currentState.fields.counter!;
     final base = currentState.fields.base!;
-    final symbol = base + counter;
-    final instrumentQuoteFuture = exchangeProvider.rate(symbol);
-    final instrumentQuote = await instrumentQuoteFuture;
-
-    if (instrumentQuote == null) {
-      // FIXME: display an error message
-      return null;
-    }
 
     calculator
-      ..instrumentPairRate = instrumentQuote.price
-      ..counterToAccountCurrencyRate = 0
       ..isAccountCurrencyBase = accountCurrency == base
+      ..instrumentPairRate = instrumentPairRate
+      ..counterToAccountCurrencyRate = 0
       ..isAccountCurrencyCounter = false;
 
     if (accountCurrency == counter) {
       calculator.isAccountCurrencyCounter = true;
     } else {
       final symbol = counter + accountCurrency;
-      final accountBaseQuote = await exchangeProvider.rate(symbol);
+      final accountBaseQuote = await exchangeProvider!.rate(symbol);
 
-      if (accountBaseQuote == null) {
-        // FIXME: display an error message
-        return null;
-      }
+      // FIXME: display an error message
+      if (accountBaseQuote == null) return;
 
       calculator.counterToAccountCurrencyRate = accountBaseQuote.price;
     }
-
-    return instrumentQuote;
   }
 
   @override
-  String getReportFilename() => 'forex_pip_value_calculator_report';
+  String getReportFilename() => 'forex_required_margin_calculator_report';
 
   @override
   Future<Uint8List> toPdf(BuildContext context) async {
