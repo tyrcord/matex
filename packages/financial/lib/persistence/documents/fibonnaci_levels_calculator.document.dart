@@ -13,20 +13,21 @@ class MatexFibonnaciLevelsCalculatorDocument extends FastCalculatorDocument {
     String? lowPrice,
     String? trend,
   }) {
+    this.trend = assignValue(trend) ?? defaultTrend;
     this.highPrice = assignValue(highPrice);
     this.lowPrice = assignValue(lowPrice);
-    this.trend = assignValue(trend) ?? defaultTrend;
   }
 
   @override
   MatexFibonnaciLevelsCalculatorDocument clone() => copyWith();
 
   factory MatexFibonnaciLevelsCalculatorDocument.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     return MatexFibonnaciLevelsCalculatorDocument(
       highPrice: json['highPrice'] as String?,
       lowPrice: json['lowPrice'] as String?,
-      trend: json['trend'] as String? ?? defaultTrend,
+      trend: json['trend'] as String?,
     );
   }
 
@@ -54,7 +55,6 @@ class MatexFibonnaciLevelsCalculatorDocument extends FastCalculatorDocument {
     );
   }
 
-  // [toFields Method]
   @override
   MatexFibonnaciLevelsCalculatorBlocFields toFields() {
     return MatexFibonnaciLevelsCalculatorBlocFields(
@@ -64,7 +64,6 @@ class MatexFibonnaciLevelsCalculatorDocument extends FastCalculatorDocument {
     );
   }
 
-// [Copy With Defaults Method]
   @override
   MatexFibonnaciLevelsCalculatorDocument copyWithDefaults({
     bool resetHighPrice = false,

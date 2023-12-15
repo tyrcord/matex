@@ -7,67 +7,67 @@ import 'package:matex_financial/financial.dart';
 class MatexForexStopLossTakeProfitCalculatorDocument
     extends FastCalculatorDocument {
   static const String defaultPositionSizeFieldType = 'unit';
-  static const String defaultStopLossFieldType = 'price';
   static const String defaultTakeProfitFieldType = 'price';
+  static final defaultPosition = MatexPosition.long.name;
+  static const String defaultStopLossFieldType = 'price';
 
-  static String defaultPosition = MatexPosition.long.name;
-
-  late final String? accountCurrency;
-  late final String? base;
-  late final String? counter;
-  late final String? positionSize;
-  late final String? entryPrice;
-  late final String? pipDecimalPlaces;
   late final String positionSizeFieldType;
-  late final String? lotSize;
-  late final String? stopLossPrice;
-  late final String? stopLossPips;
-  late final String? stopLossAmount;
+  late final String takeProfitFieldType;
+  late final String? pipDecimalPlaces;
+  late final String stopLossFieldType;
+  late final String? takeProfitAmount;
+  late final String? accountCurrency;
   late final String? takeProfitPrice;
   late final String? takeProfitPips;
-  late final String? takeProfitAmount;
+  late final String? stopLossAmount;
+  late final String? stopLossPrice;
+  late final String? stopLossPips;
+  late final String? positionSize;
+  late final String? entryPrice;
+  late final String? lotSize;
   late final String position;
-  late final String stopLossFieldType;
-  late final String takeProfitFieldType;
+  late final String? counter;
+  late final String? base;
 
   MatexForexStopLossTakeProfitCalculatorDocument({
-    String? accountCurrency,
-    String? base,
-    String? counter,
-    String? positionSize,
-    String? entryPrice,
-    String? pipDecimalPlaces,
     String? positionSizeFieldType,
-    String? lotSize,
+    String? takeProfitFieldType,
+    String? stopLossFieldType,
+    String? pipDecimalPlaces,
+    String? takeProfitAmount,
+    String? accountCurrency,
+    String? takeProfitPrice,
+    String? stopLossAmount,
+    String? takeProfitPips,
     String? stopLossPrice,
     String? stopLossPips,
-    String? stopLossAmount,
-    String? takeProfitPrice,
-    String? takeProfitPips,
-    String? takeProfitAmount,
+    String? positionSize,
+    String? entryPrice,
     String? position,
-    String? stopLossFieldType,
-    String? takeProfitFieldType,
+    String? lotSize,
+    String? counter,
+    String? base,
   }) {
+    this.stopLossFieldType = stopLossFieldType ?? defaultStopLossFieldType;
+    this.takeProfitAmount = assignValue(takeProfitAmount);
     this.accountCurrency = assignValue(accountCurrency);
-    this.base = assignValue(base);
-    this.counter = assignValue(counter);
-    this.positionSize = assignValue(positionSize);
-    this.entryPrice = assignValue(entryPrice);
-    this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
-    this.lotSize = assignValue(lotSize);
+    this.takeProfitPrice = assignValue(takeProfitPrice);
+    this.stopLossAmount = assignValue(stopLossAmount);
+    this.takeProfitPips = assignValue(takeProfitPips);
     this.stopLossPrice = assignValue(stopLossPrice);
     this.stopLossPips = assignValue(stopLossPips);
-    this.stopLossAmount = assignValue(stopLossAmount);
-    this.takeProfitPrice = assignValue(takeProfitPrice);
-    this.takeProfitPips = assignValue(takeProfitPips);
-    this.takeProfitAmount = assignValue(takeProfitAmount);
+    this.positionSize = assignValue(positionSize);
     this.position = position ?? defaultPosition;
-    this.stopLossFieldType = stopLossFieldType ?? defaultStopLossFieldType;
+    this.entryPrice = assignValue(entryPrice);
+    this.lotSize = assignValue(lotSize);
+    this.counter = assignValue(counter);
+    this.base = assignValue(base);
     this.positionSizeFieldType =
         positionSizeFieldType ?? defaultPositionSizeFieldType;
     this.takeProfitFieldType =
         takeProfitFieldType ?? defaultTakeProfitFieldType;
+    this.pipDecimalPlaces =
+        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
   }
 
   @override
@@ -75,84 +75,84 @@ class MatexForexStopLossTakeProfitCalculatorDocument
 
   @override
   MatexForexStopLossTakeProfitCalculatorDocument copyWith({
-    String? accountCurrency,
-    String? base,
-    String? counter,
-    String? positionSize,
-    String? entryPrice,
-    String? pipDecimalPlaces,
     String? positionSizeFieldType,
-    String? lotSize,
+    String? takeProfitFieldType,
+    String? stopLossFieldType,
+    String? pipDecimalPlaces,
+    String? takeProfitAmount,
+    String? accountCurrency,
+    String? takeProfitPrice,
+    String? stopLossAmount,
+    String? takeProfitPips,
     String? stopLossPrice,
     String? stopLossPips,
-    String? stopLossAmount,
-    String? takeProfitPrice,
-    String? takeProfitPips,
-    String? takeProfitAmount,
+    String? positionSize,
+    String? entryPrice,
     String? position,
-    String? stopLossFieldType,
-    String? takeProfitFieldType,
+    String? lotSize,
+    String? counter,
+    String? base,
   }) {
     return MatexForexStopLossTakeProfitCalculatorDocument(
-      accountCurrency: accountCurrency ?? this.accountCurrency,
-      base: base ?? this.base,
-      counter: counter ?? this.counter,
-      positionSize: positionSize ?? this.positionSize,
-      entryPrice: entryPrice ?? this.entryPrice,
+      takeProfitFieldType: takeProfitFieldType ?? this.takeProfitFieldType,
+      stopLossFieldType: stopLossFieldType ?? this.stopLossFieldType,
       pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
-      lotSize: lotSize ?? this.lotSize,
-      positionSizeFieldType:
-          positionSizeFieldType ?? this.positionSizeFieldType,
-      stopLossPrice: stopLossPrice ?? this.stopLossPrice,
-      stopLossPips: stopLossPips ?? this.stopLossPips,
-      stopLossAmount: stopLossAmount ?? this.stopLossAmount,
+      takeProfitAmount: takeProfitAmount ?? this.takeProfitAmount,
+      accountCurrency: accountCurrency ?? this.accountCurrency,
       takeProfitPrice: takeProfitPrice ?? this.takeProfitPrice,
       takeProfitPips: takeProfitPips ?? this.takeProfitPips,
-      takeProfitAmount: takeProfitAmount ?? this.takeProfitAmount,
+      stopLossAmount: stopLossAmount ?? this.stopLossAmount,
+      stopLossPrice: stopLossPrice ?? this.stopLossPrice,
+      stopLossPips: stopLossPips ?? this.stopLossPips,
+      positionSize: positionSize ?? this.positionSize,
+      entryPrice: entryPrice ?? this.entryPrice,
       position: position ?? this.position,
-      stopLossFieldType: stopLossFieldType ?? this.stopLossFieldType,
-      takeProfitFieldType: takeProfitFieldType ?? this.takeProfitFieldType,
+      counter: counter ?? this.counter,
+      lotSize: lotSize ?? this.lotSize,
+      base: base ?? this.base,
+      positionSizeFieldType:
+          positionSizeFieldType ?? this.positionSizeFieldType,
     );
   }
 
   @override
   MatexForexStopLossTakeProfitCalculatorDocument copyWithDefaults({
-    bool resetAccountCurrency = false,
-    bool resetBase = false,
-    bool resetCounter = false,
-    bool resetPositionSize = false,
-    bool resetEntryPrice = false,
-    bool resetPipDecimalPlaces = false,
     bool resetPositionSizeFieldType = false,
-    bool resetLotSize = false,
-    bool resetStopLossPrice = false,
-    bool resetStopLossPips = false,
-    bool resetStopLossAmount = false,
+    bool resettakeProfitFieldType = false,
+    bool resetStopLossFieldType = false,
+    bool resetTakeProfitAmount = false,
+    bool resetPipDecimalPlaces = false,
+    bool resetAccountCurrency = false,
     bool resetTakeProfitPrice = false,
     bool resetTakeProfitPips = false,
-    bool resetTakeProfitAmount = false,
+    bool resetStopLossAmount = false,
+    bool resetStopLossPrice = false,
+    bool resetStopLossPips = false,
+    bool resetPositionSize = false,
+    bool resetEntryPrice = false,
     bool resetPosition = false,
-    bool resetstopLossFieldType = false,
-    bool resettakeProfitFieldType = false,
+    bool resetLotSize = false,
+    bool resetCounter = false,
+    bool resetBase = false,
   }) {
     return MatexForexStopLossTakeProfitCalculatorDocument(
-      accountCurrency: resetAccountCurrency ? null : accountCurrency,
-      base: resetBase ? null : base,
-      counter: resetCounter ? null : counter,
-      positionSize: resetPositionSize ? null : positionSize,
-      entryPrice: resetEntryPrice ? null : entryPrice,
+      stopLossFieldType: resetStopLossFieldType ? null : stopLossFieldType,
       pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
-      lotSize: resetLotSize ? null : lotSize,
-      positionSizeFieldType:
-          resetPositionSizeFieldType ? null : positionSizeFieldType,
-      stopLossPrice: resetStopLossPrice ? null : stopLossPrice,
-      stopLossPips: resetStopLossPips ? null : stopLossPips,
-      stopLossAmount: resetStopLossAmount ? null : stopLossAmount,
+      takeProfitAmount: resetTakeProfitAmount ? null : takeProfitAmount,
+      accountCurrency: resetAccountCurrency ? null : accountCurrency,
       takeProfitPrice: resetTakeProfitPrice ? null : takeProfitPrice,
       takeProfitPips: resetTakeProfitPips ? null : takeProfitPips,
-      takeProfitAmount: resetTakeProfitAmount ? null : takeProfitAmount,
+      stopLossAmount: resetStopLossAmount ? null : stopLossAmount,
+      stopLossPrice: resetStopLossPrice ? null : stopLossPrice,
+      stopLossPips: resetStopLossPips ? null : stopLossPips,
+      positionSize: resetPositionSize ? null : positionSize,
+      entryPrice: resetEntryPrice ? null : entryPrice,
       position: resetPosition ? null : position,
-      stopLossFieldType: resetstopLossFieldType ? null : stopLossFieldType,
+      lotSize: resetLotSize ? null : lotSize,
+      counter: resetCounter ? null : counter,
+      base: resetBase ? null : base,
+      positionSizeFieldType:
+          resetPositionSizeFieldType ? null : positionSizeFieldType,
       takeProfitFieldType:
           resettakeProfitFieldType ? null : takeProfitFieldType,
     );
@@ -163,45 +163,45 @@ class MatexForexStopLossTakeProfitCalculatorDocument
     covariant MatexForexStopLossTakeProfitCalculatorDocument model,
   ) {
     return copyWith(
-      accountCurrency: model.accountCurrency,
-      base: model.base,
-      counter: model.counter,
-      positionSize: model.positionSize,
-      entryPrice: model.entryPrice,
-      pipDecimalPlaces: model.pipDecimalPlaces,
-      lotSize: model.lotSize,
       positionSizeFieldType: model.positionSizeFieldType,
+      takeProfitFieldType: model.takeProfitFieldType,
+      stopLossFieldType: model.stopLossFieldType,
+      pipDecimalPlaces: model.pipDecimalPlaces,
+      takeProfitAmount: model.takeProfitAmount,
+      takeProfitPrice: model.takeProfitPrice,
+      accountCurrency: model.accountCurrency,
+      stopLossAmount: model.stopLossAmount,
+      takeProfitPips: model.takeProfitPips,
       stopLossPrice: model.stopLossPrice,
       stopLossPips: model.stopLossPips,
-      stopLossAmount: model.stopLossAmount,
-      takeProfitPrice: model.takeProfitPrice,
-      takeProfitPips: model.takeProfitPips,
-      takeProfitAmount: model.takeProfitAmount,
+      positionSize: model.positionSize,
+      entryPrice: model.entryPrice,
       position: model.position,
-      stopLossFieldType: model.stopLossFieldType,
-      takeProfitFieldType: model.takeProfitFieldType,
+      counter: model.counter,
+      lotSize: model.lotSize,
+      base: model.base,
     );
   }
 
   @override
   MatexForexStopLossTakeProfitCalculatorBlocFields toFields() {
     return MatexForexStopLossTakeProfitCalculatorBlocFields(
-      accountCurrency: accountCurrency,
-      base: base,
-      counter: counter,
-      positionSize: positionSize,
-      entryPrice: entryPrice,
+      position: MatexPositionX.fromName(position),
+      takeProfitFieldType: takeProfitFieldType,
+      stopLossFieldType: stopLossFieldType,
+      takeProfitAmount: takeProfitAmount,
       pipDecimalPlaces: pipDecimalPlaces,
-      lotSize: lotSize,
+      takeProfitPrice: takeProfitPrice,
+      accountCurrency: accountCurrency,
+      takeProfitPips: takeProfitPips,
+      stopLossAmount: stopLossAmount,
       stopLossPrice: stopLossPrice,
       stopLossPips: stopLossPips,
-      stopLossAmount: stopLossAmount,
-      takeProfitPrice: takeProfitPrice,
-      takeProfitPips: takeProfitPips,
-      takeProfitAmount: takeProfitAmount,
-      position: MatexPositionX.fromName(position),
-      stopLossFieldType: stopLossFieldType,
-      takeProfitFieldType: takeProfitFieldType,
+      positionSize: positionSize,
+      entryPrice: entryPrice,
+      counter: counter,
+      lotSize: lotSize,
+      base: base,
       positionSizeFieldType:
           MatexPositionSizeTypeX.fromName(positionSizeFieldType),
     );
@@ -210,23 +210,23 @@ class MatexForexStopLossTakeProfitCalculatorDocument
   @override
   Map<String, dynamic> toJson() {
     return {
-      'accountCurrency': accountCurrency,
-      'base': base,
-      'counter': counter,
-      'positionSize': positionSize,
-      'entryPrice': entryPrice,
-      'pipDecimalPlaces': pipDecimalPlaces,
       'positionSizeFieldType': positionSizeFieldType,
-      'lotSize': lotSize,
+      'takeProfitFieldType': takeProfitFieldType,
+      'stopLossFieldType': stopLossFieldType,
+      'takeProfitAmount': takeProfitAmount,
+      'pipDecimalPlaces': pipDecimalPlaces,
+      'takeProfitPrice': takeProfitPrice,
+      'accountCurrency': accountCurrency,
+      'stopLossAmount': stopLossAmount,
+      'takeProfitPips': takeProfitPips,
       'stopLossPrice': stopLossPrice,
       'stopLossPips': stopLossPips,
-      'stopLossAmount': stopLossAmount,
-      'takeProfitPrice': takeProfitPrice,
-      'takeProfitPips': takeProfitPips,
-      'takeProfitAmount': takeProfitAmount,
+      'positionSize': positionSize,
+      'entryPrice': entryPrice,
       'position': position,
-      'stopLossFieldType': stopLossFieldType,
-      'takeProfitFieldType': takeProfitFieldType,
+      'lotSize': lotSize,
+      'counter': counter,
+      'base': base,
       ...super.toJson(),
     };
   }
@@ -235,44 +235,44 @@ class MatexForexStopLossTakeProfitCalculatorDocument
     Map<String, dynamic> json,
   ) {
     return MatexForexStopLossTakeProfitCalculatorDocument(
-      accountCurrency: json['accountCurrency'] as String?,
-      base: json['base'] as String?,
-      counter: json['counter'] as String?,
-      positionSize: json['positionSize'] as String?,
-      entryPrice: json['entryPrice'] as String?,
-      pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
       positionSizeFieldType: json['positionSizeFieldType'] as String?,
-      lotSize: json['lotSize'] as String?,
-      stopLossPrice: json['stopLossPrice'] as String?,
-      stopLossPips: json['stopLossPips'] as String?,
-      stopLossAmount: json['stopLossAmount'] as String?,
-      takeProfitPrice: json['takeProfitPrice'] as String?,
-      takeProfitPips: json['takeProfitPips'] as String?,
-      takeProfitAmount: json['takeProfitAmount'] as String?,
-      position: json['position'] as String?,
-      stopLossFieldType: json['stopLossFieldType'] as String?,
       takeProfitFieldType: json['takeProfitFieldType'] as String?,
+      stopLossFieldType: json['stopLossFieldType'] as String?,
+      pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
+      takeProfitAmount: json['takeProfitAmount'] as String?,
+      takeProfitPrice: json['takeProfitPrice'] as String?,
+      accountCurrency: json['accountCurrency'] as String?,
+      stopLossAmount: json['stopLossAmount'] as String?,
+      takeProfitPips: json['takeProfitPips'] as String?,
+      stopLossPrice: json['stopLossPrice'] as String?,
+      positionSize: json['positionSize'] as String?,
+      stopLossPips: json['stopLossPips'] as String?,
+      entryPrice: json['entryPrice'] as String?,
+      position: json['position'] as String?,
+      lotSize: json['lotSize'] as String?,
+      counter: json['counter'] as String?,
+      base: json['base'] as String?,
     );
   }
 
   @override
   List<Object?> get props => [
-        accountCurrency,
-        base,
-        counter,
-        positionSize,
-        entryPrice,
-        pipDecimalPlaces,
         positionSizeFieldType,
-        lotSize,
+        takeProfitFieldType,
+        stopLossFieldType,
+        pipDecimalPlaces,
+        takeProfitAmount,
+        accountCurrency,
+        takeProfitPrice,
+        stopLossAmount,
+        takeProfitPips,
         stopLossPrice,
         stopLossPips,
-        stopLossAmount,
-        takeProfitPrice,
-        takeProfitPips,
-        takeProfitAmount,
+        positionSize,
+        entryPrice,
         position,
-        stopLossFieldType,
-        takeProfitFieldType,
+        lotSize,
+        counter,
+        base,
       ];
 }

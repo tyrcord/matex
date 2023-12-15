@@ -5,36 +5,37 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexForexPipValueCalculatorDocument extends FastCalculatorDocument {
-  static const String _kDefaultPositionSizeFieldType = 'unit';
+  static const String defaultPositionSizeFieldType = 'unit';
 
+  late final String? positionSizeFieldType;
+  late final String? pipDecimalPlaces;
   late final String? accountCurrency;
-  late final String? base;
-  late final String? counter;
   late final String? positionSize;
   late final String? numberOfPips;
-  late final String? pipDecimalPlaces;
-  late final String positionSizeFieldType;
   late final String? lotSize;
+  late final String? counter;
+  late final String? base;
 
   MatexForexPipValueCalculatorDocument({
+    String? positionSizeFieldType,
+    String? pipDecimalPlaces,
     String? accountCurrency,
-    String? base,
-    String? counter,
     String? positionSize,
     String? numberOfPips,
-    String? pipDecimalPlaces,
-    String? positionSizeFieldType,
+    String? counter,
     String? lotSize,
+    String? base,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
-    this.base = assignValue(base);
-    this.counter = assignValue(counter);
     this.positionSize = assignValue(positionSize);
     this.numberOfPips = assignValue(numberOfPips);
-    this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
     this.lotSize = assignValue(lotSize);
+    this.counter = assignValue(counter);
+    this.base = assignValue(base);
     this.positionSizeFieldType =
-        positionSizeFieldType ?? _kDefaultPositionSizeFieldType;
+        positionSizeFieldType ?? defaultPositionSizeFieldType;
+    this.pipDecimalPlaces =
+        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
   }
 
   @override
@@ -42,23 +43,23 @@ class MatexForexPipValueCalculatorDocument extends FastCalculatorDocument {
 
   @override
   MatexForexPipValueCalculatorDocument copyWith({
+    String? positionSizeFieldType,
+    String? pipDecimalPlaces,
     String? accountCurrency,
-    String? base,
-    String? counter,
     String? positionSize,
     String? numberOfPips,
-    String? pipDecimalPlaces,
-    String? positionSizeFieldType,
+    String? counter,
     String? lotSize,
+    String? base,
   }) {
     return MatexForexPipValueCalculatorDocument(
+      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
       accountCurrency: accountCurrency ?? this.accountCurrency,
-      base: base ?? this.base,
-      counter: counter ?? this.counter,
       positionSize: positionSize ?? this.positionSize,
       numberOfPips: numberOfPips ?? this.numberOfPips,
-      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
       lotSize: lotSize ?? this.lotSize,
+      counter: counter ?? this.counter,
+      base: base ?? this.base,
       positionSizeFieldType:
           positionSizeFieldType ?? this.positionSizeFieldType,
     );
@@ -66,22 +67,22 @@ class MatexForexPipValueCalculatorDocument extends FastCalculatorDocument {
 
   @override
   MatexForexPipValueCalculatorDocument copyWithDefaults({
+    bool resetPositionSizeFieldType = false,
+    bool resetPipDecimalPlaces = false,
     bool resetAccountCurrency = false,
-    bool resetBase = false,
-    bool resetCounter = false,
     bool resetPositionSize = false,
     bool resetNumberOfPips = false,
-    bool resetPipDecimalPlaces = false,
-    bool resetPositionSizeFieldType = false,
+    bool resetCounter = false,
     bool resetLotSize = false,
+    bool resetBase = false,
   }) {
     return MatexForexPipValueCalculatorDocument(
       pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
       accountCurrency: resetAccountCurrency ? null : accountCurrency,
-      positionSize: resetPositionSize ? null : positionSize,
       numberOfPips: resetNumberOfPips ? null : numberOfPips,
-      counter: resetCounter ? null : counter,
+      positionSize: resetPositionSize ? null : positionSize,
       lotSize: resetLotSize ? null : lotSize,
+      counter: resetCounter ? null : counter,
       base: resetBase ? null : base,
       positionSizeFieldType:
           resetPositionSizeFieldType ? null : positionSizeFieldType,
@@ -93,27 +94,27 @@ class MatexForexPipValueCalculatorDocument extends FastCalculatorDocument {
     covariant MatexForexPipValueCalculatorDocument model,
   ) {
     return copyWith(
+      positionSizeFieldType: model.positionSizeFieldType,
+      pipDecimalPlaces: model.pipDecimalPlaces,
       accountCurrency: model.accountCurrency,
-      base: model.base,
-      counter: model.counter,
       positionSize: model.positionSize,
       numberOfPips: model.numberOfPips,
-      pipDecimalPlaces: model.pipDecimalPlaces,
-      positionSizeFieldType: model.positionSizeFieldType,
       lotSize: model.lotSize,
+      counter: model.counter,
+      base: model.base,
     );
   }
 
   @override
   MatexForexPipValueCalculatorBlocFields toFields() {
     return MatexForexPipValueCalculatorBlocFields(
+      pipDecimalPlaces: pipDecimalPlaces,
       accountCurrency: accountCurrency,
-      base: base,
-      counter: counter,
       positionSize: positionSize,
       numberOfPips: numberOfPips,
-      pipDecimalPlaces: pipDecimalPlaces,
+      counter: counter,
       lotSize: lotSize,
+      base: base,
       positionSizeFieldType:
           MatexPositionSizeTypeX.fromName(positionSizeFieldType),
     );
@@ -122,14 +123,14 @@ class MatexForexPipValueCalculatorDocument extends FastCalculatorDocument {
   @override
   Map<String, dynamic> toJson() {
     return {
-      'accountCurrency': accountCurrency,
-      'base': base,
-      'counter': counter,
-      'positionSize': positionSize,
-      'numberOfPips': numberOfPips,
-      'pipDecimalPlaces': pipDecimalPlaces,
       'positionSizeFieldType': positionSizeFieldType,
+      'pipDecimalPlaces': pipDecimalPlaces,
+      'accountCurrency': accountCurrency,
+      'numberOfPips': numberOfPips,
+      'positionSize': positionSize,
+      'counter': counter,
       'lotSize': lotSize,
+      'base': base,
       ...super.toJson(),
     };
   }
@@ -138,26 +139,26 @@ class MatexForexPipValueCalculatorDocument extends FastCalculatorDocument {
     Map<String, dynamic> json,
   ) {
     return MatexForexPipValueCalculatorDocument(
+      positionSizeFieldType: json['positionSizeFieldType'] as String?,
+      pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
       accountCurrency: json['accountCurrency'] as String?,
-      base: json['base'] as String?,
-      counter: json['counter'] as String?,
       positionSize: json['positionSize'] as String?,
       numberOfPips: json['numberOfPips'] as String?,
-      pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
-      positionSizeFieldType: json['positionSizeFieldType'] as String?,
       lotSize: json['lotSize'] as String?,
+      counter: json['counter'] as String?,
+      base: json['base'] as String?,
     );
   }
 
   @override
   List<Object?> get props => [
+        positionSizeFieldType,
+        pipDecimalPlaces,
         accountCurrency,
-        base,
-        counter,
         positionSize,
         numberOfPips,
-        pipDecimalPlaces,
-        positionSizeFieldType,
         lotSize,
+        counter,
+        base,
       ];
 }

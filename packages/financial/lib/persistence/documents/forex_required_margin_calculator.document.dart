@@ -6,33 +6,34 @@ import 'package:matex_financial/financial.dart';
 
 class MatexForexRequiredMarginCalculatorDocument
     extends FastCalculatorDocument {
-  static const String _kDefaultPositionSizeFieldType = 'unit';
+  static const String defaultPositionSizeFieldType = 'unit';
+  static const String defaultLeverage = '1';
 
+  late final String positionSizeFieldType;
   late final String? accountCurrency;
-  late final String? base;
-  late final String? counter;
   late final String? positionSize;
   late final String leverage;
-  late final String positionSizeFieldType;
   late final String? lotSize;
+  late final String? counter;
+  late final String? base;
 
   MatexForexRequiredMarginCalculatorDocument({
+    String? positionSizeFieldType,
     String? accountCurrency,
-    String? base,
-    String? counter,
     String? positionSize,
     String? leverage,
-    String? positionSizeFieldType,
     String? lotSize,
+    String? counter,
+    String? base,
   }) {
+    this.leverage = assignValue(leverage) ?? defaultLeverage;
     this.accountCurrency = assignValue(accountCurrency);
-    this.base = assignValue(base);
-    this.counter = assignValue(counter);
     this.positionSize = assignValue(positionSize);
-    this.leverage = assignValue(leverage) ?? '1';
+    this.counter = assignValue(counter);
     this.lotSize = assignValue(lotSize);
+    this.base = assignValue(base);
     this.positionSizeFieldType =
-        positionSizeFieldType ?? _kDefaultPositionSizeFieldType;
+        positionSizeFieldType ?? defaultPositionSizeFieldType;
   }
 
   @override
@@ -40,21 +41,21 @@ class MatexForexRequiredMarginCalculatorDocument
 
   @override
   MatexForexRequiredMarginCalculatorDocument copyWith({
+    String? positionSizeFieldType,
     String? accountCurrency,
-    String? base,
-    String? counter,
     String? positionSize,
     String? leverage,
-    String? positionSizeFieldType,
     String? lotSize,
+    String? counter,
+    String? base,
   }) {
     return MatexForexRequiredMarginCalculatorDocument(
       accountCurrency: accountCurrency ?? this.accountCurrency,
-      base: base ?? this.base,
-      counter: counter ?? this.counter,
       positionSize: positionSize ?? this.positionSize,
       leverage: leverage ?? this.leverage,
       lotSize: lotSize ?? this.lotSize,
+      counter: counter ?? this.counter,
+      base: base ?? this.base,
       positionSizeFieldType:
           positionSizeFieldType ?? this.positionSizeFieldType,
     );
@@ -62,21 +63,21 @@ class MatexForexRequiredMarginCalculatorDocument
 
   @override
   MatexForexRequiredMarginCalculatorDocument copyWithDefaults({
+    bool resetPositionSizeFieldType = false,
     bool resetAccountCurrency = false,
-    bool resetBase = false,
-    bool resetCounter = false,
     bool resetPositionSize = false,
     bool resetLeverage = false,
-    bool resetPositionSizeFieldType = false,
     bool resetLotSize = false,
+    bool resetCounter = false,
+    bool resetBase = false,
   }) {
     return MatexForexRequiredMarginCalculatorDocument(
       accountCurrency: resetAccountCurrency ? null : accountCurrency,
-      base: resetBase ? null : base,
-      counter: resetCounter ? null : counter,
       positionSize: resetPositionSize ? null : positionSize,
       leverage: resetLeverage ? null : leverage,
       lotSize: resetLotSize ? null : lotSize,
+      counter: resetCounter ? null : counter,
+      base: resetBase ? null : base,
       positionSizeFieldType:
           resetPositionSizeFieldType ? null : positionSizeFieldType,
     );
@@ -87,13 +88,13 @@ class MatexForexRequiredMarginCalculatorDocument
     covariant MatexForexRequiredMarginCalculatorDocument model,
   ) {
     return copyWith(
+      positionSizeFieldType: model.positionSizeFieldType,
       accountCurrency: model.accountCurrency,
-      base: model.base,
-      counter: model.counter,
       positionSize: model.positionSize,
       leverage: model.leverage,
-      positionSizeFieldType: model.positionSizeFieldType,
       lotSize: model.lotSize,
+      counter: model.counter,
+      base: model.base,
     );
   }
 
@@ -101,11 +102,11 @@ class MatexForexRequiredMarginCalculatorDocument
   MatexForexRequiredMarginCalculatorBlocFields toFields() {
     return MatexForexRequiredMarginCalculatorBlocFields(
       accountCurrency: accountCurrency,
-      base: base,
-      counter: counter,
       positionSize: positionSize,
       leverage: leverage,
+      counter: counter,
       lotSize: lotSize,
+      base: base,
       positionSizeFieldType:
           MatexPositionSizeTypeX.fromName(positionSizeFieldType),
     );
@@ -114,13 +115,13 @@ class MatexForexRequiredMarginCalculatorDocument
   @override
   Map<String, dynamic> toJson() {
     return {
+      'positionSizeFieldType': positionSizeFieldType,
       'accountCurrency': accountCurrency,
-      'base': base,
-      'counter': counter,
       'positionSize': positionSize,
       'leverage': leverage,
-      'positionSizeFieldType': positionSizeFieldType,
+      'counter': counter,
       'lotSize': lotSize,
+      'base': base,
       ...super.toJson(),
     };
   }
@@ -129,24 +130,24 @@ class MatexForexRequiredMarginCalculatorDocument
     Map<String, dynamic> json,
   ) {
     return MatexForexRequiredMarginCalculatorDocument(
+      positionSizeFieldType: json['positionSizeFieldType'] as String?,
       accountCurrency: json['accountCurrency'] as String?,
-      base: json['base'] as String?,
-      counter: json['counter'] as String?,
       positionSize: json['positionSize'] as String?,
       leverage: json['leverage'] as String?,
-      positionSizeFieldType: json['positionSizeFieldType'] as String?,
+      counter: json['counter'] as String?,
       lotSize: json['lotSize'] as String?,
+      base: json['base'] as String?,
     );
   }
 
   @override
   List<Object?> get props => [
+        positionSizeFieldType,
         accountCurrency,
-        base,
-        counter,
         positionSize,
         leverage,
-        positionSizeFieldType,
         lotSize,
+        counter,
+        base,
       ];
 }

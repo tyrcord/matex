@@ -41,7 +41,7 @@ class MatexInstrumentFavoriteDataProvider extends TDocumentDataProvider {
     bool sort = false,
   }) async {
     final document = await retreiveDocument();
-    var favorites = document.favorites ?? const [];
+    var favorites = document.favorites;
 
     if (sort) {
       favorites = [...favorites]..sort((a, b) => a.base.compareTo(b.base));
@@ -58,7 +58,7 @@ class MatexInstrumentFavoriteDataProvider extends TDocumentDataProvider {
   ///  is empty.
   Future<void> addFavorite(MatexInstrumentFavorite favorite) async {
     final document = await retreiveDocument();
-    final existingFavorites = document.favorites ?? const [];
+    final existingFavorites = document.favorites;
     final alreadyExists = existingFavorites.any((f) {
       return f.counter == favorite.counter && f.base == favorite.base;
     });
@@ -99,7 +99,7 @@ class MatexInstrumentFavoriteDataProvider extends TDocumentDataProvider {
 
     return persistDocument(
       document.copyWith(
-        favorites: document.favorites?.where((f) {
+        favorites: document.favorites.where((f) {
           return !(f.counter == favorite.counter && f.base == favorite.base);
         }).toList(),
       ),

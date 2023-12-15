@@ -1,69 +1,68 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_forms/fastyle_forms.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-final String _kDefaulTipFieldType = FastAmountSwitchFieldType.percent.name;
-final String _kDefaulDiscountFieldType = FastAmountSwitchFieldType.amount.name;
-
 class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
+  final String defaulDiscountFieldType = 'amount';
+  final String defaulTipFieldType = 'percent';
+
+  late final String discountFieldType;
   late final String? regionalVatRate;
   late final String? federalVatRate;
   late final String? discountAmount;
   late final String? priceBeforeVat;
   late final String? customVatRate;
+  late final String? discountRate;
+  late final String tipFieldType;
+  late final String? tipAmount;
   late final String? tipRate;
   late final String? vatRate;
-  late final String? discountRate;
-  late final String? tipAmount;
-  late final String? tipFieldType;
-  late final String? discountFieldType;
 
   static MatexVatCalculatorBlocDocument fromJson(
     Map<String, dynamic> json,
   ) {
     return MatexVatCalculatorBlocDocument(
+      discountFieldType: json['discountFieldType'] as String?,
       regionalVatRate: json['regionalVatRate'] as String?,
       federalVatRate: json['federalVatRate'] as String?,
       discountAmount: json['discountAmount'] as String?,
       priceBeforeVat: json['priceBeforeVat'] as String?,
       customVatRate: json['customVatRate'] as String?,
-      tipRate: json['tipRate'] as String?,
-      vatRate: json['vatRate'] as String?,
+      tipFieldType: json['tipFieldType'] as String?,
       discountRate: json['discountRate'] as String?,
       tipAmount: json['tipAmount'] as String?,
-      tipFieldType: json['tipFieldType'] as String?,
-      discountFieldType: json['discountFieldType'] as String?,
+      tipRate: json['tipRate'] as String?,
+      vatRate: json['vatRate'] as String?,
     );
   }
 
   MatexVatCalculatorBlocDocument({
+    String? discountFieldType,
     String? regionalVatRate,
     String? federalVatRate,
     String? discountAmount,
     String? priceBeforeVat,
     String? customVatRate,
+    String? discountRate,
+    String? tipFieldType,
+    String? tipAmount,
     String? tipRate,
     String? vatRate,
-    String? discountRate,
-    String? tipAmount,
-    String? tipFieldType,
-    String? discountFieldType,
   }) {
+    this.tipFieldType = assignValue(tipFieldType) ?? defaulTipFieldType;
     this.regionalVatRate = assignValue(regionalVatRate);
     this.federalVatRate = assignValue(federalVatRate);
     this.discountAmount = assignValue(discountAmount);
     this.priceBeforeVat = assignValue(priceBeforeVat);
     this.customVatRate = assignValue(customVatRate);
-    this.tipRate = assignValue(tipRate);
-    this.vatRate = assignValue(vatRate);
     this.discountRate = assignValue(discountRate);
     this.tipAmount = assignValue(tipAmount);
-    this.tipFieldType = assignValue(tipFieldType) ?? _kDefaulTipFieldType;
+    this.tipRate = assignValue(tipRate);
+    this.vatRate = assignValue(vatRate);
     this.discountFieldType =
-        assignValue(discountFieldType) ?? _kDefaulDiscountFieldType;
+        assignValue(discountFieldType) ?? defaulDiscountFieldType;
   }
 
   @override
@@ -71,30 +70,59 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
 
   @override
   MatexVatCalculatorBlocDocument copyWith({
+    String? discountFieldType,
     String? regionalVatRate,
     String? federalVatRate,
     String? discountAmount,
     String? priceBeforeVat,
     String? customVatRate,
+    String? discountRate,
+    String? tipFieldType,
+    String? tipAmount,
     String? tipRate,
     String? vatRate,
-    String? discountRate,
-    String? tipAmount,
-    String? tipFieldType,
-    String? discountFieldType,
   }) {
     return MatexVatCalculatorBlocDocument(
-      federalVatRate: federalVatRate ?? this.federalVatRate,
+      discountFieldType: discountFieldType ?? this.discountFieldType,
       regionalVatRate: regionalVatRate ?? this.regionalVatRate,
+      federalVatRate: federalVatRate ?? this.federalVatRate,
       discountAmount: discountAmount ?? this.discountAmount,
       priceBeforeVat: priceBeforeVat ?? this.priceBeforeVat,
       customVatRate: customVatRate ?? this.customVatRate,
+      discountRate: discountRate ?? this.discountRate,
+      tipFieldType: tipFieldType ?? this.tipFieldType,
+      tipAmount: tipAmount ?? this.tipAmount,
       tipRate: tipRate ?? this.tipRate,
       vatRate: vatRate ?? this.vatRate,
-      discountRate: discountRate ?? this.discountRate,
-      tipAmount: tipAmount ?? this.tipAmount,
-      tipFieldType: tipFieldType ?? this.tipFieldType,
-      discountFieldType: discountFieldType ?? this.discountFieldType,
+    );
+  }
+
+  @override
+  MatexVatCalculatorBlocDocument copyWithDefaults({
+    bool resetDiscountFieldType = false,
+    bool resetRegionalVatRate = false,
+    bool resetFederalVatRate = false,
+    bool resetDiscountAmount = false,
+    bool resetPriceBeforeVat = false,
+    bool resetCustomVatRate = false,
+    bool resetDiscountRate = false,
+    bool resetTipFieldType = false,
+    bool resetTipAmount = false,
+    bool resetTipRate = false,
+    bool resetVatRate = false,
+  }) {
+    return MatexVatCalculatorBlocDocument(
+      discountFieldType: resetDiscountFieldType ? null : discountFieldType,
+      regionalVatRate: resetRegionalVatRate ? null : regionalVatRate,
+      federalVatRate: resetFederalVatRate ? null : federalVatRate,
+      discountAmount: resetDiscountAmount ? null : discountAmount,
+      priceBeforeVat: resetPriceBeforeVat ? null : priceBeforeVat,
+      customVatRate: resetCustomVatRate ? null : customVatRate,
+      discountRate: resetDiscountRate ? null : discountRate,
+      tipFieldType: resetTipFieldType ? null : tipFieldType,
+      tipAmount: resetTipAmount ? null : tipAmount,
+      tipRate: resetTipRate ? null : tipRate,
+      vatRate: resetVatRate ? null : vatRate,
     );
   }
 
@@ -103,67 +131,67 @@ class MatexVatCalculatorBlocDocument extends FastCalculatorDocument {
     covariant MatexVatCalculatorBlocDocument model,
   ) {
     return copyWith(
+      discountFieldType: model.discountFieldType,
       regionalVatRate: model.regionalVatRate,
       federalVatRate: model.federalVatRate,
       discountAmount: model.discountAmount,
       priceBeforeVat: model.priceBeforeVat,
       customVatRate: model.customVatRate,
+      discountRate: model.discountRate,
+      tipFieldType: model.tipFieldType,
+      tipAmount: model.tipAmount,
       tipRate: model.tipRate,
       vatRate: model.vatRate,
-      discountRate: model.discountRate,
-      tipAmount: model.tipAmount,
-      tipFieldType: model.tipFieldType,
-      discountFieldType: model.discountFieldType,
     );
   }
 
   @override
   MatexVatCalculatorBlocFields toFields() {
     return MatexVatCalculatorBlocFields(
+      discountFieldType: discountFieldType,
       regionalVatRate: regionalVatRate,
       federalVatRate: federalVatRate,
       discountAmount: discountAmount,
       priceBeforeVat: priceBeforeVat,
       customVatRate: customVatRate,
-      vatRate: vatRate,
-      tipRate: tipRate,
       discountRate: discountRate,
-      tipAmount: tipAmount,
       tipFieldType: tipFieldType,
-      discountFieldType: discountFieldType,
+      tipAmount: tipAmount,
+      tipRate: tipRate,
+      vatRate: vatRate,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return {
+      'discountFieldType': discountFieldType,
       'regionalVatRate': regionalVatRate,
       'federalVatRate': federalVatRate,
       'discountAmount': discountAmount,
       'priceBeforeVat': priceBeforeVat,
       'customVatRate': customVatRate,
+      'discountRate': discountRate,
+      'tipFieldType': tipFieldType,
+      'tipAmount': tipAmount,
       'tipRate': tipRate,
       'vatRate': vatRate,
-      'discountRate': discountRate,
-      'tipAmount': tipAmount,
-      'tipFieldType': tipFieldType,
-      'discountFieldType': discountFieldType,
       ...super.toJson(),
     };
   }
 
   @override
   List<Object?> get props => [
+        discountFieldType,
         regionalVatRate,
         federalVatRate,
         discountAmount,
         priceBeforeVat,
         customVatRate,
+        discountRate,
+        tipFieldType,
+        tipAmount,
         tipRate,
         vatRate,
-        discountRate,
-        tipAmount,
-        tipFieldType,
-        discountFieldType,
       ];
 }

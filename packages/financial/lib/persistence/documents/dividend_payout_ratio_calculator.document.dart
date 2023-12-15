@@ -42,6 +42,17 @@ class MatexDividendPayoutRatioCalculatorDocument
   }
 
   @override
+  MatexDividendPayoutRatioCalculatorDocument copyWithDefaults({
+    bool resetTotalDividends = false,
+    bool resetNetIncome = false,
+  }) {
+    return MatexDividendPayoutRatioCalculatorDocument(
+      totalDividends: resetTotalDividends ? null : totalDividends,
+      netIncome: resetNetIncome ? null : netIncome,
+    );
+  }
+
+  @override
   MatexDividendPayoutRatioCalculatorDocument merge(
     covariant MatexDividendPayoutRatioCalculatorDocument model,
   ) {
@@ -54,24 +65,11 @@ class MatexDividendPayoutRatioCalculatorDocument
   @override
   List<Object?> get props => [netIncome, totalDividends];
 
-  // [toFields Method]
   @override
   MatexDividendPayoutRatioCalculatorBlocFields toFields() {
     return MatexDividendPayoutRatioCalculatorBlocFields(
       totalDividends: totalDividends,
       netIncome: netIncome,
-    );
-  }
-
-// [Copy With Defaults Method]
-  @override
-  MatexDividendPayoutRatioCalculatorDocument copyWithDefaults({
-    bool resetTotalDividends = false,
-    bool resetNetIncome = false,
-  }) {
-    return MatexDividendPayoutRatioCalculatorDocument(
-      totalDividends: resetTotalDividends ? null : totalDividends,
-      netIncome: resetNetIncome ? null : netIncome,
     );
   }
 

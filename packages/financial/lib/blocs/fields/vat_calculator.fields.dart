@@ -87,8 +87,7 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
     String? tipRate,
     String? vatRate,
   }) {
-    this.discountFieldType = discountFieldType ?? defaulDiscountFieldType;
-    this.tipFieldType = tipFieldType ?? defaulTipFieldType;
+    this.tipFieldType = assignValue(tipFieldType) ?? defaulTipFieldType;
     this.regionalVatRate = assignValue(regionalVatRate);
     this.federalVatRate = assignValue(federalVatRate);
     this.discountAmount = assignValue(discountAmount);
@@ -99,6 +98,8 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
     this.tipRate = assignValue(tipRate);
     this.vatRate = assignValue(vatRate);
     this.delegate = delegate;
+    this.discountFieldType =
+        assignValue(discountFieldType) ?? defaulDiscountFieldType;
   }
 
   @override

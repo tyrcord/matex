@@ -12,7 +12,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
   late final String? stopLossAmount;
   late final MatexPosition position;
   late final String? stopLossPrice;
-  late final String? riskFieldType;
+  late final String riskFieldType;
   late final String? riskPercent;
   late final String? accountSize;
   late final String? entryPrice;

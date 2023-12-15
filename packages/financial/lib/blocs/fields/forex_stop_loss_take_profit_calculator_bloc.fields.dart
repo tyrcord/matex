@@ -8,10 +8,9 @@ class MatexForexStopLossTakeProfitCalculatorBlocFields
     with MatexCalculatorFormatterMixin, MatexFinancialCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
   static const defaultPositionSizeFieldType = MatexPositionSizeType.unit;
-  static const String defaultStopLossFieldType = 'price';
-  static const String defaultTakeProfitFieldType = 'price';
-
   static MatexPosition defaultPosition = MatexPosition.long;
+  static const String defaultTakeProfitFieldType = 'price';
+  static const String defaultStopLossFieldType = 'price';
 
   @override
   late final String? counter;

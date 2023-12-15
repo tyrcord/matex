@@ -123,16 +123,16 @@ class MatexForexProfitLossCalculatorBlocFields extends FastCalculatorFields
 
   @override
   MatexForexProfitLossCalculatorBlocFields copyWithDefaults({
+    bool resetPositionSizeFieldType = false,
+    bool resetPipDecimalPlaces = false,
     bool resetAccountCurrency = false,
-    bool resetBase = false,
-    bool resetCounter = false,
     bool resetPositionSize = false,
     bool resetEntryPrice = false,
-    bool resetPipDecimalPlaces = false,
-    bool resetPositionSizeFieldType = false,
-    bool resetLotSize = false,
     bool resetExitPrice = false,
     bool resetPosition = false,
+    bool resetCounter = false,
+    bool resetLotSize = false,
+    bool resetBase = false,
   }) {
     return MatexForexProfitLossCalculatorBlocFields(
       pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,

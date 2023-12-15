@@ -72,31 +72,6 @@ class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
   MatexForexPipValueCalculatorBlocFields clone() => copyWith();
 
   @override
-  MatexForexPipValueCalculatorBlocFields copyWithDefaults({
-    bool resetPositionSizeFieldType = false,
-    bool resetPipDecimalPlaces = false,
-    bool resetAccountCurrency = false,
-    bool resetPositionSize = false,
-    bool resetNumberOfPips = false,
-    bool resetCounter = false,
-    bool resetLotSize = false,
-    bool resetBase = false,
-  }) {
-    return MatexForexPipValueCalculatorBlocFields(
-      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
-      accountCurrency: resetAccountCurrency ? null : accountCurrency,
-      numberOfPips: resetNumberOfPips ? null : numberOfPips,
-      positionSize: resetPositionSize ? null : positionSize,
-      lotSize: resetLotSize ? null : lotSize,
-      counter: resetCounter ? null : counter,
-      base: resetBase ? null : base,
-      delegate: delegate,
-      positionSizeFieldType:
-          resetPositionSizeFieldType ? null : positionSizeFieldType,
-    );
-  }
-
-  @override
   MatexForexPipValueCalculatorBlocFields copyWith({
     MatexPositionSizeType? positionSizeFieldType,
     FastCalculatorBlocDelegate? delegate,
@@ -119,6 +94,31 @@ class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
       base: base ?? this.base,
       positionSizeFieldType:
           positionSizeFieldType ?? this.positionSizeFieldType,
+    );
+  }
+
+  @override
+  MatexForexPipValueCalculatorBlocFields copyWithDefaults({
+    bool resetPositionSizeFieldType = false,
+    bool resetPipDecimalPlaces = false,
+    bool resetAccountCurrency = false,
+    bool resetPositionSize = false,
+    bool resetNumberOfPips = false,
+    bool resetCounter = false,
+    bool resetLotSize = false,
+    bool resetBase = false,
+  }) {
+    return MatexForexPipValueCalculatorBlocFields(
+      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
+      accountCurrency: resetAccountCurrency ? null : accountCurrency,
+      numberOfPips: resetNumberOfPips ? null : numberOfPips,
+      positionSize: resetPositionSize ? null : positionSize,
+      lotSize: resetLotSize ? null : lotSize,
+      counter: resetCounter ? null : counter,
+      base: resetBase ? null : base,
+      delegate: delegate,
+      positionSizeFieldType:
+          resetPositionSizeFieldType ? null : positionSizeFieldType,
     );
   }
 

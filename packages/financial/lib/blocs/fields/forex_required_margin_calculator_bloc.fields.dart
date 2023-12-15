@@ -7,6 +7,7 @@ class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin, MatexFinancialCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
   static const defaultPositionSizeFieldType = MatexPositionSizeType.unit;
+  static const String defaultLeverage = '1';
 
   @override
   late final String? counter;
@@ -16,7 +17,7 @@ class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
   late final MatexPositionSizeType positionSizeFieldType;
   late final String? accountCurrency;
   late final String? positionSize;
-  late final String? leverage;
+  late final String leverage;
   late final String? lotSize;
 
   List<double>? get leverages => kMatexLeverages;
@@ -61,14 +62,13 @@ class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
     String? lotSize,
     String? base,
   }) {
+    this.leverage = assignValue(leverage) ?? defaultLeverage;
     this.accountCurrency = assignValue(accountCurrency);
     this.positionSize = assignValue(positionSize);
-    this.leverage = assignValue(leverage);
     this.counter = assignValue(counter);
     this.lotSize = assignValue(lotSize);
     this.base = assignValue(base);
     this.delegate = delegate;
-
     this.positionSizeFieldType =
         positionSizeFieldType ?? defaultPositionSizeFieldType;
   }

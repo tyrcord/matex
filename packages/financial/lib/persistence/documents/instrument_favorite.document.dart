@@ -5,12 +5,12 @@ import 'package:tstore/tstore.dart';
 /// instruments.
 class MatexInstrumentFavoriteDocument extends TDocument {
   /// The list of favorite financial instruments.
-  final List<MatexInstrumentFavorite>? favorites;
+  final List<MatexInstrumentFavorite> favorites;
 
   /// Creates a new instance of the [MatexInstrumentFavoriteDocument] class.
   const MatexInstrumentFavoriteDocument({
-    this.favorites = const [],
-  });
+    List<MatexInstrumentFavorite>? favorites,
+  }) : favorites = favorites ?? const [];
 
   /// Parses a JSON map and returns a [MatexInstrumentFavoriteDocument] object.
   static MatexInstrumentFavoriteDocument fromJson(
@@ -54,6 +54,15 @@ class MatexInstrumentFavoriteDocument extends TDocument {
     );
   }
 
+  @override
+  MatexInstrumentFavoriteDocument copyWithDefaults({
+    bool resetFavorites = false,
+  }) {
+    return MatexInstrumentFavoriteDocument(
+      favorites: resetFavorites ? null : favorites,
+    );
+  }
+
   /// Returns a new instance of [MatexInstrumentFavoriteDocument] with the
   /// [favorites] field replaced by the [favorites] list of the provided
   /// [MatexInstrumentFavoriteDocument] argument.
@@ -70,10 +79,8 @@ class MatexInstrumentFavoriteDocument extends TDocument {
   Map<String, dynamic> toJson() {
     final superMap = super.toJson();
 
-    if (favorites == null) return superMap;
-
     return {
-      'favorites': favorites!.map((favorite) => favorite.toJson()).toList(),
+      'favorites': favorites.map((favorite) => favorite.toJson()).toList(),
       ...superMap,
     };
   }

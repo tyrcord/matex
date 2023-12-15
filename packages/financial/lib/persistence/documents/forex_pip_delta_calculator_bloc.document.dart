@@ -3,63 +3,61 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexForexPipDeltaCalculatorDocument extends FastCalculatorDocument {
-  late final String? base;
+  late final String? pipDecimalPlaces;
   late final String? counter;
-
   late final String? priceA;
   late final String? priceB;
-  late final String? pipDecimalPlaces;
+  late final String? base;
 
   MatexForexPipDeltaCalculatorDocument({
-    String? base,
+    String? pipDecimalPlaces,
     String? counter,
     String? priceA,
     String? priceB,
-    String? pipDecimalPlaces,
+    String? base,
   }) {
     this.base = assignValue(base);
     this.counter = assignValue(counter);
     this.priceA = assignValue(priceA);
     this.priceB = assignValue(priceB);
-    this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
+    this.pipDecimalPlaces =
+        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
   }
 
   @override
   MatexForexPipDeltaCalculatorDocument clone() => copyWith();
 
   @override
-  MatexForexPipDeltaCalculatorDocument copyWithDefaults({
-    bool resetPriceA = false,
-    bool resetBase = false,
-    bool resetCounter = false,
-    bool resetPriceB = false,
-    bool resetPipDecimalPlaces = false,
+  MatexForexPipDeltaCalculatorDocument copyWith({
+    String? pipDecimalPlaces,
+    String? counter,
+    String? priceA,
+    String? priceB,
+    String? base,
   }) {
     return MatexForexPipDeltaCalculatorDocument(
-      priceA: resetPriceA ? null : priceA,
-      base: resetBase ? null : base,
-      counter: resetCounter ? null : counter,
-      priceB: resetPriceB ? null : priceB,
-      pipDecimalPlaces: resetPipDecimalPlaces
-          ? kDefaultPipPipDecimalPlaces.toString()
-          : pipDecimalPlaces,
+      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
+      counter: counter ?? this.counter,
+      priceA: priceA ?? this.priceA,
+      priceB: priceB ?? this.priceB,
+      base: base ?? this.base,
     );
   }
 
   @override
-  MatexForexPipDeltaCalculatorDocument copyWith({
-    String? priceA,
-    String? base,
-    String? counter,
-    String? priceB,
-    String? pipDecimalPlaces,
+  MatexForexPipDeltaCalculatorDocument copyWithDefaults({
+    bool resetPipDecimalPlaces = false,
+    bool resetCounter = false,
+    bool resetPriceA = false,
+    bool resetPriceB = false,
+    bool resetBase = false,
   }) {
     return MatexForexPipDeltaCalculatorDocument(
-      priceA: priceA ?? this.priceA,
-      base: base ?? this.base,
-      counter: counter ?? this.counter,
-      priceB: priceB ?? this.priceB,
-      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
+      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
+      counter: resetCounter ? null : counter,
+      priceA: resetPriceA ? null : priceA,
+      priceB: resetPriceB ? null : priceB,
+      base: resetBase ? null : base,
     );
   }
 
@@ -68,33 +66,33 @@ class MatexForexPipDeltaCalculatorDocument extends FastCalculatorDocument {
     covariant MatexForexPipDeltaCalculatorDocument model,
   ) {
     return copyWith(
-      priceA: model.priceA,
-      base: model.base,
-      counter: model.counter,
-      priceB: model.priceB,
       pipDecimalPlaces: model.pipDecimalPlaces,
+      counter: model.counter,
+      priceA: model.priceA,
+      priceB: model.priceB,
+      base: model.base,
     );
   }
 
   @override
   MatexForexPipDeltaCalculatorBlocFields toFields() {
     return MatexForexPipDeltaCalculatorBlocFields(
-      priceA: priceA,
-      base: base,
-      counter: counter,
-      priceB: priceB,
       pipDecimalPlaces: pipDecimalPlaces,
+      counter: counter,
+      priceA: priceA,
+      priceB: priceB,
+      base: base,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return {
-      'base': base,
+      'pipDecimalPlaces': pipDecimalPlaces,
       'counter': counter,
       'priceA': priceA,
       'priceB': priceB,
-      'pipDecimalPlaces': pipDecimalPlaces,
+      'base': base,
       ...super.toJson(),
     };
   }
@@ -103,20 +101,20 @@ class MatexForexPipDeltaCalculatorDocument extends FastCalculatorDocument {
     Map<String, dynamic> json,
   ) {
     return MatexForexPipDeltaCalculatorDocument(
-      base: json['base'] as String?,
+      pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
       counter: json['counter'] as String?,
       priceA: json['priceA'] as String?,
       priceB: json['priceB'] as String?,
-      pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
+      base: json['base'] as String?,
     );
   }
 
   @override
   List<Object?> get props => [
-        priceA,
-        base,
-        counter,
-        priceB,
         pipDecimalPlaces,
+        counter,
+        priceA,
+        priceB,
+        base,
       ];
 }

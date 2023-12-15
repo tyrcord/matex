@@ -11,8 +11,8 @@ class MatexStockPositionSizeCalculatorBlocDocument
 
   late final String? slippagePercent;
   late final String? stopLossAmount;
-  late final String? riskFieldType;
   late final String? stopLossPrice;
+  late final String riskFieldType;
   late final String? accountSize;
   late final String? riskPercent;
   late final String? entryPrice;
@@ -70,29 +70,29 @@ class MatexStockPositionSizeCalculatorBlocDocument
 
   @override
   MatexStockPositionSizeCalculatorBlocDocument copyWith({
-    String? accountSize,
-    String? entryPrice,
-    String? stopLossPrice,
-    String? stopLossAmount,
     String? slippagePercent,
+    String? stopLossAmount,
+    String? riskFieldType,
+    String? stopLossPrice,
+    String? accountSize,
     String? riskPercent,
+    String? entryPrice,
     String? riskReward,
     String? entryFees,
-    String? exitFees,
-    String? riskFieldType,
     String? position,
+    String? exitFees,
   }) {
     return MatexStockPositionSizeCalculatorBlocDocument(
-      accountSize: accountSize ?? this.accountSize,
-      entryPrice: entryPrice ?? this.entryPrice,
-      stopLossPrice: stopLossPrice ?? this.stopLossPrice,
-      stopLossAmount: stopLossAmount ?? this.stopLossAmount,
       slippagePercent: slippagePercent ?? this.slippagePercent,
+      stopLossAmount: stopLossAmount ?? this.stopLossAmount,
+      stopLossPrice: stopLossPrice ?? this.stopLossPrice,
+      riskFieldType: riskFieldType ?? this.riskFieldType,
+      accountSize: accountSize ?? this.accountSize,
       riskPercent: riskPercent ?? this.riskPercent,
+      entryPrice: entryPrice ?? this.entryPrice,
       riskReward: riskReward ?? this.riskReward,
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
-      riskFieldType: riskFieldType ?? this.riskFieldType,
       position: position ?? this.position,
     );
   }

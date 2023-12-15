@@ -1,52 +1,51 @@
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_forms/fastyle_forms.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-final String _kDefaultEntryFeeType = FastAmountSwitchFieldType.amount.name;
-final String _kDefaultExitFeeType = FastAmountSwitchFieldType.amount.name;
-
 class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
-  late final String? expectedSaleUnits;
-  late final String? buyingPrice;
-  late final String? sellingPrice;
-  late final String? operatingExpenses;
-  late final String? buyingExpensePerUnitRate;
+  final String defaultEntryFeeType = 'amount';
+  final String defaultExitFeeType = 'amount';
+
+  late final String? sellingExpensePerUnitAmount;
   late final String? buyingExpensePerUnitAmount;
   late final String? sellingExpensePerUnitRate;
-  late final String? sellingExpensePerUnitAmount;
-  late final String? taxRate;
-  late final String? buyingCostsPerUnitType;
+  late final String? buyingExpensePerUnitRate;
   late final String? sellingCostsPerUnitType;
+  late final String? buyingCostsPerUnitType;
+  late final String? operatingExpenses;
+  late final String? expectedSaleUnits;
+  late final String? sellingPrice;
+  late final String? buyingPrice;
+  late final String? taxRate;
 
   MatexProfitAndLossCalculatorDocument({
-    String? expectedSaleUnits,
-    String? buyingPrice,
-    String? sellingPrice,
-    String? operatingExpenses,
-    String? buyingExpensePerUnitRate,
+    String? sellingExpensePerUnitAmount,
     String? buyingExpensePerUnitAmount,
     String? sellingExpensePerUnitRate,
-    String? sellingExpensePerUnitAmount,
-    String? taxRate,
-    String? buyingCostsPerUnitType,
+    String? buyingExpensePerUnitRate,
     String? sellingCostsPerUnitType,
+    String? buyingCostsPerUnitType,
+    String? expectedSaleUnits,
+    String? operatingExpenses,
+    String? sellingPrice,
+    String? buyingPrice,
+    String? taxRate,
   }) {
-    this.expectedSaleUnits = assignValue(expectedSaleUnits);
-    this.buyingPrice = assignValue(buyingPrice);
-    this.sellingPrice = assignValue(sellingPrice);
-    this.operatingExpenses = assignValue(operatingExpenses);
-    this.buyingExpensePerUnitRate = assignValue(buyingExpensePerUnitRate);
+    this.sellingExpensePerUnitAmount = assignValue(sellingExpensePerUnitAmount);
     this.buyingExpensePerUnitAmount = assignValue(buyingExpensePerUnitAmount);
     this.sellingExpensePerUnitRate = assignValue(sellingExpensePerUnitRate);
-    this.sellingExpensePerUnitAmount = assignValue(sellingExpensePerUnitAmount);
+    this.buyingExpensePerUnitRate = assignValue(buyingExpensePerUnitRate);
+    this.expectedSaleUnits = assignValue(expectedSaleUnits);
+    this.operatingExpenses = assignValue(operatingExpenses);
+    this.sellingPrice = assignValue(sellingPrice);
+    this.buyingPrice = assignValue(buyingPrice);
     this.taxRate = assignValue(taxRate);
     this.buyingCostsPerUnitType =
-        assignValue(buyingCostsPerUnitType) ?? _kDefaultEntryFeeType;
+        assignValue(buyingCostsPerUnitType) ?? defaultEntryFeeType;
     this.sellingCostsPerUnitType =
-        assignValue(sellingCostsPerUnitType) ?? _kDefaultExitFeeType;
+        assignValue(sellingCostsPerUnitType) ?? defaultExitFeeType;
   }
 
   @override
@@ -54,69 +53,68 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
 
   @override
   MatexProfitAndLossCalculatorDocument copyWithDefaults({
-    bool expectedSaleUnits = false,
-    bool buyingPrice = false,
-    bool sellingPrice = false,
-    bool operatingExpenses = false,
-    bool buyingExpensePerUnitRate = false,
+    bool sellingExpensePerUnitAmount = false,
     bool buyingExpensePerUnitAmount = false,
     bool sellingExpensePerUnitRate = false,
-    bool sellingExpensePerUnitAmount = false,
-    bool taxRate = false,
-    bool buyingCostsPerUnitType = false,
+    bool buyingExpensePerUnitRate = false,
     bool sellingCostsPerUnitType = false,
+    bool buyingCostsPerUnitType = false,
+    bool expectedSaleUnits = false,
+    bool operatingExpenses = false,
+    bool sellingPrice = false,
+    bool buyingPrice = false,
+    bool taxRate = false,
   }) {
     return MatexProfitAndLossCalculatorDocument(
       expectedSaleUnits: expectedSaleUnits ? null : this.expectedSaleUnits,
-      buyingPrice: buyingPrice ? null : this.buyingPrice,
-      sellingPrice: sellingPrice ? null : this.sellingPrice,
       operatingExpenses: operatingExpenses ? null : this.operatingExpenses,
-      buyingExpensePerUnitRate:
-          buyingExpensePerUnitRate ? null : this.buyingExpensePerUnitRate,
+      sellingPrice: sellingPrice ? null : this.sellingPrice,
+      buyingPrice: buyingPrice ? null : this.buyingPrice,
+      taxRate: taxRate ? null : this.taxRate,
+      sellingExpensePerUnitAmount:
+          sellingExpensePerUnitAmount ? null : this.sellingExpensePerUnitAmount,
       buyingExpensePerUnitAmount:
           buyingExpensePerUnitAmount ? null : this.buyingExpensePerUnitAmount,
       sellingExpensePerUnitRate:
           sellingExpensePerUnitRate ? null : this.sellingExpensePerUnitRate,
-      sellingExpensePerUnitAmount:
-          sellingExpensePerUnitAmount ? null : this.sellingExpensePerUnitAmount,
-      taxRate: taxRate ? null : this.taxRate,
-      buyingCostsPerUnitType: buyingCostsPerUnitType
-          ? _kDefaultEntryFeeType
-          : this.buyingCostsPerUnitType,
-      sellingCostsPerUnitType: sellingCostsPerUnitType
-          ? _kDefaultExitFeeType
-          : this.sellingCostsPerUnitType,
+      buyingExpensePerUnitRate:
+          buyingExpensePerUnitRate ? null : this.buyingExpensePerUnitRate,
+      sellingCostsPerUnitType:
+          sellingCostsPerUnitType ? null : this.sellingCostsPerUnitType,
+      buyingCostsPerUnitType:
+          buyingCostsPerUnitType ? null : this.buyingCostsPerUnitType,
     );
   }
 
   @override
   MatexProfitAndLossCalculatorDocument copyWith({
-    String? expectedSaleUnits,
-    String? buyingPrice,
-    String? sellingPrice,
-    String? operatingExpenses,
-    String? buyingExpensePerUnitRate,
+    FastCalculatorBlocDelegate? delegate,
+    String? sellingExpensePerUnitAmount,
     String? buyingExpensePerUnitAmount,
     String? sellingExpensePerUnitRate,
-    String? sellingExpensePerUnitAmount,
-    String? taxRate,
-    String? buyingCostsPerUnitType,
+    String? buyingExpensePerUnitRate,
     String? sellingCostsPerUnitType,
+    String? buyingCostsPerUnitType,
+    String? operatingExpenses,
+    String? expectedSaleUnits,
+    String? sellingPrice,
+    String? buyingPrice,
+    String? taxRate,
   }) {
     return MatexProfitAndLossCalculatorDocument(
       expectedSaleUnits: expectedSaleUnits ?? this.expectedSaleUnits,
-      buyingPrice: buyingPrice ?? this.buyingPrice,
-      sellingPrice: sellingPrice ?? this.sellingPrice,
       operatingExpenses: operatingExpenses ?? this.operatingExpenses,
-      buyingExpensePerUnitRate:
-          buyingExpensePerUnitRate ?? this.buyingExpensePerUnitRate,
+      sellingPrice: sellingPrice ?? this.sellingPrice,
+      buyingPrice: buyingPrice ?? this.buyingPrice,
+      taxRate: taxRate ?? this.taxRate,
+      sellingExpensePerUnitAmount:
+          sellingExpensePerUnitAmount ?? this.sellingExpensePerUnitAmount,
       buyingExpensePerUnitAmount:
           buyingExpensePerUnitAmount ?? this.buyingExpensePerUnitAmount,
       sellingExpensePerUnitRate:
           sellingExpensePerUnitRate ?? this.sellingExpensePerUnitRate,
-      sellingExpensePerUnitAmount:
-          sellingExpensePerUnitAmount ?? this.sellingExpensePerUnitAmount,
-      taxRate: taxRate ?? this.taxRate,
+      buyingExpensePerUnitRate:
+          buyingExpensePerUnitRate ?? this.buyingExpensePerUnitRate,
       sellingCostsPerUnitType:
           sellingCostsPerUnitType ?? this.sellingCostsPerUnitType,
       buyingCostsPerUnitType:
@@ -129,51 +127,51 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
     covariant MatexProfitAndLossCalculatorDocument model,
   ) {
     return copyWith(
-      expectedSaleUnits: model.expectedSaleUnits,
-      buyingPrice: model.buyingPrice,
-      sellingPrice: model.sellingPrice,
-      operatingExpenses: model.operatingExpenses,
-      buyingExpensePerUnitRate: model.buyingExpensePerUnitRate,
+      sellingExpensePerUnitAmount: model.sellingExpensePerUnitAmount,
       buyingExpensePerUnitAmount: model.buyingExpensePerUnitAmount,
       sellingExpensePerUnitRate: model.sellingExpensePerUnitRate,
-      sellingExpensePerUnitAmount: model.sellingExpensePerUnitAmount,
-      taxRate: model.taxRate,
+      buyingExpensePerUnitRate: model.buyingExpensePerUnitRate,
       sellingCostsPerUnitType: model.sellingCostsPerUnitType,
       buyingCostsPerUnitType: model.buyingCostsPerUnitType,
+      expectedSaleUnits: model.expectedSaleUnits,
+      operatingExpenses: model.operatingExpenses,
+      sellingPrice: model.sellingPrice,
+      buyingPrice: buyingPrice,
+      taxRate: model.taxRate,
     );
   }
 
   @override
   MatexProfitAndLossCalculatorBlocFields toFields() {
     return MatexProfitAndLossCalculatorBlocFields(
-      taxRate: taxRate,
-      buyingCostsPerUnitType: buyingCostsPerUnitType,
-      sellingCostsPerUnitType: sellingCostsPerUnitType,
-      expectedSaleUnits: expectedSaleUnits,
-      buyingPrice: buyingPrice,
-      sellingPrice: sellingPrice,
-      operatingExpenses: operatingExpenses,
-      buyingExpensePerUnitRate: buyingExpensePerUnitRate,
+      sellingExpensePerUnitAmount: sellingExpensePerUnitAmount,
       buyingExpensePerUnitAmount: buyingExpensePerUnitAmount,
       sellingExpensePerUnitRate: sellingExpensePerUnitRate,
-      sellingExpensePerUnitAmount: sellingExpensePerUnitAmount,
+      buyingExpensePerUnitRate: buyingExpensePerUnitRate,
+      sellingCostsPerUnitType: sellingCostsPerUnitType,
+      buyingCostsPerUnitType: buyingCostsPerUnitType,
+      expectedSaleUnits: expectedSaleUnits,
+      operatingExpenses: operatingExpenses,
+      sellingPrice: sellingPrice,
+      buyingPrice: buyingPrice,
+      taxRate: taxRate,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return {
-      'buyingCostsPerUnitType': buyingCostsPerUnitType,
-      'sellingCostsPerUnitType': sellingCostsPerUnitType,
-      'taxRate': taxRate,
-      'expectedSaleUnits': expectedSaleUnits,
-      'buyingPrice': buyingPrice,
-      'sellingPrice': sellingPrice,
-      'operatingExpenses': operatingExpenses,
-      'buyingExpensePerUnitRate': buyingExpensePerUnitRate,
+      'sellingExpensePerUnitAmount': sellingExpensePerUnitAmount,
       'buyingExpensePerUnitAmount': buyingExpensePerUnitAmount,
       'sellingExpensePerUnitRate': sellingExpensePerUnitRate,
-      'sellingExpensePerUnitAmount': sellingExpensePerUnitAmount,
+      'buyingExpensePerUnitRate': buyingExpensePerUnitRate,
+      'sellingCostsPerUnitType': sellingCostsPerUnitType,
+      'buyingCostsPerUnitType': buyingCostsPerUnitType,
+      'expectedSaleUnits': expectedSaleUnits,
+      'operatingExpenses': operatingExpenses,
+      'sellingPrice': sellingPrice,
+      'buyingPrice': buyingPrice,
+      'taxRate': taxRate,
       ...super.toJson(),
     };
   }
@@ -182,16 +180,16 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
     Map<String, dynamic> json,
   ) {
     return MatexProfitAndLossCalculatorDocument(
-      sellingCostsPerUnitType: json['sellingCostsPerUnitType'] as String?,
-      buyingCostsPerUnitType: json['buyingCostsPerUnitType'] as String?,
-      taxRate: json['taxRate'] as String?,
-      expectedSaleUnits: json['expectedSaleUnits'] as String?,
-      buyingPrice: json['buyingPrice'] as String?,
-      sellingPrice: json['sellingPrice'] as String?,
-      operatingExpenses: json['operatingExpenses'] as String?,
-      buyingExpensePerUnitRate: json['buyingExpensePerUnitRate'] as String?,
       buyingExpensePerUnitAmount: json['buyingExpensePerUnitAmount'] as String?,
       sellingExpensePerUnitRate: json['sellingExpensePerUnitRate'] as String?,
+      buyingExpensePerUnitRate: json['buyingExpensePerUnitRate'] as String?,
+      sellingCostsPerUnitType: json['sellingCostsPerUnitType'] as String?,
+      buyingCostsPerUnitType: json['buyingCostsPerUnitType'] as String?,
+      expectedSaleUnits: json['expectedSaleUnits'] as String?,
+      operatingExpenses: json['operatingExpenses'] as String?,
+      sellingPrice: json['sellingPrice'] as String?,
+      buyingPrice: json['buyingPrice'] as String?,
+      taxRate: json['taxRate'] as String?,
       sellingExpensePerUnitAmount:
           json['sellingExpensePerUnitAmount'] as String?,
     );
@@ -199,16 +197,16 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
 
   @override
   List<Object?> get props => [
-        expectedSaleUnits,
-        buyingPrice,
-        sellingPrice,
-        operatingExpenses,
-        buyingExpensePerUnitRate,
+        sellingExpensePerUnitAmount,
         buyingExpensePerUnitAmount,
         sellingExpensePerUnitRate,
-        sellingExpensePerUnitAmount,
-        taxRate,
-        buyingCostsPerUnitType,
+        buyingExpensePerUnitRate,
         sellingCostsPerUnitType,
+        buyingCostsPerUnitType,
+        operatingExpenses,
+        expectedSaleUnits,
+        sellingPrice,
+        buyingPrice,
+        taxRate,
       ];
 }

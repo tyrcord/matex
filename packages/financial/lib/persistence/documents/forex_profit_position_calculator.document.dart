@@ -8,40 +8,42 @@ class MatexForexProfitLossCalculatorDocument extends FastCalculatorDocument {
   static const String defaultPositionSizeFieldType = 'unit';
   final String defaultPosition = MatexPosition.long.name;
 
+  late final String positionSizeFieldType;
+  late final String? pipDecimalPlaces;
   late final String? accountCurrency;
-  late final String? base;
-  late final String? counter;
+  late final String position;
   late final String? positionSize;
   late final String? entryPrice;
-  late final String? pipDecimalPlaces;
-  late final String positionSizeFieldType;
-  late final String? lotSize;
   late final String? exitPrice;
-  late final String position;
+  late final String? lotSize;
+  late final String? counter;
+  late final String? base;
 
   MatexForexProfitLossCalculatorDocument({
+    String? positionSizeFieldType,
+    String? pipDecimalPlaces,
     String? accountCurrency,
-    String? base,
-    String? counter,
     String? positionSize,
     String? entryPrice,
-    String? pipDecimalPlaces,
-    String? positionSizeFieldType,
-    String? lotSize,
     String? exitPrice,
     String? position,
+    String? lotSize,
+    String? counter,
+    String? base,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
-    this.base = assignValue(base);
-    this.counter = assignValue(counter);
-    this.positionSize = assignValue(positionSize);
-    this.entryPrice = assignValue(entryPrice);
     this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
-    this.lotSize = assignValue(lotSize);
+    this.positionSize = assignValue(positionSize);
+    this.position = position ?? defaultPosition;
+    this.entryPrice = assignValue(entryPrice);
     this.exitPrice = assignValue(exitPrice);
+    this.lotSize = assignValue(lotSize);
+    this.counter = assignValue(counter);
+    this.base = assignValue(base);
     this.positionSizeFieldType =
         positionSizeFieldType ?? defaultPositionSizeFieldType;
-    this.position = position ?? defaultPosition;
+    this.pipDecimalPlaces =
+        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
   }
 
   @override
@@ -49,57 +51,57 @@ class MatexForexProfitLossCalculatorDocument extends FastCalculatorDocument {
 
   @override
   MatexForexProfitLossCalculatorDocument copyWith({
+    String? positionSizeFieldType,
+    String? pipDecimalPlaces,
     String? accountCurrency,
-    String? base,
-    String? counter,
     String? positionSize,
     String? entryPrice,
-    String? pipDecimalPlaces,
-    String? positionSizeFieldType,
-    String? lotSize,
     String? exitPrice,
     String? position,
+    String? lotSize,
+    String? counter,
+    String? base,
   }) {
     return MatexForexProfitLossCalculatorDocument(
+      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
       accountCurrency: accountCurrency ?? this.accountCurrency,
-      base: base ?? this.base,
-      counter: counter ?? this.counter,
       positionSize: positionSize ?? this.positionSize,
       entryPrice: entryPrice ?? this.entryPrice,
-      pipDecimalPlaces: pipDecimalPlaces ?? this.pipDecimalPlaces,
-      lotSize: lotSize ?? this.lotSize,
-      positionSizeFieldType:
-          positionSizeFieldType ?? this.positionSizeFieldType,
       exitPrice: exitPrice ?? this.exitPrice,
       position: position ?? this.position,
+      lotSize: lotSize ?? this.lotSize,
+      counter: counter ?? this.counter,
+      base: base ?? this.base,
+      positionSizeFieldType:
+          positionSizeFieldType ?? this.positionSizeFieldType,
     );
   }
 
   @override
   MatexForexProfitLossCalculatorDocument copyWithDefaults({
+    bool resetPositionSizeFieldType = false,
+    bool resetPipDecimalPlaces = false,
     bool resetAccountCurrency = false,
-    bool resetBase = false,
-    bool resetCounter = false,
     bool resetPositionSize = false,
     bool resetEntryPrice = false,
-    bool resetPipDecimalPlaces = false,
-    bool resetPositionSizeFieldType = false,
-    bool resetLotSize = false,
     bool resetExitPrice = false,
     bool resetPosition = false,
+    bool resetCounter = false,
+    bool resetLotSize = false,
+    bool resetBase = false,
   }) {
     return MatexForexProfitLossCalculatorDocument(
+      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
       accountCurrency: resetAccountCurrency ? null : accountCurrency,
-      base: resetBase ? null : base,
-      counter: resetCounter ? null : counter,
       positionSize: resetPositionSize ? null : positionSize,
       entryPrice: resetEntryPrice ? null : entryPrice,
-      pipDecimalPlaces: resetPipDecimalPlaces ? null : pipDecimalPlaces,
-      lotSize: resetLotSize ? null : lotSize,
-      positionSizeFieldType:
-          resetPositionSizeFieldType ? null : positionSizeFieldType,
       exitPrice: resetExitPrice ? null : exitPrice,
       position: resetPosition ? null : position,
+      lotSize: resetLotSize ? null : lotSize,
+      counter: resetCounter ? null : counter,
+      base: resetBase ? null : base,
+      positionSizeFieldType:
+          resetPositionSizeFieldType ? null : positionSizeFieldType,
     );
   }
 
@@ -108,31 +110,31 @@ class MatexForexProfitLossCalculatorDocument extends FastCalculatorDocument {
     covariant MatexForexProfitLossCalculatorDocument model,
   ) {
     return copyWith(
+      positionSizeFieldType: model.positionSizeFieldType,
+      pipDecimalPlaces: model.pipDecimalPlaces,
       accountCurrency: model.accountCurrency,
-      base: model.base,
-      counter: model.counter,
       positionSize: model.positionSize,
       entryPrice: model.entryPrice,
-      pipDecimalPlaces: model.pipDecimalPlaces,
-      positionSizeFieldType: model.positionSizeFieldType,
-      lotSize: model.lotSize,
       exitPrice: model.exitPrice,
       position: model.position,
+      lotSize: model.lotSize,
+      counter: model.counter,
+      base: model.base,
     );
   }
 
   @override
   MatexForexProfitLossCalculatorBlocFields toFields() {
     return MatexForexProfitLossCalculatorBlocFields(
+      position: MatexPositionX.fromName(position),
+      pipDecimalPlaces: pipDecimalPlaces,
       accountCurrency: accountCurrency,
-      base: base,
-      counter: counter,
       positionSize: positionSize,
       entryPrice: entryPrice,
-      pipDecimalPlaces: pipDecimalPlaces,
-      lotSize: lotSize,
       exitPrice: exitPrice,
-      position: MatexPositionX.fromName(position),
+      lotSize: lotSize,
+      counter: counter,
+      base: base,
       positionSizeFieldType:
           MatexPositionSizeTypeX.fromName(positionSizeFieldType),
     );
@@ -141,16 +143,16 @@ class MatexForexProfitLossCalculatorDocument extends FastCalculatorDocument {
   @override
   Map<String, dynamic> toJson() {
     return {
+      'positionSizeFieldType': positionSizeFieldType,
+      'pipDecimalPlaces': pipDecimalPlaces,
       'accountCurrency': accountCurrency,
-      'base': base,
-      'counter': counter,
       'positionSize': positionSize,
       'entryPrice': entryPrice,
-      'pipDecimalPlaces': pipDecimalPlaces,
-      'positionSizeFieldType': positionSizeFieldType,
-      'lotSize': lotSize,
       'exitPrice': exitPrice,
       'position': position,
+      'lotSize': lotSize,
+      'counter': counter,
+      'base': base,
       ...super.toJson(),
     };
   }
@@ -159,30 +161,30 @@ class MatexForexProfitLossCalculatorDocument extends FastCalculatorDocument {
     Map<String, dynamic> json,
   ) {
     return MatexForexProfitLossCalculatorDocument(
+      positionSizeFieldType: json['positionSizeFieldType'] as String?,
+      pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
       accountCurrency: json['accountCurrency'] as String?,
-      base: json['base'] as String?,
-      counter: json['counter'] as String?,
       positionSize: json['positionSize'] as String?,
       entryPrice: json['entryPrice'] as String?,
-      pipDecimalPlaces: json['pipDecimalPlaces'] as String?,
-      positionSizeFieldType: json['positionSizeFieldType'] as String?,
-      lotSize: json['lotSize'] as String?,
       exitPrice: json['exitPrice'] as String?,
       position: json['position'] as String?,
+      lotSize: json['lotSize'] as String?,
+      counter: json['counter'] as String?,
+      base: json['base'] as String?,
     );
   }
 
   @override
   List<Object?> get props => [
+        positionSizeFieldType,
+        pipDecimalPlaces,
         accountCurrency,
-        base,
-        counter,
         positionSize,
         entryPrice,
-        pipDecimalPlaces,
-        positionSizeFieldType,
-        lotSize,
         exitPrice,
         position,
+        counter,
+        lotSize,
+        base,
       ];
 }
