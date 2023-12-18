@@ -53,36 +53,36 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
 
   @override
   MatexProfitAndLossCalculatorDocument copyWithDefaults({
-    bool sellingExpensePerUnitAmount = false,
-    bool buyingExpensePerUnitAmount = false,
-    bool sellingExpensePerUnitRate = false,
-    bool buyingExpensePerUnitRate = false,
-    bool sellingCostsPerUnitType = false,
-    bool buyingCostsPerUnitType = false,
-    bool expectedSaleUnits = false,
-    bool operatingExpenses = false,
-    bool sellingPrice = false,
-    bool buyingPrice = false,
-    bool taxRate = false,
+    bool resetSellingExpensePerUnitAmount = false,
+    bool resetBuyingExpensePerUnitAmount = false,
+    bool resetSellingExpensePerUnitRate = false,
+    bool resetBuyingExpensePerUnitRate = false,
+    bool resetSellingCostsPerUnitType = false,
+    bool resetBuyingCostsPerUnitType = false,
+    bool resetExpectedSaleUnits = false,
+    bool resetOperatingExpenses = false,
+    bool resetSellingPrice = false,
+    bool resetBuyingPrice = false,
+    bool resetTaxRate = false,
   }) {
     return MatexProfitAndLossCalculatorDocument(
-      expectedSaleUnits: expectedSaleUnits ? null : this.expectedSaleUnits,
-      operatingExpenses: operatingExpenses ? null : this.operatingExpenses,
-      sellingPrice: sellingPrice ? null : this.sellingPrice,
-      buyingPrice: buyingPrice ? null : this.buyingPrice,
-      taxRate: taxRate ? null : this.taxRate,
+      expectedSaleUnits: resetExpectedSaleUnits ? null : expectedSaleUnits,
+      operatingExpenses: resetOperatingExpenses ? null : operatingExpenses,
+      sellingPrice: resetSellingPrice ? null : sellingPrice,
+      buyingPrice: resetBuyingPrice ? null : buyingPrice,
+      taxRate: resetTaxRate ? null : taxRate,
       sellingExpensePerUnitAmount:
-          sellingExpensePerUnitAmount ? null : this.sellingExpensePerUnitAmount,
+          resetSellingExpensePerUnitAmount ? null : sellingExpensePerUnitAmount,
       buyingExpensePerUnitAmount:
-          buyingExpensePerUnitAmount ? null : this.buyingExpensePerUnitAmount,
+          resetBuyingExpensePerUnitAmount ? null : buyingExpensePerUnitAmount,
       sellingExpensePerUnitRate:
-          sellingExpensePerUnitRate ? null : this.sellingExpensePerUnitRate,
+          resetSellingExpensePerUnitRate ? null : sellingExpensePerUnitRate,
       buyingExpensePerUnitRate:
-          buyingExpensePerUnitRate ? null : this.buyingExpensePerUnitRate,
+          resetBuyingExpensePerUnitRate ? null : buyingExpensePerUnitRate,
       sellingCostsPerUnitType:
-          sellingCostsPerUnitType ? null : this.sellingCostsPerUnitType,
+          resetSellingCostsPerUnitType ? null : sellingCostsPerUnitType,
       buyingCostsPerUnitType:
-          buyingCostsPerUnitType ? null : this.buyingCostsPerUnitType,
+          resetBuyingCostsPerUnitType ? null : buyingCostsPerUnitType,
     );
   }
 

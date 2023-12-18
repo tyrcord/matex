@@ -426,11 +426,11 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   MatexForexPipValueCalculatorBlocState patchPositionSize(String? value) {
-    late MatexForexPipValueCalculatorBlocFields fields;
-    final positionSizeFieldType = currentState.fields.positionSizeFieldType;
+    var fields = currentState.fields;
+    final positionSizeFieldType = fields.positionSizeFieldType;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
+      fields = fields.copyWithDefaults(
         resetPositionSize: true,
         resetLotSize: true,
       );
@@ -438,7 +438,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       calculator.positionSize = 0;
     } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
       final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(positionSize: value);
+      fields = fields.copyWith(positionSize: value);
       calculator.positionSize = dValue.toDouble();
     }
 

@@ -97,7 +97,33 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value is String) {
+    if (value == null) {
+      if (key == MatexProfitAndLossCalculatorBlocKey.expectedSaleUnits) {
+        return document.copyWithDefaults(resetExpectedSaleUnits: true);
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.buyingPrice) {
+        return document.copyWithDefaults(resetBuyingPrice: true);
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.sellingPrice) {
+        return document.copyWithDefaults(resetSellingPrice: true);
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.operatingExpenses) {
+        return document.copyWithDefaults(resetOperatingExpenses: true);
+      } else if (key ==
+          MatexProfitAndLossCalculatorBlocKey.buyingExpensePerUnitRate) {
+        return document.copyWithDefaults(resetBuyingExpensePerUnitRate: true);
+      } else if (key ==
+          MatexProfitAndLossCalculatorBlocKey.buyingExpensePerUnitAmount) {
+        return document.copyWithDefaults(resetBuyingExpensePerUnitAmount: true);
+      } else if (key ==
+          MatexProfitAndLossCalculatorBlocKey.sellingExpensePerUnitRate) {
+        return document.copyWithDefaults(resetSellingExpensePerUnitRate: true);
+      } else if (key ==
+          MatexProfitAndLossCalculatorBlocKey.sellingExpensePerUnitAmount) {
+        return document.copyWithDefaults(
+          resetSellingExpensePerUnitAmount: true,
+        );
+      } else if (key == MatexProfitAndLossCalculatorBlocKey.taxRate) {
+        return document.copyWithDefaults(resetTaxRate: true);
+      }
+    } else if (value is String) {
       if (key == MatexProfitAndLossCalculatorBlocKey.expectedSaleUnits) {
         return document.copyWith(expectedSaleUnits: value);
       } else if (key == MatexProfitAndLossCalculatorBlocKey.buyingPrice) {
@@ -146,7 +172,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value is String) {
+    if (value is String?) {
       if (key == MatexProfitAndLossCalculatorBlocKey.expectedSaleUnits) {
         return patchExpectedSaleUnits(value);
       } else if (key == MatexProfitAndLossCalculatorBlocKey.buyingPrice) {
@@ -183,48 +209,16 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
-  Future<MatexProfitAndLossCalculatorDocument?> resetCalculatorDocument(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexProfitAndLossCalculatorBlocKey.operatingExpenses:
-        return document.copyWithDefaults(operatingExpenses: true);
-
-      case MatexProfitAndLossCalculatorBlocKey.expectedSaleUnits:
-        return document.copyWithDefaults(expectedSaleUnits: true);
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexProfitAndLossCalculatorBlocState?> resetCalculatorState(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexProfitAndLossCalculatorBlocKey.operatingExpenses:
-        return patchOperatingExpenses(null);
-
-      case MatexProfitAndLossCalculatorBlocKey.expectedSaleUnits:
-        return patchExpectedSaleUnits(null);
-    }
-
-    return null;
-  }
-
-  @override
   Future<void> resetCalculator(
     MatexProfitAndLossCalculatorDocument document,
   ) async {
-    final taxRate = toDecimal(document.taxRate) ?? dZero;
-    final sellingExpensePerUnitRate = toDecimal(
-          document.sellingExpensePerUnitRate,
-        ) ??
-        dZero;
-    final buyingExpensePerUnitRate = toDecimal(
-          document.buyingExpensePerUnitRate,
-        ) ??
-        dZero;
+    final taxRate = toDecimalOrDefault(document.taxRate);
+    final sellingExpensePerUnitRate = toDecimalOrDefault(
+      document.sellingExpensePerUnitRate,
+    );
+    final buyingExpensePerUnitRate = toDecimalOrDefault(
+      document.buyingExpensePerUnitRate,
+    );
 
     calculator.setState(MatexProfitAndLossCalculatorState(
       expectedSaleUnits: parseStringToDouble(document.expectedSaleUnits),
@@ -281,107 +275,144 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexProfitAndLossCalculatorBlocState patchExpectedSaleUnits(String? value) {
-    if (value == null) {
-      final fields = currentState.fields.copyWithDefaults(
-        expectedSaleUnits: true,
-      );
-      calculator.expectedSaleUnits = 0;
+    var fields = currentState.fields;
 
-      return currentState.copyWith(fields: fields);
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetExpectedSaleUnits: true);
+      calculator.expectedSaleUnits = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(expectedSaleUnits: value);
+      calculator.expectedSaleUnits = dValue.toDouble();
     }
 
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(expectedSaleUnits: value);
-    calculator.expectedSaleUnits = dValue.toDouble();
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexProfitAndLossCalculatorBlocState patchBuyingPrice(String? value) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetBuyingPrice: true);
+      calculator.buyingPrice = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(buyingPrice: value);
+      calculator.buyingPrice = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchBuyingPrice(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(buyingPrice: value);
-    calculator.buyingPrice = dValue.toDouble();
+  MatexProfitAndLossCalculatorBlocState patchSellingPrice(String? value) {
+    var fields = currentState.fields;
 
-    return currentState.copyWith(fields: fields);
-  }
-
-  MatexProfitAndLossCalculatorBlocState patchSellingPrice(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(sellingPrice: value);
-    calculator.sellingPrice = dValue.toDouble();
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetSellingPrice: true);
+      calculator.sellingPrice = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(sellingPrice: value);
+      calculator.sellingPrice = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexProfitAndLossCalculatorBlocState patchBuyingExpensePerUnitAmount(
-    String value,
+    String? value,
   ) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(
-      buyingExpensePerUnitAmount: value,
-    );
-    calculator.buyingExpensePerUnitAmount = dValue.toDouble();
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetBuyingExpensePerUnitAmount: true);
+      calculator.buyingExpensePerUnitAmount = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields = fields.copyWith(buyingExpensePerUnitAmount: value);
+      calculator.buyingExpensePerUnitAmount = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexProfitAndLossCalculatorBlocState patchBuyingExpensePerUnitRate(
-    String value,
+    String? value,
   ) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(
-      buyingExpensePerUnitRate: value,
-    );
-    calculator.buyingExpensePerUnitRate = (dValue / dHundred).toDouble();
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetBuyingExpensePerUnitRate: true);
+      calculator.buyingExpensePerUnitRate = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields = fields.copyWith(buyingExpensePerUnitRate: value);
+      calculator.buyingExpensePerUnitRate = (dValue / dHundred).toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexProfitAndLossCalculatorBlocState patchSellingExpensePerUnitAmount(
-    String value,
+    String? value,
   ) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(
-      sellingExpensePerUnitAmount: value,
-    );
-    calculator.sellingExpensePerUnitAmount = dValue.toDouble();
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetSellingExpensePerUnitAmount: true);
+      calculator.sellingExpensePerUnitAmount = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(sellingExpensePerUnitAmount: value);
+      calculator.sellingExpensePerUnitAmount = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexProfitAndLossCalculatorBlocState patchSellingExpensePerUnitRate(
-    String value,
+    String? value,
   ) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(
-      sellingExpensePerUnitRate: value,
-    );
-    calculator.sellingExpensePerUnitRate = (dValue / dHundred).toDouble();
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetSellingExpensePerUnitRate: true);
+      calculator.sellingExpensePerUnitRate = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields = fields.copyWith(sellingExpensePerUnitRate: value);
+      calculator.sellingExpensePerUnitRate = (dValue / dHundred).toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexProfitAndLossCalculatorBlocState patchOperatingExpenses(String? value) {
+    var fields = currentState.fields;
+
     if (value == null) {
-      final fields = currentState.fields.copyWithDefaults(
-        operatingExpenses: true,
-      );
+      fields = fields.copyWithDefaults(resetOperatingExpenses: true);
       calculator.operatingExpenses = 0;
-
-      return currentState.copyWith(fields: fields);
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(operatingExpenses: value);
+      calculator.operatingExpenses = dValue.toDouble();
     }
-
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(operatingExpenses: value);
-    calculator.operatingExpenses = dValue.toDouble();
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexProfitAndLossCalculatorBlocState patchTaxRate(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(taxRate: value);
-    calculator.taxRate = (dValue / dHundred).toDouble();
+  MatexProfitAndLossCalculatorBlocState patchTaxRate(String? value) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetTaxRate: true);
+      calculator.taxRate = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields = fields.copyWith(taxRate: value);
+      calculator.taxRate = (dValue / dHundred).toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }

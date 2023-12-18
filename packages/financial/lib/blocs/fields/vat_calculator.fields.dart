@@ -4,8 +4,8 @@ import 'package:matex_core/core.dart';
 
 class MatexVatCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
-  final String defaulDiscountFieldType = 'amount';
-  final String defaulTipFieldType = 'percent';
+  static const String defaulDiscountFieldType = 'amount';
+  static const String defaulTipFieldType = 'percent';
 
   late final String discountFieldType;
   late final String? regionalVatRate;

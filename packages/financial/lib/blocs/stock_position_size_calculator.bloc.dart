@@ -121,7 +121,31 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value is String) {
+    if (value == null) {
+      if (key == MatexStockPositionSizeCalculatorBlocKey.accountSize) {
+        return document.copyWithDefaults(resetAccountSize: true);
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryPrice) {
+        return document.copyWithDefaults(resetEntryPrice: true);
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.stopLossPrice) {
+        return document.copyWithDefaults(resetStopLossPrice: true);
+      } else if (key ==
+          MatexStockPositionSizeCalculatorBlocKey.stopLossAmount) {
+        return document.copyWithDefaults(resetStopLossAmount: true);
+      } else if (key ==
+          MatexStockPositionSizeCalculatorBlocKey.slippagePercent) {
+        return document.copyWithDefaults(resetSlippagePercent: true);
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskPercent) {
+        return document.copyWithDefaults(resetRiskPercent: true);
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskReward) {
+        return document.copyWithDefaults(resetRiskReward: true);
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryFees) {
+        return document.copyWithDefaults(resetEntryFees: true);
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.exitFees) {
+        return document.copyWithDefaults(resetExitFees: true);
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
+        return document.copyWithDefaults(resetRiskFieldType: true);
+      }
+    } else if (value is String) {
       if (key == MatexStockPositionSizeCalculatorBlocKey.accountSize) {
         return document.copyWith(accountSize: value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryPrice) {
@@ -168,7 +192,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value is String) {
+    if (value is String?) {
       if (key == MatexStockPositionSizeCalculatorBlocKey.accountSize) {
         return patchAccountSize(value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryPrice) {
@@ -203,37 +227,13 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
-  Future<MatexStockPositionSizeCalculatorBlocDocument?> resetCalculatorDocument(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexStockPositionSizeCalculatorBlocKey.entryFees:
-        return document.copyWithDefaults(resetEntryFees: true);
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexStockPositionSizeCalculatorBlocState?> resetCalculatorState(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexStockPositionSizeCalculatorBlocKey.entryFees:
-        return patchEntryFees(null);
-    }
-
-    return null;
-  }
-
-  @override
   Future<void> resetCalculator(
     MatexStockPositionSizeCalculatorBlocDocument document,
   ) async {
-    final slippagePercent = toDecimal(document.slippagePercent) ?? dZero;
-    final riskPercent = toDecimal(document.riskPercent) ?? dZero;
-    final entryFees = toDecimal(document.entryFees) ?? dZero;
-    final exitFees = toDecimal(document.exitFees) ?? dZero;
+    final slippagePercent = toDecimalOrDefault(document.slippagePercent);
+    final riskPercent = toDecimalOrDefault(document.riskPercent);
+    final entryFees = toDecimalOrDefault(document.entryFees);
+    final exitFees = toDecimalOrDefault(document.exitFees);
 
     calculator.setState(MatexStockPositionSizeCalculatorState(
       isShortPosition: document.position == MatexPosition.short.name,
@@ -299,91 +299,140 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchAccountSize(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(accountSize: value);
-    calculator.accountSize = dValue.toDouble();
+  MatexStockPositionSizeCalculatorBlocState patchAccountSize(String? value) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetAccountSize: true);
+      calculator.accountSize = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(accountSize: value);
+      calculator.accountSize = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchEntryPrice(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(entryPrice: value);
-    calculator.entryPrice = dValue.toDouble();
+  MatexStockPositionSizeCalculatorBlocState patchEntryPrice(String? value) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetEntryPrice: true);
+      calculator.entryPrice = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(entryPrice: value);
+      calculator.entryPrice = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchStopLossPrice(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(stopLossPrice: value);
-    calculator.stopLossPrice = dValue.toDouble();
+  MatexStockPositionSizeCalculatorBlocState patchStopLossPrice(String? value) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetStopLossPrice: true);
+      calculator.stopLossPrice = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(stopLossPrice: value);
+      calculator.stopLossPrice = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchSlippagePercent(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(slippagePercent: value);
-    calculator.slippagePercent = (dValue / dHundred).toDouble();
+  MatexStockPositionSizeCalculatorBlocState patchSlippagePercent(
+    String? value,
+  ) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetSlippagePercent: true);
+      calculator.slippagePercent = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(slippagePercent: value);
+      calculator.slippagePercent = (dValue / dHundred).toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchRiskReward(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(riskReward: value);
-    calculator.riskReward = dValue.toDouble();
+  MatexStockPositionSizeCalculatorBlocState patchRiskReward(String? value) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetRiskReward: true);
+      calculator.riskReward = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(riskReward: value);
+      calculator.riskReward = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexStockPositionSizeCalculatorBlocState patchEntryFees(String? value) {
-    if (value == null) {
-      final fields = currentState.fields.copyWithDefaults(resetEntryFees: true);
-      calculator.entryFees = 0;
+    var fields = currentState.fields;
 
-      return currentState.copyWith(fields: fields);
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetEntryFees: true);
+
+      calculator.entryFees = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(entryFees: value);
+      calculator.entryFees = (dValue / dHundred).toDouble();
     }
 
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(entryFees: value);
-    calculator.entryFees = (dValue / dHundred).toDouble();
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexStockPositionSizeCalculatorBlocState patchExitFees(String? value) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetExitFees: true);
+      calculator.exitFees = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(exitFees: value);
+      calculator.exitFees = (dValue / dHundred).toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchExitFees(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(exitFees: value);
-    calculator.exitFees = (dValue / dHundred).toDouble();
+  MatexStockPositionSizeCalculatorBlocState patchRiskPercent(String? value) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetRiskPercent: true);
+      calculator.riskPercent = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(riskPercent: value, stopLossAmount: '');
+      calculator.riskPercent = (dValue / dHundred).toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchRiskPercent(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(
-      riskPercent: value,
-      stopLossAmount: '',
-    );
+  MatexStockPositionSizeCalculatorBlocState patchStopLossAmount(String? value) {
+    var fields = currentState.fields;
 
-    // also reset stop loss amount
-    calculator.riskPercent = (dValue / dHundred).toDouble();
-
-    return currentState.copyWith(fields: fields);
-  }
-
-  MatexStockPositionSizeCalculatorBlocState patchStopLossAmount(String value) {
-    final dValue = toDecimalOrDefault(value);
-    final fields = currentState.fields.copyWith(
-      stopLossAmount: value,
-      riskPercent: '',
-    );
-
-    // also reset risk percent
-    calculator.stopLossAmount = dValue.toDouble();
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetStopLossAmount: true);
+      calculator.stopLossAmount = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = fields.copyWith(stopLossAmount: value, riskPercent: '');
+      calculator.stopLossAmount = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
