@@ -52,6 +52,9 @@ abstract class MatexFinancialCalculatorBloc<
 
     return {
       ...metadata,
+      'standardLotSize': await getUnitsPerStandardLot(),
+      'microLotSize': await getUnitsPerMiniLot(),
+      'miniLotSize': await getUnitsPerMicroLot(),
       'instrumentMetadata': instrumentMetadata,
     };
   }

@@ -24,12 +24,10 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
         MatexForexProfitLossCalculatorDocument,
         MatexForexProfitLossCalculatorBlocResults>
     with MatexFinancialCalculatorFormatterMixin {
-  final MatexFinancialInstrumentExchangeService exchangeProvider;
-
   MatexForexProfitLossCalculatorBloc({
     MatexForexProfitLossCalculatorBlocState? initialState,
     MatexForexProfitLossCalculatorDataProvider? dataProvider,
-    required this.exchangeProvider,
+    required super.exchangeProvider,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,
     super.showExportPdfDialog,
@@ -52,11 +50,12 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  void close() {
-    if (!isClosed && canClose()) {
-      exchangeProvider.dispose();
-      super.close();
-    }
+  @mustCallSuper
+  String getUserCurrencyCode() {
+    String? localeCode = currentState.fields.accountCurrency?.toUpperCase();
+    localeCode ??= super.getUserCurrencyCode();
+
+    return localeCode;
   }
 
   @override
@@ -109,31 +108,6 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
         'updatedOn': updatedOn,
       },
     );
-  }
-
-  /// Loads the metadata of the calculator.
-  @override
-  @mustCallSuper
-  Future<Map<String, dynamic>> loadMetadata() async {
-    final metadata = await super.loadMetadata();
-    final instrumentMetadata = await getInstrumentMetadata();
-    final instrumentPairRate = calculator.instrumentPairRate ?? 0;
-
-    if (instrumentPairRate > 0 && isMandatoryFieldValid) {
-      metadata.putIfAbsent('formattedInstrumentExchangeRate', () {
-        final formatted = localizeQuote(
-          rate: calculator.instrumentPairRate,
-          metadata: instrumentMetadata,
-        );
-
-        return superscriptLastCharacter(formatted);
-      });
-    }
-
-    return {
-      ...metadata,
-      'instrumentMetadata': instrumentMetadata,
-    };
   }
 
   @override
@@ -544,7 +518,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     final base = currentState.fields.base!;
     final pipDecimalPlaces = currentState.fields.pipDecimalPlaces;
     final symbol = base + counter;
-    final instrumentQuoteFuture = exchangeProvider.rate(symbol);
+    final instrumentQuoteFuture = exchangeProvider!.rate(symbol);
 
     if (pipDecimalPlaces == null) {
       final pairMetadata = await getInstrumentMetadata();
@@ -572,7 +546,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       calculator.isAccountCurrencyCounter = true;
     } else {
       final symbol = counter + accountCurrency;
-      final accountBaseQuote = await exchangeProvider.rate(symbol);
+      final accountBaseQuote = await exchangeProvider!.rate(symbol);
 
       if (accountBaseQuote == null) {
         // FIXME: display an error message

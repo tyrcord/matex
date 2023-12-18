@@ -60,6 +60,15 @@ class MatexForexRequiredMarginCalculatorBloc
   }
 
   @override
+  @mustCallSuper
+  String getUserCurrencyCode() {
+    String? localeCode = currentState.fields.accountCurrency?.toUpperCase();
+    localeCode ??= super.getUserCurrencyCode();
+
+    return localeCode;
+  }
+
+  @override
   @protected
   Stream<MatexForexRequiredMarginCalculatorBlocState> willCompute() async* {
     yield* super.willCompute();

@@ -61,6 +61,15 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   }
 
   @override
+  @mustCallSuper
+  String getUserCurrencyCode() {
+    String? localeCode = currentState.fields.accountCurrency?.toUpperCase();
+    localeCode ??= super.getUserCurrencyCode();
+
+    return localeCode;
+  }
+
+  @override
   Stream<MatexForexStopLossTakeProfitCalculatorBlocState> mapEventToState(
     FastCalculatorBlocEvent<FastCalculatorResults> event,
   ) async* {

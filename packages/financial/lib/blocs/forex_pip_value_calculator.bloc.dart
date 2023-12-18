@@ -59,6 +59,15 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
+  @mustCallSuper
+  String getUserCurrencyCode() {
+    String? localeCode = currentState.fields.accountCurrency?.toUpperCase();
+    localeCode ??= super.getUserCurrencyCode();
+
+    return localeCode;
+  }
+
+  @override
   @protected
   @mustCallSuper
   Stream<MatexForexPipValueCalculatorBlocState> willCompute() async* {
@@ -87,20 +96,6 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       calculator.positionSize = positionSize;
     }
-  }
-
-  /// Loads the metadata of the calculator.
-  @override
-  @mustCallSuper
-  Future<Map<String, dynamic>> loadMetadata() async {
-    final metadata = await super.loadMetadata();
-
-    return {
-      ...metadata,
-      'standardLotSize': await getUnitsPerStandardLot(),
-      'microLotSize': await getUnitsPerMiniLot(),
-      'miniLotSize': await getUnitsPerMicroLot(),
-    };
   }
 
   @override
