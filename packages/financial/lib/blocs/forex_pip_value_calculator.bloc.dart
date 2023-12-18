@@ -60,6 +60,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
   @override
   @protected
+  @mustCallSuper
   Stream<MatexForexPipValueCalculatorBlocState> willCompute() async* {
     yield* super.willCompute();
 
@@ -70,7 +71,22 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     final quote = currentMetadata['instrumentExchangeRate'] as double?;
 
+    // update the calculator with the latest instrument exchange rate
     if (quote != null) await patchCalculatorExchangeRates(quote);
+
+    final positionSizeFieldType = currentState.fields.positionSizeFieldType;
+
+    // update the calculator position size with the latest lot size
+    if (positionSizeFieldType != MatexPositionSizeType.unit) {
+      final dLotSize = toDecimalOrDefault(currentState.fields.lotSize);
+
+      final positionSize = await getPositionSizeForLotSize(
+        positionSize: dLotSize.toDouble(),
+        lotSize: positionSizeFieldType,
+      );
+
+      calculator.positionSize = positionSize;
+    }
   }
 
   /// Loads the metadata of the calculator.
@@ -274,6 +290,9 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
         case MatexForexPipValueCalculatorBlocKey.lotSize:
           return patchLotSize(value);
+
+        case MatexForexPipValueCalculatorBlocKey.instrument:
+          return patchInstrument(null);
       }
     } else if (value is MatexPositionSizeType) {
       if (key == MatexForexPipValueCalculatorBlocKey.positionSizeFieldType) {
@@ -332,12 +351,10 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     );
 
     MatexFinancialInstrument? instrument;
-
     int pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
 
     if (json != null) {
       instrument = MatexFinancialInstrument.fromJson(json);
-
       pipDecimalPlaces = await getPipPrecision(
         counter: instrument.counter,
         base: instrument.base,
@@ -385,19 +402,31 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     if (instrument == null) {
       fields = currentState.fields.copyWithDefaults(
+        resetPipDecimalPlaces: true,
         resetCounter: true,
         resetBase: true,
       );
+
+      calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
     } else {
-      fields = currentState.fields.copyWith(
+      final pipDecimalPlaces = await getPipPrecision(
         counter: instrument.counter,
         base: instrument.base,
       );
+
+      fields = currentState.fields.copyWith(
+        pipDecimalPlaces: pipDecimalPlaces.toString(),
+        counter: instrument.counter,
+        base: instrument.base,
+      );
+
+      calculator.pipDecimalPlaces = pipDecimalPlaces;
     }
 
     // Note: Erase the previous instrument exchange rate metadata
+    // the new  instrument exchange rate metadata will be updated in
+    // the will compute method
     final metadata = await super.loadMetadata();
-    fields = currentState.fields.merge(fields);
 
     return currentState.copyWith(fields: fields, metadata: metadata);
   }
@@ -429,24 +458,13 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     if (value == null) {
       fields = currentState.fields.copyWithDefaults(resetLotSize: true);
-      calculator.positionSize = 0;
     } else {
-      final positionSizeFieldType = currentState.fields.positionSizeFieldType;
-      double positionSize = 0;
-
-      if (positionSizeFieldType != MatexPositionSizeType.unit) {
-        final dValue = toDecimalOrDefault(value);
-        final numValue = dValue.toDouble();
-
-        positionSize = await getPositionSizeForLotSize(
-          lotSize: positionSizeFieldType,
-          positionSize: numValue,
-        );
-      }
-
       fields = currentState.fields.copyWith(lotSize: value);
-      calculator.positionSize = positionSize;
+      // NOTE: we need to convert the lot size to a position size
+      // will be done in the will compute method
     }
+
+    calculator.positionSize = 0;
 
     return currentState.copyWith(fields: fields);
   }

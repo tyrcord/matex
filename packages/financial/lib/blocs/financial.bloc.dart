@@ -62,7 +62,9 @@ abstract class MatexFinancialCalculatorBloc<
   ) async {
     if (instrument.symbol == null || exchangeProvider == null) return null;
 
-    return retry(task: () => exchangeProvider!.rate(instrument.symbol!));
+    // Note: we don't need to use a retry mechanism here because the
+    // exchange provider already implements it.
+    return exchangeProvider!.rate(instrument.symbol!);
   }
 
   Stream<S> patchInstrumentExchangeRate(
@@ -78,8 +80,6 @@ abstract class MatexFinancialCalculatorBloc<
 
       if (quote != null) {
         final instrumentMetadata = await getInstrumentMetadata();
-
-        // await patchExchangeRates(quote);
 
         partialMetadata = {
           'formattedInstrumentExchangeRate': localizeQuote(
@@ -158,19 +158,19 @@ abstract class MatexFinancialCalculatorBloc<
     return instrumentPairMetadataService.metadata(base + counter);
   }
 
-  Future<int> getStandardLotValue() async {
+  Future<int> getUnitsPerStandardLot() async {
     final metadata = await getInstrumentMetadata();
 
     return metadata?.lots?.standard ?? 0;
   }
 
-  Future<int> getMiniLotValue() async {
+  Future<int> getUnitsPerMiniLot() async {
     final metadata = await getInstrumentMetadata();
 
     return metadata?.lots?.mini ?? 0;
   }
 
-  Future<int> getMicroLotValue() async {
+  Future<int> getUnitsPerMicroLot() async {
     final metadata = await getInstrumentMetadata();
 
     return metadata?.lots?.micro ?? 0;
@@ -194,17 +194,16 @@ abstract class MatexFinancialCalculatorBloc<
   }
 
   @protected
-  num computePipValueForLotSize(num lotSize, num pipValue, num? positionSize) {
-    double unitaryPipValue = 0.0;
+  num computePipValueForUnits(num units, num pipValue, num? positionSize) {
+    final dUnits = toDecimalOrDefault(units);
+    var unitaryPipValue = dZero;
 
     if (positionSize != null && positionSize > 0) {
-      final dPipValue = toDecimal(pipValue) ?? dZero;
-      final dPositionSize = toDecimal(positionSize)!;
-
-      unitaryPipValue =
-          decimalFromRational(dPipValue / dPositionSize).toDouble();
+      final dPositionSize = toDecimalOrDefault(positionSize);
+      final dPipValue = toDecimalOrDefault(pipValue);
+      unitaryPipValue = decimalFromRational(dPipValue / dPositionSize);
     }
 
-    return lotSize * unitaryPipValue;
+    return (dUnits * unitaryPipValue).toDouble();
   }
 }
