@@ -50,6 +50,15 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
+  bool get isMandatoryFieldValid {
+    final fields = currentState.fields;
+
+    return (fields.positionSize != null || fields.lotSize != null) &&
+        fields.financialInstrument != null &&
+        fields.accountCurrency != null;
+  }
+
+  @override
   @mustCallSuper
   String getUserCurrencyCode() {
     String? localeCode = currentState.fields.accountCurrency?.toUpperCase();
@@ -59,55 +68,33 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  bool get isMandatoryFieldValid {
-    return currentState.fields.accountCurrency != null &&
-        currentState.fields.base != null &&
-        currentState.fields.counter != null &&
-        (currentState.fields.positionSize != null ||
-            currentState.fields.lotSize != null);
-  }
-
-  @override
   @protected
   Stream<MatexForexProfitLossCalculatorBlocState> willCompute() async* {
     yield* super.willCompute();
 
-    var fields = currentState.fields;
-    MatexQuote? quote;
-    String? updatedOn;
+    final instrument = currentState.fields.financialInstrument;
 
-    if (isMandatoryFieldValid) {
-      quote = await patchExchangeRates();
+    // update the state metadata with the latest instrument metadata
+    if (instrument != null) yield* patchInstrumentExchangeRate(instrument);
 
-      if (quote != null) {
-        updatedOn = await localizeTimestampInMilliseconds(quote.timestamp);
-      }
-    }
+    final quote = currentMetadata['instrumentExchangeRate'] as double?;
 
-    if (fields.positionSizeFieldType != MatexPositionSizeType.unit &&
-        fields.lotSize != null &&
-        fields.lotSize!.isNotEmpty) {
+    // update the calculator with the latest instrument exchange rate
+    if (quote != null) await patchCalculatorExchangeRates(quote);
+
+    final positionSizeFieldType = currentState.fields.positionSizeFieldType;
+
+    // update the calculator position size with the latest lot size
+    if (positionSizeFieldType != MatexPositionSizeType.unit) {
+      final dLotSize = toDecimalOrDefault(currentState.fields.lotSize);
+
       final positionSize = await getPositionSizeForLotSize(
-        positionSize: parseFieldValueToDouble(fields.lotSize),
-        lotSize: fields.positionSizeFieldType,
+        positionSize: dLotSize.toDouble(),
+        lotSize: positionSizeFieldType,
       );
-
-      final isInt = isDoubleInteger(positionSize);
 
       calculator.positionSize = positionSize;
-      fields = fields.copyWith(
-        positionSize:
-            isInt ? positionSize.toInt().toString() : positionSize.toString(),
-      );
     }
-
-    yield currentState.copyWith(
-      fields: fields,
-      metadata: {
-        ...await loadMetadata(),
-        'updatedOn': updatedOn,
-      },
-    );
   }
 
   @override
@@ -138,7 +125,34 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       value = MatexFinancialInstrument.fromJson(value);
     }
 
-    if (value is String) {
+    if (value == null) {
+      switch (key) {
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
+          return document.copyWithDefaults(resetAccountCurrency: true);
+
+        case MatexForexProfitLossCalculatorBlocKey.positionSize:
+          return document.copyWithDefaults(resetPositionSize: true);
+
+        case MatexForexProfitLossCalculatorBlocKey.pipDecimalPlaces:
+          return document.copyWithDefaults(resetPipDecimalPlaces: true);
+
+        case MatexForexProfitLossCalculatorBlocKey.lotSize:
+          return document.copyWithDefaults(resetLotSize: true);
+
+        case MatexForexProfitLossCalculatorBlocKey.entryPrice:
+          return document.copyWithDefaults(resetEntryPrice: true);
+
+        case MatexForexProfitLossCalculatorBlocKey.exitPrice:
+          return document.copyWithDefaults(resetExitPrice: true);
+
+        case MatexForexProfitLossCalculatorBlocKey.instrument:
+          return document.copyWithDefaults(
+            resetPipDecimalPlaces: true,
+            resetCounter: true,
+            resetBase: true,
+          );
+      }
+    } else if (value is String) {
       switch (key) {
         case MatexFiancialCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
@@ -212,6 +226,9 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
 
         case MatexForexProfitLossCalculatorBlocKey.exitPrice:
           return patchExitPrice(value);
+
+        case MatexForexProfitLossCalculatorBlocKey.instrument:
+          return patchInstrument(null);
       }
     } else if (value is MatexPositionSizeType &&
         key == MatexForexProfitLossCalculatorBlocKey.positionSizeFieldType) {
@@ -221,40 +238,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       return patchInstrument(value);
     } else if (value is MatexPosition &&
         key == MatexForexProfitLossCalculatorBlocKey.position) {
-      return patchPosition(value.name);
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexForexProfitLossCalculatorDocument?> resetCalculatorDocument(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexFiancialCalculatorBlocKey.accountCurrency:
-        return document.copyWithDefaults(resetAccountCurrency: true);
-
-      case MatexForexProfitLossCalculatorBlocKey.instrument:
-        return document.copyWithDefaults(
-          resetCounter: true,
-          resetBase: true,
-        );
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexForexProfitLossCalculatorBlocState?> resetCalculatorState(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexFiancialCalculatorBlocKey.accountCurrency:
-        return patchAccountCurrency(null);
-
-      case MatexForexProfitLossCalculatorBlocKey.instrument:
-        return patchInstrument(null);
+      return patchPosition(value);
     }
 
     return null;
@@ -265,8 +249,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexForexProfitLossCalculatorDocument document,
   ) async {
     calculator.setState(MatexForexProfitLossCalculatorState(
-      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces) ??
-          kMatexDefaultPipDecimalPlaces,
+      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
       positionSize: parseStringToDouble(document.positionSize),
     ));
   }
@@ -305,7 +288,6 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     );
 
     MatexFinancialInstrument? instrument;
-
     int pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
 
     if (json != null) {
@@ -356,10 +338,6 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       ..isAccountCurrencyCounter = false
       ..instrumentPairRate = 0;
 
-    // Note: Loads default metadata values from the super class.
-    // instrument metadata will be loaded in the willCompute method.
-    final metadata = await super.loadMetadata();
-
     if (instrument == null) {
       fields = currentState.fields.copyWithDefaults(
         resetPipDecimalPlaces: true,
@@ -383,6 +361,11 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       calculator.pipDecimalPlaces = pipDecimalPlaces;
     }
 
+    // Note: Erase the previous instrument exchange rate metadata
+    // the new  instrument exchange rate metadata will be updated in
+    // the will compute method
+    final metadata = await super.loadMetadata();
+
     return currentState.copyWith(fields: fields, metadata: metadata);
   }
 
@@ -397,7 +380,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       );
 
       calculator.positionSize = 0;
-    } else if (positionSizeFieldType == MatexPositionSizeType.unit.name) {
+    } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(positionSize: value);
       calculator.positionSize = dValue.toDouble();
@@ -417,7 +400,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       );
 
       calculator.positionSize = 0;
-    } else if (positionSizeFieldType != MatexPositionSizeType.unit.name) {
+    } else if (positionSizeFieldType != MatexPositionSizeType.unit) {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(positionSize: value);
       calculator.positionSize = dValue.toDouble();
@@ -462,10 +445,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     late MatexForexProfitLossCalculatorBlocFields fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetEntryPrice: true,
-      );
-
+      fields = currentState.fields.copyWithDefaults(resetEntryPrice: true);
       calculator.entryPrice = 0;
     } else {
       final dValue = toDecimalOrDefault(value);
@@ -480,10 +460,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     late MatexForexProfitLossCalculatorBlocFields fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetExitPrice: true,
-      );
-
+      fields = currentState.fields.copyWithDefaults(resetExitPrice: true);
       calculator.exitPrice = 0;
     } else {
       final dValue = toDecimalOrDefault(value);
@@ -494,51 +471,26 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexForexProfitLossCalculatorBlocState patchPosition(String? value) {
+  MatexForexProfitLossCalculatorBlocState patchPosition(MatexPosition? value) {
     late MatexForexProfitLossCalculatorBlocFields fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetPosition: true,
-      );
-
+      fields = currentState.fields.copyWithDefaults(resetPosition: true);
       calculator.position = MatexPosition.long;
     } else {
-      final position = MatexPositionX.fromName(value);
-      fields = currentState.fields.copyWith(position: position);
-      calculator.position = position!;
+      fields = currentState.fields.copyWith(position: value);
+      calculator.position = value;
     }
 
     return currentState.copyWith(fields: fields);
   }
 
-  Future<MatexQuote?> patchExchangeRates() async {
+  Future<void> patchCalculatorExchangeRates(double instrumentPairRate) async {
     final accountCurrency = currentState.fields.accountCurrency!;
     final counter = currentState.fields.counter!;
-    final base = currentState.fields.base!;
-    final pipDecimalPlaces = currentState.fields.pipDecimalPlaces;
-    final symbol = base + counter;
-    final instrumentQuoteFuture = exchangeProvider!.rate(symbol);
-
-    if (pipDecimalPlaces == null) {
-      final pairMetadata = await getInstrumentMetadata();
-
-      if (pairMetadata != null) {
-        calculator.pipDecimalPlaces = pairMetadata.pip.precision;
-      } else {
-        calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
-      }
-    }
-
-    final instrumentQuote = await instrumentQuoteFuture;
-
-    if (instrumentQuote == null) {
-      // FIXME: display an error message
-      return null;
-    }
 
     calculator
-      ..instrumentPairRate = instrumentQuote.price
+      ..instrumentPairRate = instrumentPairRate
       ..counterToAccountCurrencyRate = 0
       ..isAccountCurrencyCounter = false;
 
@@ -548,15 +500,11 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       final symbol = counter + accountCurrency;
       final accountBaseQuote = await exchangeProvider!.rate(symbol);
 
-      if (accountBaseQuote == null) {
-        // FIXME: display an error message
-        return null;
-      }
+      // FIXME: display an error message
+      if (accountBaseQuote == null) return;
 
       calculator.counterToAccountCurrencyRate = accountBaseQuote.price;
     }
-
-    return instrumentQuote;
   }
 
   @override
@@ -570,11 +518,6 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     final metadata = currentState.metadata;
 
     // ignore: use_build_context_synchronously
-    return pdfGenerator.generate(
-      context,
-      fields,
-      results,
-      metadata,
-    );
+    return pdfGenerator.generate(context, fields, results, metadata);
   }
 }

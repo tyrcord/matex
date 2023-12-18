@@ -56,9 +56,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
   @override
   bool get isMandatoryFieldValid {
-    return currentState.fields.accountCurrency != null &&
-        currentState.fields.base != null &&
-        currentState.fields.counter != null;
+    final fields = currentState.fields;
+
+    return fields.accountCurrency != null && fields.financialInstrument != null;
   }
 
   @override
@@ -342,12 +342,12 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   Future<void> resetCalculator(
     MatexForexPositionSizeCalculatorDocument document,
   ) async {
-    final riskPercent = toDecimal(document.riskPercent) ?? dZero;
+    final dRiskPercent = toDecimalOrDefault(document.riskPercent);
 
     calculator.setState(MatexForexPositionSizeCalculatorState(
       pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
       accountSize: parseStringToDouble(document.accountSize),
-      riskPercent: (riskPercent / dHundred).toDouble(),
+      riskPercent: (dRiskPercent / dHundred).toDouble(),
       riskAmount: parseStringToDouble(document.riskAmount),
       entryPrice: parseStringToDouble(document.entryPrice),
       stopLossPips: parseStringToDouble(document.stopLossPips),
@@ -446,10 +446,6 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       ..isAccountCurrencyCounter = false
       ..instrumentPairRate = 0;
 
-    // Note: Loads default metadata values from the super class.
-    // instrument metadata will be loaded in the willCompute method.
-    final metadata = await super.loadMetadata();
-
     if (instrument == null) {
       fields = currentState.fields.copyWithDefaults(
         resetPipDecimalPlaces: true,
@@ -472,6 +468,11 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       calculator.pipDecimalPlaces = pipDecimalPlaces;
     }
+
+    // Note: Erase the previous instrument exchange rate metadata
+    // the new  instrument exchange rate metadata will be updated in
+    // the will compute method
+    final metadata = await super.loadMetadata();
 
     return currentState.copyWith(fields: fields, metadata: metadata);
   }

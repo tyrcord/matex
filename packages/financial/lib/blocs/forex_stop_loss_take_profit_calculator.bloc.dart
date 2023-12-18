@@ -538,6 +538,8 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     }
 
     // Note: Erase the previous instrument exchange rate metadata
+    // the new  instrument exchange rate metadata will be updated in
+    // the will compute method
     final metadata = await super.loadMetadata();
 
     return currentState.copyWith(fields: fields, metadata: metadata);
