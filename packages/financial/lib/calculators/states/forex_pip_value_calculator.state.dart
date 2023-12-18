@@ -10,12 +10,15 @@ class MatexForexPipValueCalculatorState extends MatexCalculatorState {
   final double instrumentPairRate;
 
   const MatexForexPipValueCalculatorState({
-    this.pipDecimalPlaces = kDefaultPipPipDecimalPlaces,
-    this.isAccountCurrencyCounter = false,
-    this.counterToAccountCurrencyRate = 0,
-    this.instrumentPairRate = 0,
+    int? pipDecimalPlaces,
+    bool? isAccountCurrencyCounter,
+    double? counterToAccountCurrencyRate,
+    double? instrumentPairRate,
     this.positionSize,
-  });
+  })  : pipDecimalPlaces = pipDecimalPlaces ?? kDefaultPipPipDecimalPlaces,
+        counterToAccountCurrencyRate = counterToAccountCurrencyRate ?? 0,
+        isAccountCurrencyCounter = isAccountCurrencyCounter ?? false,
+        instrumentPairRate = instrumentPairRate ?? 0;
 
   @override
   MatexForexPipValueCalculatorState clone() => copyWith();
