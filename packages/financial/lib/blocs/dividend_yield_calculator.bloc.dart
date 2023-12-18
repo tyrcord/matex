@@ -39,6 +39,9 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
           debugLabel: 'MatexDividendYieldCalculatorBloc',
         ) {
     calculator = MatexDividendYieldCalculator();
+
+    // Note: no need to listen to user account currency changes
+    // because the calculator is not requiring full screen.
   }
 
   @override
@@ -66,7 +69,15 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value is String) {
+    if (value == null) {
+      if (key == MatexDividendYieldCalculatorBlocKey.sharePrice) {
+        return document.copyWithDefaults(resetSharePrice: true);
+      } else if (key == MatexDividendYieldCalculatorBlocKey.dividendAmount) {
+        return document.copyWithDefaults(resetDividendAmount: true);
+      } else if (key == MatexDividendYieldCalculatorBlocKey.paymentFrequency) {
+        return document.copyWithDefaults(resetPaymentFrequency: true);
+      }
+    } else if (value is String) {
       if (key == MatexDividendYieldCalculatorBlocKey.sharePrice) {
         return document.copyWith(sharePrice: value);
       } else if (key == MatexDividendYieldCalculatorBlocKey.dividendAmount) {
@@ -88,7 +99,7 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value is String) {
+    if (value is String?) {
       if (key == MatexDividendYieldCalculatorBlocKey.sharePrice) {
         return patchSharePrice(value);
       } else if (key == MatexDividendYieldCalculatorBlocKey.dividendAmount) {
@@ -156,7 +167,7 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.sharePrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(sharePrice: value);
       calculator.sharePrice = dValue.toDouble();
     }
@@ -174,7 +185,7 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.dividendAmount = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(dividendAmount: value);
       calculator.dividendAmount = dValue.toDouble();
     }

@@ -42,6 +42,9 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
           debugLabel: 'MatexDividendPayoutRatioCalculatorBloc',
         ) {
     calculator = MatexDividendPayoutRatioCalculator();
+
+    // Note: no need to listen to user account currency changes
+    // because the calculator is not requiring full screen.
   }
 
   @override
@@ -78,7 +81,13 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value is String) {
+    if (value == null) {
+      if (key == MatexDividendPayoutRatioCalculatorBlocKey.totalDividends) {
+        return document.copyWithDefaults(resetTotalDividends: true);
+      } else if (key == MatexDividendPayoutRatioCalculatorBlocKey.netIncome) {
+        return document.copyWithDefaults(resetNetIncome: true);
+      }
+    } else if (value is String) {
       if (key == MatexDividendPayoutRatioCalculatorBlocKey.totalDividends) {
         return document.copyWith(totalDividends: value);
       } else if (key == MatexDividendPayoutRatioCalculatorBlocKey.netIncome) {
@@ -94,7 +103,7 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value is String) {
+    if (value is String?) {
       if (key == MatexDividendPayoutRatioCalculatorBlocKey.totalDividends) {
         return patchTotalDividends(value);
       } else if (key == MatexDividendPayoutRatioCalculatorBlocKey.netIncome) {
@@ -151,7 +160,7 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.totalDividends = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(totalDividends: value);
       calculator.totalDividends = dValue.toDouble();
     }
@@ -169,7 +178,7 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.netIncome = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(netIncome: value);
       calculator.netIncome = dValue.toDouble();
     }
