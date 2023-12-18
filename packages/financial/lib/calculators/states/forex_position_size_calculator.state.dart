@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:matex_core/core.dart';
+import 'package:matex_financial/financial.dart';
 
 class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
   final int? pipDecimalPlaces;
@@ -14,17 +15,20 @@ class MatexForexPositionSizeCalculatorState extends MatexCalculatorState {
   final double? accountSize;
 
   const MatexForexPositionSizeCalculatorState({
-    this.pipDecimalPlaces,
-    this.isAccountCurrencyCounter = false,
-    this.counterToAccountCurrencyRate = 0,
-    this.instrumentPairRate = 0,
+    int? pipDecimalPlaces,
+    bool? isAccountCurrencyCounter,
+    double? counterToAccountCurrencyRate,
+    double? instrumentPairRate,
     this.stopLossPrice,
     this.riskAmount,
     this.riskPercent,
     this.stopLossPips,
     this.entryPrice,
     this.accountSize,
-  });
+  })  : pipDecimalPlaces = pipDecimalPlaces ?? kMatexDefaultPipDecimalPlaces,
+        counterToAccountCurrencyRate = counterToAccountCurrencyRate ?? 0,
+        isAccountCurrencyCounter = isAccountCurrencyCounter ?? false,
+        instrumentPairRate = instrumentPairRate ?? 0;
 
   @override
   MatexForexPositionSizeCalculatorState clone() => copyWith();

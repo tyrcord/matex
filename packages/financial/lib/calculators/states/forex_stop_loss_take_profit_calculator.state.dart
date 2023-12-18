@@ -18,10 +18,10 @@ class MatexForexStopLossTakeProfitCalculatorState extends MatexCalculatorState {
   final MatexPosition position;
 
   const MatexForexStopLossTakeProfitCalculatorState({
-    this.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces,
-    this.isAccountCurrencyCounter = false,
-    this.counterToAccountCurrencyRate = 0,
-    this.instrumentPairRate = 0,
+    int? pipDecimalPlaces,
+    bool? isAccountCurrencyCounter,
+    double? counterToAccountCurrencyRate,
+    double? instrumentPairRate,
     this.positionSize,
     this.entryPrice,
     this.stopLossPrice,
@@ -31,7 +31,11 @@ class MatexForexStopLossTakeProfitCalculatorState extends MatexCalculatorState {
     this.takeProfitPips,
     this.takeProfitAmount,
     MatexPosition? position,
-  }) : position = position ?? MatexPosition.long;
+  })  : position = position ?? MatexPosition.long,
+        pipDecimalPlaces = pipDecimalPlaces ?? kMatexDefaultPipDecimalPlaces,
+        counterToAccountCurrencyRate = counterToAccountCurrencyRate ?? 0,
+        isAccountCurrencyCounter = isAccountCurrencyCounter ?? false,
+        instrumentPairRate = instrumentPairRate ?? 0;
 
   @override
   MatexForexStopLossTakeProfitCalculatorState clone() => copyWith();

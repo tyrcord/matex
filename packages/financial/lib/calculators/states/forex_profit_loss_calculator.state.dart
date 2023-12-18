@@ -14,14 +14,18 @@ class MatexForexProfitLossCalculatorState extends MatexCalculatorState {
 
   const MatexForexProfitLossCalculatorState({
     this.positionSize,
-    this.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces,
-    this.isAccountCurrencyCounter = false,
-    this.counterToAccountCurrencyRate = 0,
-    this.instrumentPairRate = 0,
+    int? pipDecimalPlaces,
+    bool? isAccountCurrencyCounter,
+    double? counterToAccountCurrencyRate,
+    double? instrumentPairRate,
     this.exitPrice,
     this.entryPrice,
     MatexPosition? position,
-  }) : position = position ?? MatexPosition.long;
+  })  : position = position ?? MatexPosition.long,
+        pipDecimalPlaces = pipDecimalPlaces ?? kMatexDefaultPipDecimalPlaces,
+        counterToAccountCurrencyRate = counterToAccountCurrencyRate ?? 0,
+        isAccountCurrencyCounter = isAccountCurrencyCounter ?? false,
+        instrumentPairRate = instrumentPairRate ?? 0;
 
   @override
   MatexForexProfitLossCalculatorState clone() => copyWith();

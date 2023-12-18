@@ -290,7 +290,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       return currentState.copyWith(fields: fields);
     }
 
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(expectedSaleUnits: value);
     calculator.expectedSaleUnits = dValue.toDouble();
 
@@ -298,7 +298,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexProfitAndLossCalculatorBlocState patchBuyingPrice(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(buyingPrice: value);
     calculator.buyingPrice = dValue.toDouble();
 
@@ -306,7 +306,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexProfitAndLossCalculatorBlocState patchSellingPrice(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(sellingPrice: value);
     calculator.sellingPrice = dValue.toDouble();
 
@@ -316,7 +316,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   MatexProfitAndLossCalculatorBlocState patchBuyingExpensePerUnitAmount(
     String value,
   ) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(
       buyingExpensePerUnitAmount: value,
     );
@@ -328,7 +328,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   MatexProfitAndLossCalculatorBlocState patchBuyingExpensePerUnitRate(
     String value,
   ) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(
       buyingExpensePerUnitRate: value,
     );
@@ -340,7 +340,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   MatexProfitAndLossCalculatorBlocState patchSellingExpensePerUnitAmount(
     String value,
   ) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(
       sellingExpensePerUnitAmount: value,
     );
@@ -352,7 +352,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   MatexProfitAndLossCalculatorBlocState patchSellingExpensePerUnitRate(
     String value,
   ) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(
       sellingExpensePerUnitRate: value,
     );
@@ -371,7 +371,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       return currentState.copyWith(fields: fields);
     }
 
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(operatingExpenses: value);
     calculator.operatingExpenses = dValue.toDouble();
 
@@ -379,7 +379,7 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexProfitAndLossCalculatorBlocState patchTaxRate(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(taxRate: value);
     calculator.taxRate = (dValue / dHundred).toDouble();
 

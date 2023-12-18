@@ -577,7 +577,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
       calculator.positionSize = 0;
     } else if (positionSizeFieldType != MatexPositionSizeType.unit) {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(positionSize: value);
       calculator.positionSize = dValue.toDouble();
     }
@@ -597,7 +597,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
       calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(pipDecimalPlaces: value);
       calculator.pipDecimalPlaces = dValue.toDouble().toInt();
     }
@@ -617,7 +617,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
       calculator.entryPrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(entryPrice: value);
       calculator.entryPrice = dValue.toDouble();
     }
@@ -637,7 +637,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
       calculator.stopLossPrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(stopLossPrice: value);
       calculator.stopLossPrice = dValue.toDouble();
     }
@@ -657,7 +657,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
       calculator.stopLossPips = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(stopLossPips: value);
       calculator.stopLossPips = dValue.toDouble();
     }
@@ -677,7 +677,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
       calculator.stopLossAmount = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(stopLossAmount: value);
       calculator.stopLossAmount = dValue.toDouble();
     }
@@ -697,7 +697,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
       calculator.takeProfitPrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(takeProfitPrice: value);
       calculator.takeProfitPrice = dValue.toDouble();
     }
@@ -717,7 +717,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
       calculator.takeProfitPips = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(takeProfitPips: value);
       calculator.takeProfitPips = dValue.toDouble();
     }
@@ -737,7 +737,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
       calculator.takeProfitAmount = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(takeProfitAmount: value);
       calculator.takeProfitAmount = dValue.toDouble();
     }

@@ -293,14 +293,14 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     );
 
     calculator
-      ..isShortPosition = value == MatexPosition.short.name
+      ..isShortPosition = value == MatexPosition.short
       ..stopLossPrice = 0;
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexStockPositionSizeCalculatorBlocState patchAccountSize(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(accountSize: value);
     calculator.accountSize = dValue.toDouble();
 
@@ -308,7 +308,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexStockPositionSizeCalculatorBlocState patchEntryPrice(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(entryPrice: value);
     calculator.entryPrice = dValue.toDouble();
 
@@ -316,7 +316,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexStockPositionSizeCalculatorBlocState patchStopLossPrice(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(stopLossPrice: value);
     calculator.stopLossPrice = dValue.toDouble();
 
@@ -324,7 +324,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexStockPositionSizeCalculatorBlocState patchSlippagePercent(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(slippagePercent: value);
     calculator.slippagePercent = (dValue / dHundred).toDouble();
 
@@ -332,7 +332,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexStockPositionSizeCalculatorBlocState patchRiskReward(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(riskReward: value);
     calculator.riskReward = dValue.toDouble();
 
@@ -347,7 +347,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       return currentState.copyWith(fields: fields);
     }
 
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(entryFees: value);
     calculator.entryFees = (dValue / dHundred).toDouble();
 
@@ -355,7 +355,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexStockPositionSizeCalculatorBlocState patchExitFees(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(exitFees: value);
     calculator.exitFees = (dValue / dHundred).toDouble();
 
@@ -363,7 +363,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexStockPositionSizeCalculatorBlocState patchRiskPercent(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(
       riskPercent: value,
       stopLossAmount: '',
@@ -376,7 +376,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexStockPositionSizeCalculatorBlocState patchStopLossAmount(String value) {
-    final dValue = toDecimal(value) ?? dZero;
+    final dValue = toDecimalOrDefault(value);
     final fields = currentState.fields.copyWith(
       stopLossAmount: value,
       riskPercent: '',

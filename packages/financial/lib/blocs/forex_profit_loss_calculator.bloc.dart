@@ -418,7 +418,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       calculator.positionSize = 0;
     } else if (positionSizeFieldType != MatexPositionSizeType.unit.name) {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(positionSize: value);
       calculator.positionSize = dValue.toDouble();
     }
@@ -436,7 +436,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(pipDecimalPlaces: value);
       calculator.pipDecimalPlaces = dValue.toDouble().toInt();
     }
@@ -468,7 +468,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       calculator.entryPrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(entryPrice: value);
       calculator.entryPrice = dValue.toDouble();
     }
@@ -486,7 +486,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       calculator.exitPrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(exitPrice: value);
       calculator.exitPrice = dValue.toDouble();
     }
