@@ -1,43 +1,48 @@
 // Package imports:
 import 'package:matex_core/core.dart';
+import 'package:matex_financial/financial.dart';
 
 class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
-  final double? positionSize;
-  final bool isAccountCurrencyCounter;
   final double counterToAccountCurrencyRate;
-  final double instrumentPairRate;
-  final double leverage;
+  final bool isAccountCurrencyCounter;
   final bool isAccountCurrencyBase;
+  final double instrumentPairRate;
+  final double? positionSize;
+  final double leverage;
 
   const MatexForexRequiredMarginCalculatorState({
-    this.isAccountCurrencyCounter = false,
-    this.isAccountCurrencyBase = false,
-    this.counterToAccountCurrencyRate = 0,
-    this.instrumentPairRate = 0,
-    this.leverage = 1,
+    double? counterToAccountCurrencyRate,
+    bool? isAccountCurrencyCounter,
+    bool? isAccountCurrencyBase,
+    double? instrumentPairRate,
+    double? leverage,
     this.positionSize,
-  });
+  })  : counterToAccountCurrencyRate = counterToAccountCurrencyRate ?? 0,
+        isAccountCurrencyCounter = isAccountCurrencyCounter ?? false,
+        isAccountCurrencyBase = isAccountCurrencyBase ?? false,
+        leverage = leverage ?? kMatexDefaultLeverage,
+        instrumentPairRate = instrumentPairRate ?? 0;
 
   @override
   MatexForexRequiredMarginCalculatorState clone() => copyWith();
 
   @override
   MatexForexRequiredMarginCalculatorState copyWith({
-    double? positionSize,
-    bool? isAccountCurrencyCounter,
     double? counterToAccountCurrencyRate,
-    double? instrumentPairRate,
+    bool? isAccountCurrencyCounter,
     bool? isAccountCurrencyBase,
+    double? instrumentPairRate,
+    double? positionSize,
     double? leverage,
   }) {
     return MatexForexRequiredMarginCalculatorState(
+      instrumentPairRate: instrumentPairRate ?? this.instrumentPairRate,
       positionSize: positionSize ?? this.positionSize,
+      leverage: leverage ?? this.leverage,
       isAccountCurrencyCounter:
           isAccountCurrencyCounter ?? this.isAccountCurrencyCounter,
       counterToAccountCurrencyRate:
           counterToAccountCurrencyRate ?? this.counterToAccountCurrencyRate,
-      instrumentPairRate: instrumentPairRate ?? this.instrumentPairRate,
-      leverage: leverage ?? this.leverage,
       isAccountCurrencyBase:
           isAccountCurrencyBase ?? this.isAccountCurrencyBase,
     );
@@ -45,23 +50,24 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
 
   @override
   MatexForexRequiredMarginCalculatorState copyWithDefaults({
-    bool resetPositionSize = false,
-    bool resetIsAccountCurrencyCounter = false,
     bool resetCounterToAccountCurrencyRate = false,
-    bool resetInstrumentPairRate = false,
-    bool resetLeverage = false,
+    bool resetIsAccountCurrencyCounter = false,
     bool resetIsAccountCurrencyBase = false,
+    bool resetInstrumentPairRate = false,
+    bool resetPositionSize = false,
+    bool resetLeverage = false,
   }) {
     return MatexForexRequiredMarginCalculatorState(
+      instrumentPairRate: resetInstrumentPairRate ? null : instrumentPairRate,
       positionSize: resetPositionSize ? null : positionSize,
-      isAccountCurrencyCounter:
-          resetIsAccountCurrencyCounter ? false : isAccountCurrencyCounter,
-      counterToAccountCurrencyRate:
-          resetCounterToAccountCurrencyRate ? 0 : counterToAccountCurrencyRate,
-      instrumentPairRate: resetInstrumentPairRate ? 0 : instrumentPairRate,
-      leverage: resetLeverage ? 1 : leverage,
+      leverage: resetLeverage ? null : leverage,
       isAccountCurrencyBase:
           resetIsAccountCurrencyBase ? false : isAccountCurrencyBase,
+      isAccountCurrencyCounter:
+          resetIsAccountCurrencyCounter ? null : isAccountCurrencyCounter,
+      counterToAccountCurrencyRate: resetCounterToAccountCurrencyRate
+          ? null
+          : counterToAccountCurrencyRate,
     );
   }
 
@@ -70,22 +76,22 @@ class MatexForexRequiredMarginCalculatorState extends MatexCalculatorState {
     covariant MatexForexRequiredMarginCalculatorState model,
   ) {
     return copyWith(
-      positionSize: model.positionSize,
-      isAccountCurrencyCounter: model.isAccountCurrencyCounter,
       counterToAccountCurrencyRate: model.counterToAccountCurrencyRate,
-      instrumentPairRate: model.instrumentPairRate,
-      leverage: model.leverage,
+      isAccountCurrencyCounter: model.isAccountCurrencyCounter,
       isAccountCurrencyBase: model.isAccountCurrencyBase,
+      instrumentPairRate: model.instrumentPairRate,
+      positionSize: model.positionSize,
+      leverage: model.leverage,
     );
   }
 
   @override
   List<Object?> get props => [
-        positionSize,
-        isAccountCurrencyCounter,
         counterToAccountCurrencyRate,
-        instrumentPairRate,
-        leverage,
+        isAccountCurrencyCounter,
         isAccountCurrencyBase,
+        instrumentPairRate,
+        positionSize,
+        leverage,
       ];
 }

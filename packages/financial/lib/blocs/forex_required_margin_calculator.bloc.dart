@@ -71,29 +71,22 @@ class MatexForexRequiredMarginCalculatorBloc
 
     final quote = currentMetadata['instrumentExchangeRate'] as double?;
 
+    // update the calculator with the latest instrument exchange rate
     if (quote != null) await patchCalculatorExchangeRates(quote);
 
-    var fields = currentState.fields;
+    final positionSizeFieldType = currentState.fields.positionSizeFieldType;
 
-    if (fields.positionSizeFieldType != MatexPositionSizeType.unit &&
-        fields.lotSize != null &&
-        fields.lotSize!.isNotEmpty) {
+    // update the calculator position size with the latest lot size
+    if (positionSizeFieldType != MatexPositionSizeType.unit) {
+      final dLotSize = toDecimalOrDefault(currentState.fields.lotSize);
+
       final positionSize = await getPositionSizeForLotSize(
-        lotSize: fields.positionSizeFieldType,
-        positionSize: parseFieldValueToDouble(fields.lotSize),
+        positionSize: dLotSize.toDouble(),
+        lotSize: positionSizeFieldType,
       );
-
-      final isInt = isDoubleInteger(positionSize);
 
       calculator.positionSize = positionSize;
-
-      fields = currentState.fields.copyWith(
-        positionSize:
-            isInt ? positionSize.toInt().toString() : positionSize.toString(),
-      );
     }
-
-    yield currentState.copyWith(fields: fields);
   }
 
   @override
@@ -123,7 +116,27 @@ class MatexForexRequiredMarginCalculatorBloc
       value = MatexFinancialInstrument.fromJson(value);
     }
 
-    if (value is String) {
+    if (value == null) {
+      switch (key) {
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
+          return document.copyWithDefaults(resetAccountCurrency: true);
+
+        case MatexForexRequiredMarginCalculatorBlocKey.positionSize:
+          return document.copyWithDefaults(resetPositionSize: true);
+
+        case MatexForexRequiredMarginCalculatorBlocKey.leverage:
+          return document.copyWithDefaults(resetLeverage: true);
+
+        case MatexForexRequiredMarginCalculatorBlocKey.lotSize:
+          return document.copyWithDefaults(resetLotSize: true);
+
+        case MatexForexRequiredMarginCalculatorBlocKey.instrument:
+          return document.copyWithDefaults(
+            resetCounter: true,
+            resetBase: true,
+          );
+      }
+    } else if (value is String) {
       switch (key) {
         case MatexFiancialCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
@@ -147,12 +160,11 @@ class MatexForexRequiredMarginCalculatorBloc
           );
       }
     } else if (value is MatexFinancialInstrument) {
-      switch (key) {
-        case MatexForexRequiredMarginCalculatorBlocKey.instrument:
-          return document.copyWith(
-            counter: value.counter,
-            base: value.base,
-          );
+      if (key == MatexForexPipDeltaCalculatorBlocKey.instrument) {
+        return document.copyWith(
+          counter: value.counter,
+          base: value.base,
+        );
       }
     }
 
@@ -182,6 +194,9 @@ class MatexForexRequiredMarginCalculatorBloc
 
         case MatexForexRequiredMarginCalculatorBlocKey.lotSize:
           return patchLotSize(value);
+
+        case MatexForexPipValueCalculatorBlocKey.instrument:
+          return patchInstrument(null);
       }
     } else if (value is MatexPositionSizeType) {
       if (key ==
@@ -203,7 +218,7 @@ class MatexForexRequiredMarginCalculatorBloc
   ) async {
     calculator.setState(MatexForexRequiredMarginCalculatorState(
       positionSize: parseStringToDouble(document.positionSize),
-      leverage: parseStringToDouble(document.leverage) ?? 1,
+      leverage: parseStringToDouble(document.leverage),
     ));
   }
 
@@ -274,11 +289,10 @@ class MatexForexRequiredMarginCalculatorBloc
   Future<MatexForexRequiredMarginCalculatorBlocState> patchInstrument(
     MatexFinancialInstrument? instrument,
   ) async {
-    late final MatexForexRequiredMarginCalculatorBlocFields fields;
+    late MatexForexRequiredMarginCalculatorBlocFields fields;
 
     calculator
       ..counterToAccountCurrencyRate = 0
-      ..isAccountCurrencyBase = false
       ..isAccountCurrencyCounter = false
       ..instrumentPairRate = 0;
 
@@ -295,6 +309,8 @@ class MatexForexRequiredMarginCalculatorBloc
     }
 
     // Note: Erase the previous instrument exchange rate metadata
+    // the new  instrument exchange rate metadata will be updated in
+    // the will compute method
     final metadata = await super.loadMetadata();
 
     return currentState.copyWith(fields: fields, metadata: metadata);
@@ -320,22 +336,20 @@ class MatexForexRequiredMarginCalculatorBloc
     return currentState.copyWith(fields: fields);
   }
 
-  MatexForexRequiredMarginCalculatorBlocState patchLotSize(String? value) {
+  Future<MatexForexRequiredMarginCalculatorBlocState> patchLotSize(
+    String? value,
+  ) async {
     late MatexForexRequiredMarginCalculatorBlocFields fields;
-    final positionSizeFieldType = currentState.fields.positionSizeFieldType;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetPositionSize: true,
-        resetLotSize: true,
-      );
-
-      calculator.positionSize = 0;
-    } else if (positionSizeFieldType != MatexPositionSizeType.unit) {
-      final dValue = toDecimal(value) ?? dZero;
-      fields = currentState.fields.copyWith(positionSize: value);
-      calculator.positionSize = dValue.toDouble();
+      fields = currentState.fields.copyWithDefaults(resetLotSize: true);
+    } else {
+      fields = currentState.fields.copyWith(lotSize: value);
+      // NOTE: we need to convert the lot size to a position size
+      // will be done in the will compute method
     }
+
+    calculator.positionSize = 0;
 
     return currentState.copyWith(fields: fields);
   }
@@ -345,9 +359,9 @@ class MatexForexRequiredMarginCalculatorBloc
 
     if (value == null) {
       fields = currentState.fields.copyWithDefaults(resetLeverage: true);
-      calculator.leverage = 1;
+      calculator.leverage = kMatexDefaultLeverage;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(leverage: value);
       calculator.leverage = dValue.toDouble();
     }
