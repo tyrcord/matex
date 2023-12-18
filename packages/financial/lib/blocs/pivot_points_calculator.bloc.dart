@@ -68,7 +68,19 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value is String) {
+    if (value == null) {
+      if (key == MatexPivotPointsCalculatorBlocKey.lowPrice) {
+        return document.copyWithDefaults(resetLowPrice: true);
+      } else if (key == MatexPivotPointsCalculatorBlocKey.highPrice) {
+        return document.copyWithDefaults(resetHighPrice: true);
+      } else if (key == MatexPivotPointsCalculatorBlocKey.method) {
+        return document.copyWithDefaults(resetMethod: true);
+      } else if (key == MatexPivotPointsCalculatorBlocKey.openPrice) {
+        return document.copyWithDefaults(resetOpenPrice: true);
+      } else if (key == MatexPivotPointsCalculatorBlocKey.closePrice) {
+        return document.copyWithDefaults(resetClosePrice: true);
+      }
+    } else if (value is String) {
       if (key == MatexPivotPointsCalculatorBlocKey.lowPrice) {
         return document.copyWith(lowPrice: value);
       } else if (key == MatexPivotPointsCalculatorBlocKey.highPrice) {
@@ -165,7 +177,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.lowPrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(lowPrice: value);
       calculator.lowPrice = dValue.toDouble();
     }
@@ -183,7 +195,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.highPrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(highPrice: value);
       calculator.highPrice = dValue.toDouble();
     }
@@ -201,7 +213,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.openPrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(openPrice: value);
       calculator.openPrice = dValue.toDouble();
     }
@@ -219,7 +231,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.closePrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(closePrice: value);
       calculator.closePrice = dValue.toDouble();
     }

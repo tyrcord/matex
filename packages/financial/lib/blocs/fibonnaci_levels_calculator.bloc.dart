@@ -63,7 +63,15 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
     String key,
     dynamic value,
   ) async {
-    if (value is String) {
+    if (value == null) {
+      if (key == MatexFibonnaciLevelsCalculatorBlocKey.lowPrice) {
+        return document.copyWithDefaults(resetLowPrice: true);
+      } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.highPrice) {
+        return document.copyWithDefaults(resetHighPrice: true);
+      } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.trend) {
+        return document.copyWithDefaults(resetMethod: true);
+      }
+    } else if (value is String) {
       if (key == MatexFibonnaciLevelsCalculatorBlocKey.lowPrice) {
         return document.copyWith(lowPrice: value);
       } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.highPrice) {
@@ -145,7 +153,7 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.lowPrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(lowPrice: value);
       calculator.lowPrice = dValue.toDouble();
     }
@@ -163,7 +171,7 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.highPrice = 0;
     } else {
-      final dValue = toDecimal(value) ?? dZero;
+      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(highPrice: value);
       calculator.highPrice = dValue.toDouble();
     }

@@ -40,12 +40,12 @@ class MatexFibonnaciLevelsCalculatorState extends MatexCalculatorState {
   MatexFibonnaciLevelsCalculatorState copyWithDefaults({
     bool resetNetIncome = false,
     bool resetTotalDividends = false,
-    bool resetTrend = false,
+    bool resetMethod = false,
   }) {
     return MatexFibonnaciLevelsCalculatorState(
       highPrice: resetNetIncome ? null : highPrice,
       lowPrice: resetTotalDividends ? null : lowPrice,
-      trend: resetTrend ? MatexTrend.up : trend,
+      trend: resetMethod ? MatexTrend.up : trend,
     );
   }
 
