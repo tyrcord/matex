@@ -105,9 +105,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   @mustCallSuper
   Future<Map<String, dynamic>> loadMetadata() async {
     final metadata = await super.loadMetadata();
-    final standardLotSize = await getStandardLotValue();
-    final miniLotSize = await getMiniLotValue();
-    final microLotSize = await getMicroLotValue();
+    final standardLotSize = await getUnitsPerStandardLot();
+    final miniLotSize = await getUnitsPerMiniLot();
+    final microLotSize = await getUnitsPerMicroLot();
     final instrumentMetadata = await getInstrumentMetadata();
     final instrumentPairRate = calculator.instrumentPairRate ?? 0;
 
@@ -156,9 +156,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       // FIXME: review naming
       final instrumentMetadata = await getInstrumentMetadata();
-      final standard = await getStandardLotValue();
-      final mini = await getMiniLotValue();
-      final micro = await getMicroLotValue();
+      final standard = await getUnitsPerStandardLot();
+      final mini = await getUnitsPerMiniLot();
+      final micro = await getUnitsPerMicroLot();
 
       // FIXME: use decimal and helper
       final standardLotSize = positionSize / standard;
@@ -442,7 +442,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     MatexFinancialInstrument? instrument;
 
-    int pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+    int pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
 
     if (json != null) {
       instrument = MatexFinancialInstrument.fromJson(json);
@@ -508,7 +508,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
         resetBase: true,
       );
 
-      calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+      calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
       final pipDecimalPlaces = await getPipPrecision(
         counter: instrument.counter,
@@ -638,7 +638,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       if (pairMetadata != null) {
         calculator.pipDecimalPlaces = pairMetadata.pip.precision;
       } else {
-        calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+        calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
       }
     }
 

@@ -1,6 +1,8 @@
-const int kDefaultPipPipDecimalPlaces = 4;
+const int kMatexDefaultPipDecimalPlaces = 4;
 
 const int kMatexQuoteMaxFractionDigits = 12;
+
+const double kMatexDefaultLeverage = 1;
 
 const List<double> kMatexFibonacciExtensionLevels = [
   23.6,

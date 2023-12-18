@@ -15,7 +15,7 @@ class MatexForexPipValueCalculatorState extends MatexCalculatorState {
     double? counterToAccountCurrencyRate,
     double? instrumentPairRate,
     this.positionSize,
-  })  : pipDecimalPlaces = pipDecimalPlaces ?? kDefaultPipPipDecimalPlaces,
+  })  : pipDecimalPlaces = pipDecimalPlaces ?? kMatexDefaultPipDecimalPlaces,
         counterToAccountCurrencyRate = counterToAccountCurrencyRate ?? 0,
         isAccountCurrencyCounter = isAccountCurrencyCounter ?? false,
         instrumentPairRate = instrumentPairRate ?? 0;

@@ -18,7 +18,7 @@ class MatexForexStopLossTakeProfitCalculatorState extends MatexCalculatorState {
   final MatexPosition position;
 
   const MatexForexStopLossTakeProfitCalculatorState({
-    this.pipDecimalPlaces = kDefaultPipPipDecimalPlaces,
+    this.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces,
     this.isAccountCurrencyCounter = false,
     this.counterToAccountCurrencyRate = 0,
     this.instrumentPairRate = 0,

@@ -7,7 +7,7 @@ class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin, MatexFinancialCalculatorFormatterMixin
     implements MatexFinancialInstrumentCalculatorBlocFields {
   static const defaultPositionSizeFieldType = MatexPositionSizeType.unit;
-  static const String defaultLeverage = '1';
+  static final String defaultLeverage = kMatexDefaultLeverage.toString();
 
   @override
   late final String? counter;

@@ -46,8 +46,8 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
     this.entryPrice = assignValue(entryPrice);
     this.counter = assignValue(counter);
     this.base = assignValue(base);
-    this.pipDecimalPlaces =
-        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
+    this.pipDecimalPlaces = assignValue(pipDecimalPlaces) ??
+        kMatexDefaultPipDecimalPlaces.toString();
   }
 
   @override

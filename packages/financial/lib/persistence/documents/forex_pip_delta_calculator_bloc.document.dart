@@ -20,8 +20,8 @@ class MatexForexPipDeltaCalculatorDocument extends FastCalculatorDocument {
     this.counter = assignValue(counter);
     this.priceA = assignValue(priceA);
     this.priceB = assignValue(priceB);
-    this.pipDecimalPlaces =
-        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
+    this.pipDecimalPlaces = assignValue(pipDecimalPlaces) ??
+        kMatexDefaultPipDecimalPlaces.toString();
   }
 
   @override

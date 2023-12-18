@@ -64,8 +64,8 @@ class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
     this.delegate = delegate;
     this.positionSizeFieldType =
         positionSizeFieldType ?? defaultPositionSizeFieldType;
-    this.pipDecimalPlaces =
-        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
+    this.pipDecimalPlaces = assignValue(pipDecimalPlaces) ??
+        kMatexDefaultPipDecimalPlaces.toString();
   }
 
   @override

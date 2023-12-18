@@ -66,8 +66,8 @@ class MatexForexStopLossTakeProfitCalculatorDocument
         positionSizeFieldType ?? defaultPositionSizeFieldType;
     this.takeProfitFieldType =
         takeProfitFieldType ?? defaultTakeProfitFieldType;
-    this.pipDecimalPlaces =
-        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
+    this.pipDecimalPlaces = assignValue(pipDecimalPlaces) ??
+        kMatexDefaultPipDecimalPlaces.toString();
   }
 
   @override

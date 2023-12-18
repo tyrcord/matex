@@ -220,8 +220,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
             resetBase: true,
           );
       }
-    }
-    if (value is String) {
+    } else if (value is String) {
       switch (key) {
         case MatexFiancialCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
@@ -351,7 +350,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     );
 
     MatexFinancialInstrument? instrument;
-    int pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+    int pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
 
     if (json != null) {
       instrument = MatexFinancialInstrument.fromJson(json);
@@ -407,7 +406,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
         resetBase: true,
       );
 
-      calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+      calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
       final pipDecimalPlaces = await getPipPrecision(
         counter: instrument.counter,
@@ -486,7 +485,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     if (value == null) {
       fields = fields.copyWithDefaults(resetPipDecimalPlaces: true);
-      calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+      calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
       fields = currentState.fields.copyWith(pipDecimalPlaces: value);
       final dValue = toDecimalOrDefault(value);

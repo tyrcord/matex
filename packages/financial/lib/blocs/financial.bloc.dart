@@ -132,14 +132,14 @@ abstract class MatexFinancialCalculatorBloc<
   }
 
   Future<int> getPipPrecision({String? base, String? counter}) async {
-    if (base == null || counter == null) return kDefaultPipPipDecimalPlaces;
+    if (base == null || counter == null) return kMatexDefaultPipDecimalPlaces;
 
     final symbol = base + counter;
     final tradingPairMetadata =
         await instrumentPairMetadataService.metadata(symbol);
     final pipMetadata = tradingPairMetadata?.pip;
 
-    return pipMetadata?.precision ?? kDefaultPipPipDecimalPlaces;
+    return pipMetadata?.precision ?? kMatexDefaultPipDecimalPlaces;
   }
 
   Future<MatexPairMetadata?> getInstrumentMetadata({

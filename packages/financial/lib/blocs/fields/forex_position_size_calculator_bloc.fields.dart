@@ -110,8 +110,8 @@ class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
     this.counter = assignValue(counter);
     this.base = assignValue(base);
     this.delegate = delegate;
-    this.pipDecimalPlaces =
-        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
+    this.pipDecimalPlaces = assignValue(pipDecimalPlaces) ??
+        kMatexDefaultPipDecimalPlaces.toString();
   }
 
   @override

@@ -14,7 +14,7 @@ class MatexForexProfitLossCalculatorState extends MatexCalculatorState {
 
   const MatexForexProfitLossCalculatorState({
     this.positionSize,
-    this.pipDecimalPlaces = kDefaultPipPipDecimalPlaces,
+    this.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces,
     this.isAccountCurrencyCounter = false,
     this.counterToAccountCurrencyRate = 0,
     this.instrumentPairRate = 0,

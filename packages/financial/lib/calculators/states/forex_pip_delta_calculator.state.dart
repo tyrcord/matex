@@ -8,10 +8,10 @@ class MatexForexPipDeltaCalculatorState extends MatexCalculatorState {
   final double? priceB;
 
   const MatexForexPipDeltaCalculatorState({
-    int? pipDecimalPlaces = kDefaultPipPipDecimalPlaces,
+    int? pipDecimalPlaces = kMatexDefaultPipDecimalPlaces,
     this.priceA,
     this.priceB,
-  }) : pipDecimalPlaces = pipDecimalPlaces ?? kDefaultPipPipDecimalPlaces;
+  }) : pipDecimalPlaces = pipDecimalPlaces ?? kMatexDefaultPipDecimalPlaces;
 
   @override
   MatexForexPipDeltaCalculatorState clone() => copyWith();

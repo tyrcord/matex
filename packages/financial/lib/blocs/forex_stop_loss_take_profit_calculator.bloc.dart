@@ -405,7 +405,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   ) async {
     calculator.setState(MatexForexStopLossTakeProfitCalculatorState(
       pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces) ??
-          kDefaultPipPipDecimalPlaces,
+          kMatexDefaultPipDecimalPlaces,
       positionSize: parseStringToDouble(document.positionSize),
       entryPrice: parseStringToDouble(document.entryPrice),
       stopLossPrice: parseStringToDouble(document.stopLossPrice),
@@ -453,7 +453,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
     MatexFinancialInstrument? instrument;
 
-    int pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+    int pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
 
     if (json != null) {
       instrument = MatexFinancialInstrument.fromJson(json);
@@ -512,7 +512,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         resetBase: true,
       );
 
-      calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+      calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
       final pipDecimalPlaces = await getPipPrecision(
         counter: instrument.counter,
@@ -586,7 +586,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         resetPipDecimalPlaces: true,
       );
 
-      calculator.pipDecimalPlaces = kDefaultPipPipDecimalPlaces;
+      calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
       final dValue = toDecimal(value) ?? dZero;
       fields = currentState.fields.copyWith(pipDecimalPlaces: value);

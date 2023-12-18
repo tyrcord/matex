@@ -62,8 +62,8 @@ class MatexForexPipDeltaCalculatorBlocFields extends FastCalculatorFields
     this.priceB = assignValue(priceB);
     this.base = assignValue(base);
     this.delegate = delegate;
-    this.pipDecimalPlaces =
-        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
+    this.pipDecimalPlaces = assignValue(pipDecimalPlaces) ??
+        kMatexDefaultPipDecimalPlaces.toString();
   }
 
   @override

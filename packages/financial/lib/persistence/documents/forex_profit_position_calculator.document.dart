@@ -42,8 +42,8 @@ class MatexForexProfitLossCalculatorDocument extends FastCalculatorDocument {
     this.base = assignValue(base);
     this.positionSizeFieldType =
         positionSizeFieldType ?? defaultPositionSizeFieldType;
-    this.pipDecimalPlaces =
-        assignValue(pipDecimalPlaces) ?? kDefaultPipPipDecimalPlaces.toString();
+    this.pipDecimalPlaces = assignValue(pipDecimalPlaces) ??
+        kMatexDefaultPipDecimalPlaces.toString();
   }
 
   @override
