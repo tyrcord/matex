@@ -24,12 +24,10 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
         MatexForexPositionSizeCalculatorDocument,
         MatexForexPositionSizeCalculatorBlocResults>
     with MatexFinancialCalculatorFormatterMixin {
-  final MatexFinancialInstrumentExchangeService exchangeProvider;
-
   MatexForexPositionSizeCalculatorBloc({
     MatexForexPositionSizeCalculatorBlocState? initialState,
     MatexForexPositionSizeCalculatorDataProvider? dataProvider,
-    required this.exchangeProvider,
+    required super.exchangeProvider,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,
     super.showExportPdfDialog,
@@ -57,14 +55,6 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  void close() {
-    if (!isClosed && canClose()) {
-      exchangeProvider.dispose();
-      super.close();
-    }
-  }
-
-  @override
   bool get isMandatoryFieldValid {
     return currentState.fields.accountCurrency != null &&
         currentState.fields.base != null &&
@@ -72,71 +62,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  @protected
-  Stream<MatexForexPositionSizeCalculatorBlocState> willCompute() async* {
-    yield* super.willCompute();
-
-    MatexQuote? quote;
-    String? updatedOn;
-
-    // dispatch in advance to avoid UI flickering
-    yield currentState.copyWith(metadata: {
-      ...await loadMetadata(),
-    });
-
-    if (isMandatoryFieldValid) {
-      quote = await patchExchangeRates();
-
-      if (quote != null) {
-        updatedOn = await localizeTimestampInMilliseconds(quote.timestamp);
-      }
-    }
-
-    yield currentState.copyWith(
-      metadata: {
-        ...await loadMetadata(),
-        'updatedOn': updatedOn,
-      },
-    );
-  }
-
-  /// Loads the metadata of the calculator.
-  @override
   @mustCallSuper
-  Future<Map<String, dynamic>> loadMetadata() async {
-    final metadata = await super.loadMetadata();
-    final standardLotSize = await getUnitsPerStandardLot();
-    final miniLotSize = await getUnitsPerMiniLot();
-    final microLotSize = await getUnitsPerMicroLot();
-    final instrumentMetadata = await getInstrumentMetadata();
-    final instrumentPairRate = calculator.instrumentPairRate ?? 0;
-
-    if (instrumentPairRate > 0 && isMandatoryFieldValid) {
-      metadata.putIfAbsent('formattedInstrumentExchangeRate', () {
-        final formatted = localizeQuote(
-          rate: calculator.instrumentPairRate,
-          metadata: instrumentMetadata,
-        );
-
-        return superscriptLastCharacter(formatted);
-      });
-    }
-
-    return {
-      ...metadata,
-      if (currentState.fields.counter != null)
-        'counterSymbol': getCurrencySymbol(
-          currencyCode: currentState.fields.counter,
-          localeCode: getUserLocaleCode(),
-        ),
-      'instrumentMetadata': instrumentMetadata,
-      'standardLotSize': standardLotSize,
-      'microLotSize': microLotSize,
-      'miniLotSize': miniLotSize,
-    };
-  }
-
-  @override
   String getUserCurrencyCode() {
     String? localeCode = currentState.fields.accountCurrency?.toUpperCase();
     localeCode ??= super.getUserCurrencyCode();
@@ -145,25 +71,57 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
+  @protected
+  Stream<MatexForexPositionSizeCalculatorBlocState> willCompute() async* {
+    yield* super.willCompute();
+
+    final instrument = currentState.fields.financialInstrument;
+
+    // update the state metadata with the latest instrument metadata
+    if (instrument != null) yield* patchInstrumentExchangeRate(instrument);
+
+    final quote = currentMetadata['instrumentExchangeRate'] as double?;
+
+    // update the calculator with the latest instrument exchange rate
+    if (quote != null) await patchCalculatorExchangeRates(quote);
+  }
+
+  /// Loads the metadata of the calculator.
+  @override
+  @mustCallSuper
+  Future<Map<String, dynamic>> loadMetadata() async {
+    final metadata = await super.loadMetadata();
+
+    return {
+      ...metadata,
+      if (currentState.fields.counter != null)
+        'counterSymbol': getCurrencySymbol(
+          currencyCode: currentState.fields.counter,
+          localeCode: getUserLocaleCode(),
+        ),
+    };
+  }
+
+  @override
   Future<MatexForexPositionSizeCalculatorBlocResults> compute() async {
     if (await isCalculatorStateValid()) {
       final results = calculator.value();
       final fields = currentState.fields;
       final accountCurrency = fields.accountCurrency;
-      final dPipValue = toDecimal(results.pipValue) ?? dZero;
+      final dPipValue = toDecimalOrDefault(results.pipValue);
       final pipValue = dPipValue.toDouble();
       final positionSize = results.positionSize?.toDouble() ?? 0;
-
-      // FIXME: review naming
+      final dPositionSize = toDecimalOrDefault(positionSize);
       final instrumentMetadata = await getInstrumentMetadata();
-      final standard = await getUnitsPerStandardLot();
-      final mini = await getUnitsPerMiniLot();
-      final micro = await getUnitsPerMicroLot();
-
-      // FIXME: use decimal and helper
-      final standardLotSize = positionSize / standard;
-      final miniLotSize = positionSize / mini;
-      final microLotSize = positionSize / micro;
+      final standardLotUnits = await getUnitsPerStandardLot();
+      final miniLotUnits = await getUnitsPerMiniLot();
+      final microLotUnits = await getUnitsPerMicroLot();
+      final dStandardLotUnits = toDecimalOrDefault(standardLotUnits);
+      final dMiniLotUnits = toDecimalOrDefault(miniLotUnits);
+      final dMicroLotUnits = toDecimalOrDefault(microLotUnits);
+      final standardLotSize = (dPositionSize / dStandardLotUnits).toDouble();
+      final miniLotSize = (dPositionSize / dMiniLotUnits).toDouble();
+      final microLotSize = (dPositionSize / dMicroLotUnits).toDouble();
 
       return MatexForexPositionSizeCalculatorBlocResults(
         formattedPipValue: localizeCurrency(
@@ -174,9 +132,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
         pipValue: pipValue,
         formattedPositionSize: localizeNumber(
           minimumFractionDigits: 3,
-          value: results.positionSize,
+          value: positionSize,
         ),
-        positionSize: results.positionSize,
+        positionSize: positionSize,
         formattedAmountAtRisk: localizeCurrency(
           minimumFractionDigits: 3,
           value: results.amountAtRisk,
@@ -203,7 +161,6 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
           value: results.stopLossPips,
         ),
         stopLossPips: results.stopLossPips,
-        // FIXME: review naming
         formattedRiskRatio: localizePercentage(
           minimumFractionDigits: 3,
           value: results.riskPercent,
@@ -230,7 +187,40 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       value = MatexFinancialInstrument.fromJson(value);
     }
 
-    if (value is String) {
+    if (value == null) {
+      switch (key) {
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
+          return document.copyWithDefaults(resetAccountCurrency: true);
+
+        case MatexForexPositionSizeCalculatorBlocKey.pipDecimalPlaces:
+          return document.copyWithDefaults(resetPipDecimalPlaces: true);
+
+        case MatexForexPositionSizeCalculatorBlocKey.accountSize:
+          return document.copyWithDefaults(resetAccountSize: true);
+
+        case MatexForexPositionSizeCalculatorBlocKey.riskPercent:
+          return document.copyWithDefaults(resetRiskPercent: true);
+
+        case MatexForexPositionSizeCalculatorBlocKey.riskAmount:
+          return document.copyWithDefaults(resetRiskAmount: true);
+
+        case MatexForexPositionSizeCalculatorBlocKey.entryPrice:
+          return document.copyWithDefaults(resetEntryPrice: true);
+
+        case MatexForexPositionSizeCalculatorBlocKey.stopLossPips:
+          return document.copyWithDefaults(resetStopLossPips: true);
+
+        case MatexForexPositionSizeCalculatorBlocKey.stopLossPrice:
+          return document.copyWithDefaults(resetStopLossPrice: true);
+
+        case MatexForexPositionSizeCalculatorBlocKey.instrument:
+          return document.copyWithDefaults(
+            resetPipDecimalPlaces: true,
+            resetCounter: true,
+            resetBase: true,
+          );
+      }
+    } else if (value is String) {
       switch (key) {
         case MatexFiancialCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
@@ -302,7 +292,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       value = MatexFinancialInstrument.fromJson(value);
     }
 
-    if (value is String) {
+    if (value is String?) {
       switch (key) {
         case MatexFiancialCalculatorBlocKey.accountCurrency:
           return patchAccountCurrency(value);
@@ -327,6 +317,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
         case MatexForexPositionSizeCalculatorBlocKey.stopLossPrice:
           return patchStopLossPrice(value);
+
+        case MatexForexPositionSizeCalculatorBlocKey.instrument:
+          return patchInstrument(null);
       }
     } else if (value is Enum) {
       switch (key) {
@@ -335,55 +328,11 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
         case MatexForexPositionSizeCalculatorBlocKey.stopLossFieldType:
           return patchStopLossFieldType(value.name);
-
-        default:
-          debugLog('Invalid key: $key', debugLabel: debugLabel);
-          break;
       }
     } else if (value is MatexFinancialInstrument) {
-      switch (key) {
-        case MatexForexPositionSizeCalculatorBlocKey.instrument:
-          return patchInstrument(value);
+      if (key == MatexForexPipValueCalculatorBlocKey.instrument) {
+        return patchInstrument(value);
       }
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexForexPositionSizeCalculatorDocument?> resetCalculatorDocument(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexFiancialCalculatorBlocKey.accountCurrency:
-        return document.copyWithDefaults(resetAccountCurrency: true);
-
-      case MatexForexPositionSizeCalculatorBlocKey.instrument:
-        return document.copyWithDefaults(
-          resetCounter: true,
-          resetBase: true,
-        );
-
-      case MatexForexPositionSizeCalculatorBlocKey.accountSize:
-        return document.copyWithDefaults(resetAccountSize: true);
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexForexPositionSizeCalculatorBlocState?> resetCalculatorState(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexFiancialCalculatorBlocKey.accountCurrency:
-        return patchAccountCurrency(null);
-
-      case MatexForexPositionSizeCalculatorBlocKey.instrument:
-        return patchInstrument(null);
-
-      case MatexForexPositionSizeCalculatorBlocKey.accountSize:
-        return patchAccountSize(null);
     }
 
     return null;
@@ -528,66 +477,111 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   MatexForexPositionSizeCalculatorBlocState patchPipDecimalPlaces(
-      String value) {
-    final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(pipDecimalPlaces: value);
-    calculator.pipDecimalPlaces = dValue.toDouble().toInt();
+    String? value,
+  ) {
+    late MatexForexPositionSizeCalculatorBlocFields fields;
+
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(
+        resetPipDecimalPlaces: true,
+      );
+
+      calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = currentState.fields.copyWith(pipDecimalPlaces: value);
+      calculator.pipDecimalPlaces = dValue.toDouble().toInt();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexForexPositionSizeCalculatorBlocState patchAccountSize(String? value) {
-    if (value == null) {
-      final fields =
-          currentState.fields.copyWithDefaults(resetAccountSize: true);
-      calculator.accountSize = 0;
+    late MatexForexPositionSizeCalculatorBlocFields fields;
 
-      return currentState.copyWith(fields: fields);
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(resetAccountSize: true);
+      calculator.accountSize = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = currentState.fields.copyWith(accountSize: value);
+      calculator.accountSize = dValue.toDouble();
     }
 
-    final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(accountSize: value);
-    calculator.accountSize = dValue.toDouble();
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexPositionSizeCalculatorBlocState patchRiskPercent(String? value) {
+    late MatexForexPositionSizeCalculatorBlocFields fields;
+
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(resetRiskPercent: true);
+      calculator.riskPercent = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = currentState.fields.copyWith(riskPercent: value);
+      calculator.riskPercent = (dValue / dHundred).toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexForexPositionSizeCalculatorBlocState patchRiskPercent(String value) {
-    final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(riskPercent: value);
-    calculator.riskPercent = (dValue / dHundred).toDouble();
+  MatexForexPositionSizeCalculatorBlocState patchRiskAmount(String? value) {
+    late MatexForexPositionSizeCalculatorBlocFields fields;
+
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(resetRiskAmount: true);
+      calculator.riskAmount = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = currentState.fields.copyWith(riskAmount: value);
+      calculator.riskAmount = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexForexPositionSizeCalculatorBlocState patchRiskAmount(String value) {
-    final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(riskAmount: value);
-    calculator.riskAmount = dValue.toDouble();
+  MatexForexPositionSizeCalculatorBlocState patchEntryPrice(String? value) {
+    late MatexForexPositionSizeCalculatorBlocFields fields;
+
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(resetEntryPrice: true);
+      calculator.entryPrice = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = currentState.fields.copyWith(entryPrice: value);
+      calculator.entryPrice = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexForexPositionSizeCalculatorBlocState patchEntryPrice(String value) {
-    final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(entryPrice: value);
-    calculator.entryPrice = dValue.toDouble();
+  MatexForexPositionSizeCalculatorBlocState patchStopLossPips(String? value) {
+    late MatexForexPositionSizeCalculatorBlocFields fields;
+
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(resetStopLossPips: true);
+      calculator.stopLossPips = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = currentState.fields.copyWith(stopLossPips: value);
+      calculator.stopLossPips = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
-  MatexForexPositionSizeCalculatorBlocState patchStopLossPips(String value) {
-    final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(stopLossPips: value);
-    calculator.stopLossPips = dValue.toDouble();
+  MatexForexPositionSizeCalculatorBlocState patchStopLossPrice(String? value) {
+    late MatexForexPositionSizeCalculatorBlocFields fields;
 
-    return currentState.copyWith(fields: fields);
-  }
-
-  MatexForexPositionSizeCalculatorBlocState patchStopLossPrice(String value) {
-    final dValue = toDecimal(value) ?? dZero;
-    final fields = currentState.fields.copyWith(stopLossPrice: value);
-    calculator.stopLossPrice = dValue.toDouble();
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(resetStopLossPrice: true);
+      calculator.stopLossPrice = 0;
+    } else {
+      final dValue = toDecimalOrDefault(value);
+      fields = currentState.fields.copyWith(stopLossPrice: value);
+      calculator.stopLossPrice = dValue.toDouble();
+    }
 
     return currentState.copyWith(fields: fields);
   }
@@ -624,33 +618,12 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  Future<MatexQuote?> patchExchangeRates() async {
+  Future<void> patchCalculatorExchangeRates(double instrumentPairRate) async {
     final accountCurrency = currentState.fields.accountCurrency!;
     final counter = currentState.fields.counter!;
-    final base = currentState.fields.base!;
-    final pipDecimalPlaces = currentState.fields.pipDecimalPlaces;
-    final symbol = base + counter;
-    final instrumentQuoteFuture = exchangeProvider.rate(symbol);
-
-    if (pipDecimalPlaces == null) {
-      final pairMetadata = await getInstrumentMetadata();
-
-      if (pairMetadata != null) {
-        calculator.pipDecimalPlaces = pairMetadata.pip.precision;
-      } else {
-        calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
-      }
-    }
-
-    final instrumentQuote = await instrumentQuoteFuture;
-
-    if (instrumentQuote == null) {
-      // FIXME: display an error message
-      return null;
-    }
 
     calculator
-      ..instrumentPairRate = instrumentQuote.price
+      ..instrumentPairRate = instrumentPairRate
       ..counterToAccountCurrencyRate = 0
       ..isAccountCurrencyCounter = false;
 
@@ -658,17 +631,13 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       calculator.isAccountCurrencyCounter = true;
     } else {
       final symbol = counter + accountCurrency;
-      final accountBaseQuote = await exchangeProvider.rate(symbol);
+      final accountBaseQuote = await exchangeProvider!.rate(symbol);
 
-      if (accountBaseQuote == null) {
-        // FIXME: display an error message
-        return null;
-      }
+      // FIXME: display an error message
+      if (accountBaseQuote == null) return;
 
       calculator.counterToAccountCurrencyRate = accountBaseQuote.price;
     }
-
-    return instrumentQuote;
   }
 
   @override
@@ -682,11 +651,6 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     final metadata = currentState.metadata;
 
     // ignore: use_build_context_synchronously
-    return pdfGenerator.generate(
-      context,
-      fields,
-      results,
-      metadata,
-    );
+    return pdfGenerator.generate(context, fields, results, metadata);
   }
 }
