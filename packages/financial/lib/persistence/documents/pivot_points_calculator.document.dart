@@ -10,6 +10,10 @@ class MatexPivotPointsCalculatorDocument extends FastCalculatorDocument {
   late final String? lowPrice;
   late final String method;
 
+  /// The version of the document.
+  @override
+  int get version => 1;
+
   MatexPivotPointsCalculatorDocument({
     String? closePrice,
     String? highPrice,

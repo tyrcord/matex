@@ -8,6 +8,10 @@ class MatexFibonacciLevelsCalculatorDocument extends FastCalculatorDocument {
   late final String? lowPrice;
   late final String trend;
 
+  /// The version of the document.
+  @override
+  int get version => 1;
+
   MatexFibonacciLevelsCalculatorDocument({
     String? highPrice,
     String? lowPrice,
