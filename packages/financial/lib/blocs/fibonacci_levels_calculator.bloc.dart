@@ -8,75 +8,75 @@ import 'package:t_helpers/helpers.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-const _kDefaultFibonnaciLevelsBlocResults =
-    MatexFibonnaciLevelsCalculatorBlocResults();
+const _kDefaultFibonacciLevelsBlocResults =
+    MatexFibonacciLevelsCalculatorBlocResults();
 
-final _kDefaultFibonnaciLevelsBlocState =
-    MatexFibonnaciLevelsCalculatorBlocState(
-  fields: MatexFibonnaciLevelsCalculatorBlocFields(),
-  results: _kDefaultFibonnaciLevelsBlocResults,
+final _kDefaultFibonacciLevelsBlocState =
+    MatexFibonacciLevelsCalculatorBlocState(
+  fields: MatexFibonacciLevelsCalculatorBlocFields(),
+  results: _kDefaultFibonacciLevelsBlocResults,
 );
 
-class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
-        MatexFibonnaciLevelsCalculator,
+class MatexFibonacciLevelsCalculatorBloc extends MatexCalculatorBloc<
+        MatexFibonacciLevelsCalculator,
         FastCalculatorBlocEvent,
-        MatexFibonnaciLevelsCalculatorBlocState,
-        MatexFibonnaciLevelsCalculatorDocument,
-        MatexFibonnaciLevelsCalculatorBlocResults>
+        MatexFibonacciLevelsCalculatorBlocState,
+        MatexFibonacciLevelsCalculatorDocument,
+        MatexFibonacciLevelsCalculatorBlocResults>
     implements FastCalculatorBlocDelegate {
-  MatexFibonnaciLevelsCalculatorBloc({
-    MatexFibonnaciLevelsCalculatorBlocState? initialState,
-    MatexFibonnaciLevelsCalculatorDataProvider? dataProvider,
+  MatexFibonacciLevelsCalculatorBloc({
+    MatexFibonacciLevelsCalculatorBlocState? initialState,
+    MatexFibonacciLevelsCalculatorDataProvider? dataProvider,
     super.debouceComputeEvents = true,
     super.showExportPdfDialog,
     super.delegate,
   }) : super(
-          initialState: initialState ?? _kDefaultFibonnaciLevelsBlocState,
+          initialState: initialState ?? _kDefaultFibonacciLevelsBlocState,
           dataProvider:
-              dataProvider ?? MatexFibonnaciLevelsCalculatorDataProvider(),
-          debugLabel: 'MatexFibonnaciLevelsCalculatorBloc',
+              dataProvider ?? MatexFibonacciLevelsCalculatorDataProvider(),
+          debugLabel: 'MatexFibonacciLevelsCalculatorBloc',
         ) {
-    calculator = MatexFibonnaciLevelsCalculator();
+    calculator = MatexFibonacciLevelsCalculator();
   }
 
   @override
   Future<bool> canAutoRefreshComputations() async => true;
 
   @override
-  Future<MatexFibonnaciLevelsCalculatorBlocResults> compute() async {
+  Future<MatexFibonacciLevelsCalculatorBlocResults> compute() async {
     final results = calculator.value();
 
-    return MatexFibonnaciLevelsCalculatorBlocResults(
-      retracementLevels: formatFibonnaciLevels(results.retracementLevels),
-      extensionLevels: formatFibonnaciLevels(results.extensionLevels),
+    return MatexFibonacciLevelsCalculatorBlocResults(
+      retracementLevels: formatFibonacciLevels(results.retracementLevels),
+      extensionLevels: formatFibonacciLevels(results.extensionLevels),
     );
   }
 
-  List<MatexFibonacciLevel> formatFibonnaciLevels(
+  List<MatexFibonacciLevel> formatFibonacciLevels(
     List<MatexFibonacciLevel> levels,
   ) {
     return levels.map((e) => e.copyWith(delegate: this)).toList();
   }
 
   @override
-  Future<MatexFibonnaciLevelsCalculatorDocument?> patchCalculatorDocument(
+  Future<MatexFibonacciLevelsCalculatorDocument?> patchCalculatorDocument(
     String key,
     dynamic value,
   ) async {
     if (value == null) {
-      if (key == MatexFibonnaciLevelsCalculatorBlocKey.lowPrice) {
+      if (key == MatexFibonacciLevelsCalculatorBlocKey.lowPrice) {
         return document.copyWithDefaults(resetLowPrice: true);
-      } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.highPrice) {
+      } else if (key == MatexFibonacciLevelsCalculatorBlocKey.highPrice) {
         return document.copyWithDefaults(resetHighPrice: true);
-      } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.trend) {
+      } else if (key == MatexFibonacciLevelsCalculatorBlocKey.trend) {
         return document.copyWithDefaults(resetMethod: true);
       }
     } else if (value is String) {
-      if (key == MatexFibonnaciLevelsCalculatorBlocKey.lowPrice) {
+      if (key == MatexFibonacciLevelsCalculatorBlocKey.lowPrice) {
         return document.copyWith(lowPrice: value);
-      } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.highPrice) {
+      } else if (key == MatexFibonacciLevelsCalculatorBlocKey.highPrice) {
         return document.copyWith(highPrice: value);
-      } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.trend) {
+      } else if (key == MatexFibonacciLevelsCalculatorBlocKey.trend) {
         return document.copyWith(trend: value);
       }
     } else if (value is MatexTrend) {
@@ -87,16 +87,16 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
-  Future<MatexFibonnaciLevelsCalculatorBlocState?> patchCalculatorState(
+  Future<MatexFibonacciLevelsCalculatorBlocState?> patchCalculatorState(
     String key,
     dynamic value,
   ) async {
     if (value is String?) {
-      if (key == MatexFibonnaciLevelsCalculatorBlocKey.lowPrice) {
+      if (key == MatexFibonacciLevelsCalculatorBlocKey.lowPrice) {
         return patchLowPrice(value);
-      } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.highPrice) {
+      } else if (key == MatexFibonacciLevelsCalculatorBlocKey.highPrice) {
         return patchHighPrice(value);
-      } else if (key == MatexFibonnaciLevelsCalculatorBlocKey.trend) {
+      } else if (key == MatexFibonacciLevelsCalculatorBlocKey.trend) {
         return patchTrend(null);
       }
     } else if (value is MatexTrend) {
@@ -108,9 +108,9 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
 
   @override
   Future<void> resetCalculator(
-    MatexFibonnaciLevelsCalculatorDocument document,
+    MatexFibonacciLevelsCalculatorDocument document,
   ) async {
-    calculator.setState(MatexFibonnaciLevelsCalculatorState(
+    calculator.setState(MatexFibonacciLevelsCalculatorState(
       lowPrice: parseStringToDouble(document.lowPrice),
       highPrice: parseStringToDouble(document.highPrice),
       trend: MatexTrendX.fromName(document.trend),
@@ -118,12 +118,12 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
-  Future<MatexFibonnaciLevelsCalculatorBlocState> resetCalculatorBlocState(
-    MatexFibonnaciLevelsCalculatorDocument document,
+  Future<MatexFibonacciLevelsCalculatorBlocState> resetCalculatorBlocState(
+    MatexFibonacciLevelsCalculatorDocument document,
   ) async {
-    return _kDefaultFibonnaciLevelsBlocState.copyWith(
+    return _kDefaultFibonacciLevelsBlocState.copyWith(
       results: await retrieveDefaultResult(),
-      fields: MatexFibonnaciLevelsCalculatorBlocFields(
+      fields: MatexFibonacciLevelsCalculatorBlocFields(
         trend: MatexTrendX.fromName(document.trend),
         lowPrice: document.lowPrice,
         highPrice: document.highPrice,
@@ -132,19 +132,19 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
-  Future<MatexFibonnaciLevelsCalculatorDocument>
+  Future<MatexFibonacciLevelsCalculatorDocument>
       retrieveDefaultCalculatorDocument() async {
-    return MatexFibonnaciLevelsCalculatorDocument();
+    return MatexFibonacciLevelsCalculatorDocument();
   }
 
   @override
-  Future<MatexFibonnaciLevelsCalculatorBlocResults>
+  Future<MatexFibonacciLevelsCalculatorBlocResults>
       retrieveDefaultResult() async {
-    return _kDefaultFibonnaciLevelsBlocResults;
+    return _kDefaultFibonacciLevelsBlocResults;
   }
 
-  MatexFibonnaciLevelsCalculatorBlocState patchLowPrice(String? value) {
-    late MatexFibonnaciLevelsCalculatorBlocFields fields;
+  MatexFibonacciLevelsCalculatorBlocState patchLowPrice(String? value) {
+    late MatexFibonacciLevelsCalculatorBlocFields fields;
 
     if (value == null) {
       fields = currentState.fields.copyWithDefaults(
@@ -161,8 +161,8 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexFibonnaciLevelsCalculatorBlocState patchHighPrice(String? value) {
-    late MatexFibonnaciLevelsCalculatorBlocFields fields;
+  MatexFibonacciLevelsCalculatorBlocState patchHighPrice(String? value) {
+    late MatexFibonacciLevelsCalculatorBlocFields fields;
 
     if (value == null) {
       fields = currentState.fields.copyWithDefaults(
@@ -179,8 +179,8 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexFibonnaciLevelsCalculatorBlocState patchTrend(MatexTrend? value) {
-    late MatexFibonnaciLevelsCalculatorBlocFields fields;
+  MatexFibonacciLevelsCalculatorBlocState patchTrend(MatexTrend? value) {
+    late MatexFibonacciLevelsCalculatorBlocFields fields;
 
     if (value == null) {
       fields = currentState.fields.copyWithDefaults(resetMethod: true);
@@ -194,11 +194,11 @@ class MatexFibonnaciLevelsCalculatorBloc extends MatexCalculatorBloc<
   }
 
   @override
-  String getReportFilename() => 'fibonnaci_levels_report';
+  String getReportFilename() => 'fibonacci_levels_report';
 
   @override
   Future<Uint8List> toPdf(BuildContext context) async {
-    final pdfGenerator = MatexFibonnaciLevelsCalculatorPdfGenerator();
+    final pdfGenerator = MatexFibonacciLevelsCalculatorPdfGenerator();
     final fields = currentState.fields;
     final results = await compute();
 

@@ -14,14 +14,14 @@ import 'package:lingua_finance/generated/locale_keys.g.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-class MatexFibonnaciLevelsCalculatorPdfGenerator {
+class MatexFibonacciLevelsCalculatorPdfGenerator {
   final appSettingsBloc = FastAppSettingsBloc();
   final appInfoBloc = FastAppInfoBloc();
 
   Future<Uint8List> generate(
     BuildContext context,
-    MatexFibonnaciLevelsCalculatorBlocFields fields,
-    MatexFibonnaciLevelsCalculatorBlocResults results,
+    MatexFibonacciLevelsCalculatorBlocFields fields,
+    MatexFibonacciLevelsCalculatorBlocResults results,
   ) async {
     final reporter = FastPdfCalculatorReporter();
     final appInfo = appInfoBloc.currentState;
@@ -46,8 +46,8 @@ class MatexFibonnaciLevelsCalculatorPdfGenerator {
 
   List<FastReportEntry> _buildInputReportEntries(
     BuildContext context,
-    MatexFibonnaciLevelsCalculatorBlocFields fields,
-    MatexFibonnaciLevelsCalculatorBlocResults results,
+    MatexFibonacciLevelsCalculatorBlocFields fields,
+    MatexFibonacciLevelsCalculatorBlocResults results,
   ) {
     return [
       FastReportEntry(
@@ -67,8 +67,8 @@ class MatexFibonnaciLevelsCalculatorPdfGenerator {
 
   List<FastReportCategoryEntry> _buildCategoryEntries(
     BuildContext context,
-    MatexFibonnaciLevelsCalculatorBlocFields fields,
-    MatexFibonnaciLevelsCalculatorBlocResults results,
+    MatexFibonacciLevelsCalculatorBlocFields fields,
+    MatexFibonacciLevelsCalculatorBlocResults results,
   ) {
     return [
       _buildRetracementCategory(results, fields),
@@ -77,8 +77,8 @@ class MatexFibonnaciLevelsCalculatorPdfGenerator {
   }
 
   FastReportCategoryEntry _buildRetracementCategory(
-    MatexFibonnaciLevelsCalculatorBlocResults results,
-    MatexFibonnaciLevelsCalculatorBlocFields fields,
+    MatexFibonacciLevelsCalculatorBlocResults results,
+    MatexFibonacciLevelsCalculatorBlocFields fields,
   ) {
     return FastReportCategoryEntry(
       name: FinanceLocaleKeys.finance_label_retracement.tr(),
@@ -87,8 +87,8 @@ class MatexFibonnaciLevelsCalculatorPdfGenerator {
   }
 
   FastReportCategoryEntry _buildExtensionCategory(
-    MatexFibonnaciLevelsCalculatorBlocResults results,
-    MatexFibonnaciLevelsCalculatorBlocFields fields,
+    MatexFibonacciLevelsCalculatorBlocResults results,
+    MatexFibonacciLevelsCalculatorBlocFields fields,
   ) {
     return FastReportCategoryEntry(
       name: FinanceLocaleKeys.finance_label_extension.tr(),

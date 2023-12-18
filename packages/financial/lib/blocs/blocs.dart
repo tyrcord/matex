@@ -11,7 +11,7 @@ export 'dividend_yield_calculator.bloc.dart';
 export 'dividend_payout_ratio_calculator.bloc.dart';
 export 'dividend_reinvestment_calculator.bloc.dart';
 export 'forex_pip_delta_calculator.bloc.dart';
-export 'fibonnaci_levels_calculator.bloc.dart';
+export 'fibonacci_levels_calculator.bloc.dart';
 export 'pivot_points_calculator.bloc.dart';
 export 'forex_profit_loss_calculator.bloc.dart';
 export 'forex_required_margin_calculator.bloc.dart';

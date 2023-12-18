@@ -32,7 +32,6 @@ class MatexForexProfitLossCalculatorDocument extends FastCalculatorDocument {
     String? base,
   }) {
     this.accountCurrency = assignValue(accountCurrency);
-    this.pipDecimalPlaces = assignValue(pipDecimalPlaces);
     this.positionSize = assignValue(positionSize);
     this.position = position ?? defaultPosition;
     this.entryPrice = assignValue(entryPrice);

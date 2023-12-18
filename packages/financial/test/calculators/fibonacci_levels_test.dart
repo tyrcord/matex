@@ -3,9 +3,9 @@ import 'package:matex_financial/financial.dart';
 
 void main() {
   group('FibonacciLevelsCalculator', () {
-    late MatexFibonnaciLevelsCalculator calculator;
+    late MatexFibonacciLevelsCalculator calculator;
 
-    setUp(() => calculator = MatexFibonnaciLevelsCalculator());
+    setUp(() => calculator = MatexFibonacciLevelsCalculator());
 
     tearDown(() => calculator.reset());
 
@@ -45,7 +45,7 @@ void main() {
       test('should return the default value', () {
         final result = calculator.value();
         expect(
-          result == MatexFibonnaciLevelsCalculator.defaultResults,
+          result == MatexFibonacciLevelsCalculator.defaultResults,
           isTrue,
         );
       });
@@ -295,7 +295,7 @@ void main() {
         expect(calculator.isValid, isFalse);
 
         final result = calculator.value();
-        expect(result == MatexFibonnaciLevelsCalculator.defaultResults, isTrue);
+        expect(result == MatexFibonacciLevelsCalculator.defaultResults, isTrue);
 
         calculator.lowPrice = 1.35;
         expect(calculator.isValid, isFalse);
@@ -315,7 +315,7 @@ void main() {
         final result = calculator.value();
 
         expect(
-          result == MatexFibonnaciLevelsCalculator.defaultResults,
+          result == MatexFibonacciLevelsCalculator.defaultResults,
           isTrue,
         );
       });

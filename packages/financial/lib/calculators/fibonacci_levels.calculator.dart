@@ -2,20 +2,20 @@ import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:matex_financial/financial.dart';
 
-class MatexFibonnaciLevelsCalculator extends MatexCalculator<
-    MatexFibonnaciLevelsCalculatorState,
-    MatexFibonnaciLevelsCalculatorResults> {
-  MatexFibonnaciLevelsCalculator({
+class MatexFibonacciLevelsCalculator extends MatexCalculator<
+    MatexFibonacciLevelsCalculatorState,
+    MatexFibonacciLevelsCalculatorResults> {
+  MatexFibonacciLevelsCalculator({
     super.defaultState,
     super.state,
   }) : super(validators: fibonacciLevelsValidators);
 
   @override
-  MatexFibonnaciLevelsCalculatorState initializeState() =>
-      const MatexFibonnaciLevelsCalculatorState();
+  MatexFibonacciLevelsCalculatorState initializeState() =>
+      const MatexFibonacciLevelsCalculatorState();
 
   @override
-  MatexFibonnaciLevelsCalculatorState initializeDefaultState() =>
+  MatexFibonacciLevelsCalculatorState initializeDefaultState() =>
       initializeState();
 
   double? get lowPrice => state.lowPrice;
@@ -36,13 +36,13 @@ class MatexFibonnaciLevelsCalculator extends MatexCalculator<
     setState(state.copyWith(trend: value));
   }
 
-  static const defaultResults = MatexFibonnaciLevelsCalculatorResults();
+  static const defaultResults = MatexFibonacciLevelsCalculatorResults();
 
   @override
-  MatexFibonnaciLevelsCalculatorResults value() {
+  MatexFibonacciLevelsCalculatorResults value() {
     if (!isValid) return defaultResults;
 
-    return MatexFibonnaciLevelsCalculatorResults(
+    return MatexFibonacciLevelsCalculatorResults(
       extensionLevels: _computeExtensions(),
       retracementLevels: _computeRetracements(),
     );

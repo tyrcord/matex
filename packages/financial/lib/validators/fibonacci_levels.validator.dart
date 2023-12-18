@@ -3,7 +3,7 @@ import 'package:matex_core/core.dart';
 // Project imports
 import 'package:matex_financial/financial.dart';
 
-List<MatexCalculatorValidator<MatexFibonnaciLevelsCalculatorState>>
+List<MatexCalculatorValidator<MatexFibonacciLevelsCalculatorState>>
     fibonacciLevelsValidators = [
   (state) => state.lowPrice != null && state.highPrice != null,
   (state) {

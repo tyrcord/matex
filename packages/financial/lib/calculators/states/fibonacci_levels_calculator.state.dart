@@ -2,7 +2,7 @@
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 
-class MatexFibonnaciLevelsCalculatorState extends MatexCalculatorState {
+class MatexFibonacciLevelsCalculatorState extends MatexCalculatorState {
   static const defaultTrend = MatexTrend.up;
 
   // Define Properties
@@ -11,7 +11,7 @@ class MatexFibonnaciLevelsCalculatorState extends MatexCalculatorState {
   final MatexTrend trend;
 
   // Constructor
-  const MatexFibonnaciLevelsCalculatorState({
+  const MatexFibonacciLevelsCalculatorState({
     MatexTrend? trend,
     this.highPrice,
     this.lowPrice,
@@ -19,16 +19,16 @@ class MatexFibonnaciLevelsCalculatorState extends MatexCalculatorState {
 
   // Clone Method
   @override
-  MatexFibonnaciLevelsCalculatorState clone() => copyWith();
+  MatexFibonacciLevelsCalculatorState clone() => copyWith();
 
   // Copy With Method
   @override
-  MatexFibonnaciLevelsCalculatorState copyWith({
+  MatexFibonacciLevelsCalculatorState copyWith({
     double? highPrice,
     double? lowPrice,
     MatexTrend? trend,
   }) {
-    return MatexFibonnaciLevelsCalculatorState(
+    return MatexFibonacciLevelsCalculatorState(
       highPrice: highPrice ?? this.highPrice,
       lowPrice: lowPrice ?? this.lowPrice,
       trend: trend ?? this.trend,
@@ -37,12 +37,12 @@ class MatexFibonnaciLevelsCalculatorState extends MatexCalculatorState {
 
   // Copy With Defaults Method
   @override
-  MatexFibonnaciLevelsCalculatorState copyWithDefaults({
+  MatexFibonacciLevelsCalculatorState copyWithDefaults({
     bool resetNetIncome = false,
     bool resetTotalDividends = false,
     bool resetMethod = false,
   }) {
-    return MatexFibonnaciLevelsCalculatorState(
+    return MatexFibonacciLevelsCalculatorState(
       highPrice: resetNetIncome ? null : highPrice,
       lowPrice: resetTotalDividends ? null : lowPrice,
       trend: resetMethod ? MatexTrend.up : trend,
@@ -51,8 +51,8 @@ class MatexFibonnaciLevelsCalculatorState extends MatexCalculatorState {
 
   // Merge Method
   @override
-  MatexFibonnaciLevelsCalculatorState merge(
-    covariant MatexFibonnaciLevelsCalculatorState model,
+  MatexFibonacciLevelsCalculatorState merge(
+    covariant MatexFibonacciLevelsCalculatorState model,
   ) {
     return copyWith(
       highPrice: model.highPrice,

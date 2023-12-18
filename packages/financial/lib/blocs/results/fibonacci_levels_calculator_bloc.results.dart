@@ -1,11 +1,11 @@
 import 'package:matex_financial/financial.dart';
-import 'package:tmodel/tmodel.dart';
+import 'package:fastyle_calculator/fastyle_calculator.dart';
 
-class MatexFibonnaciLevelsCalculatorResults extends TModel {
+class MatexFibonacciLevelsCalculatorBlocResults extends FastCalculatorResults {
   final List<MatexFibonacciLevel> retracementLevels;
   final List<MatexFibonacciLevel> extensionLevels;
 
-  const MatexFibonnaciLevelsCalculatorResults({
+  const MatexFibonacciLevelsCalculatorBlocResults({
     this.retracementLevels = const [],
     this.extensionLevels = const [],
   });
@@ -14,22 +14,22 @@ class MatexFibonnaciLevelsCalculatorResults extends TModel {
   List<Object> get props => [retracementLevels, extensionLevels];
 
   @override
-  MatexFibonnaciLevelsCalculatorResults clone() => copyWith();
+  MatexFibonacciLevelsCalculatorBlocResults clone() => copyWith();
 
   @override
-  MatexFibonnaciLevelsCalculatorResults copyWith({
+  MatexFibonacciLevelsCalculatorBlocResults copyWith({
     List<MatexFibonacciLevel>? retracementLevels,
     List<MatexFibonacciLevel>? extensionLevels,
   }) {
-    return MatexFibonnaciLevelsCalculatorResults(
+    return MatexFibonacciLevelsCalculatorBlocResults(
       retracementLevels: retracementLevels ?? this.retracementLevels,
       extensionLevels: extensionLevels ?? this.extensionLevels,
     );
   }
 
   @override
-  MatexFibonnaciLevelsCalculatorResults merge(
-    covariant MatexFibonnaciLevelsCalculatorResults model,
+  MatexFibonacciLevelsCalculatorBlocResults merge(
+    covariant MatexFibonacciLevelsCalculatorBlocResults model,
   ) {
     return copyWith(
       retracementLevels: model.retracementLevels,

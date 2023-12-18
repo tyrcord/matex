@@ -3,7 +3,7 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 
-class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
+class MatexFibonacciLevelsCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
   static const MatexTrend defaultTrend = MatexTrend.up;
 
@@ -31,7 +31,7 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
 
   String get formattedTrend => trend.localizedName;
 
-  MatexFibonnaciLevelsCalculatorBlocFields({
+  MatexFibonacciLevelsCalculatorBlocFields({
     FastCalculatorBlocDelegate? delegate,
     MatexTrend? trend,
     String? highPrice,
@@ -44,16 +44,16 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
   }
 
   @override
-  MatexFibonnaciLevelsCalculatorBlocFields clone() => copyWith();
+  MatexFibonacciLevelsCalculatorBlocFields clone() => copyWith();
 
   @override
-  MatexFibonnaciLevelsCalculatorBlocFields copyWith({
+  MatexFibonacciLevelsCalculatorBlocFields copyWith({
     FastCalculatorBlocDelegate? delegate,
     MatexTrend? trend,
     String? highPrice,
     String? lowPrice,
   }) {
-    return MatexFibonnaciLevelsCalculatorBlocFields(
+    return MatexFibonacciLevelsCalculatorBlocFields(
       highPrice: highPrice ?? this.highPrice,
       lowPrice: lowPrice ?? this.lowPrice,
       delegate: delegate ?? this.delegate,
@@ -63,12 +63,12 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
 
   // [Copy With Defaults Method]
   @override
-  MatexFibonnaciLevelsCalculatorBlocFields copyWithDefaults({
+  MatexFibonacciLevelsCalculatorBlocFields copyWithDefaults({
     bool resetHighPrice = false,
     bool resetLowPrice = false,
     bool resetMethod = false,
   }) {
-    return MatexFibonnaciLevelsCalculatorBlocFields(
+    return MatexFibonacciLevelsCalculatorBlocFields(
       highPrice: resetHighPrice ? null : highPrice,
       lowPrice: resetLowPrice ? null : lowPrice,
       trend: resetMethod ? null : trend,
@@ -77,8 +77,8 @@ class MatexFibonnaciLevelsCalculatorBlocFields extends FastCalculatorFields
   }
 
   @override
-  MatexFibonnaciLevelsCalculatorBlocFields merge(
-    covariant MatexFibonnaciLevelsCalculatorBlocFields model,
+  MatexFibonacciLevelsCalculatorBlocFields merge(
+    covariant MatexFibonacciLevelsCalculatorBlocFields model,
   ) {
     return copyWith(
       highPrice: model.highPrice,
