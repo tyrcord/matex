@@ -451,7 +451,12 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     late MatexForexPipValueCalculatorBlocFields fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(resetLotSize: true);
+      fields = currentState.fields.copyWithDefaults(
+        resetPositionSize: true,
+        resetLotSize: true,
+      );
+
+      calculator.positionSize = 0;
     } else {
       fields = currentState.fields.copyWith(lotSize: value);
       // NOTE: we need to convert the lot size to a position size

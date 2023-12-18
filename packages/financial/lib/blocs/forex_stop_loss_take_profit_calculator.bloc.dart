@@ -110,29 +110,22 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
     final quote = currentMetadata['instrumentExchangeRate'] as double?;
 
+    // update the calculator with the latest instrument exchange rate
     if (quote != null) await patchCalculatorExchangeRates(quote);
 
-    var fields = currentState.fields;
+    final positionSizeFieldType = currentState.fields.positionSizeFieldType;
 
-    if (fields.positionSizeFieldType != MatexPositionSizeType.unit &&
-        fields.lotSize != null &&
-        fields.lotSize!.isNotEmpty) {
+    // update the calculator position size with the latest lot size
+    if (positionSizeFieldType != MatexPositionSizeType.unit) {
+      final dLotSize = toDecimalOrDefault(currentState.fields.lotSize);
+
       final positionSize = await getPositionSizeForLotSize(
-        lotSize: fields.positionSizeFieldType,
-        positionSize: parseFieldValueToDouble(fields.lotSize),
+        positionSize: dLotSize.toDouble(),
+        lotSize: positionSizeFieldType,
       );
-
-      final isInt = isDoubleInteger(positionSize);
 
       calculator.positionSize = positionSize;
-
-      fields = currentState.fields.copyWith(
-        positionSize:
-            isInt ? positionSize.toInt().toString() : positionSize.toString(),
-      );
     }
-
-    yield currentState.copyWith(fields: fields);
   }
 
   @override
@@ -194,13 +187,58 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
   @override
   Future<MatexForexStopLossTakeProfitCalculatorDocument?>
-      patchCalculatorDocument(String key, dynamic value) async {
+      patchCalculatorDocument(
+    String key,
+    dynamic value,
+  ) async {
     if (value is Map<dynamic, dynamic> &&
         key == MatexForexStopLossTakeProfitCalculatorBlocKey.instrument) {
       value = MatexFinancialInstrument.fromJson(value);
     }
 
-    if (value is String?) {
+    if (value == null) {
+      switch (key) {
+        case MatexFiancialCalculatorBlocKey.accountCurrency:
+          return document.copyWithDefaults(resetAccountCurrency: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.positionSize:
+          return document.copyWithDefaults(resetPositionSize: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.entryPrice:
+          return document.copyWithDefaults(resetEntryPrice: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.pipDecimalPlaces:
+          return document.copyWithDefaults(resetPipDecimalPlaces: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.lotSize:
+          return document.copyWithDefaults(resetLotSize: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.stopLossPrice:
+          return document.copyWithDefaults(resetStopLossPrice: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.stopLossPips:
+          return document.copyWithDefaults(resetStopLossPips: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.stopLossAmount:
+          return document.copyWithDefaults(resetStopLossAmount: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.takeProfitPrice:
+          return document.copyWithDefaults(resetTakeProfitPrice: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.takeProfitPips:
+          return document.copyWithDefaults(resetTakeProfitPips: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.takeProfitAmount:
+          return document.copyWithDefaults(resetTakeProfitAmount: true);
+
+        case MatexForexStopLossTakeProfitCalculatorBlocKey.instrument:
+          return document.copyWithDefaults(
+            resetPipDecimalPlaces: true,
+            resetCounter: true,
+            resetBase: true,
+          );
+      }
+    } else if (value is String) {
       switch (key) {
         case MatexFiancialCalculatorBlocKey.accountCurrency:
           return document.copyWith(accountCurrency: value);
@@ -359,50 +397,11 @@ class MatexForexStopLossTakeProfitCalculatorBloc
 
         case MatexForexStopLossTakeProfitCalculatorBlocKey.takeProfitFieldType:
           return patchTakeProfitFieldType(value.name);
-
-        default:
-          debugLog('Invalid key: $key', debugLabel: debugLabel);
-          break;
       }
     } else if (value is MatexFinancialInstrument) {
-      switch (key) {
-        case MatexForexStopLossTakeProfitCalculatorBlocKey.instrument:
-          return patchInstrument(value);
+      if (key == MatexForexPipValueCalculatorBlocKey.instrument) {
+        return patchInstrument(value);
       }
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexForexStopLossTakeProfitCalculatorDocument?>
-      resetCalculatorDocument(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexFiancialCalculatorBlocKey.accountCurrency:
-        return document.copyWithDefaults(resetAccountCurrency: true);
-
-      case MatexForexStopLossTakeProfitCalculatorBlocKey.instrument:
-        return document.copyWithDefaults(
-          resetCounter: true,
-          resetBase: true,
-        );
-    }
-
-    return null;
-  }
-
-  @override
-  Future<MatexForexStopLossTakeProfitCalculatorBlocState?> resetCalculatorState(
-    String key,
-  ) async {
-    switch (key) {
-      case MatexFiancialCalculatorBlocKey.accountCurrency:
-        return patchAccountCurrency(null);
-
-      case MatexForexStopLossTakeProfitCalculatorBlocKey.instrument:
-        return patchInstrument(null);
     }
 
     return null;
@@ -413,8 +412,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     MatexForexStopLossTakeProfitCalculatorDocument document,
   ) async {
     calculator.setState(MatexForexStopLossTakeProfitCalculatorState(
-      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces) ??
-          kMatexDefaultPipDecimalPlaces,
+      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
       positionSize: parseStringToDouble(document.positionSize),
       entryPrice: parseStringToDouble(document.entryPrice),
       stopLossPrice: parseStringToDouble(document.stopLossPrice),
@@ -461,12 +459,10 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     );
 
     MatexFinancialInstrument? instrument;
-
     int pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
 
     if (json != null) {
       instrument = MatexFinancialInstrument.fromJson(json);
-
       pipDecimalPlaces = await getPipPrecision(
         counter: instrument.counter,
         base: instrument.base,
@@ -493,12 +489,12 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   MatexForexStopLossTakeProfitCalculatorBlocState patchAccountCurrency(
     String? value,
   ) {
-    late final MatexForexStopLossTakeProfitCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(resetAccountCurrency: true);
+      fields = fields.copyWithDefaults(resetAccountCurrency: true);
     } else {
-      fields = currentState.fields.copyWith(accountCurrency: value);
+      fields = fields.copyWith(accountCurrency: value);
     }
 
     return currentState.copyWith(fields: fields);
@@ -548,11 +544,11 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   MatexForexStopLossTakeProfitCalculatorBlocState patchPositionSize(
     String? value,
   ) {
-    late final MatexForexStopLossTakeProfitCalculatorBlocFields fields;
-    final positionSizeFieldType = currentState.fields.positionSizeFieldType;
+    var fields = currentState.fields;
+    final positionSizeFieldType = fields.positionSizeFieldType;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
+      fields = fields.copyWithDefaults(
         resetPositionSize: true,
         resetLotSize: true,
       );
@@ -560,7 +556,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       calculator.positionSize = 0;
     } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
       final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(positionSize: value);
+      fields = fields.copyWith(positionSize: value);
       calculator.positionSize = dValue.toDouble();
     }
 
@@ -568,20 +564,19 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   }
 
   MatexForexStopLossTakeProfitCalculatorBlocState patchLotSize(String? value) {
-    late MatexForexStopLossTakeProfitCalculatorBlocFields fields;
-    final positionSizeFieldType = currentState.fields.positionSizeFieldType;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
+      fields = fields.copyWithDefaults(
         resetPositionSize: true,
         resetLotSize: true,
       );
 
       calculator.positionSize = 0;
-    } else if (positionSizeFieldType != MatexPositionSizeType.unit) {
-      final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(positionSize: value);
-      calculator.positionSize = dValue.toDouble();
+    } else {
+      fields = fields.copyWith(lotSize: value);
+      // NOTE: we need to convert the lot size to a position size
+      // will be done in the will compute method
     }
 
     return currentState.copyWith(fields: fields);
@@ -590,17 +585,14 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   MatexForexStopLossTakeProfitCalculatorBlocState patchPipDecimalPlaces(
     String? value,
   ) {
-    late MatexForexStopLossTakeProfitCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetPipDecimalPlaces: true,
-      );
-
+      fields = fields.copyWithDefaults(resetPipDecimalPlaces: true);
       calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
-      final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(pipDecimalPlaces: value);
+      final dValue = toDecimalOrDefault(value);
       calculator.pipDecimalPlaces = dValue.toDouble().toInt();
     }
 
@@ -610,17 +602,14 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   MatexForexStopLossTakeProfitCalculatorBlocState patchEntryPrice(
     String? value,
   ) {
-    late MatexForexStopLossTakeProfitCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetEntryPrice: true,
-      );
-
+      fields = fields.copyWithDefaults(resetEntryPrice: true);
       calculator.entryPrice = 0;
     } else {
       final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(entryPrice: value);
+      fields = fields.copyWith(entryPrice: value);
       calculator.entryPrice = dValue.toDouble();
     }
 
@@ -630,17 +619,14 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   MatexForexStopLossTakeProfitCalculatorBlocState patchStopLossPrice(
     String? value,
   ) {
-    late MatexForexStopLossTakeProfitCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetStopLossPrice: true,
-      );
-
+      fields = fields.copyWithDefaults(resetStopLossPrice: true);
       calculator.stopLossPrice = 0;
     } else {
       final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(stopLossPrice: value);
+      fields = fields.copyWith(stopLossPrice: value);
       calculator.stopLossPrice = dValue.toDouble();
     }
 
@@ -650,17 +636,14 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   MatexForexStopLossTakeProfitCalculatorBlocState patchStopLossPips(
     String? value,
   ) {
-    late MatexForexStopLossTakeProfitCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetStopLossPips: true,
-      );
-
+      fields = fields.copyWithDefaults(resetStopLossPips: true);
       calculator.stopLossPips = 0;
     } else {
       final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(stopLossPips: value);
+      fields = fields.copyWith(stopLossPips: value);
       calculator.stopLossPips = dValue.toDouble();
     }
 
@@ -670,17 +653,14 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   MatexForexStopLossTakeProfitCalculatorBlocState patchStopLossAmount(
     String? value,
   ) {
-    late MatexForexStopLossTakeProfitCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetStopLossAmount: true,
-      );
-
+      fields = fields.copyWithDefaults(resetStopLossAmount: true);
       calculator.stopLossAmount = 0;
     } else {
       final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(stopLossAmount: value);
+      fields = fields.copyWith(stopLossAmount: value);
       calculator.stopLossAmount = dValue.toDouble();
     }
 
@@ -690,17 +670,14 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   MatexForexStopLossTakeProfitCalculatorBlocState patchTakeProfitPrice(
     String? value,
   ) {
-    late MatexForexStopLossTakeProfitCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetTakeProfitPrice: true,
-      );
-
+      fields = fields.copyWithDefaults(resetTakeProfitPrice: true);
       calculator.takeProfitPrice = 0;
     } else {
       final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(takeProfitPrice: value);
+      fields = fields.copyWith(takeProfitPrice: value);
       calculator.takeProfitPrice = dValue.toDouble();
     }
 
@@ -710,17 +687,14 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   MatexForexStopLossTakeProfitCalculatorBlocState patchTakeProfitPips(
     String? value,
   ) {
-    late MatexForexStopLossTakeProfitCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetTakeProfitPips: true,
-      );
-
+      fields = fields.copyWithDefaults(resetTakeProfitPips: true);
       calculator.takeProfitPips = 0;
     } else {
       final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(takeProfitPips: value);
+      fields = fields.copyWith(takeProfitPips: value);
       calculator.takeProfitPips = dValue.toDouble();
     }
 
@@ -730,17 +704,14 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   MatexForexStopLossTakeProfitCalculatorBlocState patchTakeProfitAmount(
     String? value,
   ) {
-    late MatexForexStopLossTakeProfitCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetTakeProfitAmount: true,
-      );
-
+      fields = fields.copyWithDefaults(resetTakeProfitAmount: true);
       calculator.takeProfitAmount = 0;
     } else {
       final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(takeProfitAmount: value);
+      fields = fields.copyWith(takeProfitAmount: value);
       calculator.takeProfitAmount = dValue.toDouble();
     }
 
@@ -830,11 +801,6 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     final metadata = currentState.metadata;
 
     // ignore: use_build_context_synchronously
-    return pdfGenerator.generate(
-      context,
-      fields,
-      results,
-      metadata,
-    );
+    return pdfGenerator.generate(context, fields, results, metadata);
   }
 }

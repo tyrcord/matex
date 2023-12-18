@@ -391,7 +391,6 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
 
   MatexForexProfitLossCalculatorBlocState patchLotSize(String? value) {
     late MatexForexProfitLossCalculatorBlocFields fields;
-    final positionSizeFieldType = currentState.fields.positionSizeFieldType;
 
     if (value == null) {
       fields = currentState.fields.copyWithDefaults(
@@ -400,10 +399,10 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       );
 
       calculator.positionSize = 0;
-    } else if (positionSizeFieldType != MatexPositionSizeType.unit) {
-      final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(positionSize: value);
-      calculator.positionSize = dValue.toDouble();
+    } else {
+      fields = currentState.fields.copyWith(lotSize: value);
+      // NOTE: we need to convert the lot size to a position size
+      // will be done in the will compute method
     }
 
     return currentState.copyWith(fields: fields);
