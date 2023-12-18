@@ -46,7 +46,7 @@ abstract class MatexFinancialCalculatorBloc<
   Future<Map<String, dynamic>> loadMetadata() async {
     final metadata = await super.loadMetadata();
 
-    if (!isMandatoryFieldValid) return metadata;
+    if (!hasInstrumentValid) return metadata;
 
     final instrumentMetadata = await getInstrumentMetadata();
 
@@ -73,7 +73,7 @@ abstract class MatexFinancialCalculatorBloc<
   Stream<S> patchInstrumentExchangeRate(
     MatexFinancialInstrument instrument,
   ) async* {
-    if (isMandatoryFieldValid) {
+    if (hasInstrumentValid) {
       var metadata = mergeMetadata({'isFetchingInstrumentExchangeRate': true});
 
       yield currentState.copyWith(metadata: metadata) as S;
@@ -129,7 +129,7 @@ abstract class MatexFinancialCalculatorBloc<
 
   @override
   Future<bool> isCalculatorStateValid() async {
-    if (!isMandatoryFieldValid) return false;
+    if (!hasInstrumentValid) return false;
 
     return calculator.isValid;
   }
@@ -159,6 +159,17 @@ abstract class MatexFinancialCalculatorBloc<
     if (base == null || counter == null) return null;
 
     return instrumentPairMetadataService.metadata(base + counter);
+  }
+
+  bool get hasInstrumentValid {
+    if (currentState.fields is MatexFinancialInstrumentCalculatorBlocFields) {
+      final fields =
+          currentState.fields as MatexFinancialInstrumentCalculatorBlocFields;
+
+      return fields.base != null && fields.counter != null;
+    }
+
+    return false;
   }
 
   Future<int> getUnitsPerStandardLot() async {

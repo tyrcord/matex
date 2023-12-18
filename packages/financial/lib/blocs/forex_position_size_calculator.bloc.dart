@@ -55,13 +55,6 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  bool get isMandatoryFieldValid {
-    final fields = currentState.fields;
-
-    return fields.accountCurrency != null && fields.financialInstrument != null;
-  }
-
-  @override
   @mustCallSuper
   String getUserCurrencyCode() {
     String? localeCode = currentState.fields.accountCurrency?.toUpperCase();

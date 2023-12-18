@@ -44,11 +44,6 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   @override
-  bool get isMandatoryFieldValid {
-    return currentState.fields.financialInstrument != null;
-  }
-
-  @override
   Future<MatexForexPipDeltaCalculatorBlocResults> compute() async {
     if (await isCalculatorStateValid()) {
       final results = calculator.value();

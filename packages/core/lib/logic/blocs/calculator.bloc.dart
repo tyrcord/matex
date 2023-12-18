@@ -40,8 +40,6 @@ abstract class MatexCalculatorBloc<
   @protected
   late final C calculator;
 
-  bool get isMandatoryFieldValid => true;
-
   /// Checks if the current calculator state is valid.
   ///
   /// Returns `true` if the calculator state is valid, `false` otherwise.

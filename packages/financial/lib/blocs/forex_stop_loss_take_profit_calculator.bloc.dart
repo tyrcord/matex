@@ -52,15 +52,6 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   }
 
   @override
-  bool get isMandatoryFieldValid {
-    final fields = currentState.fields;
-
-    return (fields.positionSize != null || fields.lotSize != null) &&
-        fields.financialInstrument != null &&
-        fields.accountCurrency != null;
-  }
-
-  @override
   @mustCallSuper
   String getUserCurrencyCode() {
     String? localeCode = currentState.fields.accountCurrency?.toUpperCase();
