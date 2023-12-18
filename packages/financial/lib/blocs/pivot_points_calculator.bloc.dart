@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:fastyle_calculator/fastyle_calculator.dart';
+import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
@@ -34,6 +35,11 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
           debugLabel: 'MatexPivotPointsCalculatorBloc',
         ) {
     calculator = MatexPivotPointsCalculator();
+
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.matexPivotPointsMethod.name,
+      MatexPivotPointsCalculatorBlocKey.method,
+    );
   }
 
   static const defaultPrecision = 5;
@@ -159,6 +165,18 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<MatexPivotPointsCalculatorDocument>
       retrieveDefaultCalculatorDocument() async {
+    final bloc = FastAppDictBloc.instance;
+
+    final method = bloc.getValue<String?>(
+      MatexCalculatorDefaultValueKeys.matexPivotPointsMethod.name,
+    );
+
+    if (MatexPivotPointsMethodsX.hasName(method)) {
+      return MatexPivotPointsCalculatorDocument(
+        method: method,
+      );
+    }
+
     return MatexPivotPointsCalculatorDocument();
   }
 

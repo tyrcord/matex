@@ -10,6 +10,21 @@ enum MatexPivotPointsMethods {
 }
 
 extension MatexPivotPointsMethodsX on MatexPivotPointsMethods {
+  static bool hasName(String? str) {
+    if (str == null) return false;
+
+    switch (str.toLowerCase()) {
+      case 'camarilla':
+      case 'demark':
+      case 'fibonacci':
+      case 'standard':
+      case 'woodie':
+        return true;
+      default:
+        return false;
+    }
+  }
+
   static MatexPivotPointsMethods? fromName(String? str) {
     if (str == null) return null;
 

@@ -47,6 +47,11 @@ class MatexForexRequiredMarginCalculatorBloc
       MatexForexRequiredMarginCalculatorBlocKey.instrument,
     );
 
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.matexCalculatorLeverage.name,
+      MatexForexRequiredMarginCalculatorBlocKey.leverage,
+    );
+
     listenToPrimaryCurrencyCodeChanges();
   }
 
@@ -256,7 +261,12 @@ class MatexForexRequiredMarginCalculatorBloc
       instrument = MatexFinancialInstrument.fromJson(json);
     }
 
+    final leverage = bloc.getValue<double?>(
+      MatexCalculatorDefaultValueKeys.matexCalculatorLeverage.name,
+    );
+
     return MatexForexRequiredMarginCalculatorDocument(
+      leverage: leverage?.toString() ?? kMatexDefaultLeverage.toString(),
       accountCurrency: getUserCurrencyCode(),
       counter: instrument?.counter,
       base: instrument?.base,
