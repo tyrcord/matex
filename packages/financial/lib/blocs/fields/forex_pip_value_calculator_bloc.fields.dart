@@ -27,6 +27,12 @@ class MatexForexPipValueCalculatorBlocFields
     return localizeNumber(value: value);
   }
 
+  String get formattedLotSize {
+    final value = parseFieldValueToDouble(lotSize);
+
+    return localizeNumber(value: value);
+  }
+
   String get formattedFinancialInstrument {
     if (base == null || counter == null) return '';
 

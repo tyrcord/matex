@@ -36,6 +36,12 @@ class MatexForexProfitLossCalculatorBlocFields
     );
   }
 
+  String get formattedLotSize {
+    final value = parseFieldValueToDouble(lotSize);
+
+    return localizeNumber(value: value);
+  }
+
   String get formattedPosition => position.localizedName;
 
   String get formattedPositionSize {

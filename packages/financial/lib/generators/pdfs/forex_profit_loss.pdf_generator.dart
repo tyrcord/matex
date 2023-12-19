@@ -13,6 +13,7 @@ import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:lingua_units/lingua_units.dart';
+import 'package:lingua_finance_forex/generated/locale_keys.g.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -56,6 +57,8 @@ class MatexForexProfitLossCalculatorPdfGenerator {
     final positionSize = parseFieldValueToDouble(fields.positionSize);
     final entryPrice = parseFieldValueToDouble(fields.entryPrice);
     final exitPrice = parseFieldValueToDouble(fields.exitPrice);
+    final positionSizeFieldType = fields.positionSizeFieldType;
+    final lotSize = parseFieldValueToDouble(fields.lotSize);
     final updatedOn = metadata['updatedOn'] as String?;
     final formattedInstrumentExchangeRate =
         metadata['formattedInstrumentExchangeRate'] as String?;
@@ -92,6 +95,22 @@ class MatexForexProfitLossCalculatorPdfGenerator {
             value: positionSize,
           )!,
         ),
+      if (lotSize > 0 &&
+          positionSizeFieldType == MatexPositionSizeType.standard)
+        FastReportEntry(
+          name: FinanceForexLocaleKeys.forex_label_lot_standard.tr(),
+          value: fields.formattedLotSize,
+        ),
+      if (lotSize > 0 && positionSizeFieldType == MatexPositionSizeType.mini)
+        FastReportEntry(
+          name: FinanceForexLocaleKeys.forex_label_lot_mini.tr(),
+          value: fields.formattedLotSize,
+        ),
+      if (lotSize > 0 && positionSizeFieldType == MatexPositionSizeType.micro)
+        FastReportEntry(
+          name: FinanceForexLocaleKeys.forex_label_lot_micro.tr(),
+          value: fields.formattedLotSize,
+        ),
       if (entryPrice > 0)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_entry_price_at.tr(),
@@ -114,15 +133,17 @@ class MatexForexProfitLossCalculatorPdfGenerator {
     final netProfit = results.netProfit;
 
     return [
-      if (netProfit != null && netProfit > 0)
+      if (netProfit != null)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_gross_profit_text.tr(),
+          color: getColorBasedOnValue(context, netProfit),
           value: results.formattedNetProfit!,
         ),
-      if (returnOnInvestment != null && returnOnInvestment > 0)
+      if (returnOnInvestment != null)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_return_on_investment.tr(),
-          value: results.formattedNetProfit!,
+          color: getColorBasedOnValue(context, returnOnInvestment),
+          value: results.formattedReturnOnInvestment!,
         ),
     ];
   }

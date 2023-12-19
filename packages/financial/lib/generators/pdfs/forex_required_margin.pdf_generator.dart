@@ -55,6 +55,8 @@ class MatexForexRequiredMarginCalculatorPdfGenerator {
     Map<String, dynamic> metadata,
   ) {
     final positionSize = parseFieldValueToDouble(fields.positionSize);
+    final positionSizeFieldType = fields.positionSizeFieldType;
+    final lotSize = parseFieldValueToDouble(fields.lotSize);
     final updatedOn = metadata['updatedOn'] as String?;
     final formattedInstrumentExchangeRate =
         metadata['formattedInstrumentExchangeRate'] as String?;
@@ -68,14 +70,31 @@ class MatexForexRequiredMarginCalculatorPdfGenerator {
         name: FinanceLocaleKeys.finance_label_financial_instrument.tr(),
         value: fields.formattedFinancialInstrument,
       ),
-      FastReportEntry(
-        name: FinanceLocaleKeys.finance_label_position_size.tr(),
-        value: localizeUnitSize(
-          localeCode: FastAppSettingsBloc.instance.currentState.localeCode,
-          unitKey: LinguaUnits.unit.name,
-          value: positionSize,
-        )!,
-      ),
+      if (positionSize > 0)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_position_size.tr(),
+          value: localizeUnitSize(
+            localeCode: FastAppSettingsBloc.instance.currentState.localeCode,
+            unitKey: LinguaUnits.unit.name,
+            value: positionSize,
+          )!,
+        ),
+      if (lotSize > 0 &&
+          positionSizeFieldType == MatexPositionSizeType.standard)
+        FastReportEntry(
+          name: FinanceForexLocaleKeys.forex_label_lot_standard.tr(),
+          value: fields.formattedLotSize,
+        ),
+      if (lotSize > 0 && positionSizeFieldType == MatexPositionSizeType.mini)
+        FastReportEntry(
+          name: FinanceForexLocaleKeys.forex_label_lot_mini.tr(),
+          value: fields.formattedLotSize,
+        ),
+      if (lotSize > 0 && positionSizeFieldType == MatexPositionSizeType.micro)
+        FastReportEntry(
+          name: FinanceForexLocaleKeys.forex_label_lot_micro.tr(),
+          value: fields.formattedLotSize,
+        ),
       FastReportEntry(
         name: FinanceLocaleKeys.finance_label_leverage.tr(),
         value: fields.formattedLeverage,
