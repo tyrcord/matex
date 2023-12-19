@@ -104,7 +104,10 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       final results = calculator.value();
 
       return MatexForexProfitLossCalculatorBlocResults(
-        formattedNetProfit: localizeCurrency(value: results.netProfit),
+        formattedNetProfit: localizeCurrency(
+          value: results.netProfit,
+          maximumFractionDigits: 3,
+        ),
         returnOnInvestment: results.returnOnInvestment,
         netProfit: results.netProfit,
         formattedReturnOnInvestment: localizePercentage(
@@ -252,6 +255,9 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     calculator.setState(MatexForexProfitLossCalculatorState(
       pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
       positionSize: parseStringToDouble(document.positionSize),
+      entryPrice: parseStringToDouble(document.entryPrice),
+      exitPrice: parseStringToDouble(document.exitPrice),
+      position: MatexPositionX.fromName(document.position),
     ));
   }
 
@@ -269,6 +275,8 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields: MatexForexProfitLossCalculatorBlocFields(
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         accountCurrency: document.accountCurrency,
+        entryPrice: document.entryPrice,
+        exitPrice: document.exitPrice,
         counter: document.counter,
         base: document.base,
       ),
@@ -396,17 +404,14 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   MatexForexProfitLossCalculatorBlocState patchPipDecimalPlaces(String? value) {
-    late MatexForexProfitLossCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetPipDecimalPlaces: true,
-      );
-
+      fields = fields.copyWithDefaults(resetPipDecimalPlaces: true);
       calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
+      fields = fields.copyWith(pipDecimalPlaces: value);
       final dValue = toDecimalOrDefault(value);
-      fields = currentState.fields.copyWith(pipDecimalPlaces: value);
       calculator.pipDecimalPlaces = dValue.toDouble().toInt();
     }
 

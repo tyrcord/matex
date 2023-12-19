@@ -138,7 +138,7 @@ class MatexForexStopLossTakeProfitCalculatorBlocFields
   @override
   MatexForexStopLossTakeProfitCalculatorBlocFields copyWithDefaults({
     bool resetPositionSizeFieldType = false,
-    bool resettakeProfitFieldType = false,
+    bool resetTakeProfitFieldType = false,
     bool resetStopLossFieldType = false,
     bool resetTakeProfitAmount = false,
     bool resetPipDecimalPlaces = false,
@@ -175,7 +175,7 @@ class MatexForexStopLossTakeProfitCalculatorBlocFields
       positionSizeFieldType:
           resetPositionSizeFieldType ? null : positionSizeFieldType,
       takeProfitFieldType:
-          resettakeProfitFieldType ? null : takeProfitFieldType,
+          resetTakeProfitFieldType ? null : takeProfitFieldType,
     );
   }
 

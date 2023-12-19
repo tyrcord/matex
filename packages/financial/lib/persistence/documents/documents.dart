@@ -10,6 +10,6 @@ export 'dividend_reinvestment_calculator.document.dart';
 export 'forex_pip_delta_calculator_bloc.document.dart';
 export 'fibonacci_levels_calculator.document.dart';
 export 'pivot_points_calculator.document.dart';
-export 'forex_profit_position_calculator.document.dart';
+export 'forex_profit_loss_calculator.document.dart';
 export 'forex_required_margin_calculator.document.dart';
 export 'forex_stop_loss_take_profit_calculator.document.dart';

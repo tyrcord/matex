@@ -481,7 +481,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields = fields.copyWithDefaults(resetPipDecimalPlaces: true);
       calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
-      fields = currentState.fields.copyWith(pipDecimalPlaces: value);
+      fields = fields.copyWith(pipDecimalPlaces: value);
       final dValue = toDecimalOrDefault(value);
       calculator.pipDecimalPlaces = dValue.toDouble().toInt();
     }

@@ -104,7 +104,7 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
               widget.resultsTitleText ?? CoreLocaleKeys.core_label_results.tr(),
           fieldsTitleText: widget.fieldsTitleText ??
               CalculatorLocaleKeys.calculator_label_calculator.tr(),
-          pageTitleText: widget.pageTitleText,
+          pageTitleText: !widget.requestFullApp ? widget.pageTitleText : null,
           showRefreshIcon: widget.showRefreshIcon,
           requestFullApp: widget.requestFullApp,
           refreshIcon: widget.refreshIcon,
