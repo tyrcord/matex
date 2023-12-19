@@ -47,7 +47,7 @@ List<double> _calculatePricePoints(
   bool isSupport,
 ) {
   return _dividers.map((divider) {
-    final difference = high - low * _multiplier;
+    final difference = (high - low) * _multiplier;
     final priceDifference = decimalFromRational(difference / divider);
 
     if (isSupport) {
