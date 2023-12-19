@@ -69,15 +69,26 @@ class MatexForexRequiredMarginCalculatorBloc
   Stream<MatexForexRequiredMarginCalculatorBlocState> willCompute() async* {
     yield* super.willCompute();
 
+    final accountCurrency = currentState.fields.accountCurrency;
     final instrument = currentState.fields.financialInstrument;
 
     // update the state metadata with the latest instrument metadata
-    if (instrument != null) yield* patchInstrumentExchangeRate(instrument);
+    if (instrument == null) {
+      yield currentState.copyWith(
+        metadata: mergeMetadata(emptyInstrumentMetadata),
+      );
+    } else {
+      yield* patchInstrumentExchangeRate(instrument);
+    }
 
     final quote = currentMetadata['instrumentExchangeRate'] as double?;
 
     // update the calculator with the latest instrument exchange rate
-    if (quote != null) await patchCalculatorExchangeRates(quote);
+    await patchCalculatorExchangeRates(
+      accountCurrency: accountCurrency!,
+      instrumentPairRate: quote,
+      instrument: instrument,
+    );
 
     final positionSizeFieldType = currentState.fields.positionSizeFieldType;
 
@@ -318,12 +329,10 @@ class MatexForexRequiredMarginCalculatorBloc
       );
     }
 
-    // Note: Erase the previous instrument exchange rate metadata
-    // the new  instrument exchange rate metadata will be updated in
-    // the will compute method
-    final metadata = await super.loadMetadata();
-
-    return currentState.copyWith(fields: fields, metadata: metadata);
+    return currentState.copyWith(
+      metadata: mergeMetadata(emptyInstrumentMetadata),
+      fields: fields,
+    );
   }
 
   MatexForexRequiredMarginCalculatorBlocState patchPositionSize(String? value) {
@@ -393,16 +402,23 @@ class MatexForexRequiredMarginCalculatorBloc
     return currentState.copyWith(fields: fields);
   }
 
-  Future<void> patchCalculatorExchangeRates(double instrumentPairRate) async {
-    final accountCurrency = currentState.fields.accountCurrency!;
-    final counter = currentState.fields.counter!;
-    final base = currentState.fields.base!;
-
+  Future<void> patchCalculatorExchangeRates({
+    required String accountCurrency,
+    MatexFinancialInstrument? instrument,
+    double? instrumentPairRate,
+  }) async {
     calculator
-      ..isAccountCurrencyBase = accountCurrency == base
-      ..instrumentPairRate = instrumentPairRate
+      ..instrumentPairRate = instrumentPairRate ?? 0
       ..counterToAccountCurrencyRate = 0
+      ..isAccountCurrencyBase = false
       ..isAccountCurrencyCounter = false;
+
+    if (instrument == null) return;
+
+    final counter = instrument.counter!;
+    final base = instrument.base!;
+
+    calculator.isAccountCurrencyBase = accountCurrency == base;
 
     if (accountCurrency == counter) {
       calculator.isAccountCurrencyCounter = true;

@@ -31,6 +31,16 @@ abstract class MatexFinancialCalculatorBloc<
     super.delegate,
   });
 
+  Map<String, dynamic> get emptyInstrumentMetadata => const {
+        'formattedInstrumentExchangeRate': null,
+        'instrumentExchangeRate': null,
+        'instrumentMetadata': null,
+        'standardLotSize': null,
+        'rateUpdatedOn': null,
+        'microLotSize': null,
+        'miniLotSize': null,
+      };
+
   @override
   @mustCallSuper
   void close() {
@@ -53,10 +63,21 @@ abstract class MatexFinancialCalculatorBloc<
     return {
       ...metadata,
       'standardLotSize': await getUnitsPerStandardLot(),
-      'microLotSize': await getUnitsPerMiniLot(),
-      'miniLotSize': await getUnitsPerMicroLot(),
+      'microLotSize': await getUnitsPerMicroLot(),
+      'miniLotSize': await getUnitsPerMiniLot(),
       'instrumentMetadata': instrumentMetadata,
     };
+  }
+
+  @override
+  @protected
+  @mustCallSuper
+  Stream<S> willCompute() async* {
+    yield* super.willCompute();
+
+    final metadata = await loadMetadata();
+
+    yield currentState.copyWith(metadata: metadata) as S;
   }
 
   // TODO: catch errors
@@ -85,9 +106,11 @@ abstract class MatexFinancialCalculatorBloc<
         final instrumentMetadata = await getInstrumentMetadata();
 
         partialMetadata = {
-          'formattedInstrumentExchangeRate': localizeQuote(
-            metadata: instrumentMetadata,
-            rate: quote.price,
+          'formattedInstrumentExchangeRate': superscriptLastCharacter(
+            localizeQuote(
+              metadata: instrumentMetadata,
+              rate: quote.price,
+            ),
           ),
           'rateUpdatedOn': await localizeTimestampInMilliseconds(
             quote.timestamp,
