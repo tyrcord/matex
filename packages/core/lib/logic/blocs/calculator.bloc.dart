@@ -155,6 +155,7 @@ abstract class MatexCalculatorBloc<
       metadata = await super.loadMetadata();
 
       return {
+        ...metadata,
         'userCurrencySymbol': getUserCurrencySymbol(),
         'userCurrencyCode': getUserCurrencyCode(),
         'userLocaleCode': getUserLocaleCode(),

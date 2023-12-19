@@ -4,18 +4,12 @@ import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexForexStopLossTakeProfitCalculatorBlocFields
-    extends FastCalculatorFields
-    with MatexCalculatorFormatterMixin, MatexFinancialCalculatorFormatterMixin
-    implements MatexFinancialInstrumentCalculatorBlocFields {
+    extends MatexFinancialInstrumentCalculatorBlocFields
+    with MatexCalculatorFormatterMixin, MatexFinancialCalculatorFormatterMixin {
   static const defaultPositionSizeFieldType = MatexPositionSizeType.unit;
   static MatexPosition defaultPosition = MatexPosition.long;
   static const String defaultTakeProfitFieldType = 'price';
   static const String defaultStopLossFieldType = 'price';
-
-  @override
-  late final String? counter;
-  @override
-  late final String? base;
 
   late final MatexPositionSizeType positionSizeFieldType;
   late final String takeProfitFieldType;

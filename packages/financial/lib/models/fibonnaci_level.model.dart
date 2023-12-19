@@ -11,6 +11,7 @@ class MatexFibonacciLevel extends TModel with MatexCalculatorFormatterMixin {
   String get formattedValue {
     return localizeNumber(
       value: value,
+      minimumFractionDigits: defaultPrecision,
       maximumFractionDigits: defaultPrecision,
     );
   }

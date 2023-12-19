@@ -1,8 +1,11 @@
+import 'package:fastyle_calculator/fastyle_calculator.dart';
+
 /// An abstract class representing fields for a financial instrument
 /// calculator in a Bloc pattern. This class provides the foundation
 /// for handling calculations related to various financial instruments
 /// like currency pairs or stocks against a currency.
-abstract class MatexFinancialInstrumentCalculatorBlocFields {
+abstract class MatexFinancialInstrumentCalculatorBlocFields
+    extends FastCalculatorFields {
   /// The 'base' part of a financial instrument. In the context of
   /// currency pairs, this represents the base currency. For example,
   /// in a currency pair 'EUR/USD', 'EUR' is the base currency.

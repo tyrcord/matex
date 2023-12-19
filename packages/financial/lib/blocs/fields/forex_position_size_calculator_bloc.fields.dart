@@ -3,16 +3,11 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 
-class MatexForexPositionSizeCalculatorBlocFields extends FastCalculatorFields
-    with MatexCalculatorFormatterMixin
-    implements MatexFinancialInstrumentCalculatorBlocFields {
+class MatexForexPositionSizeCalculatorBlocFields
+    extends MatexFinancialInstrumentCalculatorBlocFields
+    with MatexCalculatorFormatterMixin {
   static const String defaultStopLossFieldType = 'price';
   static const String defaultRiskFieldType = 'percent';
-
-  @override
-  late final String? base;
-  @override
-  late final String? counter;
 
   late final String? stopLossFieldType;
   late final String? pipDecimalPlaces;

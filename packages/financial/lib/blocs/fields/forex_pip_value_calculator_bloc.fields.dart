@@ -3,15 +3,10 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 
-class MatexForexPipValueCalculatorBlocFields extends FastCalculatorFields
-    with MatexCalculatorFormatterMixin
-    implements MatexFinancialInstrumentCalculatorBlocFields {
+class MatexForexPipValueCalculatorBlocFields
+    extends MatexFinancialInstrumentCalculatorBlocFields
+    with MatexCalculatorFormatterMixin {
   static const defaultPositionSizeFieldType = MatexPositionSizeType.unit;
-
-  @override
-  late final String? base;
-  @override
-  late final String? counter;
 
   late final MatexPositionSizeType positionSizeFieldType;
   late final String? pipDecimalPlaces;

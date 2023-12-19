@@ -3,16 +3,11 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 
-class MatexForexRequiredMarginCalculatorBlocFields extends FastCalculatorFields
-    with MatexCalculatorFormatterMixin, MatexFinancialCalculatorFormatterMixin
-    implements MatexFinancialInstrumentCalculatorBlocFields {
+class MatexForexRequiredMarginCalculatorBlocFields
+    extends MatexFinancialInstrumentCalculatorBlocFields
+    with MatexCalculatorFormatterMixin, MatexFinancialCalculatorFormatterMixin {
   static const defaultPositionSizeFieldType = MatexPositionSizeType.unit;
   static final String defaultLeverage = kMatexDefaultLeverage.toString();
-
-  @override
-  late final String? counter;
-  @override
-  late final String? base;
 
   late final MatexPositionSizeType positionSizeFieldType;
   late final String? accountCurrency;
