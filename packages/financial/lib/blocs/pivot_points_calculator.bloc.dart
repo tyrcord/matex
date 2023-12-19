@@ -172,9 +172,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
     );
 
     if (MatexPivotPointsMethodsX.hasName(method)) {
-      return MatexPivotPointsCalculatorDocument(
-        method: method,
-      );
+      return MatexPivotPointsCalculatorDocument(method: method);
     }
 
     return MatexPivotPointsCalculatorDocument();

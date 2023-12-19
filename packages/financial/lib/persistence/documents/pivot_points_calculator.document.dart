@@ -2,13 +2,11 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexPivotPointsCalculatorDocument extends FastCalculatorDocument {
-  static final String defaultMethod = MatexPivotPointsMethods.standard.name;
-
   late final String? closePrice;
   late final String? highPrice;
   late final String? openPrice;
   late final String? lowPrice;
-  late final String method;
+  late final String? method;
 
   /// The version of the document.
   @override
@@ -21,11 +19,11 @@ class MatexPivotPointsCalculatorDocument extends FastCalculatorDocument {
     String? lowPrice,
     String? method,
   }) {
-    this.method = assignValue(method) ?? defaultMethod;
     this.closePrice = assignValue(closePrice);
     this.highPrice = assignValue(highPrice);
     this.openPrice = assignValue(openPrice);
     this.lowPrice = assignValue(lowPrice);
+    this.method = assignValue(method);
   }
 
   @override

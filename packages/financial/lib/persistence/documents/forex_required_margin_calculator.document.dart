@@ -7,12 +7,11 @@ import 'package:matex_financial/financial.dart';
 class MatexForexRequiredMarginCalculatorDocument
     extends FastCalculatorDocument {
   static final defaultPositionSizeFieldType = MatexPositionSizeType.unit.name;
-  static const String defaultLeverage = '1';
 
   late final String positionSizeFieldType;
   late final String? accountCurrency;
   late final String? positionSize;
-  late final String leverage;
+  late final String? leverage;
   late final String? lotSize;
   late final String? counter;
   late final String? base;
@@ -26,9 +25,9 @@ class MatexForexRequiredMarginCalculatorDocument
     String? counter,
     String? base,
   }) {
-    this.leverage = assignValue(leverage) ?? defaultLeverage;
     this.accountCurrency = assignValue(accountCurrency);
     this.positionSize = assignValue(positionSize);
+    this.leverage = assignValue(leverage);
     this.counter = assignValue(counter);
     this.lotSize = assignValue(lotSize);
     this.base = assignValue(base);
@@ -107,8 +106,9 @@ class MatexForexRequiredMarginCalculatorDocument
       counter: counter,
       lotSize: lotSize,
       base: base,
-      positionSizeFieldType:
-          MatexPositionSizeTypeX.fromName(positionSizeFieldType),
+      positionSizeFieldType: MatexPositionSizeTypeX.fromName(
+        positionSizeFieldType,
+      ),
     );
   }
 
