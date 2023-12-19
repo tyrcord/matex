@@ -22,9 +22,11 @@ dependencies:
   rxdart: ^0.27.7
   t_helpers: ^0.0.47
   tbloc: ^0.21.8+6
+  tlogger: ^0.0.6+4
   tmodel: ^0.5.12+6
   tstore: ^0.8.22+1
-description: An assortment of helpful tools and calculators specifically designed
+description:
+  An assortment of helpful tools and calculators specifically designed
   for use within the financial sector.
 dev_dependencies:
   dependency_validator: ^3.2.3
@@ -33,8 +35,8 @@ dev_dependencies:
     sdk: flutter
   import_sorter: ^4.6.0
 environment:
-  flutter: '>=3.16.0'
-  sdk: '>=3.2.0 <4.0.0'
+  flutter: ">=3.16.0"
+  sdk: ">=3.2.0 <4.0.0"
 name: matex_financial
 repository: https://github.com/tyrcord/matex/tree/main/packages/financial
 version: 0.0.36

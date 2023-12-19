@@ -147,7 +147,7 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
     final riskPercent = state.riskPercent ?? 0.0;
 
     if (accountSize == null || accountSize <= 0) return dZero;
-    if (riskPercent > 0) return toDecimal(riskPercent)!;
+    if (riskPercent > 0 && amountAtRisk <= 0) return toDecimal(riskPercent)!;
 
     final dAccountSize = toDecimal(accountSize) ?? dZero;
 

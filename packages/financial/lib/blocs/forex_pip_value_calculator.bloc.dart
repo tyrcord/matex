@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
@@ -342,21 +341,10 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   @override
   Future<MatexForexPipValueCalculatorDocument>
       retrieveDefaultCalculatorDocument() async {
-    final bloc = FastAppDictBloc.instance;
-    final json = bloc.getValue<Map<dynamic, dynamic>?>(
-      MatexCalculatorDefaultValueKeys.matexCalculatorFinancialInstrument.name,
-    );
-
-    debugLog(
-      'retrieveDefaultCalculatorDocument: $json',
-      debugLabel: debugLabel,
-    );
-
-    MatexFinancialInstrument? instrument;
+    final instrument = userDefaultInstrument;
     int pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
 
-    if (json != null) {
-      instrument = MatexFinancialInstrument.fromJson(json);
+    if (instrument != null) {
       pipDecimalPlaces = await getPipPrecision(
         counter: instrument.counter,
         base: instrument.base,

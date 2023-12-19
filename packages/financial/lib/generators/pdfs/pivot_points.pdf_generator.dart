@@ -50,23 +50,23 @@ class MatexPivotPointsCalculatorPdfGenerator {
     MatexPivotPointsCalculatorBlocResults results,
   ) {
     return [
-      FastReportEntry(
-        name: FinanceLocaleKeys.finance_label_low_price.tr(),
-        value: fields.formattedLowPrice,
-      ),
-      FastReportEntry(
-        name: FinanceLocaleKeys.finance_label_high_price.tr(),
-        value: fields.formattedHighPrice,
-      ),
-      FastReportEntry(
-        name: FinanceLocaleKeys.finance_label_close_price.tr(),
-        value: fields.formattedClosePrice,
-      ),
       if (fields.method == MatexPivotPointsMethods.deMark)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_open_price.tr(),
           value: fields.formattedOpenPrice,
         ),
+      FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_high_price.tr(),
+        value: fields.formattedHighPrice,
+      ),
+      FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_low_price.tr(),
+        value: fields.formattedLowPrice,
+      ),
+      FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_close_price.tr(),
+        value: fields.formattedClosePrice,
+      ),
       FastReportEntry(
         name: FinanceLocaleKeys.finance_label_pivot_point_method.tr(),
         value: fields.formattedMethod,
@@ -139,18 +139,24 @@ class MatexPivotPointsCalculatorPdfGenerator {
     const labelKey = FinanceLocaleKeys.finance_label_support_level;
     final values = results.formattedSupports ?? [];
 
-    return _buildEntries(values, labelKey, color);
+    return _buildEntries(values, labelKey, color, reversed: false);
   }
 
   List<FastReportEntry> _buildEntries(
     List<String> values,
     String labelKey,
-    Color color,
-  ) {
-    var level = values.length;
+    Color color, {
+    bool reversed = true,
+  }) {
+    if (reversed) values = values.reversed.toList();
 
-    return values.reversed.map((String value) {
-      final label = labelKey.tr(namedArgs: {'level': (level--).toString()});
+    var level = values.length;
+    var i = 0;
+
+    return values.map((String value) {
+      final label = labelKey.tr(namedArgs: {
+        'level': (reversed ? level-- : i++ + 1).toString(),
+      });
 
       return _buildEntry(value, label, color);
     }).toList();

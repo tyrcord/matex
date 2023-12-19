@@ -19,6 +19,35 @@ abstract class MatexFinancialCalculatorBloc<
 
   final MatexFinancialInstrumentExchangeService? exchangeProvider;
 
+  @protected
+  String? get userDefaultRiskPercent {
+    final bloc = FastAppDictBloc.instance;
+
+    return bloc.getValue<String?>(
+      MatexCalculatorDefaultValueKeys.matexCalculatorRiskPercent.name,
+    );
+  }
+
+  double? get userDefaultLeverage {
+    final bloc = FastAppDictBloc.instance;
+
+    return bloc.getValue<double?>(
+      MatexCalculatorDefaultValueKeys.matexCalculatorLeverage.name,
+    );
+  }
+
+  @protected
+  MatexFinancialInstrument? get userDefaultInstrument {
+    final bloc = FastAppDictBloc.instance;
+    final json = bloc.getValue<Map<dynamic, dynamic>?>(
+      MatexCalculatorDefaultValueKeys.matexCalculatorFinancialInstrument.name,
+    );
+
+    if (json != null) return MatexFinancialInstrument.fromJson(json);
+
+    return null;
+  }
+
   MatexFinancialCalculatorBloc({
     required super.dataProvider,
     super.debouceComputeEvents = false,

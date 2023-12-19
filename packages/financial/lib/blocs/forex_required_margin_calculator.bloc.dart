@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
@@ -256,28 +255,10 @@ class MatexForexRequiredMarginCalculatorBloc
   @override
   Future<MatexForexRequiredMarginCalculatorDocument>
       retrieveDefaultCalculatorDocument() async {
-    final bloc = FastAppDictBloc.instance;
-    final json = bloc.getValue<Map<dynamic, dynamic>?>(
-      MatexCalculatorDefaultValueKeys.matexCalculatorFinancialInstrument.name,
-    );
-
-    debugLog(
-      'retrieveDefaultCalculatorDocument: $json',
-      debugLabel: debugLabel,
-    );
-
-    MatexFinancialInstrument? instrument;
-
-    if (json != null) {
-      instrument = MatexFinancialInstrument.fromJson(json);
-    }
-
-    final leverage = bloc.getValue<double?>(
-      MatexCalculatorDefaultValueKeys.matexCalculatorLeverage.name,
-    );
+    final instrument = userDefaultInstrument;
 
     return MatexForexRequiredMarginCalculatorDocument(
-      leverage: leverage?.toString() ?? kMatexDefaultLeverage.toString(),
+      leverage: (userDefaultLeverage ?? kMatexDefaultLeverage).toString(),
       accountCurrency: getUserCurrencyCode(),
       counter: instrument?.counter,
       base: instrument?.base,
