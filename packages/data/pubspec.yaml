@@ -4,10 +4,10 @@ dependencies:
   flutter:
     sdk: flutter
   rxdart: ^0.27.7
-  t_cache: ^0.0.11+6
-  t_helpers: ^0.0.47
-  tbloc: ^0.21.8+6
-  tmodel: ^0.5.12+6
+  t_cache: ^0.0.11+9
+  t_helpers: ^0.0.48+2
+  tbloc: ^0.21.8+9
+  tmodel: ^0.5.12+9
 description: The data tool of the Matex packages.
 dev_dependencies:
   dependency_validator: ^3.2.3
