@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-12-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.27`](#matex_core---v0027)
+ - [`matex_data` - `v0.0.21`](#matex_data---v0021)
+ - [`matex_financial` - `v0.0.37`](#matex_financial---v0037)
+
+---
+
+#### `matex_core` - `v0.0.27`
+
+ - **FIX**: bunch of fixes.
+ - **FEAT**: update dependencies.
+ - **FEAT**: forex pip delta version 1.
+ - **FEAT**: add pivot points logic.
+
+#### `matex_data` - `v0.0.21`
+
+ - **FIX**: typo.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update currencies.
+ - **FEAT**: add jamaican dollar.
+
+#### `matex_financial` - `v0.0.37`
+
+ - **FIX**: typo.
+ - **FIX**: bunch of fixes.
+ - **FIX**: display lot size in pdfs.
+ - **FIX**: bunch of fixes.
+ - **FIX**: allow user default value to override default value from documents.
+ - **FIX**: bunch of fixes.
+ - **FIX**: Pivot Points Camarilla.
+ - **FIX**: typos.
+ - **FIX**: bunch of fixes.
+ - **FIX**: SL/TP calculator.
+ - **FIX**: required margin.
+ - **FIX**: allow negative pnl computations.
+ - **FEAT**: update dependencies.
+ - **FEAT**: bunch of improvements.
+ - **FEAT**: support more default values.
+ - **FEAT**: update doc versions.
+ - **FEAT**: forex pip delta version 1.
+ - **FEAT**: add logic for stop loss & take profit logic.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add required margin logic.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add logic for fx profit & loss.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add pivot points logic.
+
+
 ## 2023-12-07
 
 ### Changes

@@ -1,3 +1,10 @@
+## 0.0.27
+
+ - **FIX**: bunch of fixes.
+ - **FEAT**: update dependencies.
+ - **FEAT**: forex pip delta version 1.
+ - **FEAT**: add pivot points logic.
+
 ## 0.0.26
 
  - **FEAT**: update dependencies.

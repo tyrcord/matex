@@ -1,3 +1,31 @@
+## 0.0.37
+
+ - **FIX**: typo.
+ - **FIX**: bunch of fixes.
+ - **FIX**: display lot size in pdfs.
+ - **FIX**: bunch of fixes.
+ - **FIX**: allow user default value to override default value from documents.
+ - **FIX**: bunch of fixes.
+ - **FIX**: Pivot Points Camarilla.
+ - **FIX**: typos.
+ - **FIX**: bunch of fixes.
+ - **FIX**: SL/TP calculator.
+ - **FIX**: required margin.
+ - **FIX**: allow negative pnl computations.
+ - **FEAT**: update dependencies.
+ - **FEAT**: bunch of improvements.
+ - **FEAT**: support more default values.
+ - **FEAT**: update doc versions.
+ - **FEAT**: forex pip delta version 1.
+ - **FEAT**: add logic for stop loss & take profit logic.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add required margin logic.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add logic for fx profit & loss.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add pivot points logic.
+
 ## 0.0.36
 
  - **FEAT**: update dependencies.

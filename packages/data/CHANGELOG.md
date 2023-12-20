@@ -1,3 +1,10 @@
+## 0.0.21
+
+ - **FIX**: typo.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update currencies.
+ - **FEAT**: add jamaican dollar.
+
 ## 0.0.20
 
  - **FEAT**: update dependencies.
