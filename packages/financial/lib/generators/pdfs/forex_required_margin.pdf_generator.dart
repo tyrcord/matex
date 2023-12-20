@@ -70,6 +70,16 @@ class MatexForexRequiredMarginCalculatorPdfGenerator {
         name: FinanceLocaleKeys.finance_label_financial_instrument.tr(),
         value: fields.formattedFinancialInstrument,
       ),
+      if (formattedInstrumentExchangeRate != null)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_rate.tr(),
+          value: revertSuperscripts(formattedInstrumentExchangeRate),
+        ),
+      if (updatedOn != null)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_last_updated_on.tr(),
+          value: updatedOn,
+        ),
       if (positionSize > 0)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_position_size.tr(),
@@ -99,16 +109,6 @@ class MatexForexRequiredMarginCalculatorPdfGenerator {
         name: FinanceLocaleKeys.finance_label_leverage.tr(),
         value: fields.formattedLeverage,
       ),
-      if (formattedInstrumentExchangeRate != null)
-        FastReportEntry(
-          name: FinanceLocaleKeys.finance_label_rate.tr(),
-          value: revertSuperscripts(formattedInstrumentExchangeRate),
-        ),
-      if (updatedOn != null)
-        FastReportEntry(
-          name: FinanceLocaleKeys.finance_label_last_updated_on.tr(),
-          value: updatedOn,
-        ),
     ];
   }
 

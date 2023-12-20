@@ -273,6 +273,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     return _kDefaultProfitLossBlocState.copyWith(
       results: await retrieveDefaultResult(),
       fields: MatexForexProfitLossCalculatorBlocFields(
+        position: MatexPositionX.fromName(document.position),
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         accountCurrency: document.accountCurrency,
         entryPrice: document.entryPrice,
@@ -463,13 +464,13 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   MatexForexProfitLossCalculatorBlocState patchPosition(MatexPosition? value) {
-    late MatexForexProfitLossCalculatorBlocFields fields;
+    var fields = currentState.fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(resetPosition: true);
+      fields = fields.copyWithDefaults(resetPosition: true);
       calculator.position = MatexPosition.long;
     } else {
-      fields = currentState.fields.copyWith(position: value);
+      fields = fields.copyWith(position: value);
       calculator.position = value;
     }
 

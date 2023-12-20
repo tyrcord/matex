@@ -27,6 +27,63 @@ class MatexForexStopLossTakeProfitCalculatorBlocFields
   late final String? entryPrice;
   late final String? lotSize;
 
+  String get formattedPosition => position.localizedName;
+
+  String get formattedEntryPrice {
+    final value = parseFieldValueToDouble(entryPrice);
+
+    return localizeNumber(
+      maximumFractionDigits: kMatexQuoteMaxFractionDigits,
+      value: value,
+    );
+  }
+
+  String get formattedStopLossPrice {
+    final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
+    final value = parseFieldValueToDouble(stopLossPrice);
+
+    return localizeCurrency(
+      minimumFractionDigits: pipDecimalPlacesValue.toInt(),
+      maximumFractionDigits: kMatexQuoteMaxFractionDigits,
+      value: value,
+    );
+  }
+
+  String get formattedStopLossPips {
+    final stopLossPipsValue = parseFieldValueToDouble(stopLossPips);
+
+    return localizeNumber(value: stopLossPipsValue);
+  }
+
+  String get formattedTakeProfitPrice {
+    final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
+    final value = parseFieldValueToDouble(takeProfitPrice);
+
+    return localizeCurrency(
+      minimumFractionDigits: pipDecimalPlacesValue.toInt(),
+      maximumFractionDigits: kMatexQuoteMaxFractionDigits,
+      value: value,
+    );
+  }
+
+  String get formattedTakeProfitPips {
+    final takeProfitPipsValue = parseFieldValueToDouble(takeProfitPips);
+
+    return localizeNumber(value: takeProfitPipsValue);
+  }
+
+  String get formattedTakeProfitAmount {
+    final takeProfitAmountValue = parseFieldValueToDouble(takeProfitAmount);
+
+    return localizeCurrency(value: takeProfitAmountValue);
+  }
+
+  String get formattedStopLossAmount {
+    final stopLossAmountValue = parseFieldValueToDouble(stopLossAmount);
+
+    return localizeCurrency(value: stopLossAmountValue);
+  }
+
   String get formattedPositionSize {
     final value = parseFieldValueToDouble(positionSize);
 

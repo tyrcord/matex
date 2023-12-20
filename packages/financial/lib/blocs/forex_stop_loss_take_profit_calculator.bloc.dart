@@ -302,16 +302,20 @@ class MatexForexStopLossTakeProfitCalculatorBloc
             takeProfitAmount: '',
           );
       }
+    } else if (value is MatexPositionSizeType) {
+      if (key ==
+          MatexForexStopLossTakeProfitCalculatorBlocKey.positionSizeFieldType) {
+        return document.copyWith(
+          positionSizeFieldType: value.name,
+          positionSize: '',
+          lotSize: '',
+        );
+      }
+    } else if (value is MatexPosition &&
+        key == MatexForexStopLossTakeProfitCalculatorBlocKey.position) {
+      return document.copyWith(position: value.name);
     } else if (value is Enum) {
       switch (key) {
-        case MatexForexStopLossTakeProfitCalculatorBlocKey
-              .positionSizeFieldType:
-          return document.copyWith(
-            positionSizeFieldType: value.name,
-            positionSize: '',
-            lotSize: '',
-          );
-
         case MatexForexStopLossTakeProfitCalculatorBlocKey.stopLossFieldType:
           return document.copyWith(
             stopLossFieldType: value.name,
@@ -405,7 +409,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         return patchPositionSizeFieldType(value);
       }
     } else if (value is MatexPosition &&
-        key == MatexForexProfitLossCalculatorBlocKey.position) {
+        key == MatexForexStopLossTakeProfitCalculatorBlocKey.position) {
       return patchPosition(value);
     } else if (value is Enum) {
       switch (key) {
@@ -416,7 +420,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
           return patchTakeProfitFieldType(value.name);
       }
     } else if (value is MatexFinancialInstrument) {
-      if (key == MatexForexPipValueCalculatorBlocKey.instrument) {
+      if (key == MatexForexStopLossTakeProfitCalculatorBlocKey.instrument) {
         return patchInstrument(value);
       }
     }
@@ -438,6 +442,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       takeProfitPrice: parseStringToDouble(document.takeProfitPrice),
       takeProfitPips: parseStringToDouble(document.takeProfitPips),
       takeProfitAmount: parseStringToDouble(document.takeProfitAmount),
+      position: MatexPositionX.fromName(document.position),
     ));
   }
 
@@ -454,8 +459,16 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     return _kDefaultPipValueBlocState.copyWith(
       results: await retrieveDefaultResult(),
       fields: MatexForexStopLossTakeProfitCalculatorBlocFields(
+        position: MatexPositionX.fromName(document.position),
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         accountCurrency: document.accountCurrency,
+        stopLossAmount: document.stopLossAmount,
+        stopLossPips: document.stopLossPips,
+        stopLossPrice: document.stopLossPrice,
+        takeProfitAmount: document.takeProfitAmount,
+        takeProfitPips: document.takeProfitPips,
+        takeProfitPrice: document.takeProfitPrice,
+        entryPrice: document.entryPrice,
         counter: document.counter,
         base: document.base,
       ),
