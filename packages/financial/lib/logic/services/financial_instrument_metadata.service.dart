@@ -10,7 +10,7 @@ const _kInstrumentKeyMetadata = {
   'instrument_types': 'instrument_types',
 };
 
-// FIXME: needs review from matex_dart
+// TODO: needs review from matex_dart
 class MatexFinancialInstrumentMedatataService
     extends MatexFiancialMetadataProvider<MatexInstrumentMetadata> {
   static final MatexFinancialInstrumentMedatataService _singleton =

@@ -89,22 +89,6 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     );
   }
 
-  /// Loads the metadata of the calculator.
-  @override
-  @mustCallSuper
-  Future<Map<String, dynamic>> loadMetadata() async {
-    final metadata = await super.loadMetadata();
-
-    return {
-      ...metadata,
-      if (currentState.fields.counter != null)
-        'counterSymbol': getCurrencySymbol(
-          currencyCode: currentState.fields.counter,
-          localeCode: getUserLocaleCode(),
-        ),
-    };
-  }
-
   @override
   Future<MatexForexPositionSizeCalculatorBlocResults> compute() async {
     if (await isCalculatorStateValid()) {
@@ -626,7 +610,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       final symbol = counter + accountCurrency;
       final accountBaseQuote = await exchangeProvider!.rate(symbol);
 
-      // FIXME: display an error message
+      // TODO: display an error message
       if (accountBaseQuote == null) return;
 
       calculator.counterToAccountCurrencyRate = accountBaseQuote.price;

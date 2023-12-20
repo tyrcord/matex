@@ -1,7 +1,7 @@
 import 'package:tmodel/tmodel.dart';
 import 'package:matex_financial/financial.dart';
 
-// FIXME: needs review from matex_dart
+// TODO: needs review from matex_dart
 class MatexPairMetadata extends TModel {
   final MatexInstrumentMetadata? counterInstrumentMetadata;
   final MatexInstrumentMetadata? baseInstrumentMetadata;

@@ -13,7 +13,7 @@ const _kPairKeyMetadata = {
   'lot_units': 'lot_units',
 };
 
-// FIXME: needs review from matex_dart
+// TODO: needs review from matex_dart
 // FIXME: need to find another name
 // need to review when we will take of the stock market
 class MatexFinancialInstrumentPairMetadataService

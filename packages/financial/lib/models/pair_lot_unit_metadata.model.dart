@@ -1,6 +1,6 @@
 import 'package:tmodel/tmodel.dart';
 
-// FIXME: needs review from matex_dart
+// TODO: needs review from matex_dart
 const kMatexForexPairLotUnitMetadata = MatexPairLotUnitMetadata(
   key: 'forex',
   long: 'unit',

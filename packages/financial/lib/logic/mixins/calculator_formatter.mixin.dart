@@ -34,4 +34,16 @@ mixin MatexFinancialCalculatorFormatterMixin on MatexCalculatorFormatterMixin {
       locale: locale ?? getUserLocaleCode(),
     );
   }
+
+  String localizeRiskRewardRatio(double? reward) {
+    if (reward == null) return '0';
+
+    const int risk = 1;
+    final formattedRatio = localizeNumber(
+      minimumFractionDigits: 2,
+      value: reward,
+    );
+
+    return '$risk:$formattedRatio';
+  }
 }

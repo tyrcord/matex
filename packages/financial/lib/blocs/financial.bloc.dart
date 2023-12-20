@@ -89,12 +89,25 @@ abstract class MatexFinancialCalculatorBloc<
 
     final instrumentMetadata = await getInstrumentMetadata();
 
+    String? counter;
+
+    if (currentState.fields is MatexFinancialInstrumentCalculatorBlocFields) {
+      final fields =
+          currentState.fields as MatexFinancialInstrumentCalculatorBlocFields;
+      counter = fields.counter;
+    }
+
     return {
       ...metadata,
       'standardLotSize': await getUnitsPerStandardLot(),
       'microLotSize': await getUnitsPerMicroLot(),
       'miniLotSize': await getUnitsPerMiniLot(),
       'instrumentMetadata': instrumentMetadata,
+      if (counter != null)
+        'counterSymbol': getCurrencySymbol(
+          localeCode: getUserLocaleCode(),
+          currencyCode: counter,
+        ),
     };
   }
 

@@ -163,11 +163,8 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         stopLossPips: results.stopLossPips,
         stopLossAmount: results.stopLossAmount,
         riskRewardRatio: results.riskRewardRatio,
-        // FIXME: it should be the folowing format: 1:2.5
-        formattedRiskRewardRatio: localizeNumber(
-          value: results.riskRewardRatio,
-          minimumFractionDigits: 2,
-        ),
+        formattedRiskRewardRatio:
+            localizeRiskRewardRatio(results.riskRewardRatio),
         formattedStopLossAmount: localizeCurrency(
           minimumFractionDigits: 3,
           symbol: accountCurrency,
@@ -823,7 +820,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       final symbol = counter + accountCurrency;
       final accountBaseQuote = await exchangeProvider!.rate(symbol);
 
-      // FIXME: display an error message
+      // TODO: display an error message
       if (accountBaseQuote == null) return;
 
       calculator.counterToAccountCurrencyRate = accountBaseQuote.price;

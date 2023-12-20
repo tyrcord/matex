@@ -1,7 +1,7 @@
 import 'package:matex_financial/financial.dart';
 import 'package:tmodel/tmodel.dart';
 
-// FIXME: needs review from matex_dart
+// TODO: needs review from matex_dart
 const _kDefaultPairLotsMetadata = MatexPairLotsMetadata(
   unit: kMatexForexPairLotUnitMetadata,
   normalized: true,

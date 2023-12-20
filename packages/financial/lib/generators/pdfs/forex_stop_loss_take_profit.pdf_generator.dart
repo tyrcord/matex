@@ -174,6 +174,7 @@ class MatexForexStopLossTakeProfitCalculatorPdfGenerator {
     return [
       if (riskRewardRatio != null && riskRewardRatio != 0)
         FastReportEntry(
+          color: getRiskRewardRatioColorForValue(context, riskRewardRatio),
           name: FinanceLocaleKeys.finance_label_risk_reward_ratio.tr(),
           value: results.formattedRiskRewardRatio!,
         ),

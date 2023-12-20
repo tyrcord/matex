@@ -523,7 +523,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       final symbol = counter + accountCurrency;
       final accountBaseQuote = await exchangeProvider!.rate(symbol);
 
-      // FIXME: display an error message
+      // TODO: display an error message
       if (accountBaseQuote == null) return;
 
       calculator.counterToAccountCurrencyRate = accountBaseQuote.price;

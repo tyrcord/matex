@@ -2,7 +2,7 @@ import 'package:tmodel/tmodel.dart';
 
 const _kWeight = 0.0;
 
-// FIXME: needs review from matex_dart
+// TODO: needs review from matex_dart
 class MatexPairTypeMetadata extends TModel {
   static final Map<String, MatexPairTypeMetadata> _cacheMap = {};
   final String key;

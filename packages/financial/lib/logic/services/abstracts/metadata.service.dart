@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// FIXME: needs review from matex_dart
+// TODO: needs review from matex_dart
 abstract class MatexFiancialMetadataProvider<T> {
   @protected
   bool isInitialized = false;

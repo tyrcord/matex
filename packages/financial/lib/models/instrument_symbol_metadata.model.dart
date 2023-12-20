@@ -1,6 +1,6 @@
 import 'package:tmodel/tmodel.dart';
 
-// FIXME: needs review from matex_dart
+// TODO: needs review from matex_dart
 class MatexInstrumentSymbolMetadata extends TModel {
   final String ticker;
   final String long;
