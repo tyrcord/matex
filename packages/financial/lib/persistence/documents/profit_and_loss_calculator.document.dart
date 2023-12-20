@@ -136,7 +136,7 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
       expectedSaleUnits: model.expectedSaleUnits,
       operatingExpenses: model.operatingExpenses,
       sellingPrice: model.sellingPrice,
-      buyingPrice: buyingPrice,
+      buyingPrice: model.buyingPrice,
       taxRate: model.taxRate,
     );
   }
