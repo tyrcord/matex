@@ -114,6 +114,18 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       instrument: instrument,
     );
 
+    final entryPrice = currentState.fields.entryPrice;
+
+    if (entryPrice == null) {
+      // update the calculator entry price with the instrument exchange rate
+      calculator.entryPrice = quote ?? 0;
+
+      // update the state entry price with the instrument exchange rate
+      yield currentState.copyWith(
+        fields: currentState.fields.copyWith(entryPrice: quote?.toString()),
+      );
+    }
+
     final positionSizeFieldType = currentState.fields.positionSizeFieldType;
 
     // update the calculator position size with the latest lot size
@@ -328,6 +340,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
             pipDecimalPlaces: pipDecimalPlaces.toString(),
             counter: value.counter,
             base: value.base,
+            entryPrice: '',
           );
       }
     }
@@ -391,6 +404,9 @@ class MatexForexStopLossTakeProfitCalculatorBloc
           MatexForexStopLossTakeProfitCalculatorBlocKey.positionSizeFieldType) {
         return patchPositionSizeFieldType(value);
       }
+    } else if (value is MatexPosition &&
+        key == MatexForexProfitLossCalculatorBlocKey.position) {
+      return patchPosition(value);
     } else if (value is Enum) {
       switch (key) {
         case MatexForexStopLossTakeProfitCalculatorBlocKey.stopLossFieldType:
@@ -503,6 +519,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     if (instrument == null) {
       fields = currentState.fields.copyWithDefaults(
         resetPipDecimalPlaces: true,
+        resetEntryPrice: true,
         resetCounter: true,
         resetBase: true,
       );
@@ -518,6 +535,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         counter: instrument.counter,
         base: instrument.base,
+        entryPrice: '',
       );
 
       calculator.pipDecimalPlaces = pipDecimalPlaces;
@@ -565,6 +583,22 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       fields = fields.copyWith(lotSize: value);
       // NOTE: we need to convert the lot size to a position size
       // will be done in the will compute method
+    }
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexForexStopLossTakeProfitCalculatorBlocState patchPosition(
+    MatexPosition? value,
+  ) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetPosition: true);
+      calculator.position = MatexPosition.long;
+    } else {
+      fields = fields.copyWith(position: value);
+      calculator.position = value;
     }
 
     return currentState.copyWith(fields: fields);
