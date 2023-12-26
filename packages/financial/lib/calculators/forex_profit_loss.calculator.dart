@@ -76,9 +76,7 @@ class MatexForexProfitLossCalculator extends MatexCalculator<
       counterToAccountCurrencyRate,
     );
 
-    if (state.isAccountCurrencyCounter) {
-      return toDecimalOrDefault(instrumentPairRate);
-    } else if (dCounterToAccountCurrencyRate == dZero) {
+    if (dCounterToAccountCurrencyRate == dZero) {
       return dOne;
     }
 

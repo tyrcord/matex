@@ -149,6 +149,9 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       final results = calculator.value();
       final pipValue = results.pipValue;
 
+      final instrumentMetadata =
+          currentState.metadata['instrumentMetadata'] as MatexPairMetadata?;
+
       return MatexForexStopLossTakeProfitCalculatorBlocResults(
         formattedPipValue: localizeCurrency(
           minimumFractionDigits: 3,
@@ -163,8 +166,9 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         stopLossPips: results.stopLossPips,
         stopLossAmount: results.stopLossAmount,
         riskRewardRatio: results.riskRewardRatio,
-        formattedRiskRewardRatio:
-            localizeRiskRewardRatio(results.riskRewardRatio),
+        formattedRiskRewardRatio: localizeRiskRewardRatio(
+          results.riskRewardRatio,
+        ),
         formattedStopLossAmount: localizeCurrency(
           minimumFractionDigits: 3,
           symbol: accountCurrency,
@@ -176,6 +180,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         ),
         formattedStopLossPrice: localizeQuote(
           rate: results.stopLossPrice,
+          metadata: instrumentMetadata,
         ),
         formattedTakeProfitAmount: localizeCurrency(
           minimumFractionDigits: 3,
@@ -188,6 +193,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         ),
         formattedTakeProfitPrice: localizeQuote(
           rate: results.takeProfitPrice,
+          metadata: instrumentMetadata,
         ),
       );
     }
