@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-12-27
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_financial` - `v0.0.37+1`](#matex_financial---v00371)
+
+---
+
+#### `matex_financial` - `v0.0.37+1`
+
+ - **FIX**: bunch of fixes.
+
+
 ## 2023-12-20
 
 ### Changes
