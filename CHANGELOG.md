@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_financial` - `v0.0.37+2`](#matex_financial---v00372)
+
+---
+
+#### `matex_financial` - `v0.0.37+2`
+
+ - **FIX**: avoid to compute tax amount when profit is negative.
+
+
+## 2023-12-27
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_financial` - `v0.0.37+1`](#matex_financial---v00371)
 
 ---
