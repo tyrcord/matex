@@ -99,6 +99,8 @@ Decimal computeTaxAmount({
   final dOperatingProfit = toDecimalOrDefault(operatingProfit);
   final dTaxRate = toDecimalOrDefault(taxRate);
 
+  if (dOperatingProfit <= dZero) return dZero; // Prevent negative tax amount
+
   return dOperatingProfit * dTaxRate;
 }
 
