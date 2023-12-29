@@ -1,3 +1,7 @@
+## 0.0.37+3
+
+ - **FIX**: minor improvements.
+
 ## 0.0.37+2
 
  - **FIX**: avoid to compute tax amount when profit is negative.
