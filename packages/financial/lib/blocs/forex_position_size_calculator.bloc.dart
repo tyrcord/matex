@@ -390,7 +390,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   Future<MatexForexPositionSizeCalculatorBlocResults>
       retrieveDefaultResult() async {
     return MatexForexPositionSizeCalculatorBlocResults(
-      formattedPositionSize: localizeCurrency(value: 0),
+      formattedPositionSize: localizeNumber(value: 0),
       positionSize: 0,
     );
   }
