@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-12-31
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.28`](#matex_core---v0028)
+ - [`matex_data` - `v0.0.22`](#matex_data---v0022)
+ - [`matex_financial` - `v0.0.38`](#matex_financial---v0038)
+
+---
+
+#### `matex_core` - `v0.0.28`
+
+ - **FIX**: use toSafeDouble.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add  tenhance dependencies.
+
+#### `matex_data` - `v0.0.22`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.38`
+
+ - **FIX**: use toSafeDouble.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add  tenhance dependencies.
+
+
 ## 2023-12-29
 
 ### Changes

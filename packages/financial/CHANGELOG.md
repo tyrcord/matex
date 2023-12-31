@@ -1,3 +1,9 @@
+## 0.0.38
+
+ - **FIX**: use toSafeDouble.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add  tenhance dependencies.
+
 ## 0.0.37+3
 
  - **FIX**: minor improvements.
