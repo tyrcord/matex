@@ -17,18 +17,6 @@ class MatexDividendYieldCalculatorState extends MatexCalculatorState {
   @override
   MatexDividendYieldCalculatorState clone() => copyWith();
 
-  factory MatexDividendYieldCalculatorState.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    return MatexDividendYieldCalculatorState(
-      sharePrice: json['sharePrice'] as double?,
-      dividendAmount: json['dividendAmount'] as double?,
-      paymentFrequency:
-          json['dividendPaymentFrequency'] as MatexFinancialFrequency? ??
-              defaultFrequency,
-    );
-  }
-
   @override
   MatexDividendYieldCalculatorState copyWith({
     double? sharePrice,

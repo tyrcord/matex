@@ -14,3 +14,4 @@ export 'pivot_points.data_provider.dart';
 export 'forex_profit_loss_calculator.data_provider.dart';
 export 'forex_required_margin_calculator.data_provider.dart';
 export 'forex_stop_loss_take_profit_calculator.data_provider.dart';
+export 'forex_compound_calculator.data_provider.dart';

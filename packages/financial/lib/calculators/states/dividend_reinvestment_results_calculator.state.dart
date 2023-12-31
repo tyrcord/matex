@@ -32,25 +32,6 @@ class MatexDividendReinvestmentCalculatorState extends MatexCalculatorState {
   @override
   MatexDividendReinvestmentCalculatorState clone() => copyWith();
 
-  factory MatexDividendReinvestmentCalculatorState.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    return MatexDividendReinvestmentCalculatorState(
-      dividendPaymentFrequency:
-          json['dividendPaymentFrequency'] as MatexFinancialFrequency? ??
-              defaultFrequency,
-      sharePrice: json['sharePrice'] as double?,
-      numberOfShares: json['numberOfShares'] as double?,
-      dividendYield: json['dividendYield'] as double?,
-      yearsToGrow: json['yearsToGrow'] as int?,
-      annualContribution: json['annualContribution'] as double?,
-      annualSharePriceIncrease: json['annualSharePriceIncrease'] as double?,
-      annualDividendIncrease: json['annualDividendIncrease'] as double?,
-      taxRate: json['taxRate'] as double?,
-      drip: json['drip'] as bool? ?? defaultDrip,
-    );
-  }
-
   @override
   MatexDividendReinvestmentCalculatorState copyWith({
     MatexFinancialFrequency? paymentFrequency,
