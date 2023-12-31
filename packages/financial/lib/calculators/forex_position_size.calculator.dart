@@ -9,6 +9,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 class MatexForexPositionSizeCalculator extends MatexCalculator<
     MatexForexPositionSizeCalculatorState,
@@ -93,15 +94,15 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
     if (!isValid) return defaultResults;
 
     final dStopLossPips = computeStopLossPip(state.pipDecimalPlaces);
-    final stopLossPips = dStopLossPips.toDouble();
+    final stopLossPips = dStopLossPips.toSafeDouble();
     var stopLossPrice = state.stopLossPrice ?? 0.0;
 
     if (stopLossPrice <= 0) {
-      stopLossPrice = computeStopPrice(state.pipDecimalPlaces).toDouble();
+      stopLossPrice = computeStopPrice(state.pipDecimalPlaces).toSafeDouble();
     }
 
     final dAmountAtRisk = computeAmountAtRisk();
-    final amountAtRisk = dAmountAtRisk.toDouble();
+    final amountAtRisk = dAmountAtRisk.toSafeDouble();
     final dRiskRatio = computeRiskPercent(amountAtRisk, state.accountSize);
     final dPipValue = computePipValue(
       counterToAccountCurrencyRate: state.counterToAccountCurrencyRate,
@@ -112,13 +113,17 @@ class MatexForexPositionSizeCalculator extends MatexCalculator<
     );
 
     final size = dPipValue > dZero && stopLossPips > 0
-        ? computePositionSize(amountAtRisk, dPipValue.toDouble(), stopLossPips)
+        ? computePositionSize(
+            amountAtRisk,
+            dPipValue.toSafeDouble(),
+            stopLossPips,
+          )
         : dZero;
 
     return (result = MatexForexPositionSizeCalculatorResults(
-      pipValue: (dPipValue * size).toDouble(),
-      riskPercent: dRiskRatio.toDouble(),
-      positionSize: size.toDouble(),
+      pipValue: (dPipValue * size).toSafeDouble(),
+      riskPercent: dRiskRatio.toSafeDouble(),
+      positionSize: size.toSafeDouble(),
       amountAtRisk: amountAtRisk,
       stopLossPips: stopLossPips,
       stopLossPrice: stopLossPrice,

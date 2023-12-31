@@ -3,6 +3,7 @@ import 'package:matex_core/core.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 class MatexForexPipDeltaCalculator extends MatexCalculator<
     MatexForexPipDeltaCalculatorState, MatexForexPipDeltaCalculatorResults> {
@@ -50,7 +51,7 @@ class MatexForexPipDeltaCalculator extends MatexCalculator<
     );
 
     return MatexForexPipDeltaCalculatorResults(
-      numberOfPips: dPipDelta.toDouble().abs(),
+      numberOfPips: dPipDelta.toSafeDouble().abs(),
     );
   }
 }

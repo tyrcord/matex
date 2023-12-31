@@ -9,6 +9,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 // Initialize default state for the Pip Value Calculator
 final _kDefaultProfitLossBlocState = MatexForexProfitLossCalculatorBlocState(
@@ -90,7 +91,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       final dLotSize = toDecimalOrDefault(currentState.fields.lotSize);
 
       final positionSize = await getPositionSizeForLotSize(
-        positionSize: dLotSize.toDouble(),
+        positionSize: dLotSize.toSafeDouble(),
         lotSize: positionSizeFieldType,
       );
 
@@ -379,7 +380,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(positionSize: value);
-      calculator.positionSize = dValue.toDouble();
+      calculator.positionSize = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -413,7 +414,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     } else {
       fields = fields.copyWith(pipDecimalPlaces: value);
       final dValue = toDecimalOrDefault(value);
-      calculator.pipDecimalPlaces = dValue.toDouble().toInt();
+      calculator.pipDecimalPlaces = dValue.toSafeDouble().toInt();
     }
 
     return currentState.copyWith(fields: fields);
@@ -442,7 +443,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(entryPrice: value);
-      calculator.entryPrice = dValue.toDouble();
+      calculator.entryPrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -457,7 +458,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(exitPrice: value);
-      calculator.exitPrice = dValue.toDouble();
+      calculator.exitPrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);

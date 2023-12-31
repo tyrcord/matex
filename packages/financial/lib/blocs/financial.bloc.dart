@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/decimal.dart';
 
 abstract class MatexFinancialCalculatorBloc<
         C extends MatexCalculator,
@@ -265,7 +266,8 @@ abstract class MatexFinancialCalculatorBloc<
       final multiplier = metadata.lots![lotSize];
 
       if (multiplier != 0) {
-        return (toDecimal(positionSize)! * toDecimal(multiplier)!).toDouble();
+        return (toDecimal(positionSize)! * toDecimal(multiplier)!)
+            .toSafeDouble();
       }
     }
 
@@ -283,6 +285,6 @@ abstract class MatexFinancialCalculatorBloc<
       unitaryPipValue = decimalFromRational(dPipValue / dPositionSize);
     }
 
-    return (dUnits * unitaryPipValue).toDouble();
+    return (dUnits * unitaryPipValue).toSafeDouble();
   }
 }

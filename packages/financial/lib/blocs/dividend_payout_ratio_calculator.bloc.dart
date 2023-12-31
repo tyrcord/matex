@@ -10,6 +10,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 const _kDefaultDividendPayoutRatioBlocResults =
     MatexDividendPayoutRatioCalculatorBlocResults(
@@ -162,7 +163,7 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(totalDividends: value);
-      calculator.totalDividends = dValue.toDouble();
+      calculator.totalDividends = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -180,7 +181,7 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(netIncome: value);
-      calculator.netIncome = dValue.toDouble();
+      calculator.netIncome = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);

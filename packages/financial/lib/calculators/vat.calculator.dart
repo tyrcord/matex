@@ -4,6 +4,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     MatexVatCalculatorResults> {
@@ -75,7 +76,8 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
       discountRate: state.discountRate,
     );
 
-    final totalTaxes = getVATAmount(discountedPrice, dTotalVatRate.toDouble());
+    final totalTaxes =
+        getVATAmount(discountedPrice, dTotalVatRate.toSafeDouble());
     final totalPrice = discountedPrice + totalTaxes;
 
     final (discountAmount, discountRate) = getDiscountAmountAndRate(
@@ -100,19 +102,19 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
       grandTotal: tipAmount > 0 ? totalPrice + tipAmount : 0,
       federalVatAmount: getVATAmount(
         discountedPrice,
-        dFederalVatRate.toDouble(),
+        dFederalVatRate.toSafeDouble(),
       ),
       regionalVatAmount: getVATAmount(
         discountedPrice,
-        dRegionalVatRate.toDouble(),
+        dRegionalVatRate.toSafeDouble(),
       ),
       vatAmount: getVATAmount(
         discountedPrice,
-        dVatRate.toDouble(),
+        dVatRate.toSafeDouble(),
       ),
       customVatAmount: getVATAmount(
         discountedPrice,
-        dCustomVatRate.toDouble(),
+        dCustomVatRate.toSafeDouble(),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:decimal/decimal.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/decimal.dart';
 
 Decimal computeRevenue({
   double? expectedSaleUnits = 0,
@@ -219,7 +220,8 @@ double computeRiskRewardRatio({
   if (dStopLossAmount == dZero) return ratio; // Prevent division by zero
 
   if (dTakeProfitAmount != dStopLossAmount) {
-    ratio = (dTakeProfitAmount / dStopLossAmount).toDouble();
+    ratio =
+        decimalFromRational(dTakeProfitAmount / dStopLossAmount).toSafeDouble();
   } else {
     ratio = 1.0;
   }

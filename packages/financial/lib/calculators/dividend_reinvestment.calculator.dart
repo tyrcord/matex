@@ -5,6 +5,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 class MatexDividendReinvestmentCalculator extends MatexCalculator<
     MatexDividendReinvestmentCalculatorState,
@@ -134,13 +135,14 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
     }
 
     return MatexDividendReinvestmentCalculatorResults(
-      totalReturn: _computeTotalReturn(lastReport!.endingBalance!).toDouble(),
-      totalTaxAmount: _computeTotalTaxAmount(lastReport).toDouble(),
+      totalReturn:
+          _computeTotalReturn(lastReport!.endingBalance!).toSafeDouble(),
+      totalTaxAmount: _computeTotalTaxAmount(lastReport).toSafeDouble(),
       grossDividendPaid: lastReport.cumulativeGrossAmount,
       netDividendIncome: futureReport!.netDividendPayout,
       netDividendPaid: lastReport.cumulativeNetAmount,
-      totalContribution: dTotalContribution.toDouble(),
-      startingBalance: dStartingPrincipal.toDouble(),
+      totalContribution: dTotalContribution.toSafeDouble(),
+      startingBalance: dStartingPrincipal.toSafeDouble(),
       numberOfShares: lastReport.numberOfShares,
       endingBalance: lastReport.endingBalance,
       sharePrice: lastReport.sharePrice,
@@ -186,8 +188,8 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
     for (var i = 0; i < paymentFrequency; i++) {
       final dividendPayout = _computeDividendPayout(
         MatexDividendReinvestementRecord(
-          numberOfshares: dCumulativeShares.toDouble(),
-          dividendAmount: dividendAmount.toDouble(),
+          numberOfshares: dCumulativeShares.toSafeDouble(),
+          dividendAmount: dividendAmount.toSafeDouble(),
         ),
       );
 
@@ -234,27 +236,27 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
       payoutReports.add(
         MatexDividendReinvestementPayoutReport(
           additionalSharesFromAnnualContribution:
-              dAdditionalShareFromAnnualContribution.toDouble(),
-          sharePrice: dCurrentSharePrice.toDouble(),
+              dAdditionalShareFromAnnualContribution.toSafeDouble(),
+          sharePrice: dCurrentSharePrice.toSafeDouble(),
           grossDividendPayout: dividendPayout.grossDividendPayout,
           netDividendPayout: dividendPayout.netDividendPayout,
-          cumulativeGrossAmount: dCumulativeGrossAmount.toDouble(),
-          cumulativeNetAmount: dCumulativeNetAmount.toDouble(),
-          additionalSharesFromDrip: dAdditionalSharesFromDrip.toDouble(),
-          endingBalance: dEndingBalance.toDouble(),
-          numberOfShares: dCumulativeShares.toDouble(),
+          cumulativeGrossAmount: dCumulativeGrossAmount.toSafeDouble(),
+          cumulativeNetAmount: dCumulativeNetAmount.toSafeDouble(),
+          additionalSharesFromDrip: dAdditionalSharesFromDrip.toSafeDouble(),
+          endingBalance: dEndingBalance.toSafeDouble(),
+          numberOfShares: dCumulativeShares.toSafeDouble(),
         ),
       );
     }
 
     return MatexDividendReinvestementYearlyPayoutReport(
-      netDividendPayout: dCumulativeNetDividendPayout.toDouble(),
-      dividendAmountPerShare: dDividendAmountPerShare.toDouble(),
-      cumulativeGrossAmount: dCumulativeGrossAmount.toDouble(),
-      cumulativeNetAmount: dCumulativeNetAmount.toDouble(),
-      numberOfShares: dCumulativeShares.toDouble(),
-      sharePrice: dCurrentSharePrice.toDouble(),
-      endingBalance: dEndingBalance.toDouble(),
+      netDividendPayout: dCumulativeNetDividendPayout.toSafeDouble(),
+      dividendAmountPerShare: dDividendAmountPerShare.toSafeDouble(),
+      cumulativeGrossAmount: dCumulativeGrossAmount.toSafeDouble(),
+      cumulativeNetAmount: dCumulativeNetAmount.toSafeDouble(),
+      numberOfShares: dCumulativeShares.toSafeDouble(),
+      sharePrice: dCurrentSharePrice.toSafeDouble(),
+      endingBalance: dEndingBalance.toSafeDouble(),
       payouts: payoutReports,
     );
   }
@@ -318,8 +320,8 @@ class MatexDividendReinvestmentCalculator extends MatexCalculator<
     final netAmount = dGrossAmount * (dOne - dTaxRate);
 
     return MatexDividendReinvestementPayout(
-      grossDividendPayout: dGrossAmount.toDouble(),
-      netDividendPayout: netAmount.toDouble(),
+      grossDividendPayout: dGrossAmount.toSafeDouble(),
+      netDividendPayout: netAmount.toSafeDouble(),
     );
   }
 

@@ -4,6 +4,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 class MatexDividendYieldCalculator extends MatexCalculator<
     MatexDividendYieldCalculatorState, MatexDividendYieldResultsModel> {
@@ -58,9 +59,9 @@ class MatexDividendYieldCalculator extends MatexCalculator<
     final dDividendYield = decimalFromRational(dTotalDividends / dSharePrice);
 
     return MatexDividendYieldResultsModel(
-      totalDividends: dTotalDividends.toDouble(),
-      dividendYield: dDividendYield.toDouble(),
-      sharePrice: dSharePrice.toDouble(),
+      totalDividends: dTotalDividends.toSafeDouble(),
+      dividendYield: dDividendYield.toSafeDouble(),
+      sharePrice: dSharePrice.toSafeDouble(),
     );
   }
 }

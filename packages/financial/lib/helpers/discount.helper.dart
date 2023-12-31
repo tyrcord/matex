@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:decimal/decimal.dart';
+import 'package:tenhance/decimal.dart';
 
 /// Applies a discount to a given price.
 ///
@@ -27,5 +28,5 @@ double applyDiscount(
     discountedPrice -= (discountedPrice * dDiscountRate);
   }
 
-  return discountedPrice.toDouble();
+  return discountedPrice.toSafeDouble();
 }

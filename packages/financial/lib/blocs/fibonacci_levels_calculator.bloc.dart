@@ -7,6 +7,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 const _kDefaultFibonacciLevelsBlocResults =
     MatexFibonacciLevelsCalculatorBlocResults();
@@ -155,7 +156,7 @@ class MatexFibonacciLevelsCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(lowPrice: value);
-      calculator.lowPrice = dValue.toDouble();
+      calculator.lowPrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -173,7 +174,7 @@ class MatexFibonacciLevelsCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(highPrice: value);
-      calculator.highPrice = dValue.toDouble();
+      calculator.highPrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);

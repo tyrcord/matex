@@ -1,5 +1,6 @@
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/decimal.dart';
 
 MatexPivotPointsCalculatorResults pivotPointsWoodie(
   double? high,
@@ -20,8 +21,8 @@ MatexPivotPointsCalculatorResults pivotPointsWoodie(
   final dSupport2 = pivotPoint - dHighPrice + dLowPrice;
 
   return MatexPivotPointsCalculatorResults(
-    pivotPoint: pivotPoint.toDouble(),
-    resistances: [dResistance1.toDouble(), dResistance2.toDouble()],
-    supports: [dSupport1.toDouble(), dSupport2.toDouble()],
+    pivotPoint: pivotPoint.toSafeDouble(),
+    resistances: [dResistance1.toSafeDouble(), dResistance2.toSafeDouble()],
+    supports: [dSupport1.toSafeDouble(), dSupport2.toSafeDouble()],
   );
 }

@@ -7,6 +7,7 @@ import 'package:matex_core/core.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/decimal.dart';
 
 // TODO: can probably merge this with the take profit calculator
 
@@ -131,9 +132,9 @@ class MatexForexStopLossCalculator extends MatexCalculator<
     Decimal? price,
   }) {
     return MatexForexTradeOutcome(
-      amount: toDecimalOrDefault(amount).toDouble(),
-      pips: toDecimalOrDefault(pips).toDouble(),
-      price: toDecimalOrDefault(price).toDouble(),
+      amount: toDecimalOrDefault(amount).toSafeDouble(),
+      pips: toDecimalOrDefault(pips).toSafeDouble(),
+      price: toDecimalOrDefault(price).toSafeDouble(),
     );
   }
 }

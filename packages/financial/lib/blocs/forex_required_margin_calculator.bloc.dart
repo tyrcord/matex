@@ -9,6 +9,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 // Initialize default state for the Pip Value Calculator
 final _kDefaultPipValueBlocState = MatexForexRequiredMarginCalculatorBlocState(
@@ -96,7 +97,7 @@ class MatexForexRequiredMarginCalculatorBloc
       final dLotSize = toDecimalOrDefault(currentState.fields.lotSize);
 
       final positionSize = await getPositionSizeForLotSize(
-        positionSize: dLotSize.toDouble(),
+        positionSize: dLotSize.toSafeDouble(),
         lotSize: positionSizeFieldType,
       );
 
@@ -330,7 +331,7 @@ class MatexForexRequiredMarginCalculatorBloc
     } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(positionSize: value);
-      calculator.positionSize = dValue.toDouble();
+      calculator.positionSize = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -363,7 +364,7 @@ class MatexForexRequiredMarginCalculatorBloc
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(leverage: value);
-      calculator.leverage = dValue.toDouble();
+      calculator.leverage = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);

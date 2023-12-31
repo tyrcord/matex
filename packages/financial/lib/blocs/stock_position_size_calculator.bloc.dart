@@ -10,6 +10,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 final _kDefaultStockPositionSizeBlocState =
     MatexStockPositionSizeCalculatorBlocState(
@@ -239,13 +240,13 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       isShortPosition: document.position == MatexPosition.short.name,
       stopLossAmount: parseStringToDouble(document.stopLossAmount),
       stopLossPrice: parseStringToDouble(document.stopLossPrice),
-      slippagePercent: (slippagePercent / dHundred).toDouble(),
+      slippagePercent: (slippagePercent / dHundred).toSafeDouble(),
       accountSize: parseStringToDouble(document.accountSize),
       entryPrice: parseStringToDouble(document.entryPrice),
       riskReward: parseStringToDouble(document.riskReward),
-      riskPercent: (riskPercent / dHundred).toDouble(),
-      entryFees: (entryFees / dHundred).toDouble(),
-      exitFees: (exitFees / dHundred).toDouble(),
+      riskPercent: (riskPercent / dHundred).toSafeDouble(),
+      entryFees: (entryFees / dHundred).toSafeDouble(),
+      exitFees: (exitFees / dHundred).toSafeDouble(),
     ));
   }
 
@@ -308,7 +309,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(accountSize: value);
-      calculator.accountSize = dValue.toDouble();
+      calculator.accountSize = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -323,7 +324,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(entryPrice: value);
-      calculator.entryPrice = dValue.toDouble();
+      calculator.entryPrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -338,7 +339,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(stopLossPrice: value);
-      calculator.stopLossPrice = dValue.toDouble();
+      calculator.stopLossPrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -355,7 +356,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(slippagePercent: value);
-      calculator.slippagePercent = (dValue / dHundred).toDouble();
+      calculator.slippagePercent = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -370,7 +371,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(riskReward: value);
-      calculator.riskReward = dValue.toDouble();
+      calculator.riskReward = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -386,7 +387,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(entryFees: value);
-      calculator.entryFees = (dValue / dHundred).toDouble();
+      calculator.entryFees = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -401,7 +402,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(exitFees: value);
-      calculator.exitFees = (dValue / dHundred).toDouble();
+      calculator.exitFees = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -416,7 +417,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(riskPercent: value, stopLossAmount: '');
-      calculator.riskPercent = (dValue / dHundred).toDouble();
+      calculator.riskPercent = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -431,7 +432,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(stopLossAmount: value, riskPercent: '');
-      calculator.stopLossAmount = dValue.toDouble();
+      calculator.stopLossAmount = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);

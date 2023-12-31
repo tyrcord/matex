@@ -4,6 +4,7 @@ import 'package:matex_core/core.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 class MatexProfitAndLossCalculator extends MatexCalculator<
     MatexProfitAndLossCalculatorState, MatexProfitAndLossCalculatorResults> {
@@ -82,8 +83,8 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
   // Calculates gross profit
   Decimal get grossProfit {
     return computeGrossProfit(
-      costOfGoodsSold: costOfGoodsSold.toDouble(),
-      revenue: revenue.toDouble(),
+      costOfGoodsSold: costOfGoodsSold.toSafeDouble(),
+      revenue: revenue.toSafeDouble(),
     );
   }
 
@@ -101,15 +102,15 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
   // Calculates operating profit
   Decimal get operatingProfit {
     return computeOperatingProfit(
-      sellingExpenses: sellingExpenses.toDouble(),
-      grossProfit: grossProfit.toDouble(),
+      sellingExpenses: sellingExpenses.toSafeDouble(),
+      grossProfit: grossProfit.toSafeDouble(),
     );
   }
 
   // Calculates the tax amount
   Decimal get taxAmount {
     return computeTaxAmount(
-      operatingProfit: operatingProfit.toDouble(),
+      operatingProfit: operatingProfit.toSafeDouble(),
       taxRate: state.taxRate,
     );
   }
@@ -117,23 +118,23 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
   // Calculates net profit
   Decimal get netProfit {
     return computeNetProfit(
-      operatingProfit: operatingProfit.toDouble(),
-      taxAmount: taxAmount.toDouble(),
+      operatingProfit: operatingProfit.toSafeDouble(),
+      taxAmount: taxAmount.toSafeDouble(),
     );
   }
 
   Decimal get costOfInvestment {
     return computeCostOfInvestment(
-      sellingExpenses: sellingExpenses.toDouble(),
-      costOfGoodsSold: costOfGoodsSold.toDouble(),
+      sellingExpenses: sellingExpenses.toSafeDouble(),
+      costOfGoodsSold: costOfGoodsSold.toSafeDouble(),
     );
   }
 
   // Calculates the return on investment
   Decimal get returnOnInvestment {
     return computeReturnOnInvestment(
-      costOfInvestment: costOfInvestment.toDouble(),
-      netProfit: netProfit.toDouble(),
+      costOfInvestment: costOfInvestment.toSafeDouble(),
+      netProfit: netProfit.toSafeDouble(),
     );
   }
 
@@ -153,16 +154,16 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
   // Calculates Gross Profit Margin
   Decimal get grossProfitMargin {
     return computeGrossProfitMargin(
-      grossProfit: grossProfit.toDouble(),
-      revenue: revenue.toDouble(),
+      grossProfit: grossProfit.toSafeDouble(),
+      revenue: revenue.toSafeDouble(),
     );
   }
 
   // Calculates Net Profit Margin
   Decimal get netProfitMargin {
     return computeNetProfitMargin(
-      netProfit: netProfit.toDouble(),
-      revenue: revenue.toDouble(),
+      netProfit: netProfit.toSafeDouble(),
+      revenue: revenue.toSafeDouble(),
     );
   }
 
@@ -171,18 +172,18 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
     if (!isValid) return defaultResults;
 
     return MatexProfitAndLossCalculatorResults(
-      returnOnInvestment: returnOnInvestment.toDouble(),
-      breakEvenUnits: breakEvenUnits.toDouble().ceil(),
-      grossProfitMargin: grossProfitMargin.toDouble(),
-      costOfInvestment: costOfInvestment.toDouble(),
-      costOfGoodsSold: costOfGoodsSold.toDouble(),
-      sellingExpenses: sellingExpenses.toDouble(),
-      netProfitMargin: netProfitMargin.toDouble(),
-      operatingProfit: operatingProfit.toDouble(),
-      grossProfit: grossProfit.toDouble(),
-      netProfit: netProfit.toDouble(),
-      taxAmount: taxAmount.toDouble(),
-      revenue: revenue.toDouble(),
+      returnOnInvestment: returnOnInvestment.toSafeDouble(),
+      breakEvenUnits: breakEvenUnits.toSafeDouble().ceil(),
+      grossProfitMargin: grossProfitMargin.toSafeDouble(),
+      costOfInvestment: costOfInvestment.toSafeDouble(),
+      costOfGoodsSold: costOfGoodsSold.toSafeDouble(),
+      sellingExpenses: sellingExpenses.toSafeDouble(),
+      netProfitMargin: netProfitMargin.toSafeDouble(),
+      operatingProfit: operatingProfit.toSafeDouble(),
+      grossProfit: grossProfit.toSafeDouble(),
+      netProfit: netProfit.toSafeDouble(),
+      taxAmount: taxAmount.toSafeDouble(),
+      revenue: revenue.toSafeDouble(),
     );
   }
 }

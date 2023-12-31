@@ -6,6 +6,7 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:flutter/widgets.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/decimal.dart';
 import 'package:tlogger/logger.dart';
 
 // Project imports:
@@ -97,7 +98,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       final dLotSize = toDecimalOrDefault(currentState.fields.lotSize);
 
       final positionSize = await getPositionSizeForLotSize(
-        positionSize: dLotSize.toDouble(),
+        positionSize: dLotSize.toSafeDouble(),
         lotSize: positionSizeFieldType,
       );
 
@@ -115,8 +116,8 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       final dCustomPipValue = dPipValue * dNumberOfPips;
       final accountCurrency = fields.accountCurrency;
       final positionSize = calculator.positionSize;
-      final customPipValue = dCustomPipValue.toDouble();
-      final pipValue = dPipValue.toDouble();
+      final customPipValue = dCustomPipValue.toSafeDouble();
+      final pipValue = dPipValue.toSafeDouble();
       final standardLotUnits = await getUnitsPerStandardLot();
       final miniLotUnits = await getUnitsPerMiniLot();
       final microLotUnits = await getUnitsPerMicroLot();
@@ -433,7 +434,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(positionSize: value);
-      calculator.positionSize = dValue.toDouble();
+      calculator.positionSize = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -483,7 +484,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     } else {
       fields = fields.copyWith(pipDecimalPlaces: value);
       final dValue = toDecimalOrDefault(value);
-      calculator.pipDecimalPlaces = dValue.toDouble().toInt();
+      calculator.pipDecimalPlaces = dValue.toSafeDouble().toInt();
     }
 
     return currentState.copyWith(fields: fields);

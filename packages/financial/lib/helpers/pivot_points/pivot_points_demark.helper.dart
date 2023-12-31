@@ -1,6 +1,7 @@
 import 'package:decimal/decimal.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/decimal.dart';
 
 MatexPivotPointsCalculatorResults pivotPointsDeMark(
   double? high,
@@ -28,8 +29,8 @@ MatexPivotPointsCalculatorResults pivotPointsDeMark(
   final support = pivotPointDividedBy2 - dHighPrice;
 
   return MatexPivotPointsCalculatorResults(
-    pivotPoint: pivotPointDividedBy4.toDouble(),
-    resistances: [resistance.toDouble()],
-    supports: [support.toDouble()],
+    pivotPoint: pivotPointDividedBy4.toSafeDouble(),
+    resistances: [resistance.toSafeDouble()],
+    supports: [support.toSafeDouble()],
   );
 }

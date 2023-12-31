@@ -8,6 +8,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 const _kDefaultPivotPointsBlocResults = MatexPivotPointsCalculatorBlocResults();
 
@@ -195,7 +196,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(lowPrice: value);
-      calculator.lowPrice = dValue.toDouble();
+      calculator.lowPrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -213,7 +214,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(highPrice: value);
-      calculator.highPrice = dValue.toDouble();
+      calculator.highPrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -231,7 +232,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(openPrice: value);
-      calculator.openPrice = dValue.toDouble();
+      calculator.openPrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -249,7 +250,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(closePrice: value);
-      calculator.closePrice = dValue.toDouble();
+      calculator.closePrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);

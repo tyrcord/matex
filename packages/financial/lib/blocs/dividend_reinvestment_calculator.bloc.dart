@@ -8,6 +8,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 final _kDefaultDividendPayoutRatioBlocState =
     MatexDividendReinvestmentCalculatorBlocState(
@@ -211,13 +212,14 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
       sharePrice: parseStringToDouble(document.sharePrice),
       numberOfShares: parseStringToDouble(document.numberOfShares),
       dividendPaymentFrequency: frequency,
-      dividendYield: (dDividendYield / dHundred).toDouble(),
+      dividendYield: (dDividendYield / dHundred).toSafeDouble(),
       yearsToGrow: parseStringToInt(document.yearsToGrow),
       annualContribution: parseStringToDouble(document.annualContribution),
       annualSharePriceIncrease:
-          (dAnnualSharePriceIncrease / dHundred).toDouble(),
-      annualDividendIncrease: (dAnnualDividendIncrease / dHundred).toDouble(),
-      taxRate: (dTaxRate / dHundred).toDouble(),
+          (dAnnualSharePriceIncrease / dHundred).toSafeDouble(),
+      annualDividendIncrease:
+          (dAnnualDividendIncrease / dHundred).toSafeDouble(),
+      taxRate: (dTaxRate / dHundred).toSafeDouble(),
       drip: document.drip,
     ));
   }
@@ -274,7 +276,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(sharePrice: value);
-      calculator.sharePrice = dValue.toDouble();
+      calculator.sharePrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -294,7 +296,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(numberOfShares: value);
-      calculator.numberOfShares = dValue.toDouble();
+      calculator.numberOfShares = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -338,7 +340,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(dividendYield: value);
-      calculator.dividendYield = (dValue / dHundred).toDouble();
+      calculator.dividendYield = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -378,7 +380,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(annualContribution: value);
-      calculator.annualContribution = dValue.toDouble();
+      calculator.annualContribution = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -398,7 +400,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(annualSharePriceIncrease: value);
-      calculator.annualSharePriceIncrease = (dValue / dHundred).toDouble();
+      calculator.annualSharePriceIncrease = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -418,7 +420,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(annualDividendIncrease: value);
-      calculator.annualDividendIncrease = (dValue / dHundred).toDouble();
+      calculator.annualDividendIncrease = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -436,7 +438,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(taxRate: value);
-      calculator.taxRate = (dValue / dHundred).toDouble();
+      calculator.taxRate = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);

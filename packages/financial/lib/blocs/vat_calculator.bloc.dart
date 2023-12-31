@@ -11,6 +11,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 final _kDefaultVatBlocState = MatexVatCalculatorBlocState(
   fields: MatexVatCalculatorBlocFields(),
@@ -202,12 +203,12 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       priceBeforeVat: parseStringToDouble(document.priceBeforeVat),
       discountAmount: parseStringToDouble(document.discountAmount),
       tipAmount: parseStringToDouble(document.tipAmount),
-      regionalVatRate: (regionalVatRate / dHundred).toDouble(),
-      federalVatRate: (federalVatRate / dHundred).toDouble(),
-      customVatRate: (customVatRate / dHundred).toDouble(),
-      discountRate: (discountRate / dHundred).toDouble(),
-      vatRate: (vatRate / dHundred).toDouble(),
-      tipRate: (tipRate / dHundred).toDouble(),
+      regionalVatRate: (regionalVatRate / dHundred).toSafeDouble(),
+      federalVatRate: (federalVatRate / dHundred).toSafeDouble(),
+      customVatRate: (customVatRate / dHundred).toSafeDouble(),
+      discountRate: (discountRate / dHundred).toSafeDouble(),
+      vatRate: (vatRate / dHundred).toSafeDouble(),
+      tipRate: (tipRate / dHundred).toSafeDouble(),
     ));
   }
 
@@ -264,7 +265,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(priceBeforeVat: value);
-      calculator.priceBeforeVat = dValue.toDouble();
+      calculator.priceBeforeVat = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -279,7 +280,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(customVatRate: value);
-      calculator.customVatRate = (dValue / dHundred).toDouble();
+      calculator.customVatRate = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -294,7 +295,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(vatRate: value);
-      calculator.vatRate = (dValue / dHundred).toDouble();
+      calculator.vatRate = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -309,7 +310,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(federalVatRate: value);
-      calculator.federalVatRate = (dValue / dHundred).toDouble();
+      calculator.federalVatRate = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -324,7 +325,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(regionalVatRate: value);
-      calculator.regionalVatRate = (dValue / dHundred).toDouble();
+      calculator.regionalVatRate = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -339,7 +340,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(discountAmount: value, discountRate: '');
-      calculator.discountAmount = dValue.toDouble();
+      calculator.discountAmount = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -354,7 +355,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(discountRate: value, discountAmount: '');
-      calculator.discountRate = (dValue / dHundred).toDouble();
+      calculator.discountRate = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -369,7 +370,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(tipRate: value, tipAmount: '');
-      calculator.tipRate = (dValue / dHundred).toDouble();
+      calculator.tipRate = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -384,7 +385,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = fields.copyWith(tipAmount: value, tipRate: '');
-      calculator.tipAmount = dValue.toDouble();
+      calculator.tipAmount = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);

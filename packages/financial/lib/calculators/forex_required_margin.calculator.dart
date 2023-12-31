@@ -4,6 +4,7 @@ import 'package:matex_core/core.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/decimal.dart';
 
 class MatexForexRequiredMarginCalculator extends MatexCalculator<
     MatexForexRequiredMarginCalculatorState,
@@ -79,7 +80,7 @@ class MatexForexRequiredMarginCalculator extends MatexCalculator<
         instrumentPairRate: state.instrumentPairRate,
         positionSize: state.positionSize,
         leverage: state.leverage,
-      ).toDouble(),
+      ).toSafeDouble(),
     );
   }
 

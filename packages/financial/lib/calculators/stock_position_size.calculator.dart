@@ -5,6 +5,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 class MatexStockPositionSizeCalculator extends MatexCalculator<
     MatexStockPositionSizeCalculatorState,
@@ -119,13 +120,13 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     );
 
     final shares = calculateShares(
-      stopLossPrice.toDouble(),
-      entryPrice.toDouble(),
-      accountBalance.toDouble(),
-      entryFees.toDouble(),
-      exitFees.toDouble(),
-      riskPercent.toDouble(),
-      slippage.toDouble(),
+      stopLossPrice.toSafeDouble(),
+      entryPrice.toSafeDouble(),
+      accountBalance.toSafeDouble(),
+      entryFees.toSafeDouble(),
+      exitFees.toSafeDouble(),
+      riskPercent.toSafeDouble(),
+      slippage.toSafeDouble(),
     );
 
     final positionAmount = calculatePositionAmount(shares, adjustedEntryPrice);
@@ -170,37 +171,37 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     final adjustedTakeProfitAmount = takeProfitAmount - takeProfitFeeAmount;
 
     return MatexStockPositionSizeCalculatorResults(
-      stopLossPriceWithSlippage: adjustedStopLossPrice.toDouble(),
-      entryPriceWithSlippage: adjustedEntryPrice.toDouble(),
-      takeProfitAmount: takeProfitAmount.toDouble(),
-      takeProfitAmountAfterFee: adjustedTakeProfitAmount.toDouble(),
-      takeProfitPrice: takeProfitPrice.toDouble(),
-      takeProfitPriceWithSlippage: adjustedTakeProfitPrice.toDouble(),
-      entryFeeAmount: entryFeeAmount.toDouble(),
-      stopLossFeeAmount: stopLossFeeAmount.toDouble(),
-      takeProfitFeeAmount: takeProfitFeeAmount.toDouble(),
-      totalFeesForLossPosition: totalFeesForLossPosition.toDouble(),
-      totalFeesForProfitPosition: totalFeesForProfitPosition.toDouble(),
-      positionAmount: positionAmount.toDouble(),
-      effectiveRisk: effectiveRisk.toDouble(),
-      riskPercent: riskPercent.toDouble(),
-      shares: shares.toDouble(),
+      stopLossPriceWithSlippage: adjustedStopLossPrice.toSafeDouble(),
+      entryPriceWithSlippage: adjustedEntryPrice.toSafeDouble(),
+      takeProfitAmount: takeProfitAmount.toSafeDouble(),
+      takeProfitAmountAfterFee: adjustedTakeProfitAmount.toSafeDouble(),
+      takeProfitPrice: takeProfitPrice.toSafeDouble(),
+      takeProfitPriceWithSlippage: adjustedTakeProfitPrice.toSafeDouble(),
+      entryFeeAmount: entryFeeAmount.toSafeDouble(),
+      stopLossFeeAmount: stopLossFeeAmount.toSafeDouble(),
+      takeProfitFeeAmount: takeProfitFeeAmount.toSafeDouble(),
+      totalFeesForLossPosition: totalFeesForLossPosition.toSafeDouble(),
+      totalFeesForProfitPosition: totalFeesForProfitPosition.toSafeDouble(),
+      positionAmount: positionAmount.toSafeDouble(),
+      effectiveRisk: effectiveRisk.toSafeDouble(),
+      riskPercent: riskPercent.toSafeDouble(),
+      shares: shares.toSafeDouble(),
       stopLossPercentWithSlippage: calculatePercentageDecrease(
-        adjustedEntryPrice.toDouble(),
-        adjustedStopLossPrice.toDouble(),
+        adjustedEntryPrice.toSafeDouble(),
+        adjustedStopLossPrice.toSafeDouble(),
       ).abs(),
       stopLossPercent: calculatePercentageDecrease(
-        entryPrice.toDouble(),
-        stopLossPrice.toDouble(),
+        entryPrice.toSafeDouble(),
+        stopLossPrice.toSafeDouble(),
       ).abs(),
       toleratedRisk: calculateToleratedRisk(
         accountBalance,
         riskPercent,
-      ).toDouble(),
+      ).toSafeDouble(),
       involvedCapital: calculateStopLossAmount(
         positionAmount,
         accountBalance,
-      ).toDouble(),
+      ).toSafeDouble(),
     );
   }
 

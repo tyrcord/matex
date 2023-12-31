@@ -1,6 +1,7 @@
 // Package imports:
 import 'package:decimal/decimal.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/decimal.dart';
 
 double getShareAmount({
   required double accountBalance,
@@ -86,7 +87,7 @@ double getShareAmount({
     positionSize = Decimal.parse(positionSize.floor().toString());
   }
 
-  return positionSize.toDouble();
+  return positionSize.toSafeDouble();
 }
 
 Decimal adjustEntryPriceForSlippage(

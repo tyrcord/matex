@@ -1,6 +1,7 @@
 import 'package:decimal/decimal.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/decimal.dart';
 
 final List<Decimal> _dividers = [12.0, 6.0, 4.0, 2.0].map((double divider) {
   return Decimal.parse(divider.toString());
@@ -26,7 +27,7 @@ MatexPivotPointsCalculatorResults pivotPointsCamarilla(
 
 // Helper function to calculate the pivot point
 double _calculatePivotPoint(Decimal high, Decimal low, Decimal close) {
-  return decimalFromRational((high + low + close) / dThree).toDouble();
+  return decimalFromRational((high + low + close) / dThree).toSafeDouble();
 }
 
 // Helper function to calculate resistances
@@ -51,9 +52,9 @@ List<double> _calculatePricePoints(
     final priceDifference = decimalFromRational(difference / divider);
 
     if (isSupport) {
-      return (close - priceDifference).toDouble();
+      return (close - priceDifference).toSafeDouble();
     }
 
-    return (close + priceDifference).toDouble();
+    return (close + priceDifference).toSafeDouble();
   }).toList();
 }

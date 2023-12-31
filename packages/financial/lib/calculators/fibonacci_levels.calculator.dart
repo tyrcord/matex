@@ -1,6 +1,7 @@
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 class MatexFibonacciLevelsCalculator extends MatexCalculator<
     MatexFibonacciLevelsCalculatorState,
@@ -61,8 +62,8 @@ class MatexFibonacciLevelsCalculator extends MatexCalculator<
         final parsedValue = isValid ? dLevelRate * dDelta + dHighPrice : dOne;
 
         return _makeFibonacciLevel(
-          dLevelRate.toDouble(),
-          parsedValue.toDouble(),
+          dLevelRate.toSafeDouble(),
+          parsedValue.toSafeDouble(),
         );
       }).toList();
     }
@@ -72,7 +73,10 @@ class MatexFibonacciLevelsCalculator extends MatexCalculator<
       final dLevelRate = decimalFromRational(dLevel / dHundred);
       final parsedValue = isValid ? -(dLevelRate * dDelta) + dLowPrice : dOne;
 
-      return _makeFibonacciLevel(dLevelRate.toDouble(), parsedValue.toDouble());
+      return _makeFibonacciLevel(
+        dLevelRate.toSafeDouble(),
+        parsedValue.toSafeDouble(),
+      );
     }).toList();
   }
 
@@ -89,8 +93,8 @@ class MatexFibonacciLevelsCalculator extends MatexCalculator<
         final parsedValue = isValid ? dLevelRate * dDelta + dLowPrice : dOne;
 
         return _makeFibonacciLevel(
-          dLevelRate.toDouble(),
-          parsedValue.toDouble(),
+          dLevelRate.toSafeDouble(),
+          parsedValue.toSafeDouble(),
         );
       }).toList();
     }
@@ -100,7 +104,10 @@ class MatexFibonacciLevelsCalculator extends MatexCalculator<
       final dLevelRate = decimalFromRational(dLevel / dHundred);
       final parsedValue = isValid ? -(dLevelRate * dDelta) + dHighPrice : dOne;
 
-      return _makeFibonacciLevel(dLevelRate.toDouble(), parsedValue.toDouble());
+      return _makeFibonacciLevel(
+        dLevelRate.toSafeDouble(),
+        parsedValue.toSafeDouble(),
+      );
     }).toList();
   }
 

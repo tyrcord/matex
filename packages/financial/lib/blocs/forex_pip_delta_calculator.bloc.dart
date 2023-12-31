@@ -9,6 +9,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 // Initialize default state for the Pip Value Calculator
 final _kDefaultPipValueBlocState = MatexForexPipDeltaCalculatorBlocState(
@@ -231,7 +232,7 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
         ? fields.copyWithDefaults(resetPriceA: true)
         : fields.copyWith(priceA: value);
 
-    calculator.priceA = dValue.toDouble();
+    calculator.priceA = dValue.toSafeDouble();
 
     return currentState.copyWith(fields: fields);
   }
@@ -244,7 +245,7 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
         ? fields.copyWithDefaults(resetPriceB: true)
         : fields.copyWith(priceB: value);
 
-    calculator.priceB = dValue.toDouble();
+    calculator.priceB = dValue.toSafeDouble();
 
     return currentState.copyWith(fields: fields);
   }
@@ -289,7 +290,7 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
     } else {
       fields = currentState.fields.copyWith(pipDecimalPlaces: value);
       final dValue = toDecimalOrDefault(value);
-      calculator.pipDecimalPlaces = dValue.toDouble().toInt();
+      calculator.pipDecimalPlaces = dValue.toSafeDouble().toInt();
     }
 
     return currentState.copyWith(fields: fields);

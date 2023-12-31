@@ -8,6 +8,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
+import 'package:tenhance/decimal.dart';
 
 const _kDefaultDividendYieldBlocResults =
     MatexDividendYieldCalculatorBlocResults(
@@ -169,7 +170,7 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(sharePrice: value);
-      calculator.sharePrice = dValue.toDouble();
+      calculator.sharePrice = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);
@@ -187,7 +188,7 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(dividendAmount: value);
-      calculator.dividendAmount = dValue.toDouble();
+      calculator.dividendAmount = dValue.toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);

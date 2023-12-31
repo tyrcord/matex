@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:decimal/decimal.dart';
+import 'package:tenhance/decimal.dart';
 
 /// Calculates the tip on a price before VAT.
 ///
@@ -21,7 +22,7 @@ double calculateTip(double price, double tipRate) {
   final decimalTipRate = Decimal.parse(tipRate.toString());
   final result = decimalPriceWithoutVAT * decimalTipRate;
 
-  return result.toDouble();
+  return result.toSafeDouble();
 }
 
 /// Calculates the tip amount for a given price and tip percentage.
@@ -44,7 +45,7 @@ double getTipAmount(double price, double tipRate) {
   final Decimal dPrice = Decimal.parse(price.toString());
   final dTipRate = Decimal.parse(tipRate.toString());
 
-  return (dPrice * dTipRate).toDouble();
+  return (dPrice * dTipRate).toSafeDouble();
 }
 
 /// Calculates the tip rate based on the price and tip amount.
@@ -62,5 +63,5 @@ double getTipRate(double price, double tipAmount) {
         )
       : Decimal.zero;
 
-  return result.toDouble();
+  return result.toSafeDouble();
 }
