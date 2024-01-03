@@ -16,6 +16,7 @@ export 'pivot_points_calculator.bloc.dart';
 export 'forex_profit_loss_calculator.bloc.dart';
 export 'forex_required_margin_calculator.bloc.dart';
 export 'forex_stop_loss_take_profit_calculator.bloc.dart';
+export 'forex_compound_calculator.bloc.dart';
 
 export './states/states.dart';
 export './events/events.dart';
