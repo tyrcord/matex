@@ -16,15 +16,6 @@ class MatexDividendPayoutRatioCalculatorState extends MatexCalculatorState {
   @override
   MatexDividendPayoutRatioCalculatorState clone() => copyWith();
 
-  // From JSON Factory
-  factory MatexDividendPayoutRatioCalculatorState.fromJson(
-      Map<String, dynamic> json) {
-    return MatexDividendPayoutRatioCalculatorState(
-      netIncome: json['netIncome'] as double?,
-      totalDividends: json['totalDividend'] as double?,
-    );
-  }
-
   // Copy With Method
   @override
   MatexDividendPayoutRatioCalculatorState copyWith({

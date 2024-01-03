@@ -12,3 +12,4 @@ export 'pivot_points.validator.dart';
 export 'forex_profit_and_loss.validator.dart';
 export 'forex_required_margin.validator.dart';
 export 'forex_stop_loss_take_profit.validator.dart';
+export 'compound_interest.validator.dart';

@@ -16,3 +16,4 @@ export 'forex_required_margin.calculator.dart';
 export 'forex_stop_loss_take_profit.calculator.dart';
 export 'forex_take_profit.calculator.dart';
 export 'forex_stop_loss.calculator.dart';
+export 'compound_interest.calculator.dart';

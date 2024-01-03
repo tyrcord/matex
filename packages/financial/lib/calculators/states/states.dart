@@ -12,3 +12,4 @@ export 'pivot_points_calculator.state.dart';
 export 'forex_profit_loss_calculator.state.dart';
 export 'forex_required_margin_calculator.state.dart';
 export 'forex_stop_loss_take_profit_calculator.state.dart';
+export 'compound_interest_calculator.state.dart';

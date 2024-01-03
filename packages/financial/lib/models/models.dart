@@ -17,3 +17,4 @@ export 'dividend_reinvestment_record.model.dart';
 export 'dividend_reinvestment_payout.model.dart';
 export 'fibonnaci_level.model.dart';
 export 'trade_outcome.model.dart';
+export 'compound_interest_breakdown_entry.model.dart';
