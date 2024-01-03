@@ -15,6 +15,7 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
   late final MatexFinancialFrequency withdrawalFrequency;
   late final MatexFinancialFrequency rateFrequency;
   late final String? withdrawalAmount;
+  late final String? accountCurrency;
   late final String? additionalContribution;
 
   String get formattedStartBalance {
@@ -66,7 +67,10 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
     MatexFinancialFrequency? rateFrequency,
     String? withdrawalAmount,
     String? additionalContribution,
+    String? accountCurrency,
+    FastCalculatorBlocDelegate? delegate,
   }) {
+    this.accountCurrency = assignValue(accountCurrency);
     this.startBalance = assignValue(startBalance);
     this.rate = assignValue(rate);
     this.duration = assignValue(duration);
@@ -76,6 +80,7 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
     this.rateFrequency = rateFrequency ?? defaultFrequency;
     this.withdrawalAmount = assignValue(withdrawalAmount);
     this.additionalContribution = assignValue(additionalContribution);
+    this.delegate = delegate;
   }
 
   @override
@@ -91,7 +96,9 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
     MatexFinancialFrequency? withdrawalFrequency,
     MatexFinancialFrequency? rateFrequency,
     String? withdrawalAmount,
+    String? accountCurrency,
     String? additionalContribution,
+    FastCalculatorBlocDelegate? delegate,
   }) {
     return MatexForexCompoundCalculatorBlocFields(
       startBalance: startBalance ?? this.startBalance,
@@ -105,6 +112,8 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
       withdrawalAmount: withdrawalAmount ?? this.withdrawalAmount,
       additionalContribution:
           additionalContribution ?? this.additionalContribution,
+      accountCurrency: accountCurrency ?? this.accountCurrency,
+      delegate: delegate ?? this.delegate,
     );
   }
 
@@ -119,6 +128,7 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
     bool resetRateFrequency = false,
     bool resetWithdrawalAmount = false,
     bool resetAdditionalContribution = false,
+    bool resetAccountCurrency = false,
   }) {
     return MatexForexCompoundCalculatorBlocFields(
       startBalance: resetStartBalance ? null : startBalance,
@@ -133,6 +143,8 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
       withdrawalAmount: resetWithdrawalAmount ? null : withdrawalAmount,
       additionalContribution:
           resetAdditionalContribution ? null : additionalContribution,
+      accountCurrency: resetAccountCurrency ? null : accountCurrency,
+      delegate: delegate,
     );
   }
 
@@ -150,6 +162,8 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
       rateFrequency: model.rateFrequency,
       withdrawalAmount: model.withdrawalAmount,
       additionalContribution: model.additionalContribution,
+      accountCurrency: model.accountCurrency,
+      delegate: model.delegate,
     );
   }
 
@@ -164,5 +178,6 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
         rateFrequency,
         withdrawalAmount,
         additionalContribution,
+        accountCurrency,
       ];
 }

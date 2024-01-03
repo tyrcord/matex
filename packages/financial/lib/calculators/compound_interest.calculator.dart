@@ -12,7 +12,7 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
     setState(state.copyWith(duration: value));
   }
 
-  int get duration => state.duration;
+  int? get duration => state.duration;
 
   set rate(double? value) {
     setState(state.copyWith(rate: value));
@@ -211,21 +211,22 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
 
   int _getPeriods(MatexFinancialFrequency frequency) {
     final periodsPerYear = _getPeriodsPerYear(frequency);
+    final years = duration ?? 0;
     int periods;
 
     switch (frequency) {
       case MatexFinancialFrequency.daily:
-        periods = periodsPerYear * duration;
+        periods = periodsPerYear * years;
       case MatexFinancialFrequency.weekly:
-        periods = periodsPerYear * duration;
+        periods = periodsPerYear * years;
       case MatexFinancialFrequency.monthly:
-        periods = periodsPerYear * duration;
+        periods = periodsPerYear * years;
       case MatexFinancialFrequency.quarterly:
-        periods = periodsPerYear * duration;
+        periods = periodsPerYear * years;
       case MatexFinancialFrequency.semiAnnually:
-        periods = periodsPerYear * duration;
+        periods = periodsPerYear * years;
       case MatexFinancialFrequency.annually:
-        periods = periodsPerYear * duration;
+        periods = periodsPerYear * years;
     }
 
     return periods;

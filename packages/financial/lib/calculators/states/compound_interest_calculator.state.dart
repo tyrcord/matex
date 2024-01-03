@@ -4,11 +4,10 @@ import 'package:matex_financial/financial.dart';
 
 class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
   static const defaultFrequency = MatexFinancialFrequency.monthly;
-  static const defaultDuration = 1;
 
   final double? startBalance;
   final double? rate;
-  final int duration;
+  final int? duration;
   final MatexFinancialFrequency contributionFrequency;
   final MatexFinancialFrequency compoundFrequency;
   final MatexFinancialFrequency withdrawalFrequency;
@@ -21,19 +20,18 @@ class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
     this.rate,
     this.withdrawalAmount,
     this.additionalContribution,
+    this.duration,
     MatexFinancialFrequency? contributionFrequency,
     MatexFinancialFrequency? compoundFrequency,
     MatexFinancialFrequency? withdrawalFrequency,
     MatexFinancialFrequency? rateFrequency,
-    int? duration,
   })  : contributionFrequency =
             contributionFrequency ?? rateFrequency ?? defaultFrequency,
         compoundFrequency =
             compoundFrequency ?? rateFrequency ?? defaultFrequency,
         withdrawalFrequency =
             withdrawalFrequency ?? rateFrequency ?? defaultFrequency,
-        rateFrequency = rateFrequency ?? defaultFrequency,
-        duration = duration ?? 1;
+        rateFrequency = rateFrequency ?? defaultFrequency;
 
   @override
   MatexCompoundInterestCalculatorState clone() => copyWith();

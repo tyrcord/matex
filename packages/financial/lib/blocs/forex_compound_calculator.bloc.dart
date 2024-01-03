@@ -42,34 +42,75 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<MatexForexCompoundCalculatorBlocResults> compute() async {
     final results = calculator.value();
+    final fields = currentState.fields;
+    final accountCurrency = fields.accountCurrency;
 
     return MatexForexCompoundCalculatorBlocResults(
       endBalance: results.endBalance,
-      formattedEndBalance: localizeCurrency(value: results.endBalance),
+      formattedEndBalance: localizeCurrency(
+        symbol: accountCurrency,
+        value: results.endBalance,
+      ),
       startBalance: results.startBalance,
-      formattedStartBalance: localizeCurrency(value: results.startBalance),
+      formattedStartBalance: localizeCurrency(
+        symbol: accountCurrency,
+        value: results.startBalance,
+      ),
       totalContributions: results.totalContributions,
-      formattedTotalContributions:
-          localizeCurrency(value: results.totalContributions),
+      formattedTotalContributions: localizeCurrency(
+        symbol: accountCurrency,
+        value: results.totalContributions,
+      ),
       totalWithdrawals: results.totalWithdrawals,
-      formattedTotalWithdrawals:
-          localizeCurrency(value: results.totalWithdrawals),
+      formattedTotalWithdrawals: localizeCurrency(
+        symbol: accountCurrency,
+        value: results.totalWithdrawals,
+      ),
       rateOfReturn: results.rateOfReturn,
       formattedRateOfReturn: localizePercentage(value: results.rateOfReturn),
       totalEarnings: results.totalEarnings,
-      formattedTotalEarnings: localizeCurrency(value: results.totalEarnings),
+      formattedTotalEarnings: localizeCurrency(
+        symbol: accountCurrency,
+        value: results.totalEarnings,
+      ),
       breakdown: results.breakdown?.map((entry) {
         return entry.copyWith(
-          formattedStartBalance: localizeCurrency(value: entry.startBalance),
-          formattedEndBalance: localizeCurrency(value: entry.endBalance),
-          formattedEarnings: localizeCurrency(value: entry.earnings),
-          formattedCashFlow: localizeCurrency(value: entry.cashFlow),
-          formattedWithdrawal: localizeCurrency(value: entry.withdrawal),
-          formattedDeposit: localizeCurrency(value: entry.deposit),
-          formattedTotalEarnings: localizeCurrency(value: entry.totalEarnings),
-          formattedTotalWithdrawals:
-              localizeCurrency(value: entry.totalWithdrawals),
-          formattedTotalDeposits: localizeCurrency(value: entry.totalDeposits),
+          formattedStartBalance: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.startBalance,
+          ),
+          formattedEndBalance: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.endBalance,
+          ),
+          formattedEarnings: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.earnings,
+          ),
+          formattedCashFlow: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.cashFlow,
+          ),
+          formattedWithdrawal: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.withdrawal,
+          ),
+          formattedDeposit: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.deposit,
+          ),
+          formattedTotalEarnings: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.totalEarnings,
+          ),
+          formattedTotalWithdrawals: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.totalWithdrawals,
+          ),
+          formattedTotalDeposits: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.totalDeposits,
+          ),
         );
       }).toList(),
     );
@@ -81,7 +122,9 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     dynamic value,
   ) async {
     if (value == null) {
-      if (key == MatexForexCompoundCalculatorBlocKey.startBalance) {
+      if (key == MatexFiancialCalculatorBlocKey.accountCurrency) {
+        return document.copyWithDefaults(resetAccountCurrency: true);
+      } else if (key == MatexForexCompoundCalculatorBlocKey.startBalance) {
         return document.copyWithDefaults(resetStartBalance: true);
       } else if (key == MatexForexCompoundCalculatorBlocKey.rate) {
         return document.copyWithDefaults(resetRate: true);
@@ -104,7 +147,9 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWithDefaults(resetAdditionalContribution: true);
       }
     } else if (value is String) {
-      if (key == MatexForexCompoundCalculatorBlocKey.startBalance) {
+      if (key == MatexFiancialCalculatorBlocKey.accountCurrency) {
+        return document.copyWith(accountCurrency: value);
+      } else if (key == MatexForexCompoundCalculatorBlocKey.startBalance) {
         return document.copyWith(startBalance: value);
       } else if (key == MatexForexCompoundCalculatorBlocKey.rate) {
         return document.copyWith(rate: value);
@@ -148,7 +193,9 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     dynamic value,
   ) async {
     if (value is String?) {
-      if (key == MatexForexCompoundCalculatorBlocKey.startBalance) {
+      if (key == MatexFiancialCalculatorBlocKey.accountCurrency) {
+        return patchAccountCurrency(value);
+      } else if (key == MatexForexCompoundCalculatorBlocKey.startBalance) {
         return patchStartBalance(value);
       } else if (key == MatexForexCompoundCalculatorBlocKey.rate) {
         return patchRate(value);
@@ -195,6 +242,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     final compoundFrequency = document.compoundFrequency;
     final contributionFrequency = document.contributionFrequency;
     final withdrawalFrequency = document.withdrawalFrequency;
+    final dRate = toDecimalOrDefault(document.rate);
 
     calculator.setState(MatexCompoundInterestCalculatorState(
       rateFrequency: MatexFinancialFrequencyX.fromName(rateFrequency),
@@ -204,7 +252,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
       withdrawalFrequency:
           MatexFinancialFrequencyX.fromName(withdrawalFrequency),
       startBalance: parseStringToDouble(document.startBalance),
-      rate: parseStringToDouble(document.rate),
+      rate: (dRate / dHundred).toSafeDouble(),
       duration: parseStringToInt(document.duration),
       withdrawalAmount: parseStringToDouble(document.withdrawalAmount),
       additionalContribution:
@@ -235,6 +283,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
         duration: document.duration,
         withdrawalAmount: document.withdrawalAmount,
         additionalContribution: document.additionalContribution,
+        accountCurrency: document.accountCurrency,
       ),
     );
   }
@@ -242,16 +291,33 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<MatexForexCompoundCalculatorBlocDocument>
       retrieveDefaultCalculatorDocument() async {
-    return MatexForexCompoundCalculatorBlocDocument();
+    return MatexForexCompoundCalculatorBlocDocument(
+      accountCurrency: getUserCurrencyCode(),
+    );
   }
 
   @override
   Future<MatexForexCompoundCalculatorBlocResults>
       retrieveDefaultResult() async {
+    final fields = currentState.fields;
+    final accountCurrency = fields.accountCurrency;
+
     return MatexForexCompoundCalculatorBlocResults(
-      formattedEndBalance: localizeCurrency(value: 0),
+      formattedEndBalance: localizeCurrency(symbol: accountCurrency, value: 0),
       endBalance: 0,
     );
+  }
+
+  MatexForexCompoundCalculatorBlocState patchAccountCurrency(String? value) {
+    late final MatexForexCompoundCalculatorBlocFields fields;
+
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(resetAccountCurrency: true);
+    } else {
+      fields = currentState.fields.copyWith(accountCurrency: value);
+    }
+
+    return currentState.copyWith(fields: fields);
   }
 
   MatexForexCompoundCalculatorBlocState patchStartBalance(String? value) {
@@ -284,7 +350,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     } else {
       final dValue = toDecimalOrDefault(value);
       fields = currentState.fields.copyWith(rate: value);
-      calculator.rate = dValue.toSafeDouble();
+      calculator.rate = (dValue / dHundred).toSafeDouble();
     }
 
     return currentState.copyWith(fields: fields);

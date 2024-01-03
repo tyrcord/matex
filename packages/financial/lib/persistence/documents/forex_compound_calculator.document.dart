@@ -16,6 +16,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
   late final String rateFrequency;
   late final String? withdrawalAmount;
   late final String? additionalContribution;
+  late final String? accountCurrency;
 
   static MatexForexCompoundCalculatorBlocDocument fromJson(
     Map<String, dynamic> json,
@@ -30,6 +31,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
       rateFrequency: json['rateFrequency'] as String?,
       withdrawalAmount: json['withdrawalAmount'] as String?,
       additionalContribution: json['additionalContribution'] as String?,
+      accountCurrency: json['accountCurrency'] as String?,
     );
   }
 
@@ -43,6 +45,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
     String? rateFrequency,
     String? withdrawalAmount,
     String? additionalContribution,
+    String? accountCurrency,
   }) {
     this.startBalance = assignValue(startBalance);
     this.rate = assignValue(rate);
@@ -53,6 +56,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
     this.rateFrequency = rateFrequency ?? defaultFrequency;
     this.withdrawalAmount = assignValue(withdrawalAmount);
     this.additionalContribution = assignValue(additionalContribution);
+    this.accountCurrency = assignValue(accountCurrency);
   }
 
   @override
@@ -69,6 +73,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
     String? rateFrequency,
     String? withdrawalAmount,
     String? additionalContribution,
+    String? accountCurrency,
   }) {
     return MatexForexCompoundCalculatorBlocDocument(
       startBalance: startBalance ?? this.startBalance,
@@ -82,6 +87,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
       withdrawalAmount: withdrawalAmount ?? this.withdrawalAmount,
       additionalContribution:
           additionalContribution ?? this.additionalContribution,
+      accountCurrency: accountCurrency ?? this.accountCurrency,
     );
   }
 
@@ -96,6 +102,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
     bool resetRateFrequency = false,
     bool resetWithdrawalAmount = false,
     bool resetAdditionalContribution = false,
+    bool resetAccountCurrency = false,
   }) {
     return MatexForexCompoundCalculatorBlocDocument(
       startBalance: resetStartBalance ? null : startBalance,
@@ -110,6 +117,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
       withdrawalAmount: resetWithdrawalAmount ? null : withdrawalAmount,
       additionalContribution:
           resetAdditionalContribution ? null : additionalContribution,
+      accountCurrency: resetAccountCurrency ? null : accountCurrency,
     );
   }
 
@@ -127,6 +135,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
       rateFrequency: model.rateFrequency,
       withdrawalAmount: model.withdrawalAmount,
       additionalContribution: model.additionalContribution,
+      accountCurrency: model.accountCurrency,
     );
   }
 
@@ -144,6 +153,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
       rateFrequency: MatexFinancialFrequencyX.fromName(rateFrequency),
       withdrawalAmount: withdrawalAmount,
       additionalContribution: additionalContribution,
+      accountCurrency: accountCurrency,
     );
   }
 
@@ -159,6 +169,7 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
       'rateFrequency': rateFrequency,
       'withdrawalAmount': withdrawalAmount,
       'additionalContribution': additionalContribution,
+      'accountCurrency': accountCurrency,
       ...super.toJson(),
     };
   }
@@ -174,5 +185,6 @@ class MatexForexCompoundCalculatorBlocDocument extends FastCalculatorDocument {
         rateFrequency,
         withdrawalAmount,
         additionalContribution,
+        accountCurrency,
       ];
 }

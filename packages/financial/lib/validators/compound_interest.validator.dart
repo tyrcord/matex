@@ -11,5 +11,5 @@ final List<MatexCalculatorValidator<MatexCompoundInterestCalculatorState>>
   (state) => state.withdrawalFrequency >= state.rateFrequency,
   (state) => state.startBalance != null && state.startBalance! > 0,
   (state) => state.rate != null && state.rate! > 0,
-  (state) => state.duration > 0,
+  (state) => state.duration != null && state.duration! > 0,
 ];
