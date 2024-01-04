@@ -12,6 +12,7 @@ class MatexCompoundInterestBreakdownEntry {
   late final double totalWithdrawals;
 
   late final double cashFlow;
+  late final int period;
 
   // Formatted properties
   final String? formattedStartBalance;
@@ -23,12 +24,14 @@ class MatexCompoundInterestBreakdownEntry {
   final String? formattedWithdrawal;
   final String? formattedTotalWithdrawals;
   final String? formattedCashFlow;
+  final String? formattedPeriod;
 
   MatexCompoundInterestBreakdownEntry({
     required this.startBalance,
     required this.endBalance,
     required this.earnings,
     required this.totalEarnings,
+    required this.period,
     this.formattedStartBalance,
     this.formattedEndBalance,
     this.formattedEarnings,
@@ -38,6 +41,7 @@ class MatexCompoundInterestBreakdownEntry {
     this.formattedWithdrawal,
     this.formattedTotalWithdrawals,
     this.formattedCashFlow,
+    this.formattedPeriod,
     double? totalWithdrawals,
     double? totalDeposits,
     double? withdrawal,
@@ -68,6 +72,8 @@ class MatexCompoundInterestBreakdownEntry {
     double? totalDeposits,
     double? withdrawal,
     double? deposit,
+    int? period,
+    String? formattedPeriod,
   }) {
     return MatexCompoundInterestBreakdownEntry(
       startBalance: startBalance ?? this.startBalance,
@@ -91,6 +97,8 @@ class MatexCompoundInterestBreakdownEntry {
       totalDeposits: totalDeposits ?? this.totalDeposits,
       withdrawal: withdrawal ?? this.withdrawal,
       deposit: deposit ?? this.deposit,
+      period: period ?? this.period,
+      formattedPeriod: formattedPeriod ?? this.formattedPeriod,
     );
   }
 }

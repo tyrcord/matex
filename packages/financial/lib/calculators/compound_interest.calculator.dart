@@ -182,6 +182,7 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
         deposit: deposit.toSafeDouble(),
         totalWithdrawals: totalWithdrawals.toSafeDouble(),
         withdrawal: withdrawal.toSafeDouble(),
+        period: period,
       );
 
       breakdown.add(entry);
