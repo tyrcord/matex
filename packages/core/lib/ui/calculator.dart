@@ -38,6 +38,19 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
   final B calculatorBloc;
   final Widget? leading;
 
+  /// A builder method used to build the UI for displaying the breakdown of
+  /// the calculations.
+  final WidgetBuilder? breakdownBuilder;
+
+  /// A string that represents the title text for the breakdown section.
+  /// If null, the default value is used.
+  final String? breakdownTitleText;
+
+  /// A list of actions that can be performed on the breakdown section.
+  final List<Widget>? breakdownActions;
+
+  final ValueNotifier<bool>? breadownViewNotifier;
+
   const MatexCalculatorWidget({
     super.key,
     required this.calculatorBloc,
@@ -58,11 +71,15 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
     this.pageTitleText,
     this.refreshIcon,
     this.backButton,
+    this.breakdownBuilder,
+    this.breakdownTitleText,
+    this.breakdownActions,
     this.exportToPdfIcon,
     this.clearIcon,
     this.infoIcon,
     this.leading,
     this.onInfo,
+    this.breadownViewNotifier,
   });
 
   @override
@@ -116,6 +133,10 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
           infoIcon: widget.infoIcon,
           onInfo: widget.onInfo,
           leading: widget.leading,
+          breakdownBuilder: widget.breakdownBuilder,
+          breakdownTitleText: widget.breakdownTitleText,
+          breakdownActions: widget.breakdownActions,
+          breadownViewNotifier: widget.breadownViewNotifier,
         );
       },
     );
