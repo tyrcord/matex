@@ -111,6 +111,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
             symbol: accountCurrency,
             value: entry.totalDeposits,
           ),
+          formattedPeriod: localizeNumber(value: entry.period),
         );
       }).toList(),
     );
