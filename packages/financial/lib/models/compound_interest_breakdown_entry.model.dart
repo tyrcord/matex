@@ -51,7 +51,7 @@ class MatexCompoundInterestBreakdownEntry {
     this.totalDeposits = totalDeposits ?? 0;
     this.withdrawal = withdrawal ?? 0;
     this.deposit = deposit ?? 0;
-    cashFlow = this.totalDeposits - this.totalWithdrawals;
+    cashFlow = this.deposit - this.withdrawal;
   }
 
   MatexCompoundInterestBreakdownEntry copyWith({
@@ -100,5 +100,40 @@ class MatexCompoundInterestBreakdownEntry {
       period: period ?? this.period,
       formattedPeriod: formattedPeriod ?? this.formattedPeriod,
     );
+  }
+
+  // FIXME: move to t_helpers
+  String _escape(String field) {
+    return '"${field.replaceAll('"', '""')}"';
+  }
+
+  String toCsv() {
+    var csv = '';
+
+    if (formattedPeriod == null) {
+      csv += _escape(formattedPeriod!);
+    }
+
+    if (formattedStartBalance == null) {
+      csv += ',${_escape(formattedStartBalance!)}';
+    }
+
+    if (formattedDeposit == null) {
+      csv += ',${_escape(formattedDeposit!)}';
+    }
+
+    if (formattedWithdrawal == null) {
+      csv += ',${_escape(formattedWithdrawal!)}';
+    }
+
+    if (formattedEarnings == null) {
+      csv += ',${_escape(formattedEarnings!)}';
+    }
+
+    if (formattedEndBalance == null) {
+      csv += ',${_escape(formattedEndBalance!)}';
+    }
+
+    return csv;
   }
 }
