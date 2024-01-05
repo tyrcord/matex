@@ -6,6 +6,7 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:flutter/widgets.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tlogger/logger.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -26,6 +27,8 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         MatexForexStopLossTakeProfitCalculatorDocument,
         MatexForexStopLossTakeProfitCalculatorBlocResults>
     with MatexFinancialCalculatorFormatterMixin {
+  static const defaultDebugLabel = 'MatexForexStopLossTakeProfitCalculatorBloc';
+
   MatexForexStopLossTakeProfitCalculatorBloc({
     MatexForexStopLossTakeProfitCalculatorBlocState? initialState,
     MatexForexStopLossTakeProfitCalculatorDataProvider? dataProvider,
@@ -35,12 +38,14 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     super.showExportPdfDialog,
     super.autoRefreshPeriod,
     super.delegate,
+    super.getContext,
   }) : super(
           initialState: initialState ?? _kDefaultPipValueBlocState,
           dataProvider: dataProvider ??
               MatexForexStopLossTakeProfitCalculatorDataProvider(),
-          debugLabel: 'MatexForexStopLossTakeProfitCalculatorBloc',
+          debugLabel: defaultDebugLabel,
         ) {
+    logger = TLoggerManager().getLogger(defaultDebugLabel);
     calculator = MatexForexStopLossTakeProfitCalculator();
 
     listenOnDefaultValueChanges(
@@ -870,10 +875,15 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     if (accountCurrency == counter) {
       calculator.isAccountCurrencyCounter = true;
     } else {
-      final symbol = counter + accountCurrency;
-      final accountBaseQuote = await exchangeProvider!.rate(symbol);
+      final counterInstrument = MatexFinancialInstrument(
+        counter: accountCurrency,
+        base: counter,
+      );
 
-      // TODO: display an error message
+      final accountBaseQuote = await fetchInstrumentExchangeRate(
+        counterInstrument,
+      );
+
       if (accountBaseQuote == null) return;
 
       calculator.counterToAccountCurrencyRate = accountBaseQuote.price;

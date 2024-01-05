@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
+import 'package:lingua_core/generated/locale_keys.g.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -88,6 +89,7 @@ abstract class MatexCalculatorBloc<
     super.initialState,
     super.debugLabel,
     FastCalculatorBlocDelegate? delegate,
+    super.getContext,
   }) {
     this.delegate = delegate;
   }
@@ -142,7 +144,12 @@ abstract class MatexCalculatorBloc<
   /// Returns a `Future` that completes when the error has been handled.
   @override
   Future<void> handleComputeError(dynamic error) async {
-    //TODO: handle compute error
+    if (context != null) {
+      FastNotificationCenter.error(
+        context!,
+        CoreLocaleKeys.core_error_error_occurred_please.tr(),
+      );
+    }
   }
 
   /// Loads the metadata of the calculator.

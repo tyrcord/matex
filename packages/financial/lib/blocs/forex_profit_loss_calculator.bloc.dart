@@ -10,6 +10,7 @@ import 'package:t_helpers/helpers.dart';
 // Project imports:
 import 'package:matex_financial/financial.dart';
 import 'package:tenhance/decimal.dart';
+import 'package:tlogger/logger.dart';
 
 // Initialize default state for the Pip Value Calculator
 final _kDefaultProfitLossBlocState = MatexForexProfitLossCalculatorBlocState(
@@ -24,6 +25,8 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
         MatexForexProfitLossCalculatorDocument,
         MatexForexProfitLossCalculatorBlocResults>
     with MatexFinancialCalculatorFormatterMixin {
+  static const defaultDebugLabel = 'MatexForexProfitLossCalculatorBloc';
+
   MatexForexProfitLossCalculatorBloc({
     MatexForexProfitLossCalculatorBlocState? initialState,
     MatexForexProfitLossCalculatorDataProvider? dataProvider,
@@ -33,12 +36,14 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     super.showExportPdfDialog,
     super.autoRefreshPeriod,
     super.delegate,
+    super.getContext,
   }) : super(
           initialState: initialState ?? _kDefaultProfitLossBlocState,
           dataProvider:
               dataProvider ?? MatexForexProfitLossCalculatorDataProvider(),
-          debugLabel: 'MatexForexProfitLossCalculatorBloc',
+          debugLabel: defaultDebugLabel,
         ) {
+    logger = TLoggerManager().getLogger(defaultDebugLabel);
     calculator = MatexForexProfitLossCalculator();
 
     listenOnDefaultValueChanges(
@@ -495,10 +500,15 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     if (accountCurrency == counter) {
       calculator.isAccountCurrencyCounter = true;
     } else {
-      final symbol = counter + accountCurrency;
-      final accountBaseQuote = await exchangeProvider!.rate(symbol);
+      final counterInstrument = MatexFinancialInstrument(
+        counter: accountCurrency,
+        base: counter,
+      );
 
-      // TODO: display an error message
+      final accountBaseQuote = await fetchInstrumentExchangeRate(
+        counterInstrument,
+      );
+
       if (accountBaseQuote == null) return;
 
       calculator.counterToAccountCurrencyRate = accountBaseQuote.price;

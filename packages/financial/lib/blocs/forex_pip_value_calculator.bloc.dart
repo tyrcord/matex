@@ -25,7 +25,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
         MatexForexPipValueCalculatorDocument,
         MatexForexPipValueCalculatorBlocResults>
     with MatexFinancialCalculatorFormatterMixin {
-  late final TLogger logger;
+  static const defaultDebugLabel = 'MatexForexPipValueCalculatorBloc';
 
   MatexForexPipValueCalculatorBloc({
     MatexForexPipValueCalculatorBlocState? initialState,
@@ -36,14 +36,14 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     super.showExportPdfDialog,
     super.autoRefreshPeriod,
     super.delegate,
+    super.getContext,
   }) : super(
           initialState: initialState ?? _kDefaultPipValueBlocState,
           dataProvider:
               dataProvider ?? MatexForexPipValueCalculatorDataProvider(),
-          debugLabel: 'MatexForexPipValueCalculatorBloc',
+          debugLabel: defaultDebugLabel,
         ) {
-    logger = TLoggerManager().getLogger('MatexForexPipValueCalculatorBloc');
-
+    logger = TLoggerManager().getLogger(defaultDebugLabel);
     calculator = MatexForexPipValueCalculator();
 
     listenOnDefaultValueChanges(
@@ -67,7 +67,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
   @protected
   @mustCallSuper
   Stream<MatexForexPipValueCalculatorBlocState> willCompute() async* {
-    logger.debug('willCompute');
+    logger?.debug('willCompute');
     yield* super.willCompute();
 
     final accountCurrency = currentState.fields.accountCurrency;
@@ -521,10 +521,15 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     if (accountCurrency == counter) {
       calculator.isAccountCurrencyCounter = true;
     } else {
-      final symbol = counter + accountCurrency;
-      final accountBaseQuote = await exchangeProvider!.rate(symbol);
+      final counterInstrument = MatexFinancialInstrument(
+        counter: accountCurrency,
+        base: counter,
+      );
 
-      // TODO: display an error message
+      final accountBaseQuote = await fetchInstrumentExchangeRate(
+        counterInstrument,
+      );
+
       if (accountBaseQuote == null) return;
 
       calculator.counterToAccountCurrencyRate = accountBaseQuote.price;

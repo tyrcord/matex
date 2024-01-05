@@ -1,10 +1,13 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:tenhance/decimal.dart';
+import 'package:tlogger/logger.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 abstract class MatexFinancialCalculatorBloc<
         C extends MatexCalculator,
@@ -19,6 +22,8 @@ abstract class MatexFinancialCalculatorBloc<
       MatexFinancialInstrumentPairMetadataService();
 
   final MatexFinancialInstrumentExchangeService? exchangeProvider;
+
+  TLogger? logger;
 
   @protected
   String? get userDefaultRiskPercent {
@@ -83,6 +88,7 @@ abstract class MatexFinancialCalculatorBloc<
     super.initialState,
     super.debugLabel,
     super.delegate,
+    super.getContext,
   });
 
   Map<String, dynamic> get emptyInstrumentMetadata => const {
@@ -147,15 +153,40 @@ abstract class MatexFinancialCalculatorBloc<
     yield currentState.copyWith(metadata: metadata) as S;
   }
 
-  // TODO: catch errors
   Future<MatexQuote?> fetchInstrumentExchangeRate(
     MatexFinancialInstrument instrument,
   ) async {
-    if (instrument.symbol == null || exchangeProvider == null) return null;
+    if (instrument.symbol == null || exchangeProvider == null) {
+      logger?.warning('No exchange provider or symbol found');
+      return null;
+    }
 
-    // Note: we don't need to use a retry mechanism here because the
-    // exchange provider already implements it.
-    return exchangeProvider!.rate(instrument.symbol!);
+    final symbol = instrument.symbol!;
+    MatexQuote? quote;
+
+    try {
+      // Note: we don't need to use a retry mechanism here because the
+      // exchange provider already implements it.
+      quote = await exchangeProvider!.rate(symbol);
+
+      if (quote == null) {
+        throw Exception('Exchange provider returned a null quote');
+      }
+    } catch (error, stackTrace) {
+      logger?.error('Unable to retrieve the $symbol exchange rate');
+      logger?.error(error.toString(), stackTrace);
+
+      if (context != null) {
+        FastNotificationCenter.error(
+          context!,
+          FinanceLocaleKeys.finance_error_quote_unavailable.tr(
+            namedArgs: {'symbol': symbol},
+          ),
+        );
+      }
+    }
+
+    return quote;
   }
 
   Stream<S> patchInstrumentExchangeRate(
