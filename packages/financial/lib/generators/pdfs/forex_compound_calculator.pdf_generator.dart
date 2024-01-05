@@ -30,8 +30,7 @@ class MatexForexCompoundCalculatorPdfGenerator {
       use24HourFormat: appSettingsBloc.currentState.use24HourFormat,
       disclaimerText:
           FinanceLocaleKeys.finance_disclaimer_intervening_markets.tr(),
-      // FIXME: localize
-      subtitle: 'Forex Compounding Calculator',
+      subtitle: FinanceLocaleKeys.finance_label_compounding_text.tr(),
       inputs: _buildInputReportEntries(context, fields, results),
       languageCode: appSettingsBloc.currentState.languageCode,
       title: CoreLocaleKeys.core_label_report_text.tr(),
@@ -59,11 +58,11 @@ class MatexForexCompoundCalculatorPdfGenerator {
         value: fields.formattedStartBalance,
       ),
       FastReportEntry(
-        name: 'Expected gain %',
+        name: FinanceLocaleKeys.finance_label_rate_of_return_text.tr(),
         value: fields.formattedRate,
       ),
       FastReportEntry(
-        name: 'Expected gain frequency',
+        name: FinanceLocaleKeys.finance_label_return_frequency.tr(),
         value: fields.formattedRateFrequency,
       ),
       FastReportEntry(
@@ -71,26 +70,26 @@ class MatexForexCompoundCalculatorPdfGenerator {
         value: fields.formattedDuration,
       ),
       FastReportEntry(
-        name: 'Compounding frequency',
+        name: FinanceLocaleKeys.finance_label_compounding_frequency.tr(),
         value: fields.formattedCompoundFrequency,
       ),
       if (hasContributions) ...[
         FastReportEntry(
-          name: 'Additional contribution',
+          name: FinanceLocaleKeys.finance_label_additional_contributions.tr(),
           value: fields.formattedAdditionalContribution,
         ),
         FastReportEntry(
-          name: 'Additional contribution frequency',
+          name: FinanceLocaleKeys.finance_label_contribution_frequency.tr(),
           value: fields.formattedContributionFrequency,
         ),
       ],
       if (hasWithdrawals) ...[
         FastReportEntry(
-          name: 'Withdrawal amount',
+          name: FinanceLocaleKeys.finance_label_withdrawals_amount.tr(),
           value: fields.formattedWithdrawalAmount,
         ),
         FastReportEntry(
-          name: 'Withdrawal frequency',
+          name: FinanceLocaleKeys.finance_label_withdrawal_frequency.tr(),
           value: fields.formattedWithdrawalFrequency,
         ),
       ],
@@ -111,21 +110,21 @@ class MatexForexCompoundCalculatorPdfGenerator {
         value: results.formattedEndBalance!,
       ),
       FastReportEntry(
-        name: 'Total Earnings',
+        name: FinanceLocaleKeys.finance_label_total_earnings.tr(),
         value: results.formattedTotalEarnings!,
       ),
       FastReportEntry(
-        name: FinanceLocaleKeys.finance_label_total_return.tr(),
+        name: FinanceLocaleKeys.finance_label_rate_of_return_all_time.tr(),
         value: results.formattedRateOfReturn!,
       ),
       if (hasContributions)
         FastReportEntry(
-          name: 'Total contributions',
+          name: FinanceLocaleKeys.finance_label_total_deposits.tr(),
           value: results.formattedTotalContributions!,
         ),
       if (hasWithdrawals)
         FastReportEntry(
-          name: 'Total withdrawals',
+          name: FinanceLocaleKeys.finance_label_total_withdrawals.tr(),
           value: results.formattedTotalWithdrawals!,
         ),
     ];
