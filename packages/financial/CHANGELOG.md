@@ -1,3 +1,11 @@
+## 0.0.39
+
+ - **FEAT**: handle exchange rate errors.
+ - **FEAT**: update dependencies.
+ - **FEAT**: use default user values.
+ - **FEAT**: add periods.
+ - **FEAT**: implement forex compounding calculator.
+
 ## 0.0.38
 
  - **FIX**: use toSafeDouble.

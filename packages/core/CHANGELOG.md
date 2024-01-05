@@ -1,3 +1,8 @@
+## 0.0.29
+
+ - **FEAT**: handle exchange rate errors.
+ - **FEAT**: support latest fastyle.
+
 ## 0.0.28
 
  - **FIX**: use toSafeDouble.

@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-01-05
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.29`](#matex_core---v0029)
+ - [`matex_financial` - `v0.0.39`](#matex_financial---v0039)
+
+---
+
+#### `matex_core` - `v0.0.29`
+
+ - **FEAT**: handle exchange rate errors.
+ - **FEAT**: support latest fastyle.
+
+#### `matex_financial` - `v0.0.39`
+
+ - **FEAT**: handle exchange rate errors.
+ - **FEAT**: update dependencies.
+ - **FEAT**: use default user values.
+ - **FEAT**: add periods.
+ - **FEAT**: implement forex compounding calculator.
+
+
 ## 2023-12-31
 
 ### Changes
