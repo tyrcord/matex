@@ -2,10 +2,10 @@ dependencies:
   cross_file: ^0.3.3+6
   decimal: ^2.3.3
   easy_localization: ^3.0.3
-  fastyle_calculator: ^1.54.0
-  fastyle_core: ^0.0.45
+  fastyle_calculator: ^1.55.0
+  fastyle_core: ^0.0.46
   fastyle_financial: ^0.0.39
-  fastyle_forms: ^0.0.43
+  fastyle_forms: ^0.0.44
   flutter:
     sdk: flutter
   lingua_core: ^0.0.34
@@ -16,8 +16,8 @@ dependencies:
   lingua_number: ^0.0.10+2
   lingua_settings: ^0.0.14
   lingua_units: ^0.0.7
-  matex_core: ^0.0.30
-  matex_data: ^0.0.23
+  matex_core: ^0.0.28
+  matex_data: ^0.0.22
   pdf: ^3.10.6
   printing: ^5.11.1
   rxdart: ^0.27.7
