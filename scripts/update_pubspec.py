@@ -127,7 +127,7 @@ specified_versions = {
     'url_launcher': '^6.2.1',
     'uuid': '^4.2.1',
     'visibility_detector': '^0.4.0+2',
-    'go_router': '^12.1.1',
+    'go_router': '^13.0.1',
     'video_player': '^2.8.1',
     'flutter_native_splash': '^2.3.6',
 }
