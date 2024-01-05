@@ -78,14 +78,17 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
           formattedStartBalance: localizeCurrency(
             symbol: accountCurrency,
             value: entry.startBalance,
+            minimumFractionDigits: 2,
           ),
           formattedEndBalance: localizeCurrency(
             symbol: accountCurrency,
             value: entry.endBalance,
+            minimumFractionDigits: 2,
           ),
           formattedEarnings: localizeCurrency(
             symbol: accountCurrency,
             value: entry.earnings,
+            minimumFractionDigits: 2,
           ),
           formattedCashFlow: localizeCurrency(
             symbol: accountCurrency,
@@ -94,22 +97,27 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
           formattedWithdrawal: localizeCurrency(
             symbol: accountCurrency,
             value: entry.withdrawal,
+            minimumFractionDigits: 2,
           ),
           formattedDeposit: localizeCurrency(
             symbol: accountCurrency,
             value: entry.deposit,
+            minimumFractionDigits: 2,
           ),
           formattedTotalEarnings: localizeCurrency(
             symbol: accountCurrency,
             value: entry.totalEarnings,
+            minimumFractionDigits: 2,
           ),
           formattedTotalWithdrawals: localizeCurrency(
             symbol: accountCurrency,
             value: entry.totalWithdrawals,
+            minimumFractionDigits: 2,
           ),
           formattedTotalDeposits: localizeCurrency(
             symbol: accountCurrency,
             value: entry.totalDeposits,
+            minimumFractionDigits: 2,
           ),
           formattedPeriod: localizeNumber(value: entry.period),
         );

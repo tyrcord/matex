@@ -27,7 +27,7 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
   String get formattedRate {
     final value = parseFieldValueToDouble(rate);
 
-    return localizePercentage(value: value);
+    return '${localizeNumber(value: value)}%';
   }
 
   String get formattedDuration {
