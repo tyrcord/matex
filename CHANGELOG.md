@@ -15,6 +15,37 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_core` - `v0.0.30`](#matex_core---v0030)
+ - [`matex_data` - `v0.0.23`](#matex_data---v0023)
+ - [`matex_financial` - `v0.0.40`](#matex_financial---v0040)
+
+---
+
+#### `matex_core` - `v0.0.30`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.23`
+
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.40`
+
+ - **FEAT**: update dependencies.
+
+
+## 2024-01-05
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_core` - `v0.0.29`](#matex_core---v0029)
  - [`matex_financial` - `v0.0.39`](#matex_financial---v0039)
 
