@@ -37,6 +37,30 @@ abstract class MatexFinancialCalculatorBloc<
     );
   }
 
+  String? get userDefaultRiskType {
+    final bloc = FastAppDictBloc.instance;
+
+    return bloc.getValue<String?>(
+      MatexCalculatorDefaultValueKeys.matexCalculatorRiskType.name,
+    );
+  }
+
+  String? get userDefaultStopLossType {
+    final bloc = FastAppDictBloc.instance;
+
+    return bloc.getValue<String?>(
+      MatexCalculatorDefaultValueKeys.matexCalculatorStopLossType.name,
+    );
+  }
+
+  String? get userDefaultTakeProfitType {
+    final bloc = FastAppDictBloc.instance;
+
+    return bloc.getValue<String?>(
+      MatexCalculatorDefaultValueKeys.matexCalculatorTakeProfitType.name,
+    );
+  }
+
   @protected
   MatexFinancialInstrument? get userDefaultInstrument {
     final bloc = FastAppDictBloc.instance;

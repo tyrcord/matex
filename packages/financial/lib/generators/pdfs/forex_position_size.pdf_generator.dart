@@ -13,7 +13,6 @@ import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:lingua_finance_forex/generated/locale_keys.g.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
-import 'package:fastyle_financial/fastyle_financial.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';

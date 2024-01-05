@@ -5,9 +5,6 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
-  final String defaultEntryFeeType = 'amount';
-  final String defaultExitFeeType = 'amount';
-
   late final String? sellingExpensePerUnitAmount;
   late final String? buyingExpensePerUnitAmount;
   late final String? sellingExpensePerUnitRate;
@@ -42,10 +39,8 @@ class MatexProfitAndLossCalculatorDocument extends FastCalculatorDocument {
     this.sellingPrice = assignValue(sellingPrice);
     this.buyingPrice = assignValue(buyingPrice);
     this.taxRate = assignValue(taxRate);
-    this.buyingCostsPerUnitType =
-        assignValue(buyingCostsPerUnitType) ?? defaultEntryFeeType;
-    this.sellingCostsPerUnitType =
-        assignValue(sellingCostsPerUnitType) ?? defaultExitFeeType;
+    this.buyingCostsPerUnitType = assignValue(buyingCostsPerUnitType);
+    this.sellingCostsPerUnitType = assignValue(sellingCostsPerUnitType);
   }
 
   @override

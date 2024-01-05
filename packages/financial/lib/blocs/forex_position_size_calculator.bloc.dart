@@ -48,7 +48,17 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     listenOnDefaultValueChanges(
       MatexCalculatorDefaultValueKeys.matexCalculatorRiskPercent.name,
-      MatexStockPositionSizeCalculatorBlocKey.riskPercent,
+      MatexForexPositionSizeCalculatorBlocKey.riskPercent,
+    );
+
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.matexCalculatorRiskType.name,
+      MatexForexPositionSizeCalculatorBlocKey.riskFieldType,
+    );
+
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.matexCalculatorStopLossType.name,
+      MatexForexPositionSizeCalculatorBlocKey.stopLossFieldType,
     );
 
     listenToPrimaryCurrencyCodeChanges();
@@ -332,15 +342,27 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexForexPositionSizeCalculatorDocument document,
   ) async {
     final dRiskPercent = toDecimalOrDefault(document.riskPercent);
+    const typeFromName = FastFinancialAmountSwitchFieldTypeX.fromName;
+    final stopLossFieldType = typeFromName(document.stopLossFieldType);
+    final riskFieldType = typeFromName(document.riskFieldType);
 
     calculator.setState(MatexForexPositionSizeCalculatorState(
       pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
       accountSize: parseStringToDouble(document.accountSize),
-      riskPercent: (dRiskPercent / dHundred).toSafeDouble(),
-      riskAmount: parseStringToDouble(document.riskAmount),
       entryPrice: parseStringToDouble(document.entryPrice),
-      stopLossPips: parseStringToDouble(document.stopLossPips),
-      stopLossPrice: parseStringToDouble(document.stopLossPrice),
+      riskPercent: riskFieldType == FastFinancialAmountSwitchFieldType.percent
+          ? (dRiskPercent / dHundred).toSafeDouble()
+          : 0,
+      riskAmount: riskFieldType == FastFinancialAmountSwitchFieldType.amount
+          ? parseStringToDouble(document.riskAmount)
+          : 0,
+      stopLossPips: stopLossFieldType == FastFinancialAmountSwitchFieldType.pip
+          ? parseStringToDouble(document.stopLossPips)
+          : 0,
+      stopLossPrice:
+          stopLossFieldType == FastFinancialAmountSwitchFieldType.price
+              ? parseStringToDouble(document.stopLossPips)
+              : 0,
     ));
   }
 
@@ -348,6 +370,13 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   Future<MatexForexPositionSizeCalculatorBlocState> resetCalculatorBlocState(
     MatexForexPositionSizeCalculatorDocument document,
   ) async {
+    const percentType = FastFinancialAmountSwitchFieldType.percent;
+    const amountType = FastFinancialAmountSwitchFieldType.amount;
+    const priceType = FastFinancialAmountSwitchFieldType.price;
+    const pipType = FastFinancialAmountSwitchFieldType.pip;
+    const typeFromName = FastFinancialAmountSwitchFieldTypeX.fromName;
+    final stopLossFieldType = typeFromName(document.stopLossFieldType);
+    final riskFieldType = typeFromName(document.riskFieldType);
     final pipDecimalPlaces = await getPipPrecision(
       counter: document.counter,
       base: document.base,
@@ -357,9 +386,15 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       results: await retrieveDefaultResult(),
       fields: MatexForexPositionSizeCalculatorBlocFields(
         pipDecimalPlaces: pipDecimalPlaces.toString(),
+        stopLossFieldType: document.stopLossFieldType,
+        riskFieldType: document.riskFieldType,
         accountCurrency: document.accountCurrency,
-        riskPercent: document.riskPercent,
-        riskAmount: document.riskAmount,
+        riskPercent: riskFieldType == percentType ? document.riskPercent : null,
+        riskAmount: riskFieldType == amountType ? document.riskAmount : null,
+        stopLossPips:
+            stopLossFieldType == pipType ? document.stopLossPips : null,
+        stopLossPrice:
+            stopLossFieldType == priceType ? document.stopLossPrice : null,
         counter: document.counter,
         base: document.base,
       ),
@@ -371,6 +406,8 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       retrieveDefaultCalculatorDocument() async {
     final instrument = userDefaultInstrument;
     int pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
+    const percentType = FastFinancialAmountSwitchFieldType.percent;
+    final riskType = userDefaultRiskType;
 
     if (instrument != null) {
       pipDecimalPlaces = await getPipPrecision(
@@ -380,9 +417,11 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     }
 
     return MatexForexPositionSizeCalculatorDocument(
+      riskPercent: riskType == percentType.name ? userDefaultRiskPercent : null,
       pipDecimalPlaces: pipDecimalPlaces.toString(),
+      stopLossFieldType: userDefaultStopLossType,
       accountCurrency: getUserCurrencyCode(),
-      riskPercent: userDefaultRiskPercent,
+      riskFieldType: userDefaultRiskType,
       counter: instrument?.counter,
       base: instrument?.base,
     );

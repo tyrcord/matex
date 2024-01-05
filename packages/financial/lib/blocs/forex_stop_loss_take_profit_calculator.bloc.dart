@@ -48,6 +48,16 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       MatexForexStopLossTakeProfitCalculatorBlocKey.instrument,
     );
 
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.matexCalculatorStopLossType.name,
+      MatexForexStopLossTakeProfitCalculatorBlocKey.stopLossFieldType,
+    );
+
+    listenOnDefaultValueChanges(
+      MatexCalculatorDefaultValueKeys.matexCalculatorTakeProfitType.name,
+      MatexForexStopLossTakeProfitCalculatorBlocKey.takeProfitFieldType,
+    );
+
     listenToPrimaryCurrencyCodeChanges();
   }
 
@@ -436,17 +446,36 @@ class MatexForexStopLossTakeProfitCalculatorBloc
   Future<void> resetCalculator(
     MatexForexStopLossTakeProfitCalculatorDocument document,
   ) async {
+    const typeFromName = FastFinancialAmountSwitchFieldTypeX.fromName;
+    const amountType = FastFinancialAmountSwitchFieldType.amount;
+    const priceType = FastFinancialAmountSwitchFieldType.price;
+    const pipType = FastFinancialAmountSwitchFieldType.pip;
+    final stopLossFieldType = typeFromName(document.stopLossFieldType);
+    final takeProfitFieldType = typeFromName(document.takeProfitFieldType);
+
     calculator.setState(MatexForexStopLossTakeProfitCalculatorState(
       pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
       positionSize: parseStringToDouble(document.positionSize),
       entryPrice: parseStringToDouble(document.entryPrice),
-      stopLossPrice: parseStringToDouble(document.stopLossPrice),
-      stopLossPips: parseStringToDouble(document.stopLossPips),
-      stopLossAmount: parseStringToDouble(document.stopLossAmount),
-      takeProfitPrice: parseStringToDouble(document.takeProfitPrice),
-      takeProfitPips: parseStringToDouble(document.takeProfitPips),
-      takeProfitAmount: parseStringToDouble(document.takeProfitAmount),
       position: MatexPositionX.fromName(document.position),
+      stopLossPips: stopLossFieldType == pipType
+          ? parseStringToDouble(document.stopLossPips)
+          : 0,
+      stopLossPrice: stopLossFieldType == priceType
+          ? parseStringToDouble(document.stopLossPips)
+          : 0,
+      stopLossAmount: stopLossFieldType == amountType
+          ? parseStringToDouble(document.stopLossPips)
+          : 0,
+      takeProfitAmount: takeProfitFieldType == amountType
+          ? parseStringToDouble(document.takeProfitAmount)
+          : 0,
+      takeProfitPips: takeProfitFieldType == pipType
+          ? parseStringToDouble(document.takeProfitPips)
+          : 0,
+      takeProfitPrice: takeProfitFieldType == priceType
+          ? parseStringToDouble(document.takeProfitPrice)
+          : 0,
     ));
   }
 
@@ -455,6 +484,12 @@ class MatexForexStopLossTakeProfitCalculatorBloc
       resetCalculatorBlocState(
     MatexForexStopLossTakeProfitCalculatorDocument document,
   ) async {
+    const typeFromName = FastFinancialAmountSwitchFieldTypeX.fromName;
+    const amountType = FastFinancialAmountSwitchFieldType.amount;
+    const priceType = FastFinancialAmountSwitchFieldType.price;
+    const pipType = FastFinancialAmountSwitchFieldType.pip;
+    final stopLossFieldType = typeFromName(document.stopLossFieldType);
+    final takeProfitFieldType = typeFromName(document.takeProfitFieldType);
     final pipDecimalPlaces = await getPipPrecision(
       counter: document.counter,
       base: document.base,
@@ -466,15 +501,24 @@ class MatexForexStopLossTakeProfitCalculatorBloc
         position: MatexPositionX.fromName(document.position),
         pipDecimalPlaces: pipDecimalPlaces.toString(),
         accountCurrency: document.accountCurrency,
-        stopLossAmount: document.stopLossAmount,
-        stopLossPips: document.stopLossPips,
-        stopLossPrice: document.stopLossPrice,
-        takeProfitAmount: document.takeProfitAmount,
-        takeProfitPips: document.takeProfitPips,
-        takeProfitPrice: document.takeProfitPrice,
+        stopLossPips:
+            stopLossFieldType == pipType ? document.stopLossPips : null,
+        stopLossPrice:
+            stopLossFieldType == priceType ? document.stopLossPrice : null,
+        stopLossAmount:
+            stopLossFieldType == amountType ? document.stopLossAmount : null,
+        takeProfitPips:
+            takeProfitFieldType == pipType ? document.takeProfitPips : null,
+        takeProfitPrice:
+            takeProfitFieldType == priceType ? document.takeProfitPrice : null,
+        takeProfitAmount: takeProfitFieldType == amountType
+            ? document.takeProfitAmount
+            : null,
         entryPrice: document.entryPrice,
         counter: document.counter,
         base: document.base,
+        stopLossFieldType: document.stopLossFieldType,
+        takeProfitFieldType: document.takeProfitFieldType,
       ),
     );
   }
@@ -493,7 +537,9 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     }
 
     return MatexForexStopLossTakeProfitCalculatorDocument(
+      takeProfitFieldType: userDefaultTakeProfitType,
       pipDecimalPlaces: pipDecimalPlaces.toString(),
+      stopLossFieldType: userDefaultStopLossType,
       accountCurrency: getUserCurrencyCode(),
       counter: instrument?.counter,
       base: instrument?.base,

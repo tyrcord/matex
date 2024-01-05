@@ -5,13 +5,10 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
-  static const String defaultStopLossFieldType = 'price';
-  static const String defaultRiskFieldType = 'percent';
-
-  late final String stopLossFieldType;
+  late final String? stopLossFieldType;
   late final String pipDecimalPlaces;
   late final String? accountCurrency;
-  late final String riskFieldType;
+  late final String? riskFieldType;
   late final String? stopLossPrice;
   late final String? stopLossPips;
   late final String? accountSize;
@@ -35,8 +32,8 @@ class MatexForexPositionSizeCalculatorDocument extends FastCalculatorDocument {
     String? stopLossPips,
     String? entryPrice,
   }) {
-    this.stopLossFieldType = stopLossFieldType ?? defaultStopLossFieldType;
-    this.riskFieldType = riskFieldType ?? defaultRiskFieldType;
+    this.stopLossFieldType = assignValue(stopLossFieldType);
+    this.riskFieldType = assignValue(riskFieldType);
     this.accountCurrency = assignValue(accountCurrency);
     this.stopLossPrice = assignValue(stopLossPrice);
     this.stopLossPips = assignValue(stopLossPips);

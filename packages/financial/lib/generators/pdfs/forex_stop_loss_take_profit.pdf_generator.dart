@@ -2,7 +2,6 @@
 import 'dart:typed_data';
 
 // Flutter imports:
-import 'package:fastyle_financial/fastyle_financial.dart';
 import 'package:flutter/widgets.dart';
 
 // Package imports:

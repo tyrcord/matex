@@ -6,8 +6,11 @@ import 'package:matex_financial/financial.dart';
 class MatexForexPositionSizeCalculatorBlocFields
     extends MatexFinancialInstrumentCalculatorBlocFields
     with MatexCalculatorFormatterMixin {
-  static const String defaultStopLossFieldType = 'price';
-  static const String defaultRiskFieldType = 'percent';
+  static final String defaultStopLossFieldType =
+      FastFinancialAmountSwitchFieldType.price.name;
+
+  static final String defaultRiskFieldType =
+      FastFinancialAmountSwitchFieldType.percent.name;
 
   late final String? stopLossFieldType;
   late final String? pipDecimalPlaces;
