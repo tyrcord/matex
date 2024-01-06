@@ -29,6 +29,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     super.debouceComputeEvents = true,
     super.showExportPdfDialog,
     super.delegate,
+    super.getContext,
   }) : super(
           dataProvider: MatexVatCalculatorDataProvider(),
           initialState: initialState ?? _kDefaultVatBlocState,
