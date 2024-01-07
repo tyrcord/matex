@@ -467,10 +467,10 @@ class MatexForexStopLossTakeProfitCalculatorBloc
           ? parseStringToDouble(document.stopLossPips)
           : 0,
       stopLossPrice: stopLossFieldType == priceType
-          ? parseStringToDouble(document.stopLossPips)
+          ? parseStringToDouble(document.stopLossPrice)
           : 0,
       stopLossAmount: stopLossFieldType == amountType
-          ? parseStringToDouble(document.stopLossPips)
+          ? parseStringToDouble(document.stopLossAmount)
           : 0,
       takeProfitAmount: takeProfitFieldType == amountType
           ? parseStringToDouble(document.takeProfitAmount)

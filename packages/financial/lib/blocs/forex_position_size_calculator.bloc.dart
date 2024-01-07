@@ -366,7 +366,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
           : 0,
       stopLossPrice:
           stopLossFieldType == FastFinancialAmountSwitchFieldType.price
-              ? parseStringToDouble(document.stopLossPips)
+              ? parseStringToDouble(document.stopLossPrice)
               : 0,
     ));
   }
