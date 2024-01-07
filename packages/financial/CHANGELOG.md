@@ -1,3 +1,7 @@
+## 0.0.42+1
+
+ - **FIX**: typo.
+
 ## 0.0.42
 
  - **FEAT**: minor improvements.
