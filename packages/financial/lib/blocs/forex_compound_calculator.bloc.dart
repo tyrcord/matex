@@ -8,7 +8,7 @@ import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
-import 'package:tenhance/decimal.dart';
+import 'package:tenhance/tenhance.dart';
 
 final _kDefaultDividendYieldBlocState = MatexForexCompoundCalculatorBlocState(
   results: const MatexForexCompoundCalculatorBlocResults(),
@@ -21,6 +21,9 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     MatexForexCompoundCalculatorBlocState,
     MatexForexCompoundCalculatorBlocDocument,
     MatexForexCompoundCalculatorBlocResults> {
+  static const defaultFrequency =
+      MatexForexCompoundCalculatorBlocFields.defaultFrequency;
+
   MatexForexCompoundCalculatorBloc({
     MatexForexCompoundCalculatorBlocState? initialState,
     MatexForexCompoundCalculatorBlocDataProvider? dataProvider,
@@ -148,13 +151,18 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
       } else if (key ==
           MatexForexCompoundCalculatorBlocKey.withdrawalFrequency) {
         return document.copyWithDefaults(resetWithdrawalFrequency: true);
-      } else if (key == MatexForexCompoundCalculatorBlocKey.rateFrequency) {
-        return document.copyWithDefaults(resetRateFrequency: true);
       } else if (key == MatexForexCompoundCalculatorBlocKey.withdrawalAmount) {
         return document.copyWithDefaults(resetWithdrawalAmount: true);
       } else if (key ==
           MatexForexCompoundCalculatorBlocKey.additionalContribution) {
         return document.copyWithDefaults(resetAdditionalContribution: true);
+      } else if (key == MatexForexCompoundCalculatorBlocKey.rateFrequency) {
+        return document.copyWithDefaults(
+          resetRateFrequency: true,
+          resetContributionFrequency: true,
+          resetWithdrawalFrequency: true,
+          resetCompoundFrequency: true,
+        );
       }
     } else if (value is String) {
       if (key == MatexFiancialCalculatorBlocKey.accountCurrency) {
@@ -165,32 +173,53 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWith(rate: value);
       } else if (key == MatexForexCompoundCalculatorBlocKey.duration) {
         return document.copyWith(duration: value);
-      } else if (key ==
-          MatexForexCompoundCalculatorBlocKey.contributionFrequency) {
-        return document.copyWith(contributionFrequency: value);
-      } else if (key == MatexForexCompoundCalculatorBlocKey.compoundFrequency) {
-        return document.copyWith(compoundFrequency: value);
-      } else if (key ==
-          MatexForexCompoundCalculatorBlocKey.withdrawalFrequency) {
-        return document.copyWith(withdrawalFrequency: value);
-      } else if (key == MatexForexCompoundCalculatorBlocKey.rateFrequency) {
-        return document.copyWith(rateFrequency: value);
       } else if (key == MatexForexCompoundCalculatorBlocKey.withdrawalAmount) {
         return document.copyWith(withdrawalAmount: value);
       } else if (key ==
           MatexForexCompoundCalculatorBlocKey.additionalContribution) {
         return document.copyWith(additionalContribution: value);
+      } else if (key == MatexForexCompoundCalculatorBlocKey.rateFrequency) {
+        return document.copyWith(
+          rateFrequency: value,
+          contributionFrequency: value,
+          withdrawalFrequency: value,
+          compoundFrequency: value,
+        );
+      } else {
+        final frequency = MatexFinancialFrequencyX.fromName(value);
+
+        if (frequency != null &&
+            frequency >= currentState.fields.rateFrequency) {
+          if (key ==
+              MatexForexCompoundCalculatorBlocKey.contributionFrequency) {
+            return document.copyWith(contributionFrequency: value);
+          } else if (key ==
+              MatexForexCompoundCalculatorBlocKey.compoundFrequency) {
+            return document.copyWith(compoundFrequency: value);
+          } else if (key ==
+              MatexForexCompoundCalculatorBlocKey.withdrawalFrequency) {
+            return document.copyWith(withdrawalFrequency: value);
+          }
+        }
       }
     } else if (value is MatexFinancialFrequency) {
-      if (key == MatexForexCompoundCalculatorBlocKey.contributionFrequency) {
-        return document.copyWith(contributionFrequency: value.name);
-      } else if (key == MatexForexCompoundCalculatorBlocKey.compoundFrequency) {
-        return document.copyWith(compoundFrequency: value.name);
-      } else if (key ==
-          MatexForexCompoundCalculatorBlocKey.withdrawalFrequency) {
-        return document.copyWith(withdrawalFrequency: value.name);
-      } else if (key == MatexForexCompoundCalculatorBlocKey.rateFrequency) {
-        return document.copyWith(rateFrequency: value.name);
+      if (key == MatexForexCompoundCalculatorBlocKey.rateFrequency) {
+        return document.copyWith(
+          contributionFrequency: value.name,
+          withdrawalFrequency: value.name,
+          compoundFrequency: value.name,
+          rateFrequency: value.name,
+        );
+      } else if (value >= currentState.fields.rateFrequency) {
+        if (key == MatexForexCompoundCalculatorBlocKey.contributionFrequency) {
+          return document.copyWith(contributionFrequency: value.name);
+        } else if (key ==
+            MatexForexCompoundCalculatorBlocKey.compoundFrequency) {
+          return document.copyWith(compoundFrequency: value.name);
+        } else if (key ==
+            MatexForexCompoundCalculatorBlocKey.withdrawalFrequency) {
+          return document.copyWith(withdrawalFrequency: value.name);
+        }
       }
     }
 
@@ -388,16 +417,15 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     String? value,
   ) {
     late MatexForexCompoundCalculatorBlocFields fields;
+    final frequency = MatexFinancialFrequencyX.fromName(value);
 
-    if (value == null) {
+    if (frequency == null) {
       fields = currentState.fields.copyWithDefaults(
         resetContributionFrequency: true,
       );
 
-      calculator.contributionFrequency =
-          MatexForexCompoundCalculatorBlocFields.defaultFrequency;
-    } else {
-      final frequency = MatexFinancialFrequencyX.fromName(value);
+      calculator.contributionFrequency = defaultFrequency;
+    } else if (frequency >= currentState.fields.rateFrequency) {
       fields = currentState.fields.copyWith(contributionFrequency: frequency);
       calculator.contributionFrequency = frequency;
     }
@@ -409,16 +437,15 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     String? value,
   ) {
     late MatexForexCompoundCalculatorBlocFields fields;
+    final frequency = MatexFinancialFrequencyX.fromName(value);
 
-    if (value == null) {
+    if (frequency == null) {
       fields = currentState.fields.copyWithDefaults(
         resetCompoundFrequency: true,
       );
 
-      calculator.compoundFrequency =
-          MatexForexCompoundCalculatorBlocFields.defaultFrequency;
-    } else {
-      final frequency = MatexFinancialFrequencyX.fromName(value);
+      calculator.compoundFrequency = defaultFrequency;
+    } else if (frequency >= currentState.fields.rateFrequency) {
       fields = currentState.fields.copyWith(compoundFrequency: frequency);
       calculator.compoundFrequency = frequency;
     }
@@ -430,16 +457,14 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     String? value,
   ) {
     late MatexForexCompoundCalculatorBlocFields fields;
+    final frequency = MatexFinancialFrequencyX.fromName(value);
 
-    if (value == null) {
+    if (frequency == null) {
       fields = currentState.fields.copyWithDefaults(
         resetWithdrawalFrequency: true,
       );
-
-      calculator.withdrawalFrequency =
-          MatexForexCompoundCalculatorBlocFields.defaultFrequency;
-    } else {
-      final frequency = MatexFinancialFrequencyX.fromName(value);
+      calculator.withdrawalFrequency = defaultFrequency;
+    } else if (frequency >= currentState.fields.rateFrequency) {
       fields = currentState.fields.copyWith(withdrawalFrequency: frequency);
       calculator.withdrawalFrequency = frequency;
     }
@@ -451,18 +476,25 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     String? value,
   ) {
     late MatexForexCompoundCalculatorBlocFields fields;
+    final frequency = MatexFinancialFrequencyX.fromName(value);
 
-    if (value == null) {
+    if (frequency == null) {
       fields = currentState.fields.copyWithDefaults(
         resetRateFrequency: true,
       );
 
-      calculator.rateFrequency =
-          MatexForexCompoundCalculatorBlocFields.defaultFrequency;
+      calculator
+        ..rateFrequency = defaultFrequency
+        ..contributionFrequency = defaultFrequency
+        ..compoundFrequency = defaultFrequency
+        ..withdrawalFrequency = defaultFrequency;
     } else {
-      final frequency = MatexFinancialFrequencyX.fromName(value);
       fields = currentState.fields.copyWith(rateFrequency: frequency);
-      calculator.rateFrequency = frequency;
+      calculator
+        ..rateFrequency = frequency
+        ..contributionFrequency = frequency
+        ..compoundFrequency = frequency
+        ..withdrawalFrequency = frequency;
     }
 
     return currentState.copyWith(fields: fields);
