@@ -80,6 +80,52 @@ class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'startBalance': startBalance,
+      'rate': rate,
+      'duration': duration,
+      'contributionFrequency': contributionFrequency.name,
+      'compoundFrequency': compoundFrequency.name,
+      'withdrawalFrequency': withdrawalFrequency.name,
+      'rateFrequency': rateFrequency.name,
+      'withdrawalAmount': withdrawalAmount,
+      'additionalContribution': additionalContribution,
+    };
+  }
+
+  factory MatexCompoundInterestCalculatorState.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final contributionFrequency = MatexFinancialFrequencyX.fromName(
+      json['contributionFrequency'] as String?,
+    );
+
+    final rateFrequency = MatexFinancialFrequencyX.fromName(
+      json['rateFrequency'] as String?,
+    );
+
+    final withdrawalFrequency = MatexFinancialFrequencyX.fromName(
+      json['withdrawalFrequency'] as String?,
+    );
+
+    final compoundFrequency = MatexFinancialFrequencyX.fromName(
+      json['compoundFrequency'] as String?,
+    );
+
+    return MatexCompoundInterestCalculatorState(
+      additionalContribution: json['additionalContribution'] as double?,
+      contributionFrequency: contributionFrequency ?? defaultFrequency,
+      withdrawalFrequency: withdrawalFrequency ?? defaultFrequency,
+      compoundFrequency: compoundFrequency ?? defaultFrequency,
+      withdrawalAmount: json['withdrawalAmount'] as double?,
+      rateFrequency: rateFrequency ?? defaultFrequency,
+      startBalance: json['startBalance'] as double?,
+      duration: json['duration'] as int?,
+      rate: json['rate'] as double?,
+    );
+  }
+
   @override
   List<Object?> get props => [
         startBalance,

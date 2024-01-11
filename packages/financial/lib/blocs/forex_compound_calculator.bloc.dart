@@ -24,6 +24,22 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
   static const defaultFrequency =
       MatexForexCompoundCalculatorBlocFields.defaultFrequency;
 
+  static const allowedRateFinancialFrequency = [
+    MatexFinancialFrequency.daily,
+    MatexFinancialFrequency.weekly,
+    MatexFinancialFrequency.monthly,
+    MatexFinancialFrequency.quarterly,
+    MatexFinancialFrequency.semiAnnually,
+    MatexFinancialFrequency.annually,
+  ];
+
+  static const allowedCashFlowFinancialFrequency = [
+    MatexFinancialFrequency.monthly,
+    MatexFinancialFrequency.quarterly,
+    MatexFinancialFrequency.semiAnnually,
+    MatexFinancialFrequency.annually,
+  ];
+
   MatexForexCompoundCalculatorBloc({
     MatexForexCompoundCalculatorBlocState? initialState,
     MatexForexCompoundCalculatorBlocDataProvider? dataProvider,
@@ -179,12 +195,18 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
           MatexForexCompoundCalculatorBlocKey.additionalContribution) {
         return document.copyWith(additionalContribution: value);
       } else if (key == MatexForexCompoundCalculatorBlocKey.rateFrequency) {
-        return document.copyWith(
-          rateFrequency: value,
-          contributionFrequency: value,
-          withdrawalFrequency: value,
-          compoundFrequency: value,
-        );
+        final frequency = MatexFinancialFrequencyX.fromName(value);
+
+        if (frequency != null) {
+          final cashFlowFrequency = _getCashFlowFrequency(frequency);
+
+          return document.copyWith(
+            rateFrequency: value,
+            compoundFrequency: value,
+            contributionFrequency: cashFlowFrequency.name,
+            withdrawalFrequency: cashFlowFrequency.name,
+          );
+        }
       } else {
         final frequency = MatexFinancialFrequencyX.fromName(value);
 
@@ -204,9 +226,11 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
       }
     } else if (value is MatexFinancialFrequency) {
       if (key == MatexForexCompoundCalculatorBlocKey.rateFrequency) {
+        final cashFlowFrequency = _getCashFlowFrequency(value);
+
         return document.copyWith(
-          contributionFrequency: value.name,
-          withdrawalFrequency: value.name,
+          contributionFrequency: cashFlowFrequency.name,
+          withdrawalFrequency: cashFlowFrequency.name,
           compoundFrequency: value.name,
           rateFrequency: value.name,
         );
@@ -489,12 +513,20 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
         ..compoundFrequency = defaultFrequency
         ..withdrawalFrequency = defaultFrequency;
     } else {
-      fields = currentState.fields.copyWith(rateFrequency: frequency);
+      final cashFlowFrequency = _getCashFlowFrequency(frequency);
+
+      fields = currentState.fields.copyWith(
+        rateFrequency: frequency,
+        compoundFrequency: frequency,
+        contributionFrequency: cashFlowFrequency,
+        withdrawalFrequency: cashFlowFrequency,
+      );
+
       calculator
         ..rateFrequency = frequency
-        ..contributionFrequency = frequency
         ..compoundFrequency = frequency
-        ..withdrawalFrequency = frequency;
+        ..contributionFrequency = cashFlowFrequency
+        ..withdrawalFrequency = cashFlowFrequency;
     }
 
     return currentState.copyWith(fields: fields);
@@ -536,6 +568,14 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     }
 
     return currentState.copyWith(fields: fields);
+  }
+
+  MatexFinancialFrequency _getCashFlowFrequency(
+    MatexFinancialFrequency frequency,
+  ) {
+    return allowedCashFlowFinancialFrequency.contains(frequency)
+        ? frequency
+        : allowedCashFlowFinancialFrequency[0];
   }
 
   @override
