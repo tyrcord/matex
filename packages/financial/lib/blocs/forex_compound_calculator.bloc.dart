@@ -45,7 +45,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
 
   @override
   Future<MatexForexCompoundCalculatorBlocResults> compute() async {
-    final results = calculator.value();
+    final results = await calculator.valueAsync();
     final fields = currentState.fields;
     final accountCurrency = fields.accountCurrency;
 

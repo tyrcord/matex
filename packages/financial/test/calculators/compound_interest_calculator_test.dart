@@ -3,7 +3,7 @@ import 'package:matex_financial/financial.dart';
 
 void main() {
   group('CompoundInterestCalculator', () {
-    test('Calculates daily compounded amount correctly', () {
+    test('Calculates daily compounded amount correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           startBalance: 10000,
@@ -14,12 +14,12 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(14402.51, 0.01));
     });
 
-    test('Calculates weekly compounded amount correctly', () {
+    test('Calculates weekly compounded amount correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           startBalance: 10000,
@@ -30,12 +30,12 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(12960.90, 0.01));
     });
 
-    test('Calculates monthly compounded amount correctly', () {
+    test('Calculates monthly compounded amount correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           startBalance: 10000,
@@ -46,7 +46,7 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(32251.00, 0.01));
       expect(results.totalEarnings, closeTo(22251.00, 0.01));
@@ -55,7 +55,7 @@ void main() {
 
     test(
         'Calculates monthly compounded amount with '
-        'monthly contributions correctly', () {
+        'monthly contributions correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.monthly,
@@ -68,18 +68,19 @@ void main() {
         ),
       );
 
-      final results = calculator.breakdown();
+      final results = await calculator.valueAsync();
+      final last = results.breakdown!.last;
 
-      expect(results.last.endBalance, closeTo(37496.49, 0.01));
-      expect(results.last.totalEarnings, closeTo(18496.49, 0.01));
-      expect(results.last.earnings, closeTo(729.34, 0.01));
-      expect(results.last.deposit, closeTo(300, 0.01));
-      expect(results.last.totalDeposits, closeTo(18000, 0.01));
+      expect(last.endBalance, closeTo(37496.49, 0.01));
+      expect(last.totalEarnings, closeTo(18496.49, 0.01));
+      expect(last.earnings, closeTo(729.34, 0.01));
+      expect(last.deposit, closeTo(300, 0.01));
+      expect(last.totalDeposits, closeTo(18000, 0.01));
     });
 
     test(
         'Calculates monthly compounded amount with '
-        'monthly withdrawal correctly', () {
+        'monthly withdrawal correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           withdrawalFrequency: MatexFinancialFrequency.monthly,
@@ -92,7 +93,7 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
       final last = results.breakdown!.last;
 
       expect(last.endBalance, closeTo(21405.15, 0.01));
@@ -106,7 +107,7 @@ void main() {
 
     test(
         'Calculates monthly compounded amount with '
-        'quarterly contributions correctly', () {
+        'quarterly contributions correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.quarterly,
@@ -119,14 +120,14 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(14461.09, 0.01));
     });
 
     test(
         'Calculates monthly compounded amount with '
-        'semi-annually contributions correctly', () {
+        'semi-annually contributions correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.semiAnnually,
@@ -139,17 +140,14 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
-      expect(
-        results.endBalance,
-        closeTo(8705.06, 0.01),
-      );
+      expect(results.endBalance, closeTo(8705.06, 0.01));
     });
 
     test(
         'Calculates monthly compounded amount with '
-        'annually contributions correctly', () {
+        'annually contributions correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.annually,
@@ -162,12 +160,12 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(5832.12, 0.01));
     });
 
-    test('Calculates quarterly compounded amount correctly', () {
+    test('Calculates quarterly compounded amount correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           startBalance: 10000,
@@ -178,14 +176,14 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(10201.51, 0.01));
     });
 
     test(
         'Calculates quarterly compounded amount with '
-        'quarterly contributions correctly', () {
+        'quarterly contributions correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.quarterly,
@@ -198,14 +196,14 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(8775.16, 0.01));
     });
 
     test(
         'Calculates quarterly compounded amount with '
-        'semi-annually contributions correctly', () {
+        'semi-annually contributions correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.semiAnnually,
@@ -218,14 +216,14 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(5094.47, 0.01));
     });
 
     test(
         'Calculates quarterly compounded amount with '
-        'annually contributions correctly', () {
+        'annually contributions correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.annually,
@@ -238,14 +236,14 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(3254.48, 0.01));
     });
 
     test(
         'Calculates quartely compounded amount with '
-        'monlty interest correctly', () {
+        'monlty interest correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.annually,
@@ -257,12 +255,12 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(1593.85, 0.01));
     });
 
-    test('Calculates semi-annually compounded amount correctly', () {
+    test('Calculates semi-annually compounded amount correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           startBalance: 10000,
@@ -273,14 +271,14 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(11261.62, 0.01));
     });
 
     test(
         'Calculates semi-annually compounded amount with '
-        'semi-annually contributions correctly', () {
+        'semi-annually contributions correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.semiAnnually,
@@ -293,14 +291,14 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(4503.91, 0.01));
     });
 
     test(
         'Calculates semi-annually compounded amount with '
-        'annually contributions correctly', () {
+        'annually contributions correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.annually,
@@ -313,12 +311,12 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(2845.191, 0.01));
     });
 
-    test('Calculates annually compounded amount correctly', () {
+    test('Calculates annually compounded amount correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           startBalance: 10000,
@@ -329,14 +327,14 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(11025, 0.01));
     });
 
     test(
         'Calculates annually compounded amount with '
-        'annually contributions correctly', () {
+        'annually contributions correctly', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           contributionFrequency: MatexFinancialFrequency.annually,
@@ -349,12 +347,12 @@ void main() {
         ),
       );
 
-      final results = calculator.value();
+      final results = await calculator.valueAsync();
 
       expect(results.endBalance, closeTo(2665.29, 0.01));
     });
 
-    test('Provides correct daily breakdown', () {
+    test('Provides correct daily breakdown', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           compoundFrequency: MatexFinancialFrequency.daily,
@@ -365,13 +363,15 @@ void main() {
         ),
       );
 
-      final breakdown = calculator.breakdown();
+      final results = await calculator.valueAsync();
+      final breakdown = results.breakdown!;
+
       expect(breakdown.length, 365);
       expect(breakdown.first.endBalance, closeTo(10010.00, 0.01));
       expect(breakdown.last.endBalance, closeTo(14402.51, 0.01));
     });
 
-    test('Provides correct weekly breakdown', () {
+    test('Provides correct weekly breakdown', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           compoundFrequency: MatexFinancialFrequency.weekly,
@@ -382,7 +382,9 @@ void main() {
         ),
       );
 
-      final breakdown = calculator.breakdown();
+      final results = await calculator.valueAsync();
+      final breakdown = results.breakdown!;
+
       expect(breakdown.length, 52);
       expect(breakdown.first.endBalance, closeTo(10050.00, 0.01));
       expect(breakdown[8].endBalance, closeTo(10459.11, 0.01));
@@ -392,7 +394,7 @@ void main() {
       expect(breakdown.last.endBalance, closeTo(12960.90, 0.01));
     });
 
-    test('Provides correct monthly breakdown', () {
+    test('Provides correct monthly breakdown', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           compoundFrequency: MatexFinancialFrequency.monthly,
@@ -403,13 +405,15 @@ void main() {
         ),
       );
 
-      final breakdown = calculator.breakdown();
+      final results = await calculator.valueAsync();
+      final breakdown = results.breakdown!;
+
       expect(breakdown.length, 12);
       expect(breakdown.first.endBalance, closeTo(10050.00, 0.01));
       expect(breakdown.last.endBalance, closeTo(10616.78, 0.01));
     });
 
-    test('Provides correct quarterly breakdown', () {
+    test('Provides correct quarterly breakdown', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           compoundFrequency: MatexFinancialFrequency.quarterly,
@@ -420,7 +424,9 @@ void main() {
         ),
       );
 
-      final breakdown = calculator.breakdown();
+      final results = await calculator.valueAsync();
+      final breakdown = results.breakdown!;
+
       expect(breakdown.length, 8);
       expect(breakdown.first.endBalance, closeTo(10100.00, 0.01));
       expect(breakdown[1].endBalance, closeTo(10201.00, 0.01));
@@ -432,7 +438,7 @@ void main() {
       expect(breakdown.last.endBalance, closeTo(10828.57, 0.01));
     });
 
-    test('Provides correct semi-annually breakdown', () {
+    test('Provides correct semi-annually breakdown', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           compoundFrequency: MatexFinancialFrequency.semiAnnually,
@@ -443,7 +449,9 @@ void main() {
         ),
       );
 
-      final breakdown = calculator.breakdown();
+      final results = await calculator.valueAsync();
+      final breakdown = results.breakdown!;
+
       expect(breakdown.length, 6);
       expect(breakdown.first.endBalance, closeTo(10200.00, 0.01));
       expect(breakdown[1].endBalance, closeTo(10404.00, 0.01));
@@ -453,7 +461,7 @@ void main() {
       expect(breakdown.last.endBalance, closeTo(11261.62, 0.01));
     });
 
-    test('Provides correct annually breakdown', () {
+    test('Provides correct annually breakdown', () async {
       final calculator = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
           compoundFrequency: MatexFinancialFrequency.annually,
@@ -464,7 +472,9 @@ void main() {
         ),
       );
 
-      final breakdown = calculator.breakdown();
+      final results = await calculator.valueAsync();
+      final breakdown = results.breakdown!;
+
       expect(breakdown.length, 5);
       expect(breakdown.first.endBalance, closeTo(10500.00, 0.01));
       expect(breakdown[1].endBalance, closeTo(11025, 0.01));
