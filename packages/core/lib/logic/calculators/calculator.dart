@@ -52,7 +52,10 @@ abstract class MatexCalculator<S extends MatexCalculatorState, R> {
   S initializeState() => throw UnimplementedError();
 
   /// Returns the current value of the calculator.
-  R value();
+  R value() => throw UnimplementedError();
+
+  /// Returns the current value of the calculator asynchronously.
+  Future<R> valueAsync() async => value();
 
   /// Sets the state of the calculator to [newState].
   void setState(S newState) {
