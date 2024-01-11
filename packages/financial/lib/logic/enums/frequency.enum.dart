@@ -23,7 +23,7 @@ extension MatexFinancialFrequencyX on MatexFinancialFrequency {
         return MatexFinancialFrequency.monthly;
       case 'quarterly':
         return MatexFinancialFrequency.quarterly;
-      case 'semi-annually':
+      case 'semiannually':
         return MatexFinancialFrequency.semiAnnually;
       case 'annually':
         return MatexFinancialFrequency.annually;

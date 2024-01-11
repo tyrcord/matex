@@ -25,8 +25,9 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
       MatexForexCompoundCalculatorBlocFields.defaultFrequency;
 
   static const allowedRateFinancialFrequency = [
-    MatexFinancialFrequency.daily,
-    MatexFinancialFrequency.weekly,
+    // TODO: implement better ui for daily and weekly
+    // MatexFinancialFrequency.daily,
+    // MatexFinancialFrequency.weekly,
     MatexFinancialFrequency.monthly,
     MatexFinancialFrequency.quarterly,
     MatexFinancialFrequency.semiAnnually,

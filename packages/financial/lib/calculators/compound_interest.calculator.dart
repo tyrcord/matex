@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:matex_financial/financial.dart';
 import 'package:matex_core/core.dart';
 import 'package:tenhance/tenhance.dart';
@@ -96,10 +99,10 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
       initializeState();
 
   @override
-  MatexCompoundInterestCalculatorResults value() {
+  Future<MatexCompoundInterestCalculatorResults> valueAsync() async {
     if (!isValid) return defaultResults;
 
-    final results = breakdown();
+    final results = await compute(_computeBreakdown, state.toJson());
 
     if (results.isEmpty) return defaultResults;
 
@@ -114,124 +117,6 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
     );
   }
 
-  // Updated breakdown methods
-  List<MatexCompoundInterestBreakdownEntry> breakdown() {
-    final dAdditionalContribution = additionalContribution ?? 0.0;
-    final dWithdrawalAmount = withdrawalAmount ?? 0.0;
-    final dPrincipal = startBalance ?? 0.0;
-    final dRate = rate ?? 0.0;
-
-    final contributionPeriods = _getPeriods(contributionFrequency);
-    final withdrawalPeriods = _getPeriods(withdrawalFrequency);
-    final compoundPeriods = _getPeriods(compoundFrequency);
-    final periods = _getPeriods(rateFrequency);
-
-    final List<MatexCompoundInterestBreakdownEntry> breakdown = [];
-    var balance = dPrincipal;
-    var totalDeposits = 0.0;
-    var totalWithdrawals = 0.0;
-    var totalEarnings = 0.0;
-    var pendingEarnings = 0.0;
-
-    for (int period = 1; period <= periods; period++) {
-      final startBalance = balance;
-      final earnings = startBalance * dRate;
-      var deposit = 0.0;
-      var withdrawal = 0.0;
-
-      // Handle deposits
-      if (period % (periods / contributionPeriods) == 0) {
-        deposit = dAdditionalContribution;
-      }
-
-      // Handle withdrawals
-      if (period % (periods / withdrawalPeriods) == 0) {
-        // Check if the withdrawal amount is greater than the current balance
-        if (dWithdrawalAmount <= balance + earnings + deposit) {
-          withdrawal = dWithdrawalAmount;
-        } else {
-          // If withdrawal amount is too high, only withdraw up to
-          // the available balance
-          withdrawal = balance + earnings + deposit;
-        }
-      }
-
-      // Apply compound interest
-      if (period % (periods / compoundPeriods) == 0) {
-        balance += pendingEarnings + earnings;
-        pendingEarnings = 0.0;
-      } else {
-        pendingEarnings += earnings;
-      }
-
-      balance += deposit - withdrawal;
-      // Prevent balance from going negative
-      balance = balance < 0.0 ? 0.0 : balance;
-
-      totalDeposits += deposit;
-      totalWithdrawals += withdrawal;
-      totalEarnings += earnings;
-
-      final entry = MatexCompoundInterestBreakdownEntry(
-        totalEarnings: totalEarnings,
-        earnings: earnings,
-        startBalance: startBalance,
-        endBalance: balance,
-        totalDeposits: totalDeposits,
-        deposit: deposit,
-        totalWithdrawals: totalWithdrawals,
-        withdrawal: withdrawal,
-        period: period,
-      );
-
-      breakdown.add(entry);
-    }
-
-    return breakdown;
-  }
-
-  int _getPeriodsPerYear(MatexFinancialFrequency frequency) {
-    switch (frequency) {
-      case MatexFinancialFrequency.daily:
-        return 365;
-      case MatexFinancialFrequency.weekly:
-        return 52;
-      case MatexFinancialFrequency.monthly:
-        return 12;
-      case MatexFinancialFrequency.quarterly:
-        return 4;
-      case MatexFinancialFrequency.semiAnnually:
-        return 2;
-      case MatexFinancialFrequency.annually:
-        return 1;
-      default:
-        return 0;
-    }
-  }
-
-  int _getPeriods(MatexFinancialFrequency frequency) {
-    final periodsPerYear = _getPeriodsPerYear(frequency);
-    final years = duration ?? 0;
-    int periods;
-
-    switch (frequency) {
-      case MatexFinancialFrequency.daily:
-        periods = periodsPerYear * years;
-      case MatexFinancialFrequency.weekly:
-        periods = periodsPerYear * years;
-      case MatexFinancialFrequency.monthly:
-        periods = periodsPerYear * years;
-      case MatexFinancialFrequency.quarterly:
-        periods = periodsPerYear * years;
-      case MatexFinancialFrequency.semiAnnually:
-        periods = periodsPerYear * years;
-      case MatexFinancialFrequency.annually:
-        periods = periodsPerYear * years;
-    }
-
-    return periods;
-  }
-
   double _computeRateOfReturn(
     List<MatexCompoundInterestBreakdownEntry> breakdown,
   ) {
@@ -243,4 +128,128 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
 
     return rateOfReturn;
   }
+}
+
+// Updated breakdown methods
+List<MatexCompoundInterestBreakdownEntry> _computeBreakdown(
+  Map<String, dynamic> json,
+) {
+  final state = MatexCompoundInterestCalculatorState.fromJson(json);
+
+  final dAdditionalContribution = state.additionalContribution ?? 0.0;
+  final dWithdrawalAmount = state.withdrawalAmount ?? 0.0;
+  final dPrincipal = state.startBalance ?? 0.0;
+  final duration = state.duration ?? 0;
+  final dRate = state.rate ?? 0.0;
+
+  final contributionPeriods =
+      _getPeriods(state.contributionFrequency, duration);
+  final withdrawalPeriods = _getPeriods(state.withdrawalFrequency, duration);
+  final compoundPeriods = _getPeriods(state.compoundFrequency, duration);
+  final periods = _getPeriods(state.rateFrequency, duration);
+
+  final List<MatexCompoundInterestBreakdownEntry> breakdown = [];
+  var balance = dPrincipal;
+  var totalDeposits = 0.0;
+  var totalWithdrawals = 0.0;
+  var totalEarnings = 0.0;
+  var pendingEarnings = 0.0;
+
+  for (int period = 1; period <= periods; period++) {
+    final startBalance = balance;
+    final earnings = startBalance * dRate;
+    var deposit = 0.0;
+    var withdrawal = 0.0;
+
+    // Handle deposits
+    if (period % (periods / contributionPeriods) == 0) {
+      deposit = dAdditionalContribution;
+    }
+
+    // Handle withdrawals
+    if (period % (periods / withdrawalPeriods) == 0) {
+      // Check if the withdrawal amount is greater than the current balance
+      if (dWithdrawalAmount <= balance + earnings + deposit) {
+        withdrawal = dWithdrawalAmount;
+      } else {
+        // If withdrawal amount is too high, only withdraw up to
+        // the available balance
+        withdrawal = balance + earnings + deposit;
+      }
+    }
+
+    // Apply compound interest
+    if (period % (periods / compoundPeriods) == 0) {
+      balance += pendingEarnings + earnings;
+      pendingEarnings = 0.0;
+    } else {
+      pendingEarnings += earnings;
+    }
+
+    balance += deposit - withdrawal;
+    // Prevent balance from going negative
+    balance = balance < 0.0 ? 0.0 : balance;
+
+    totalDeposits += deposit;
+    totalWithdrawals += withdrawal;
+    totalEarnings += earnings;
+
+    final entry = MatexCompoundInterestBreakdownEntry(
+      totalEarnings: totalEarnings,
+      earnings: earnings,
+      startBalance: startBalance,
+      endBalance: balance,
+      totalDeposits: totalDeposits,
+      deposit: deposit,
+      totalWithdrawals: totalWithdrawals,
+      withdrawal: withdrawal,
+      period: period,
+    );
+
+    breakdown.add(entry);
+  }
+
+  return breakdown;
+}
+
+int _getPeriodsPerYear(MatexFinancialFrequency frequency) {
+  switch (frequency) {
+    case MatexFinancialFrequency.daily:
+      return 365;
+    case MatexFinancialFrequency.weekly:
+      return 52;
+    case MatexFinancialFrequency.monthly:
+      return 12;
+    case MatexFinancialFrequency.quarterly:
+      return 4;
+    case MatexFinancialFrequency.semiAnnually:
+      return 2;
+    case MatexFinancialFrequency.annually:
+      return 1;
+    default:
+      return 0;
+  }
+}
+
+int _getPeriods(MatexFinancialFrequency frequency, [int? duration]) {
+  final periodsPerYear = _getPeriodsPerYear(frequency);
+  final years = duration ?? 0;
+  int periods;
+
+  switch (frequency) {
+    case MatexFinancialFrequency.daily:
+      periods = periodsPerYear * years;
+    case MatexFinancialFrequency.weekly:
+      periods = periodsPerYear * years;
+    case MatexFinancialFrequency.monthly:
+      periods = periodsPerYear * years;
+    case MatexFinancialFrequency.quarterly:
+      periods = periodsPerYear * years;
+    case MatexFinancialFrequency.semiAnnually:
+      periods = periodsPerYear * years;
+    case MatexFinancialFrequency.annually:
+      periods = periodsPerYear * years;
+  }
+
+  return periods;
 }
