@@ -1,5 +1,4 @@
 import 'package:matex_financial/financial.dart';
-import 'package:t_helpers/helpers.dart';
 import 'package:matex_core/core.dart';
 import 'package:tenhance/tenhance.dart';
 
@@ -117,10 +116,10 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
 
   // Updated breakdown methods
   List<MatexCompoundInterestBreakdownEntry> breakdown() {
-    final dAdditionalContribution = toDecimalOrDefault(additionalContribution);
-    final dWithdrawalAmount = toDecimalOrDefault(withdrawalAmount);
-    final dPrincipal = toDecimalOrDefault(startBalance);
-    final dRate = toDecimalOrDefault(rate);
+    final dAdditionalContribution = additionalContribution ?? 0.0;
+    final dWithdrawalAmount = withdrawalAmount ?? 0.0;
+    final dPrincipal = startBalance ?? 0.0;
+    final dRate = rate ?? 0.0;
 
     final contributionPeriods = _getPeriods(contributionFrequency);
     final withdrawalPeriods = _getPeriods(withdrawalFrequency);
@@ -129,16 +128,16 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
 
     final List<MatexCompoundInterestBreakdownEntry> breakdown = [];
     var balance = dPrincipal;
-    var totalDeposits = dZero;
-    var totalWithdrawals = dZero;
-    var totalEarnings = dZero;
-    var pendingEarnings = dZero;
+    var totalDeposits = 0.0;
+    var totalWithdrawals = 0.0;
+    var totalEarnings = 0.0;
+    var pendingEarnings = 0.0;
 
     for (int period = 1; period <= periods; period++) {
       final startBalance = balance;
       final earnings = startBalance * dRate;
-      var deposit = dZero;
-      var withdrawal = dZero;
+      var deposit = 0.0;
+      var withdrawal = 0.0;
 
       // Handle deposits
       if (period % (periods / contributionPeriods) == 0) {
@@ -160,28 +159,28 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
       // Apply compound interest
       if (period % (periods / compoundPeriods) == 0) {
         balance += pendingEarnings + earnings;
-        pendingEarnings = dZero;
+        pendingEarnings = 0.0;
       } else {
         pendingEarnings += earnings;
       }
 
       balance += deposit - withdrawal;
       // Prevent balance from going negative
-      balance = balance < dZero ? dZero : balance;
+      balance = balance < 0.0 ? 0.0 : balance;
 
       totalDeposits += deposit;
       totalWithdrawals += withdrawal;
       totalEarnings += earnings;
 
       final entry = MatexCompoundInterestBreakdownEntry(
-        totalEarnings: totalEarnings.toSafeDouble(),
-        earnings: earnings.toSafeDouble(),
-        startBalance: startBalance.toSafeDouble(),
-        endBalance: balance.toSafeDouble(),
-        totalDeposits: totalDeposits.toSafeDouble(),
-        deposit: deposit.toSafeDouble(),
-        totalWithdrawals: totalWithdrawals.toSafeDouble(),
-        withdrawal: withdrawal.toSafeDouble(),
+        totalEarnings: totalEarnings,
+        earnings: earnings,
+        startBalance: startBalance,
+        endBalance: balance,
+        totalDeposits: totalDeposits,
+        deposit: deposit,
+        totalWithdrawals: totalWithdrawals,
+        withdrawal: withdrawal,
         period: period,
       );
 
