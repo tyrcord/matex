@@ -1,3 +1,7 @@
+## 0.0.32
+
+ - **FEAT**: allow to the value of a calculator asynchronously.
+
 ## 0.0.31
 
  - **FEAT**: update dependencies.

@@ -1,3 +1,8 @@
+## 0.0.42+2
+
+ - **FIX**: move away from Decimal for performance issue.
+ - **FIX**(compound): frequency logic.
+
 ## 0.0.42+1
 
  - **FIX**: typo.

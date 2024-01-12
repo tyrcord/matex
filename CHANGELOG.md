@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-01-12
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.32`](#matex_core---v0032)
+ - [`matex_financial` - `v0.0.42+2`](#matex_financial---v00422)
+
+---
+
+#### `matex_core` - `v0.0.32`
+
+ - **FEAT**: allow to the value of a calculator asynchronously.
+
+#### `matex_financial` - `v0.0.42+2`
+
+ - **FIX**: move away from Decimal for performance issue.
+ - **FIX**(compound): frequency logic.
+
+
 ## 2024-01-07
 
 ### Changes
