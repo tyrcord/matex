@@ -67,7 +67,8 @@ abstract class MatexCalculatorBloc<
   /// This callback can be used to display a dialog for exporting PDF documents.
   ///
   /// If not provided, it will be `null`.
-  final MatexPdfDialogCallback? showExportPdfDialog;
+  final MatexPdfDialogCallback? Function(MatexExportDialogType)?
+      getExportDialog;
 
   /// Creates a new instance of the `MatexCalculatorBloc`.
   ///
@@ -85,7 +86,7 @@ abstract class MatexCalculatorBloc<
     super.debouceComputeEvents = false,
     super.isAutoRefreshEnabled = false,
     super.autoRefreshPeriod,
-    this.showExportPdfDialog,
+    this.getExportDialog,
     super.initialState,
     super.debugLabel,
     FastCalculatorBlocDelegate? delegate,
@@ -202,13 +203,32 @@ abstract class MatexCalculatorBloc<
 
   @override
   Future<void> exportToPdf(BuildContext context) async {
+    await exportGeneric(context, toPdfFile, MatexExportDialogType.pdf);
+  }
+
+  @override
+  Future<void> exportToCsv(BuildContext context) async {
+    await exportGeneric(context, toCSVFile, MatexExportDialogType.csv);
+  }
+
+  @override
+  Future<void> exportToExcel(BuildContext context) async {
+    await exportGeneric(context, toExcelFile, MatexExportDialogType.excel);
+  }
+
+  Future<void> exportGeneric(
+    BuildContext context,
+    Future<XFile> Function(BuildContext) fileCreator,
+    MatexExportDialogType type,
+  ) async {
     if (calculator.isValid) {
+      final exportDialog = getExportDialog?.call(type);
       XFile? file;
 
-      showExportPdfDialog?.call(
+      exportDialog?.call(
         context: context,
         onCreateOperation: () async {
-          file = await toPdfFile(context);
+          file = await fileCreator(context);
 
           return true;
         },
@@ -239,26 +259,79 @@ abstract class MatexCalculatorBloc<
   }
 
   @protected
+  Future<XFile> toCSVFile(BuildContext context) async {
+    final csvBytes = await toCsv(context);
+
+    return createCsvXFile(csvBytes, getReportFilename());
+  }
+
+  @protected
+  Future<XFile> toExcelFile(BuildContext context) async {
+    final excelBytes = await toExcel(context);
+
+    return createExcelXFile(excelBytes, getReportFilename());
+  }
+
+  @protected
   Future<Uint8List> toPdf(BuildContext context) async {
     throw UnimplementedError('toPdf() is not implemented');
   }
 
-  // Function to write bytes to a file and return an XFile
+  @protected
+  Future<Uint8List> toCsv(BuildContext context) async {
+    throw UnimplementedError('toCsv() is not implemented');
+  }
+
+  // to Excel
+  @protected
+  Future<Uint8List> toExcel(BuildContext context) async {
+    throw UnimplementedError('toExcel() is not implemented');
+  }
+
+  // Function to create a PDF XFile
   @protected
   Future<XFile> createPdfXFile(List<int> bytes, String newFileName) async {
+    return createXFile(bytes, newFileName, 'pdf', 'application/pdf');
+  }
+
+  // Function to create a CSV XFile
+  @protected
+  Future<XFile> createCsvXFile(List<int> bytes, String newFileName) async {
+    return createXFile(bytes, newFileName, 'csv', 'text/csv');
+  }
+
+  // Function to create an Excel XFile
+  @protected
+  Future<XFile> createExcelXFile(List<int> bytes, String newFileName) async {
+    return createXFile(
+      bytes,
+      newFileName,
+      'xlsx',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+  }
+
+  @protected
+  Future<XFile> createXFile(
+    List<int> bytes,
+    String newFileName,
+    String extension,
+    String mimeType,
+  ) async {
     // Get temporary directory
     final directory = await getTemporaryDirectory();
 
     // Format the current date
     final now = DateTime.now();
-    final String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    final formattedDate = DateFormat('yyyy-MM-dd').format(now);
 
-    final filePath = '${directory.path}/${newFileName}_$formattedDate.pdf';
-    // Write bytes to the file
+    final filePath =
+        '${directory.path}/${newFileName}_$formattedDate.$extension';
+
     final file = File(filePath);
+
     await file.writeAsBytes(bytes);
 
-    // Create an XFile from the file path
-    return XFile(file.path, mimeType: 'application/pdf');
+    return XFile(file.path, mimeType: mimeType);
   }
 }
