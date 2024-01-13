@@ -110,27 +110,27 @@ class MatexCompoundInterestBreakdownEntry {
   String toCsv() {
     var csv = '';
 
-    if (formattedPeriod == null) {
+    if (formattedPeriod != null) {
       csv += _escape(formattedPeriod!);
     }
 
-    if (formattedStartBalance == null) {
+    if (formattedStartBalance != null) {
       csv += ',${_escape(formattedStartBalance!)}';
     }
 
-    if (formattedDeposit == null) {
+    if (formattedDeposit != null && deposit > 0) {
       csv += ',${_escape(formattedDeposit!)}';
     }
 
-    if (formattedWithdrawal == null) {
+    if (formattedWithdrawal != null && withdrawal > 0) {
       csv += ',${_escape(formattedWithdrawal!)}';
     }
 
-    if (formattedEarnings == null) {
+    if (formattedEarnings != null) {
       csv += ',${_escape(formattedEarnings!)}';
     }
 
-    if (formattedEndBalance == null) {
+    if (formattedEndBalance != null) {
       csv += ',${_escape(formattedEndBalance!)}';
     }
 

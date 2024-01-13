@@ -49,8 +49,8 @@ class MatexForexCompoundCalculatorPdfGenerator {
     MatexForexCompoundCalculatorBlocFields fields,
     MatexForexCompoundCalculatorBlocResults results,
   ) {
-    final hasContributions = results.totalContributions > 0;
-    final hasWithdrawals = results.totalWithdrawals > 0;
+    final hasContributions = fields.additionalContribution?.isNotEmpty ?? false;
+    final hasWithdrawals = fields.withdrawalAmount?.isNotEmpty ?? false;
 
     return [
       FastReportEntry(
@@ -101,8 +101,8 @@ class MatexForexCompoundCalculatorPdfGenerator {
     MatexForexCompoundCalculatorBlocFields fields,
     MatexForexCompoundCalculatorBlocResults results,
   ) {
-    final hasContributions = results.totalContributions > 0;
-    final hasWithdrawals = results.totalWithdrawals > 0;
+    final hasContributions = fields.additionalContribution?.isNotEmpty ?? false;
+    final hasWithdrawals = fields.withdrawalAmount?.isNotEmpty ?? false;
 
     return [
       FastReportEntry(

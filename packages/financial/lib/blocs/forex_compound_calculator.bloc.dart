@@ -1,10 +1,14 @@
 // Package imports:
+import 'dart:convert';
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart' as isolate;
 
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:flutter/material.dart';
+import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -45,7 +49,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     MatexForexCompoundCalculatorBlocState? initialState,
     MatexForexCompoundCalculatorBlocDataProvider? dataProvider,
     super.debouceComputeEvents = true,
-    super.showExportPdfDialog,
+    super.getExportDialog,
     super.delegate,
     super.getContext,
   }) : super(
@@ -590,5 +594,46 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
 
     // ignore: use_build_context_synchronously
     return pdfGenerator.generate(context, fields, results);
+  }
+
+  @override
+  Future<Uint8List> toCsv(BuildContext context) async {
+    final fields = currentState.fields;
+    final hasContributions = fields.additionalContribution?.isNotEmpty ?? false;
+    final hasWithdrawals = fields.withdrawalAmount?.isNotEmpty ?? false;
+
+    final results = await compute();
+    final breakdown = results.breakdown ?? [];
+    final columns = [
+      FinanceLocaleKeys.finance_label_period.tr(),
+      FinanceLocaleKeys.finance_label_starting_balance.tr(),
+      if (hasContributions) FinanceLocaleKeys.finance_label_deposits.tr(),
+      if (hasWithdrawals) FinanceLocaleKeys.finance_label_withdrawals_text.tr(),
+      FinanceLocaleKeys.finance_label_earnings.tr(),
+      FinanceLocaleKeys.finance_label_ending_balance.tr(),
+    ];
+
+    return isolate.compute((Map<String, dynamic> map) {
+      final breakdown =
+          map['breakdown'] as List<MatexCompoundInterestBreakdownEntry>;
+      final columns = map['columns'] as List<String>;
+
+      // Add columns
+      var data = '${columns.join(',')}\n';
+
+      // Add rows
+      for (final element in breakdown) {
+        data += '${element.toCsv()}\n';
+      }
+
+      // Convert the string to a byte buffer using UTF-8 encoding
+      final List<int> bytesBuffer = utf8.encode(data);
+
+      // Create a Uint8List from the byte buffer
+      return Uint8List.fromList(bytesBuffer);
+    }, {
+      'breakdown': breakdown,
+      'columns': columns,
+    });
   }
 }
