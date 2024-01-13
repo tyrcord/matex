@@ -33,7 +33,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     required super.exchangeProvider,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,
-    super.showExportPdfDialog,
+    super.getExportDialog,
     super.autoRefreshPeriod,
     super.delegate,
     super.getContext,

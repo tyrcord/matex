@@ -31,7 +31,7 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
     MatexDividendYieldCalculatorBlocState? initialState,
     MatexDividendYieldCalculatorDataProvider? dataProvider,
     super.debouceComputeEvents = true,
-    super.showExportPdfDialog,
+    super.getExportDialog,
     super.delegate,
     super.getContext,
   }) : super(

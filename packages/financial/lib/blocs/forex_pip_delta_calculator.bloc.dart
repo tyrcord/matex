@@ -28,7 +28,7 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexForexPipDeltaCalculatorBlocState? initialState,
     MatexForexPipDeltaCalculatorDataProvider? dataProvider,
     super.debouceComputeEvents = true,
-    super.showExportPdfDialog,
+    super.getExportDialog,
     super.delegate,
     super.getContext,
   }) : super(

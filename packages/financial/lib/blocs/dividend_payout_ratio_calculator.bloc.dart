@@ -34,7 +34,7 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
     MatexDividendPayoutRatioCalculatorBlocState? initialState,
     MatexDividendPayoutRatioCalculatorDataProvider? dataProvider,
     super.debouceComputeEvents = true,
-    super.showExportPdfDialog,
+    super.getExportDialog,
     super.delegate,
     super.getContext,
   }) : super(

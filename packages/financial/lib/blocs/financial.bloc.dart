@@ -82,7 +82,7 @@ abstract class MatexFinancialCalculatorBloc<
     required super.dataProvider,
     super.debouceComputeEvents = false,
     super.isAutoRefreshEnabled = false,
-    super.showExportPdfDialog,
+    super.getExportDialog,
     super.autoRefreshPeriod,
     this.exchangeProvider,
     super.initialState,

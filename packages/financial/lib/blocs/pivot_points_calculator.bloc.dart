@@ -27,7 +27,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
     MatexPivotPointsCalculatorBlocState? initialState,
     MatexPivotPointsCalculatorDataProvider? dataProvider,
     super.debouceComputeEvents = true,
-    super.showExportPdfDialog,
+    super.getExportDialog,
     super.delegate,
     super.getContext,
   }) : super(
