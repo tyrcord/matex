@@ -84,6 +84,23 @@
     },
     "type": "crypto"
   },
+  "ALI": {
+    "code": "ALI",
+    "format": {
+      "round": 3
+    },
+    "icon": "aluminum",
+    "name": {
+      "key": "aluminum",
+      "localized": "Aluminum"
+    },
+    "symbol": {
+      "long": "ALI",
+      "short": "ALI",
+      "ticker": "ALI"
+    },
+    "type": "commodity_metal"
+  },
   "AORD": {
     "code": "AORD",
     "format": {
@@ -446,6 +463,23 @@
     },
     "type": "index"
   },
+  "CC": {
+    "code": "CC",
+    "format": {
+      "round": 3
+    },
+    "icon": "cocoa",
+    "name": {
+      "key": "cocoa",
+      "localized": "Cocoa"
+    },
+    "symbol": {
+      "long": "CC",
+      "short": "CC",
+      "ticker": "CC"
+    },
+    "type": "commodity_agricultural"
+  },
   "CHF": {
     "code": "CHF",
     "format": {
@@ -530,6 +564,23 @@
       "ticker": "COP"
     },
     "type": "currency"
+  },
+  "CT": {
+    "code": "CT",
+    "format": {
+      "round": 3
+    },
+    "icon": "cotton",
+    "name": {
+      "key": "cotton",
+      "localized": "Cotton"
+    },
+    "symbol": {
+      "long": "CT",
+      "short": "CT",
+      "ticker": "CT"
+    },
+    "type": "commodity_agricultural"
   },
   "CZK": {
     "code": "CZK",
@@ -973,6 +1024,23 @@
     },
     "type": "crypto"
   },
+  "HG": {
+    "code": "HG",
+    "format": {
+      "round": 3
+    },
+    "icon": "copper",
+    "name": {
+      "key": "copper",
+      "localized": "Copper"
+    },
+    "symbol": {
+      "long": "HG",
+      "short": "HG",
+      "ticker": "HG"
+    },
+    "type": "commodity_metal"
+  },
   "HKD": {
     "code": "HKD",
     "format": {
@@ -1346,6 +1414,40 @@
       "ticker": "KAVA"
     },
     "type": "crypto"
+  },
+  "KC": {
+    "code": "KC",
+    "format": {
+      "round": 3
+    },
+    "icon": "coffee",
+    "name": {
+      "key": "coffee",
+      "localized": "Coffee"
+    },
+    "symbol": {
+      "long": "KC",
+      "short": "KC",
+      "ticker": "KC"
+    },
+    "type": "commodity_agricultural"
+  },
+  "KE": {
+    "code": "KE",
+    "format": {
+      "round": 3
+    },
+    "icon": "wheat",
+    "name": {
+      "key": "wheat",
+      "localized": "Wheat"
+    },
+    "symbol": {
+      "long": "KE",
+      "short": "KE",
+      "ticker": "KE"
+    },
+    "type": "commodity_agricultural"
   },
   "KES": {
     "code": "KES",
@@ -1942,6 +2044,23 @@
     },
     "type": "crypto"
   },
+  "PA": {
+    "code": "PA",
+    "format": {
+      "round": 3
+    },
+    "icon": "palladium",
+    "name": {
+      "key": "palladium",
+      "localized": "Palladium"
+    },
+    "symbol": {
+      "long": "PA",
+      "short": "PA",
+      "ticker": "PA"
+    },
+    "type": "commodity_metal"
+  },
   "PEN": {
     "code": "PEN",
     "format": {
@@ -2162,6 +2281,23 @@
       "ticker": "SAR"
     },
     "type": "currency"
+  },
+  "SB": {
+    "code": "SB",
+    "format": {
+      "round": 3
+    },
+    "icon": "sugar",
+    "name": {
+      "key": "sugar",
+      "localized": "Sugar"
+    },
+    "symbol": {
+      "long": "SB",
+      "short": "SB",
+      "ticker": "SB"
+    },
+    "type": "commodity_agricultural"
   },
   "SCR": {
     "code": "SCR",
@@ -2749,7 +2885,7 @@
     "icon": "gold",
     "name": {
       "key": "gold",
-      "localized": "gold"
+      "localized": "Gold"
     },
     "symbol": {
       "long": "XAU",
@@ -2800,7 +2936,7 @@
     "icon": "platinum",
     "name": {
       "key": "platinum",
-      "localized": "platinum"
+      "localized": "Platinum"
     },
     "symbol": {
       "long": "XPT",
@@ -2893,6 +3029,40 @@
       "ticker": "ZAR"
     },
     "type": "currency"
+  },
+  "ZC": {
+    "code": "ZC",
+    "format": {
+      "round": 3
+    },
+    "icon": "corn",
+    "name": {
+      "key": "corn",
+      "localized": "Corn"
+    },
+    "symbol": {
+      "long": "ZC",
+      "short": "ZC",
+      "ticker": "ZC"
+    },
+    "type": "commodity_agricultural"
+  },
+  "ZL": {
+    "code": "ZL",
+    "format": {
+      "round": 3
+    },
+    "icon": "soybean_oil",
+    "name": {
+      "key": "soybean_oil",
+      "localized": "Soybean Oil"
+    },
+    "symbol": {
+      "long": "ZL",
+      "short": "ZL",
+      "ticker": "ZL"
+    },
+    "type": "commodity_agricultural"
   },
   "ZMW": {
     "code": "ZMW",

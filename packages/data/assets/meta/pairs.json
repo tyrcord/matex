@@ -39,6 +39,23 @@
     },
     "type": "crypto"
   },
+  "ALI": {
+    "base": "ALI",
+    "counter": "USD",
+    "lots": {
+      "micro": 1000,
+      "mini": 5000,
+      "normalized": false,
+      "standard": 25000,
+      "unit": "ton"
+    },
+    "pip": {
+      "pipette": 2,
+      "precision": 0.5,
+      "round": 2
+    },
+    "type": "commodity_metal"
+  },
   "AORDAUD": {
     "base": "AORD",
     "counter": "AUD",
@@ -371,6 +388,23 @@
     },
     "type": "index"
   },
+  "CC": {
+    "base": "CC",
+    "counter": "USD",
+    "lots": {
+      "micro": 10,
+      "mini": 100,
+      "normalized": false,
+      "standard": 1000,
+      "unit": "ton"
+    },
+    "pip": {
+      "pipette": 2,
+      "precision": 1,
+      "round": 2
+    },
+    "type": "commodity_agricultural"
+  },
   "CHFAUD": {
     "base": "CHF",
     "counter": "AUD",
@@ -482,6 +516,23 @@
       "round": 3
     },
     "type": "commodity_energy"
+  },
+  "CT": {
+    "base": "CT",
+    "counter": "USD",
+    "lots": {
+      "micro": 500,
+      "mini": 5000,
+      "normalized": false,
+      "standard": 50000,
+      "unit": "pound"
+    },
+    "pip": {
+      "pipette": 2,
+      "precision": 0.01,
+      "round": 2
+    },
+    "type": "commodity_agricultural"
   },
   "DAIUSD": {
     "base": "DAI",
@@ -918,6 +969,23 @@
     },
     "type": "crypto"
   },
+  "HG": {
+    "base": "HG",
+    "counter": "USD",
+    "lots": {
+      "micro": 25000,
+      "mini": 125000,
+      "normalized": false,
+      "standard": 250000,
+      "unit": "pound"
+    },
+    "pip": {
+      "pipette": 5,
+      "precision": 0.0005,
+      "round": 2
+    },
+    "type": "commodity_metal"
+  },
   "HKDJPY": {
     "base": "HKD",
     "counter": "JPY",
@@ -1112,6 +1180,40 @@
       "round": 3
     },
     "type": "crypto"
+  },
+  "KC": {
+    "base": "KC",
+    "counter": "USD",
+    "lots": {
+      "micro": 375,
+      "mini": 3750,
+      "normalized": false,
+      "standard": 37500,
+      "unit": "pound"
+    },
+    "pip": {
+      "pipette": 5,
+      "precision": 0.05,
+      "round": 2
+    },
+    "type": "commodity_agricultural"
+  },
+  "KE": {
+    "base": "KE",
+    "counter": "USD",
+    "lots": {
+      "micro": 10,
+      "mini": 100,
+      "normalized": false,
+      "standard": 1000,
+      "unit": "ton"
+    },
+    "pip": {
+      "pipette": 2,
+      "precision": 1,
+      "round": 2
+    },
+    "type": "commodity_agricultural"
   },
   "KLSEMYR": {
     "base": "KLSE",
@@ -1480,6 +1582,23 @@
     },
     "type": "crypto"
   },
+  "PAUSD": {
+    "base": "PA",
+    "counter": "USD",
+    "lots": {
+      "micro": 100,
+      "mini": 1000,
+      "normalized": false,
+      "standard": 10000,
+      "unit": "ounce"
+    },
+    "pip": {
+      "pipette": 2,
+      "precision": 1,
+      "round": 2
+    },
+    "type": "commodity_metal"
+  },
   "RUAUSD": {
     "base": "RUA",
     "counter": "USD",
@@ -1529,6 +1648,23 @@
       "round": 3
     },
     "type": "crypto"
+  },
+  "SB": {
+    "base": "SB",
+    "counter": "USD",
+    "lots": {
+      "micro": 1120,
+      "mini": 11200,
+      "normalized": false,
+      "standard": 112000,
+      "unit": "pound"
+    },
+    "pip": {
+      "pipette": 2,
+      "precision": 0.01,
+      "round": 2
+    },
+    "type": "commodity_agricultural"
   },
   "SEIUSD": {
     "base": "SEI",
@@ -2324,6 +2460,40 @@
       "round": 3
     },
     "type": "currency_exotic"
+  },
+  "ZC": {
+    "base": "ZC",
+    "counter": "USD",
+    "lots": {
+      "micro": 100,
+      "mini": 1000,
+      "normalized": false,
+      "standard": 5000,
+      "unit": "bushel"
+    },
+    "pip": {
+      "pipette": 4,
+      "precision": 0.25,
+      "round": 2
+    },
+    "type": "commodity_agricultural"
+  },
+  "ZL": {
+    "base": "ZL",
+    "counter": "USD",
+    "lots": {
+      "micro": 50,
+      "mini": 500,
+      "normalized": false,
+      "standard": 5000,
+      "unit": "pound"
+    },
+    "pip": {
+      "pipette": 5,
+      "precision": 0.01,
+      "round": 2
+    },
+    "type": "commodity_metal"
   },
   "default_forex_lots": {
     "micro": 1000,
