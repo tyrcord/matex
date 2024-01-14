@@ -1,147 +1,260 @@
 {
   "austria": {
-    "vatRates": [10, 13, 20],
+    "code": "AT",
     "currency": "EUR",
-    "code": "AT"
+    "vatRates": [
+      10,
+      13,
+      20
+    ]
   },
   "belgium": {
-    "vatRates": [6, 12, 21],
+    "code": "BE",
     "currency": "EUR",
-    "code": "BE"
+    "vatRates": [
+      6,
+      12,
+      21
+    ]
   },
   "bulgaria": {
-    "vatRates": [9, 20],
+    "code": "BG",
     "currency": "EUR",
-    "code": "BG"
+    "vatRates": [
+      9,
+      20
+    ]
   },
   "croatia": {
-    "vatRates": [5, 13, 25],
+    "code": "HR",
     "currency": "EUR",
-    "code": "HR"
+    "vatRates": [
+      5,
+      13,
+      25
+    ]
   },
   "cyprus": {
-    "vatRates": [5, 9, 19],
+    "code": "CY",
     "currency": "EUR",
-    "code": "CY"
+    "vatRates": [
+      5,
+      9,
+      19
+    ]
   },
   "czech": {
-    "vatRates": [10, 15, 21],
+    "code": "CZ",
     "currency": "EUR",
-    "code": "CZ"
+    "vatRates": [
+      10,
+      15,
+      21
+    ]
   },
   "denmark": {
-    "vatRates": [25],
+    "code": "DK",
     "currency": "EUR",
-    "code": "DK"
+    "vatRates": [
+      25
+    ]
   },
   "estonia": {
-    "vatRates": [5, 9, 20],
+    "code": "EE",
     "currency": "EUR",
-    "code": "EE"
+    "vatRates": [
+      5,
+      9,
+      20
+    ]
   },
   "finland": {
-    "vatRates": [10, 14, 24],
+    "code": "FI",
     "currency": "EUR",
-    "code": "FI"
+    "vatRates": [
+      10,
+      14,
+      24
+    ]
   },
   "france": {
-    "vatRates": [2.1, 5.5, 10, 20],
+    "code": "FR",
     "currency": "EUR",
-    "code": "FR"
+    "vatRates": [
+      2.1,
+      5.5,
+      10,
+      20
+    ]
   },
   "germany": {
-    "vatRates": [7, 19],
+    "code": "DE",
     "currency": "EUR",
-    "code": "DE"
+    "vatRates": [
+      7,
+      19
+    ]
   },
   "greece": {
-    "vatRates": [6, 13, 24],
+    "code": "GR",
     "currency": "EUR",
-    "code": "GR"
+    "vatRates": [
+      6,
+      13,
+      24
+    ]
   },
   "hungary": {
-    "vatRates": [5, 18, 27],
+    "code": "HU",
     "currency": "EUR",
-    "code": "HU"
+    "vatRates": [
+      5,
+      18,
+      27
+    ]
   },
   "ireland": {
-    "vatRates": [4.8, 9, 13.5, 23],
+    "code": "IE",
     "currency": "EUR",
-    "code": "IE"
+    "vatRates": [
+      4.8,
+      9,
+      13.5,
+      23
+    ]
   },
   "italy": {
-    "vatRates": [4, 5, 10, 22],
+    "code": "IT",
     "currency": "EUR",
-    "code": "IT"
+    "vatRates": [
+      4,
+      5,
+      10,
+      22
+    ]
   },
   "latvia": {
-    "vatRates": [12, 21],
+    "code": "LV",
     "currency": "EUR",
-    "code": "LV"
+    "vatRates": [
+      12,
+      21
+    ]
   },
   "lithuania": {
-    "vatRates": [5, 9, 21],
+    "code": "LT",
     "currency": "EUR",
-    "code": "LT"
+    "vatRates": [
+      5,
+      9,
+      21
+    ]
   },
   "luxembourg": {
-    "vatRates": [3, 7, 13, 16],
+    "code": "LU",
     "currency": "EUR",
-    "code": "LU"
+    "vatRates": [
+      3,
+      7,
+      13,
+      16
+    ]
   },
   "malta": {
-    "vatRates": [5, 7, 18],
+    "code": "MT",
     "currency": "EUR",
-    "code": "MT"
+    "vatRates": [
+      5,
+      7,
+      18
+    ]
   },
   "monaco": {
-    "vatRates": [2.1, 5.5, 10, 20],
+    "code": "MC",
     "currency": "EUR",
-    "code": "MC"
+    "vatRates": [
+      2.1,
+      5.5,
+      10,
+      20
+    ]
   },
   "netherlands": {
-    "vatRates": [9, 21],
+    "code": "NL",
     "currency": "EUR",
-    "code": "NL"
+    "vatRates": [
+      9,
+      21
+    ]
   },
   "poland": {
-    "vatRates": [5, 8, 23],
+    "code": "PL",
     "currency": "EUR",
-    "code": "PL"
+    "vatRates": [
+      5,
+      8,
+      23
+    ]
   },
   "romania": {
-    "vatRates": [5, 9, 19],
+    "code": "RO",
     "currency": "EUR",
-    "code": "RO"
+    "vatRates": [
+      5,
+      9,
+      19
+    ]
   },
   "slovakia": {
-    "vatRates": [10, 20],
+    "code": "SK",
     "currency": "EUR",
-    "code": "SK"
+    "vatRates": [
+      10,
+      20
+    ]
   },
   "slovenia": {
-    "vatRates": [5, 9.5, 22],
+    "code": "SI",
     "currency": "EUR",
-    "code": "SI"
+    "vatRates": [
+      5,
+      9.5,
+      22
+    ]
   },
   "spain": {
-    "vatRates": [4, 10, 21],
+    "code": "ES",
     "currency": "EUR",
-    "code": "ES"
+    "vatRates": [
+      4,
+      10,
+      21
+    ]
   },
   "sweden": {
-    "vatRates": [6, 12, 25],
+    "code": "SE",
     "currency": "EUR",
-    "code": "SE"
+    "vatRates": [
+      6,
+      12,
+      25
+    ]
   },
   "switzerland": {
-    "vatRates": [2.5, 3.7, 7.7],
+    "code": "CH",
     "currency": "CHF",
-    "code": "CH"
+    "vatRates": [
+      2.5,
+      3.7,
+      7.7
+    ]
   },
   "uk": {
-    "vatRates": [5, 20],
+    "code": "GB",
     "currency": "GBP",
-    "code": "GB"
+    "vatRates": [
+      5,
+      20
+    ]
   }
 }

@@ -21,8 +21,20 @@ scripts:
     exec: $PWD/scripts/update_analysis_options.sh
   sort_imports:
     exec: flutter pub run import_sorter:main
-  update:meta:
-    exec: $PWD/scripts/update_meta.sh
+
+  update:meta:countries:
+    exec: python3 $PWD/scripts/data/update_countries.py
+    packageFilters:
+      scope:
+        - matex_data
+
+  update:meta:instruments:
+    exec: python3 $PWD/scripts/data/update_instruments.py
+    packageFilters:
+      scope:
+        - matex_data
+  update:meta:pairs:
+    exec: python3 $PWD/scripts/data/update_pairs.py
     packageFilters:
       scope:
         - matex_data

@@ -1,4 +1,249 @@
 {
+  "AAVEUSD": {
+    "base": "AAVE",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "ADAUSD": {
+    "base": "ADA",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "AEXEUR": {
+    "base": "AEX",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "ALGOUSD": {
+    "base": "ALGO",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "AORDAUD": {
+    "base": "AORD",
+    "counter": "AUD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "APTUSD": {
+    "base": "APT",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "ARBUSD": {
+    "base": "ARB",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "ATOMUSD": {
+    "base": "ATOM",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "AUDCAD": {
+    "base": "AUD",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "AUDCHF": {
+    "base": "AUD",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "AUDCZK": {
+    "base": "AUD",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "AUDDKK": {
+    "base": "AUD",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "AUDEUR": {
+    "base": "AUD",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "AUDGBP": {
+    "base": "AUD",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "AUDHKD": {
+    "base": "AUD",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "AUDHUF": {
+    "base": "AUD",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "AUDJPY": {
+    "base": "AUD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "AUDMXN": {
+    "base": "AUD",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "AUDNOK": {
+    "base": "AUD",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "AUDNZD": {
+    "base": "AUD",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "AUDPLN": {
+    "base": "AUD",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "AUDSEK": {
+    "base": "AUD",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "AUDSGD": {
+    "base": "AUD",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "AUDUSD": {
+    "base": "AUD",
+    "counter": "USD",
+    "type": "currency_major"
+  },
+  "AUDZAR": {
+    "base": "AUD",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "AVAXUSD": {
+    "base": "AVAX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "AXJOAUD": {
+    "base": "AXJO",
+    "counter": "AUD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "BCHUSD": {
+    "base": "BCH",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "BFXEUR": {
+    "base": "BFX",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "BNBUSD": {
+    "base": "BNB",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "BTCUSD": {
+    "base": "BTC",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "BVSPBRL": {
+    "base": "BVSP",
+    "counter": "BRL",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
   "BZUSD": {
     "base": "BZ",
     "counter": "USD",
@@ -15,6 +260,211 @@
       "round": 3
     },
     "type": "commodity_energy"
+  },
+  "CADAUD": {
+    "base": "CAD",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "CADCHF": {
+    "base": "CAD",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "CADCZK": {
+    "base": "CAD",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "CADDKK": {
+    "base": "CAD",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "CADEUR": {
+    "base": "CAD",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "CADGBP": {
+    "base": "CAD",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "CADHKD": {
+    "base": "CAD",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "CADHUF": {
+    "base": "CAD",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "CADJPY": {
+    "base": "CAD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "CADMXN": {
+    "base": "CAD",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "CADNOK": {
+    "base": "CAD",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "CADNZD": {
+    "base": "CAD",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "CADPLN": {
+    "base": "CAD",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "CADSEK": {
+    "base": "CAD",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "CADSGD": {
+    "base": "CAD",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "CADZAR": {
+    "base": "CAD",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "CAKEUSD": {
+    "base": "CAKE",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "CASE30EGP": {
+    "base": "CASE30",
+    "counter": "EGP",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "CHFAUD": {
+    "base": "CHF",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "CHFCAD": {
+    "base": "CHF",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "CHFCZK": {
+    "base": "CHF",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "CHFDKK": {
+    "base": "CHF",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "CHFEUR": {
+    "base": "CHF",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "CHFGBP": {
+    "base": "CHF",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "CHFHKD": {
+    "base": "CHF",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "CHFHUF": {
+    "base": "CHF",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "CHFJPY": {
+    "base": "CHF",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "CHFMXN": {
+    "base": "CHF",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "CHFNOK": {
+    "base": "CHF",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "CHFNZD": {
+    "base": "CHF",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "CHFPLN": {
+    "base": "CHF",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "CHFSEK": {
+    "base": "CHF",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "CHFSGD": {
+    "base": "CHF",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "CHFTRY": {
+    "base": "CHF",
+    "counter": "TRY",
+    "type": "currency_exotic"
+  },
+  "CHFZAR": {
+    "base": "CHF",
+    "counter": "ZAR",
+    "type": "currency_exotic"
   },
   "CLUSD": {
     "base": "CL",
@@ -33,6 +483,786 @@
     },
     "type": "commodity_energy"
   },
+  "DAIUSD": {
+    "base": "DAI",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "DASHUSD": {
+    "base": "DASH",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "DJIUSD": {
+    "base": "DJI",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "DKKCZK": {
+    "base": "DKK",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "DKKHKD": {
+    "base": "DKK",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "DKKHUF": {
+    "base": "DKK",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "DKKMXN": {
+    "base": "DKK",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "DKKNOK": {
+    "base": "DKK",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "DKKPLN": {
+    "base": "DKK",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "DKKSEK": {
+    "base": "DKK",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "DKKSGD": {
+    "base": "DKK",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "DKKZAR": {
+    "base": "DKK",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "DOGEUSD": {
+    "base": "DOGE",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "DOTUSD": {
+    "base": "DOT",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "EOSUSD": {
+    "base": "EOS",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "ETCUSD": {
+    "base": "ETC",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "ETHUSD": {
+    "base": "ETH",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "EURAUD": {
+    "base": "EUR",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "EURCAD": {
+    "base": "EUR",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "EURCHF": {
+    "base": "EUR",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "EURCZK": {
+    "base": "EUR",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "EURDKK": {
+    "base": "EUR",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "EURGBP": {
+    "base": "EUR",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "EURHKD": {
+    "base": "EUR",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "EURHUF": {
+    "base": "EUR",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "EURJPY": {
+    "base": "EUR",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "EURMXN": {
+    "base": "EUR",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "EURNOK": {
+    "base": "EUR",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "EURNZD": {
+    "base": "EUR",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "EURPLN": {
+    "base": "EUR",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "EURRON": {
+    "base": "EUR",
+    "counter": "RON",
+    "type": "currency_exotic"
+  },
+  "EURRUB": {
+    "base": "EUR",
+    "counter": "RUB",
+    "type": "currency_exotic"
+  },
+  "EURSEK": {
+    "base": "EUR",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "EURSGD": {
+    "base": "EUR",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "EURTRY": {
+    "base": "EUR",
+    "counter": "TRY",
+    "type": "currency_exotic"
+  },
+  "EURUSD": {
+    "base": "EUR",
+    "counter": "USD",
+    "type": "currency_major"
+  },
+  "EURZAR": {
+    "base": "EUR",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "FCHIEUR": {
+    "base": "FCHI",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "FILUSD": {
+    "base": "FIL",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "FTMCGBP": {
+    "base": "FTMC",
+    "counter": "GBP",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "FTSEGBP": {
+    "base": "FTSE",
+    "counter": "GBP",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "FVXUSD": {
+    "base": "FVX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 2
+    },
+    "type": "index"
+  },
+  "GBPAUD": {
+    "base": "GBP",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "GBPCAD": {
+    "base": "GBP",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "GBPCHF": {
+    "base": "GBP",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "GBPCZK": {
+    "base": "GBP",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "GBPDKK": {
+    "base": "GBP",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "GBPEUR": {
+    "base": "GBP",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "GBPHKD": {
+    "base": "GBP",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "GBPHUF": {
+    "base": "GBP",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "GBPJPY": {
+    "base": "GBP",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "GBPMXN": {
+    "base": "GBP",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "GBPNOK": {
+    "base": "GBP",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "GBPNZD": {
+    "base": "GBP",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "GBPPLN": {
+    "base": "GBP",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "GBPRON": {
+    "base": "GBP",
+    "counter": "RON",
+    "type": "currency_exotic"
+  },
+  "GBPSEK": {
+    "base": "GBP",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "GBPSGD": {
+    "base": "GBP",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "GBPTRY": {
+    "base": "GBP",
+    "counter": "TRY",
+    "type": "currency_exotic"
+  },
+  "GBPUSD": {
+    "base": "GBP",
+    "counter": "USD",
+    "type": "currency_major"
+  },
+  "GBPZAR": {
+    "base": "GBP",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "GDAXIEUR": {
+    "base": "GDAXI",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "GSPCUSD": {
+    "base": "GSPC",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "GSPTSECAD": {
+    "base": "GSPTSE",
+    "counter": "CAD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "HBARUSD": {
+    "base": "HBAR",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "HKDJPY": {
+    "base": "HKD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "HSIHKD": {
+    "base": "HSI",
+    "counter": "HKD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "IBEXEUR": {
+    "base": "IBEX",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "ICPUSD": {
+    "base": "ICP",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "IMOEX_MERUB": {
+    "base": "IMOEX_ME",
+    "counter": "RUB",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "IMXUSD": {
+    "base": "IMX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "INJUSD": {
+    "base": "INJ",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "IOTAUSD": {
+    "base": "IOTA",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "JKSEIDR": {
+    "base": "JKSE",
+    "counter": "IDR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "JPYAUD": {
+    "base": "JPY",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "JPYCAD": {
+    "base": "JPY",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "JPYCHF": {
+    "base": "JPY",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "JPYCZK": {
+    "base": "JPY",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "JPYDKK": {
+    "base": "JPY",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "JPYEUR": {
+    "base": "JPY",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "JPYGBP": {
+    "base": "JPY",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "JPYHKD": {
+    "base": "JPY",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "JPYHUF": {
+    "base": "JPY",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "JPYMXN": {
+    "base": "JPY",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "JPYNOK": {
+    "base": "JPY",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "JPYNZD": {
+    "base": "JPY",
+    "counter": "NZD",
+    "type": "currency_minor"
+  },
+  "JPYPLN": {
+    "base": "JPY",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "JPYSEK": {
+    "base": "JPY",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "JPYSGD": {
+    "base": "JPY",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "JPYZAR": {
+    "base": "JPY",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "KASUSD": {
+    "base": "KAS",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "KAVAUSD": {
+    "base": "KAVA",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "KLSEMYR": {
+    "base": "KLSE",
+    "counter": "MYR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "KS11KRW": {
+    "base": "KS11",
+    "counter": "KRW",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "LDOUSD": {
+    "base": "LDO",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "LEOUSUSD": {
+    "base": "LEO",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "LINKUSD": {
+    "base": "LINK",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "LTCUSD": {
+    "base": "LTC",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "MATICUSD": {
+    "base": "MATIC",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "MKRUSD": {
+    "base": "MKR",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "MXNJPY": {
+    "base": "MXN",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "MXXMXN": {
+    "base": "MXX",
+    "counter": "MXN",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "N100EUR": {
+    "base": "N100",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "N225JPY": {
+    "base": "N225",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "NDXUSD": {
+    "base": "NDX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "NEARUSD": {
+    "base": "NEAR",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "NEOUSD": {
+    "base": "NEO",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
   "NGUSD": {
     "base": "NG",
     "counter": "USD",
@@ -49,6 +1279,676 @@
       "round": 4
     },
     "type": "commodity_energy"
+  },
+  "NOKCZK": {
+    "base": "NOK",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "NOKHKD": {
+    "base": "NOK",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "NOKHUF": {
+    "base": "NOK",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "NOKJPY": {
+    "base": "NOK",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "NOKMXN": {
+    "base": "NOK",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "NOKPLN": {
+    "base": "NOK",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "NOKSEK": {
+    "base": "NOK",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "NOKSGD": {
+    "base": "NOK",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "NOKZAR": {
+    "base": "NOK",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "NSEIINR": {
+    "base": "NSEI",
+    "counter": "INR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "NZ50NZD": {
+    "base": "NZ50",
+    "counter": "NZD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "NZDAUD": {
+    "base": "NZD",
+    "counter": "AUD",
+    "type": "currency_minor"
+  },
+  "NZDCAD": {
+    "base": "NZD",
+    "counter": "CAD",
+    "type": "currency_minor"
+  },
+  "NZDCHF": {
+    "base": "NZD",
+    "counter": "CHF",
+    "type": "currency_minor"
+  },
+  "NZDCZK": {
+    "base": "NZD",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "NZDDKK": {
+    "base": "NZD",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "NZDEUR": {
+    "base": "NZD",
+    "counter": "EUR",
+    "type": "currency_minor"
+  },
+  "NZDGBP": {
+    "base": "NZD",
+    "counter": "GBP",
+    "type": "currency_minor"
+  },
+  "NZDHKD": {
+    "base": "NZD",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "NZDHUF": {
+    "base": "NZD",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "NZDJPY": {
+    "base": "NZD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_minor"
+  },
+  "NZDMXN": {
+    "base": "NZD",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "NZDNOK": {
+    "base": "NZD",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "NZDPLN": {
+    "base": "NZD",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "NZDSEK": {
+    "base": "NZD",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "NZDSGD": {
+    "base": "NZD",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "NZDUSD": {
+    "base": "NZD",
+    "counter": "USD",
+    "type": "currency_major"
+  },
+  "NZDZAR": {
+    "base": "NZD",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "OKBUSD": {
+    "base": "OKB",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "OPUSD": {
+    "base": "OP",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "ORDIUSD": {
+    "base": "ORDI",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "RUAUSD": {
+    "base": "RUA",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "RUIUSD": {
+    "base": "RUI",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "RUNEUSD": {
+    "base": "RUNE",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "RUTUSD": {
+    "base": "RUT",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "SANDUSD": {
+    "base": "SAND",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "SEIUSD": {
+    "base": "SEI",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "SEKJPY": {
+    "base": "SEK",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "SGDCHF": {
+    "base": "SGD",
+    "counter": "CHF",
+    "type": "currency_exotic"
+  },
+  "SGDHKD": {
+    "base": "SGD",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "SGDJPY": {
+    "base": "SGD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "SHIBUSD": {
+    "base": "SHIB",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "SOLUSD": {
+    "base": "SOL",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "SPGNRUPUSD": {
+    "base": "SPGNRUP",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "SPGSCIUSD": {
+    "base": "SPGSCI",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "SSMICHF": {
+    "base": "SSMI",
+    "counter": "CHF",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "STISGD": {
+    "base": "STI",
+    "counter": "SGD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "STOXX50EEUR": {
+    "base": "STOXX50E",
+    "counter": "EUR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "STXUSD": {
+    "base": "STX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "TA125_TAILS": {
+    "base": "TA125_TA",
+    "counter": "ILS",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "index"
+  },
+  "TIAUSD": {
+    "base": "TIA",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "TNXUSD": {
+    "base": "TNX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 2
+    },
+    "type": "index"
+  },
+  "TONUSD": {
+    "base": "TON",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "TRXUSD": {
+    "base": "TRX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "TRYJPY": {
+    "base": "TRY",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "TYXUSD": {
+    "base": "TYX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 2
+    },
+    "type": "index"
+  },
+  "UNIUSD": {
+    "base": "UNI",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "USDBRL": {
+    "base": "USD",
+    "counter": "BRL",
+    "pip": {
+      "pipette": 4,
+      "precision": 4,
+      "round": 4
+    },
+    "type": "currency_exotic"
+  },
+  "USDCAD": {
+    "base": "USD",
+    "counter": "CAD",
+    "type": "currency_major"
+  },
+  "USDCHF": {
+    "base": "USD",
+    "counter": "CHF",
+    "type": "currency_major"
+  },
+  "USDCNH": {
+    "base": "USD",
+    "counter": "CNH",
+    "type": "currency_exotic"
+  },
+  "USDCUSD": {
+    "base": "USDC",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "USDCZK": {
+    "base": "USD",
+    "counter": "CZK",
+    "type": "currency_exotic"
+  },
+  "USDDKK": {
+    "base": "USD",
+    "counter": "DKK",
+    "type": "currency_exotic"
+  },
+  "USDHKD": {
+    "base": "USD",
+    "counter": "HKD",
+    "type": "currency_exotic"
+  },
+  "USDHRK": {
+    "base": "USD",
+    "counter": "HRK",
+    "type": "currency_exotic"
+  },
+  "USDHUF": {
+    "base": "USD",
+    "counter": "HUF",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDIDR": {
+    "base": "USD",
+    "counter": "IDR",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
+    },
+    "type": "currency_exotic"
+  },
+  "USDILS": {
+    "base": "USD",
+    "counter": "ILS",
+    "type": "currency_exotic"
+  },
+  "USDINR": {
+    "base": "USD",
+    "counter": "INR",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDJPY": {
+    "base": "USD",
+    "counter": "JPY",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_major"
+  },
+  "USDKRW": {
+    "base": "USD",
+    "counter": "KRW",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDKWD": {
+    "base": "USD",
+    "counter": "KWD",
+    "type": "currency_exotic"
+  },
+  "USDMXN": {
+    "base": "USD",
+    "counter": "MXN",
+    "type": "currency_exotic"
+  },
+  "USDMYR": {
+    "base": "USD",
+    "counter": "MYR",
+    "type": "currency_exotic"
+  },
+  "USDNGN": {
+    "base": "USD",
+    "counter": "NGN",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDNOK": {
+    "base": "USD",
+    "counter": "NOK",
+    "type": "currency_exotic"
+  },
+  "USDPLN": {
+    "base": "USD",
+    "counter": "PLN",
+    "type": "currency_exotic"
+  },
+  "USDRON": {
+    "base": "USD",
+    "counter": "RON",
+    "type": "currency_exotic"
+  },
+  "USDRUB": {
+    "base": "USD",
+    "counter": "RUB",
+    "type": "currency_exotic"
+  },
+  "USDSAR": {
+    "base": "USD",
+    "counter": "SAR",
+    "type": "currency_exotic"
+  },
+  "USDSEK": {
+    "base": "USD",
+    "counter": "SEK",
+    "type": "currency_exotic"
+  },
+  "USDSGD": {
+    "base": "USD",
+    "counter": "SGD",
+    "type": "currency_exotic"
+  },
+  "USDTHB": {
+    "base": "USD",
+    "counter": "THB",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "currency_exotic"
+  },
+  "USDTRY": {
+    "base": "USD",
+    "counter": "TRY",
+    "type": "currency_exotic"
+  },
+  "USDTUSD": {
+    "base": "USDT",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "USDZAR": {
+    "base": "USD",
+    "counter": "ZAR",
+    "type": "currency_exotic"
+  },
+  "VETUSD": {
+    "base": "VET",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "VIXUSD": {
+    "base": "VIX",
+    "counter": "USD",
+    "pip": {
+      "pipette": 1,
+      "precision": 0,
+      "round": 2
+    },
+    "type": "index"
   },
   "XAGAUD": {
     "base": "XAG",
@@ -348,6 +2248,26 @@
     },
     "type": "commodity_metal"
   },
+  "XLMUSD": {
+    "base": "XLM",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
+  "XMRUSD": {
+    "base": "XMR",
+    "counter": "USD",
+    "pip": {
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
+    },
+    "type": "crypto"
+  },
   "XPTUSD": {
     "base": "XPT",
     "counter": "USD",
@@ -365,56 +2285,6 @@
     },
     "type": "commodity_metal"
   },
-  "BCHUSD": {
-    "base": "BCH",
-    "counter": "USD",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "crypto"
-  },
-  "BTCUSD": {
-    "base": "BTC",
-    "counter": "USD",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "crypto"
-  },
-  "DSHUSD": {
-    "base": "DSH",
-    "counter": "USD",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "crypto"
-  },
-  "ETHUSD": {
-    "base": "ETH",
-    "counter": "USD",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "crypto"
-  },
-  "LTCUSD": {
-    "base": "LTC",
-    "counter": "USD",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "crypto"
-  },
   "XRPUSD": {
     "base": "XRP",
     "counter": "USD",
@@ -425,745 +2295,25 @@
     },
     "type": "crypto"
   },
-  "AUDCZK": {
-    "base": "AUD",
-    "counter": "CZK",
-    "type": "currency_exotic"
-  },
-  "AUDDKK": {
-    "base": "AUD",
-    "counter": "DKK",
-    "type": "currency_exotic"
-  },
-  "AUDHKD": {
-    "base": "AUD",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "AUDHUF": {
-    "base": "AUD",
-    "counter": "HUF",
+  "XTZUSD": {
+    "base": "XTZ",
+    "counter": "USD",
     "pip": {
       "pipette": 3,
       "precision": 2,
       "round": 3
     },
-    "type": "currency_exotic"
+    "type": "crypto"
   },
-  "AUDMXN": {
-    "base": "AUD",
-    "counter": "MXN",
-    "type": "currency_exotic"
-  },
-  "AUDNOK": {
-    "base": "AUD",
-    "counter": "NOK",
-    "type": "currency_exotic"
-  },
-  "AUDPLN": {
-    "base": "AUD",
-    "counter": "PLN",
-    "type": "currency_exotic"
-  },
-  "AUDSEK": {
-    "base": "AUD",
-    "counter": "SEK",
-    "type": "currency_exotic"
-  },
-  "AUDSGD": {
-    "base": "AUD",
-    "counter": "SGD",
-    "type": "currency_exotic"
-  },
-  "AUDZAR": {
-    "base": "AUD",
-    "counter": "ZAR",
-    "type": "currency_exotic"
-  },
-  "CADCZK": {
-    "base": "CAD",
-    "counter": "CZK",
-    "type": "currency_exotic"
-  },
-  "CADDKK": {
-    "base": "CAD",
-    "counter": "DKK",
-    "type": "currency_exotic"
-  },
-  "CADHKD": {
-    "base": "CAD",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "CADHUF": {
-    "base": "CAD",
-    "counter": "HUF",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "CADMXN": {
-    "base": "CAD",
-    "counter": "MXN",
-    "type": "currency_exotic"
-  },
-  "CADNOK": {
-    "base": "CAD",
-    "counter": "NOK",
-    "type": "currency_exotic"
-  },
-  "CADPLN": {
-    "base": "CAD",
-    "counter": "PLN",
-    "type": "currency_exotic"
-  },
-  "CADSEK": {
-    "base": "CAD",
-    "counter": "SEK",
-    "type": "currency_exotic"
-  },
-  "CADSGD": {
-    "base": "CAD",
-    "counter": "SGD",
-    "type": "currency_exotic"
-  },
-  "CADZAR": {
-    "base": "CAD",
-    "counter": "ZAR",
-    "type": "currency_exotic"
-  },
-  "CHFCZK": {
-    "base": "CHF",
-    "counter": "CZK",
-    "type": "currency_exotic"
-  },
-  "CHFDKK": {
-    "base": "CHF",
-    "counter": "DKK",
-    "type": "currency_exotic"
-  },
-  "CHFHKD": {
-    "base": "CHF",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "CHFHUF": {
-    "base": "CHF",
-    "counter": "HUF",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "CHFMXN": {
-    "base": "CHF",
-    "counter": "MXN",
-    "type": "currency_exotic"
-  },
-  "CHFNOK": {
-    "base": "CHF",
-    "counter": "NOK",
-    "type": "currency_exotic"
-  },
-  "CHFPLN": {
-    "base": "CHF",
-    "counter": "PLN",
-    "type": "currency_exotic"
-  },
-  "CHFSEK": {
-    "base": "CHF",
-    "counter": "SEK",
-    "type": "currency_exotic"
-  },
-  "CHFSGD": {
-    "base": "CHF",
-    "counter": "SGD",
-    "type": "currency_exotic"
-  },
-  "CHFTRY": {
-    "base": "CHF",
+  "XU100_ISTRY": {
+    "base": "XU100_IS",
     "counter": "TRY",
-    "type": "currency_exotic"
-  },
-  "CHFZAR": {
-    "base": "CHF",
-    "counter": "ZAR",
-    "type": "currency_exotic"
-  },
-  "DKKCZK": {
-    "base": "DKK",
-    "counter": "CZK",
-    "type": "currency_exotic"
-  },
-  "DKKHKD": {
-    "base": "DKK",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "DKKHUF": {
-    "base": "DKK",
-    "counter": "HUF",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "DKKMXN": {
-    "base": "DKK",
-    "counter": "MXN",
-    "type": "currency_exotic"
-  },
-  "DKKNOK": {
-    "base": "DKK",
-    "counter": "NOK",
-    "type": "currency_exotic"
-  },
-  "DKKPLN": {
-    "base": "DKK",
-    "counter": "PLN",
-    "type": "currency_exotic"
-  },
-  "DKKSEK": {
-    "base": "DKK",
-    "counter": "SEK",
-    "type": "currency_exotic"
-  },
-  "DKKSGD": {
-    "base": "DKK",
-    "counter": "SGD",
-    "type": "currency_exotic"
-  },
-  "DKKZAR": {
-    "base": "DKK",
-    "counter": "ZAR",
-    "type": "currency_exotic"
-  },
-  "EURCZK": {
-    "base": "EUR",
-    "counter": "CZK",
-    "type": "currency_exotic"
-  },
-  "EURDKK": {
-    "base": "EUR",
-    "counter": "DKK",
-    "type": "currency_exotic"
-  },
-  "EURHKD": {
-    "base": "EUR",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "EURHUF": {
-    "base": "EUR",
-    "counter": "HUF",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "EURMXN": {
-    "base": "EUR",
-    "counter": "MXN",
-    "type": "currency_exotic"
-  },
-  "EURNOK": {
-    "base": "EUR",
-    "counter": "NOK",
-    "type": "currency_exotic"
-  },
-  "EURPLN": {
-    "base": "EUR",
-    "counter": "PLN",
-    "type": "currency_exotic"
-  },
-  "EURRON": {
-    "base": "EUR",
-    "counter": "RON",
-    "type": "currency_exotic"
-  },
-  "EURRUB": {
-    "base": "EUR",
-    "counter": "RUB",
-    "type": "currency_exotic"
-  },
-  "EURSEK": {
-    "base": "EUR",
-    "counter": "SEK",
-    "type": "currency_exotic"
-  },
-  "EURSGD": {
-    "base": "EUR",
-    "counter": "SGD",
-    "type": "currency_exotic"
-  },
-  "EURTRY": {
-    "base": "EUR",
-    "counter": "TRY",
-    "type": "currency_exotic"
-  },
-  "EURZAR": {
-    "base": "EUR",
-    "counter": "ZAR",
-    "type": "currency_exotic"
-  },
-  "GBPCZK": {
-    "base": "GBP",
-    "counter": "CZK",
-    "type": "currency_exotic"
-  },
-  "GBPDKK": {
-    "base": "GBP",
-    "counter": "DKK",
-    "type": "currency_exotic"
-  },
-  "GBPHKD": {
-    "base": "GBP",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "GBPHUF": {
-    "base": "GBP",
-    "counter": "HUF",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "GBPMXN": {
-    "base": "GBP",
-    "counter": "MXN",
-    "type": "currency_exotic"
-  },
-  "GBPNOK": {
-    "base": "GBP",
-    "counter": "NOK",
-    "type": "currency_exotic"
-  },
-  "GBPPLN": {
-    "base": "GBP",
-    "counter": "PLN",
-    "type": "currency_exotic"
-  },
-  "GBPRON": {
-    "base": "GBP",
-    "counter": "RON",
-    "type": "currency_exotic"
-  },
-  "GBPSEK": {
-    "base": "GBP",
-    "counter": "SEK",
-    "type": "currency_exotic"
-  },
-  "GBPSGD": {
-    "base": "GBP",
-    "counter": "SGD",
-    "type": "currency_exotic"
-  },
-  "GBPTRY": {
-    "base": "GBP",
-    "counter": "TRY",
-    "type": "currency_exotic"
-  },
-  "GBPZAR": {
-    "base": "GBP",
-    "counter": "ZAR",
-    "type": "currency_exotic"
-  },
-  "HKDJPY": {
-    "base": "HKD",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "JPYCZK": {
-    "base": "JPY",
-    "counter": "CZK",
-    "type": "currency_exotic"
-  },
-  "JPYDKK": {
-    "base": "JPY",
-    "counter": "DKK",
-    "type": "currency_exotic"
-  },
-  "JPYHKD": {
-    "base": "JPY",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "JPYHUF": {
-    "base": "JPY",
-    "counter": "HUF",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "JPYMXN": {
-    "base": "JPY",
-    "counter": "MXN",
-    "type": "currency_exotic"
-  },
-  "JPYNOK": {
-    "base": "JPY",
-    "counter": "NOK",
-    "type": "currency_exotic"
-  },
-  "JPYPLN": {
-    "base": "JPY",
-    "counter": "PLN",
-    "type": "currency_exotic"
-  },
-  "JPYSEK": {
-    "base": "JPY",
-    "counter": "SEK",
-    "type": "currency_exotic"
-  },
-  "JPYSGD": {
-    "base": "JPY",
-    "counter": "SGD",
-    "type": "currency_exotic"
-  },
-  "JPYZAR": {
-    "base": "JPY",
-    "counter": "ZAR",
-    "type": "currency_exotic"
-  },
-  "MXNJPY": {
-    "base": "MXN",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "NOKCZK": {
-    "base": "NOK",
-    "counter": "CZK",
-    "type": "currency_exotic"
-  },
-  "NOKHKD": {
-    "base": "NOK",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "NOKHUF": {
-    "base": "NOK",
-    "counter": "HUF",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "NOKJPY": {
-    "base": "NOK",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "NOKMXN": {
-    "base": "NOK",
-    "counter": "MXN",
-    "type": "currency_exotic"
-  },
-  "NOKPLN": {
-    "base": "NOK",
-    "counter": "PLN",
-    "type": "currency_exotic"
-  },
-  "NOKSEK": {
-    "base": "NOK",
-    "counter": "SEK",
-    "type": "currency_exotic"
-  },
-  "NOKSGD": {
-    "base": "NOK",
-    "counter": "SGD",
-    "type": "currency_exotic"
-  },
-  "NOKZAR": {
-    "base": "NOK",
-    "counter": "ZAR",
-    "type": "currency_exotic"
-  },
-  "NZDCZK": {
-    "base": "NZD",
-    "counter": "CZK",
-    "type": "currency_exotic"
-  },
-  "NZDDKK": {
-    "base": "NZD",
-    "counter": "DKK",
-    "type": "currency_exotic"
-  },
-  "NZDHKD": {
-    "base": "NZD",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "NZDHUF": {
-    "base": "NZD",
-    "counter": "HUF",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "NZDMXN": {
-    "base": "NZD",
-    "counter": "MXN",
-    "type": "currency_exotic"
-  },
-  "NZDNOK": {
-    "base": "NZD",
-    "counter": "NOK",
-    "type": "currency_exotic"
-  },
-  "NZDPLN": {
-    "base": "NZD",
-    "counter": "PLN",
-    "type": "currency_exotic"
-  },
-  "NZDSEK": {
-    "base": "NZD",
-    "counter": "SEK",
-    "type": "currency_exotic"
-  },
-  "NZDSGD": {
-    "base": "NZD",
-    "counter": "SGD",
-    "type": "currency_exotic"
-  },
-  "NZDZAR": {
-    "base": "NZD",
-    "counter": "ZAR",
-    "type": "currency_exotic"
-  },
-  "SEKJPY": {
-    "base": "SEK",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "SGDCHF": {
-    "base": "SGD",
-    "counter": "CHF",
-    "type": "currency_exotic"
-  },
-  "SGDHKD": {
-    "base": "SGD",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "SGDJPY": {
-    "base": "SGD",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "TRYJPY": {
-    "base": "TRY",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "USDBRL": {
-    "base": "USD",
-    "counter": "BRL",
-    "pip": {
-      "pipette": 4,
-      "precision": 4,
-      "round": 4
-    },
-    "type": "currency_exotic"
-  },
-  "USDCNH": {
-    "base": "USD",
-    "counter": "CNH",
-    "type": "currency_exotic"
-  },
-  "USDCZK": {
-    "base": "USD",
-    "counter": "CZK",
-    "type": "currency_exotic"
-  },
-  "USDDKK": {
-    "base": "USD",
-    "counter": "DKK",
-    "type": "currency_exotic"
-  },
-  "USDHKD": {
-    "base": "USD",
-    "counter": "HKD",
-    "type": "currency_exotic"
-  },
-  "USDHRK": {
-    "base": "USD",
-    "counter": "HRK",
-    "type": "currency_exotic"
-  },
-  "USDHUF": {
-    "base": "USD",
-    "counter": "HUF",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "USDIDR": {
-    "base": "USD",
-    "counter": "IDR",
     "pip": {
       "pipette": 1,
       "precision": 0,
       "round": 1
     },
-    "type": "currency_exotic"
-  },
-  "USDILS": {
-    "base": "USD",
-    "counter": "ILS",
-    "type": "currency_exotic"
-  },
-  "USDINR": {
-    "base": "USD",
-    "counter": "INR",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "USDKRW": {
-    "base": "USD",
-    "counter": "KRW",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "USDKWD": {
-    "base": "USD",
-    "counter": "KWD",
-    "type": "currency_exotic"
-  },
-  "USDMXN": {
-    "base": "USD",
-    "counter": "MXN",
-    "type": "currency_exotic"
-  },
-  "USDMYR": {
-    "base": "USD",
-    "counter": "MYR",
-    "type": "currency_exotic"
-  },
-  "USDNGN": {
-    "base": "USD",
-    "counter": "NGN",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "USDNOK": {
-    "base": "USD",
-    "counter": "NOK",
-    "type": "currency_exotic"
-  },
-  "USDPLN": {
-    "base": "USD",
-    "counter": "PLN",
-    "type": "currency_exotic"
-  },
-  "USDRON": {
-    "base": "USD",
-    "counter": "RON",
-    "type": "currency_exotic"
-  },
-  "USDRUB": {
-    "base": "USD",
-    "counter": "RUB",
-    "type": "currency_exotic"
-  },
-  "USDSAR": {
-    "base": "USD",
-    "counter": "SAR",
-    "type": "currency_exotic"
-  },
-  "USDSEK": {
-    "base": "USD",
-    "counter": "SEK",
-    "type": "currency_exotic"
-  },
-  "USDSGD": {
-    "base": "USD",
-    "counter": "SGD",
-    "type": "currency_exotic"
-  },
-  "USDTHB": {
-    "base": "USD",
-    "counter": "THB",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_exotic"
-  },
-  "USDTRY": {
-    "base": "USD",
-    "counter": "TRY",
-    "type": "currency_exotic"
-  },
-  "USDZAR": {
-    "base": "USD",
-    "counter": "ZAR",
-    "type": "currency_exotic"
+    "type": "index"
   },
   "ZARJPY": {
     "base": "ZAR",
@@ -1174,286 +2324,6 @@
       "round": 3
     },
     "type": "currency_exotic"
-  },
-  "AUDUSD": {
-    "base": "AUD",
-    "counter": "USD",
-    "type": "currency_major"
-  },
-  "EURUSD": {
-    "base": "EUR",
-    "counter": "USD",
-    "type": "currency_major"
-  },
-  "GBPUSD": {
-    "base": "GBP",
-    "counter": "USD",
-    "type": "currency_major"
-  },
-  "NZDUSD": {
-    "base": "NZD",
-    "counter": "USD",
-    "type": "currency_major"
-  },
-  "USDCAD": {
-    "base": "USD",
-    "counter": "CAD",
-    "type": "currency_major"
-  },
-  "USDCHF": {
-    "base": "USD",
-    "counter": "CHF",
-    "type": "currency_major"
-  },
-  "USDJPY": {
-    "base": "USD",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_major"
-  },
-  "AUDCAD": {
-    "base": "AUD",
-    "counter": "CAD",
-    "type": "currency_minor"
-  },
-  "AUDCHF": {
-    "base": "AUD",
-    "counter": "CHF",
-    "type": "currency_minor"
-  },
-  "AUDEUR": {
-    "base": "AUD",
-    "counter": "EUR",
-    "type": "currency_minor"
-  },
-  "AUDGBP": {
-    "base": "AUD",
-    "counter": "GBP",
-    "type": "currency_minor"
-  },
-  "AUDJPY": {
-    "base": "AUD",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_minor"
-  },
-  "AUDNZD": {
-    "base": "AUD",
-    "counter": "NZD",
-    "type": "currency_minor"
-  },
-  "CADAUD": {
-    "base": "CAD",
-    "counter": "AUD",
-    "type": "currency_minor"
-  },
-  "CADCHF": {
-    "base": "CAD",
-    "counter": "CHF",
-    "type": "currency_minor"
-  },
-  "CADEUR": {
-    "base": "CAD",
-    "counter": "EUR",
-    "type": "currency_minor"
-  },
-  "CADGBP": {
-    "base": "CAD",
-    "counter": "GBP",
-    "type": "currency_minor"
-  },
-  "CADJPY": {
-    "base": "CAD",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_minor"
-  },
-  "CADNZD": {
-    "base": "CAD",
-    "counter": "NZD",
-    "type": "currency_minor"
-  },
-  "CHFAUD": {
-    "base": "CHF",
-    "counter": "AUD",
-    "type": "currency_minor"
-  },
-  "CHFCAD": {
-    "base": "CHF",
-    "counter": "CAD",
-    "type": "currency_minor"
-  },
-  "CHFEUR": {
-    "base": "CHF",
-    "counter": "EUR",
-    "type": "currency_minor"
-  },
-  "CHFGBP": {
-    "base": "CHF",
-    "counter": "GBP",
-    "type": "currency_minor"
-  },
-  "CHFJPY": {
-    "base": "CHF",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_minor"
-  },
-  "CHFNZD": {
-    "base": "CHF",
-    "counter": "NZD",
-    "type": "currency_minor"
-  },
-  "EURAUD": {
-    "base": "EUR",
-    "counter": "AUD",
-    "type": "currency_minor"
-  },
-  "EURCAD": {
-    "base": "EUR",
-    "counter": "CAD",
-    "type": "currency_minor"
-  },
-  "EURCHF": {
-    "base": "EUR",
-    "counter": "CHF",
-    "type": "currency_minor"
-  },
-  "EURGBP": {
-    "base": "EUR",
-    "counter": "GBP",
-    "type": "currency_minor"
-  },
-  "EURJPY": {
-    "base": "EUR",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_minor"
-  },
-  "EURNZD": {
-    "base": "EUR",
-    "counter": "NZD",
-    "type": "currency_minor"
-  },
-  "GBPAUD": {
-    "base": "GBP",
-    "counter": "AUD",
-    "type": "currency_minor"
-  },
-  "GBPCAD": {
-    "base": "GBP",
-    "counter": "CAD",
-    "type": "currency_minor"
-  },
-  "GBPCHF": {
-    "base": "GBP",
-    "counter": "CHF",
-    "type": "currency_minor"
-  },
-  "GBPEUR": {
-    "base": "GBP",
-    "counter": "EUR",
-    "type": "currency_minor"
-  },
-  "GBPJPY": {
-    "base": "GBP",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_minor"
-  },
-  "GBPNZD": {
-    "base": "GBP",
-    "counter": "NZD",
-    "type": "currency_minor"
-  },
-  "JPYAUD": {
-    "base": "JPY",
-    "counter": "AUD",
-    "type": "currency_minor"
-  },
-  "JPYCAD": {
-    "base": "JPY",
-    "counter": "CAD",
-    "type": "currency_minor"
-  },
-  "JPYCHF": {
-    "base": "JPY",
-    "counter": "CHF",
-    "type": "currency_minor"
-  },
-  "JPYEUR": {
-    "base": "JPY",
-    "counter": "EUR",
-    "type": "currency_minor"
-  },
-  "JPYGBP": {
-    "base": "JPY",
-    "counter": "GBP",
-    "type": "currency_minor"
-  },
-  "JPYNZD": {
-    "base": "JPY",
-    "counter": "NZD",
-    "type": "currency_minor"
-  },
-  "NZDAUD": {
-    "base": "NZD",
-    "counter": "AUD",
-    "type": "currency_minor"
-  },
-  "NZDCAD": {
-    "base": "NZD",
-    "counter": "CAD",
-    "type": "currency_minor"
-  },
-  "NZDCHF": {
-    "base": "NZD",
-    "counter": "CHF",
-    "type": "currency_minor"
-  },
-  "NZDEUR": {
-    "base": "NZD",
-    "counter": "EUR",
-    "type": "currency_minor"
-  },
-  "NZDGBP": {
-    "base": "NZD",
-    "counter": "GBP",
-    "type": "currency_minor"
-  },
-  "NZDJPY": {
-    "base": "NZD",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
-    },
-    "type": "currency_minor"
   },
   "default_forex_lots": {
     "micro": 1000,
@@ -1530,395 +2400,5 @@
       "main": "index",
       "weight": 40
     }
-  },
-  "AEXEUR": {
-    "base": "AEX",
-    "counter": "EUR",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "AORDAUD": {
-    "base": "AORD",
-    "counter": "AUD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "AXJOAUD": {
-    "base": "AXJO",
-    "counter": "AUD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "BFXEUR": {
-    "base": "BFX",
-    "counter": "EUR",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "BVSPBRL": {
-    "base": "BVSP",
-    "counter": "BRL",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "CASE30EGP": {
-    "base": "CASE30",
-    "counter": "EGP",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "DJIUSD": {
-    "base": "DJI",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "FCHIEUR": {
-    "base": "FCHI",
-    "counter": "EUR",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "FTMCGBP": {
-    "base": "FTMC",
-    "counter": "GBP",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "FTSEGBP": {
-    "base": "FTSE",
-    "counter": "GBP",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "FVXUSD": {
-    "base": "FVX",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 2
-    },
-    "type": "index"
-  },
-  "GDAXIEUR": {
-    "base": "GDAXI",
-    "counter": "EUR",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "GSPCUSD": {
-    "base": "GSPC",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "GSPTSECAD": {
-    "base": "GSPTSE",
-    "counter": "CAD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "HSIHKD": {
-    "base": "HSI",
-    "counter": "HKD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "IBEXEUR": {
-    "base": "IBEX",
-    "counter": "EUR",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "IMOEX_MERUB": {
-    "base": "IMOEX_ME",
-    "counter": "RUB",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "JKSEIDR": {
-    "base": "JKSE",
-    "counter": "IDR",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "KLSEMYR": {
-    "base": "KLSE",
-    "counter": "MYR",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "KS11KRW": {
-    "base": "KS11",
-    "counter": "KRW",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "MXXMXN": {
-    "base": "MXX",
-    "counter": "MXN",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "N100EUR": {
-    "base": "N100",
-    "counter": "EUR",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "N225JPY": {
-    "base": "N225",
-    "counter": "JPY",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "NDXUSD": {
-    "base": "NDX",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "NSEIINR": {
-    "base": "NSEI",
-    "counter": "INR",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "NZ50NZD": {
-    "base": "NZ50",
-    "counter": "NZD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "RUAUSD": {
-    "base": "RUA",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "RUIUSD": {
-    "base": "RUI",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "RUTUSD": {
-    "base": "RUT",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "SPGNRUPUSD": {
-    "base": "SPGNRUP",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "SPGSCIUSD": {
-    "base": "SPGSCI",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "SSMICHF": {
-    "base": "SSMI",
-    "counter": "CHF",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "STISGD": {
-    "base": "STI",
-    "counter": "SGD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "STOXX50EEUR": {
-    "base": "STOXX50E",
-    "counter": "EUR",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "TA125_TAILS": {
-    "base": "TA125_TA",
-    "counter": "ILS",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
-  },
-  "TNXUSD": {
-    "base": "TNX",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 2
-    },
-    "type": "index"
-  },
-  "TYXUSD": {
-    "base": "TYX",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 2
-    },
-    "type": "index"
-  },
-  "VIXUSD": {
-    "base": "VIX",
-    "counter": "USD",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 2
-    },
-    "type": "index"
-  },
-  "XU100_ISTRY": {
-    "base": "XU100_IS",
-    "counter": "TRY",
-    "pip": {
-      "pipette": 1,
-      "precision": 0,
-      "round": 1
-    },
-    "type": "index"
   }
 }
