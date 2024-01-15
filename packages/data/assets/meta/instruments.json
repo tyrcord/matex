@@ -19,7 +19,7 @@
   "ADA": {
     "code": "ADA",
     "format": {
-      "round": 6
+      "round": 5
     },
     "icon": "cardano",
     "name": {
@@ -70,7 +70,7 @@
   "ALGO": {
     "code": "ALGO",
     "format": {
-      "round": 6
+      "round": 5
     },
     "icon": "algorand",
     "name": {
@@ -565,23 +565,6 @@
     },
     "type": "currency"
   },
-  "CT": {
-    "code": "CT",
-    "format": {
-      "round": 3
-    },
-    "icon": "cotton",
-    "name": {
-      "key": "cotton",
-      "localized": "Cotton"
-    },
-    "symbol": {
-      "long": "CT",
-      "short": "CT",
-      "ticker": "CT"
-    },
-    "type": "commodity_agricultural"
-  },
   "CZK": {
     "code": "CZK",
     "format": {
@@ -602,7 +585,7 @@
   "DAI": {
     "code": "DAI",
     "format": {
-      "round": 6
+      "round": 5
     },
     "icon": "dai_stable_coin",
     "name": {
@@ -738,7 +721,7 @@
   "EOS": {
     "code": "EOS",
     "format": {
-      "round": 3
+      "round": 5
     },
     "icon": "eos",
     "name": {
@@ -1027,7 +1010,7 @@
   "HG": {
     "code": "HG",
     "format": {
-      "round": 3
+      "round": 5
     },
     "icon": "copper",
     "name": {
@@ -1248,7 +1231,7 @@
   "IOTA": {
     "code": "IOTA",
     "format": {
-      "round": 6
+      "round": 5
     },
     "icon": "iota",
     "name": {
@@ -1384,7 +1367,7 @@
   "KAS": {
     "code": "KAS",
     "format": {
-      "round": 3
+      "round": 5
     },
     "icon": "kas",
     "name": {
@@ -1401,7 +1384,7 @@
   "KAVA": {
     "code": "KAVA",
     "format": {
-      "round": 3
+      "round": 5
     },
     "icon": "kava",
     "name": {
@@ -1414,40 +1397,6 @@
       "ticker": "KAVA"
     },
     "type": "crypto"
-  },
-  "KC": {
-    "code": "KC",
-    "format": {
-      "round": 3
-    },
-    "icon": "coffee",
-    "name": {
-      "key": "coffee",
-      "localized": "Coffee"
-    },
-    "symbol": {
-      "long": "KC",
-      "short": "KC",
-      "ticker": "KC"
-    },
-    "type": "commodity_agricultural"
-  },
-  "KE": {
-    "code": "KE",
-    "format": {
-      "round": 3
-    },
-    "icon": "wheat",
-    "name": {
-      "key": "wheat",
-      "localized": "Wheat"
-    },
-    "symbol": {
-      "long": "KE",
-      "short": "KE",
-      "ticker": "KE"
-    },
-    "type": "commodity_agricultural"
   },
   "KES": {
     "code": "KES",
@@ -1690,7 +1639,7 @@
   "MATIC": {
     "code": "MATIC",
     "format": {
-      "round": 3
+      "round": 5
     },
     "icon": "matic",
     "name": {
@@ -2047,7 +1996,7 @@
   "PA": {
     "code": "PA",
     "format": {
-      "round": 3
+      "round": 2
     },
     "icon": "palladium",
     "name": {
@@ -2251,7 +2200,7 @@
   "SAND": {
     "code": "SAND",
     "format": {
-      "round": 3
+      "round": 5
     },
     "icon": "sand",
     "name": {
@@ -2282,23 +2231,6 @@
     },
     "type": "currency"
   },
-  "SB": {
-    "code": "SB",
-    "format": {
-      "round": 3
-    },
-    "icon": "sugar",
-    "name": {
-      "key": "sugar",
-      "localized": "Sugar"
-    },
-    "symbol": {
-      "long": "SB",
-      "short": "SB",
-      "ticker": "SB"
-    },
-    "type": "commodity_agricultural"
-  },
   "SCR": {
     "code": "SCR",
     "format": {
@@ -2319,7 +2251,7 @@
   "SEI": {
     "code": "SEI",
     "format": {
-      "round": 3
+      "round": 5
     },
     "icon": "sei",
     "name": {
@@ -2370,7 +2302,7 @@
   "SHIB": {
     "code": "SHIB",
     "format": {
-      "round": 6
+      "round": 10
     },
     "icon": "shiba_inu",
     "name": {
@@ -2625,7 +2557,7 @@
   "TRX": {
     "code": "TRX",
     "format": {
-      "round": 6
+      "round": 5
     },
     "icon": "tron",
     "name": {
@@ -2761,7 +2693,7 @@
   "USDC": {
     "code": "USDC",
     "format": {
-      "round": 6
+      "round": 5
     },
     "icon": "usdc",
     "name": {
@@ -2778,7 +2710,7 @@
   "USDT": {
     "code": "USDT",
     "format": {
-      "round": 6
+      "round": 5
     },
     "icon": "tether",
     "name": {
@@ -2812,7 +2744,7 @@
   "VET": {
     "code": "VET",
     "format": {
-      "round": 6
+      "round": 5
     },
     "icon": "vechain",
     "name": {
@@ -2897,7 +2829,7 @@
   "XLM": {
     "code": "XLM",
     "format": {
-      "round": 6
+      "round": 5
     },
     "icon": "stellar",
     "name": {
@@ -3030,40 +2962,6 @@
     },
     "type": "currency"
   },
-  "ZC": {
-    "code": "ZC",
-    "format": {
-      "round": 3
-    },
-    "icon": "corn",
-    "name": {
-      "key": "corn",
-      "localized": "Corn"
-    },
-    "symbol": {
-      "long": "ZC",
-      "short": "ZC",
-      "ticker": "ZC"
-    },
-    "type": "commodity_agricultural"
-  },
-  "ZL": {
-    "code": "ZL",
-    "format": {
-      "round": 3
-    },
-    "icon": "soybean_oil",
-    "name": {
-      "key": "soybean_oil",
-      "localized": "Soybean Oil"
-    },
-    "symbol": {
-      "long": "ZL",
-      "short": "ZL",
-      "ticker": "ZL"
-    },
-    "type": "commodity_agricultural"
-  },
   "ZMW": {
     "code": "ZMW",
     "format": {
@@ -3099,6 +2997,13 @@
     "type": "currency"
   },
   "instrument_types": {
+    "commodity_agricultural": {
+      "key": "commodities",
+      "main": "commodity",
+      "sub": "agricultural",
+      "subKey": "agricultural",
+      "weight": 50
+    },
     "commodity_energy": {
       "key": "commodities",
       "main": "commodity",

@@ -13,9 +13,9 @@
     "base": "ADA",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -33,26 +33,26 @@
     "base": "ALGO",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
-  "ALI": {
+  "ALIUSD": {
     "base": "ALI",
     "counter": "USD",
     "lots": {
-      "micro": 1000,
-      "mini": 5000,
+      "micro": 1,
+      "mini": 5,
       "normalized": false,
-      "standard": 25000,
+      "standard": 25,
       "unit": "ton"
     },
     "pip": {
-      "pipette": 2,
-      "precision": 0.5,
-      "round": 2
+      "pipette": 3,
+      "precision": 2,
+      "round": 3
     },
     "type": "commodity_metal"
   },
@@ -388,20 +388,20 @@
     },
     "type": "index"
   },
-  "CC": {
+  "CCUSD": {
     "base": "CC",
     "counter": "USD",
     "lots": {
-      "micro": 10,
-      "mini": 100,
+      "micro": 0.1,
+      "mini": 1,
       "normalized": false,
-      "standard": 1000,
+      "standard": 10,
       "unit": "ton"
     },
     "pip": {
-      "pipette": 2,
-      "precision": 1,
-      "round": 2
+      "pipette": 1,
+      "precision": 0,
+      "round": 1
     },
     "type": "commodity_agricultural"
   },
@@ -517,30 +517,13 @@
     },
     "type": "commodity_energy"
   },
-  "CT": {
-    "base": "CT",
-    "counter": "USD",
-    "lots": {
-      "micro": 500,
-      "mini": 5000,
-      "normalized": false,
-      "standard": 50000,
-      "unit": "pound"
-    },
-    "pip": {
-      "pipette": 2,
-      "precision": 0.01,
-      "round": 2
-    },
-    "type": "commodity_agricultural"
-  },
   "DAIUSD": {
     "base": "DAI",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -618,9 +601,9 @@
     "base": "DOGE",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 6,
+      "precision": 5,
+      "round": 6
     },
     "type": "crypto"
   },
@@ -638,9 +621,9 @@
     "base": "EOS",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -963,26 +946,26 @@
     "base": "HBAR",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 6,
+      "precision": 5,
+      "round": 6
     },
     "type": "crypto"
   },
-  "HG": {
+  "HGUSD": {
     "base": "HG",
     "counter": "USD",
     "lots": {
-      "micro": 25000,
-      "mini": 125000,
+      "micro": 250,
+      "mini": 2500,
       "normalized": false,
-      "standard": 250000,
+      "standard": 25000,
       "unit": "pound"
     },
     "pip": {
       "pipette": 5,
-      "precision": 0.0005,
-      "round": 2
+      "precision": 4,
+      "round": 5
     },
     "type": "commodity_metal"
   },
@@ -1060,9 +1043,9 @@
     "base": "IOTA",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -1165,9 +1148,9 @@
     "base": "KAS",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -1175,45 +1158,11 @@
     "base": "KAVA",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
-  },
-  "KC": {
-    "base": "KC",
-    "counter": "USD",
-    "lots": {
-      "micro": 375,
-      "mini": 3750,
-      "normalized": false,
-      "standard": 37500,
-      "unit": "pound"
-    },
-    "pip": {
-      "pipette": 5,
-      "precision": 0.05,
-      "round": 2
-    },
-    "type": "commodity_agricultural"
-  },
-  "KE": {
-    "base": "KE",
-    "counter": "USD",
-    "lots": {
-      "micro": 10,
-      "mini": 100,
-      "normalized": false,
-      "standard": 1000,
-      "unit": "ton"
-    },
-    "pip": {
-      "pipette": 2,
-      "precision": 1,
-      "round": 2
-    },
-    "type": "commodity_agricultural"
   },
   "KLSEMYR": {
     "base": "KLSE",
@@ -1245,7 +1194,7 @@
     },
     "type": "crypto"
   },
-  "LEOUSUSD": {
+  "LEOUSD": {
     "base": "LEO",
     "counter": "USD",
     "pip": {
@@ -1279,9 +1228,9 @@
     "base": "MATIC",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 4,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -1586,10 +1535,10 @@
     "base": "PA",
     "counter": "USD",
     "lots": {
-      "micro": 100,
-      "mini": 1000,
+      "micro": 1,
+      "mini": 10,
       "normalized": false,
-      "standard": 10000,
+      "standard": 100,
       "unit": "ounce"
     },
     "pip": {
@@ -1643,36 +1592,19 @@
     "base": "SAND",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
-  },
-  "SB": {
-    "base": "SB",
-    "counter": "USD",
-    "lots": {
-      "micro": 1120,
-      "mini": 11200,
-      "normalized": false,
-      "standard": 112000,
-      "unit": "pound"
-    },
-    "pip": {
-      "pipette": 2,
-      "precision": 0.01,
-      "round": 2
-    },
-    "type": "commodity_agricultural"
   },
   "SEIUSD": {
     "base": "SEI",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -1710,9 +1642,9 @@
     "base": "SHIB",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 10,
+      "precision": 9,
+      "round": 10
     },
     "type": "crypto"
   },
@@ -1830,9 +1762,9 @@
     "base": "TRX",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -1895,9 +1827,9 @@
     "base": "USDC",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -2055,9 +1987,9 @@
     "base": "USDT",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -2070,9 +2002,9 @@
     "base": "VET",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -2388,9 +2320,9 @@
     "base": "XLM",
     "counter": "USD",
     "pip": {
-      "pipette": 3,
-      "precision": 2,
-      "round": 3
+      "pipette": 5,
+      "precision": 4,
+      "round": 5
     },
     "type": "crypto"
   },
@@ -2461,40 +2393,6 @@
     },
     "type": "currency_exotic"
   },
-  "ZC": {
-    "base": "ZC",
-    "counter": "USD",
-    "lots": {
-      "micro": 100,
-      "mini": 1000,
-      "normalized": false,
-      "standard": 5000,
-      "unit": "bushel"
-    },
-    "pip": {
-      "pipette": 4,
-      "precision": 0.25,
-      "round": 2
-    },
-    "type": "commodity_agricultural"
-  },
-  "ZL": {
-    "base": "ZL",
-    "counter": "USD",
-    "lots": {
-      "micro": 50,
-      "mini": 500,
-      "normalized": false,
-      "standard": 5000,
-      "unit": "pound"
-    },
-    "pip": {
-      "pipette": 5,
-      "precision": 0.01,
-      "round": 2
-    },
-    "type": "commodity_metal"
-  },
   "default_forex_lots": {
     "micro": 1000,
     "mini": 10000,
@@ -2514,6 +2412,11 @@
       "long": "barrel",
       "short": "bbl"
     },
+    "bushel": {
+      "key": "bushel",
+      "long": "bushel",
+      "short": "bu"
+    },
     "forex": {
       "key": "forex",
       "long": "unit",
@@ -2528,9 +2431,36 @@
       "key": "ounce",
       "long": "ounce",
       "short": "oz"
+    },
+    "pound": {
+      "key": "pound",
+      "long": "pound",
+      "short": "lb"
+    },
+    "ton": {
+      "key": "ton",
+      "long": "ton",
+      "short": "ton"
+    },
+    "troy_ounce": {
+      "key": "troy_ounce",
+      "long": "troy ounce",
+      "short": "ozt"
+    },
+    "unit": {
+      "key": "unit",
+      "long": "unit",
+      "short": "unit"
     }
   },
   "pair_types": {
+    "commodity_agricultural": {
+      "key": "commodities",
+      "main": "commodity",
+      "sub": "agricultural",
+      "subKey": "agricultural",
+      "weight": 20
+    },
     "commodity_energy": {
       "key": "commodities",
       "main": "commodity",
