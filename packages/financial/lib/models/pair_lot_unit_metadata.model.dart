@@ -25,6 +25,21 @@ class MatexPairLotUnitMetadata extends TModel {
       long: 'ounce',
       short: 'oz',
     ),
+    'ton': MatexPairLotUnitMetadata(
+      key: 'ton',
+      long: 'ton',
+      short: 't',
+    ),
+    'pound': MatexPairLotUnitMetadata(
+      key: 'pound',
+      long: 'pound',
+      short: 'lb',
+    ),
+    'busshel': MatexPairLotUnitMetadata(
+      key: 'busshel',
+      long: 'busshel',
+      short: 'bu',
+    ),
   };
 
   final String key;

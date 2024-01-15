@@ -293,19 +293,19 @@ abstract class MatexFinancialCalculatorBloc<
     return false;
   }
 
-  Future<int> getUnitsPerStandardLot() async {
+  Future<double> getUnitsPerStandardLot() async {
     final metadata = await getInstrumentMetadata();
 
     return metadata?.lots?.standard ?? 0;
   }
 
-  Future<int> getUnitsPerMiniLot() async {
+  Future<double> getUnitsPerMiniLot() async {
     final metadata = await getInstrumentMetadata();
 
     return metadata?.lots?.mini ?? 0;
   }
 
-  Future<int> getUnitsPerMicroLot() async {
+  Future<double> getUnitsPerMicroLot() async {
     final metadata = await getInstrumentMetadata();
 
     return metadata?.lots?.micro ?? 0;

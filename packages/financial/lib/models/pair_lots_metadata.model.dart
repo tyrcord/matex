@@ -14,10 +14,10 @@ const _kDefaultPairLotsMetadata = MatexPairLotsMetadata(
 class MatexPairLotsMetadata extends TModel {
   final MatexPairLotUnitMetadata unit;
   final bool? normalized;
-  final int? standard;
-  final int? micro;
-  final int? mini;
-  final int? nano;
+  final double? standard;
+  final double? micro;
+  final double? mini;
+  final double? nano;
 
   const MatexPairLotsMetadata({
     this.micro,
@@ -29,28 +29,33 @@ class MatexPairLotsMetadata extends TModel {
   });
 
   static MatexPairLotsMetadata fromJson(Map<String, dynamic> json) {
+    final standard = json[MatexPositionSizeType.standard.name] as num?;
+    final micro = json[MatexPositionSizeType.micro.name] as num?;
+    final mini = json[MatexPositionSizeType.mini.name] as num?;
+    final nano = json[MatexPositionSizeType.nano.name] as num?;
+
     return MatexPairLotsMetadata(
       unit: MatexPairLotUnitMetadata.fromCache(json['unit'] as String),
-      standard: json[MatexPositionSizeType.standard.name] as int?,
-      micro: json[MatexPositionSizeType.micro.name] as int?,
-      mini: json[MatexPositionSizeType.mini.name] as int?,
-      nano: json[MatexPositionSizeType.nano.name] as int?,
+      standard: standard?.toDouble(),
+      micro: micro?.toDouble(),
+      mini: mini?.toDouble(),
+      nano: nano?.toDouble(),
       normalized: json['normalized'] as bool?,
     );
   }
 
   static MatexPairLotsMetadata defaultMetatada() => _kDefaultPairLotsMetadata;
 
-  int operator [](MatexPositionSizeType size) {
+  double operator [](MatexPositionSizeType size) {
     switch (size) {
       case MatexPositionSizeType.micro:
-        return micro ?? 0;
+        return micro ?? 0.0;
       case MatexPositionSizeType.mini:
-        return mini ?? 0;
+        return mini ?? 0.0;
       case MatexPositionSizeType.nano:
-        return nano ?? 0;
+        return nano ?? 0.0;
       case MatexPositionSizeType.standard:
-        return standard ?? 0;
+        return standard ?? 0.0;
       default:
         return 0;
     }
@@ -71,11 +76,11 @@ class MatexPairLotsMetadata extends TModel {
 
   @override
   MatexPairLotsMetadata copyWith({
-    int? micro,
-    int? mini,
-    int? nano,
+    double? micro,
+    double? mini,
+    double? nano,
     bool? normalized,
-    int? standard,
+    double? standard,
     MatexPairLotUnitMetadata? unit,
   }) {
     return MatexPairLotsMetadata(
