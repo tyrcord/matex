@@ -33,7 +33,7 @@ mixin MatexLotSizeMixin {
     final metadata = bloc.currentState.metadata;
     final instrument = metadata[instrumentMetadataKey] as MatexPairMetadata?;
     final lotMetadataKey = matadataKeys[key];
-    final lotSize = metadata[lotMetadataKey] as int?;
+    final lotSize = metadata[lotMetadataKey] as double?;
     String? captionText;
 
     if (instrument != null && lotSize != null && instrument.lots != null) {
