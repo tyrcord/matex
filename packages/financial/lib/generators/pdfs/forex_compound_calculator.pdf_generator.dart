@@ -103,15 +103,18 @@ class MatexForexCompoundCalculatorPdfGenerator {
   ) {
     final hasContributions = fields.additionalContribution?.isNotEmpty ?? false;
     final hasWithdrawals = fields.withdrawalAmount?.isNotEmpty ?? false;
+    final palette = ThemeHelper.getPaletteColors(context);
 
     return [
       FastReportEntry(
         name: FinanceLocaleKeys.finance_label_ending_balance.tr(),
         value: results.formattedEndBalance!,
+        color: palette.indigo.mid,
       ),
       FastReportEntry(
         name: FinanceLocaleKeys.finance_label_total_earnings.tr(),
         value: results.formattedTotalEarnings!,
+        color: palette.green.mid,
       ),
       FastReportEntry(
         name: FinanceLocaleKeys.finance_label_rate_of_return_all_time.tr(),
@@ -121,11 +124,13 @@ class MatexForexCompoundCalculatorPdfGenerator {
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_total_deposits.tr(),
           value: results.formattedTotalContributions!,
+          color: palette.blue.mid,
         ),
       if (hasWithdrawals)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_total_withdrawals.tr(),
           value: results.formattedTotalWithdrawals!,
+          color: palette.red.mid,
         ),
     ];
   }
