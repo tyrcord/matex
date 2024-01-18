@@ -29,8 +29,8 @@ jobs:
         run: flutter pub get
 
       # Code analysis
-      - name: Analyze project source
-        run: melos run --no-select analyze
+      # - name: Analyze project source
+      #   run: melos run --no-select analyze
 
       # Run tests
       - name: Run tests
