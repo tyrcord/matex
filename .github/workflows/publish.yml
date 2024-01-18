@@ -16,6 +16,9 @@ jobs:
       # Checkout the code
       - name: Checkout the code
         uses: actions/checkout@v4
+        with:
+          # This is required to allow another workflow to be triggered
+          token: ${{ secrets.WORKFLOW_TOKEN }}
 
       # Install Flutter
       - name: Install and set Flutter version
