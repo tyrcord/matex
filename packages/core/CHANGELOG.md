@@ -1,3 +1,79 @@
+## 0.0.33
+
+ - **REFACTOR**: isMandatoryFieldValid.
+ - **PERF**: minor improvement.
+ - **FIX**: remove defaults min and max fraction digits.
+ - **FIX**: use toSafeDouble.
+ - **FIX**: bunch of fixes.
+ - **FIX**: use right document for resetCalculatorBlocState.
+ - **FIX**: bunch of fixes.
+ - **FIX**: wrong initial validity.
+ - **FIX**: remove fastyle_ad dependency.
+ - **FIX**: regression.
+ - **FIX**: make sure we keep the default metadata after reseting a calculator.
+ - **FIX**: dependency requirements.
+ - **FIX**: minor issue.
+ - **FEAT**: add default financial instrument to pip value calculator.
+ - **FEAT**: allow to change the filename of a PDF report.
+ - **FEAT**: update dependencies.
+ - **FEAT**: support latest fastyle.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: allow to the value of a calculator asynchronously.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add  tenhance dependencies.
+ - **FEAT**: add parseStringToInt.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add PDF generators.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: more tests.
+ - **FEAT**: support latest fastyle_settings.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: implement toPdf for MatexVatCalculatorBloc.
+ - **FEAT**: update dependencies.
+ - **FEAT**: override canSaveEntry.
+ - **FEAT**: allow to override share user interactions.
+ - **FEAT**: remove dead code.
+ - **FEAT**: update dependencies.
+ - **FEAT**: support default values.
+ - **FEAT**: add matex core package.
+ - **FEAT**: update dependencies.
+ - **FEAT**: forex pip delta version 1.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: remove dead code.
+ - **FEAT**: add validators to MatexStockPositionSizeCalculator.
+ - **FEAT**: better export to PDF file.
+ - **FEAT**: add pivot points logic.
+ - **FEAT**: update dependencies.
+ - **FEAT**: handle exchange rate errors.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add metadata to blocs.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**(core): add default info button.
+ - **FEAT**: generate stock position size pdf report.
+ - **FEAT**: first implementation of stock position calculator.
+ - **FEAT**: implement shareCalculatorState.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add UserPreferences Bloc.
+ - **FEAT**: support dart 3 & flutter 3.10.0.
+ - **FEAT**: update dependencies.
+
 ## 0.0.32
 
  - **FEAT**: allow to the value of a calculator asynchronously.
