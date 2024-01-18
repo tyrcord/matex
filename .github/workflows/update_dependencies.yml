@@ -1,0 +1,63 @@
+name: Update dependency versions
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [update_dependencies]
+
+env:
+  changes: 0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Set up Flutter environment
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      # Precache Flutter
+      - name: Precache Flutter
+        run: flutter precache --ios
+
+      # Checkout the repository
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      # Install Melos
+      - name: Install and set Melos version
+        uses: bluefireteam/melos-action@v3
+
+      # Update pubspec files
+      - name: Update pubspec files
+        run: |
+          export DEPENDENCY_DATA=$(<./data/dependencies.json) && \
+          melos run --no-select update:pubspec
+
+      # Install packages dependencies
+      - name: Install packages dependencies
+        run: melos bs
+
+      # Check for any changes
+      - name: Check for pubspec file changes
+        id: git-check
+        run: |
+          git diff --exit-code -- '**/pubspec.yaml' || echo "changes=1" >> $GITHUB_ENV
+
+      # Configure Git
+      - name: Configure Git
+        if: env.changes == '1'
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "actions@github.com"
+
+      # Commit and push changes
+      - name: Commit and push Changes
+        if: env.changes == '1'
+        run: |
+          git add -u **/pubspec.yaml
+          git commit -m "Update dependencies"
+          git push

@@ -1,0 +1,66 @@
+name: Update localization files
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [update_localization]
+
+env:
+  changes: 0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Set up Flutter environment
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      # Precache Flutter
+      - name: Precache Flutter
+        run: flutter precache --ios
+
+      # Checkout the repository
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      # Install Melos
+      - name: Install and set Melos version
+        uses: bluefireteam/melos-action@v3
+
+      # Install dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Update localization files
+      - name: Update localization files
+        run: melos run --no-select update:resources
+
+      # Update keys in localization files
+      - name: Update keys in localization files
+        run: melos run --no-select generate:keys
+
+      # Check for any changes
+      - name: Check for any changes
+        id: git-check
+        run: |
+          git diff --exit-code -- '*.dart' '*.json' || echo "changes=1" >> $GITHUB_ENV
+
+      # Configure Git
+      - name: Configure Git
+        if: env.changes == '1'
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "actions@github.com"
+
+      # Commit and push changes
+      - name: Commit and push files
+        if: env.changes == '1'
+        run: |
+          git add *.dart
+          git add *.json
+          git commit -m "chore: update localization files"
+          git push
