@@ -1,3 +1,218 @@
+## 0.0.47
+
+ - **REFACTOR**: property names.
+ - **REFACTOR**: isMandatoryFieldValid.
+ - **REFACTOR**: MatexFinancialInstrumentsBloc.
+ - **FIX**: short positions.
+ - **FIX**: typo.
+ - **FIX**: use toSafeDouble.
+ - **FIX**: minor improvements.
+ - **FIX**: avoid to compute tax amount when profit is negative.
+ - **FIX**: bunch of fixes.
+ - **FIX**: typo.
+ - **FIX**: bunch of fixes.
+ - **FIX**: display lot size in pdfs.
+ - **FIX**: bunch of fixes.
+ - **FIX**: allow user default value to override default value from documents.
+ - **FIX**: bunch of fixes.
+ - **FIX**: Pivot Points Camarilla.
+ - **FIX**: typos.
+ - **FIX**: bunch of fixes.
+ - **FIX**: SL/TP calculator.
+ - **FIX**: wrong dependency version.
+ - **FIX**: required margin.
+ - **FIX**: allow negative pnl computations.
+ - **FIX**: allow to reset some fields.
+ - **FIX**: Pdf for Forex position Calculator.
+ - **FIX**: minor improvements.
+ - **FIX**: dispatch metadata in advance to avoid UI flickering.
+ - **FIX**: override  getUserCurrencyCode.
+ - **FIX**: reset entry price when stop loss type change.
+ - **FIX**: attempts to fix tests.
+ - **FIX**: typo.
+ - **FIX**: deprecated use of describeEnum.
+ - **FIX**: show the defaults results when resetting.
+ - **FIX**: regression.
+ - **FIX**: bunch of fixes.
+ - **FIX**: use24HourFormat.
+ - **FIX**: move away from Decimal for performance issue.
+ - **FIX**: minor improvement.
+ - **FIX**: bunch of fixes.
+ - **FIX**: bunch of fixes.
+ - **FIX**: minor improvements.
+ - **FIX**(compound): frequency logic.
+ - **FIX**: better user country handling.
+ - **FIX**: minor issues.
+ - **FIX**: remove fastyle_ad dependency.
+ - **FIX**: remove MatexSelectCurrencyField.
+ - **FIX**: regression.
+ - **FIX**: typo.
+ - **FIX**: support very small values correctly.
+ - **FIX**: minor improvements.
+ - **FIX**: rename to RiskReward.
+ - **FIX**: minor improvements.
+ - **FIX**: dependency requirements.
+ - **FIX**: wrong import.
+ - **FIX**: missing export.
+ - **FIX**: wrong dependency requirement.
+ - **FIX**: bunch of fixes.
+ - **FIX**: minor fixes.
+ - **FEAT**: minor changes.
+ - **FEAT**: minor improvements.
+ - **FEAT**: added MatexDividendPayoutRatioCalculatorBloc.
+ - **FEAT**: add MatexDividendYieldCalculatorPdfGenerator.
+ - **FEAT**: implement dividend yield calculator bloc.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add dividend calculators.
+ - **FEAT**: added MatexFinancialFrequency.
+ - **FEAT**: allow to reset account size.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add more results to profit and loss.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**(MatexForexCompoundCalculatorPdfGenerator): add colors.
+ - **FEAT**: handle exchange rate errors.
+ - **FEAT**: add default risk percent settings.
+ - **FEAT**: update MatexForexPositionSizeCalculatorPdfGenerator.
+ - **FEAT**: bunch of improvements.
+ - **FEAT**: add stopLossPrice result to fx position calculator.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: use default user values.
+ - **FEAT**: add periods.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add fastyle financial dependencies.
+ - **FEAT**: refactor validators.
+ - **FEAT**: implement forex compounding calculator.
+ - **FEAT**: implement MatexForexPositionSizeCalculatorPdfGenerator.
+ - **FEAT**: update dependencies.
+ - **FEAT**: implement ForexPositionSize Results.
+ - **FEAT**: update dependencies.
+ - **FEAT**: implement position calculator.
+ - **FEAT**: implement MatexForexPositionSizeCalculator results.
+ - **FEAT**: missing MatexForexPositionSizeCalculatorBloc results.
+ - **FEAT**: implement fx pos cal fields.
+ - **FEAT**: clean up.
+ - **FEAT**: add structure for forex position size calculator.
+ - **FEAT**: support more default values.
+ - **FEAT**: update dependencies.
+ - **FEAT**: support lot sizes.
+ - **FEAT**: update doc versions.
+ - **FEAT**: compound calculator can export to CSV.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: move away from matex_dart.
+ - **FEAT**: add  tenhance dependencies.
+ - **FEAT**: clean up.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add default financial instrument to pip value calculator.
+ - **FEAT**: add pdf generator for pip value.
+ - **FEAT**: update dependencies.
+ - **FEAT**: debounce compute events.
+ - **FEAT**: implement pip value results.
+ - **FEAT**: add MatexFinancialInstrumentExchangeService.
+ - **FEAT**: support new metadata.
+ - **FEAT**: update dependencies.
+ - **FEAT**: added MatexFinancialInstrumentCalculatorBlocFields interface.
+ - **FEAT**: add quote model.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add favorite instrument logic.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: implement MatexPipValueCalculator.
+ - **FEAT**: add logic for stop loss & take profit logic.
+ - **FEAT**: add MatexInstrumentPairsBloc.
+ - **FEAT**: initial structure for pip calculator.
+ - **FEAT**: update dependencies.
+ - **FEAT**(MatexProfitAndLossCalculatorPdfGenerator): add additional metrics category.
+ - **FEAT**: update localization.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add default tax rate to MatexProfitAndLossCalculatorBloc.
+ - **FEAT**: add MatexProfitAndLossCalculatorPdfGenerator.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add PDF generators.
+ - **FEAT**: add required margin logic.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: implement MatexProfitAndLossCalculator.
+ - **FEAT**: initial commit for MatexProfitAndLossCalculatorBloc.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**(PDF): support short position.
+ - **FEAT**: add MatexVatCalculator.
+ - **FEAT**: add support for short positions.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add logic for fx profit & loss.
+ - **FEAT**: more tests.
+ - **FEAT**: update dependencies.
+ - **FEAT**: bunch of improvements.
+ - **FEAT**: support latest fastyle_settings.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add vat validators.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: implement toPdf for MatexVatCalculatorBloc.
+ - **FEAT**: minor improvements.
+ - **FEAT**: minor improvements.
+ - **FEAT**: stock position size supports short positions.
+ - **FEAT**: update dependencies.
+ - **FEAT**: support takeProfitAmountAfterFee.
+ - **FEAT**: minor improvements.
+ - **FEAT**: toleratedRisk should be red when it's equal to effectiveRisk.
+ - **FEAT**: add pivot points logic.
+ - **FEAT**: update dependencies.
+ - **FEAT**: support default values.
+ - **FEAT**: implement fibonnaci levels pdf generator.
+ - **FEAT**(pdf): add subtitle.
+ - **FEAT**: update dependencies.
+ - **FEAT**: localize PDF.
+ - **FEAT**: add fibonacci levels.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: added pip delta calculator.
+ - **FEAT**: minor improvements.
+ - **FEAT**: add validators to MatexStockPositionSizeCalculator.
+ - **FEAT**: better export to PDF file.
+ - **FEAT**: localize text.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: set dividend document versions.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: update dependencies.
+ - **FEAT**: allow to clear the selection.
+ - **FEAT**: update fastyle_financial dependency.
+ - **FEAT**: rename MatexInstrumentBloc to MatexCurrencyBloc.
+ - **FEAT**: add MatexDividendReinvestmentCalculatorPdfGenerator.
+ - **FEAT**: add instruments ui.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**: better pdf for stock position.
+ - **FEAT**(StockPositionSizeCalculator): add missing results.
+ - **FEAT**: more results.
+ - **FEAT**: generate stock position size pdf report.
+ - **FEAT**: add risk and amount at risk support.
+ - **FEAT**: implement MatexStockPositionSizeCalculatorBloc.
+ - **FEAT**: add more results.
+ - **FEAT**: use Decimal package for MatexStockPositionSizeCalculator.
+ - **FEAT**: first implementation of stock position calculator.
+ - **FEAT**: implement shareCalculatorState.
+ - **FEAT**: more tests.
+ - **FEAT**: add missing properties.
+ - **FEAT**: minor improvements.
+ - **FEAT**: added MatexDividendReinvestmentCalculatorBloc.
+ - **FEAT**: update dependencies.
+ - **FEAT**: rename discountPercentage.
+ - **FEAT**: add missing features.
+ - **FEAT**: support dart 3 & flutter 3.10.0.
+ - **FEAT**: allow to change the filename of a PDF report.
+ - **FEAT**: forex pip delta version 1.
+
 ## 0.0.46
 
  - **REFACTOR**: property names.
