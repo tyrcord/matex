@@ -28,6 +28,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      # melos bootstrap
+      - name: Bootstrap
+        run: melos bootstrap
+
       # Code analysis
       # - name: Analyze project source
       #   run: melos run --no-select analyze
