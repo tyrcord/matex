@@ -1,3 +1,40 @@
+## 0.0.26
+
+ - **FIX**: typo.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update metadata.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update currencies.
+ - **FEAT**: update data.
+ - **FEAT**: add jamaican dollar.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update metadata.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: move away from matex_dart.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: initial commit for matex_data.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: add findOneByCountryCode method.
+ - **FEAT**: bunch of improvements.
+ - **FEAT**: update country metadata.
+ - **FEAT**: update dependencies.
+ - **FEAT**: minor perf improvements.
+ - **FEAT**: add country data bloc.
+ - **FEAT**: update country data.
+ - **FEAT**: add id property to MatexCountryMetadata.
+ - **FEAT**: add MatexCountryMetadata.
+ - **FEAT**: update dependencies.
+
 ## 0.0.25
 
  - **FIX**: typo.
