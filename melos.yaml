@@ -39,5 +39,5 @@ scripts:
       scope:
         - matex_data
 
-  update:dependencies:
+  update:pubspec:
     exec: python3 $PWD/scripts/update_pubspec.py

@@ -2,31 +2,31 @@ dependencies:
   cross_file: ^0.3.3+6
   decimal: ^2.3.3
   easy_localization: ^3.0.3
-  fastyle_calculator: ^1.55.0
-  fastyle_core: ^0.0.46
-  fastyle_financial: ^0.0.39
-  fastyle_forms: ^0.0.44
+  fastyle_calculator: ^1.57.0
+  fastyle_core: ^0.0.48
+  fastyle_financial: ^0.0.42
+  fastyle_forms: ^0.0.46
   flutter:
     sdk: flutter
-  lingua_core: ^0.0.34
-  lingua_finance: ^0.0.30
-  lingua_finance_dividend: ^0.0.8
-  lingua_finance_forex: ^0.0.11
-  lingua_finance_stock: ^0.0.11
-  lingua_number: ^0.0.10+2
-  lingua_settings: ^0.0.14
-  lingua_units: ^0.0.7
+  lingua_core: ^0.0.36
+  lingua_finance: ^0.0.33
+  lingua_finance_dividend: ^0.0.10
+  lingua_finance_forex: ^0.0.13
+  lingua_finance_stock: ^0.0.13
+  lingua_number: ^0.0.12
+  lingua_settings: ^0.0.17
+  lingua_units: ^0.0.9
   matex_core: ^0.0.37
   matex_data: ^0.0.29
   pdf: ^3.10.6
   printing: ^5.11.1
   rxdart: ^0.27.7
-  t_helpers: ^0.0.50
-  tbloc: ^0.21.9
-  tenhance: ^0.0.7
-  tlogger: ^0.0.7+4
-  tmodel: ^0.5.12+13
-  tstore: ^0.8.22+8
+  t_helpers: ^0.0.51
+  tbloc: ^0.22.0
+  tenhance: ^0.0.8
+  tlogger: ^0.0.8
+  tmodel: ^0.5.13
+  tstore: ^0.8.23
 description: An assortment of helpful tools and calculators specifically designed
   for use within the financial sector.
 dev_dependencies:
