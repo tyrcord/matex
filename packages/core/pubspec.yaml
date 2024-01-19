@@ -13,7 +13,7 @@ dependencies:
   path_provider: ^2.1.1
   share_plus: ^7.2.1
   t_helpers: ^0.0.51
-  tbloc: ^0.22.0
+  tbloc: ^0.21.0
   tenhance: ^0.0.8
   tmodel: ^0.5.13
   tstore: ^0.8.23
@@ -25,8 +25,8 @@ dev_dependencies:
     sdk: flutter
   import_sorter: ^4.6.0
 environment:
-  flutter: '>=3.16.0'
-  sdk: '>=3.2.0 <4.0.0'
+  flutter: ">=3.16.0"
+  sdk: ">=3.2.0 <4.0.0"
 name: matex_core
 repository: https://github.com/tyrcord/matex/tree/main/packages/core
 version: 0.0.40
