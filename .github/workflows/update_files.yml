@@ -10,9 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
+          # This is required to allow another workflow to be triggered
           token: ${{ secrets.WORKFLOW_TOKEN }}
 
       # Configure Git
@@ -110,7 +112,7 @@ jobs:
             echo "No changes to commit"
           else
             # Commit the changes
-            git commit -m "Update files from codex repository"
+            git commit -m "chore: updated files from codex repository"
 
             # Push the changes back to the origin
             git push
