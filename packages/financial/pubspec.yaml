@@ -2,7 +2,7 @@ dependencies:
   cross_file: ^0.3.3+6
   decimal: ^2.3.3
   easy_localization: ^3.0.3
-  fastyle_calculator: ^1.57.0
+  fastyle_calculator: ^1.59.0
   fastyle_core: ^0.0.48
   fastyle_financial: ^0.0.42
   fastyle_forms: ^0.0.46
@@ -16,8 +16,8 @@ dependencies:
   lingua_number: ^0.0.12
   lingua_settings: ^0.0.17
   lingua_units: ^0.0.9
-  matex_core: ^0.0.38
-  matex_data: ^0.0.30
+  matex_core: ^0.0.37
+  matex_data: ^0.0.29
   pdf: ^3.10.6
   printing: ^5.11.1
   rxdart: ^0.27.7

@@ -2,7 +2,7 @@ dependencies:
   collection: ^1.18.0
   decimal: ^2.3.3
   easy_localization: ^3.0.3
-  fastyle_calculator: ^1.57.0
+  fastyle_calculator: ^1.59.0
   fastyle_core: ^0.0.48
   fastyle_settings: ^0.0.51
   flutter:
