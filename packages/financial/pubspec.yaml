@@ -16,8 +16,8 @@ dependencies:
   lingua_number: ^0.0.12
   lingua_settings: ^0.0.17
   lingua_units: ^0.0.9
-  matex_core: ^0.0.37
-  matex_data: ^0.0.29
+  matex_core: ^0.0.38
+  matex_data: ^0.0.30
   pdf: ^3.10.6
   printing: ^5.11.1
   rxdart: ^0.27.7
@@ -40,4 +40,4 @@ environment:
   sdk: '>=3.2.0 <4.0.0'
 name: matex_financial
 repository: https://github.com/tyrcord/matex/tree/main/packages/financial
-version: 0.0.47
+version: 0.0.48
