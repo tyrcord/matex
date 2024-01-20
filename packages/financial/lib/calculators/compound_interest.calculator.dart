@@ -1,9 +1,15 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
 import 'package:flutter/foundation.dart';
-import 'package:matex_financial/financial.dart';
+
+// Package imports:
 import 'package:matex_core/core.dart';
 import 'package:tenhance/tenhance.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 class MatexCompoundInterestCalculator extends MatexCalculator<
     MatexCompoundInterestCalculatorState,

@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:tmodel/tmodel.dart';
 
 /// Represents a financial quote with price, symbol, and a timestamp.

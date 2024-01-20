@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:matex_financial/financial.dart';
 import 'package:lingua_units/lingua_units.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 mixin MatexLotSizeMixin {
   static const matadataKeys = {

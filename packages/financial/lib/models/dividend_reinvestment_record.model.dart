@@ -1,6 +1,7 @@
+// Package imports:
 import 'package:decimal/decimal.dart';
-import 'package:tmodel/tmodel.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tmodel/tmodel.dart';
 
 class MatexDividendReinvestementRecord extends TModel {
   final double? dividendAmount;

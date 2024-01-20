@@ -11,9 +11,9 @@ import 'package:fastyle_core/fastyle_core.dart';
 import 'package:lingua_core/generated/locale_keys.g.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:lingua_finance_forex/generated/locale_keys.g.dart';
+import 'package:lingua_units/lingua_units.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
-import 'package:lingua_units/lingua_units.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';

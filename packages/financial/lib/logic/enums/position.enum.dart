@@ -1,5 +1,6 @@
-import 'package:lingua_finance/generated/locale_keys.g.dart';
+// Package imports:
 import 'package:easy_localization/easy_localization.dart';
+import 'package:lingua_finance/generated/locale_keys.g.dart';
 
 enum MatexPosition {
   long,

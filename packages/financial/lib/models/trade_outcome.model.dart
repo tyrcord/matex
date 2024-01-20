@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:tmodel/tmodel.dart';
 
 class MatexForexTradeOutcome extends TModel {

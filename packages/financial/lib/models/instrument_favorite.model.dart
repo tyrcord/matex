@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:tmodel/tmodel.dart';
 
 /// This class represents a favorite financial instrument.

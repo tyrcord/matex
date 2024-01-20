@@ -1,6 +1,8 @@
 // Package imports:
-import 'package:matex_financial/financial.dart';
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 /// The state of the `MatexFinancialInstrumentBloc`.
 class MatexFinancialInstrumentsBlocState extends BlocState {

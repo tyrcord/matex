@@ -1,7 +1,12 @@
 // Package imports
+
+// Package imports:
 import 'package:matex_core/core.dart';
-// Project imports
+
+// Project imports:
 import 'package:matex_financial/financial.dart';
+
+// Project imports
 
 // Validators for profit and loss calculation
 final List<MatexCalculatorValidator<MatexProfitAndLossCalculatorState>>

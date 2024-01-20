@@ -1,9 +1,9 @@
 // Flutter imports:
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
-import 'package:flutter/widgets.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:tenhance/decimal.dart';

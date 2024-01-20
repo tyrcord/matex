@@ -1,7 +1,12 @@
 // Package imports
+
+// Package imports:
 import 'package:matex_core/core.dart';
-// Project imports
+
+// Project imports:
 import 'package:matex_financial/financial.dart';
+
+// Project imports
 
 List<MatexCalculatorValidator<MatexDividendReinvestmentCalculatorState>>
     dividendReinvestmentValidators = [

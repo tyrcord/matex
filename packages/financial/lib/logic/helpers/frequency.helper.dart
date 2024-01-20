@@ -1,5 +1,7 @@
 // Package imports:
 import 'package:lingua_core/generated/locale_keys.g.dart';
+
+// Project imports:
 import 'package:matex_financial/financial.dart';
 
 /// Gets the locale key for a given financial frequency.

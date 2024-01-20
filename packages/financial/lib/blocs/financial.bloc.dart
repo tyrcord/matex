@@ -1,13 +1,18 @@
+// Flutter imports:
+import 'package:flutter/foundation.dart';
+
+// Package imports:
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:matex_core/core.dart';
-import 'package:matex_financial/financial.dart';
 import 'package:t_helpers/helpers.dart';
 import 'package:tenhance/decimal.dart';
 import 'package:tlogger/logger.dart';
-import 'package:easy_localization/easy_localization.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 abstract class MatexFinancialCalculatorBloc<
         C extends MatexCalculator,

@@ -1,5 +1,8 @@
-import 'package:matex_financial/financial.dart';
+// Package imports:
 import 'package:tmodel/tmodel.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 class MatexFibonacciLevelsCalculatorResults extends TModel {
   final List<MatexFibonacciLevel> retracementLevels;

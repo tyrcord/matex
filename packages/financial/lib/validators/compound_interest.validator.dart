@@ -1,8 +1,13 @@
 // Package imports
+
+// Package imports:
 import 'package:matex_core/core.dart';
-// Project imports
-import 'package:matex_financial/financial.dart';
 import 'package:tenhance/tenhance.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
+
+// Project imports
 
 final List<MatexCalculatorValidator<MatexCompoundInterestCalculatorState>>
     compoundInterestValidators = [

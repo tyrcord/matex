@@ -3,16 +3,16 @@ import 'dart:async';
 import 'dart:io';
 
 // Flutter imports:
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:lingua_core/generated/locale_keys.g.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 // Project imports:
 import 'package:matex_core/core.dart';

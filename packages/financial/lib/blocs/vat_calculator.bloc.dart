@@ -8,10 +8,10 @@ import 'package:fastyle_core/fastyle_core.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_data/matex_data.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
-import 'package:tenhance/decimal.dart';
 
 final _kDefaultVatBlocState = MatexVatCalculatorBlocState(
   fields: MatexVatCalculatorBlocFields(),

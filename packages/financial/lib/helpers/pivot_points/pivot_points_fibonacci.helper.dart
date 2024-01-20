@@ -1,6 +1,9 @@
-import 'package:matex_financial/financial.dart';
+// Package imports:
 import 'package:t_helpers/helpers.dart';
 import 'package:tenhance/decimal.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 final _fibonacci382 = toDecimalOrDefault('0.382');
 final _fibonacci618 = toDecimalOrDefault('0.618');

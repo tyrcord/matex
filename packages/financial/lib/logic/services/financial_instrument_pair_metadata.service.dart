@@ -1,7 +1,11 @@
+// Dart imports:
 import 'dart:async';
 import 'dart:convert' show jsonDecode;
 
+// Flutter imports:
 import 'package:flutter/services.dart';
+
+// Project imports:
 import 'package:matex_financial/financial.dart';
 
 const _kAssetPath = 'packages/matex_data/assets/meta/pairs.json';

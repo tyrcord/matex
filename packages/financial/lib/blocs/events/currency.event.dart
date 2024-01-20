@@ -1,6 +1,8 @@
 // Package imports:
-import 'package:matex_financial/models/models.dart';
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_financial/models/models.dart';
 
 enum MatexCurrencyBlocEventType {
   init,

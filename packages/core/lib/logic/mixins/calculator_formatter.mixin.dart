@@ -2,9 +2,9 @@
 import 'package:flutter/foundation.dart';
 
 // Package imports:
+import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:t_helpers/helpers.dart';
-import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 mixin MatexCalculatorFormatterMixin {
   /// An optional delegate for handling MatexCalculatorBloc-specific tasks.

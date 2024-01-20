@@ -1,5 +1,8 @@
-import 'package:matex_financial/models/dividend_reinvestment_payout_yearly_report.model.dart';
+// Package imports:
 import 'package:tmodel/tmodel.dart';
+
+// Project imports:
+import 'package:matex_financial/models/dividend_reinvestment_payout_yearly_report.model.dart';
 
 class MatexDividendReinvestmentCalculatorResults extends TModel {
   // Define Properties

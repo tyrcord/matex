@@ -1,6 +1,10 @@
 // Import the required packages.
-import 'package:matex_financial/financial.dart';
+
+// Package imports:
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 /// Define an enumeration for the different types of events that can occur in
 /// the [MatexInstrumentFavoriteBloc].

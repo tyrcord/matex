@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:fastyle_core/fastyle_core.dart';
+
+// Project imports:
 import 'package:matex_financial/financial.dart';
 
 /// Determines whether the financial instrument is marked as favorite or not

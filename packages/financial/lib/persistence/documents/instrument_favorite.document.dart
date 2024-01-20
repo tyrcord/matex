@@ -1,5 +1,8 @@
-import 'package:matex_financial/financial.dart';
+// Package imports:
 import 'package:tstore/tstore.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 /// Represents a document that contains a list of favorite financial
 /// instruments.
