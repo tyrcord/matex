@@ -5,8 +5,6 @@ import 'package:flutter/widgets.dart';
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 import 'package:tlogger/logger.dart';
 
 // Project imports:
@@ -99,10 +97,10 @@ class MatexForexRequiredMarginCalculatorBloc
 
     // update the calculator position size with the latest lot size
     if (positionSizeFieldType != MatexPositionSizeType.unit) {
-      final dLotSize = toDecimalOrDefault(currentState.fields.lotSize);
+      final dLotSize = parseStringToDouble(currentState.fields.lotSize);
 
       final positionSize = await getPositionSizeForLotSize(
-        positionSize: dLotSize.toSafeDouble(),
+        positionSize: dLotSize,
         lotSize: positionSizeFieldType,
       );
 
@@ -334,9 +332,9 @@ class MatexForexRequiredMarginCalculatorBloc
 
       calculator.positionSize = 0;
     } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(positionSize: value);
-      calculator.positionSize = dValue.toSafeDouble();
+      calculator.positionSize = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -367,9 +365,9 @@ class MatexForexRequiredMarginCalculatorBloc
       fields = currentState.fields.copyWithDefaults(resetLeverage: true);
       calculator.leverage = kMatexDefaultLeverage;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(leverage: value);
-      calculator.leverage = dValue.toSafeDouble();
+      calculator.leverage = dValue;
     }
 
     return currentState.copyWith(fields: fields);

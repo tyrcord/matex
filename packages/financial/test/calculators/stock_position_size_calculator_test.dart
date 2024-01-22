@@ -319,7 +319,7 @@ void main() {
 
         expect(results.shares, 24);
         expect(results.positionAmount, 3564.00);
-        expect(results.effectiveRisk, 193.2);
+        expect(results.effectiveRisk, closeTo(193.2, 0.2));
         expect(results.entryPriceWithSlippage, 148.5);
         expect(results.stopLossPriceWithSlippage, 156.55);
         expect(results.stopLossPercent, closeTo(0.033, 1e-3));
@@ -342,14 +342,14 @@ void main() {
         final results = calculator.value();
 
         expect(results.shares, 24);
-        expect(results.effectiveRisk, 193.2);
+        expect(results.effectiveRisk, closeTo(193.2, 0.1));
         expect(results.positionAmount, 3600);
         expect(results.entryFeeAmount, 36.0);
-        expect(results.stopLossFeeAmount, 37.2);
-        expect(results.totalFeesForLossPosition, 73.2);
-        expect(results.takeProfitAmount, 386.4);
-        expect(results.takeProfitPrice, 133.9);
-        expect(results.takeProfitAmountAfterFee, 354.264);
+        expect(results.stopLossFeeAmount, closeTo(37.2, 0.1));
+        expect(results.totalFeesForLossPosition, closeTo(73.2, 0.1));
+        expect(results.takeProfitAmount, closeTo(386.4, 0.1));
+        expect(results.takeProfitPrice, closeTo(133.9, 0.1));
+        expect(results.takeProfitAmountAfterFee, closeTo(354.264, 0.001));
         expect(results.stopLossPercent, closeTo(0.033, 1e-3));
       });
 

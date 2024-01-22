@@ -1,7 +1,3 @@
-// Package imports:
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
-
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
@@ -10,22 +6,21 @@ MatexPivotPointsCalculatorResults pivotPointsWoodie(
   double? low,
   double? close,
 ) {
-  final dHighPrice = toDecimalOrDefault(high);
-  final dLowPrice = toDecimalOrDefault(low);
-  final dClosePrice = toDecimalOrDefault(close);
+  close ??= 0;
+  high ??= 0;
+  low ??= 0;
 
-  final pivotPoint = decimalFromRational(
-      (dClosePrice * dTwo + dLowPrice + dHighPrice) / dFour);
+  final pivotPoint = (close * 2 + low + high) / 4;
 
-  final dResistance1 = pivotPoint * dTwo - dLowPrice;
-  final dResistance2 = pivotPoint + dHighPrice - dLowPrice;
+  final dResistance1 = pivotPoint * 2 - low;
+  final dResistance2 = pivotPoint + high - low;
 
-  final dSupport1 = pivotPoint * dTwo - dHighPrice;
-  final dSupport2 = pivotPoint - dHighPrice + dLowPrice;
+  final dSupport1 = pivotPoint * 2 - high;
+  final dSupport2 = pivotPoint - high + low;
 
   return MatexPivotPointsCalculatorResults(
-    pivotPoint: pivotPoint.toSafeDouble(),
-    resistances: [dResistance1.toSafeDouble(), dResistance2.toSafeDouble()],
-    supports: [dSupport1.toSafeDouble(), dSupport2.toSafeDouble()],
+    resistances: [dResistance1, dResistance2],
+    supports: [dSupport1, dSupport2],
+    pivotPoint: pivotPoint,
   );
 }

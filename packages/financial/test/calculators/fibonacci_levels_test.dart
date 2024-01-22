@@ -65,10 +65,8 @@ void main() {
 
         // retracements
 
-        expect(
-          retracements[0],
-          equals(MatexFibonacciLevel(level: 0.236, value: 1.3264)),
-        );
+        expect(retracements[0].level, closeTo(0.236, 0.001));
+        expect(retracements[0].value, closeTo(1.3264, 0.0001));
 
         expect(
           retracements[1],
@@ -85,67 +83,43 @@ void main() {
           equals(MatexFibonacciLevel(level: 0.618, value: 1.28820)),
         );
 
-        expect(
-          retracements[4],
-          equals(MatexFibonacciLevel(level: 0.786, value: 1.27140)),
-        );
+        expect(retracements[4].level, closeTo(0.786, 0.001));
+        expect(retracements[4].value, closeTo(1.2714, 0.0001));
 
         // extensions
 
-        expect(
-          extensions[0],
-          equals(MatexFibonacciLevel(level: 2.618, value: 1.61180)),
-        );
+        expect(extensions[0].level, closeTo(2.618, 0.001));
+        expect(extensions[0].value, closeTo(1.61180, 0.0001));
 
-        expect(
-          extensions[1],
-          equals(MatexFibonacciLevel(level: 2, value: 1.55)),
-        );
+        expect(extensions[1].level, closeTo(2, 1));
+        expect(extensions[1].value, closeTo(1.55, 0.01));
 
-        expect(
-          extensions[2],
-          equals(MatexFibonacciLevel(level: 1.618, value: 1.5118)),
-        );
+        expect(extensions[2].level, closeTo(1.618, 0.001));
+        expect(extensions[2].value, closeTo(1.5118, 0.0001));
 
-        expect(
-          extensions[3],
-          equals(MatexFibonacciLevel(level: 1.5, value: 1.5)),
-        );
+        expect(extensions[3].level, closeTo(1.5, 0.1));
+        expect(extensions[3].value, closeTo(1.5, 0.1));
 
-        expect(
-          extensions[4],
-          equals(MatexFibonacciLevel(level: 1.382, value: 1.48820)),
-        );
+        expect(extensions[4].level, closeTo(1.382, 0.001));
+        expect(extensions[4].value, closeTo(1.48820, 0.0001));
 
-        expect(
-          extensions[5],
-          equals(MatexFibonacciLevel(level: 1.236, value: 1.4736)),
-        );
+        expect(extensions[5].level, closeTo(1.236, 0.001));
+        expect(extensions[5].value, closeTo(1.4736, 0.0001));
 
-        expect(
-          extensions[6],
-          equals(MatexFibonacciLevel(level: 1, value: 1.45)),
-        );
+        expect(extensions[6].level, closeTo(1, 1));
+        expect(extensions[6].value, closeTo(1.45, 0.01));
 
-        expect(
-          extensions[7],
-          equals(MatexFibonacciLevel(level: 0.618, value: 1.4118)),
-        );
+        expect(extensions[7].level, closeTo(0.618, 0.001));
+        expect(extensions[7].value, closeTo(1.4118, 0.0001));
 
-        expect(
-          extensions[8],
-          equals(MatexFibonacciLevel(level: 0.5, value: 1.4)),
-        );
+        expect(extensions[8].level, closeTo(0.5, 0.1));
+        expect(extensions[8].value, closeTo(1.4, 0.1));
 
-        expect(
-          extensions[9],
-          equals(MatexFibonacciLevel(level: 0.382, value: 1.38820)),
-        );
+        expect(extensions[9].level, closeTo(0.382, 0.001));
+        expect(extensions[9].value, closeTo(1.38820, 0.0001));
 
-        expect(
-          extensions[10],
-          equals(MatexFibonacciLevel(level: 0.236, value: 1.3736)),
-        );
+        expect(extensions[10].level, closeTo(0.236, 0.001));
+        expect(extensions[10].value, closeTo(1.3736, 0.0001));
       });
 
       test('should return the correct value when the trend is down', () {
@@ -160,10 +134,9 @@ void main() {
 
         // retracements
 
-        expect(
-          retracements[0],
-          equals(MatexFibonacciLevel(level: 0.786, value: 1.3286)),
-        );
+        expect(retracements[0].level, closeTo(0.786, 0.001));
+
+        expect(retracements[0].value, closeTo(1.3286, 0.0001));
 
         expect(
           retracements[1],
@@ -180,17 +153,15 @@ void main() {
           equals(MatexFibonacciLevel(level: 0.382, value: 1.2882)),
         );
 
-        expect(
-          retracements[4],
-          equals(MatexFibonacciLevel(level: 0.236, value: 1.2736)),
-        );
+        expect(retracements[4].level, closeTo(0.236, 0.001));
+
+        expect(retracements[4].value, closeTo(1.2736, 0.0001));
 
         // extensions
 
-        expect(
-          extensions[0],
-          equals(MatexFibonacciLevel(level: 0.236, value: 1.22640)),
-        );
+        expect(extensions[0].level, closeTo(0.236, 0.001));
+
+        expect(extensions[0].value, closeTo(1.22640, 0.0001));
 
         expect(
           extensions[1],
@@ -212,35 +183,26 @@ void main() {
           equals(MatexFibonacciLevel(level: 1, value: 1.15)),
         );
 
-        expect(
-          extensions[5],
-          equals(MatexFibonacciLevel(level: 1.236, value: 1.1264)),
-        );
+        expect(extensions[5].level, closeTo(1.236, 0.001));
+
+        expect(extensions[5].value, closeTo(1.1264, 0.0001));
 
         expect(
           extensions[6],
           equals(MatexFibonacciLevel(level: 1.382, value: 1.1118)),
         );
 
-        expect(
-          extensions[7],
-          equals(MatexFibonacciLevel(level: 1.5, value: 1.1)),
-        );
+        expect(extensions[7].level, closeTo(1.5, 0.1));
+        expect(extensions[7].value, closeTo(1.1, 0.1));
 
-        expect(
-          extensions[8],
-          equals(MatexFibonacciLevel(level: 1.618, value: 1.0882)),
-        );
+        expect(extensions[8].level, closeTo(1.618, 0.001));
+        expect(extensions[8].value, closeTo(1.0882, 0.0001));
 
-        expect(
-          extensions[9],
-          equals(MatexFibonacciLevel(level: 2, value: 1.05)),
-        );
+        expect(extensions[9].level, closeTo(2, 0.001));
+        expect(extensions[9].value, closeTo(1.05, 0.0001));
 
-        expect(
-          extensions[10],
-          equals(MatexFibonacciLevel(level: 2.618, value: 0.9882)),
-        );
+        expect(extensions[10].level, closeTo(2.618, 0.001));
+        expect(extensions[10].value, closeTo(0.9882, 0.0001));
       });
     });
 

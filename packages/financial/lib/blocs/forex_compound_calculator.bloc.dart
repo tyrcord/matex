@@ -11,7 +11,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
 import 'package:tenhance/tenhance.dart';
 
 // Project imports:
@@ -313,7 +312,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     final compoundFrequency = document.compoundFrequency;
     final contributionFrequency = document.contributionFrequency;
     final withdrawalFrequency = document.withdrawalFrequency;
-    final dRate = toDecimalOrDefault(document.rate);
+    final dRate = parseStringToDouble(document.rate);
 
     calculator.setState(MatexCompoundInterestCalculatorState(
       rateFrequency: MatexFinancialFrequencyX.fromName(rateFrequency),
@@ -323,7 +322,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
       withdrawalFrequency:
           MatexFinancialFrequencyX.fromName(withdrawalFrequency),
       startBalance: tryParseStringToDouble(document.startBalance),
-      rate: (dRate / dHundred).toSafeDouble(),
+      rate: (dRate / 100),
       duration: tryParseStringToInt(document.duration),
       withdrawalAmount: tryParseStringToDouble(document.withdrawalAmount),
       additionalContribution:
@@ -401,9 +400,9 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.startBalance = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(startBalance: value);
-      calculator.startBalance = dValue.toSafeDouble();
+      calculator.startBalance = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -419,9 +418,9 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.rate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(rate: value);
-      calculator.rate = (dValue / dHundred).toSafeDouble();
+      calculator.rate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -437,9 +436,9 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.duration = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(duration: value);
-      calculator.duration = dValue.toSafeDouble().toInt();
+      calculator.duration = dValue.toInt();
     }
 
     return currentState.copyWith(fields: fields);
@@ -550,9 +549,9 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.withdrawalAmount = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(withdrawalAmount: value);
-      calculator.withdrawalAmount = dValue.toSafeDouble();
+      calculator.withdrawalAmount = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -570,9 +569,9 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.additionalContribution = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(additionalContribution: value);
-      calculator.additionalContribution = dValue.toSafeDouble();
+      calculator.additionalContribution = dValue;
     }
 
     return currentState.copyWith(fields: fields);

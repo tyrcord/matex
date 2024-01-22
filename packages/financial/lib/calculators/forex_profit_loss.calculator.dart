@@ -1,8 +1,5 @@
 // Package imports:
-import 'package:decimal/decimal.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -72,16 +69,12 @@ class MatexForexProfitLossCalculator extends MatexCalculator<
     netProfit: 0,
   );
 
-  Decimal get multiplier {
-    final dCounterToAccountCurrencyRate = toDecimalOrDefault(
-      counterToAccountCurrencyRate,
-    );
+  double get multiplier {
+    final rate = counterToAccountCurrencyRate ?? 0;
 
-    if (dCounterToAccountCurrencyRate == dZero) {
-      return dOne;
-    }
+    if (rate == 0) return 1;
 
-    return dCounterToAccountCurrencyRate;
+    return rate;
   }
 
   double get pipValue {
@@ -103,7 +96,7 @@ class MatexForexProfitLossCalculator extends MatexCalculator<
   }
 
   // Calculates the cost of goods sold
-  Decimal get costOfGoodsSold {
+  double get costOfGoodsSold {
     final costOfGoodsSold = computeCostOfGoodsSold(
       expectedSaleUnits: state.positionSize,
       buyingPrice: state.entryPrice,
@@ -120,28 +113,24 @@ class MatexForexProfitLossCalculator extends MatexCalculator<
   }
 
   // Calculates operating profit
-  Decimal get operatingProfit {
+  double get operatingProfit {
     return computeOperatingProfit(grossProfit: grossProfit);
   }
 
   // Calculates net profit
-  Decimal get netProfit {
-    return computeNetProfit(
-      operatingProfit: operatingProfit.toSafeDouble(),
-    );
+  double get netProfit {
+    return computeNetProfit(operatingProfit: operatingProfit);
   }
 
-  Decimal get costOfInvestment {
-    return computeCostOfInvestment(
-      costOfGoodsSold: costOfGoodsSold.toSafeDouble(),
-    );
+  double get costOfInvestment {
+    return computeCostOfInvestment(costOfGoodsSold: costOfGoodsSold);
   }
 
   // Calculates the return on investment
-  Decimal get returnOnInvestment {
+  double get returnOnInvestment {
     return computeReturnOnInvestment(
-      costOfInvestment: costOfInvestment.toSafeDouble(),
-      netProfit: netProfit.toSafeDouble(),
+      costOfInvestment: costOfInvestment,
+      netProfit: netProfit,
     );
   }
 
@@ -150,7 +139,7 @@ class MatexForexProfitLossCalculator extends MatexCalculator<
     if (!isValid) return defaultResults;
 
     return MatexForexProfitLossCalculatorResults(
-      returnOnInvestment: returnOnInvestment.toSafeDouble(),
+      returnOnInvestment: returnOnInvestment,
       netProfit: grossProfit,
     );
   }

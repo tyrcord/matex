@@ -9,7 +9,6 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -229,27 +228,27 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
   }
 
   MatexForexPipDeltaCalculatorBlocState patchPriceA(String? value) {
-    final dValue = toDecimalOrDefault(value);
+    final dValue = parseStringToDouble(value);
     var fields = currentState.fields;
 
     fields = value == null
         ? fields.copyWithDefaults(resetPriceA: true)
         : fields.copyWith(priceA: value);
 
-    calculator.priceA = dValue.toSafeDouble();
+    calculator.priceA = dValue;
 
     return currentState.copyWith(fields: fields);
   }
 
   MatexForexPipDeltaCalculatorBlocState patchPriceB(String? value) {
-    final dValue = toDecimalOrDefault(value);
+    final dValue = parseStringToDouble(value);
     var fields = currentState.fields;
 
     fields = value == null
         ? fields.copyWithDefaults(resetPriceB: true)
         : fields.copyWith(priceB: value);
 
-    calculator.priceB = dValue.toSafeDouble();
+    calculator.priceB = dValue;
 
     return currentState.copyWith(fields: fields);
   }
@@ -293,8 +292,8 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
       calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
       fields = currentState.fields.copyWith(pipDecimalPlaces: value);
-      final dValue = toDecimalOrDefault(value);
-      calculator.pipDecimalPlaces = dValue.toSafeDouble().toInt();
+      final dValue = parseStringToDouble(value);
+      calculator.pipDecimalPlaces = dValue.toInt();
     }
 
     return currentState.copyWith(fields: fields);

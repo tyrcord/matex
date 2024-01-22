@@ -1,7 +1,3 @@
-// Package imports:
-import 'package:decimal/decimal.dart';
-import 'package:t_helpers/helpers.dart';
-
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
@@ -10,12 +6,6 @@ class MatexDividendReinvestementYearlyPayoutReport
   final List<MatexDividendReinvestementPayoutReport> payouts;
   final double? dividendAmountPerShare;
   final double? cumulativeContribution;
-
-  Decimal get dDividendAmountPerShare =>
-      toDecimal(dividendAmountPerShare) ?? dZero;
-
-  Decimal get dCumulativeContribution =>
-      toDecimal(cumulativeContribution) ?? dZero;
 
   const MatexDividendReinvestementYearlyPayoutReport({
     this.payouts = const <MatexDividendReinvestementPayoutReport>[],

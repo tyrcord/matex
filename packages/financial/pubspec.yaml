@@ -1,6 +1,5 @@
 dependencies:
   cross_file: ^0.3.3+6
-  decimal: ^2.3.3
   easy_localization: ^3.0.3
   fastyle_calculator: ^1.60.0
   fastyle_core: ^0.0.50

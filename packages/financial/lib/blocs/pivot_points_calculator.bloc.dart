@@ -8,8 +8,6 @@ import 'package:flutter/widgets.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -199,9 +197,9 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.lowPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(lowPrice: value);
-      calculator.lowPrice = dValue.toSafeDouble();
+      calculator.lowPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -217,9 +215,9 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.highPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(highPrice: value);
-      calculator.highPrice = dValue.toSafeDouble();
+      calculator.highPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -235,9 +233,9 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.openPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(openPrice: value);
-      calculator.openPrice = dValue.toSafeDouble();
+      calculator.openPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -253,9 +251,9 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.closePrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(closePrice: value);
-      calculator.closePrice = dValue.toSafeDouble();
+      calculator.closePrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);

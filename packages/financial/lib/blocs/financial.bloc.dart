@@ -8,7 +8,6 @@ import 'package:fastyle_core/fastyle_core.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 import 'package:tlogger/logger.dart';
 
 // Project imports:
@@ -325,10 +324,7 @@ abstract class MatexFinancialCalculatorBloc<
     if (metadata != null && metadata.lots != null) {
       final multiplier = metadata.lots![lotSize];
 
-      if (multiplier != 0) {
-        return (toDecimal(positionSize)! * toDecimal(multiplier)!)
-            .toSafeDouble();
-      }
+      if (multiplier != 0) positionSize * multiplier;
     }
 
     return positionSize;
@@ -336,15 +332,12 @@ abstract class MatexFinancialCalculatorBloc<
 
   @protected
   num computePipValueForUnits(num units, num pipValue, num? positionSize) {
-    final dUnits = toDecimalOrDefault(units);
-    var unitaryPipValue = dZero;
+    var unitaryPipValue = 0.0;
 
     if (positionSize != null && positionSize > 0) {
-      final dPositionSize = toDecimalOrDefault(positionSize);
-      final dPipValue = toDecimalOrDefault(pipValue);
-      unitaryPipValue = decimalFromRational(dPipValue / dPositionSize);
+      unitaryPipValue = (pipValue / positionSize);
     }
 
-    return (dUnits * unitaryPipValue).toSafeDouble();
+    return (units * unitaryPipValue);
   }
 }

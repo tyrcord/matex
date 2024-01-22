@@ -1,7 +1,3 @@
-// Package imports:
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
-
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
@@ -10,32 +6,23 @@ MatexPivotPointsCalculatorResults pivotPointsStandard(
   double? low,
   double? close,
 ) {
-  final dHighPrice = toDecimalOrDefault(high);
-  final dLowPrice = toDecimalOrDefault(low);
-  final dClosePrice = toDecimalOrDefault(close);
+  close ??= 0;
+  high ??= 0;
+  low ??= 0;
 
-  final dPivotPoint =
-      decimalFromRational((dHighPrice + dLowPrice + dClosePrice) / dThree);
+  final dPivotPoint = ((high + low + close) / 3);
 
-  final dResistance1 = dPivotPoint * dTwo - dLowPrice;
-  final dResistance2 = dPivotPoint + (dHighPrice - dLowPrice);
-  final dResistance3 = (dPivotPoint - dLowPrice) * dTwo + dHighPrice;
+  final dResistance1 = dPivotPoint * 2 - low;
+  final dResistance2 = dPivotPoint + (high - low);
+  final dResistance3 = (dPivotPoint - low) * 2 + high;
 
-  final dSupport1 = dPivotPoint * dTwo - dHighPrice;
-  final dSupport2 = dPivotPoint - (dHighPrice - dLowPrice);
-  final dSupport3 = (dHighPrice - dPivotPoint) * (-dTwo) + dLowPrice;
+  final dSupport1 = dPivotPoint * 2 - high;
+  final dSupport2 = dPivotPoint - (high - low);
+  final dSupport3 = (high - dPivotPoint) * (-2) + low;
 
   return MatexPivotPointsCalculatorResults(
-    pivotPoint: dPivotPoint.toSafeDouble(),
-    resistances: [
-      dResistance1.toSafeDouble(),
-      dResistance2.toSafeDouble(),
-      dResistance3.toSafeDouble(),
-    ],
-    supports: [
-      dSupport1.toSafeDouble(),
-      dSupport2.toSafeDouble(),
-      dSupport3.toSafeDouble(),
-    ],
+    resistances: [dResistance1, dResistance2, dResistance3],
+    supports: [dSupport1, dSupport2, dSupport3],
+    pivotPoint: dPivotPoint,
   );
 }

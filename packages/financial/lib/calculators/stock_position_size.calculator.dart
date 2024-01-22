@@ -1,8 +1,6 @@
 // Package imports:
-import 'package:decimal/decimal.dart';
 import 'package:matex_core/core.dart';
 import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -74,26 +72,24 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
   MatexStockPositionSizeCalculatorResults value() {
     if (!isValid) return defaultResults;
 
-    final accountBalance = toDecimal(state.accountSize) ?? dZero;
-    final stopLossAmount = toDecimal(state.stopLossAmount) ?? dZero;
-    Decimal riskPercent;
+    final accountBalance = (state.accountSize) ?? 0.0;
+    final stopLossAmount = (state.stopLossAmount) ?? 0.0;
+    double riskPercent;
 
     if (state.riskPercent != null && state.riskPercent != 0) {
-      riskPercent = toDecimal(state.riskPercent) ?? dZero;
-    } else if (stopLossAmount != dZero && accountBalance != dZero) {
-      riskPercent = decimalFromRational(
-        stopLossAmount / accountBalance,
-      );
+      riskPercent = (state.riskPercent) ?? 0.0;
+    } else if (stopLossAmount != 0.0 && accountBalance != 0.0) {
+      riskPercent = (stopLossAmount / accountBalance);
     } else {
       return defaultResults;
     }
 
-    final slippage = toDecimal(state.slippagePercent) ?? dZero;
-    final entryPrice = toDecimal(state.entryPrice) ?? dZero;
-    final entryFees = toDecimal(state.entryFees) ?? dZero;
-    final exitFees = toDecimal(state.exitFees) ?? dZero;
-    final stopLossPrice = toDecimal(state.stopLossPrice) ?? dZero;
-    final riskReward = toDecimal(state.riskReward) ?? dZero;
+    final slippage = (state.slippagePercent) ?? 0.0;
+    final entryPrice = (state.entryPrice) ?? 0.0;
+    final entryFees = (state.entryFees) ?? 0.0;
+    final exitFees = (state.exitFees) ?? 0.0;
+    final stopLossPrice = (state.stopLossPrice) ?? 0.0;
+    final riskReward = (state.riskReward) ?? 0.0;
 
     final adjustedEntryPrice = adjustEntryPriceForSlippage(
       entryPrice,
@@ -120,13 +116,13 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     );
 
     final shares = calculateShares(
-      stopLossPrice.toSafeDouble(),
-      entryPrice.toSafeDouble(),
-      accountBalance.toSafeDouble(),
-      entryFees.toSafeDouble(),
-      exitFees.toSafeDouble(),
-      riskPercent.toSafeDouble(),
-      slippage.toSafeDouble(),
+      stopLossPrice,
+      entryPrice,
+      accountBalance,
+      entryFees,
+      exitFees,
+      riskPercent,
+      slippage,
     );
 
     final positionAmount = calculatePositionAmount(shares, adjustedEntryPrice);
@@ -171,41 +167,41 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     final adjustedTakeProfitAmount = takeProfitAmount - takeProfitFeeAmount;
 
     return MatexStockPositionSizeCalculatorResults(
-      stopLossPriceWithSlippage: adjustedStopLossPrice.toSafeDouble(),
-      entryPriceWithSlippage: adjustedEntryPrice.toSafeDouble(),
-      takeProfitAmount: takeProfitAmount.toSafeDouble(),
-      takeProfitAmountAfterFee: adjustedTakeProfitAmount.toSafeDouble(),
-      takeProfitPrice: takeProfitPrice.toSafeDouble(),
-      takeProfitPriceWithSlippage: adjustedTakeProfitPrice.toSafeDouble(),
-      entryFeeAmount: entryFeeAmount.toSafeDouble(),
-      stopLossFeeAmount: stopLossFeeAmount.toSafeDouble(),
-      takeProfitFeeAmount: takeProfitFeeAmount.toSafeDouble(),
-      totalFeesForLossPosition: totalFeesForLossPosition.toSafeDouble(),
-      totalFeesForProfitPosition: totalFeesForProfitPosition.toSafeDouble(),
-      positionAmount: positionAmount.toSafeDouble(),
-      effectiveRisk: effectiveRisk.toSafeDouble(),
-      riskPercent: riskPercent.toSafeDouble(),
-      shares: shares.toSafeDouble(),
+      stopLossPriceWithSlippage: adjustedStopLossPrice,
+      entryPriceWithSlippage: adjustedEntryPrice,
+      takeProfitAmount: takeProfitAmount,
+      takeProfitAmountAfterFee: adjustedTakeProfitAmount,
+      takeProfitPrice: takeProfitPrice,
+      takeProfitPriceWithSlippage: adjustedTakeProfitPrice,
+      entryFeeAmount: entryFeeAmount,
+      stopLossFeeAmount: stopLossFeeAmount,
+      takeProfitFeeAmount: takeProfitFeeAmount,
+      totalFeesForLossPosition: totalFeesForLossPosition,
+      totalFeesForProfitPosition: totalFeesForProfitPosition,
+      positionAmount: positionAmount,
+      effectiveRisk: effectiveRisk,
+      riskPercent: riskPercent,
+      shares: shares,
       stopLossPercentWithSlippage: calculatePercentageDecrease(
-        adjustedEntryPrice.toSafeDouble(),
-        adjustedStopLossPrice.toSafeDouble(),
+        adjustedEntryPrice,
+        adjustedStopLossPrice,
       ).abs(),
       stopLossPercent: calculatePercentageDecrease(
-        entryPrice.toSafeDouble(),
-        stopLossPrice.toSafeDouble(),
+        entryPrice,
+        stopLossPrice,
       ).abs(),
       toleratedRisk: calculateToleratedRisk(
         accountBalance,
         riskPercent,
-      ).toSafeDouble(),
+      ),
       involvedCapital: calculateStopLossAmount(
         positionAmount,
         accountBalance,
-      ).toSafeDouble(),
+      ),
     );
   }
 
-  Decimal calculateShares(
+  double calculateShares(
     double stopLossPrice,
     double entryPrice,
     double accountBalance,
@@ -214,7 +210,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     double riskPercent,
     double slippage,
   ) {
-    final shares = getShareAmount(
+    return getShareAmount(
       isShortPosition: isShortPosition,
       accountBalance: accountBalance,
       stopLossPrice: stopLossPrice,
@@ -224,53 +220,51 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       exitFees: exitFees,
       risk: riskPercent,
     );
-
-    return decimalFromDouble(shares)!;
   }
 
-  Decimal calculatePositionAmount(Decimal shares, Decimal adjustedEntryPrice) {
+  double calculatePositionAmount(double shares, double adjustedEntryPrice) {
     return shares * adjustedEntryPrice;
   }
 
-  Decimal calculateEffectiveRisk(
-    Decimal shares,
-    Decimal entryPriceWithFees,
-    Decimal stopLossPriceWithFees,
+  double calculateEffectiveRisk(
+    double shares,
+    double entryPriceWithFees,
+    double stopLossPriceWithFees,
   ) {
     return isShortPosition
         ? shares * stopLossPriceWithFees - shares * entryPriceWithFees
         : shares * entryPriceWithFees - shares * stopLossPriceWithFees;
   }
 
-  Decimal calculateTakeProfitPrice(
-    Decimal adjustedEntryPrice,
-    Decimal effectiveRisk,
-    Decimal shares,
-    Decimal riskReward,
+  double calculateTakeProfitPrice(
+    double adjustedEntryPrice,
+    double effectiveRisk,
+    double shares,
+    double riskReward,
   ) {
-    if (shares == dZero) return adjustedEntryPrice;
+    if (shares == 0.0) return adjustedEntryPrice;
 
-    final riskPerShare = decimalFromRational(effectiveRisk / shares);
+    final riskPerShare = (effectiveRisk / shares);
 
     return isShortPosition
         ? adjustedEntryPrice - riskPerShare * riskReward
         : adjustedEntryPrice + riskPerShare * riskReward;
   }
 
-  Decimal calculateToleratedRisk(Decimal accountBalance, Decimal riskPercent) {
+  double calculateToleratedRisk(double accountBalance, double riskPercent) {
     return accountBalance * riskPercent;
   }
 
-  Decimal calculateStopLossAmount(
-    Decimal positionAmount,
-    Decimal accountBalance,
+  double calculateStopLossAmount(
+    double positionAmount,
+    double accountBalance,
   ) {
-    if (accountBalance == dZero) return dZero;
+    if (accountBalance == 0.0) return 0.0;
 
-    return decimalFromRational(positionAmount / accountBalance);
+    return (positionAmount / accountBalance);
   }
 
-  Decimal calculateTakeProfitAmount(Decimal effectiveRisk, Decimal riskReward) {
+  double calculateTakeProfitAmount(double effectiveRisk, double riskReward) {
     return effectiveRisk * riskReward;
   }
 }

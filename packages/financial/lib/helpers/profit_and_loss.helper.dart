@@ -1,173 +1,160 @@
-// Package imports:
-import 'package:decimal/decimal.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
-
-Decimal computeRevenue({
+double computeRevenue({
   double? expectedSaleUnits = 0,
   double? sellingPrice = 0,
 }) {
-  final dExpectedSaleUnits = toDecimalOrDefault(expectedSaleUnits);
-  final dSellingPrice = toDecimalOrDefault(sellingPrice);
+  expectedSaleUnits ??= 0;
+  sellingPrice ??= 0;
 
-  return dExpectedSaleUnits * dSellingPrice;
+  return expectedSaleUnits * sellingPrice;
 }
 
-Decimal computeCostOfGoodsSold({
+double computeCostOfGoodsSold({
   double? buyingExpensePerUnitAmount = 0,
   double? buyingExpensePerUnitRate = 0,
   double? expectedSaleUnits = 0,
   double? buyingPrice = 0,
 }) {
-  final dExpectedSaleUnits = toDecimalOrDefault(expectedSaleUnits);
-  final dBuyingPrice = toDecimalOrDefault(buyingPrice);
-  final dBuyingExpensePerUnitAmount =
-      toDecimalOrDefault(buyingExpensePerUnitAmount);
-  final dBuyingExpensePerUnitRate =
-      toDecimalOrDefault(buyingExpensePerUnitRate);
+  buyingExpensePerUnitAmount ??= 0;
+  buyingExpensePerUnitRate ??= 0;
+  expectedSaleUnits ??= 0;
+  buyingPrice ??= 0;
 
   // Calculate the total buying expense per unit.
   final totalBuyingExpensePerUnit =
-      dBuyingExpensePerUnitAmount + (dBuyingPrice * dBuyingExpensePerUnitRate);
+      buyingExpensePerUnitAmount + (buyingPrice * buyingExpensePerUnitRate);
 
-  if (totalBuyingExpensePerUnit == dZero) {
-    return dExpectedSaleUnits * dBuyingPrice;
+  if (totalBuyingExpensePerUnit == 0) {
+    return expectedSaleUnits * buyingPrice;
   }
 
-  return dExpectedSaleUnits * (dBuyingPrice + totalBuyingExpensePerUnit);
+  return expectedSaleUnits * (buyingPrice + totalBuyingExpensePerUnit);
 }
 
-Decimal computeGrossProfit({
+double computeGrossProfit({
   double? costOfGoodsSold = 0,
   double? revenue = 0,
 }) {
-  final dCostOfGoodsSold = toDecimalOrDefault(costOfGoodsSold);
-  final dRevenue = toDecimalOrDefault(revenue);
+  costOfGoodsSold ??= 0;
+  revenue ??= 0;
 
-  return dRevenue - dCostOfGoodsSold;
+  return revenue - costOfGoodsSold;
 }
 
 // Calculates selling expenses
-Decimal computSellingExpenses({
+double computSellingExpenses({
   double? sellingExpensePerUnitAmount = 0,
   double? sellingExpensePerUnitRate = 0,
   double? operatingExpenses = 0,
   double? expectedSaleUnits = 0,
   double? sellingPrice = 0,
 }) {
-  final dOperatingExpenses = toDecimalOrDefault(operatingExpenses);
-  final dExpectedSaleUnits = toDecimalOrDefault(expectedSaleUnits);
-  // The selling price is not required for calculating selling expenses
-  // so it is removed from here.
-
-  final dSellingExpensePerUnitAmount =
-      toDecimalOrDefault(sellingExpensePerUnitAmount);
-  final dSellingExpensePerUnitRate =
-      toDecimalOrDefault(sellingExpensePerUnitRate);
-  // This will be used for rate calculation.
-  final dSellingPrice = toDecimalOrDefault(sellingPrice);
+  sellingExpensePerUnitAmount ??= 0;
+  sellingExpensePerUnitRate ??= 0;
+  operatingExpenses ??= 0;
+  expectedSaleUnits ??= 0;
+  sellingPrice ??= 0;
 
   // Calculate the total selling expense per unit, considering both a fixed
   // amount and a rate.
-  final totalSellingExpensePerUnitAmount = dSellingExpensePerUnitAmount;
+  final totalSellingExpensePerUnitAmount = sellingExpensePerUnitAmount;
   final totalSellingExpensePerUnitRate =
-      dSellingPrice * dSellingExpensePerUnitRate;
+      sellingPrice * sellingExpensePerUnitRate;
 
   // Total selling expenses are the sum of the fixed and rate-based expenses
   // for each unit sold. It is not related to the selling price,
   // so we should not add it to the selling price.
-  final totalSellingExpenses = dExpectedSaleUnits *
+  final totalSellingExpenses = expectedSaleUnits *
       (totalSellingExpensePerUnitAmount + totalSellingExpensePerUnitRate);
 
-  return totalSellingExpenses + dOperatingExpenses;
+  return totalSellingExpenses + operatingExpenses;
 }
 
 // Calculates operating profit
-Decimal computeOperatingProfit({
+double computeOperatingProfit({
   double? grossProfit = 0,
   double? sellingExpenses = 0,
 }) {
-  final dGrossProfit = toDecimalOrDefault(grossProfit);
-  final dSellingExpenses = toDecimalOrDefault(sellingExpenses);
+  grossProfit ??= 0;
+  sellingExpenses ??= 0;
 
-  return dGrossProfit - dSellingExpenses;
+  return grossProfit - sellingExpenses;
 }
 
 // Calculates the tax amount
-Decimal computeTaxAmount({
+double computeTaxAmount({
   double? operatingProfit = 0,
   double? taxRate = 0,
 }) {
-  final dOperatingProfit = toDecimalOrDefault(operatingProfit);
-  final dTaxRate = toDecimalOrDefault(taxRate);
+  operatingProfit ??= 0;
+  taxRate ??= 0;
 
-  if (dOperatingProfit <= dZero) return dZero; // Prevent negative tax amount
+  if (operatingProfit <= 0) return 0; // Prevent negative tax amount
 
-  return dOperatingProfit * dTaxRate;
+  return operatingProfit * taxRate;
 }
 
 // Calculates net profit
-Decimal computeNetProfit({
+double computeNetProfit({
   double? operatingProfit = 0,
   double? taxAmount = 0,
 }) {
-  final dOperatingProfit = toDecimalOrDefault(operatingProfit);
-  final dTaxAmount = toDecimalOrDefault(taxAmount);
+  operatingProfit ??= 0;
+  taxAmount ??= 0;
 
-  return dOperatingProfit - dTaxAmount;
+  return operatingProfit - taxAmount;
 }
 
-Decimal computeCostOfInvestment({
+double computeCostOfInvestment({
   double? sellingExpenses = 0,
   double? costOfGoodsSold = 0,
 }) {
-  final dSellingExpenses = toDecimalOrDefault(sellingExpenses);
-  final dCostOfGoodsSold = toDecimalOrDefault(costOfGoodsSold);
+  sellingExpenses ??= 0;
+  costOfGoodsSold ??= 0;
 
-  return dSellingExpenses + dCostOfGoodsSold;
+  return sellingExpenses + costOfGoodsSold;
 }
 
 // Calculates the return on investment
-Decimal computeReturnOnInvestment({
+double computeReturnOnInvestment({
   double? costOfInvestment = 0,
   double? netProfit = 0,
 }) {
-  if (costOfInvestment == 0) return dZero; // Prevent division by zero
+  costOfInvestment ??= 0;
+  netProfit ??= 0;
 
-  final dCostOfInvestment = toDecimalOrDefault(costOfInvestment);
-  final dNetProfit = toDecimalOrDefault(netProfit);
+  if (costOfInvestment == 0) return 0; // Prevent division by zero
 
-  return decimalFromRational(dNetProfit / dCostOfInvestment);
+  return netProfit / costOfInvestment;
 }
 
 // Calculates Gross Profit Margin
-Decimal computeGrossProfitMargin({
+double computeGrossProfitMargin({
   double? grossProfit = 0,
   double? revenue = 0,
 }) {
-  if (revenue == 0) return dZero; // Prevent division by zero
+  grossProfit ??= 0;
+  revenue ??= 0;
 
-  final dGrossProfit = toDecimalOrDefault(grossProfit);
-  final dRevenue = toDecimalOrDefault(revenue);
+  if (revenue == 0) return 0; // Prevent division by zero
 
-  return decimalFromRational((dGrossProfit / dRevenue));
+  return grossProfit / revenue;
 }
 
 // Calculates Net Profit Margin
-Decimal computeNetProfitMargin({
+double computeNetProfitMargin({
   double? netProfit = 0,
   double? revenue = 0,
 }) {
-  if (revenue == 0) return dZero; // Prevent division by zero
+  netProfit ??= 0;
+  revenue ??= 0;
 
-  final dNetProfit = toDecimalOrDefault(netProfit);
-  final dRevenue = toDecimalOrDefault(revenue);
+  if (revenue == 0) return 0; // Prevent division by zero
 
-  return decimalFromRational((dNetProfit / dRevenue));
+  return netProfit / revenue;
 }
 
 // Calculates the break-even units
-Decimal computeBreakEvenUnits({
+double computeBreakEvenUnits({
   double? sellingExpensePerUnitAmount = 0,
   double? buyingExpensePerUnitAmount = 0,
   double? sellingExpensePerUnitRate = 0,
@@ -176,53 +163,47 @@ Decimal computeBreakEvenUnits({
   double? sellingPrice = 0,
   double? buyingPrice = 0,
 }) {
-  final dOperatingExpenses = toDecimalOrDefault(operatingExpenses);
-  final dFixedCosts = dOperatingExpenses; // Total fixed costs
-  final dSellingPrice = toDecimalOrDefault(sellingPrice);
-  final dBuyingPrice = toDecimalOrDefault(buyingPrice);
-  final dBuyingExpensePerUnitAmount =
-      toDecimalOrDefault(buyingExpensePerUnitAmount);
-  final dBuyingExpensePerUnitRate =
-      toDecimalOrDefault(buyingExpensePerUnitRate);
-  final dSellingExpensePerUnitAmount =
-      toDecimalOrDefault(sellingExpensePerUnitAmount);
-  final dSellingExpensePerUnitRate =
-      toDecimalOrDefault(sellingExpensePerUnitRate);
+  operatingExpenses ??= 0;
+  final fixedCosts = operatingExpenses; // Total fixed costs
+
+  sellingExpensePerUnitAmount ??= 0;
+  sellingExpensePerUnitRate ??= 0;
+  buyingExpensePerUnitAmount ??= 0;
+  buyingExpensePerUnitRate ??= 0;
+  sellingPrice ??= 0;
+  buyingPrice ??= 0;
 
   // Calculate the total buying expense per unit.
   final totalBuyingExpensePerUnit =
-      dBuyingExpensePerUnitAmount + (dBuyingPrice * dBuyingExpensePerUnitRate);
+      buyingExpensePerUnitAmount + (buyingPrice * buyingExpensePerUnitRate);
 
   // Calculate the total selling expense per unit.
-  final totalSellingExpensePerUnit = dSellingExpensePerUnitAmount +
-      (dSellingPrice * dSellingExpensePerUnitRate);
+  final totalSellingExpensePerUnit =
+      sellingExpensePerUnitAmount + (sellingPrice * sellingExpensePerUnitRate);
 
   // Calculate total variable cost per unit.
   final totalVariableCostPerUnit =
-      dBuyingPrice + totalBuyingExpensePerUnit + totalSellingExpensePerUnit;
+      buyingPrice + totalBuyingExpensePerUnit + totalSellingExpensePerUnit;
 
   // Prevent division by zero
-  if (dSellingPrice - totalVariableCostPerUnit == dZero) return dZero;
+  if (sellingPrice - totalVariableCostPerUnit == 0) return 0;
 
   // The formula for break-even units is: Fixed Costs / (Selling Price - Variable Cost per Unit)
-  return decimalFromRational(
-    dFixedCosts / (dSellingPrice - totalVariableCostPerUnit),
-  );
+  return fixedCosts / (sellingPrice - totalVariableCostPerUnit);
 }
 
 double computeRiskRewardRatio({
   double? rewardAmount,
   double? riskAmount,
 }) {
-  final dStopLossAmount = toDecimalOrDefault(riskAmount);
-  final dTakeProfitAmount = toDecimalOrDefault(rewardAmount);
+  riskAmount ??= 0;
+  rewardAmount ??= 0;
   var ratio = 0.0;
 
-  if (dStopLossAmount == dZero) return ratio; // Prevent division by zero
+  if (riskAmount == 0) return ratio; // Prevent division by zero
 
-  if (dTakeProfitAmount != dStopLossAmount) {
-    ratio =
-        decimalFromRational(dTakeProfitAmount / dStopLossAmount).toSafeDouble();
+  if (rewardAmount != riskAmount) {
+    ratio = (rewardAmount / riskAmount);
   } else {
     ratio = 1.0;
   }

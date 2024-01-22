@@ -6,8 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -214,11 +212,11 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
   Future<void> resetCalculator(
     MatexProfitAndLossCalculatorDocument document,
   ) async {
-    final taxRate = toDecimalOrDefault(document.taxRate);
-    final sellingExpensePerUnitRate = toDecimalOrDefault(
+    final taxRate = parseStringToDouble(document.taxRate);
+    final sellingExpensePerUnitRate = parseStringToDouble(
       document.sellingExpensePerUnitRate,
     );
-    final buyingExpensePerUnitRate = toDecimalOrDefault(
+    final buyingExpensePerUnitRate = parseStringToDouble(
       document.buyingExpensePerUnitRate,
     );
 
@@ -227,17 +225,15 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       operatingExpenses: tryParseStringToDouble(document.operatingExpenses),
       sellingPrice: tryParseStringToDouble(document.sellingPrice),
       buyingPrice: tryParseStringToDouble(document.buyingPrice),
-      taxRate: (taxRate / dHundred).toSafeDouble(),
+      taxRate: (taxRate / 100),
       buyingExpensePerUnitAmount: tryParseStringToDouble(
         document.buyingExpensePerUnitAmount,
       ),
       sellingExpensePerUnitAmount: tryParseStringToDouble(
         document.sellingExpensePerUnitAmount,
       ),
-      buyingExpensePerUnitRate:
-          (buyingExpensePerUnitRate / dHundred).toSafeDouble(),
-      sellingExpensePerUnitRate:
-          (sellingExpensePerUnitRate / dHundred).toSafeDouble(),
+      buyingExpensePerUnitRate: (buyingExpensePerUnitRate / 100),
+      sellingExpensePerUnitRate: (sellingExpensePerUnitRate / 100),
     ));
   }
 
@@ -283,9 +279,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetExpectedSaleUnits: true);
       calculator.expectedSaleUnits = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(expectedSaleUnits: value);
-      calculator.expectedSaleUnits = dValue.toSafeDouble();
+      calculator.expectedSaleUnits = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -298,9 +294,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetBuyingPrice: true);
       calculator.buyingPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(buyingPrice: value);
-      calculator.buyingPrice = dValue.toSafeDouble();
+      calculator.buyingPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -313,9 +309,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetSellingPrice: true);
       calculator.sellingPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(sellingPrice: value);
-      calculator.sellingPrice = dValue.toSafeDouble();
+      calculator.sellingPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -330,9 +326,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetBuyingExpensePerUnitAmount: true);
       calculator.buyingExpensePerUnitAmount = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields = fields.copyWith(buyingExpensePerUnitAmount: value);
-      calculator.buyingExpensePerUnitAmount = dValue.toSafeDouble();
+      calculator.buyingExpensePerUnitAmount = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -347,9 +343,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetBuyingExpensePerUnitRate: true);
       calculator.buyingExpensePerUnitRate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields = fields.copyWith(buyingExpensePerUnitRate: value);
-      calculator.buyingExpensePerUnitRate = (dValue / dHundred).toSafeDouble();
+      calculator.buyingExpensePerUnitRate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -364,9 +360,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetSellingExpensePerUnitAmount: true);
       calculator.sellingExpensePerUnitAmount = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(sellingExpensePerUnitAmount: value);
-      calculator.sellingExpensePerUnitAmount = dValue.toSafeDouble();
+      calculator.sellingExpensePerUnitAmount = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -381,9 +377,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetSellingExpensePerUnitRate: true);
       calculator.sellingExpensePerUnitRate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields = fields.copyWith(sellingExpensePerUnitRate: value);
-      calculator.sellingExpensePerUnitRate = (dValue / dHundred).toSafeDouble();
+      calculator.sellingExpensePerUnitRate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -396,9 +392,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetOperatingExpenses: true);
       calculator.operatingExpenses = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(operatingExpenses: value);
-      calculator.operatingExpenses = dValue.toSafeDouble();
+      calculator.operatingExpenses = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -411,9 +407,9 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetTaxRate: true);
       calculator.taxRate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields = fields.copyWith(taxRate: value);
-      calculator.taxRate = (dValue / dHundred).toSafeDouble();
+      calculator.taxRate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);

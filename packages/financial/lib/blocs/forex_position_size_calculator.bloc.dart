@@ -5,8 +5,6 @@ import 'package:flutter/widgets.dart';
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 import 'package:tlogger/logger.dart';
 
 // Project imports:
@@ -110,22 +108,19 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     if (await isCalculatorStateValid()) {
       final results = calculator.value();
       final fields = currentState.fields;
+
       final accountCurrency = fields.accountCurrency;
-      final dPipValue = toDecimalOrDefault(results.pipValue);
-      final pipValue = dPipValue.toSafeDouble();
       final positionSize = results.positionSize ?? 0;
-      final dPositionSize = toDecimalOrDefault(positionSize);
+      final pipValue = results.pipValue ?? 0;
+
       final instrumentMetadata = await getInstrumentMetadata();
       final standardLotUnits = await getUnitsPerStandardLot();
       final miniLotUnits = await getUnitsPerMiniLot();
       final microLotUnits = await getUnitsPerMicroLot();
-      final dStandardLotUnits = toDecimalOrDefault(standardLotUnits);
-      final dMiniLotUnits = toDecimalOrDefault(miniLotUnits);
-      final dMicroLotUnits = toDecimalOrDefault(microLotUnits);
-      final standardLotSize =
-          (dPositionSize / dStandardLotUnits).toSafeDouble();
-      final miniLotSize = (dPositionSize / dMiniLotUnits).toSafeDouble();
-      final microLotSize = (dPositionSize / dMicroLotUnits).toSafeDouble();
+
+      final standardLotSize = (positionSize / standardLotUnits);
+      final miniLotSize = (positionSize / miniLotUnits);
+      final microLotSize = (positionSize / microLotUnits);
 
       return MatexForexPositionSizeCalculatorBlocResults(
         formattedPipValue: localizeCurrency(
@@ -346,7 +341,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   Future<void> resetCalculator(
     MatexForexPositionSizeCalculatorDocument document,
   ) async {
-    final dRiskPercent = toDecimalOrDefault(document.riskPercent);
+    final dRiskPercent = parseStringToDouble(document.riskPercent);
     const typeFromName = FastFinancialAmountSwitchFieldTypeX.fromName;
     final stopLossFieldType = typeFromName(document.stopLossFieldType);
     final riskFieldType = typeFromName(document.riskFieldType);
@@ -356,7 +351,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       accountSize: tryParseStringToDouble(document.accountSize),
       entryPrice: tryParseStringToDouble(document.entryPrice),
       riskPercent: riskFieldType == FastFinancialAmountSwitchFieldType.percent
-          ? (dRiskPercent / dHundred).toSafeDouble()
+          ? (dRiskPercent / 100)
           : 0,
       riskAmount: riskFieldType == FastFinancialAmountSwitchFieldType.amount
           ? tryParseStringToDouble(document.riskAmount)
@@ -506,9 +501,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(pipDecimalPlaces: value);
-      calculator.pipDecimalPlaces = dValue.toSafeDouble().toInt();
+      calculator.pipDecimalPlaces = dValue.toInt();
     }
 
     return currentState.copyWith(fields: fields);
@@ -521,9 +516,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields = currentState.fields.copyWithDefaults(resetAccountSize: true);
       calculator.accountSize = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(accountSize: value);
-      calculator.accountSize = dValue.toSafeDouble();
+      calculator.accountSize = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -536,9 +531,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields = currentState.fields.copyWithDefaults(resetRiskPercent: true);
       calculator.riskPercent = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(riskPercent: value);
-      calculator.riskPercent = (dValue / dHundred).toSafeDouble();
+      calculator.riskPercent = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -551,9 +546,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields = currentState.fields.copyWithDefaults(resetRiskAmount: true);
       calculator.riskAmount = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(riskAmount: value);
-      calculator.riskAmount = dValue.toSafeDouble();
+      calculator.riskAmount = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -566,9 +561,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields = currentState.fields.copyWithDefaults(resetEntryPrice: true);
       calculator.entryPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(entryPrice: value);
-      calculator.entryPrice = dValue.toSafeDouble();
+      calculator.entryPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -581,9 +576,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields = currentState.fields.copyWithDefaults(resetStopLossPips: true);
       calculator.stopLossPips = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(stopLossPips: value);
-      calculator.stopLossPips = dValue.toSafeDouble();
+      calculator.stopLossPips = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -596,9 +591,9 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields = currentState.fields.copyWithDefaults(resetStopLossPrice: true);
       calculator.stopLossPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(stopLossPrice: value);
-      calculator.stopLossPrice = dValue.toSafeDouble();
+      calculator.stopLossPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);

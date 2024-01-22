@@ -1,7 +1,5 @@
 // Package imports:
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -48,20 +46,19 @@ class MatexDividendYieldCalculator extends MatexCalculator<
   MatexDividendYieldResultsModel value() {
     if (!isValid) return defaultResults;
 
-    final dSharePrice = toDecimalOrDefault(state.sharePrice);
+    final dSharePrice = state.sharePrice ?? 0.0;
 
-    if (dSharePrice == dZero) return defaultResults;
+    if (dSharePrice == 0) return defaultResults;
 
-    final dDividendAmount = toDecimalOrDefault(state.dividendAmount);
     final paymentFrequency = getPaymentFrequency(state.paymentFrequency);
-    final dFrequency = toDecimalOrDefault(paymentFrequency);
-    final dTotalDividends = dDividendAmount * dFrequency;
-    final dDividendYield = decimalFromRational(dTotalDividends / dSharePrice);
+    final dDividendAmount = state.dividendAmount ?? 0;
+    final dTotalDividends = dDividendAmount * paymentFrequency;
+    final dDividendYield = (dTotalDividends / dSharePrice);
 
     return MatexDividendYieldResultsModel(
-      totalDividends: dTotalDividends.toSafeDouble(),
-      dividendYield: dDividendYield.toSafeDouble(),
-      sharePrice: dSharePrice.toSafeDouble(),
+      totalDividends: dTotalDividends,
+      dividendYield: dDividendYield,
+      sharePrice: dSharePrice,
     );
   }
 }

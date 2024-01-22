@@ -1,14 +1,9 @@
 // Package imports:
-import 'package:decimal/decimal.dart';
-import 'package:t_helpers/helpers.dart';
 import 'package:tmodel/tmodel.dart';
 
 class MatexDividendReinvestementPayout extends TModel {
   final double? grossDividendPayout;
   final double? netDividendPayout;
-
-  Decimal get dGrossDividendPayout => toDecimal(grossDividendPayout) ?? dZero;
-  Decimal get dNetDividendPayout => toDecimal(netDividendPayout) ?? dZero;
 
   const MatexDividendReinvestementPayout({
     this.grossDividendPayout,

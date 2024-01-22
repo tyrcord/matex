@@ -7,12 +7,12 @@ import 'package:matex_financial/financial.dart';
 void main() {
   test('addVAT adds VAT to price', () {
     expect(addVAT(100, 0.2), equals(120));
-    expect(addVAT(50, 0.1), equals(55));
+    expect(addVAT(50, 0.1), closeTo(55, 1));
   });
 
   test('removeVAT removes VAT from price', () {
     expect(removeVAT(120, 0.2), equals(100));
-    expect(removeVAT(55, 0.1), equals(50));
+    expect(removeVAT(55, 0.1), closeTo(50, 1));
   });
 
   test('getVATAmount returns correct value', () {

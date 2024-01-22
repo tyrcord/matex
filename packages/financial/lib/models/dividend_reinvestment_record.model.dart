@@ -1,14 +1,9 @@
 // Package imports:
-import 'package:decimal/decimal.dart';
-import 'package:t_helpers/helpers.dart';
 import 'package:tmodel/tmodel.dart';
 
 class MatexDividendReinvestementRecord extends TModel {
   final double? dividendAmount;
   final double? numberOfshares;
-
-  Decimal get dDividendAmount => toDecimal(dividendAmount) ?? dZero;
-  Decimal get dNumberOfShares => toDecimal(numberOfshares) ?? dZero;
 
   const MatexDividendReinvestementRecord({
     this.dividendAmount = 0,

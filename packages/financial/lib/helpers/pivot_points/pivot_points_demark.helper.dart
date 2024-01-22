@@ -1,8 +1,3 @@
-// Package imports:
-import 'package:decimal/decimal.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
-
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
@@ -12,28 +7,28 @@ MatexPivotPointsCalculatorResults pivotPointsDeMark(
   double? close,
   double? open,
 ) {
-  final dHighPrice = toDecimalOrDefault(high);
-  final dLowPrice = toDecimalOrDefault(low);
-  final dClosePrice = toDecimalOrDefault(close);
-  final dOpenPrice = toDecimalOrDefault(open);
-  Decimal pivotPoint;
+  double pivotPoint;
+  close ??= 0;
+  open ??= 0;
+  high ??= 0;
+  low ??= 0;
 
-  if (dClosePrice < dOpenPrice) {
-    pivotPoint = dLowPrice * dTwo + dHighPrice + dClosePrice;
-  } else if (dClosePrice > dOpenPrice) {
-    pivotPoint = dTwo * dHighPrice + dLowPrice + dClosePrice;
+  if (close < open) {
+    pivotPoint = low * 2 + high + close;
+  } else if (close > open) {
+    pivotPoint = 2 * high + low + close;
   } else {
-    pivotPoint = dClosePrice * dTwo + dHighPrice + dLowPrice;
+    pivotPoint = close * 2 + high + low;
   }
 
-  final pivotPointDividedBy2 = decimalFromRational(pivotPoint / dTwo);
-  final pivotPointDividedBy4 = decimalFromRational(pivotPoint / dFour);
-  final resistance = pivotPointDividedBy2 - dLowPrice;
-  final support = pivotPointDividedBy2 - dHighPrice;
+  final pivotPointDividedBy2 = pivotPoint / 2;
+  final pivotPointDividedBy4 = pivotPoint / 4;
+  final resistance = pivotPointDividedBy2 - low;
+  final support = pivotPointDividedBy2 - high;
 
   return MatexPivotPointsCalculatorResults(
-    pivotPoint: pivotPointDividedBy4.toSafeDouble(),
-    resistances: [resistance.toSafeDouble()],
-    supports: [support.toSafeDouble()],
+    pivotPoint: pivotPointDividedBy4,
+    resistances: [resistance],
+    supports: [support],
   );
 }

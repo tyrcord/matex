@@ -8,7 +8,6 @@ import 'package:fastyle_core/fastyle_core.dart';
 import 'package:matex_core/core.dart';
 import 'package:matex_data/matex_data.dart';
 import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -108,10 +107,10 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     dynamic value,
   ) async {
     if (value is String) {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       final isNumber = isStringNumber(value) || value.isEmpty;
 
-      if (dValue < dZero || !isNumber) return null;
+      if (dValue < 0 || !isNumber) return null;
 
       if (key == MatexVatCalculatorBlocKey.priceBeforeVat) {
         return document.copyWith(priceBeforeVat: value);
@@ -193,23 +192,23 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
 
   @override
   Future<void> resetCalculator(MatexVatCalculatorBlocDocument document) async {
-    final vatRate = toDecimalOrDefault(document.vatRate);
-    final customVatRate = toDecimalOrDefault(document.customVatRate);
-    final tipRate = toDecimalOrDefault(document.tipRate);
-    final discountRate = toDecimalOrDefault(document.discountRate);
-    final federalVatRate = toDecimalOrDefault(document.federalVatRate);
-    final regionalVatRate = toDecimalOrDefault(document.regionalVatRate);
+    final vatRate = parseStringToDouble(document.vatRate);
+    final customVatRate = parseStringToDouble(document.customVatRate);
+    final tipRate = parseStringToDouble(document.tipRate);
+    final discountRate = parseStringToDouble(document.discountRate);
+    final federalVatRate = parseStringToDouble(document.federalVatRate);
+    final regionalVatRate = parseStringToDouble(document.regionalVatRate);
 
     calculator.setState(MatexVatCalculatorState(
       priceBeforeVat: tryParseStringToDouble(document.priceBeforeVat),
       discountAmount: tryParseStringToDouble(document.discountAmount),
       tipAmount: tryParseStringToDouble(document.tipAmount),
-      regionalVatRate: (regionalVatRate / dHundred).toSafeDouble(),
-      federalVatRate: (federalVatRate / dHundred).toSafeDouble(),
-      customVatRate: (customVatRate / dHundred).toSafeDouble(),
-      discountRate: (discountRate / dHundred).toSafeDouble(),
-      vatRate: (vatRate / dHundred).toSafeDouble(),
-      tipRate: (tipRate / dHundred).toSafeDouble(),
+      regionalVatRate: (regionalVatRate / 100),
+      federalVatRate: (federalVatRate / 100),
+      customVatRate: (customVatRate / 100),
+      discountRate: (discountRate / 100),
+      vatRate: (vatRate / 100),
+      tipRate: (tipRate / 100),
     ));
   }
 
@@ -264,9 +263,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetPriceBeforeVat: true);
       calculator.priceBeforeVat = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(priceBeforeVat: value);
-      calculator.priceBeforeVat = dValue.toSafeDouble();
+      calculator.priceBeforeVat = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -279,9 +278,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetCustomVatRate: true);
       calculator.customVatRate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(customVatRate: value);
-      calculator.customVatRate = (dValue / dHundred).toSafeDouble();
+      calculator.customVatRate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -294,9 +293,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetVatRate: true);
       calculator.vatRate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(vatRate: value);
-      calculator.vatRate = (dValue / dHundred).toSafeDouble();
+      calculator.vatRate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -309,9 +308,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetFederalVatRate: true);
       calculator.federalVatRate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(federalVatRate: value);
-      calculator.federalVatRate = (dValue / dHundred).toSafeDouble();
+      calculator.federalVatRate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -324,9 +323,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetRegionalVatRate: true);
       calculator.regionalVatRate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(regionalVatRate: value);
-      calculator.regionalVatRate = (dValue / dHundred).toSafeDouble();
+      calculator.regionalVatRate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -339,9 +338,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetDiscountAmount: true);
       calculator.discountAmount = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(discountAmount: value, discountRate: '');
-      calculator.discountAmount = dValue.toSafeDouble();
+      calculator.discountAmount = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -354,9 +353,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetDiscountRate: true);
       calculator.discountRate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(discountRate: value, discountAmount: '');
-      calculator.discountRate = (dValue / dHundred).toSafeDouble();
+      calculator.discountRate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -369,9 +368,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetTipRate: true);
       calculator.tipRate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(tipRate: value, tipAmount: '');
-      calculator.tipRate = (dValue / dHundred).toSafeDouble();
+      calculator.tipRate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -384,9 +383,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       fields = fields.copyWithDefaults(resetTipAmount: true);
       calculator.tipAmount = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(tipAmount: value, tipRate: '');
-      calculator.tipAmount = dValue.toSafeDouble();
+      calculator.tipAmount = dValue;
     }
 
     return currentState.copyWith(fields: fields);

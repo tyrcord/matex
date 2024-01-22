@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -172,9 +170,9 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.sharePrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(sharePrice: value);
-      calculator.sharePrice = dValue.toSafeDouble();
+      calculator.sharePrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -190,9 +188,9 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.dividendAmount = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(dividendAmount: value);
-      calculator.dividendAmount = dValue.toSafeDouble();
+      calculator.dividendAmount = dValue;
     }
 
     return currentState.copyWith(fields: fields);

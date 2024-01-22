@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -201,12 +199,12 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
   Future<void> resetCalculator(
     MatexDividendReinvestmentCalculatorDocument document,
   ) async {
-    final dDividendYield = toDecimalOrDefault(document.dividendYield);
-    final dTaxRate = toDecimalOrDefault(document.taxRate);
+    final dDividendYield = parseStringToDouble(document.dividendYield);
+    final dTaxRate = parseStringToDouble(document.taxRate);
     final dAnnualDividendIncrease =
-        toDecimalOrDefault(document.annualDividendIncrease);
+        parseStringToDouble(document.annualDividendIncrease);
     final dAnnualSharePriceIncrease =
-        toDecimalOrDefault(document.annualSharePriceIncrease);
+        parseStringToDouble(document.annualSharePriceIncrease);
 
     final frequency = MatexFinancialFrequencyX.fromName(
       document.paymentFrequency,
@@ -216,14 +214,12 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
       sharePrice: tryParseStringToDouble(document.sharePrice),
       numberOfShares: tryParseStringToDouble(document.numberOfShares),
       dividendPaymentFrequency: frequency,
-      dividendYield: (dDividendYield / dHundred).toSafeDouble(),
+      dividendYield: (dDividendYield / 100),
       yearsToGrow: tryParseStringToInt(document.yearsToGrow),
       annualContribution: tryParseStringToDouble(document.annualContribution),
-      annualSharePriceIncrease:
-          (dAnnualSharePriceIncrease / dHundred).toSafeDouble(),
-      annualDividendIncrease:
-          (dAnnualDividendIncrease / dHundred).toSafeDouble(),
-      taxRate: (dTaxRate / dHundred).toSafeDouble(),
+      annualSharePriceIncrease: (dAnnualSharePriceIncrease / 100),
+      annualDividendIncrease: (dAnnualDividendIncrease / 100),
+      taxRate: (dTaxRate / 100),
       drip: document.drip,
     ));
   }
@@ -278,9 +274,9 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.sharePrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(sharePrice: value);
-      calculator.sharePrice = dValue.toSafeDouble();
+      calculator.sharePrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -298,9 +294,9 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.numberOfShares = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(numberOfShares: value);
-      calculator.numberOfShares = dValue.toSafeDouble();
+      calculator.numberOfShares = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -342,9 +338,9 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.dividendYield = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(dividendYield: value);
-      calculator.dividendYield = (dValue / dHundred).toSafeDouble();
+      calculator.dividendYield = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -362,9 +358,9 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.yearsToGrow = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToInt(value);
       fields = currentState.fields.copyWith(yearsToGrow: value);
-      calculator.yearsToGrow = dValue.toBigInt().toInt();
+      calculator.yearsToGrow = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -382,9 +378,9 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.annualContribution = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(annualContribution: value);
-      calculator.annualContribution = dValue.toSafeDouble();
+      calculator.annualContribution = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -402,9 +398,9 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.annualSharePriceIncrease = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(annualSharePriceIncrease: value);
-      calculator.annualSharePriceIncrease = (dValue / dHundred).toSafeDouble();
+      calculator.annualSharePriceIncrease = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -422,9 +418,9 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.annualDividendIncrease = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(annualDividendIncrease: value);
-      calculator.annualDividendIncrease = (dValue / dHundred).toSafeDouble();
+      calculator.annualDividendIncrease = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);
@@ -440,9 +436,9 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.taxRate = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(taxRate: value);
-      calculator.taxRate = (dValue / dHundred).toSafeDouble();
+      calculator.taxRate = (dValue / 100);
     }
 
     return currentState.copyWith(fields: fields);

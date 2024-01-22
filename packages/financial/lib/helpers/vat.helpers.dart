@@ -1,8 +1,3 @@
-// Package imports:
-import 'package:decimal/decimal.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
-
 /// Adds VAT to a price.
 ///
 /// This function takes a [price] that does not include VAT and a [vatRate]
@@ -18,13 +13,7 @@ import 'package:tenhance/decimal.dart';
 /// final priceWithVAT = addVAT(100, 0.2);
 /// print(priceWithVAT); // 120.0
 /// ```
-double addVAT(double price, double vatRate) {
-  final decimalPrice = Decimal.parse(price.toString());
-  final decimalVatRate = Decimal.parse(vatRate.toString());
-  final result = decimalPrice * (Decimal.one + decimalVatRate);
-
-  return result.toSafeDouble();
-}
+double addVAT(double price, double vatRate) => price * (1 + vatRate);
 
 /// Removes the VAT from a price.
 ///
@@ -42,11 +31,7 @@ double addVAT(double price, double vatRate) {
 /// print(priceBeforeVAT); // 100.0
 /// ```
 double removeVAT(double priceWithVAT, double vatRate) {
-  final decimalPriceWithVAT = Decimal.parse(priceWithVAT.toString());
-  final decimalVatRate = Decimal.parse(vatRate.toString());
-  final result = decimalPriceWithVAT / (Decimal.one + decimalVatRate);
-
-  return decimalFromRational(result).toSafeDouble();
+  return priceWithVAT / (1 + vatRate);
 }
 
 /// Calculates the VAT amount for a given price and VAT rate.
@@ -64,9 +49,4 @@ double removeVAT(double priceWithVAT, double vatRate) {
 /// double vatAmount = getVATAmount(100.0, 0.2);
 /// print(vatAmount); // 20.0
 /// ```
-double getVATAmount(double price, double vatRate) {
-  final Decimal dPrice = Decimal.parse(price.toString());
-  final Decimal dVatRate = Decimal.parse(vatRate.toString());
-
-  return (dPrice * dVatRate).toSafeDouble();
-}
+double getVATAmount(double price, double vatRate) => price * vatRate;

@@ -1,7 +1,5 @@
 // Package imports:
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -42,16 +40,13 @@ class MatexDividendPayoutRatioCalculator extends MatexCalculator<
   MatexDividendPayoutRatioCalculatorResults value() {
     if (!isValid) return defaultResults;
 
-    final dTotalDividend = toDecimal(state.totalDividends) ?? dZero;
-    final dNetIncome = toDecimal(state.netIncome) ?? dZero;
+    final totalDividends = state.totalDividends ?? 0;
+    final netIncome = state.netIncome ?? 0;
 
-    if (dNetIncome == dZero) return defaultResults;
-
-    final dDividendPayoutRatio =
-        decimalFromRational(dTotalDividend / dNetIncome);
+    if (netIncome == 0) return defaultResults;
 
     return MatexDividendPayoutRatioCalculatorResults(
-      dividendPayoutRatio: dDividendPayoutRatio.toSafeDouble(),
+      dividendPayoutRatio: totalDividends / netIncome,
     );
   }
 }

@@ -2,10 +2,7 @@
 import 'dart:math';
 
 // Package imports:
-import 'package:decimal/decimal.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -38,60 +35,55 @@ class MatexForexStopLossCalculator extends MatexCalculator<
       positionSize: state.positionSize,
     );
 
-    final dPipValue = toDecimalOrDefault(pipValue);
-
-    return _computeStopLossLevels(dPipValue);
+    return _computeStopLossLevels(pipValue);
   }
 
-  MatexForexTradeOutcome _computeStopLossLevels(Decimal pipValue) {
-    final dStopLossAmount = toDecimalOrDefault(state.stopLossAmount);
-    final dStopLossPips = toDecimalOrDefault(state.stopLossPips);
-    final dStopLossPrice = toDecimalOrDefault(state.stopLossPrice);
+  MatexForexTradeOutcome _computeStopLossLevels(double pipValue) {
+    final dStopLossAmount = state.stopLossAmount ?? 0;
+    final dStopLossPips = state.stopLossPips ?? 0;
+    final dStopLossPrice = state.stopLossPrice ?? 0;
     final divider = pow(10, state.pipDecimalPlaces).toDouble();
-    final dDivider = toDecimalOrDefault(divider);
 
-    if (dStopLossAmount > dZero) {
-      return _computeStopLossWithAmount(dStopLossAmount, pipValue, dDivider);
-    } else if (dStopLossPips > dZero) {
-      return _computeStopLossWithPips(dStopLossPips, pipValue, dDivider);
-    } else if (dStopLossPrice > dZero) {
-      return _computeStopLossWithPrice(dStopLossPrice, pipValue, dDivider);
+    if (dStopLossAmount > 0) {
+      return _computeStopLossWithAmount(dStopLossAmount, pipValue, divider);
+    } else if (dStopLossPips > 0) {
+      return _computeStopLossWithPips(dStopLossPips, pipValue, divider);
+    } else if (dStopLossPrice > 0) {
+      return _computeStopLossWithPrice(dStopLossPrice, pipValue, divider);
     }
 
     return _buildStopLossResult();
   }
 
   MatexForexTradeOutcome _computeStopLossWithAmount(
-    Decimal stopLossAmount,
-    Decimal pipValue,
-    Decimal divider,
+    double stopLossAmount,
+    double pipValue,
+    double divider,
   ) {
-    final dStopLossAmount = toDecimalOrDefault(stopLossAmount);
-    final dStopLossPips = decimalFromRational(dStopLossAmount / pipValue);
+    final stopLossPips = (stopLossAmount / pipValue);
 
     return _buildStopLossResult(
-      price: _computeStopLossPrice(dStopLossPips, divider),
+      price: _computeStopLossPrice(stopLossPips, divider),
       amount: stopLossAmount,
-      pips: dStopLossPips,
+      pips: stopLossPips,
     );
   }
 
   MatexForexTradeOutcome _computeStopLossWithPrice(
-    Decimal stopLossPrice,
-    Decimal pipValue,
-    Decimal divider,
+    double stopLossPrice,
+    double pipValue,
+    double divider,
   ) {
-    final dEntryPrice = toDecimalOrDefault(state.entryPrice);
-    final dDivider = toDecimalOrDefault(divider);
+    final dEntryPrice = state.entryPrice ?? 0;
     final position = state.position;
-    var stopLossPips = dZero;
+    var stopLossPips = 0.0;
 
     if (position == MatexPosition.long && stopLossPrice < dEntryPrice) {
-      stopLossPips = (dEntryPrice - stopLossPrice) * dDivider;
+      stopLossPips = (dEntryPrice - stopLossPrice) * divider;
     }
 
     if (position == MatexPosition.short && stopLossPrice > dEntryPrice) {
-      stopLossPips = (stopLossPrice - dEntryPrice) * dDivider;
+      stopLossPips = (stopLossPrice - dEntryPrice) * divider;
     }
 
     return _buildStopLossResult(
@@ -102,9 +94,9 @@ class MatexForexStopLossCalculator extends MatexCalculator<
   }
 
   MatexForexTradeOutcome _computeStopLossWithPips(
-    Decimal stopLossPips,
-    Decimal pipValue,
-    Decimal divider,
+    double stopLossPips,
+    double pipValue,
+    double divider,
   ) {
     final stopLossPrice = _computeStopLossPrice(stopLossPips, divider);
 
@@ -115,13 +107,13 @@ class MatexForexStopLossCalculator extends MatexCalculator<
     );
   }
 
-  Decimal _computeStopLossAmount(Decimal stopLossPips, Decimal pipValue) {
+  double _computeStopLossAmount(double stopLossPips, double pipValue) {
     return stopLossPips * pipValue;
   }
 
-  Decimal _computeStopLossPrice(Decimal stopLossPips, Decimal divider) {
-    final dEntryPrice = toDecimalOrDefault(state.entryPrice);
-    final deltaPrice = decimalFromRational(stopLossPips / divider);
+  double _computeStopLossPrice(double stopLossPips, double divider) {
+    final dEntryPrice = state.entryPrice ?? 0;
+    final deltaPrice = stopLossPips / divider;
     final position = state.position;
 
     return position == MatexPosition.long
@@ -130,14 +122,14 @@ class MatexForexStopLossCalculator extends MatexCalculator<
   }
 
   MatexForexTradeOutcome _buildStopLossResult({
-    Decimal? amount,
-    Decimal? pips,
-    Decimal? price,
+    double? amount,
+    double? pips,
+    double? price,
   }) {
     return MatexForexTradeOutcome(
-      amount: toDecimalOrDefault(amount).toSafeDouble(),
-      pips: toDecimalOrDefault(pips).toSafeDouble(),
-      price: toDecimalOrDefault(price).toSafeDouble(),
+      amount: amount ?? 0,
+      price: price ?? 0,
+      pips: pips ?? 0,
     );
   }
 }

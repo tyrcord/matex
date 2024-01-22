@@ -1,8 +1,5 @@
 // Package imports:
-import 'package:decimal/decimal.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -81,11 +78,11 @@ class MatexForexRequiredMarginCalculator extends MatexCalculator<
         instrumentPairRate: state.instrumentPairRate,
         positionSize: state.positionSize,
         leverage: state.leverage,
-      ).toSafeDouble(),
+      ),
     );
   }
 
-  Decimal computeRequiredMargin({
+  double computeRequiredMargin({
     bool isAccountCurrencyCounter = false,
     double? counterToAccountCurrencyRate,
     bool isAccountCurrencyBase = false,
@@ -93,25 +90,22 @@ class MatexForexRequiredMarginCalculator extends MatexCalculator<
     double? positionSize,
     double? leverage,
   }) {
-    final dInstrumentPairRate = toDecimalOrDefault(instrumentPairRate);
-    final dPositionSize = toDecimalOrDefault(positionSize);
-    final dLeverage = toDecimalOrDefault(leverage);
-    final dCounterToAccountCurrencyRate =
-        toDecimalOrDefault(counterToAccountCurrencyRate);
+    counterToAccountCurrencyRate ??= 0;
+    instrumentPairRate ??= 0;
+    positionSize ??= 0;
+    leverage ??= 0;
 
-    if (dLeverage == dZero) return dZero;
+    if (leverage == 0) return 0;
 
     // Calculate the required margin
     if (isAccountCurrencyBase) {
-      return decimalFromRational(dPositionSize / dLeverage);
+      return positionSize / leverage;
     } else if (isAccountCurrencyCounter) {
-      return decimalFromRational(
-        dPositionSize * dInstrumentPairRate / dLeverage,
-      );
+      return positionSize * instrumentPairRate / leverage;
     }
 
-    final dMultiplier = decimalFromRational(dInstrumentPairRate / dLeverage);
+    final multiplier = instrumentPairRate / leverage;
 
-    return dPositionSize * dMultiplier * dCounterToAccountCurrencyRate;
+    return positionSize * multiplier * counterToAccountCurrencyRate;
   }
 }

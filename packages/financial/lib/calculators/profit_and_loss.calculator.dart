@@ -1,7 +1,5 @@
 // Package imports:
-import 'package:decimal/decimal.dart';
 import 'package:matex_core/core.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -63,7 +61,7 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
   );
 
   // Calculates the total revenue
-  Decimal get revenue {
+  double get revenue {
     return computeRevenue(
       expectedSaleUnits: state.expectedSaleUnits,
       sellingPrice: state.sellingPrice,
@@ -71,7 +69,7 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
   }
 
   // Calculates the cost of goods sold
-  Decimal get costOfGoodsSold {
+  double get costOfGoodsSold {
     return computeCostOfGoodsSold(
       buyingExpensePerUnitAmount: state.buyingExpensePerUnitAmount,
       buyingExpensePerUnitRate: state.buyingExpensePerUnitRate,
@@ -81,15 +79,15 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
   }
 
   // Calculates gross profit
-  Decimal get grossProfit {
+  double get grossProfit {
     return computeGrossProfit(
-      costOfGoodsSold: costOfGoodsSold.toSafeDouble(),
-      revenue: revenue.toSafeDouble(),
+      costOfGoodsSold: costOfGoodsSold,
+      revenue: revenue,
     );
   }
 
   // Calculates selling expenses
-  Decimal get sellingExpenses {
+  double get sellingExpenses {
     return computSellingExpenses(
       sellingExpensePerUnitAmount: state.sellingExpensePerUnitAmount,
       sellingExpensePerUnitRate: state.sellingExpensePerUnitRate,
@@ -100,46 +98,46 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
   }
 
   // Calculates operating profit
-  Decimal get operatingProfit {
+  double get operatingProfit {
     return computeOperatingProfit(
-      sellingExpenses: sellingExpenses.toSafeDouble(),
-      grossProfit: grossProfit.toSafeDouble(),
+      sellingExpenses: sellingExpenses,
+      grossProfit: grossProfit,
     );
   }
 
   // Calculates the tax amount
-  Decimal get taxAmount {
+  double get taxAmount {
     return computeTaxAmount(
-      operatingProfit: operatingProfit.toSafeDouble(),
+      operatingProfit: operatingProfit,
       taxRate: state.taxRate,
     );
   }
 
   // Calculates net profit
-  Decimal get netProfit {
+  double get netProfit {
     return computeNetProfit(
-      operatingProfit: operatingProfit.toSafeDouble(),
-      taxAmount: taxAmount.toSafeDouble(),
+      operatingProfit: operatingProfit,
+      taxAmount: taxAmount,
     );
   }
 
-  Decimal get costOfInvestment {
+  double get costOfInvestment {
     return computeCostOfInvestment(
-      sellingExpenses: sellingExpenses.toSafeDouble(),
-      costOfGoodsSold: costOfGoodsSold.toSafeDouble(),
+      sellingExpenses: sellingExpenses,
+      costOfGoodsSold: costOfGoodsSold,
     );
   }
 
   // Calculates the return on investment
-  Decimal get returnOnInvestment {
+  double get returnOnInvestment {
     return computeReturnOnInvestment(
-      costOfInvestment: costOfInvestment.toSafeDouble(),
-      netProfit: netProfit.toSafeDouble(),
+      costOfInvestment: costOfInvestment,
+      netProfit: netProfit,
     );
   }
 
   // Calculates the break-even units
-  Decimal get breakEvenUnits {
+  double get breakEvenUnits {
     return computeBreakEvenUnits(
       sellingExpensePerUnitAmount: state.sellingExpensePerUnitAmount,
       buyingExpensePerUnitAmount: state.buyingExpensePerUnitAmount,
@@ -152,19 +150,13 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
   }
 
   // Calculates Gross Profit Margin
-  Decimal get grossProfitMargin {
-    return computeGrossProfitMargin(
-      grossProfit: grossProfit.toSafeDouble(),
-      revenue: revenue.toSafeDouble(),
-    );
+  double get grossProfitMargin {
+    return computeGrossProfitMargin(grossProfit: grossProfit, revenue: revenue);
   }
 
   // Calculates Net Profit Margin
-  Decimal get netProfitMargin {
-    return computeNetProfitMargin(
-      netProfit: netProfit.toSafeDouble(),
-      revenue: revenue.toSafeDouble(),
-    );
+  double get netProfitMargin {
+    return computeNetProfitMargin(netProfit: netProfit, revenue: revenue);
   }
 
   @override
@@ -172,18 +164,18 @@ class MatexProfitAndLossCalculator extends MatexCalculator<
     if (!isValid) return defaultResults;
 
     return MatexProfitAndLossCalculatorResults(
-      returnOnInvestment: returnOnInvestment.toSafeDouble(),
-      breakEvenUnits: breakEvenUnits.toSafeDouble().ceil(),
-      grossProfitMargin: grossProfitMargin.toSafeDouble(),
-      costOfInvestment: costOfInvestment.toSafeDouble(),
-      costOfGoodsSold: costOfGoodsSold.toSafeDouble(),
-      sellingExpenses: sellingExpenses.toSafeDouble(),
-      netProfitMargin: netProfitMargin.toSafeDouble(),
-      operatingProfit: operatingProfit.toSafeDouble(),
-      grossProfit: grossProfit.toSafeDouble(),
-      netProfit: netProfit.toSafeDouble(),
-      taxAmount: taxAmount.toSafeDouble(),
-      revenue: revenue.toSafeDouble(),
+      returnOnInvestment: returnOnInvestment,
+      breakEvenUnits: breakEvenUnits.ceil(),
+      grossProfitMargin: grossProfitMargin,
+      costOfInvestment: costOfInvestment,
+      costOfGoodsSold: costOfGoodsSold,
+      sellingExpenses: sellingExpenses,
+      netProfitMargin: netProfitMargin,
+      operatingProfit: operatingProfit,
+      grossProfit: grossProfit,
+      netProfit: netProfit,
+      taxAmount: taxAmount,
+      revenue: revenue,
     );
   }
 }

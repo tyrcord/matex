@@ -1,25 +1,20 @@
-// Package imports:
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
-
 // Project imports:
 import 'package:matex_financial/financial.dart';
 
-final _fibonacci382 = toDecimalOrDefault('0.382');
-final _fibonacci618 = toDecimalOrDefault('0.618');
+const _fibonacci382 = 0.382;
+const _fibonacci618 = 0.618;
 
 MatexPivotPointsCalculatorResults pivotPointsFibonacci(
   double? high,
   double? low,
   double? close,
 ) {
-  final dHighPrice = toDecimalOrDefault(high);
-  final dLowPrice = toDecimalOrDefault(low);
-  final dClosePrice = toDecimalOrDefault(close);
+  close ??= 0;
+  high ??= 0;
+  low ??= 0;
 
-  final pivotPoint =
-      decimalFromRational((dHighPrice + dLowPrice + dClosePrice) / dThree);
-  final delta = dHighPrice - dLowPrice;
+  final pivotPoint = (high + low + close) / 3;
+  final delta = high - low;
 
   final dResistance1 = pivotPoint + (delta * _fibonacci382);
   final dResistance2 = pivotPoint + (delta * _fibonacci618);
@@ -30,16 +25,8 @@ MatexPivotPointsCalculatorResults pivotPointsFibonacci(
   final dSupport3 = pivotPoint - delta;
 
   return MatexPivotPointsCalculatorResults(
-    pivotPoint: pivotPoint.toSafeDouble(),
-    resistances: [
-      dResistance1.toSafeDouble(),
-      dResistance2.toSafeDouble(),
-      dResistance3.toSafeDouble(),
-    ],
-    supports: [
-      dSupport1.toSafeDouble(),
-      dSupport2.toSafeDouble(),
-      dSupport3.toSafeDouble(),
-    ],
+    resistances: [dResistance1, dResistance2, dResistance3],
+    supports: [dSupport1, dSupport2, dSupport3],
+    pivotPoint: pivotPoint,
   );
 }

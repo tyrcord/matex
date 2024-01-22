@@ -5,8 +5,6 @@ import 'package:flutter/widgets.dart';
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 import 'package:tlogger/logger.dart';
 
 // Project imports:
@@ -93,10 +91,10 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     // update the calculator position size with the latest lot size
     if (positionSizeFieldType != MatexPositionSizeType.unit) {
-      final dLotSize = toDecimalOrDefault(currentState.fields.lotSize);
+      final dLotSize = parseStringToDouble(currentState.fields.lotSize);
 
       final positionSize = await getPositionSizeForLotSize(
-        positionSize: dLotSize.toSafeDouble(),
+        positionSize: dLotSize,
         lotSize: positionSizeFieldType,
       );
 
@@ -383,9 +381,9 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       calculator.positionSize = 0;
     } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(positionSize: value);
-      calculator.positionSize = dValue.toSafeDouble();
+      calculator.positionSize = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -418,8 +416,8 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
       fields = fields.copyWith(pipDecimalPlaces: value);
-      final dValue = toDecimalOrDefault(value);
-      calculator.pipDecimalPlaces = dValue.toSafeDouble().toInt();
+      final dValue = parseStringToDouble(value);
+      calculator.pipDecimalPlaces = dValue.toInt();
     }
 
     return currentState.copyWith(fields: fields);
@@ -446,9 +444,9 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields = currentState.fields.copyWithDefaults(resetEntryPrice: true);
       calculator.entryPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(entryPrice: value);
-      calculator.entryPrice = dValue.toSafeDouble();
+      calculator.entryPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -461,9 +459,9 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
       fields = currentState.fields.copyWithDefaults(resetExitPrice: true);
       calculator.exitPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(exitPrice: value);
-      calculator.exitPrice = dValue.toSafeDouble();
+      calculator.exitPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);

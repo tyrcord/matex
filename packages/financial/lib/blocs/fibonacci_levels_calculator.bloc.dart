@@ -7,8 +7,6 @@ import 'package:flutter/widgets.dart';
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -159,9 +157,9 @@ class MatexFibonacciLevelsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.lowPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(lowPrice: value);
-      calculator.lowPrice = dValue.toSafeDouble();
+      calculator.lowPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -177,9 +175,9 @@ class MatexFibonacciLevelsCalculatorBloc extends MatexCalculatorBloc<
 
       calculator.highPrice = 0;
     } else {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(highPrice: value);
-      calculator.highPrice = dValue.toSafeDouble();
+      calculator.highPrice = dValue;
     }
 
     return currentState.copyWith(fields: fields);

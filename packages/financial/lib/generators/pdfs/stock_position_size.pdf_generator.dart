@@ -13,7 +13,6 @@ import 'package:lingua_core/generated/locale_keys.g.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:lingua_finance_stock/generated/locale_keys.g.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -241,13 +240,10 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
     final entryPrice = results.entryPriceWithSlippage;
     final entryFeeAmount = results.entryFeeAmount;
     final slippagePercent = fields.slippagePercent;
-    final dSlippagePercent = toDecimal(slippagePercent);
+    final dSlippagePercent = parseStringToDouble(slippagePercent);
 
     return (entryFeeAmount != null && entryFeeAmount > 0) ||
-        (entryPrice != null &&
-            entryPrice > 0 &&
-            dSlippagePercent != null &&
-            dSlippagePercent != dZero);
+        (entryPrice != null && entryPrice > 0 && dSlippagePercent != 0);
   }
 
   /// Builds the "Entry" category of the report.
@@ -319,9 +315,9 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
         fields.slippagePercent != null &&
         fields.slippagePercent!.isNotEmpty) {
       final slippagePercent = fields.slippagePercent;
-      final dSlippagePercent = toDecimal(slippagePercent);
+      final dSlippagePercent = parseStringToDouble(slippagePercent);
 
-      if (dSlippagePercent != null && dSlippagePercent != dZero) {
+      if (dSlippagePercent != 0) {
         entries.add(FastReportEntry(
           name: FinanceLocaleKeys.finance_label_stop_loss_price_with_slippage
               .tr(),

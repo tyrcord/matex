@@ -1,8 +1,3 @@
-// Package imports:
-import 'package:decimal/decimal.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
-
 double getShareAmount({
   required double accountBalance,
   required double risk,
@@ -14,61 +9,53 @@ double getShareAmount({
   bool fractionalStocks = false,
   bool isShortPosition = false,
 }) {
-  final dAccountBalance = toDecimal(accountBalance)!;
-  final dRisk = toDecimal(risk)!;
-  final dEntryPrice = toDecimal(entryPrice)!;
-  final dStopLossPrice = toDecimal(stopLossPrice)!;
-  final dEntryFees = toDecimal(entryFees)!;
-  final dExitFees = toDecimal(exitFees)!;
-  final dSlippage = toDecimal(slippage)!;
-
-  if (dAccountBalance <= Decimal.zero ||
-      dRisk <= Decimal.zero ||
-      dEntryPrice <= Decimal.zero ||
-      dStopLossPrice <= Decimal.zero) {
+  if (accountBalance <= 0 ||
+      risk <= 0 ||
+      entryPrice <= 0 ||
+      stopLossPrice <= 0) {
     return 0.0;
   }
 
   // Calculate the maximum amount to risk based on the account balance and
   // risk percentage
-  final maxRiskAmount = dAccountBalance * dRisk;
+  final maxRiskAmount = accountBalance * risk;
 
   // Adjust for slippage
-  Decimal adjustedEntryPrice = adjustEntryPriceForSlippage(
-    dEntryPrice,
-    dSlippage,
+  double adjustedEntryPrice = adjustEntryPriceForSlippage(
+    entryPrice,
+    slippage,
     isShortPosition: isShortPosition,
   );
 
-  Decimal adjustedStopLossPrice = adjustStopLossPriceForSlippage(
-    dStopLossPrice,
-    dSlippage,
+  double adjustedStopLossPrice = adjustStopLossPriceForSlippage(
+    stopLossPrice,
+    slippage,
     isShortPosition: isShortPosition,
   );
 
   // Calculate the difference between the adjusted entry price and
   // adjusted stop loss
-  Decimal priceDifference = isShortPosition
+  double priceDifference = isShortPosition
       ? adjustedStopLossPrice - adjustedEntryPrice
       : adjustedEntryPrice - adjustedStopLossPrice;
 
-  if (priceDifference <= Decimal.zero) {
-    return 0.0;
-  }
+  if (priceDifference <= 0) return 0.0;
 
   // Calculate the position size
-  Decimal positionSize = decimalFromRational(maxRiskAmount / priceDifference);
+  double positionSize = maxRiskAmount / priceDifference;
 
   // Adjust for entry and exit fees
   adjustedEntryPrice = adjustEntryPriceForFees(
     adjustedEntryPrice,
-    dEntryFees,
+    entryFees,
     isShortPosition: isShortPosition,
   );
 
   adjustedStopLossPrice = adjustExitPriceForFees(
-      adjustedStopLossPrice, dExitFees,
-      isShortPosition: isShortPosition);
+    adjustedStopLossPrice,
+    exitFees,
+    isShortPosition: isShortPosition,
+  );
 
   // Recalculate price difference considering worst case scenario and
   // update positionSize
@@ -76,52 +63,52 @@ double getShareAmount({
       ? adjustedStopLossPrice - adjustedEntryPrice
       : adjustedEntryPrice - adjustedStopLossPrice;
 
-  if (priceDifference <= Decimal.zero) {
+  if (priceDifference <= 0) {
     return 0.0;
   }
 
-  positionSize = decimalFromRational(maxRiskAmount / priceDifference);
+  positionSize = maxRiskAmount / priceDifference;
 
   // Adjust the position size for fractional stocks if enabled
   if (!fractionalStocks) {
-    positionSize = Decimal.parse(positionSize.floor().toString());
+    positionSize = positionSize.floor().toDouble();
   }
 
-  return positionSize.toSafeDouble();
+  return positionSize;
 }
 
-Decimal adjustEntryPriceForSlippage(
-  Decimal price,
-  Decimal slippageRate, {
+double adjustEntryPriceForSlippage(
+  double price,
+  double slippageRate, {
   bool isShortPosition = false,
 }) {
   return isShortPosition
-      ? price * (dOne - slippageRate)
-      : price * (dOne + slippageRate);
+      ? price * (1 - slippageRate)
+      : price * (1 + slippageRate);
 }
 
-Decimal adjustStopLossPriceForSlippage(
-  Decimal price,
-  Decimal slippageRate, {
+double adjustStopLossPriceForSlippage(
+  double price,
+  double slippageRate, {
   bool isShortPosition = false,
 }) {
   return isShortPosition
-      ? price * (dOne + slippageRate)
-      : price * (dOne - slippageRate);
+      ? price * (1 + slippageRate)
+      : price * (1 - slippageRate);
 }
 
-Decimal adjustEntryPriceForFees(
-  Decimal price,
-  Decimal fees, {
+double adjustEntryPriceForFees(
+  double price,
+  double fees, {
   bool isShortPosition = false,
 }) {
-  return isShortPosition ? price * (dOne - fees) : price * (dOne + fees);
+  return isShortPosition ? price * (1 - fees) : price * (1 + fees);
 }
 
-Decimal adjustExitPriceForFees(
-  Decimal price,
-  Decimal fees, {
+double adjustExitPriceForFees(
+  double price,
+  double fees, {
   bool isShortPosition = false,
 }) {
-  return isShortPosition ? price * (dOne + fees) : price * (dOne - fees);
+  return isShortPosition ? price * (1 + fees) : price * (1 - fees);
 }

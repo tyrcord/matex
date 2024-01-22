@@ -1,7 +1,5 @@
 // Package imports:
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -54,63 +52,47 @@ class MatexFibonacciLevelsCalculator extends MatexCalculator<
 
   List<MatexFibonacciLevel> _computeExtensions() {
     final trend = state.trend;
-    final dHighPrice = toDecimalOrDefault(state.highPrice);
-    final dLowPrice = toDecimalOrDefault(state.lowPrice);
-    final dDelta = toDecimalOrDefault(dHighPrice - dLowPrice);
+    final highPrice = state.highPrice ?? 0.0;
+    final lowPrice = state.lowPrice ?? 0.0;
+    final delta = highPrice - lowPrice;
 
     if (trend == MatexTrend.up) {
       return [...kMatexFibonacciExtensionLevels].reversed.map((double level) {
-        final dLevel = toDecimalOrDefault(level);
-        final dLevelRate = decimalFromRational(dLevel / dHundred);
-        final parsedValue = isValid ? dLevelRate * dDelta + dHighPrice : dOne;
+        final levelRate = level / 100;
+        final parsedValue = isValid ? levelRate * delta + highPrice : 1.0;
 
-        return _makeFibonacciLevel(
-          dLevelRate.toSafeDouble(),
-          parsedValue.toSafeDouble(),
-        );
+        return _makeFibonacciLevel(levelRate, parsedValue);
       }).toList();
     }
 
     return kMatexFibonacciExtensionLevels.map((double level) {
-      final dLevel = toDecimalOrDefault(level);
-      final dLevelRate = decimalFromRational(dLevel / dHundred);
-      final parsedValue = isValid ? -(dLevelRate * dDelta) + dLowPrice : dOne;
+      final levelRate = level / 100;
+      final parsedValue = isValid ? -(levelRate * delta) + lowPrice : 1.0;
 
-      return _makeFibonacciLevel(
-        dLevelRate.toSafeDouble(),
-        parsedValue.toSafeDouble(),
-      );
+      return _makeFibonacciLevel(levelRate, parsedValue);
     }).toList();
   }
 
   List<MatexFibonacciLevel> _computeRetracements() {
     final trend = state.trend;
-    final dHighPrice = toDecimalOrDefault(state.highPrice);
-    final dLowPrice = toDecimalOrDefault(state.lowPrice);
-    final dDelta = toDecimalOrDefault(dHighPrice - dLowPrice);
+    final highPrice = state.highPrice ?? 0.0;
+    final lowPrice = state.lowPrice ?? 0.0;
+    final delta = highPrice - lowPrice;
 
     if (trend == MatexTrend.down) {
       return [...kMatexFibonacciRetracementLevels].reversed.map((double level) {
-        final dLevel = toDecimalOrDefault(level);
-        final dLevelRate = decimalFromRational(dLevel / dHundred);
-        final parsedValue = isValid ? dLevelRate * dDelta + dLowPrice : dOne;
+        final levelRate = level / 100;
+        final parsedValue = isValid ? levelRate * delta + lowPrice : 1.0;
 
-        return _makeFibonacciLevel(
-          dLevelRate.toSafeDouble(),
-          parsedValue.toSafeDouble(),
-        );
+        return _makeFibonacciLevel(levelRate, parsedValue);
       }).toList();
     }
 
     return kMatexFibonacciRetracementLevels.map((double level) {
-      final dLevel = toDecimalOrDefault(level);
-      final dLevelRate = decimalFromRational(dLevel / dHundred);
-      final parsedValue = isValid ? -(dLevelRate * dDelta) + dHighPrice : dOne;
+      final levelRate = level / 100;
+      final parsedValue = isValid ? -(levelRate * delta) + highPrice : 1.0;
 
-      return _makeFibonacciLevel(
-        dLevelRate.toSafeDouble(),
-        parsedValue.toSafeDouble(),
-      );
+      return _makeFibonacciLevel(levelRate, parsedValue);
     }).toList();
   }
 

@@ -1,7 +1,5 @@
 // Package imports:
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -61,14 +59,14 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
   MatexVatCalculatorResults value() {
     if (!isValid) return defaultResults;
 
+    final regionalVatRate = state.regionalVatRate ?? 0;
+    final federalVatRate = state.federalVatRate ?? 0;
+    final customVatRate = state.customVatRate ?? 0;
     final price = state.priceBeforeVat ?? 0.0;
-    final dFederalVatRate = toDecimal(state.federalVatRate) ?? dZero;
-    final dRegionalVatRate = toDecimal(state.regionalVatRate) ?? dZero;
-    final dVatRate = toDecimal(state.vatRate) ?? dZero;
-    final dCustomVatRate = toDecimal(state.customVatRate) ?? dZero;
+    final vatRate = state.vatRate ?? 0;
 
     final dTotalVatRate =
-        dFederalVatRate + dRegionalVatRate + dVatRate + dCustomVatRate;
+        federalVatRate + regionalVatRate + vatRate + customVatRate;
 
     final discountedPrice = applyDiscount(
       price,
@@ -76,8 +74,7 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
       discountRate: state.discountRate,
     );
 
-    final totalTaxes =
-        getVATAmount(discountedPrice, dTotalVatRate.toSafeDouble());
+    final totalTaxes = getVATAmount(discountedPrice, dTotalVatRate);
     final totalPrice = discountedPrice + totalTaxes;
 
     final (discountAmount, discountRate) = getDiscountAmountAndRate(
@@ -92,30 +89,18 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     );
 
     return MatexVatCalculatorResults(
-      tipAmount: tipAmount,
-      tipRate: tipRate,
+      regionalVatAmount: getVATAmount(discountedPrice, regionalVatRate),
+      federalVatAmount: getVATAmount(discountedPrice, federalVatRate),
+      customVatAmount: getVATAmount(discountedPrice, customVatRate),
+      grandTotal: tipAmount > 0 ? totalPrice + tipAmount : 0,
+      subTotal: discountAmount > 0 ? discountedPrice : 0,
+      vatAmount: getVATAmount(discountedPrice, vatRate),
       discountAmount: discountAmount,
       discountRate: discountRate,
       totalTaxes: totalTaxes,
-      subTotal: discountAmount > 0 ? discountedPrice : 0,
+      tipAmount: tipAmount,
       total: totalPrice,
-      grandTotal: tipAmount > 0 ? totalPrice + tipAmount : 0,
-      federalVatAmount: getVATAmount(
-        discountedPrice,
-        dFederalVatRate.toSafeDouble(),
-      ),
-      regionalVatAmount: getVATAmount(
-        discountedPrice,
-        dRegionalVatRate.toSafeDouble(),
-      ),
-      vatAmount: getVATAmount(
-        discountedPrice,
-        dVatRate.toSafeDouble(),
-      ),
-      customVatAmount: getVATAmount(
-        discountedPrice,
-        dCustomVatRate.toSafeDouble(),
-      ),
+      tipRate: tipRate,
     );
   }
 
