@@ -54,10 +54,10 @@ class MatexForexStopLossTakeProfitCalculatorPdfGenerator {
     MatexForexStopLossTakeProfitCalculatorBlocResults results,
     Map<String, dynamic> metadata,
   ) {
-    final positionSize = parseFieldValueToDouble(fields.positionSize);
+    final positionSize = parseStringToDouble(fields.positionSize);
     final positionSizeFieldType = fields.positionSizeFieldType;
-    final lotSize = parseFieldValueToDouble(fields.lotSize);
-    final entryPrice = parseFieldValueToDouble(fields.entryPrice);
+    final lotSize = parseStringToDouble(fields.lotSize);
+    final entryPrice = parseStringToDouble(fields.entryPrice);
     final updatedOn = metadata['updatedOn'] as String?;
     final formattedInstrumentExchangeRate =
         metadata['formattedInstrumentExchangeRate'] as String?;

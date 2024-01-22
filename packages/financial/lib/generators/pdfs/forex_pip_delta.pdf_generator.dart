@@ -52,8 +52,8 @@ class MatexForexPipDeltaCalculatorPdfGenerator {
     MatexForexPipDeltaCalculatorBlocResults results,
     Map<String, dynamic> metadata,
   ) {
-    final priceA = parseFieldValueToDouble(fields.priceA);
-    final priceB = parseFieldValueToDouble(fields.priceB);
+    final priceA = parseStringToDouble(fields.priceA);
+    final priceB = parseStringToDouble(fields.priceB);
 
     return [
       if (fields.financialInstrument != null)

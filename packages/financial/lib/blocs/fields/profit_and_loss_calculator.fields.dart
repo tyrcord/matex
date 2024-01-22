@@ -20,55 +20,55 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
   late final String? taxRate;
 
   String get formattedBuyingPrice {
-    final value = parseFieldValueToDouble(buyingPrice);
+    final value = parseStringToDouble(buyingPrice);
 
     return localizeCurrency(value: value);
   }
 
   String get formattedExpectedSaleUnits {
-    final value = parseFieldValueToDouble(expectedSaleUnits);
+    final value = parseStringToDouble(expectedSaleUnits);
 
     return localizeNumber(value: value);
   }
 
   String get formattedSellingPrice {
-    final value = parseFieldValueToDouble(sellingPrice);
+    final value = parseStringToDouble(sellingPrice);
 
     return localizeCurrency(value: value);
   }
 
   String get formattedOperatingExpenses {
-    final value = parseFieldValueToDouble(operatingExpenses);
+    final value = parseStringToDouble(operatingExpenses);
 
     return localizeCurrency(value: value);
   }
 
   String get formattedBuyingExpensePerUnitRate {
-    final value = parseFieldValueToDouble(buyingExpensePerUnitRate);
+    final value = parseStringToDouble(buyingExpensePerUnitRate);
 
     return '${localizeNumber(value: value)}%';
   }
 
   String get formattedBuyingExpensePerUnitAmount {
-    final value = parseFieldValueToDouble(buyingExpensePerUnitAmount);
+    final value = parseStringToDouble(buyingExpensePerUnitAmount);
 
     return localizeCurrency(value: value);
   }
 
   String get formattedSellingExpensePerUnitRate {
-    final value = parseFieldValueToDouble(sellingExpensePerUnitRate);
+    final value = parseStringToDouble(sellingExpensePerUnitRate);
 
     return '${localizeNumber(value: value)}%';
   }
 
   String get formattedSellingExpensePerUnitAmount {
-    final value = parseFieldValueToDouble(sellingExpensePerUnitAmount);
+    final value = parseStringToDouble(sellingExpensePerUnitAmount);
 
     return localizeCurrency(value: value);
   }
 
   String get formattedTaxRate {
-    final value = parseFieldValueToDouble(taxRate);
+    final value = parseStringToDouble(taxRate);
 
     return '${localizeNumber(value: value)}%';
   }

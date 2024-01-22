@@ -23,55 +23,55 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
   late final String? exitFees;
 
   String get formattedAccountSize {
-    final accountBalance = parseFieldValueToDouble(accountSize);
+    final accountBalance = parseStringToDouble(accountSize);
 
     return localizeCurrency(value: accountBalance);
   }
 
   String get formattedEntryPrice {
-    final entryPriceValue = parseFieldValueToDouble(entryPrice);
+    final entryPriceValue = parseStringToDouble(entryPrice);
 
     return localizeCurrency(value: entryPriceValue);
   }
 
   String get formattedStopLossPrice {
-    final stopLossPriceValue = parseFieldValueToDouble(stopLossPrice);
+    final stopLossPriceValue = parseStringToDouble(stopLossPrice);
 
     return localizeCurrency(value: stopLossPriceValue);
   }
 
   String get formattedStopLossAmount {
-    final stopLossAmountValue = parseFieldValueToDouble(stopLossAmount);
+    final stopLossAmountValue = parseStringToDouble(stopLossAmount);
 
     return localizeCurrency(value: stopLossAmountValue);
   }
 
   String get formattedSlippagePercent {
-    final slippagePercentValue = parseFieldValueToDouble(slippagePercent);
+    final slippagePercentValue = parseStringToDouble(slippagePercent);
 
     return '${localizeNumber(value: slippagePercentValue)}%';
   }
 
   String get formattedRiskPercent {
-    final riskPercentValue = parseFieldValueToDouble(riskPercent);
+    final riskPercentValue = parseStringToDouble(riskPercent);
 
     return '${localizeNumber(value: riskPercentValue)}%';
   }
 
   String get formattedRiskReward {
-    final riskRewardValue = parseFieldValueToDouble(riskReward);
+    final riskRewardValue = parseStringToDouble(riskReward);
 
     return '${localizeNumber(value: riskRewardValue)}:1';
   }
 
   String get formattedEntryFees {
-    final entryFeesValue = parseFieldValueToDouble(entryFees);
+    final entryFeesValue = parseStringToDouble(entryFees);
 
     return '${localizeNumber(value: entryFeesValue)}%';
   }
 
   String get formattedExitFees {
-    final exitFeesValue = parseFieldValueToDouble(exitFees);
+    final exitFeesValue = parseStringToDouble(exitFees);
 
     return '${localizeNumber(value: exitFeesValue)}%';
   }

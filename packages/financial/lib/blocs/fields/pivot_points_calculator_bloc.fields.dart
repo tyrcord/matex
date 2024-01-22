@@ -16,7 +16,7 @@ class MatexPivotPointsCalculatorBlocFields extends FastCalculatorFields
   late final String? lowPrice;
 
   String get formattedLowPrice {
-    final value = parseFieldValueToDouble(lowPrice);
+    final value = parseStringToDouble(lowPrice);
 
     return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,
@@ -25,7 +25,7 @@ class MatexPivotPointsCalculatorBlocFields extends FastCalculatorFields
   }
 
   String get formattedHighPrice {
-    final value = parseFieldValueToDouble(highPrice);
+    final value = parseStringToDouble(highPrice);
 
     return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,
@@ -34,7 +34,7 @@ class MatexPivotPointsCalculatorBlocFields extends FastCalculatorFields
   }
 
   String get formattedClosePrice {
-    final value = parseFieldValueToDouble(closePrice);
+    final value = parseStringToDouble(closePrice);
 
     return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,
@@ -43,7 +43,7 @@ class MatexPivotPointsCalculatorBlocFields extends FastCalculatorFields
   }
 
   String get formattedOpenPrice {
-    final value = parseFieldValueToDouble(openPrice);
+    final value = parseStringToDouble(openPrice);
 
     return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,

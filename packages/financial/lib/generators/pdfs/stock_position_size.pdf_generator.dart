@@ -52,10 +52,10 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
     MatexStockPositionSizeCalculatorBlocFields fields,
     MatexStockPositionSizeCalculatorBlocResults results,
   ) {
-    final riskReward = parseFieldValueToDouble(fields.riskReward);
-    final entryFees = parseFieldValueToDouble(fields.entryFees);
-    final exitFees = parseFieldValueToDouble(fields.exitFees);
-    final slippage = parseFieldValueToDouble(fields.slippagePercent);
+    final riskReward = parseStringToDouble(fields.riskReward);
+    final entryFees = parseStringToDouble(fields.entryFees);
+    final exitFees = parseStringToDouble(fields.exitFees);
+    final slippage = parseStringToDouble(fields.slippagePercent);
 
     return [
       FastReportEntry(

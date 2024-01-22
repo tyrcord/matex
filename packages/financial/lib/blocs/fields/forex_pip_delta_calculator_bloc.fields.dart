@@ -18,8 +18,8 @@ class MatexForexPipDeltaCalculatorBlocFields extends FastCalculatorFields
   late final String? priceB;
 
   String get formattedPriceA {
-    final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
-    final value = parseFieldValueToDouble(priceA);
+    final pipDecimalPlacesValue = parseStringToDouble(pipDecimalPlaces);
+    final value = parseStringToDouble(priceA);
 
     return localizeCurrency(
       minimumFractionDigits: pipDecimalPlacesValue.toInt(),
@@ -29,8 +29,8 @@ class MatexForexPipDeltaCalculatorBlocFields extends FastCalculatorFields
   }
 
   String get formattedPriceB {
-    final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
-    final value = parseFieldValueToDouble(priceB);
+    final pipDecimalPlacesValue = parseStringToDouble(pipDecimalPlaces);
+    final value = parseStringToDouble(priceB);
 
     return localizeCurrency(
       minimumFractionDigits: pipDecimalPlacesValue.toInt(),

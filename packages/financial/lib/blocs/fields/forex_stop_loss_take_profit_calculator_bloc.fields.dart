@@ -36,7 +36,7 @@ class MatexForexStopLossTakeProfitCalculatorBlocFields
   String get formattedPosition => position.localizedName;
 
   String get formattedEntryPrice {
-    final value = parseFieldValueToDouble(entryPrice);
+    final value = parseStringToDouble(entryPrice);
 
     return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,
@@ -45,8 +45,8 @@ class MatexForexStopLossTakeProfitCalculatorBlocFields
   }
 
   String get formattedStopLossPrice {
-    final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
-    final value = parseFieldValueToDouble(stopLossPrice);
+    final pipDecimalPlacesValue = parseStringToDouble(pipDecimalPlaces);
+    final value = parseStringToDouble(stopLossPrice);
 
     return localizeCurrency(
       minimumFractionDigits: pipDecimalPlacesValue.toInt(),
@@ -56,14 +56,14 @@ class MatexForexStopLossTakeProfitCalculatorBlocFields
   }
 
   String get formattedStopLossPips {
-    final stopLossPipsValue = parseFieldValueToDouble(stopLossPips);
+    final stopLossPipsValue = parseStringToDouble(stopLossPips);
 
     return localizeNumber(value: stopLossPipsValue);
   }
 
   String get formattedTakeProfitPrice {
-    final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
-    final value = parseFieldValueToDouble(takeProfitPrice);
+    final pipDecimalPlacesValue = parseStringToDouble(pipDecimalPlaces);
+    final value = parseStringToDouble(takeProfitPrice);
 
     return localizeCurrency(
       minimumFractionDigits: pipDecimalPlacesValue.toInt(),
@@ -73,31 +73,31 @@ class MatexForexStopLossTakeProfitCalculatorBlocFields
   }
 
   String get formattedTakeProfitPips {
-    final takeProfitPipsValue = parseFieldValueToDouble(takeProfitPips);
+    final takeProfitPipsValue = parseStringToDouble(takeProfitPips);
 
     return localizeNumber(value: takeProfitPipsValue);
   }
 
   String get formattedTakeProfitAmount {
-    final takeProfitAmountValue = parseFieldValueToDouble(takeProfitAmount);
+    final takeProfitAmountValue = parseStringToDouble(takeProfitAmount);
 
     return localizeCurrency(value: takeProfitAmountValue);
   }
 
   String get formattedStopLossAmount {
-    final stopLossAmountValue = parseFieldValueToDouble(stopLossAmount);
+    final stopLossAmountValue = parseStringToDouble(stopLossAmount);
 
     return localizeCurrency(value: stopLossAmountValue);
   }
 
   String get formattedPositionSize {
-    final value = parseFieldValueToDouble(positionSize);
+    final value = parseStringToDouble(positionSize);
 
     return localizeNumber(value: value);
   }
 
   String get formattedLotSize {
-    final value = parseFieldValueToDouble(lotSize);
+    final value = parseStringToDouble(lotSize);
 
     return localizeNumber(value: value);
   }

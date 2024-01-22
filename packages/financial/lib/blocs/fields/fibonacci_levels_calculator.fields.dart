@@ -14,7 +14,7 @@ class MatexFibonacciLevelsCalculatorBlocFields extends FastCalculatorFields
   late final MatexTrend trend;
 
   String get formattedLowPrice {
-    final value = parseFieldValueToDouble(lowPrice);
+    final value = parseStringToDouble(lowPrice);
 
     return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,
@@ -23,7 +23,7 @@ class MatexFibonacciLevelsCalculatorBlocFields extends FastCalculatorFields
   }
 
   String get formattedHighPrice {
-    final value = parseFieldValueToDouble(highPrice);
+    final value = parseStringToDouble(highPrice);
 
     return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,

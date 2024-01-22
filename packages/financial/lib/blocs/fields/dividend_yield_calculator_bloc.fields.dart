@@ -14,13 +14,13 @@ class MatexDividendYieldCalculatorBlocFields extends FastCalculatorFields
   late final String? sharePrice;
 
   String get formattedSharePrice {
-    final value = parseFieldValueToDouble(sharePrice);
+    final value = parseStringToDouble(sharePrice);
 
     return localizeCurrency(value: value);
   }
 
   String get formattedDividendAmount {
-    final value = parseFieldValueToDouble(dividendAmount);
+    final value = parseStringToDouble(dividendAmount);
 
     return localizeCurrency(value: value);
   }

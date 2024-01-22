@@ -21,31 +21,31 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
   late final String? additionalContribution;
 
   String get formattedStartBalance {
-    final value = parseFieldValueToDouble(startBalance);
+    final value = parseStringToDouble(startBalance);
 
     return localizeCurrency(value: value);
   }
 
   String get formattedRate {
-    final value = parseFieldValueToDouble(rate);
+    final value = parseStringToDouble(rate);
 
     return '${localizeNumber(value: value)}%';
   }
 
   String get formattedDuration {
-    final value = parseFieldValueToDouble(duration);
+    final value = parseStringToDouble(duration);
 
     return localizeNumber(value: value);
   }
 
   String get formattedWithdrawalAmount {
-    final value = parseFieldValueToDouble(withdrawalAmount);
+    final value = parseStringToDouble(withdrawalAmount);
 
     return localizeCurrency(value: value);
   }
 
   String get formattedAdditionalContribution {
-    final value = parseFieldValueToDouble(additionalContribution);
+    final value = parseStringToDouble(additionalContribution);
 
     return localizeCurrency(value: value);
   }

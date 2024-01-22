@@ -21,7 +21,7 @@ class MatexForexProfitLossCalculatorBlocFields
   late final String? lotSize;
 
   String get formattedEntryPrice {
-    final value = parseFieldValueToDouble(entryPrice);
+    final value = parseStringToDouble(entryPrice);
 
     return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,
@@ -30,7 +30,7 @@ class MatexForexProfitLossCalculatorBlocFields
   }
 
   String get formattedExitPrice {
-    final value = parseFieldValueToDouble(exitPrice);
+    final value = parseStringToDouble(exitPrice);
 
     return localizeNumber(
       maximumFractionDigits: kMatexQuoteMaxFractionDigits,
@@ -39,7 +39,7 @@ class MatexForexProfitLossCalculatorBlocFields
   }
 
   String get formattedLotSize {
-    final value = parseFieldValueToDouble(lotSize);
+    final value = parseStringToDouble(lotSize);
 
     return localizeNumber(value: value);
   }
@@ -47,7 +47,7 @@ class MatexForexProfitLossCalculatorBlocFields
   String get formattedPosition => position.localizedName;
 
   String get formattedPositionSize {
-    final value = parseFieldValueToDouble(positionSize);
+    final value = parseStringToDouble(positionSize);
 
     return localizeNumber(value: value);
   }

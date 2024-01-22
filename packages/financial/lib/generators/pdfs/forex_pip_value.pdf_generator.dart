@@ -54,10 +54,10 @@ class MatexForexPipValueCalculatorPdfGenerator {
     MatexForexPipValueCalculatorBlocResults results,
     Map<String, dynamic> metadata,
   ) {
-    final numberOfPips = parseFieldValueToDouble(fields.numberOfPips);
-    final positionSize = parseFieldValueToDouble(fields.positionSize);
+    final numberOfPips = parseStringToDouble(fields.numberOfPips);
+    final positionSize = parseStringToDouble(fields.positionSize);
     final positionSizeFieldType = fields.positionSizeFieldType;
-    final lotSize = parseFieldValueToDouble(fields.lotSize);
+    final lotSize = parseStringToDouble(fields.lotSize);
     final updatedOn = metadata['updatedOn'] as String?;
     final formattedInstrumentExchangeRate =
         metadata['formattedInstrumentExchangeRate'] as String?;
@@ -124,7 +124,7 @@ class MatexForexPipValueCalculatorPdfGenerator {
     final standardLotValue = results.standardLotValue;
     final miniLotValue = results.miniLotValue;
     final microLotValue = results.microLotValue;
-    final numberOfPips = parseFieldValueToDouble(
+    final numberOfPips = parseStringToDouble(
       fields.numberOfPips,
     );
 

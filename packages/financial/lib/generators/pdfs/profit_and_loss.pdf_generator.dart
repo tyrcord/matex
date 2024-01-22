@@ -49,20 +49,20 @@ class MatexProfitAndLossCalculatorPdfGenerator {
     MatexProfitAndLossCalculatorBlocFields fields,
     MatexProfitAndLossCalculatorBlocResults results,
   ) {
-    final operatingExpenses = parseFieldValueToDouble(fields.operatingExpenses);
-    final buyingExpensePerUnitAmount = parseFieldValueToDouble(
+    final operatingExpenses = parseStringToDouble(fields.operatingExpenses);
+    final buyingExpensePerUnitAmount = parseStringToDouble(
       fields.buyingExpensePerUnitAmount,
     );
-    final buyingExpensePerUnitRate = parseFieldValueToDouble(
+    final buyingExpensePerUnitRate = parseStringToDouble(
       fields.buyingExpensePerUnitRate,
     );
-    final sellingExpensePerUnitAmount = parseFieldValueToDouble(
+    final sellingExpensePerUnitAmount = parseStringToDouble(
       fields.sellingExpensePerUnitAmount,
     );
-    final sellingExpensePerUnitRate = parseFieldValueToDouble(
+    final sellingExpensePerUnitRate = parseStringToDouble(
       fields.sellingExpensePerUnitRate,
     );
-    final taxRate = parseFieldValueToDouble(fields.taxRate);
+    final taxRate = parseStringToDouble(fields.taxRate);
     final sellingCostsPerUnitType = fields.sellingCostsPerUnitType;
     final buyingCostsPerUnitType = fields.buyingCostsPerUnitType;
 

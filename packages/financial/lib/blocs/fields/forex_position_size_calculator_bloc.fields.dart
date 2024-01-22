@@ -26,14 +26,14 @@ class MatexForexPositionSizeCalculatorBlocFields
   late final String? entryPrice;
 
   String get formattedAccountSize {
-    final accountBalance = parseFieldValueToDouble(accountSize);
+    final accountBalance = parseStringToDouble(accountSize);
 
     return localizeCurrency(value: accountBalance);
   }
 
   String get formattedEntryPrice {
-    final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
-    final value = parseFieldValueToDouble(entryPrice);
+    final pipDecimalPlacesValue = parseStringToDouble(pipDecimalPlaces);
+    final value = parseStringToDouble(entryPrice);
 
     return localizeCurrency(
       minimumFractionDigits: pipDecimalPlacesValue.toInt(),
@@ -43,8 +43,8 @@ class MatexForexPositionSizeCalculatorBlocFields
   }
 
   String get formattedStopLossPrice {
-    final pipDecimalPlacesValue = parseFieldValueToDouble(pipDecimalPlaces);
-    final value = parseFieldValueToDouble(stopLossPrice);
+    final pipDecimalPlacesValue = parseStringToDouble(pipDecimalPlaces);
+    final value = parseStringToDouble(stopLossPrice);
 
     return localizeCurrency(
       minimumFractionDigits: pipDecimalPlacesValue.toInt(),
@@ -54,19 +54,19 @@ class MatexForexPositionSizeCalculatorBlocFields
   }
 
   String get formattedRiskPercent {
-    final riskPercentValue = parseFieldValueToDouble(riskPercent);
+    final riskPercentValue = parseStringToDouble(riskPercent);
 
     return '${localizeNumber(value: riskPercentValue)}%';
   }
 
   String get formattedRiskAmount {
-    final riskAmountValue = parseFieldValueToDouble(riskAmount);
+    final riskAmountValue = parseStringToDouble(riskAmount);
 
     return localizeCurrency(value: riskAmountValue);
   }
 
   String get formattedStopLossPips {
-    final stopLossPipsValue = parseFieldValueToDouble(stopLossPips);
+    final stopLossPipsValue = parseStringToDouble(stopLossPips);
 
     return localizeNumber(value: stopLossPipsValue);
   }

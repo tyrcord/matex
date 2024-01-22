@@ -20,55 +20,55 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
   late final String? vatRate;
 
   String get formattedPriceBeforeVat {
-    final priceBeforeVatValue = parseFieldValueToDouble(priceBeforeVat);
+    final priceBeforeVatValue = parseStringToDouble(priceBeforeVat);
 
     return localizeCurrency(value: priceBeforeVatValue);
   }
 
   String get formattedRegionalVatRate {
-    final regionalVatRateValue = parseFieldValueToDouble(regionalVatRate);
+    final regionalVatRateValue = parseStringToDouble(regionalVatRate);
 
     return '${localizeNumber(value: regionalVatRateValue)}%';
   }
 
   String get formattedFederalVatRate {
-    final federalVatRateValue = parseFieldValueToDouble(federalVatRate);
+    final federalVatRateValue = parseStringToDouble(federalVatRate);
 
     return '${localizeNumber(value: federalVatRateValue)}%';
   }
 
   String get formattedDiscountAmount {
-    final discountAmountValue = parseFieldValueToDouble(discountAmount);
+    final discountAmountValue = parseStringToDouble(discountAmount);
 
     return localizeCurrency(value: discountAmountValue);
   }
 
   String get formattedCustomVatRate {
-    final customVatRateValue = parseFieldValueToDouble(customVatRate);
+    final customVatRateValue = parseStringToDouble(customVatRate);
 
     return '${localizeNumber(value: customVatRateValue)}%';
   }
 
   String get formattedTipRate {
-    final tipRateValue = parseFieldValueToDouble(tipRate);
+    final tipRateValue = parseStringToDouble(tipRate);
 
     return '${localizeNumber(value: tipRateValue)}%';
   }
 
   String get formattedVatRate {
-    final vatRateValue = parseFieldValueToDouble(vatRate);
+    final vatRateValue = parseStringToDouble(vatRate);
 
     return '${localizeNumber(value: vatRateValue)}%';
   }
 
   String get formattedDiscountRate {
-    final discountRateValue = parseFieldValueToDouble(discountRate);
+    final discountRateValue = parseStringToDouble(discountRate);
 
     return '${localizeNumber(value: discountRateValue)}%';
   }
 
   String get formattedTipAmount {
-    final tipAmountValue = parseFieldValueToDouble(tipAmount);
+    final tipAmountValue = parseStringToDouble(tipAmount);
 
     return localizeCurrency(value: tipAmountValue);
   }

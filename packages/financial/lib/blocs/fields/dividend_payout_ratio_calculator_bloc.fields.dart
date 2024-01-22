@@ -8,13 +8,13 @@ class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
   late final String? netIncome;
 
   String get formattedNetIncome {
-    final value = parseFieldValueToDouble(netIncome);
+    final value = parseStringToDouble(netIncome);
 
     return localizeCurrency(value: value);
   }
 
   String get formattedTotalDividends {
-    final value = parseFieldValueToDouble(totalDividends);
+    final value = parseStringToDouble(totalDividends);
 
     return localizeNumber(value: value);
   }

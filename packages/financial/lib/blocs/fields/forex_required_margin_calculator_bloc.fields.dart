@@ -26,19 +26,19 @@ class MatexForexRequiredMarginCalculatorBlocFields
   }
 
   String get formattedLeverage {
-    final value = parseFieldValueToDouble(leverage);
+    final value = parseStringToDouble(leverage);
 
     return localizeLeverage(value);
   }
 
   String get formattedPositionSize {
-    final value = parseFieldValueToDouble(positionSize);
+    final value = parseStringToDouble(positionSize);
 
     return localizeNumber(value: value);
   }
 
   String get formattedLotSize {
-    final value = parseFieldValueToDouble(lotSize);
+    final value = parseStringToDouble(lotSize);
 
     return localizeNumber(value: value);
   }

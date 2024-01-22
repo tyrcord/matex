@@ -52,11 +52,11 @@ class MatexVatCalculatorPdfGenerator {
     MatexVatCalculatorBlocFields fields,
     MatexVatCalculatorBlocResults results,
   ) {
-    final discountAmount = parseFieldValueToDouble(fields.discountAmount);
-    final discountRate = parseFieldValueToDouble(fields.discountRate);
-    final customVatRate = parseFieldValueToDouble(fields.customVatRate);
-    final tipAmount = parseFieldValueToDouble(fields.tipAmount);
-    final tipRate = parseFieldValueToDouble(fields.tipRate);
+    final discountAmount = parseStringToDouble(fields.discountAmount);
+    final discountRate = parseStringToDouble(fields.discountRate);
+    final customVatRate = parseStringToDouble(fields.customVatRate);
+    final tipAmount = parseStringToDouble(fields.tipAmount);
+    final tipRate = parseStringToDouble(fields.tipRate);
     final discountFieldType = fields.discountFieldType;
     final tipFieldType = fields.tipFieldType;
 

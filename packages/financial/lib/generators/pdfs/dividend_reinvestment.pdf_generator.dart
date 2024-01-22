@@ -52,13 +52,12 @@ class MatexDividendReinvestmentCalculatorPdfGenerator {
     MatexDividendReinvestmentCalculatorBlocFields fields,
     MatexDividendReinvestmentCalculatorBlocResults results,
   ) {
-    final annualContribution =
-        parseFieldValueToDouble(fields.annualContribution);
+    final annualContribution = parseStringToDouble(fields.annualContribution);
     final annualSharePriceIncrease =
-        parseFieldValueToDouble(fields.annualSharePriceIncrease);
+        parseStringToDouble(fields.annualSharePriceIncrease);
     final annualDividendIncrease =
-        parseFieldValueToDouble(fields.annualDividendIncrease);
-    final taxRate = parseFieldValueToDouble(fields.taxRate);
+        parseStringToDouble(fields.annualDividendIncrease);
+    final taxRate = parseStringToDouble(fields.taxRate);
 
     return [
       FastReportEntry(

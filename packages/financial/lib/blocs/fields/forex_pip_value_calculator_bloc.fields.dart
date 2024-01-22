@@ -18,19 +18,19 @@ class MatexForexPipValueCalculatorBlocFields
   late final String? lotSize;
 
   String get formattedPositionSize {
-    final value = parseFieldValueToDouble(positionSize);
+    final value = parseStringToDouble(positionSize);
 
     return localizeNumber(value: value);
   }
 
   String get formattedNumberOfPips {
-    final value = parseFieldValueToDouble(numberOfPips);
+    final value = parseStringToDouble(numberOfPips);
 
     return localizeNumber(value: value);
   }
 
   String get formattedLotSize {
-    final value = parseFieldValueToDouble(lotSize);
+    final value = parseStringToDouble(lotSize);
 
     return localizeNumber(value: value);
   }
