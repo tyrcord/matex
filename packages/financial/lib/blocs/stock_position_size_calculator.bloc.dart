@@ -239,12 +239,12 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
 
     calculator.setState(MatexStockPositionSizeCalculatorState(
       isShortPosition: document.position == MatexPosition.short.name,
-      stopLossAmount: parseStringToDouble(document.stopLossAmount),
-      stopLossPrice: parseStringToDouble(document.stopLossPrice),
+      stopLossAmount: tryParseStringToDouble(document.stopLossAmount),
+      stopLossPrice: tryParseStringToDouble(document.stopLossPrice),
       slippagePercent: (slippagePercent / dHundred).toSafeDouble(),
-      accountSize: parseStringToDouble(document.accountSize),
-      entryPrice: parseStringToDouble(document.entryPrice),
-      riskReward: parseStringToDouble(document.riskReward),
+      accountSize: tryParseStringToDouble(document.accountSize),
+      entryPrice: tryParseStringToDouble(document.entryPrice),
+      riskReward: tryParseStringToDouble(document.riskReward),
       riskPercent: (riskPercent / dHundred).toSafeDouble(),
       entryFees: (entryFees / dHundred).toSafeDouble(),
       exitFees: (exitFees / dHundred).toSafeDouble(),

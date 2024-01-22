@@ -1,10 +1,6 @@
-// Package imports:
-import 'package:decimal/decimal.dart';
-import 'package:tenhance/tenhance.dart';
-
 /// Parses a string value to a double, returning 0.0 if the parsing fails.
 double parseFieldValueToDouble(String? value) {
-  final parsedValue = parseStringToDouble(value);
+  final parsedValue = tryParseStringToDouble(value);
 
   return parsedValue ?? 0.0;
 }
@@ -15,22 +11,20 @@ double parseFieldValueToDouble(String? value) {
 ///
 /// Returns the parsed double, or `null` if the string could not be parsed.
 /// TODO: move to t_helpers
-double? parseStringToDouble(String? value) {
+double? tryParseStringToDouble(String? value) {
   if (value is String && value.isNotEmpty) {
-    final dValue = Decimal.tryParse(value);
+    final dValue = double.tryParse(value);
 
-    return dValue?.toSafeDouble();
+    if (dValue is double) return dValue;
   }
 
   return null;
 }
 
-int? parseStringToInt(String? value) {
-  if (value is String && value.isNotEmpty) {
-    final dValue = Decimal.tryParse(value);
+int? tryParseStringToInt(String? value) {
+  final dValue = tryParseStringToDouble(value);
 
-    return dValue?.toSafeDouble().toInt();
-  }
+  if (dValue is double) return dValue.toInt();
 
   return null;
 }

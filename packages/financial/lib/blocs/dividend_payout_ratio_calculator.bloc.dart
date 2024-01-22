@@ -124,8 +124,8 @@ class MatexDividendPayoutRatioCalculatorBloc extends MatexCalculatorBloc<
     MatexDividendPayoutRatioCalculatorDocument document,
   ) async {
     calculator.setState(MatexDividendPayoutRatioCalculatorState(
-      totalDividends: parseStringToDouble(document.totalDividends),
-      netIncome: parseStringToDouble(document.netIncome),
+      totalDividends: tryParseStringToDouble(document.totalDividends),
+      netIncome: tryParseStringToDouble(document.netIncome),
     ));
   }
 

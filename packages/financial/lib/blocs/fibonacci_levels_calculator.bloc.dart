@@ -117,8 +117,8 @@ class MatexFibonacciLevelsCalculatorBloc extends MatexCalculatorBloc<
     MatexFibonacciLevelsCalculatorDocument document,
   ) async {
     calculator.setState(MatexFibonacciLevelsCalculatorState(
-      lowPrice: parseStringToDouble(document.lowPrice),
-      highPrice: parseStringToDouble(document.highPrice),
+      lowPrice: tryParseStringToDouble(document.lowPrice),
+      highPrice: tryParseStringToDouble(document.highPrice),
       trend: MatexTrendX.fromName(document.trend),
     ));
   }

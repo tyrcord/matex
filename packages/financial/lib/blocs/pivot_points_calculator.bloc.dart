@@ -145,10 +145,10 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
   ) async {
     calculator.setState(MatexPivotPointsCalculatorState(
       method: MatexPivotPointsMethodsX.fromName(document.method),
-      highPrice: parseStringToDouble(document.highPrice),
-      lowPrice: parseStringToDouble(document.lowPrice),
-      closePrice: parseStringToDouble(document.closePrice),
-      openPrice: parseStringToDouble(document.openPrice),
+      highPrice: tryParseStringToDouble(document.highPrice),
+      lowPrice: tryParseStringToDouble(document.lowPrice),
+      closePrice: tryParseStringToDouble(document.closePrice),
+      openPrice: tryParseStringToDouble(document.openPrice),
     ));
   }
 

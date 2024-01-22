@@ -129,8 +129,8 @@ class MatexDividendYieldCalculatorBloc extends MatexCalculatorBloc<
 
     calculator.setState(MatexDividendYieldCalculatorState(
       paymentFrequency: MatexFinancialFrequencyX.fromName(paymentFrequency),
-      dividendAmount: parseStringToDouble(document.dividendAmount),
-      sharePrice: parseStringToDouble(document.sharePrice),
+      dividendAmount: tryParseStringToDouble(document.dividendAmount),
+      sharePrice: tryParseStringToDouble(document.sharePrice),
     ));
   }
 

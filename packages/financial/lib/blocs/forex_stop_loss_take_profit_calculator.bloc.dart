@@ -459,27 +459,27 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     final takeProfitFieldType = typeFromName(document.takeProfitFieldType);
 
     calculator.setState(MatexForexStopLossTakeProfitCalculatorState(
-      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
-      positionSize: parseStringToDouble(document.positionSize),
-      entryPrice: parseStringToDouble(document.entryPrice),
+      pipDecimalPlaces: tryParseStringToInt(document.pipDecimalPlaces),
+      positionSize: tryParseStringToDouble(document.positionSize),
+      entryPrice: tryParseStringToDouble(document.entryPrice),
       position: MatexPositionX.fromName(document.position),
       stopLossPips: stopLossFieldType == pipType
-          ? parseStringToDouble(document.stopLossPips)
+          ? tryParseStringToDouble(document.stopLossPips)
           : 0,
       stopLossPrice: stopLossFieldType == priceType
-          ? parseStringToDouble(document.stopLossPrice)
+          ? tryParseStringToDouble(document.stopLossPrice)
           : 0,
       stopLossAmount: stopLossFieldType == amountType
-          ? parseStringToDouble(document.stopLossAmount)
+          ? tryParseStringToDouble(document.stopLossAmount)
           : 0,
       takeProfitAmount: takeProfitFieldType == amountType
-          ? parseStringToDouble(document.takeProfitAmount)
+          ? tryParseStringToDouble(document.takeProfitAmount)
           : 0,
       takeProfitPips: takeProfitFieldType == pipType
-          ? parseStringToDouble(document.takeProfitPips)
+          ? tryParseStringToDouble(document.takeProfitPips)
           : 0,
       takeProfitPrice: takeProfitFieldType == priceType
-          ? parseStringToDouble(document.takeProfitPrice)
+          ? tryParseStringToDouble(document.takeProfitPrice)
           : 0,
     ));
   }

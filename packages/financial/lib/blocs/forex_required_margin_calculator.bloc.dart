@@ -238,8 +238,8 @@ class MatexForexRequiredMarginCalculatorBloc
     MatexForexRequiredMarginCalculatorDocument document,
   ) async {
     calculator.setState(MatexForexRequiredMarginCalculatorState(
-      positionSize: parseStringToDouble(document.positionSize),
-      leverage: parseStringToDouble(document.leverage),
+      positionSize: tryParseStringToDouble(document.positionSize),
+      leverage: tryParseStringToDouble(document.leverage),
     ));
   }
 

@@ -213,12 +213,12 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
     );
 
     calculator.setState(MatexDividendReinvestmentCalculatorState(
-      sharePrice: parseStringToDouble(document.sharePrice),
-      numberOfShares: parseStringToDouble(document.numberOfShares),
+      sharePrice: tryParseStringToDouble(document.sharePrice),
+      numberOfShares: tryParseStringToDouble(document.numberOfShares),
       dividendPaymentFrequency: frequency,
       dividendYield: (dDividendYield / dHundred).toSafeDouble(),
-      yearsToGrow: parseStringToInt(document.yearsToGrow),
-      annualContribution: parseStringToDouble(document.annualContribution),
+      yearsToGrow: tryParseStringToInt(document.yearsToGrow),
+      annualContribution: tryParseStringToDouble(document.annualContribution),
       annualSharePriceIncrease:
           (dAnnualSharePriceIncrease / dHundred).toSafeDouble(),
       annualDividendIncrease:

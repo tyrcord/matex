@@ -314,8 +314,8 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexForexPipValueCalculatorDocument document,
   ) async {
     calculator.setState(MatexForexPipValueCalculatorState(
-      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
-      positionSize: parseStringToDouble(document.positionSize),
+      pipDecimalPlaces: tryParseStringToInt(document.pipDecimalPlaces),
+      positionSize: tryParseStringToDouble(document.positionSize),
     ));
   }
 

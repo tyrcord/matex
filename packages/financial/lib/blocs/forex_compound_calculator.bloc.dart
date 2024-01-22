@@ -322,12 +322,12 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
           MatexFinancialFrequencyX.fromName(contributionFrequency),
       withdrawalFrequency:
           MatexFinancialFrequencyX.fromName(withdrawalFrequency),
-      startBalance: parseStringToDouble(document.startBalance),
+      startBalance: tryParseStringToDouble(document.startBalance),
       rate: (dRate / dHundred).toSafeDouble(),
-      duration: parseStringToInt(document.duration),
-      withdrawalAmount: parseStringToDouble(document.withdrawalAmount),
+      duration: tryParseStringToInt(document.duration),
+      withdrawalAmount: tryParseStringToDouble(document.withdrawalAmount),
       additionalContribution:
-          parseStringToDouble(document.additionalContribution),
+          tryParseStringToDouble(document.additionalContribution),
     ));
   }
 

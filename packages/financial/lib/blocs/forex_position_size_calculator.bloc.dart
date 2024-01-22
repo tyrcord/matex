@@ -352,21 +352,21 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
     final riskFieldType = typeFromName(document.riskFieldType);
 
     calculator.setState(MatexForexPositionSizeCalculatorState(
-      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
-      accountSize: parseStringToDouble(document.accountSize),
-      entryPrice: parseStringToDouble(document.entryPrice),
+      pipDecimalPlaces: tryParseStringToInt(document.pipDecimalPlaces),
+      accountSize: tryParseStringToDouble(document.accountSize),
+      entryPrice: tryParseStringToDouble(document.entryPrice),
       riskPercent: riskFieldType == FastFinancialAmountSwitchFieldType.percent
           ? (dRiskPercent / dHundred).toSafeDouble()
           : 0,
       riskAmount: riskFieldType == FastFinancialAmountSwitchFieldType.amount
-          ? parseStringToDouble(document.riskAmount)
+          ? tryParseStringToDouble(document.riskAmount)
           : 0,
       stopLossPips: stopLossFieldType == FastFinancialAmountSwitchFieldType.pip
-          ? parseStringToDouble(document.stopLossPips)
+          ? tryParseStringToDouble(document.stopLossPips)
           : 0,
       stopLossPrice:
           stopLossFieldType == FastFinancialAmountSwitchFieldType.price
-              ? parseStringToDouble(document.stopLossPrice)
+              ? tryParseStringToDouble(document.stopLossPrice)
               : 0,
     ));
   }

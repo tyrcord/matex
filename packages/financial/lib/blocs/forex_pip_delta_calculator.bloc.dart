@@ -161,9 +161,9 @@ class MatexForexPipDeltaCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexForexPipDeltaCalculatorDocument document,
   ) async {
     calculator.setState(MatexForexPipDeltaCalculatorState(
-      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
-      priceA: parseStringToDouble(document.priceA),
-      priceB: parseStringToDouble(document.priceB),
+      pipDecimalPlaces: tryParseStringToInt(document.pipDecimalPlaces),
+      priceA: tryParseStringToDouble(document.priceA),
+      priceB: tryParseStringToDouble(document.priceB),
     ));
   }
 

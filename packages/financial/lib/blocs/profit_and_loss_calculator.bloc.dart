@@ -223,15 +223,15 @@ class MatexProfitAndLossCalculatorBloc extends MatexCalculatorBloc<
     );
 
     calculator.setState(MatexProfitAndLossCalculatorState(
-      expectedSaleUnits: parseStringToDouble(document.expectedSaleUnits),
-      operatingExpenses: parseStringToDouble(document.operatingExpenses),
-      sellingPrice: parseStringToDouble(document.sellingPrice),
-      buyingPrice: parseStringToDouble(document.buyingPrice),
+      expectedSaleUnits: tryParseStringToDouble(document.expectedSaleUnits),
+      operatingExpenses: tryParseStringToDouble(document.operatingExpenses),
+      sellingPrice: tryParseStringToDouble(document.sellingPrice),
+      buyingPrice: tryParseStringToDouble(document.buyingPrice),
       taxRate: (taxRate / dHundred).toSafeDouble(),
-      buyingExpensePerUnitAmount: parseStringToDouble(
+      buyingExpensePerUnitAmount: tryParseStringToDouble(
         document.buyingExpensePerUnitAmount,
       ),
-      sellingExpensePerUnitAmount: parseStringToDouble(
+      sellingExpensePerUnitAmount: tryParseStringToDouble(
         document.sellingExpensePerUnitAmount,
       ),
       buyingExpensePerUnitRate:

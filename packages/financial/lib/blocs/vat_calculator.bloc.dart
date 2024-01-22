@@ -201,9 +201,9 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     final regionalVatRate = toDecimalOrDefault(document.regionalVatRate);
 
     calculator.setState(MatexVatCalculatorState(
-      priceBeforeVat: parseStringToDouble(document.priceBeforeVat),
-      discountAmount: parseStringToDouble(document.discountAmount),
-      tipAmount: parseStringToDouble(document.tipAmount),
+      priceBeforeVat: tryParseStringToDouble(document.priceBeforeVat),
+      discountAmount: tryParseStringToDouble(document.discountAmount),
+      tipAmount: tryParseStringToDouble(document.tipAmount),
       regionalVatRate: (regionalVatRate / dHundred).toSafeDouble(),
       federalVatRate: (federalVatRate / dHundred).toSafeDouble(),
       customVatRate: (customVatRate / dHundred).toSafeDouble(),

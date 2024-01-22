@@ -259,10 +259,10 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexForexProfitLossCalculatorDocument document,
   ) async {
     calculator.setState(MatexForexProfitLossCalculatorState(
-      pipDecimalPlaces: parseStringToInt(document.pipDecimalPlaces),
-      positionSize: parseStringToDouble(document.positionSize),
-      entryPrice: parseStringToDouble(document.entryPrice),
-      exitPrice: parseStringToDouble(document.exitPrice),
+      pipDecimalPlaces: tryParseStringToInt(document.pipDecimalPlaces),
+      positionSize: tryParseStringToDouble(document.positionSize),
+      entryPrice: tryParseStringToDouble(document.entryPrice),
+      exitPrice: tryParseStringToDouble(document.exitPrice),
       position: MatexPositionX.fromName(document.position),
     ));
   }
