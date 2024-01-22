@@ -27,7 +27,7 @@ class MatexForexStopLossCalculator extends MatexCalculator<
   static const defaultResults = MatexForexTradeOutcome();
 
   @override
-  MatexForexTradeOutcome value({Decimal? pipValue}) {
+  MatexForexTradeOutcome value({double? pipValue}) {
     if (!isValid) return defaultResults;
 
     pipValue ??= computePipValue(
@@ -38,7 +38,9 @@ class MatexForexStopLossCalculator extends MatexCalculator<
       positionSize: state.positionSize,
     );
 
-    return _computeStopLossLevels(pipValue);
+    final dPipValue = toDecimalOrDefault(pipValue);
+
+    return _computeStopLossLevels(dPipValue);
   }
 
   MatexForexTradeOutcome _computeStopLossLevels(Decimal pipValue) {

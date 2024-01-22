@@ -5,8 +5,6 @@ import 'package:flutter/widgets.dart';
 // Package imports:
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
-import 'package:t_helpers/helpers.dart';
-import 'package:tenhance/decimal.dart';
 import 'package:tlogger/logger.dart';
 
 // Project imports:
@@ -95,11 +93,11 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
     // update the calculator position size with the latest lot size
     if (positionSizeFieldType != MatexPositionSizeType.unit) {
-      final dLotSize = toDecimalOrDefault(currentState.fields.lotSize);
+      final dLotSize = parseStringToDouble(currentState.fields.lotSize);
 
       final positionSize = await getPositionSizeForLotSize(
-        positionSize: dLotSize.toSafeDouble(),
         lotSize: positionSizeFieldType,
+        positionSize: dLotSize,
       );
 
       calculator.positionSize = positionSize;
@@ -111,13 +109,13 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     if (await isCalculatorStateValid()) {
       final results = calculator.value();
       final fields = currentState.fields;
-      final dNumberOfPips = toDecimalOrDefault(fields.numberOfPips);
-      final dPipValue = toDecimalOrDefault(results.pipValue);
+      final dNumberOfPips = parseStringToDouble(fields.numberOfPips);
+      final dPipValue = results.pipValue ?? 0;
       final dCustomPipValue = dPipValue * dNumberOfPips;
       final accountCurrency = fields.accountCurrency;
       final positionSize = calculator.positionSize;
-      final customPipValue = dCustomPipValue.toSafeDouble();
-      final pipValue = dPipValue.toSafeDouble();
+      final customPipValue = dCustomPipValue;
+      final pipValue = dPipValue;
       final standardLotUnits = await getUnitsPerStandardLot();
       final miniLotUnits = await getUnitsPerMiniLot();
       final microLotUnits = await getUnitsPerMicroLot();
@@ -432,9 +430,9 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
 
       calculator.positionSize = 0;
     } else if (positionSizeFieldType == MatexPositionSizeType.unit) {
-      final dValue = toDecimalOrDefault(value);
+      final dValue = parseStringToDouble(value);
       fields = fields.copyWith(positionSize: value);
-      calculator.positionSize = dValue.toSafeDouble();
+      calculator.positionSize = dValue;
     }
 
     return currentState.copyWith(fields: fields);
@@ -483,8 +481,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
       calculator.pipDecimalPlaces = kMatexDefaultPipDecimalPlaces;
     } else {
       fields = fields.copyWith(pipDecimalPlaces: value);
-      final dValue = toDecimalOrDefault(value);
-      calculator.pipDecimalPlaces = dValue.toSafeDouble().toInt();
+      calculator.pipDecimalPlaces = parseStringToInt(value);
     }
 
     return currentState.copyWith(fields: fields);

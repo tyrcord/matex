@@ -1,22 +1,17 @@
 // Dart imports:
 import 'dart:math';
 
-// Package imports:
-import 'package:decimal/decimal.dart';
-import 'package:t_helpers/helpers.dart';
-
-Decimal computePipValue({
+double computePipValue({
   double? counterToAccountCurrencyRate = 0,
   bool? isAccountCurrencyCounter = false,
   double? instrumentPairRate = 0,
   int? pipDecimalPlaces = 0,
   double? positionSize = 0,
 }) {
-  final dPositionSize = toDecimalOrDefault(positionSize);
   final decimalMultiplicator = pow(10, pipDecimalPlaces ?? 0);
-  final dDecimalMultiplicator = toDecimalOrDefault(decimalMultiplicator);
-  final dDecimalPip = decimalFromRational(dOne / dDecimalMultiplicator);
-  final pipValue = dPositionSize * dDecimalPip;
+  final dDecimalPip = 1 / decimalMultiplicator;
+  positionSize ??= 0;
+  final pipValue = positionSize * dDecimalPip;
 
   isAccountCurrencyCounter ??= false;
   instrumentPairRate ??= 0;
@@ -24,26 +19,25 @@ Decimal computePipValue({
   if (isAccountCurrencyCounter) return pipValue;
 
   if (counterToAccountCurrencyRate == 0) {
-    final dInstrumentPairRate = toDecimal(instrumentPairRate) ?? dOne;
+    final dInstrumentPairRate = instrumentPairRate > 0 ? instrumentPairRate : 1;
 
-    return decimalFromRational(pipValue / dInstrumentPairRate);
+    return (pipValue / dInstrumentPairRate);
   }
 
-  final dCounterToAccountCurrencyRate =
-      toDecimal(counterToAccountCurrencyRate) ?? dOne;
+  final dCounterToAccountCurrencyRate = counterToAccountCurrencyRate ?? 1;
 
   return pipValue * dCounterToAccountCurrencyRate;
 }
 
-Decimal computePipDelta({
+double computePipDelta({
   double? entryPrice = 0,
   double? exitPrice = 0,
   num pipDecimalPlaces = 0,
 }) {
-  final dEntryPrice = toDecimalOrDefault(entryPrice);
-  final dExitPrice = toDecimalOrDefault(exitPrice);
   final decimalMultiplicator = pow(10, pipDecimalPlaces);
-  final dDecimalMultiplicator = toDecimalOrDefault(decimalMultiplicator);
 
-  return (dExitPrice - dEntryPrice) * dDecimalMultiplicator;
+  entryPrice ??= 0;
+  exitPrice ??= 0;
+
+  return (exitPrice - entryPrice) * decimalMultiplicator;
 }

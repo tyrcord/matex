@@ -27,7 +27,7 @@ class MatexForexTakeProfitCalculator extends MatexCalculator<
   static const defaultResults = MatexForexTradeOutcome();
 
   @override
-  MatexForexTradeOutcome value({Decimal? pipValue}) {
+  MatexForexTradeOutcome value({double? pipValue}) {
     if (!isValid) return defaultResults;
 
     pipValue ??= computePipValue(
@@ -38,7 +38,9 @@ class MatexForexTakeProfitCalculator extends MatexCalculator<
       positionSize: state.positionSize,
     );
 
-    return _computeTakeProfitLevels(pipValue);
+    final dPipValue = toDecimalOrDefault(pipValue);
+
+    return _computeTakeProfitLevels(dPipValue);
   }
 
   MatexForexTradeOutcome _computeTakeProfitLevels(Decimal pipValue) {

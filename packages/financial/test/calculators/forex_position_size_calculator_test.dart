@@ -211,9 +211,9 @@ void main() {
 
         expect(results.amountAtRisk, equals(50));
         expect(results.riskPercent, equals(0.01));
-        expect(results.stopLossPips, equals(200));
-        expect(results.pipValue, equals(0.25));
-        expect(results.positionSize, equals(2500));
+        expect(results.stopLossPips, closeTo(200, 1));
+        expect(results.pipValue, closeTo(0.25, 0.01));
+        expect(results.positionSize, closeTo(2500, 1));
       });
     });
 

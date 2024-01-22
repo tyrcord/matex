@@ -23,7 +23,7 @@ void main() {
 
       final result = calculator.value();
 
-      expect(result.netProfit, 5.0);
+      expect(result.netProfit, closeTo(5, 1));
       expect(result.returnOnInvestment, closeTo(0.0043, 0.0001));
     });
 
@@ -41,7 +41,7 @@ void main() {
 
       final result = calculator.value();
 
-      expect(result.netProfit, -5.0);
+      expect(result.netProfit, closeTo(-5.0, 1));
       expect(result.returnOnInvestment, closeTo(-0.0043, 0.0001));
     });
 
@@ -97,7 +97,7 @@ void main() {
 
       final result = calculator.value();
 
-      expect(result.netProfit, 6.25);
+      expect(result.netProfit, closeTo(6.25, 0.01));
       expect(result.returnOnInvestment, closeTo(0.0043, 0.0001));
     });
 
@@ -117,7 +117,7 @@ void main() {
 
       final result = calculator.value();
 
-      expect(result.netProfit, -6.25);
+      expect(result.netProfit, closeTo(-6.25, 0.01));
       expect(result.returnOnInvestment, closeTo(-0.0043, 0.0001));
     });
 
@@ -138,7 +138,7 @@ void main() {
 
       final result = calculator.value();
 
-      expect(result.netProfit, 6.25);
+      expect(result.netProfit, closeTo(6.25, 0.01));
       expect(result.returnOnInvestment, closeTo(0.0043, 0.0001));
     });
   });

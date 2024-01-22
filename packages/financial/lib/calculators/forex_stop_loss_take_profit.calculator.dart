@@ -1,6 +1,5 @@
 // Package imports:
 import 'package:matex_core/core.dart';
-import 'package:tenhance/decimal.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -98,7 +97,7 @@ class MatexForexStopLossTakeProfitCalculator extends MatexCalculator<
   MatexForexStopLossTakeProfitCalculatorResults value() {
     if (!isValid) return defaultResults;
 
-    final dPipValue = computePipValue(
+    final pipValue = computePipValue(
       counterToAccountCurrencyRate: state.counterToAccountCurrencyRate,
       isAccountCurrencyCounter: state.isAccountCurrencyCounter,
       instrumentPairRate: state.instrumentPairRate,
@@ -112,11 +111,11 @@ class MatexForexStopLossTakeProfitCalculator extends MatexCalculator<
     final takeProfitCalculator =
         MatexForexTakeProfitCalculator(state: tmpState);
 
-    final takeProfitResult = takeProfitCalculator.value(pipValue: dPipValue);
-    final stopLossResult = stopLossCalculator.value(pipValue: dPipValue);
+    final takeProfitResult = takeProfitCalculator.value(pipValue: pipValue);
+    final stopLossResult = stopLossCalculator.value(pipValue: pipValue);
 
     return MatexForexStopLossTakeProfitCalculatorResults(
-      pipValue: dPipValue.toSafeDouble(),
+      pipValue: pipValue,
       stopLossPrice: stopLossResult.price,
       stopLossPips: stopLossResult.pips,
       stopLossAmount: stopLossResult.amount,

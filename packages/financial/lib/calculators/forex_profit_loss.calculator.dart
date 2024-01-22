@@ -84,7 +84,7 @@ class MatexForexProfitLossCalculator extends MatexCalculator<
     return dCounterToAccountCurrencyRate;
   }
 
-  Decimal get pipValue {
+  double get pipValue {
     return computePipValue(
       counterToAccountCurrencyRate: state.counterToAccountCurrencyRate,
       isAccountCurrencyCounter: state.isAccountCurrencyCounter,
@@ -94,7 +94,7 @@ class MatexForexProfitLossCalculator extends MatexCalculator<
     );
   }
 
-  Decimal get pipDelta {
+  double get pipDelta {
     return computePipDelta(
       pipDecimalPlaces: state.pipDecimalPlaces,
       entryPrice: state.entryPrice,
@@ -104,16 +104,16 @@ class MatexForexProfitLossCalculator extends MatexCalculator<
 
   // Calculates the cost of goods sold
   Decimal get costOfGoodsSold {
-    final dCostOfGoodsSold = computeCostOfGoodsSold(
+    final costOfGoodsSold = computeCostOfGoodsSold(
       expectedSaleUnits: state.positionSize,
       buyingPrice: state.entryPrice,
     );
 
-    return dCostOfGoodsSold * multiplier;
+    return costOfGoodsSold * multiplier;
   }
 
   // Calculates gross profit
-  Decimal get grossProfit {
+  double get grossProfit {
     if (state.position == MatexPosition.short) return -pipDelta * pipValue;
 
     return pipDelta * pipValue;
@@ -121,9 +121,7 @@ class MatexForexProfitLossCalculator extends MatexCalculator<
 
   // Calculates operating profit
   Decimal get operatingProfit {
-    return computeOperatingProfit(
-      grossProfit: grossProfit.toSafeDouble(),
-    );
+    return computeOperatingProfit(grossProfit: grossProfit);
   }
 
   // Calculates net profit
@@ -153,7 +151,7 @@ class MatexForexProfitLossCalculator extends MatexCalculator<
 
     return MatexForexProfitLossCalculatorResults(
       returnOnInvestment: returnOnInvestment.toSafeDouble(),
-      netProfit: grossProfit.toSafeDouble(),
+      netProfit: grossProfit,
     );
   }
 }

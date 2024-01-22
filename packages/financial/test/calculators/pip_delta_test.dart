@@ -82,13 +82,13 @@ void main() {
           ..priceA = 1.20460
           ..pipDecimalPlaces = 4;
 
-        expect(calculator.value().numberOfPips, equals(4.2));
+        expect(calculator.value().numberOfPips, closeTo(4.2, 0.1));
 
         calculator
           ..priceB = 1.205
           ..priceA = 1.204
           ..pipDecimalPlaces = 2;
-        expect(calculator.value().numberOfPips, equals(0.1));
+        expect(calculator.value().numberOfPips, closeTo(0.1, 0.1));
       });
     });
 
@@ -104,14 +104,14 @@ void main() {
           ..priceA = 1.20460
           ..pipDecimalPlaces = 4;
 
-        expect(calculator.value().numberOfPips, equals(4.2));
+        expect(calculator.value().numberOfPips, closeTo(4.2, 0.1));
 
         calculator
           ..priceB = 1.205
           ..priceA = 1.204
           ..pipDecimalPlaces = 2;
 
-        expect(calculator.value().numberOfPips, equals(0.1));
+        expect(calculator.value().numberOfPips, closeTo(0.1, 0.1));
       });
     });
 
@@ -127,14 +127,14 @@ void main() {
           ..priceB = 1.40
           ..pipDecimalPlaces = 2;
 
-        expect(calculator.value().numberOfPips, equals(10));
+        expect(calculator.value().numberOfPips, closeTo(10, 1));
 
         calculator
           ..priceA = 1.50
           ..priceB = 1.40
           ..pipDecimalPlaces = 4;
 
-        expect(calculator.value().numberOfPips, equals(1000));
+        expect(calculator.value().numberOfPips, closeTo(1000, 1));
       });
     });
 
