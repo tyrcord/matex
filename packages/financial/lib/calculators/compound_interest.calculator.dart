@@ -1,5 +1,6 @@
 // Dart imports:
 import 'dart:async';
+import 'dart:math';
 
 // Flutter imports:
 import 'package:flutter/foundation.dart';
@@ -113,6 +114,7 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
     if (results.isEmpty) return defaultResults;
 
     return MatexCompoundInterestCalculatorResults(
+      effectiveAnnualRate: _computeEffectiveAnnualRate(results),
       totalWithdrawals: results.last.totalWithdrawals,
       totalContributions: results.last.totalDeposits,
       rateOfReturn: _computeRateOfReturn(results),
@@ -133,6 +135,21 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
     final rateOfReturn = (endBalance - initialBalance) / initialBalance;
 
     return rateOfReturn;
+  }
+
+  double _computeEffectiveAnnualRate(
+    List<MatexCompoundInterestBreakdownEntry> breakdown,
+  ) {
+    if (breakdown.isEmpty) return 0.0;
+
+    final entry = breakdown.first;
+    final startBalance = entry.startBalance;
+    final periods = _getPeriodsPerYear(state.rateFrequency);
+    final entries = breakdown.sublist(0, periods);
+    final endBalance = entries.last.endBalance;
+    final effectiveAnnualRate = pow(endBalance / startBalance, 1 / 1) - 1;
+
+    return effectiveAnnualRate.toDouble();
   }
 }
 

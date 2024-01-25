@@ -73,6 +73,10 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     final accountCurrency = fields.accountCurrency;
 
     return MatexForexCompoundCalculatorBlocResults(
+      effectiveAnnualRate: results.effectiveAnnualRate,
+      formattedEffectiveAnnualRate: localizePercentage(
+        value: results.effectiveAnnualRate,
+      ),
       endBalance: results.endBalance,
       formattedEndBalance: localizeCurrency(
         symbol: accountCurrency,

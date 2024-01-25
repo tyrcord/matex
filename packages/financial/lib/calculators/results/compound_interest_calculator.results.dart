@@ -12,6 +12,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
   final double startBalance;
   final double endBalance;
   final double rateOfReturn;
+  final double effectiveAnnualRate;
 
   const MatexCompoundInterestCalculatorResults({
     this.breakdown,
@@ -21,6 +22,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
     this.startBalance = 0,
     this.endBalance = 0,
     this.rateOfReturn = 0,
+    this.effectiveAnnualRate = 0,
   });
 
   @override
@@ -34,6 +36,8 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
     double? totalWithdrawals,
     double? startBalance,
     double? endBalance,
+    double? rateOfReturn,
+    double? effectiveAnnualRate,
   }) {
     return MatexCompoundInterestCalculatorResults(
       breakdown: breakdown ?? this.breakdown,
@@ -42,6 +46,8 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
       totalWithdrawals: totalWithdrawals ?? this.totalWithdrawals,
       startBalance: startBalance ?? this.startBalance,
       endBalance: endBalance ?? this.endBalance,
+      rateOfReturn: rateOfReturn ?? this.rateOfReturn,
+      effectiveAnnualRate: effectiveAnnualRate ?? this.effectiveAnnualRate,
     );
   }
 
@@ -56,6 +62,8 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
       totalWithdrawals: model.totalWithdrawals,
       startBalance: model.startBalance,
       endBalance: model.endBalance,
+      rateOfReturn: model.rateOfReturn,
+      effectiveAnnualRate: model.effectiveAnnualRate,
     );
   }
 
@@ -67,5 +75,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
         totalWithdrawals,
         startBalance,
         endBalance,
+        rateOfReturn,
+        effectiveAnnualRate,
       ];
 }
