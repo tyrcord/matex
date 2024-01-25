@@ -485,5 +485,82 @@ void main() {
       expect(breakdown[3].endBalance, closeTo(12155.06, 0.01));
       expect(breakdown.last.endBalance, closeTo(12762.82, 0.01));
     });
+
+    test('Effective Annual Rate without contributions or withdrawals',
+        () async {
+      final calculator = MatexCompoundInterestCalculator(
+        state: const MatexCompoundInterestCalculatorState(
+          compoundFrequency: MatexFinancialFrequency.annually,
+          rateFrequency: MatexFinancialFrequency.annually,
+          startBalance: 1000.0,
+          rate: 0.05,
+          duration: 1,
+        ),
+      );
+
+      final result = await calculator.valueAsync();
+      expect(result.effectiveAnnualRate, closeTo(0.05, 0.01));
+
+      final calculator2 = MatexCompoundInterestCalculator(
+        state: const MatexCompoundInterestCalculatorState(
+          compoundFrequency: MatexFinancialFrequency.monthly,
+          rateFrequency: MatexFinancialFrequency.monthly,
+          startBalance: 1000.0,
+          rate: 0.02,
+          duration: 10,
+        ),
+      );
+
+      final result2 = await calculator2.valueAsync();
+      expect(result2.effectiveAnnualRate, closeTo(0.2682, 0.0001));
+
+      final calculator3 = MatexCompoundInterestCalculator(
+        state: const MatexCompoundInterestCalculatorState(
+          compoundFrequency: MatexFinancialFrequency.quarterly,
+          rateFrequency: MatexFinancialFrequency.monthly,
+          startBalance: 1000.0,
+          rate: 0.02,
+          duration: 10,
+        ),
+      );
+
+      final result3 = await calculator3.valueAsync();
+      expect(result3.effectiveAnnualRate, closeTo(0.2625, 0.0001));
+    });
+
+    test('Effective Annual Rate with monthly contributions', () async {
+      final calculator = MatexCompoundInterestCalculator(
+        state: const MatexCompoundInterestCalculatorState(
+          compoundFrequency: MatexFinancialFrequency.annually,
+          rateFrequency: MatexFinancialFrequency.annually,
+          additionalContribution: 1000.0,
+          startBalance: 1000.0,
+          rate: 0.05,
+          duration: 1,
+        ),
+      );
+
+      final result = await calculator.valueAsync();
+      expect(result.effectiveAnnualRate, closeTo(0.05, 0.01));
+    });
+
+    test('Effective Annual Rate with contributions and withdrawals', () async {
+      final calculator = MatexCompoundInterestCalculator(
+        state: const MatexCompoundInterestCalculatorState(
+          compoundFrequency: MatexFinancialFrequency.monthly,
+          rateFrequency: MatexFinancialFrequency.monthly,
+          startBalance: 1000.0,
+          rate: 0.02,
+          duration: 1,
+          additionalContribution: 100.0,
+          contributionFrequency: MatexFinancialFrequency.monthly,
+          withdrawalAmount: 50.0,
+          withdrawalFrequency: MatexFinancialFrequency.monthly,
+        ),
+      );
+
+      final result = await calculator.valueAsync();
+      expect(result.effectiveAnnualRate, closeTo(0.3388, 0.0001));
+    });
   });
 }

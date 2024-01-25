@@ -146,7 +146,13 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
     final startBalance = entry.startBalance;
     final periods = _getPeriodsPerYear(state.rateFrequency);
     final entries = breakdown.sublist(0, periods);
-    final endBalance = entries.last.endBalance;
+    var totalEarnings = 0.0;
+
+    for (final entry in entries) {
+      totalEarnings += entry.earnings;
+    }
+
+    final endBalance = startBalance + totalEarnings;
     final effectiveAnnualRate = pow(endBalance / startBalance, 1 / 1) - 1;
 
     return effectiveAnnualRate.toDouble();
