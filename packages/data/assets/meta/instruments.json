@@ -1041,23 +1041,6 @@
     },
     "type": "currency"
   },
-  "HRK": {
-    "code": "HRK",
-    "format": {
-      "round": 3
-    },
-    "icon": "croatia",
-    "name": {
-      "key": "croatian_kuna",
-      "localized": "Croatian kuna"
-    },
-    "symbol": {
-      "long": "HRK",
-      "short": "HRK",
-      "ticker": "HRK"
-    },
-    "type": "currency"
-  },
   "HSI": {
     "code": "HSI",
     "format": {
