@@ -165,7 +165,7 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
     }
 
     final endBalance = startBalance + totalEarnings;
-    final effectiveAnnualRate = pow(endBalance / startBalance, 1 / 1) - 1;
+    final effectiveAnnualRate = pow(endBalance / startBalance, 1) - 1;
 
     return effectiveAnnualRate.toDouble();
   }
