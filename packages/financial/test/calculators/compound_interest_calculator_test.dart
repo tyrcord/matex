@@ -560,7 +560,7 @@ void main() {
       );
 
       final result = await calculator.valueAsync();
-      expect(result.effectiveAnnualRate, closeTo(0.3388, 0.0001));
+      expect(result.effectiveAnnualRate, closeTo(0.2682, 0.0001));
 
       final calculator2 = MatexCompoundInterestCalculator(
         state: const MatexCompoundInterestCalculatorState(
@@ -575,7 +575,22 @@ void main() {
       );
 
       final result2 = await calculator2.valueAsync();
-      expect(result2.effectiveAnnualRate, closeTo(0.1976, 0.0001));
+      expect(result2.effectiveAnnualRate, closeTo(0.2682, 0.0001));
+
+      final calculator3 = MatexCompoundInterestCalculator(
+        state: const MatexCompoundInterestCalculatorState(
+          compoundFrequency: MatexFinancialFrequency.quarterly,
+          rateFrequency: MatexFinancialFrequency.monthly,
+          startBalance: 1000.0,
+          rate: 0.02,
+          duration: 1,
+          withdrawalAmount: 50.0,
+          withdrawalFrequency: MatexFinancialFrequency.monthly,
+        ),
+      );
+
+      final result3 = await calculator3.valueAsync();
+      expect(result3.effectiveAnnualRate, closeTo(0.2625, 0.0001));
     });
   });
 }

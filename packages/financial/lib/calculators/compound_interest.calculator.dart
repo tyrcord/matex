@@ -113,8 +113,20 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
 
     if (results.isEmpty) return defaultResults;
 
+    // Compute the effective annual rate
+    final annualRateCalcState = state.copyWith(
+      additionalContribution: 0,
+      withdrawalAmount: 0,
+      duration: 1,
+    );
+
+    final annualRateResults = await compute(
+      _computeBreakdown,
+      annualRateCalcState.toJson(),
+    );
+
     return MatexCompoundInterestCalculatorResults(
-      effectiveAnnualRate: _computeEffectiveAnnualRate(results),
+      effectiveAnnualRate: _computeEffectiveAnnualRate(annualRateResults),
       totalWithdrawals: results.last.totalWithdrawals,
       totalContributions: results.last.totalDeposits,
       rateOfReturn: _computeRateOfReturn(results),
