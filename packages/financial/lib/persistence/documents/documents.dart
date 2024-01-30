@@ -14,3 +14,4 @@ export 'forex_profit_loss_calculator.document.dart';
 export 'forex_required_margin_calculator.document.dart';
 export 'forex_stop_loss_take_profit_calculator.document.dart';
 export 'forex_compound_calculator.document.dart';
+export 'currency_favorite.document.dart';
