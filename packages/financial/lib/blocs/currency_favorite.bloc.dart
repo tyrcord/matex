@@ -1,6 +1,11 @@
+// Flutter imports:
 import 'package:flutter/foundation.dart';
-import 'package:matex_financial/financial.dart';
+
+// Package imports:
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 /// The [MatexCurrencyFavoriteBloc] is a BLoC for managing favorite currencies
 /// in a trading app.

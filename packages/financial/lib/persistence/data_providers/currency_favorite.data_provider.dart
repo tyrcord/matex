@@ -1,5 +1,8 @@
-import 'package:matex_financial/financial.dart';
+// Package imports:
 import 'package:tstore/tstore.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 /// A provider for managing favorite currencies in a store.
 class MatexCurrencyFavoriteDataProvider extends TDocumentDataProvider {
