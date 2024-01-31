@@ -101,6 +101,57 @@
     },
     "type": "commodity_metal"
   },
+  "ALL": {
+    "code": "ALL",
+    "format": {
+      "round": 3
+    },
+    "icon": "albania",
+    "name": {
+      "key": "albanian_lek",
+      "localized": "Albanian Lek"
+    },
+    "symbol": {
+      "long": "Lek",
+      "short": "Lek",
+      "ticker": "ALL"
+    },
+    "type": "currency"
+  },
+  "AMD": {
+    "code": "AMD",
+    "format": {
+      "round": 3
+    },
+    "icon": "armenia",
+    "name": {
+      "key": "armenian_dram",
+      "localized": "Armenian Dram"
+    },
+    "symbol": {
+      "long": "\u0534",
+      "short": "\u0534",
+      "ticker": "AMD"
+    },
+    "type": "currency"
+  },
+  "AOA": {
+    "code": "AOA",
+    "format": {
+      "round": 3
+    },
+    "icon": "angola",
+    "name": {
+      "key": "angolan_kwanza",
+      "localized": "Angolan Kwanza"
+    },
+    "symbol": {
+      "long": "Kz",
+      "short": "Kz",
+      "ticker": "AOA"
+    },
+    "type": "currency"
+  },
   "AORD": {
     "code": "AORD",
     "format": {
@@ -220,6 +271,23 @@
     },
     "type": "crypto"
   },
+  "AWG": {
+    "code": "AWG",
+    "format": {
+      "round": 3
+    },
+    "icon": "aruba",
+    "name": {
+      "key": "aruban_florin",
+      "localized": "Aruban Florin"
+    },
+    "symbol": {
+      "long": "\u0192",
+      "short": "\u0192",
+      "ticker": "AWG"
+    },
+    "type": "currency"
+  },
   "AXJO": {
     "code": "AXJO",
     "format": {
@@ -236,6 +304,23 @@
       "ticker": "AXJO"
     },
     "type": "index"
+  },
+  "BAM": {
+    "code": "BAM",
+    "format": {
+      "round": 3
+    },
+    "icon": "bosnia_herzegovina",
+    "name": {
+      "key": "bosnia_and_herzegovina_convertible_mark",
+      "localized": "Bosnia and Herzegovina Convertible Mark"
+    },
+    "symbol": {
+      "long": "KM",
+      "short": "KM",
+      "ticker": "BAM"
+    },
+    "type": "currency"
   },
   "BCH": {
     "code": "BCH",
@@ -667,6 +752,23 @@
     },
     "type": "crypto"
   },
+  "DOP": {
+    "code": "DOP",
+    "format": {
+      "round": 3
+    },
+    "icon": "dominican_republic",
+    "name": {
+      "key": "dominican_peso",
+      "localized": "Dominican Peso"
+    },
+    "symbol": {
+      "long": "RD$",
+      "short": "RD$",
+      "ticker": "DOP"
+    },
+    "type": "currency"
+  },
   "DOT": {
     "code": "DOT",
     "format": {
@@ -1041,6 +1143,23 @@
     },
     "type": "currency"
   },
+  "HNL": {
+    "code": "HNL",
+    "format": {
+      "round": 3
+    },
+    "icon": "honduras",
+    "name": {
+      "key": "honduran_lempira",
+      "localized": "Honduran Lempira"
+    },
+    "symbol": {
+      "long": "L",
+      "short": "L",
+      "ticker": "HNL"
+    },
+    "type": "currency"
+  },
   "HSI": {
     "code": "HSI",
     "format": {
@@ -1057,6 +1176,23 @@
       "ticker": "HSI"
     },
     "type": "index"
+  },
+  "HTG": {
+    "code": "HTG",
+    "format": {
+      "round": 3
+    },
+    "icon": "haiti",
+    "name": {
+      "key": "haitian_gourde",
+      "localized": "Haitian Gourde"
+    },
+    "symbol": {
+      "long": "G",
+      "short": "G",
+      "ticker": "HTG"
+    },
+    "type": "currency"
   },
   "HUF": {
     "code": "HUF",
@@ -1431,6 +1567,23 @@
       "ticker": "KLSE"
     },
     "type": "index"
+  },
+  "KMF": {
+    "code": "KMF",
+    "format": {
+      "round": 3
+    },
+    "icon": "comoros",
+    "name": {
+      "key": "comorian_franc",
+      "localized": "Comorian Franc"
+    },
+    "symbol": {
+      "long": "CF",
+      "short": "CF",
+      "ticker": "KMF"
+    },
+    "type": "currency"
   },
   "KRW": {
     "code": "KRW",
@@ -1941,6 +2094,23 @@
       "ticker": "OKB"
     },
     "type": "crypto"
+  },
+  "OMR": {
+    "code": "OMR",
+    "format": {
+      "round": 3
+    },
+    "icon": "oman",
+    "name": {
+      "key": "omani_rial",
+      "localized": "Omani Rial"
+    },
+    "symbol": {
+      "long": "\u0631.\u0639.",
+      "short": "\u0631.\u0639.",
+      "ticker": "OMR"
+    },
+    "type": "currency"
   },
   "OP": {
     "code": "OP",
@@ -2486,6 +2656,40 @@
     },
     "type": "crypto"
   },
+  "TJS": {
+    "code": "TJS",
+    "format": {
+      "round": 3
+    },
+    "icon": "tajikistan",
+    "name": {
+      "key": "tajikistani_somoni",
+      "localized": "Tajikistani Somoni"
+    },
+    "symbol": {
+      "long": "\u0405\u041c",
+      "short": "\u0405\u041c",
+      "ticker": "TJS"
+    },
+    "type": "currency"
+  },
+  "TMT": {
+    "code": "TMT",
+    "format": {
+      "round": 3
+    },
+    "icon": "turkmenistan",
+    "name": {
+      "key": "turkmenistani_manat",
+      "localized": "Turkmenistani Manat"
+    },
+    "symbol": {
+      "long": "m",
+      "short": "m",
+      "ticker": "TMT"
+    },
+    "type": "currency"
+  },
   "TND": {
     "code": "TND",
     "format": {
@@ -2537,6 +2741,23 @@
     },
     "type": "crypto"
   },
+  "TOP": {
+    "code": "TOP",
+    "format": {
+      "round": 3
+    },
+    "icon": "tonga",
+    "name": {
+      "key": "tongan_paanga",
+      "localized": "Tongan Pa'anga"
+    },
+    "symbol": {
+      "long": "T$",
+      "short": "T$",
+      "ticker": "TOP"
+    },
+    "type": "currency"
+  },
   "TRX": {
     "code": "TRX",
     "format": {
@@ -2568,6 +2789,23 @@
       "long": "\u20ba",
       "short": "\u20ba",
       "ticker": "TRY"
+    },
+    "type": "currency"
+  },
+  "TTD": {
+    "code": "TTD",
+    "format": {
+      "round": 3
+    },
+    "icon": "trinidad_tobago",
+    "name": {
+      "key": "trinidad_and_tobago_dollar",
+      "localized": "Trinidad and Tobago Dollar"
+    },
+    "symbol": {
+      "long": "TT$",
+      "short": "$",
+      "ticker": "TTD"
     },
     "type": "currency"
   },
@@ -2636,6 +2874,23 @@
       "long": "UAH",
       "short": "UAH",
       "ticker": "UAH"
+    },
+    "type": "currency"
+  },
+  "UGX": {
+    "code": "UGX",
+    "format": {
+      "round": 3
+    },
+    "icon": "uganda",
+    "name": {
+      "key": "ugandan_shilling",
+      "localized": "Ugandan Shilling"
+    },
+    "symbol": {
+      "long": "USh",
+      "short": "USh",
+      "ticker": "UGX"
     },
     "type": "currency"
   },
@@ -2724,6 +2979,23 @@
     },
     "type": "currency"
   },
+  "UZS": {
+    "code": "UZS",
+    "format": {
+      "round": 3
+    },
+    "icon": "uzbekistan",
+    "name": {
+      "key": "uzbekistani_som",
+      "localized": "Uzbekistani sum"
+    },
+    "symbol": {
+      "long": "\u0441\u045e\u043c",
+      "short": "\u0441\u045e\u043c",
+      "ticker": "UZS"
+    },
+    "type": "currency"
+  },
   "VET": {
     "code": "VET",
     "format": {
@@ -2809,6 +3081,23 @@
     },
     "type": "commodity_metal"
   },
+  "XCD": {
+    "code": "XCD",
+    "format": {
+      "round": 3
+    },
+    "icon": "antigua_barbuda",
+    "name": {
+      "key": "east_caribbean_dollar",
+      "localized": "East Caribbean Dollar"
+    },
+    "symbol": {
+      "long": "$",
+      "short": "$",
+      "ticker": "XCD"
+    },
+    "type": "currency"
+  },
   "XLM": {
     "code": "XLM",
     "format": {
@@ -2842,6 +3131,40 @@
       "ticker": "XMR"
     },
     "type": "crypto"
+  },
+  "XOF": {
+    "code": "XOF",
+    "format": {
+      "round": 3
+    },
+    "icon": "senegal",
+    "name": {
+      "key": "west_african_cfa_franc",
+      "localized": "West African CFA Franc"
+    },
+    "symbol": {
+      "long": "CFA",
+      "short": "CFA",
+      "ticker": "XOF"
+    },
+    "type": "currency"
+  },
+  "XPF": {
+    "code": "XPF",
+    "format": {
+      "round": 3
+    },
+    "icon": "france",
+    "name": {
+      "key": "cfp_franc",
+      "localized": "CFP Franc"
+    },
+    "symbol": {
+      "long": "\u20a3",
+      "short": "\u20a3",
+      "ticker": "XPF"
+    },
+    "type": "currency"
   },
   "XPT": {
     "code": "XPT",
@@ -2976,346 +3299,6 @@
       "long": "ZWD",
       "short": "ZWD",
       "ticker": "ZWD"
-    },
-    "type": "currency"
-  },
-  "ALL": {
-    "code": "ALL",
-    "icon": "albania",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "albanian_lek",
-      "localized": "Albanian Lek"
-    },
-    "symbol": {
-      "long": "Lek",
-      "short": "Lek",
-      "ticker": "ALL"
-    },
-    "type": "currency"
-  },
-  "AMD": {
-    "code": "AMD",
-    "icon": "armenia",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "armenian_dram",
-      "localized": "Armenian Dram"
-    },
-    "symbol": {
-      "long": "Դ",
-      "short": "Դ",
-      "ticker": "AMD"
-    },
-    "type": "currency"
-  },
-  "AOA": {
-    "code": "AOA",
-    "icon": "angola",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "angolan_kwanza",
-      "localized": "Angolan Kwanza"
-    },
-    "symbol": {
-      "long": "Kz",
-      "short": "Kz",
-      "ticker": "AOA"
-    },
-    "type": "currency"
-  },
-  "AWG": {
-    "code": "AWG",
-    "icon": "aruba",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "aruban_florin",
-      "localized": "Aruban Florin"
-    },
-    "symbol": {
-      "long": "ƒ",
-      "short": "ƒ",
-      "ticker": "AWG"
-    },
-    "type": "currency"
-  },
-  "BAM": {
-    "code": "BAM",
-    "format": {
-      "round": 3
-    },
-    "icon": "bosnia_herzegovina",
-    "name": {
-      "key": "bosnia_and_herzegovina_convertible_mark",
-      "localized": "Bosnia and Herzegovina Convertible Mark"
-    },
-    "symbol": {
-      "long": "KM",
-      "short": "KM",
-      "ticker": "BAM"
-    },
-    "type": "currency"
-  },
-  "XPF": {
-    "code": "XPF",
-    "icon": "france",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "cfp_franc",
-      "localized": "CFP Franc"
-    },
-    "symbol": {
-      "long": "₣",
-      "short": "₣",
-      "ticker": "XPF"
-    },
-    "type": "currency"
-  },
-  "XOF": {
-    "code": "XOF",
-    "icon": "senegal",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "west_african_cfa_franc",
-      "localized": "West African CFA Franc"
-    },
-    "symbol": {
-      "long": "CFA",
-      "short": "CFA",
-      "ticker": "XOF"
-    },
-    "type": "currency"
-  },
-  "XCD": {
-    "code": "XCD",
-    "icon": "antigua_barbuda",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "east_caribbean_dollar",
-      "localized": "East Caribbean Dollar"
-    },
-    "symbol": {
-      "long": "$",
-      "short": "$",
-      "ticker": "XCD"
-    },
-    "type": "currency"
-  },
-  "UZS": {
-    "code": "UZS",
-    "icon": "uzbekistan",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "uzbekistani_som",
-      "localized": "Uzbekistani sum"
-    },
-    "symbol": {
-      "long": "сўм",
-      "short": "сўм",
-      "ticker": "UZS"
-    },
-    "type": "currency"
-  },
-  "UGX": {
-    "code": "UGX",
-    "icon": "uganda",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "ugandan_shilling",
-      "localized": "Ugandan Shilling"
-    },
-    "symbol": {
-      "long": "USh",
-      "short": "USh",
-      "ticker": "UGX"
-    },
-    "type": "currency"
-  },
-  "TTD": {
-    "code": "TTD",
-    "format": {
-      "round": 3
-    },
-    "icon": "trinidad_tobago",
-    "name": {
-      "key": "trinidad_and_tobago_dollar",
-      "localized": "Trinidad and Tobago Dollar"
-    },
-    "symbol": {
-      "long": "TT$",
-      "short": "$",
-      "ticker": "TTD"
-    },
-    "type": "currency"
-  },
-  "TOP": {
-    "code": "TOP",
-    "icon": "tonga",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "tongan_paanga",
-      "localized": "Tongan Pa'anga"
-    },
-    "symbol": {
-      "long": "T$",
-      "short": "T$",
-      "ticker": "TOP"
-    },
-    "type": "currency"
-  },
-  "TMT": {
-    "code": "TMT",
-    "format": {
-      "round": 3
-    },
-    "icon": "turkmenistan",
-    "name": {
-      "key": "turkmenistani_manat",
-      "localized": "Turkmenistani Manat"
-    },
-    "symbol": {
-      "long": "m",
-      "short": "m",
-      "ticker": "TMT"
-    },
-    "type": "currency"
-  },
-  "TJS": {
-    "code": "TJS",
-    "format": {
-      "round": 3
-    },
-    "icon": "tajikistan",
-    "name": {
-      "key": "tajikistani_somoni",
-      "localized": "Tajikistani Somoni"
-    },
-    "symbol": {
-      "long": "ЅМ",
-      "short": "ЅМ",
-      "ticker": "TJS"
-    },
-    "type": "currency"
-  },
-  "KMF": {
-    "code": "KMF",
-    "format": {
-      "round": 3
-    },
-    "icon": "comoros",
-    "name": {
-      "key": "comorian_franc",
-      "localized": "Comorian Franc"
-    },
-    "symbol": {
-      "long": "CF",
-      "short": "CF",
-      "ticker": "KMF"
-    },
-    "type": "currency"
-  },
-  "HTG": {
-    "code": "HTG",
-    "icon": "haiti",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "haitian_gourde",
-      "localized": "Haitian Gourde"
-    },
-    "symbol": {
-      "long": "G",
-      "short": "G",
-      "ticker": "HTG"
-    },
-    "type": "currency"
-  },
-  "HNL": {
-    "code": "HNL",
-    "icon": "honduras",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "honduran_lempira",
-      "localized": "Honduran Lempira"
-    },
-    "symbol": {
-      "long": "L",
-      "short": "L",
-      "ticker": "HNL"
-    },
-    "type": "currency"
-  },
-  "OMR": {
-    "code": "OMR",
-    "icon": "oman",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "omani_rial",
-      "localized": "Omani Rial"
-    },
-    "symbol": {
-      "long": "ر.ع.",
-      "short": "ر.ع.",
-      "ticker": "OMR"
-    },
-    "type": "currency"
-  },
-  "DOP": {
-    "code": "DOP",
-    "icon": "dominican_republic",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "dominican_peso",
-      "localized": "Dominican Peso"
-    },
-    "symbol": {
-      "long": "RD$",
-      "short": "RD$",
-      "ticker": "DOP"
-    },
-    "type": "currency"
-  },
-  "DJF": {
-    "code": "DJF",
-    "icon": "djibouti",
-    "format": {
-      "round": 3
-    },
-    "name": {
-      "key": "djiboutian_franc",
-      "localized": "Djiboutian Franc"
-    },
-    "symbol": {
-      "long": "Fdj",
-      "short": "Fdj",
-      "ticker": "DJF"
     },
     "type": "currency"
   },
