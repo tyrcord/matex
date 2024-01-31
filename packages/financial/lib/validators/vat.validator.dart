@@ -18,7 +18,8 @@ final List<MatexCalculatorValidator<MatexVatCalculatorState>> vatValidators = [
 
 // Validator: Check if the price before VAT is valid
 bool isPriceBeforeVatValid(MatexVatCalculatorState state) {
-  return state.priceBeforeVat != null && state.priceBeforeVat! > 0;
+  return (state.priceBeforeVat != null && state.priceBeforeVat! > 0) ||
+      (state.priceAfterVat != null && state.priceAfterVat! > 0);
 }
 
 // Validator: Check if any VAT rate (general, federal, regional) is valid
@@ -34,9 +35,17 @@ bool isVatRateValid(MatexVatCalculatorState state) {
 
 // Validator: Ensure that the discount amount is valid
 bool isDiscountAmountValid(MatexVatCalculatorState state) {
-  return state.discountAmount == null ||
-      (state.discountAmount! < state.priceBeforeVat! &&
-          state.discountAmount! >= 0);
+  if (state.priceBeforeVat != null) {
+    return state.discountAmount == null ||
+        (state.discountAmount! < state.priceBeforeVat! &&
+            state.discountAmount! >= 0);
+  } else if (state.priceAfterVat != null) {
+    return state.discountAmount == null ||
+        (state.discountAmount! < state.priceAfterVat! &&
+            state.discountAmount! >= 0);
+  }
+
+  return false;
 }
 
 // Validator: Ensure that the discount rate is valid

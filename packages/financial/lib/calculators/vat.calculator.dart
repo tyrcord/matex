@@ -21,6 +21,10 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     setState(state.copyWith(priceBeforeVat: value));
   }
 
+  set priceAfterVat(double? value) {
+    setState(state.copyWith(priceAfterVat: value));
+  }
+
   set federalVatRate(double? value) {
     setState(state.copyWith(federalVatRate: value));
   }
@@ -62,23 +66,39 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     final regionalVatRate = state.regionalVatRate ?? 0;
     final federalVatRate = state.federalVatRate ?? 0;
     final customVatRate = state.customVatRate ?? 0;
-    final price = state.priceBeforeVat ?? 0.0;
     final vatRate = state.vatRate ?? 0;
 
-    final dTotalVatRate =
+    final totalVatRate =
         federalVatRate + regionalVatRate + vatRate + customVatRate;
 
-    final discountedPrice = applyDiscount(
-      price,
-      discountAmount: state.discountAmount,
-      discountRate: state.discountRate,
-    );
+    double priceBeforeVat = state.priceBeforeVat ?? 0.0;
+    double discountedPrice = 0.0;
+    double totalTaxes = 0.0;
+    double totalPrice = 0.0;
 
-    final totalTaxes = getVATAmount(discountedPrice, dTotalVatRate);
-    final totalPrice = discountedPrice + totalTaxes;
+    // Calculate price before VAT if price after VAT is provided
+    if (state.priceAfterVat != null) {
+      totalPrice = state.priceAfterVat!;
+      totalTaxes = totalPrice * totalVatRate / (1 + totalVatRate);
+      discountedPrice = totalPrice - totalTaxes;
+      priceBeforeVat = applyReverseDiscount(
+        discountedPrice,
+        discountAmount: state.discountAmount,
+        discountRate: state.discountRate,
+      );
+    } else {
+      // Calculate price with VAT
+      discountedPrice = applyDiscount(
+        priceBeforeVat,
+        discountAmount: state.discountAmount,
+        discountRate: state.discountRate,
+      );
+      totalTaxes = getVATAmount(discountedPrice, totalVatRate);
+      totalPrice = discountedPrice + totalTaxes;
+    }
 
     final (discountAmount, discountRate) = getDiscountAmountAndRate(
-      price,
+      priceBeforeVat,
       discountedPrice,
     );
 
@@ -101,7 +121,22 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
       tipAmount: tipAmount,
       total: totalPrice,
       tipRate: tipRate,
+      priceBeforeVat: priceBeforeVat,
     );
+  }
+
+  double applyReverseDiscount(
+    double price, {
+    double? discountAmount,
+    double? discountRate,
+  }) {
+    if (discountAmount != null && discountAmount > 0) {
+      return price + discountAmount;
+    } else if (discountRate != null && discountRate > 0) {
+      return price / (1 - discountRate);
+    }
+
+    return price;
   }
 
   (double tipAmount, double tipRate) getTipAmountAndRate(

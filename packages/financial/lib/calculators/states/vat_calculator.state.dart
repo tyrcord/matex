@@ -11,6 +11,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
   final double? tipRate;
   final double? vatRate;
   final double? tipAmount;
+  final double? priceAfterVat;
 
   const MatexVatCalculatorState({
     this.discountRate,
@@ -22,6 +23,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
     this.tipRate,
     this.vatRate,
     this.tipAmount,
+    this.priceAfterVat,
   });
 
   @override
@@ -38,6 +40,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
     double? discountRate,
     double? tipRate,
     double? tipAmount,
+    double? priceAfterVat,
   }) {
     return MatexVatCalculatorState(
       priceBeforeVat: priceBeforeVat ?? this.priceBeforeVat,
@@ -49,6 +52,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
       discountRate: discountRate ?? this.discountRate,
       tipRate: tipRate ?? this.tipRate,
       tipAmount: tipAmount ?? this.tipAmount,
+      priceAfterVat: priceAfterVat ?? this.priceAfterVat,
     );
   }
 
@@ -64,6 +68,7 @@ class MatexVatCalculatorState extends MatexCalculatorState {
       discountRate: model.discountRate,
       tipRate: model.tipRate,
       tipAmount: model.tipAmount,
+      priceAfterVat: model.priceAfterVat,
     );
   }
 
@@ -78,5 +83,6 @@ class MatexVatCalculatorState extends MatexCalculatorState {
         discountRate,
         tipRate,
         tipAmount,
+        priceAfterVat,
       ];
 }

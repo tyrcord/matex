@@ -14,6 +14,7 @@ class MatexVatCalculatorResults extends TModel {
   final double? tipRate;
   final double? discountAmount;
   final double? discountRate;
+  final double? priceBeforeVat;
 
   const MatexVatCalculatorResults({
     this.totalTaxes,
@@ -28,6 +29,7 @@ class MatexVatCalculatorResults extends TModel {
     this.tipRate,
     this.discountAmount,
     this.discountRate,
+    this.priceBeforeVat,
   });
 
   @override
@@ -47,6 +49,7 @@ class MatexVatCalculatorResults extends TModel {
     double? tipRate,
     double? discountAmount,
     double? discountRate,
+    double? priceBeforeVat,
   }) {
     return MatexVatCalculatorResults(
       totalTaxes: totalTaxes ?? this.totalTaxes,
@@ -61,6 +64,7 @@ class MatexVatCalculatorResults extends TModel {
       tipRate: tipRate ?? this.tipRate,
       discountAmount: discountAmount ?? this.discountAmount,
       discountRate: discountRate ?? this.discountRate,
+      priceBeforeVat: priceBeforeVat ?? this.priceBeforeVat,
     );
   }
 
@@ -79,6 +83,7 @@ class MatexVatCalculatorResults extends TModel {
       tipRate: model.tipRate,
       discountAmount: model.discountAmount,
       discountRate: model.discountRate,
+      priceBeforeVat: model.priceBeforeVat,
     );
   }
 
@@ -96,5 +101,6 @@ class MatexVatCalculatorResults extends TModel {
         tipRate,
         discountAmount,
         discountRate,
+        priceBeforeVat,
       ];
 }

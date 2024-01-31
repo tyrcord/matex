@@ -1,4 +1,5 @@
 // Package imports:
+
 import 'package:flutter_test/flutter_test.dart';
 
 // Project imports:
@@ -450,6 +451,68 @@ void main() {
       expect(results.discountRate, equals(0.10));
       expect(results.tipAmount, equals(4.5));
       expect(results.tipRate, equals(0.05));
+    });
+
+    test('Calculates price before VAT correctly with only federal VAT rate',
+        () {
+      calculator
+        ..priceAfterVat = 121 // Price including 21% VAT
+        ..federalVatRate = 0.21; // 21% VAT rate
+
+      final results = calculator.value();
+
+      expect(results.priceBeforeVat, closeTo(100, 0.01));
+    });
+
+    test('Calculates price before VAT correctly with federal and regional VAT',
+        () {
+      calculator
+        ..priceAfterVat = 100 // Price including federal and regional VAT
+        ..federalVatRate = 0.05 // 5% federal VAT
+        ..regionalVatRate = 0.07; // 7% regional VAT
+
+      final results = calculator.value();
+
+      expect(results.priceBeforeVat, closeTo(89.29, 0.01));
+    });
+
+    test('Calculates price before VAT correctly with discount rate', () {
+      calculator
+        ..priceAfterVat = 100 // Price after 5% VAT and 10% discount
+        ..federalVatRate = 0.13 // 5% federal VAT
+        ..discountRate = 0.10; // 10% discount rate
+
+      final results = calculator.value();
+
+      expect(results.priceBeforeVat, closeTo(98.33, 0.01));
+      expect(results.totalTaxes, closeTo(11.50, 0.01));
+      expect(results.discountAmount, closeTo(9.83, 0.01));
+      expect(results.subTotal, closeTo(88.5, 0.01));
+    });
+
+    test('Calculates price before VAT correctly with discount amount', () {
+      calculator
+        ..priceAfterVat = 110 // Price after 20% VAT and $10 discount
+        ..vatRate = 0.20 // 20% VAT rate
+        ..discountAmount = 10; // $10 discount
+
+      final results = calculator.value();
+
+      expect(results.priceBeforeVat, closeTo(101.67, 0.01));
+    });
+
+    test(
+        'Calculates price before VAT and discounts correctly with custom '
+        'VAT rate', () {
+      calculator
+        ..priceAfterVat = 100 // Price after 5% VAT and 10% discount
+        ..vatRate = 0.1 // 10% VAT rate
+        ..customVatRate = 0.05 // 5% custom VAT rate
+        ..discountRate = 0.10; // 10% discount rate
+
+      final results = calculator.value();
+
+      expect(results.priceBeforeVat, closeTo(96.62, 0.01));
     });
   });
 }
