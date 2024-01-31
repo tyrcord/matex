@@ -46,3 +46,26 @@ List<FastItem<MatexFinancialInstrument>> findFavoriteInstuments(
     return isInstrumentFavorite(base, counter);
   }).toList();
 }
+
+/// Determines whether the currency code is marked as favorite or not
+/// based on the list of favorite currency codes.
+bool isCurrencyFavorite(
+  String currencyCode, {
+  List<String>? favorites,
+}) {
+  favorites ??= MatexCurrencyFavoriteBloc.instance.favorites;
+
+  return favorites.contains(currencyCode);
+}
+
+List<FastItem<MatexInstrumentMetadata>> findFavoriteCurrencies(
+  List<FastItem<MatexInstrumentMetadata>> items,
+) {
+  return items.where((item) {
+    final currencyCode = item.value?.code;
+
+    if (currencyCode != null) return isCurrencyFavorite(currencyCode);
+
+    return false;
+  }).toList();
+}
