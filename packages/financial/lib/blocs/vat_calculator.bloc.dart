@@ -66,6 +66,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     final results = calculator.value();
 
     return MatexVatCalculatorBlocResults(
+      priceBeforeVat: results.priceBeforeVat,
       totalTaxes: results.totalTaxes,
       total: results.total,
       tipAmount: results.tipAmount,
@@ -86,6 +87,8 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       formattedSubTotal: localizeCurrency(value: results.subTotal),
       formattedDiscountAmount: localizeCurrency(value: results.discountAmount),
       formattedDiscountRate: localizePercentage(value: results.discountRate),
+      formattedPriceBeforeVat: localizeCurrency(value: results.priceBeforeVat),
+      formattedVatAmount: localizeCurrency(value: results.vatAmount),
       formattedCustomVatAmount: localizeCurrency(
         value: results.customVatAmount,
       ),
@@ -94,9 +97,6 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
       ),
       formattedRegionalVatAmount: localizeCurrency(
         value: results.regionalVatAmount,
-      ),
-      formattedVatAmount: localizeCurrency(
-        value: results.vatAmount,
       ),
     );
   }
@@ -130,7 +130,34 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWith(tipRate: value, tipAmount: '');
       } else if (key == MatexVatCalculatorBlocKey.discountRate) {
         return document.copyWith(discountRate: value, discountAmount: '');
+      } else if (key == MatexVatCalculatorBlocKey.priceAfterVat) {
+        return document.copyWith(priceAfterVat: value);
+      } else if (key == MatexVatCalculatorBlocKey.tipFieldType) {
+        return document.copyWith(
+          tipFieldType: value,
+          tipAmount: '',
+          tipRate: '',
+        );
+      } else if (key == MatexVatCalculatorBlocKey.discountFieldType) {
+        return document.copyWith(
+          discountFieldType: value,
+          discountAmount: '',
+          discountRate: '',
+        );
+      } else if (key == MatexVatCalculatorBlocKey.vatCalculationStrategy) {
+        return document.copyWith(
+          vatCalculationStrategy: value,
+          priceAfterVat: '',
+          priceBeforeVat: '',
+        );
       }
+    } else if (key == MatexVatCalculatorBlocKey.vatCalculationStrategy &&
+        value is MatexVatCalculationStrategy) {
+      return document.copyWith(
+        vatCalculationStrategy: value.name,
+        priceAfterVat: '',
+        priceBeforeVat: '',
+      );
     } else if (value is Enum) {
       if (key == MatexVatCalculatorBlocKey.tipFieldType) {
         return document.copyWith(
@@ -178,7 +205,14 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
         return patchTipFieldType(value);
       } else if (key == MatexVatCalculatorBlocKey.discountFieldType) {
         return patchDiscountFieldType(value);
+      } else if (key == MatexVatCalculatorBlocKey.vatCalculationStrategy) {
+        return patchVatCalculationStrategy(value);
+      } else if (key == MatexVatCalculatorBlocKey.priceAfterVat) {
+        return patchPriceAfterVat(value);
       }
+    } else if (key == MatexVatCalculatorBlocKey.vatCalculationStrategy &&
+        value is MatexVatCalculationStrategy) {
+      return patchVatCalculationStrategy(value.name);
     } else if (value is Enum) {
       if (key == MatexVatCalculatorBlocKey.tipFieldType) {
         return patchTipFieldType(value.name);
@@ -200,6 +234,7 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
     final regionalVatRate = parseStringToDouble(document.regionalVatRate);
 
     calculator.setState(MatexVatCalculatorState(
+      priceAfterVat: tryParseStringToDouble(document.priceAfterVat),
       priceBeforeVat: tryParseStringToDouble(document.priceBeforeVat),
       discountAmount: tryParseStringToDouble(document.discountAmount),
       tipAmount: tryParseStringToDouble(document.tipAmount),
@@ -251,9 +286,26 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   @override
   Future<MatexVatCalculatorBlocResults> retrieveDefaultResult() async {
     return MatexVatCalculatorBlocResults(
+      formattedPriceBeforeVat: localizeCurrency(value: 0),
       formattedTotal: localizeCurrency(value: 0),
+      priceBeforeVat: 0,
       total: 0,
     );
+  }
+
+  MatexVatCalculatorBlocState patchPriceAfterVat(String? value) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetPriceAfterVat: true);
+      calculator.priceAfterVat = 0;
+    } else {
+      final dValue = parseStringToDouble(value);
+      fields = fields.copyWith(priceAfterVat: value);
+      calculator.priceAfterVat = dValue;
+    }
+
+    return currentState.copyWith(fields: fields);
   }
 
   MatexVatCalculatorBlocState patchPriceBeforeVat(String? value) {
@@ -392,11 +444,11 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchTipFieldType(String? value) {
-    final fields = currentState.fields.copyWith(
-      tipFieldType: value ?? MatexVatCalculatorBlocFields.defaulTipFieldType,
-      tipAmount: '',
-      tipRate: '',
-    );
+    value ??= MatexVatCalculatorBlocFields.defaulTipFieldType;
+
+    final fields = currentState.fields
+        .copyWithDefaults(resetTipRate: true, resetTipAmount: true)
+        .copyWith(tipFieldType: value);
 
     // also reset tip rate
     calculator.tipAmount = 0;
@@ -405,15 +457,30 @@ class MatexVatCalculatorBloc extends MatexCalculatorBloc<
   }
 
   MatexVatCalculatorBlocState patchDiscountFieldType(String? value) {
-    final fields = currentState.fields.copyWith(
-      discountFieldType:
-          value ?? MatexVatCalculatorBlocFields.defaulDiscountFieldType,
-      discountAmount: '',
-      discountRate: '',
-    );
+    value ??= MatexVatCalculatorBlocFields.defaulDiscountFieldType;
+
+    final fields = currentState.fields
+        .copyWithDefaults(resetDiscountAmount: true, resetDiscountRate: true)
+        .copyWith(discountFieldType: value);
 
     // also reset discount rate
     calculator.discountAmount = 0;
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexVatCalculatorBlocState patchVatCalculationStrategy(String? value) {
+    value ??= MatexVatCalculatorBlocFields.defaultVatCalculationStrategy;
+
+    final fields = currentState.fields
+        .copyWithDefaults(resetPriceAfterVat: true, resetPriceBeforeVat: true)
+        .copyWith(vatCalculationStrategy: value);
+
+    if (value == MatexVatCalculationStrategy.excluded.name) {
+      calculator.priceBeforeVat = 0;
+    } else if (value == MatexVatCalculationStrategy.included.name) {
+      calculator.priceAfterVat = 0;
+    }
 
     return currentState.copyWith(fields: fields);
   }

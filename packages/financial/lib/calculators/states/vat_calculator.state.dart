@@ -56,6 +56,37 @@ class MatexVatCalculatorState extends MatexCalculatorState {
     );
   }
 
+  MatexVatCalculatorState reset() {
+    return const MatexVatCalculatorState();
+  }
+
+  @override
+  MatexVatCalculatorState copyWithDefaults({
+    bool? resetPriceBeforeVat,
+    bool? resetFederalVatRate,
+    bool? resetRegionalVatRate,
+    bool? resetVatRate,
+    bool? resetCustomVatRate,
+    bool? resetDiscountAmount,
+    bool? resetDiscountRate,
+    bool? resetTipRate,
+    bool? resetTipAmount,
+    bool? resetPriceAfterVat,
+  }) {
+    return MatexVatCalculatorState(
+      priceBeforeVat: resetPriceBeforeVat == true ? null : priceBeforeVat,
+      federalVatRate: resetFederalVatRate == true ? null : federalVatRate,
+      regionalVatRate: resetRegionalVatRate == true ? null : regionalVatRate,
+      vatRate: resetVatRate == true ? null : vatRate,
+      customVatRate: resetCustomVatRate == true ? null : customVatRate,
+      discountAmount: resetDiscountAmount == true ? null : discountAmount,
+      discountRate: resetDiscountRate == true ? null : discountRate,
+      tipRate: resetTipRate == true ? null : tipRate,
+      tipAmount: resetTipAmount == true ? null : tipAmount,
+      priceAfterVat: resetPriceAfterVat == true ? null : priceAfterVat,
+    );
+  }
+
   @override
   MatexVatCalculatorState merge(covariant MatexVatCalculatorState model) {
     return copyWith(

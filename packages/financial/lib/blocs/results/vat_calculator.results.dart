@@ -2,6 +2,7 @@
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 
 class MatexVatCalculatorBlocResults extends FastCalculatorResults {
+  final double? priceBeforeVat;
   final double? totalTaxes;
   final double? total;
   final double? tipAmount;
@@ -14,6 +15,8 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
   final double? federalVatAmount;
   final double? regionalVatAmount;
   final double? vatAmount;
+
+  final String? formattedPriceBeforeVat;
   final String? formattedTotalTaxes;
   final String? formattedTotal;
   final String? formattedTipAmount;
@@ -28,6 +31,7 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
   final String? formattedVatAmount;
 
   const MatexVatCalculatorBlocResults({
+    this.priceBeforeVat,
     this.totalTaxes,
     this.total,
     this.tipAmount,
@@ -40,6 +44,7 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     this.federalVatAmount,
     this.regionalVatAmount,
     this.vatAmount,
+    this.formattedPriceBeforeVat,
     this.formattedTotalTaxes,
     this.formattedTotal,
     this.formattedTipAmount,
@@ -71,6 +76,7 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     double? federalVatAmount,
     double? regionalVatAmount,
     double? vatAmount,
+    double? priceBeforeVat,
     String? formattedTotalTaxes,
     String? formattedTotal,
     String? formattedTipAmount,
@@ -83,8 +89,10 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     String? formattedFederalVatAmount,
     String? formattedRegionalVatAmount,
     String? formattedVatAmount,
+    String? formattedPriceBeforeVat,
   }) {
     return MatexVatCalculatorBlocResults(
+      priceBeforeVat: priceBeforeVat ?? this.priceBeforeVat,
       totalTaxes: totalTaxes ?? this.totalTaxes,
       total: total ?? this.total,
       tipAmount: tipAmount ?? this.tipAmount,
@@ -114,6 +122,8 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       formattedRegionalVatAmount:
           formattedRegionalVatAmount ?? this.formattedRegionalVatAmount,
       formattedVatAmount: formattedVatAmount ?? this.formattedVatAmount,
+      formattedPriceBeforeVat:
+          formattedPriceBeforeVat ?? this.formattedPriceBeforeVat,
     );
   }
 
@@ -122,6 +132,7 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
     covariant MatexVatCalculatorBlocResults model,
   ) {
     return copyWith(
+      priceBeforeVat: model.priceBeforeVat,
       totalTaxes: model.totalTaxes,
       total: model.total,
       tipAmount: model.tipAmount,
@@ -146,11 +157,13 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
       formattedFederalVatAmount: model.formattedFederalVatAmount,
       formattedRegionalVatAmount: model.formattedRegionalVatAmount,
       formattedVatAmount: model.formattedVatAmount,
+      formattedPriceBeforeVat: model.formattedPriceBeforeVat,
     );
   }
 
   @override
   List<Object?> get props => [
+        priceBeforeVat,
         totalTaxes,
         total,
         tipAmount,
@@ -175,5 +188,6 @@ class MatexVatCalculatorBlocResults extends FastCalculatorResults {
         formattedFederalVatAmount,
         formattedRegionalVatAmount,
         formattedVatAmount,
+        formattedPriceBeforeVat,
       ];
 }

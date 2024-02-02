@@ -18,11 +18,17 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
   MatexVatCalculatorState initializeDefaultState() => initializeState();
 
   set priceBeforeVat(double? value) {
-    setState(state.copyWith(priceBeforeVat: value));
+    setState(
+      state
+          .copyWithDefaults(resetPriceAfterVat: true)
+          .copyWith(priceBeforeVat: value),
+    );
   }
 
   set priceAfterVat(double? value) {
-    setState(state.copyWith(priceAfterVat: value));
+    setState(state
+        .copyWithDefaults(resetPriceBeforeVat: true)
+        .copyWith(priceAfterVat: value));
   }
 
   set federalVatRate(double? value) {
@@ -57,7 +63,10 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     setState(state.copyWith(customVatRate: value));
   }
 
-  static const defaultResults = MatexVatCalculatorResults(total: 0);
+  static const defaultResults = MatexVatCalculatorResults(
+    priceBeforeVat: 0,
+    total: 0,
+  );
 
   @override
   MatexVatCalculatorResults value() {
@@ -77,7 +86,7 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
     double totalPrice = 0.0;
 
     // Calculate price before VAT if price after VAT is provided
-    if (state.priceAfterVat != null) {
+    if (state.priceAfterVat != null && state.priceAfterVat! > 0) {
       totalPrice = state.priceAfterVat!;
       totalTaxes = totalPrice * totalVatRate / (1 + totalVatRate);
       discountedPrice = totalPrice - totalTaxes;
@@ -116,12 +125,12 @@ class MatexVatCalculator extends MatexCalculator<MatexVatCalculatorState,
       subTotal: discountAmount > 0 ? discountedPrice : 0,
       vatAmount: getVATAmount(discountedPrice, vatRate),
       discountAmount: discountAmount,
+      priceBeforeVat: priceBeforeVat,
       discountRate: discountRate,
       totalTaxes: totalTaxes,
       tipAmount: tipAmount,
       total: totalPrice,
       tipRate: tipRate,
-      priceBeforeVat: priceBeforeVat,
     );
   }
 

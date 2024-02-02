@@ -37,8 +37,12 @@ class MatexVatCalculatorPdfGenerator {
       title: CoreLocaleKeys.core_label_report_text.tr(),
       countryCode: appInfo.deviceCountryCode,
       categoryColumns: 3,
-      // FIXME: make optional
-      results: [],
+      results: [
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_before_vat_price.tr(),
+          value: results.formattedPriceBeforeVat!,
+        ),
+      ],
       author: CoreLocaleKeys.core_message_pdf_generated_by.tr(
         namedArgs: {
           'app_name': appInfo.appName,
@@ -59,12 +63,21 @@ class MatexVatCalculatorPdfGenerator {
     final tipRate = parseStringToDouble(fields.tipRate);
     final discountFieldType = fields.discountFieldType;
     final tipFieldType = fields.tipFieldType;
+    final vatCalculationStrategy = fields.vatCalculationStrategy;
+    final isPriceAfterVat =
+        vatCalculationStrategy == MatexVatCalculationStrategy.included.name;
 
     return [
-      FastReportEntry(
-        name: FinanceLocaleKeys.finance_label_before_vat_price.tr(),
-        value: fields.formattedPriceBeforeVat,
-      ),
+      if (isPriceAfterVat)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_after_vat_price.tr(),
+          value: fields.formattedPriceAfterVat,
+        )
+      else
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_before_vat_price.tr(),
+          value: fields.formattedPriceBeforeVat,
+        ),
       FastReportEntry(
         name: FinanceLocaleKeys.finance_label_vat_rate.tr(),
         value: fields.formattedVatRate,

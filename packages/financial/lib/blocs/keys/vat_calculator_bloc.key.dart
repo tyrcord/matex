@@ -1,5 +1,6 @@
 class MatexVatCalculatorBlocKey {
   static const String priceBeforeVat = 'priceBeforeVat';
+  static const String priceAfterVat = 'priceAfterVat';
   static const String customVatRate = 'customVatRate';
   static const String vatRate = 'vatRate';
   static const String federalVatRate = 'federalVatRate';
@@ -10,6 +11,7 @@ class MatexVatCalculatorBlocKey {
   static const String tipAmount = 'tipAmount';
   static const String tipFieldType = 'tipFieldType';
   static const String discountFieldType = 'discountFieldType';
+  static const String vatCalculationStrategy = 'vatCalculationStrategy';
 
   // Prevent the creation of instances of this class
   MatexVatCalculatorBlocKey._();
