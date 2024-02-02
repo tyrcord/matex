@@ -47,8 +47,7 @@
     "code": "CZ",
     "currency": "EUR",
     "vatRates": [
-      10,
-      15,
+      12,
       21
     ]
   },
@@ -65,7 +64,7 @@
     "vatRates": [
       5,
       9,
-      20
+      22
     ]
   },
   "finland": {
@@ -137,8 +136,18 @@
     "code": "LV",
     "currency": "EUR",
     "vatRates": [
+      5,
       12,
       21
+    ]
+  },
+  "liechtenstein": {
+    "code": "LI",
+    "currency": "CHF",
+    "vatRates": [
+      2.6,
+      3.8,
+      8.1
     ]
   },
   "lithuania": {
@@ -157,7 +166,7 @@
       3,
       7,
       13,
-      16
+      17
     ]
   },
   "malta": {
@@ -166,6 +175,7 @@
     "vatRates": [
       5,
       7,
+      12,
       18
     ]
   },
@@ -191,8 +201,8 @@
     "code": "PL",
     "currency": "EUR",
     "vatRates": [
-      5,
-      8,
+      6,
+      13,
       23
     ]
   },
@@ -244,9 +254,9 @@
     "code": "CH",
     "currency": "CHF",
     "vatRates": [
-      2.5,
-      3.7,
-      7.7
+      2.6,
+      3.8,
+      8.1
     ]
   },
   "uk": {
