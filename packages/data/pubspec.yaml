@@ -23,4 +23,4 @@ flutter:
     - assets/meta/
 name: matex_data
 repository: https://github.com/tyrcord/matex/tree/main/packages/data
-version: 0.0.34
+version: 0.0.35

@@ -1,3 +1,8 @@
+## 0.0.42
+
+ - **FEAT**: update t_bloc min version.
+ - **FEAT**: update dependencies.
+
 ## 0.0.41+1
 
  - **REFACTOR**: move away from decimal.

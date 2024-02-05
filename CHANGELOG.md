@@ -15,6 +15,40 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`matex_core` - `v0.0.42`](#matex_core---v0042)
+ - [`matex_data` - `v0.0.35`](#matex_data---v0035)
+ - [`matex_financial` - `v0.0.53`](#matex_financial---v0053)
+
+---
+
+#### `matex_core` - `v0.0.42`
+
+ - **FEAT**: update t_bloc min version.
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.35`
+
+ - **FEAT**: update t_bloc min version.
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.53`
+
+ - **FEAT**: update t_bloc min version.
+ - **FEAT**: update dependencies.
+
+
+## 2024-02-05
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`matex_core` - `v0.0.41+1`](#matex_core---v00411)
  - [`matex_data` - `v0.0.34`](#matex_data---v0034)
  - [`matex_financial` - `v0.0.52`](#matex_financial---v0052)
