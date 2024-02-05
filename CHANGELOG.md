@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-05
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.41+1`](#matex_core---v00411)
+ - [`matex_data` - `v0.0.34`](#matex_data---v0034)
+ - [`matex_financial` - `v0.0.52`](#matex_financial---v0052)
+
+---
+
+#### `matex_core` - `v0.0.41+1`
+
+ - **REFACTOR**: move away from decimal.
+ - **REFACTOR**: rename parseFieldValueToDouble to parseStringToDouble.
+ - **REFACTOR**: rename parseStringToDouble to tryParseStringToDouble.
+
+#### `matex_data` - `v0.0.34`
+
+ - **FEAT**: update countries metadata.
+ - **FEAT**: update instruments.
+ - **FEAT**: support more financial instruments.
+
+#### `matex_financial` - `v0.0.52`
+
+ - **REFACTOR**: move away from decimal.
+ - **REFACTOR**: move away from decimal for pip delta and pip value.
+ - **REFACTOR**: rename parseFieldValueToDouble to parseStringToDouble.
+ - **REFACTOR**: rename parseStringToDouble to tryParseStringToDouble.
+ - **FIX**: typo.
+ - **FIX**: effective annual rate.
+ - **FEAT**: support price after VAT.
+ - **FEAT**(VATCalculator): support inverted computations.
+ - **FEAT**: added more favorite helpers.
+ - **FEAT**: added MatexCurrencyFavoriteJob.
+ - **FEAT**: add favorite currency logic.
+ - **FEAT**: add more tests.
+ - **FEAT**(Compound): support effective annual rate.
+
+
 ## 2024-01-19
 
 ### Changes

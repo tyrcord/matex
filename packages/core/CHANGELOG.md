@@ -1,3 +1,9 @@
+## 0.0.41+1
+
+ - **REFACTOR**: move away from decimal.
+ - **REFACTOR**: rename parseFieldValueToDouble to parseStringToDouble.
+ - **REFACTOR**: rename parseStringToDouble to tryParseStringToDouble.
+
 ## 0.0.41
 
  - **FEAT**: update dependencies.

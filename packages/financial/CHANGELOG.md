@@ -1,3 +1,19 @@
+## 0.0.52
+
+ - **REFACTOR**: move away from decimal.
+ - **REFACTOR**: move away from decimal for pip delta and pip value.
+ - **REFACTOR**: rename parseFieldValueToDouble to parseStringToDouble.
+ - **REFACTOR**: rename parseStringToDouble to tryParseStringToDouble.
+ - **FIX**: typo.
+ - **FIX**: effective annual rate.
+ - **FEAT**: support price after VAT.
+ - **FEAT**(VATCalculator): support inverted computations.
+ - **FEAT**: added more favorite helpers.
+ - **FEAT**: added MatexCurrencyFavoriteJob.
+ - **FEAT**: add favorite currency logic.
+ - **FEAT**: add more tests.
+ - **FEAT**(Compound): support effective annual rate.
+
 ## 0.0.51
 
  - **FEAT**: update dependencies.

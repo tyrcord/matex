@@ -1,3 +1,9 @@
+## 0.0.34
+
+ - **FEAT**: update countries metadata.
+ - **FEAT**: update instruments.
+ - **FEAT**: support more financial instruments.
+
 ## 0.0.33
 
  - **FEAT**: update dependencies.
