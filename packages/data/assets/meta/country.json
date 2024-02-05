@@ -201,6 +201,15 @@
     "code": "PL",
     "currency": "EUR",
     "vatRates": [
+      5,
+      8,
+      23
+    ]
+  },
+  "portugal": {
+    "code": "PT",
+    "currency": "EUR",
+    "vatRates": [
       6,
       13,
       23

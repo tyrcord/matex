@@ -162,7 +162,7 @@ class MatexVatCalculatorPdfGenerator {
         results.discountRate != 0) {
       entries.add(FastReportEntry(
         name: FinanceLocaleKeys.finance_label_rate.tr(),
-        value: results.formattedDiscountAmount!,
+        value: results.formattedDiscountRate!,
       ));
     }
 
