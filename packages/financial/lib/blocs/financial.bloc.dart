@@ -324,7 +324,7 @@ abstract class MatexFinancialCalculatorBloc<
     if (metadata != null && metadata.lots != null) {
       final multiplier = metadata.lots![lotSize];
 
-      if (multiplier != 0) positionSize * multiplier;
+      if (multiplier != 0) return positionSize * multiplier;
     }
 
     return positionSize;

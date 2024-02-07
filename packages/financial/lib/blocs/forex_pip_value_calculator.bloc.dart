@@ -448,12 +448,10 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
         resetPositionSize: true,
         resetLotSize: true,
       );
-
-      calculator.positionSize = 0;
     } else {
       fields = currentState.fields.copyWith(lotSize: value);
       // NOTE: we need to convert the lot size to a position size
-      // will be done in the will compute method
+      // will be done in the `willCompute` method
     }
 
     calculator.positionSize = 0;
