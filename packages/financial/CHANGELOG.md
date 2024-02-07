@@ -1,3 +1,7 @@
+## 0.0.53+1
+
+ - **FIX**: missing return.
+
 ## 0.0.53
 
  - **FEAT**: update t_bloc min version.

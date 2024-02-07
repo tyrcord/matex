@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-07
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_financial` - `v0.0.53+1`](#matex_financial---v00531)
+
+---
+
+#### `matex_financial` - `v0.0.53+1`
+
+ - **FIX**: missing return.
+
+
 ## 2024-02-05
 
 ### Changes
