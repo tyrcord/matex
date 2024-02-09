@@ -16,6 +16,7 @@ import 'package:share_plus/share_plus.dart';
 
 // Project imports:
 import 'package:matex_core/core.dart';
+import 'package:tbloc/tbloc.dart';
 
 /// An abstract class that defines the structure of a calculator bloc that uses
 /// the `matex_core` library.
@@ -242,6 +243,20 @@ abstract class MatexCalculatorBloc<
               [file!],
               sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
             );
+
+            late MatexBlocAnalyticsEvent analyticEvent;
+
+            switch (type) {
+              case MatexExportDialogType.pdf:
+                analyticEvent = MatexBlocAnalyticsEvent.exportToPdf;
+              case MatexExportDialogType.csv:
+                analyticEvent = MatexBlocAnalyticsEvent.exportToCsv;
+              case MatexExportDialogType.excel:
+                analyticEvent = MatexBlocAnalyticsEvent.exportToExcel;
+            }
+
+            analyticsEventController
+                .add(BlocAnalyticsEvent(type: analyticEvent));
           }
         },
       );
