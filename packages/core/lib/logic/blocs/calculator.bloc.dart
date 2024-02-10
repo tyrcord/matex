@@ -13,10 +13,10 @@ import 'package:fastyle_core/fastyle_core.dart';
 import 'package:lingua_core/generated/locale_keys.g.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:tbloc/tbloc.dart';
 
 // Project imports:
 import 'package:matex_core/core.dart';
-import 'package:tbloc/tbloc.dart';
 
 /// An abstract class that defines the structure of a calculator bloc that uses
 /// the `matex_core` library.
