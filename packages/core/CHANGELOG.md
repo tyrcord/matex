@@ -1,3 +1,7 @@
+## 0.0.43
+
+ - **FEAT**: add some analytic events.
+
 ## 0.0.42
 
  - **FEAT**: update t_bloc min version.
