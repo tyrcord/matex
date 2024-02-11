@@ -6,3 +6,4 @@ export 'favorite.helper.dart';
 export 'pivot_points/pivot_points.helper.dart';
 export 'forex.helper.dart';
 export 'profit_and_loss.helper.dart';
+export 'financial_instruments.helper.dart';
