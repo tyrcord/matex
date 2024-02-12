@@ -1,3 +1,7 @@
+## 0.0.44
+
+ - **FEAT**: update tbloc dependency.
+
 ## 0.0.43
 
  - **FEAT**: add some analytic events.
