@@ -31,7 +31,7 @@ class MatexFinancialSelectCurrencyField extends StatefulWidget {
 
   /// A list of [MatexInstrumentMetadata] objects representing the financial
   /// instruments.
-  final List<MatexInstrumentMetadata> currencies;
+  final List<MatexInstrumentMetadata>? currencies;
 
   /// The width of the flag icon displayed in each item.
   final double flagIconWidth;
@@ -73,7 +73,7 @@ class MatexFinancialSelectCurrencyField extends StatefulWidget {
     this.flagIconBuilder,
     this.captionText,
     this.selection,
-    List<MatexInstrumentMetadata>? currencies,
+    this.currencies,
     this.searchPlaceholderText,
     this.searchTitleText,
     bool? isEnabled = true,
@@ -82,7 +82,6 @@ class MatexFinancialSelectCurrencyField extends StatefulWidget {
     bool? canClearSelection,
   })  : canClearSelection = canClearSelection ?? true,
         flagIconWidth = flagIconWidth ?? 40.0,
-        currencies = currencies ?? const [],
         isEnabled = isEnabled ?? true;
 
   @override
@@ -115,7 +114,7 @@ class _MatexFinancialSelectCurrencyFieldState
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.selection != widget.selection) {
-      setState(() => _selection = _findSelection());
+      setState(() => _selection = null);
     }
   }
 
@@ -123,8 +122,9 @@ class _MatexFinancialSelectCurrencyFieldState
   Widget build(BuildContext context) {
     return MatexFinancialCurrencyBuilder(
       bloc: _currencyBloc,
-      builder: (context, instrumentBlocState) {
-        _items = _buildSelectOptions();
+      builder: (context, state) {
+        final currencies = widget.currencies ?? state.currencies;
+        _items = _buildSelectOptions(currencies);
         _selection = _findSelection();
 
         return FastSelectField<MatexInstrumentMetadata>(
@@ -199,8 +199,10 @@ class _MatexFinancialSelectCurrencyFieldState
     }).firstWhereOrNull((item) => item.value!.code!.toLowerCase() == currency);
   }
 
-  List<MatexFinancialCurrencytItem> _buildSelectOptions() {
-    return widget.currencies
+  List<MatexFinancialCurrencytItem> _buildSelectOptions(
+    List<MatexInstrumentMetadata> currencies,
+  ) {
+    return currencies
         .where((MatexInstrumentMetadata instrument) => instrument.code != null)
         .map(_buildItem)
         .toList();

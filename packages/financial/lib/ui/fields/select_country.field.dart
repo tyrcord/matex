@@ -26,7 +26,7 @@ class MatexFinancialSelectCountryField extends StatefulWidget {
   final Function(FastItem<MatexCountryMetadata>?)? onSelectionChanged;
 
   /// A list of [MatexCountryMetadata] objects representing the countries.
-  final List<MatexCountryMetadata> countries;
+  final List<MatexCountryMetadata>? countries;
 
   /// The width of the flag icon displayed in each item.
   final double flagIconWidth;
@@ -68,7 +68,7 @@ class MatexFinancialSelectCountryField extends StatefulWidget {
     this.flagIconBuilder,
     this.captionText,
     this.selection,
-    List<MatexCountryMetadata>? countries,
+    this.countries,
     this.searchPlaceholderText,
     this.searchTitleText,
     bool? isEnabled = true,
@@ -77,7 +77,6 @@ class MatexFinancialSelectCountryField extends StatefulWidget {
     bool? canClearSelection,
   })  : canClearSelection = canClearSelection ?? true,
         flagIconWidth = flagIconWidth ?? 40.0,
-        countries = countries ?? const [],
         isEnabled = isEnabled ?? true;
 
   @override
@@ -88,6 +87,7 @@ class MatexFinancialSelectCountryField extends StatefulWidget {
 class _MatexFinancialSelectCountryFieldState
     extends State<MatexFinancialSelectCountryField> {
   String get maleGender => LinguaLocalizationGender.male;
+  FastItem<MatexCountryMetadata>? _selection;
   late MatexCountryBloc _countryBloc;
 
   @override
@@ -99,12 +99,22 @@ class _MatexFinancialSelectCountryFieldState
   }
 
   @override
+  void didUpdateWidget(MatexFinancialSelectCountryField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.selection != oldWidget.selection) {
+      setState(() => _selection = null);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MatexFinancialCountryBuilder(
       bloc: _countryBloc,
-      builder: (context, countryBlocState) {
-        final options = _buildSelectOptions();
-        final selectedOption = _findSelection(options);
+      builder: (context, state) {
+        final countries = widget.countries ?? state.countries;
+        final options = _buildSelectOptions(countries);
+        _selection = _findSelection(options);
 
         return FastSelectField<MatexCountryMetadata>(
           onSelectionChanged: (selection) =>
@@ -115,14 +125,14 @@ class _MatexFinancialSelectCountryFieldState
           placeholderText: widget.placeholderText,
           searchTitleText:
               widget.searchTitleText ?? CoreLocaleKeys.core_select_country.tr(),
-          selection: selectedOption,
+          selection: _selection,
           captionText: widget.captionText,
           noneTextGender: maleGender,
           isReadOnly: !widget.isEnabled,
           useFuzzySearch: true,
           items: options,
-          leading: selectedOption != null
-              ? _buildFlagIcon(selectedOption.value!, hasShadow: false)
+          leading: _selection != null
+              ? _buildFlagIcon(_selection!.value!, hasShadow: false)
               : null,
         );
       },
@@ -132,9 +142,7 @@ class _MatexFinancialSelectCountryFieldState
   FastItem<MatexCountryMetadata>? _findSelection(
     List<FastItem<MatexCountryMetadata>> options,
   ) {
-    if (widget.selection == null) {
-      return null;
-    }
+    if (widget.selection == null) return null;
 
     final country = widget.selection!.toLowerCase();
 
@@ -150,8 +158,10 @@ class _MatexFinancialSelectCountryFieldState
         .firstWhereOrNull((item) => item.value!.id.toLowerCase() == country);
   }
 
-  List<FastItem<MatexCountryMetadata>> _buildSelectOptions() {
-    return widget.countries.map(_buildItem).toList();
+  List<FastItem<MatexCountryMetadata>> _buildSelectOptions(
+    List<MatexCountryMetadata> countries,
+  ) {
+    return countries.map(_buildItem).toList();
   }
 
   FastItem<MatexCountryMetadata> _buildItem(

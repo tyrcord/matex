@@ -12,7 +12,7 @@ import 'package:matex_financial/financial.dart';
 
 /// A widget that allows the user to switch between an amount field and a
 /// percent field.
-class MatexFiancialAmountSwitchField extends StatelessWidget {
+class MatexFinancialAmountSwitchField extends StatelessWidget {
   /// The default field type.
   static const kDefaultFieldType = FastFinancialAmountSwitchFieldType.amount;
 
@@ -100,7 +100,7 @@ class MatexFiancialAmountSwitchField extends StatelessWidget {
 
   final bool transformInvalidNumber;
 
-  const MatexFiancialAmountSwitchField({
+  const MatexFinancialAmountSwitchField({
     super.key,
     required this.onFieldTypeChanged,
     // Value callbacks
