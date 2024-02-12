@@ -1,13 +1,13 @@
 dependencies:
   collection: ^1.18.0
-  fastyle_core: ^0.0.50
+  fastyle_core: ^0.0.51+1
   flutter:
     sdk: flutter
   rxdart: ^0.27.7
-  t_cache: ^0.0.14+2
-  t_helpers: ^0.0.51+1
+  t_cache: ^0.0.14+3
+  t_helpers: ^0.0.52
   tbloc: ^0.22.1+1
-  tmodel: ^0.5.13+1
+  tmodel: ^0.5.13+2
 description: The data tool of the Matex packages.
 dev_dependencies:
   dependency_validator: ^3.2.3
@@ -16,11 +16,11 @@ dev_dependencies:
     sdk: flutter
   import_sorter: ^4.6.0
 environment:
-  flutter: ">=3.16.0"
-  sdk: ">=3.2.0 <4.0.0"
+  flutter: '>=3.16.0'
+  sdk: '>=3.2.0 <4.0.0'
 flutter:
   assets:
-    - assets/meta/
+  - assets/meta/
 name: matex_data
 repository: https://github.com/tyrcord/matex/tree/main/packages/data
 version: 0.0.35
