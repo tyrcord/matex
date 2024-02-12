@@ -6,7 +6,7 @@ dependencies:
   rxdart: ^0.27.7
   t_cache: ^0.0.14+2
   t_helpers: ^0.0.51+1
-  tbloc: ^0.21.0
+  tbloc: ^0.22.1+1
   tmodel: ^0.5.13+1
 description: The data tool of the Matex packages.
 dev_dependencies:
