@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-12
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.44`](#matex_core---v0044)
+ - [`matex_data` - `v0.0.36`](#matex_data---v0036)
+ - [`matex_financial` - `v0.0.54`](#matex_financial---v0054)
+
+---
+
+#### `matex_core` - `v0.0.44`
+
+ - **FEAT**: update tbloc dependency.
+
+#### `matex_data` - `v0.0.36`
+
+ - **FEAT**: update tbloc dependency.
+
+#### `matex_financial` - `v0.0.54`
+
+ - **FEAT**: feat: move fastyle_settings to matex_financial.
+ - **FEAT**: move fastyle_financial to matex_financial.
+
+
 ## 2024-02-10
 
 ### Changes

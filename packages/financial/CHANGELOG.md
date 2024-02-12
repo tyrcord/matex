@@ -1,3 +1,8 @@
+## 0.0.54
+
+ - **FEAT**: feat: move fastyle_settings to matex_financial.
+ - **FEAT**: move fastyle_financial to matex_financial.
+
 ## 0.0.53+2
 
  - Update a dependency to the latest release.
