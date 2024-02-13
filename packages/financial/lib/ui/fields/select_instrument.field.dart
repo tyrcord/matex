@@ -11,8 +11,10 @@ import 'package:lingua_core/lingua_core.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:lingua_finance_instrument/generated/locale_keys.g.dart';
 import 'package:lingua_finance_instrument/lingua_finance_instrument.dart';
-import 'package:matex_financial/financial.dart';
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 const _kLeadingWidth = 40.0;
 const _kLeadingHeight = 32.0;

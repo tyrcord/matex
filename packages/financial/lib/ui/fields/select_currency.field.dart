@@ -1,19 +1,21 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 // Package imports:
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:fastyle_images/fastyle_images.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:lingua_core/generated/locale_keys.g.dart';
 import 'package:lingua_core/lingua_core.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:lingua_finance_instrument/generated/locale_keys.g.dart';
 import 'package:lingua_finance_instrument/lingua_finance_instrument.dart';
-import 'package:matex_financial/financial.dart';
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 typedef MatexFinancialCurrencytItem = FastItem<MatexInstrumentMetadata>;
 

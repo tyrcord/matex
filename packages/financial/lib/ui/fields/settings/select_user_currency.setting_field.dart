@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:fastyle_forms/fastyle_forms.dart';
-import 'package:lingua_finance/generated/locale_keys.g.dart';
-import 'package:matex_financial/financial.dart';
-
 import 'package:fastyle_settings/fastyle_settings.dart';
+import 'package:lingua_finance/generated/locale_keys.g.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 /// A widget that displays a select currency field for the user's primary
 /// currency.

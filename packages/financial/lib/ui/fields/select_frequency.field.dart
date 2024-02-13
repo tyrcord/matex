@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:lingua_core/generated/locale_keys.g.dart';
+
+// Project imports:
 import 'package:matex_financial/financial.dart';
 
 /// Represents a widget for selecting financial frequencies.

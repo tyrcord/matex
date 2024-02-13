@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:matex_financial/financial.dart';
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 class MatexFinancialCurrencyBuilder extends StatelessWidget {
   final Widget Function(BuildContext, MatexCurrencyBlocState) builder;

@@ -1,16 +1,18 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 // Package imports:
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:fastyle_images/fastyle_images.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:lingua_core/generated/locale_keys.g.dart';
 import 'package:lingua_core/lingua_core.dart';
 import 'package:lingua_countries/countries.dart';
 import 'package:matex_data/matex_data.dart';
+
+// Project imports:
 import 'package:matex_financial/financial.dart';
 
 /// A Flutter widget for displaying a selectable list of countries.

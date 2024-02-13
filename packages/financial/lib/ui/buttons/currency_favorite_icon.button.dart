@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:fastyle_buttons/fastyle_buttons.dart';
-import 'package:matex_financial/financial.dart';
 import 'package:tbloc/tbloc.dart';
+
+// Project imports:
+import 'package:matex_financial/financial.dart';
 
 /// A widget that displays a heart icon indicating whether a currency
 /// is marked as favorite or not. The widget is built using the
