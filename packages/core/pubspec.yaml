@@ -1,6 +1,6 @@
 dependencies:
   collection: ^1.18.0
-  easy_localization: ^3.0.3
+  easy_localization: ^3.0.4
   fastyle_calculator: ^1.61.1
   fastyle_core: ^0.0.51+1
   fastyle_settings: ^0.0.54+1
@@ -10,7 +10,7 @@ dependencies:
   lingua_calculator: ^0.0.10
   lingua_core: ^0.0.38
   path_provider: ^2.1.1
-  share_plus: ^7.2.1
+  share_plus: ^7.2.2
   t_helpers: ^0.0.52
   tbloc: ^0.22.1+1
   tenhance: ^0.0.8+2

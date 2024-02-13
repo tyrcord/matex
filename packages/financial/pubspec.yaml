@@ -1,7 +1,7 @@
 dependencies:
   collection: ^1.18.0
   cross_file: ^0.3.3+8
-  easy_localization: ^3.0.3
+  easy_localization: ^3.0.4
   fastyle_buttons: ^0.0.28+1
   fastyle_calculator: ^1.61.1
   fastyle_core: ^0.0.51+1
