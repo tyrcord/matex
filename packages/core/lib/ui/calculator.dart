@@ -37,6 +37,7 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
   final VoidCallback? onInfo;
   final B calculatorBloc;
   final Widget? leading;
+  final VoidCallback? onClear;
 
   /// A builder method used to build the UI for displaying the breakdown of
   /// the calculations.
@@ -80,6 +81,7 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
     this.leading,
     this.onInfo,
     this.breadownViewNotifier,
+    this.onClear,
   });
 
   @override
@@ -137,6 +139,7 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
           breakdownTitleText: widget.breakdownTitleText,
           breakdownActions: widget.breakdownActions,
           breadownViewNotifier: widget.breadownViewNotifier,
+          onClear: widget.onClear,
         );
       },
     );
