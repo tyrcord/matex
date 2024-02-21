@@ -186,16 +186,16 @@ class MatexForexCompoundCalculatorBlocFields extends FastCalculatorFields
   @override
   Map<String, dynamic> toJson() {
     return {
-      'startBalance': startBalance,
-      'rate': rate,
-      'duration': duration,
       'contributionFrequency': contributionFrequency.name,
-      'compoundFrequency': compoundFrequency.name,
-      'withdrawalFrequency': withdrawalFrequency.name,
-      'rateFrequency': rateFrequency.name,
-      'withdrawalAmount': withdrawalAmount,
       'additionalContribution': additionalContribution,
+      'withdrawalFrequency': withdrawalFrequency.name,
+      'compoundFrequency': compoundFrequency.name,
+      'withdrawalAmount': withdrawalAmount,
+      'rateFrequency': rateFrequency.name,
       'accountCurrency': accountCurrency,
+      'startBalance': startBalance,
+      'duration': duration,
+      'rate': rate,
     };
   }
 }
