@@ -233,4 +233,23 @@ class MatexVatCalculatorBlocFields extends FastCalculatorFields
         tipRate,
         vatRate,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'vatCalculationStrategy': vatCalculationStrategy,
+      'discountFieldType': discountFieldType,
+      'regionalVatRate': regionalVatRate,
+      'federalVatRate': federalVatRate,
+      'discountAmount': discountAmount,
+      'priceBeforeVat': priceBeforeVat,
+      'priceAfterVat': priceAfterVat,
+      'customVatRate': customVatRate,
+      'discountRate': discountRate,
+      'tipFieldType': tipFieldType,
+      'tipAmount': tipAmount,
+      'tipRate': tipRate,
+      'vatRate': vatRate,
+    };
+  }
 }

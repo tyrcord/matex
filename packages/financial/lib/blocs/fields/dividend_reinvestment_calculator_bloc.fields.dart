@@ -200,4 +200,20 @@ class MatexDividendReinvestmentCalculatorBlocFields extends FastCalculatorFields
         taxRate,
         drip,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'annualSharePriceIncrease': annualSharePriceIncrease,
+      'annualDividendIncrease': annualDividendIncrease,
+      'annualContribution': annualContribution,
+      'paymentFrequency': paymentFrequency.name,
+      'numberOfShares': numberOfShares,
+      'dividendYield': dividendYield,
+      'yearsToGrow': yearsToGrow,
+      'sharePrice': sharePrice,
+      'taxRate': taxRate,
+      'drip': drip,
+    };
+  }
 }

@@ -70,4 +70,12 @@ class MatexDividendPayoutRatioCalculatorBlocFields extends FastCalculatorFields
 
   @override
   List<Object?> get props => [totalDividends, netIncome];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'totalDividends': totalDividends,
+      'netIncome': netIncome,
+    };
+  }
 }

@@ -294,4 +294,28 @@ class MatexForexStopLossTakeProfitCalculatorBlocFields
         counter,
         base,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'instrument': financialInstrument?.formattedSymbol,
+      'positionSizeFieldType': positionSizeFieldType.name,
+      'takeProfitFieldType': takeProfitFieldType,
+      'stopLossFieldType': stopLossFieldType,
+      'pipDecimalPlaces': pipDecimalPlaces,
+      'takeProfitAmount': takeProfitAmount,
+      'accountCurrency': accountCurrency,
+      'takeProfitPrice': takeProfitPrice,
+      'stopLossAmount': stopLossAmount,
+      'takeProfitPips': takeProfitPips,
+      'stopLossPrice': stopLossPrice,
+      'stopLossPips': stopLossPips,
+      'positionSize': positionSize,
+      'entryPrice': entryPrice,
+      'position': position.name,
+      'lotSize': lotSize,
+      'counter': counter,
+      'base': base,
+    };
+  }
 }

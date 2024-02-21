@@ -92,4 +92,13 @@ class MatexFibonacciLevelsCalculatorBlocFields extends FastCalculatorFields
 
   @override
   List<Object?> get props => [highPrice, lowPrice, trend];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'highPrice': highPrice,
+      'lowPrice': lowPrice,
+      'trend': trend.name,
+    };
+  }
 }

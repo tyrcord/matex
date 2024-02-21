@@ -218,4 +218,23 @@ class MatexForexPositionSizeCalculatorBlocFields
         counter,
         base,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'instrument': financialInstrument?.formattedSymbol,
+      'stopLossFieldType': stopLossFieldType,
+      'pipDecimalPlaces': pipDecimalPlaces,
+      'accountCurrency': accountCurrency,
+      'riskFieldType': riskFieldType,
+      'stopLossPrice': stopLossPrice,
+      'stopLossPips': stopLossPips,
+      'accountSize': accountSize,
+      'riskPercent': riskPercent,
+      'entryPrice': entryPrice,
+      'riskAmount': riskAmount,
+      'counter': counter,
+      'base': base,
+    };
+  }
 }

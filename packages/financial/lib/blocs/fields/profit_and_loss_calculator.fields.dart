@@ -213,4 +213,21 @@ class MatexProfitAndLossCalculatorBlocFields extends FastCalculatorFields
         buyingPrice,
         taxRate,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'sellingExpensePerUnitAmount': sellingExpensePerUnitAmount,
+      'buyingExpensePerUnitAmount': buyingExpensePerUnitAmount,
+      'sellingExpensePerUnitRate': sellingExpensePerUnitRate,
+      'buyingExpensePerUnitRate': buyingExpensePerUnitRate,
+      'sellingCostsPerUnitType': sellingCostsPerUnitType,
+      'buyingCostsPerUnitType': buyingCostsPerUnitType,
+      'operatingExpenses': operatingExpenses,
+      'expectedSaleUnits': expectedSaleUnits,
+      'sellingPrice': sellingPrice,
+      'buyingPrice': buyingPrice,
+      'taxRate': taxRate,
+    };
+  }
 }

@@ -153,4 +153,19 @@ class MatexForexPipValueCalculatorBlocFields
         counter,
         base,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'instrument': financialInstrument?.formattedSymbol,
+      'positionSizeFieldType': positionSizeFieldType.name,
+      'pipDecimalPlaces': pipDecimalPlaces,
+      'accountCurrency': accountCurrency,
+      'positionSize': positionSize,
+      'numberOfPips': numberOfPips,
+      'lotSize': lotSize,
+      'counter': counter,
+      'base': base,
+    };
+  }
 }

@@ -131,4 +131,15 @@ class MatexPivotPointsCalculatorBlocFields extends FastCalculatorFields
         lowPrice,
         method,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'closePrice': closePrice,
+      'highPrice': highPrice,
+      'openPrice': openPrice,
+      'lowPrice': lowPrice,
+      'method': method.name,
+    };
+  }
 }

@@ -130,4 +130,16 @@ class MatexForexPipDeltaCalculatorBlocFields extends FastCalculatorFields
         priceB,
         base,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'instrument': financialInstrument?.formattedSymbol,
+      'pipDecimalPlaces': pipDecimalPlaces,
+      'counter': counter,
+      'priceA': priceA,
+      'priceB': priceB,
+      'base': base,
+    };
+  }
 }

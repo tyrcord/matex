@@ -151,4 +151,18 @@ class MatexForexRequiredMarginCalculatorBlocFields
         counter,
         base,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'instrument': financialInstrument?.formattedSymbol,
+      'positionSizeFieldType': positionSizeFieldType.name,
+      'accountCurrency': accountCurrency,
+      'positionSize': positionSize,
+      'leverage': leverage,
+      'lotSize': lotSize,
+      'counter': counter,
+      'base': base,
+    };
+  }
 }

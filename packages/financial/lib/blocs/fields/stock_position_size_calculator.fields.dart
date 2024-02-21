@@ -204,4 +204,21 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
         exitFees,
         position,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'slippagePercent': slippagePercent,
+      'stopLossAmount': stopLossAmount,
+      'stopLossPrice': stopLossPrice,
+      'riskFieldType': riskFieldType,
+      'accountSize': accountSize,
+      'riskPercent': riskPercent,
+      'entryPrice': entryPrice,
+      'riskReward': riskReward,
+      'entryFees': entryFees,
+      'exitFees': exitFees,
+      'position': position.name,
+    };
+  }
 }

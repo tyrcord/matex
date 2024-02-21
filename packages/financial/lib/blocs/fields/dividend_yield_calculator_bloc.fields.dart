@@ -85,4 +85,13 @@ class MatexDividendYieldCalculatorBlocFields extends FastCalculatorFields
 
   @override
   List<Object?> get props => [paymentFrequency, dividendAmount, sharePrice];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'paymentFrequency': paymentFrequency.name,
+      'dividendAmount': dividendAmount,
+      'sharePrice': sharePrice,
+    };
+  }
 }

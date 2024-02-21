@@ -185,4 +185,21 @@ class MatexForexProfitLossCalculatorBlocFields
         lotSize,
         base,
       ];
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'instrument': financialInstrument?.formattedSymbol,
+      'positionSizeFieldType': positionSizeFieldType.name,
+      'pipDecimalPlaces': pipDecimalPlaces,
+      'accountCurrency': accountCurrency,
+      'positionSize': positionSize,
+      'entryPrice': entryPrice,
+      'exitPrice': exitPrice,
+      'position': position.name,
+      'counter': counter,
+      'lotSize': lotSize,
+      'base': base,
+    };
+  }
 }
