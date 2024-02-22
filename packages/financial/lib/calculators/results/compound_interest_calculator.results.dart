@@ -5,6 +5,7 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_financial/financial.dart';
 
 class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
+  final int monthsToDoubleInvestment;
   final List<MatexCompoundInterestBreakdownEntry>? breakdown;
   final double totalEarnings;
   final double totalContributions;
@@ -23,6 +24,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
     this.endBalance = 0,
     this.rateOfReturn = 0,
     this.effectiveAnnualRate = 0,
+    this.monthsToDoubleInvestment = 0,
   });
 
   @override
@@ -38,6 +40,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
     double? endBalance,
     double? rateOfReturn,
     double? effectiveAnnualRate,
+    int? monthsToDoubleInvestment,
   }) {
     return MatexCompoundInterestCalculatorResults(
       breakdown: breakdown ?? this.breakdown,
@@ -48,6 +51,8 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
       endBalance: endBalance ?? this.endBalance,
       rateOfReturn: rateOfReturn ?? this.rateOfReturn,
       effectiveAnnualRate: effectiveAnnualRate ?? this.effectiveAnnualRate,
+      monthsToDoubleInvestment:
+          monthsToDoubleInvestment ?? this.monthsToDoubleInvestment,
     );
   }
 
@@ -64,6 +69,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
       endBalance: model.endBalance,
       rateOfReturn: model.rateOfReturn,
       effectiveAnnualRate: model.effectiveAnnualRate,
+      monthsToDoubleInvestment: model.monthsToDoubleInvestment,
     );
   }
 
@@ -77,5 +83,6 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
         endBalance,
         rateOfReturn,
         effectiveAnnualRate,
+        monthsToDoubleInvestment,
       ];
 }

@@ -13,6 +13,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
   final double endBalance;
   final double rateOfReturn;
   final double effectiveAnnualRate;
+  final int monthsToDoubleInvestment;
 
   // Formatted properties
   final String? formattedTotalEarnings;
@@ -22,6 +23,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
   final String? formattedEndBalance;
   final String? formattedRateOfReturn;
   final String? formattedEffectiveAnnualRate;
+  final String? formattedTimeToDoubleInvestment;
 
   const MatexForexCompoundCalculatorBlocResults({
     this.breakdown,
@@ -32,6 +34,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
     this.endBalance = 0,
     this.rateOfReturn = 0,
     this.effectiveAnnualRate = 0,
+    this.monthsToDoubleInvestment = 0,
     this.formattedTotalEarnings,
     this.formattedTotalContributions,
     this.formattedTotalWithdrawals,
@@ -39,6 +42,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
     this.formattedEndBalance,
     this.formattedRateOfReturn,
     this.formattedEffectiveAnnualRate,
+    this.formattedTimeToDoubleInvestment,
   });
 
   @override
@@ -54,6 +58,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
     double? endBalance,
     double? rateOfReturn,
     double? effectiveAnnualRate,
+    int? monthsToDoubleInvestment,
     String? formattedTotalEarnings,
     String? formattedTotalContributions,
     String? formattedTotalWithdrawals,
@@ -61,6 +66,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
     String? formattedEndBalance,
     String? formattedRateOfReturn,
     String? formattedEffectiveAnnualRate,
+    String? formattedTimeToDoubleInvestment,
   }) {
     return MatexForexCompoundCalculatorBlocResults(
       breakdown: breakdown ?? this.breakdown,
@@ -71,6 +77,8 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
       endBalance: endBalance ?? this.endBalance,
       rateOfReturn: rateOfReturn ?? this.rateOfReturn,
       effectiveAnnualRate: effectiveAnnualRate ?? this.effectiveAnnualRate,
+      monthsToDoubleInvestment:
+          monthsToDoubleInvestment ?? this.monthsToDoubleInvestment,
       formattedTotalEarnings:
           formattedTotalEarnings ?? this.formattedTotalEarnings,
       formattedTotalContributions:
@@ -84,6 +92,8 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
           formattedRateOfReturn ?? this.formattedRateOfReturn,
       formattedEffectiveAnnualRate:
           formattedEffectiveAnnualRate ?? this.formattedEffectiveAnnualRate,
+      formattedTimeToDoubleInvestment: formattedTimeToDoubleInvestment ??
+          this.formattedTimeToDoubleInvestment,
     );
   }
 
@@ -100,6 +110,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
       endBalance: model.endBalance,
       rateOfReturn: model.rateOfReturn,
       effectiveAnnualRate: model.effectiveAnnualRate,
+      monthsToDoubleInvestment: model.monthsToDoubleInvestment,
       formattedTotalEarnings: model.formattedTotalEarnings,
       formattedTotalContributions: model.formattedTotalContributions,
       formattedTotalWithdrawals: model.formattedTotalWithdrawals,
@@ -107,6 +118,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
       formattedEndBalance: model.formattedEndBalance,
       formattedRateOfReturn: model.formattedRateOfReturn,
       formattedEffectiveAnnualRate: model.formattedEffectiveAnnualRate,
+      formattedTimeToDoubleInvestment: model.formattedTimeToDoubleInvestment,
     );
   }
 
@@ -120,6 +132,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
         endBalance,
         rateOfReturn,
         effectiveAnnualRate,
+        monthsToDoubleInvestment,
         formattedTotalEarnings,
         formattedTotalContributions,
         formattedTotalWithdrawals,
@@ -127,5 +140,6 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
         formattedEndBalance,
         formattedRateOfReturn,
         formattedEffectiveAnnualRate,
+        formattedTimeToDoubleInvestment,
       ];
 }

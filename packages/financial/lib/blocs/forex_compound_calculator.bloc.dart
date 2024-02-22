@@ -10,8 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
+import 'package:lingua_number/number.dart';
 import 'package:matex_core/core.dart';
 import 'package:tenhance/tenhance.dart';
+import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -71,8 +73,15 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     final results = await calculator.valueAsync();
     final fields = currentState.fields;
     final accountCurrency = fields.accountCurrency;
+    final monthsToDoubleInvestment = results.monthsToDoubleInvestment;
+    final period = convertMonthsToYearsAndMonths(monthsToDoubleInvestment);
 
     return MatexForexCompoundCalculatorBlocResults(
+      monthsToDoubleInvestment: results.monthsToDoubleInvestment,
+      formattedTimeToDoubleInvestment: localizePeriod(
+        years: period['years'] ?? 0,
+        months: period['months'] ?? 0,
+      ),
       effectiveAnnualRate: results.effectiveAnnualRate,
       formattedEffectiveAnnualRate: localizePercentage(
         value: results.effectiveAnnualRate,

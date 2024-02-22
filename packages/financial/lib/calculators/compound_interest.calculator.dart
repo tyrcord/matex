@@ -125,8 +125,14 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
       annualRateCalcState.toJson(),
     );
 
+    final periodToDoubleInvestment = _computePeriodToDoubleInvestment(results);
+    final monthsPerFrequency = _getMonthsPerFrequency(state.compoundFrequency);
+    final monthsToDoubleInvestment =
+        monthsPerFrequency * periodToDoubleInvestment;
+
     return MatexCompoundInterestCalculatorResults(
       effectiveAnnualRate: _computeEffectiveAnnualRate(annualRateResults),
+      monthsToDoubleInvestment: monthsToDoubleInvestment,
       totalWithdrawals: results.last.totalWithdrawals,
       totalContributions: results.last.totalDeposits,
       rateOfReturn: _computeRateOfReturn(results),
@@ -135,6 +141,22 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
       startBalance: startBalance!,
       breakdown: results,
     );
+  }
+
+  int _computePeriodToDoubleInvestment(
+    List<MatexCompoundInterestBreakdownEntry> breakdown,
+  ) {
+    final double targetBalance = 2 * startBalance!;
+    double currentBalance = startBalance!;
+    int period = 0;
+
+    if (breakdown.last.endBalance < targetBalance) return 0;
+
+    while (currentBalance < targetBalance) {
+      currentBalance = breakdown[period++].endBalance;
+    }
+
+    return period;
   }
 
   double _computeRateOfReturn(
@@ -267,6 +289,21 @@ int _getPeriodsPerYear(MatexFinancialFrequency frequency) {
       return 2;
     case MatexFinancialFrequency.annually:
       return 1;
+    default:
+      return 0;
+  }
+}
+
+int _getMonthsPerFrequency(MatexFinancialFrequency frequency) {
+  switch (frequency) {
+    case MatexFinancialFrequency.monthly:
+      return 1;
+    case MatexFinancialFrequency.quarterly:
+      return 3;
+    case MatexFinancialFrequency.semiAnnually:
+      return 6;
+    case MatexFinancialFrequency.annually:
+      return 12;
     default:
       return 0;
   }
