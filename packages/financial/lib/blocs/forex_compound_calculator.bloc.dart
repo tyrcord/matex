@@ -12,8 +12,8 @@ import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:lingua_finance/generated/locale_keys.g.dart';
 import 'package:lingua_number/number.dart';
 import 'package:matex_core/core.dart';
-import 'package:tenhance/tenhance.dart';
 import 'package:t_helpers/helpers.dart';
+import 'package:tenhance/tenhance.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
