@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:fastyle_calculator/fastyle_calculator.dart';
 import 'package:matex_core/core.dart';
 import 'package:tlogger/logger.dart';
+import 'package:t_helpers/helpers.dart';
 
 // Project imports:
 import 'package:matex_financial/financial.dart';
@@ -109,71 +110,119 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
       final results = calculator.value();
       final fields = currentState.fields;
 
-      final accountCurrency = fields.accountCurrency;
-      final positionSize = results.positionSize ?? 0;
-      final pipValue = results.pipValue ?? 0;
-
       final instrumentMetadata = await getInstrumentMetadata();
       final standardLotUnits = await getUnitsPerStandardLot();
       final miniLotUnits = await getUnitsPerMiniLot();
       final microLotUnits = await getUnitsPerMicroLot();
 
-      final standardLotSize = (positionSize / standardLotUnits);
-      final miniLotSize = (positionSize / miniLotUnits);
-      final microLotSize = (positionSize / microLotUnits);
+      final stopLossPips = results.stopLossPips ?? 0;
+      final resultsRange = <MatexForexPositionSizeCalculatorBlocResults>[];
 
-      return MatexForexPositionSizeCalculatorBlocResults(
-        formattedPipValue: localizeCurrency(
-          minimumFractionDigits: 3,
-          value: pipValue,
-          symbol: accountCurrency,
-        ),
-        pipValue: pipValue,
-        formattedPositionSize: localizeNumber(
-          minimumFractionDigits: 3,
-          value: positionSize,
-        ),
-        positionSize: positionSize,
-        formattedAmountAtRisk: localizeCurrency(
-          minimumFractionDigits: 3,
-          value: results.amountAtRisk,
-          symbol: accountCurrency,
-        ),
-        amountAtRisk: results.amountAtRisk,
-        formattedStandardLotSize: localizeNumber(
-          minimumFractionDigits: 3,
-          value: standardLotSize,
-        ),
-        standardLotSize: standardLotSize,
-        formattedMiniLotSize: localizeNumber(
-          minimumFractionDigits: 3,
-          value: miniLotSize,
-        ),
-        miniLotSize: miniLotSize,
-        formattedMicroLotSize: localizeNumber(
-          minimumFractionDigits: 3,
-          value: microLotSize,
-        ),
-        microLotSize: microLotSize,
-        formattedStopLossPips: localizeNumber(
-          minimumFractionDigits: 3,
-          value: results.stopLossPips,
-        ),
-        stopLossPips: results.stopLossPips,
-        formattedRiskRatio: localizePercentage(
-          minimumFractionDigits: 3,
-          value: results.riskPercent,
-        ),
-        riskRatio: results.riskPercent,
-        formattedStopLossPrice: localizeQuote(
-          rate: results.stopLossPrice,
-          metadata: instrumentMetadata,
-        ),
-        stopLossPrice: results.stopLossPrice,
+      if (stopLossPips > 0) {
+        final tmpCalculator = MatexForexPositionSizeCalculator();
+        final pipsRange = rangeAroundN(stopLossPips, 10, loose: true);
+        final calculatorState = calculator.getState();
+        tmpCalculator.setState(calculatorState);
+
+        for (final pips in pipsRange) {
+          tmpCalculator.stopLossPips = pips.toDouble();
+          final tmpResults = tmpCalculator.value();
+
+          final tmpFormattedResults = _buildResults(
+            instrumentMetadata: instrumentMetadata,
+            standardLotUnits: standardLotUnits,
+            microLotUnits: microLotUnits,
+            miniLotUnits: miniLotUnits,
+            results: tmpResults,
+            fields: fields,
+          );
+
+          resultsRange.add(tmpFormattedResults);
+        }
+      }
+
+      return _buildResults(
+        instrumentMetadata: instrumentMetadata,
+        standardLotUnits: standardLotUnits,
+        microLotUnits: microLotUnits,
+        miniLotUnits: miniLotUnits,
+        range: resultsRange,
+        results: results,
+        fields: fields,
       );
     }
 
     return retrieveDefaultResult();
+  }
+
+  MatexForexPositionSizeCalculatorBlocResults _buildResults({
+    required MatexForexPositionSizeCalculatorResults results,
+    required MatexForexPositionSizeCalculatorBlocFields fields,
+    required double standardLotUnits,
+    required double miniLotUnits,
+    required double microLotUnits,
+    MatexPairMetadata? instrumentMetadata,
+    List<MatexForexPositionSizeCalculatorBlocResults>? range,
+  }) {
+    final accountCurrency = fields.accountCurrency;
+    final positionSize = results.positionSize ?? 0;
+    final stopLossPips = results.stopLossPips ?? 0;
+    final pipValue = results.pipValue ?? 0;
+
+    final standardLotSize = (positionSize / standardLotUnits);
+    final miniLotSize = (positionSize / miniLotUnits);
+    final microLotSize = (positionSize / microLotUnits);
+
+    return MatexForexPositionSizeCalculatorBlocResults(
+      formattedPipValue: localizeCurrency(
+        minimumFractionDigits: 3,
+        value: pipValue,
+        symbol: accountCurrency,
+      ),
+      pipValue: pipValue,
+      formattedPositionSize: localizeNumber(
+        minimumFractionDigits: 3,
+        value: positionSize,
+      ),
+      positionSize: positionSize,
+      formattedAmountAtRisk: localizeCurrency(
+        minimumFractionDigits: 3,
+        value: results.amountAtRisk,
+        symbol: accountCurrency,
+      ),
+      amountAtRisk: results.amountAtRisk,
+      formattedStandardLotSize: localizeNumber(
+        minimumFractionDigits: 3,
+        value: standardLotSize,
+      ),
+      standardLotSize: standardLotSize,
+      formattedMiniLotSize: localizeNumber(
+        minimumFractionDigits: 3,
+        value: miniLotSize,
+      ),
+      miniLotSize: miniLotSize,
+      formattedMicroLotSize: localizeNumber(
+        minimumFractionDigits: 3,
+        value: microLotSize,
+      ),
+      microLotSize: microLotSize,
+      formattedStopLossPips: localizeNumber(
+        minimumFractionDigits: 3,
+        value: stopLossPips,
+      ),
+      stopLossPips: stopLossPips,
+      formattedRiskRatio: localizePercentage(
+        minimumFractionDigits: 3,
+        value: results.riskPercent,
+      ),
+      riskRatio: results.riskPercent,
+      formattedStopLossPrice: localizeQuote(
+        rate: results.stopLossPrice,
+        metadata: instrumentMetadata,
+      ),
+      stopLossPrice: results.stopLossPrice,
+      range: range,
+    );
   }
 
   @override

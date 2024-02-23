@@ -23,6 +23,8 @@ class MatexForexPositionSizeCalculatorBlocResults
   final String? formattedRiskRatio;
   final String? formattedPipValue;
 
+  final List<MatexForexPositionSizeCalculatorBlocResults>? range;
+
   const MatexForexPositionSizeCalculatorBlocResults({
     this.positionSize,
     this.formattedPositionSize,
@@ -42,6 +44,7 @@ class MatexForexPositionSizeCalculatorBlocResults
     this.formattedRiskRatio,
     this.pipValue,
     this.formattedPipValue,
+    this.range,
   });
 
   @override
@@ -67,6 +70,7 @@ class MatexForexPositionSizeCalculatorBlocResults
     String? formattedRiskRatio,
     double? pipValue,
     String? formattedPipValue,
+    List<MatexForexPositionSizeCalculatorBlocResults>? range,
   }) {
     return MatexForexPositionSizeCalculatorBlocResults(
       positionSize: positionSize ?? this.positionSize,
@@ -93,6 +97,7 @@ class MatexForexPositionSizeCalculatorBlocResults
       formattedRiskRatio: formattedRiskRatio ?? this.formattedRiskRatio,
       pipValue: pipValue ?? this.pipValue,
       formattedPipValue: formattedPipValue ?? this.formattedPipValue,
+      range: range ?? this.range,
     );
   }
 
@@ -119,6 +124,7 @@ class MatexForexPositionSizeCalculatorBlocResults
       formattedRiskRatio: model.formattedRiskRatio,
       pipValue: model.pipValue,
       formattedPipValue: model.formattedPipValue,
+      range: model.range,
     );
   }
 
@@ -142,5 +148,6 @@ class MatexForexPositionSizeCalculatorBlocResults
         formattedRiskRatio,
         pipValue,
         formattedPipValue,
+        range,
       ];
 }
