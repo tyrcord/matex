@@ -1,3 +1,9 @@
+## 0.0.45
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: add onClear callback.
+ - **FEAT**: updated dependencies.
+
 ## 0.0.44
 
  - **FEAT**: update tbloc dependency.

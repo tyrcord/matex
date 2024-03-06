@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-03-06
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.45`](#matex_core---v0045)
+ - [`matex_data` - `v0.0.37`](#matex_data---v0037)
+ - [`matex_financial` - `v0.0.55`](#matex_financial---v0055)
+
+---
+
+#### `matex_core` - `v0.0.45`
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: add onClear callback.
+ - **FEAT**: updated dependencies.
+
+#### `matex_data` - `v0.0.37`
+
+ - **FEAT**: updated dependencies.
+
+#### `matex_financial` - `v0.0.55`
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: added range results.
+ - **FEAT**: added time to double investment logic.
+ - **FEAT**: enable analytic logging.
+ - **FEAT**: updated dependencies.
+
+
 ## 2024-02-12
 
 ### Changes

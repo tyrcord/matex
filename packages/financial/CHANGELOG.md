@@ -1,3 +1,11 @@
+## 0.0.55
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: added range results.
+ - **FEAT**: added time to double investment logic.
+ - **FEAT**: enable analytic logging.
+ - **FEAT**: updated dependencies.
+
 ## 0.0.54
 
  - **FEAT**: feat: move fastyle_settings to matex_financial.
