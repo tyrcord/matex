@@ -56,6 +56,26 @@ void main() {
       expect(results.rateOfReturn, closeTo(2.2251, 0.0001));
     });
 
+    test('Calculates monthly compounded amount correctly with tax', () async {
+      final calculator = MatexCompoundInterestCalculator(
+        state: const MatexCompoundInterestCalculatorState(
+          startBalance: 10000,
+          rateFrequency: MatexFinancialFrequency.monthly,
+          compoundFrequency: MatexFinancialFrequency.monthly,
+          rate: 0.05,
+          duration: 2,
+          taxRate: 0.3, // 30% tax rate
+        ),
+      );
+
+      final results = await calculator.valueAsync();
+
+      expect(results.endBalance, closeTo(22833.28, 0.01));
+      expect(results.totalEarnings, closeTo(12833.28, 0.01));
+      expect(results.rateOfReturn, closeTo(1.2833, 0.0001));
+      expect(results.totalTaxPaid, closeTo(5499.98, 0.01));
+    });
+
     test(
         'Calculates monthly compounded amount with '
         'monthly contributions correctly', () async {

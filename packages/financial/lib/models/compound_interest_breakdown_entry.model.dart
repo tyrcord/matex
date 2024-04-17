@@ -13,6 +13,7 @@ class MatexCompoundInterestBreakdownEntry {
 
   late final double cashFlow;
   late final int period;
+  late final double totalTaxPaid;
 
   // Formatted properties
   final String? formattedStartBalance;
@@ -25,6 +26,7 @@ class MatexCompoundInterestBreakdownEntry {
   final String? formattedTotalWithdrawals;
   final String? formattedCashFlow;
   final String? formattedPeriod;
+  final String? formattedTotalTaxPaid;
 
   MatexCompoundInterestBreakdownEntry({
     required this.startBalance,
@@ -42,15 +44,18 @@ class MatexCompoundInterestBreakdownEntry {
     this.formattedTotalWithdrawals,
     this.formattedCashFlow,
     this.formattedPeriod,
+    this.formattedTotalTaxPaid,
     double? totalWithdrawals,
     double? totalDeposits,
     double? withdrawal,
     double? deposit,
+    double? totalTaxPaid,
   }) {
     this.totalWithdrawals = totalWithdrawals ?? 0;
     this.totalDeposits = totalDeposits ?? 0;
     this.withdrawal = withdrawal ?? 0;
     this.deposit = deposit ?? 0;
+    this.totalTaxPaid = totalTaxPaid ?? 0;
     cashFlow = this.deposit - this.withdrawal;
   }
 
@@ -74,6 +79,8 @@ class MatexCompoundInterestBreakdownEntry {
     double? deposit,
     int? period,
     String? formattedPeriod,
+    String? formattedTotalTaxPaid,
+    double? totalTaxPaid,
   }) {
     return MatexCompoundInterestBreakdownEntry(
       startBalance: startBalance ?? this.startBalance,
@@ -99,6 +106,9 @@ class MatexCompoundInterestBreakdownEntry {
       deposit: deposit ?? this.deposit,
       period: period ?? this.period,
       formattedPeriod: formattedPeriod ?? this.formattedPeriod,
+      formattedTotalTaxPaid:
+          formattedTotalTaxPaid ?? this.formattedTotalTaxPaid,
+      totalTaxPaid: totalTaxPaid ?? this.totalTaxPaid,
     );
   }
 

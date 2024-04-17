@@ -92,6 +92,12 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
   MatexFinancialFrequency get contributionFrequency =>
       state.contributionFrequency;
 
+  set taxRate(double? value) {
+    setState(state.copyWith(taxRate: value));
+  }
+
+  double? get taxRate => state.taxRate;
+
   MatexCompoundInterestCalculator({
     super.defaultState,
     super.state,
@@ -137,6 +143,7 @@ class MatexCompoundInterestCalculator extends MatexCalculator<
       totalContributions: results.last.totalDeposits,
       rateOfReturn: _computeRateOfReturn(results),
       totalEarnings: results.last.totalEarnings,
+      totalTaxPaid: results.last.totalTaxPaid,
       endBalance: results.last.endBalance,
       startBalance: startBalance!,
       breakdown: results,
@@ -217,12 +224,24 @@ List<MatexCompoundInterestBreakdownEntry> _computeBreakdown(
   var totalWithdrawals = 0.0;
   var totalEarnings = 0.0;
   var pendingEarnings = 0.0;
+  var totalTaxPaid = 0.0;
 
   for (int period = 1; period <= periods; period++) {
     final startBalance = balance;
-    final earnings = startBalance * dRate;
+    var earnings = startBalance * dRate;
     var deposit = 0.0;
     var withdrawal = 0.0;
+    var tax = 0.0;
+
+    if (earnings > 0 && state.taxRate != null) {
+      tax = earnings * state.taxRate!;
+    }
+
+    // Subtract tax from earnings
+    earnings -= tax;
+
+    // Accumulate total tax paid
+    totalTaxPaid += tax;
 
     // Handle deposits
     if (period % (periods / contributionPeriods) == 0) {
@@ -265,6 +284,7 @@ List<MatexCompoundInterestBreakdownEntry> _computeBreakdown(
       totalDeposits: totalDeposits,
       deposit: deposit,
       totalWithdrawals: totalWithdrawals,
+      totalTaxPaid: totalTaxPaid,
       withdrawal: withdrawal,
       period: period,
     );

@@ -14,6 +14,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
   final double endBalance;
   final double rateOfReturn;
   final double effectiveAnnualRate;
+  final double totalTaxPaid;
 
   const MatexCompoundInterestCalculatorResults({
     this.breakdown,
@@ -25,6 +26,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
     this.rateOfReturn = 0,
     this.effectiveAnnualRate = 0,
     this.monthsToDoubleInvestment = 0,
+    this.totalTaxPaid = 0,
   });
 
   @override
@@ -41,6 +43,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
     double? rateOfReturn,
     double? effectiveAnnualRate,
     int? monthsToDoubleInvestment,
+    double? totalTaxPaid,
   }) {
     return MatexCompoundInterestCalculatorResults(
       breakdown: breakdown ?? this.breakdown,
@@ -53,6 +56,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
       effectiveAnnualRate: effectiveAnnualRate ?? this.effectiveAnnualRate,
       monthsToDoubleInvestment:
           monthsToDoubleInvestment ?? this.monthsToDoubleInvestment,
+      totalTaxPaid: totalTaxPaid ?? this.totalTaxPaid,
     );
   }
 
@@ -70,6 +74,7 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
       rateOfReturn: model.rateOfReturn,
       effectiveAnnualRate: model.effectiveAnnualRate,
       monthsToDoubleInvestment: model.monthsToDoubleInvestment,
+      totalTaxPaid: model.totalTaxPaid,
     );
   }
 
@@ -84,5 +89,6 @@ class MatexCompoundInterestCalculatorResults extends FastCalculatorResults {
         rateOfReturn,
         effectiveAnnualRate,
         monthsToDoubleInvestment,
+        totalTaxPaid,
       ];
 }

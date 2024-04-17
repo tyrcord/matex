@@ -16,6 +16,7 @@ class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
   final MatexFinancialFrequency rateFrequency;
   final double? withdrawalAmount;
   final double? additionalContribution;
+  final double? taxRate;
 
   const MatexCompoundInterestCalculatorState({
     this.startBalance,
@@ -23,6 +24,7 @@ class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
     this.withdrawalAmount,
     this.additionalContribution,
     this.duration,
+    this.taxRate,
     MatexFinancialFrequency? contributionFrequency,
     MatexFinancialFrequency? compoundFrequency,
     MatexFinancialFrequency? withdrawalFrequency,
@@ -49,6 +51,7 @@ class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
     MatexFinancialFrequency? rateFrequency,
     double? withdrawalAmount,
     double? additionalContribution,
+    double? taxRate,
   }) {
     return MatexCompoundInterestCalculatorState(
       startBalance: startBalance ?? this.startBalance,
@@ -62,6 +65,7 @@ class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
       withdrawalAmount: withdrawalAmount ?? this.withdrawalAmount,
       additionalContribution:
           additionalContribution ?? this.additionalContribution,
+      taxRate: taxRate ?? this.taxRate,
     );
   }
 
@@ -79,6 +83,7 @@ class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
       rateFrequency: model.rateFrequency,
       withdrawalAmount: model.withdrawalAmount,
       additionalContribution: model.additionalContribution,
+      taxRate: model.taxRate,
     );
   }
 
@@ -93,6 +98,7 @@ class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
       'rateFrequency': rateFrequency.name,
       'withdrawalAmount': withdrawalAmount,
       'additionalContribution': additionalContribution,
+      'taxRate': taxRate,
     };
   }
 
@@ -123,6 +129,7 @@ class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
       withdrawalAmount: json['withdrawalAmount'] as double?,
       rateFrequency: rateFrequency ?? defaultFrequency,
       startBalance: json['startBalance'] as double?,
+      taxRate: json['taxRate'] as double?,
       duration: json['duration'] as int?,
       rate: json['rate'] as double?,
     );
@@ -139,5 +146,6 @@ class MatexCompoundInterestCalculatorState extends MatexCalculatorState {
         rateFrequency,
         withdrawalAmount,
         additionalContribution,
+        taxRate,
       ];
 }
