@@ -231,17 +231,17 @@ List<MatexCompoundInterestBreakdownEntry> _computeBreakdown(
     var earnings = startBalance * dRate;
     var deposit = 0.0;
     var withdrawal = 0.0;
-    var tax = 0.0;
+    var taxAmount = 0.0;
 
     if (earnings > 0 && state.taxRate != null) {
-      tax = earnings * state.taxRate!;
+      taxAmount = earnings * state.taxRate!;
     }
 
     // Subtract tax from earnings
-    earnings -= tax;
+    earnings -= taxAmount;
 
     // Accumulate total tax paid
-    totalTaxPaid += tax;
+    totalTaxPaid += taxAmount;
 
     // Handle deposits
     if (period % (periods / contributionPeriods) == 0) {
@@ -285,6 +285,7 @@ List<MatexCompoundInterestBreakdownEntry> _computeBreakdown(
       deposit: deposit,
       totalWithdrawals: totalWithdrawals,
       totalTaxPaid: totalTaxPaid,
+      taxAmount: taxAmount,
       withdrawal: withdrawal,
       period: period,
     );

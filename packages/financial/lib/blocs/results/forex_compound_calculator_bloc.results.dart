@@ -14,6 +14,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
   final double rateOfReturn;
   final double effectiveAnnualRate;
   final int monthsToDoubleInvestment;
+  final double totalTaxPaid;
 
   // Formatted properties
   final String? formattedTotalEarnings;
@@ -24,6 +25,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
   final String? formattedRateOfReturn;
   final String? formattedEffectiveAnnualRate;
   final String? formattedTimeToDoubleInvestment;
+  final String? formattedTotalTaxPaid;
 
   const MatexForexCompoundCalculatorBlocResults({
     this.breakdown,
@@ -35,6 +37,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
     this.rateOfReturn = 0,
     this.effectiveAnnualRate = 0,
     this.monthsToDoubleInvestment = 0,
+    this.totalTaxPaid = 0,
     this.formattedTotalEarnings,
     this.formattedTotalContributions,
     this.formattedTotalWithdrawals,
@@ -43,6 +46,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
     this.formattedRateOfReturn,
     this.formattedEffectiveAnnualRate,
     this.formattedTimeToDoubleInvestment,
+    this.formattedTotalTaxPaid,
   });
 
   @override
@@ -59,6 +63,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
     double? rateOfReturn,
     double? effectiveAnnualRate,
     int? monthsToDoubleInvestment,
+    double? totalTaxPaid,
     String? formattedTotalEarnings,
     String? formattedTotalContributions,
     String? formattedTotalWithdrawals,
@@ -67,6 +72,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
     String? formattedRateOfReturn,
     String? formattedEffectiveAnnualRate,
     String? formattedTimeToDoubleInvestment,
+    String? formattedTotalTaxPaid,
   }) {
     return MatexForexCompoundCalculatorBlocResults(
       breakdown: breakdown ?? this.breakdown,
@@ -79,6 +85,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
       effectiveAnnualRate: effectiveAnnualRate ?? this.effectiveAnnualRate,
       monthsToDoubleInvestment:
           monthsToDoubleInvestment ?? this.monthsToDoubleInvestment,
+      totalTaxPaid: totalTaxPaid ?? this.totalTaxPaid,
       formattedTotalEarnings:
           formattedTotalEarnings ?? this.formattedTotalEarnings,
       formattedTotalContributions:
@@ -94,6 +101,8 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
           formattedEffectiveAnnualRate ?? this.formattedEffectiveAnnualRate,
       formattedTimeToDoubleInvestment: formattedTimeToDoubleInvestment ??
           this.formattedTimeToDoubleInvestment,
+      formattedTotalTaxPaid:
+          formattedTotalTaxPaid ?? this.formattedTotalTaxPaid,
     );
   }
 
@@ -111,6 +120,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
       rateOfReturn: model.rateOfReturn,
       effectiveAnnualRate: model.effectiveAnnualRate,
       monthsToDoubleInvestment: model.monthsToDoubleInvestment,
+      totalTaxPaid: model.totalTaxPaid,
       formattedTotalEarnings: model.formattedTotalEarnings,
       formattedTotalContributions: model.formattedTotalContributions,
       formattedTotalWithdrawals: model.formattedTotalWithdrawals,
@@ -119,6 +129,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
       formattedRateOfReturn: model.formattedRateOfReturn,
       formattedEffectiveAnnualRate: model.formattedEffectiveAnnualRate,
       formattedTimeToDoubleInvestment: model.formattedTimeToDoubleInvestment,
+      formattedTotalTaxPaid: model.formattedTotalTaxPaid,
     );
   }
 
@@ -133,6 +144,7 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
         rateOfReturn,
         effectiveAnnualRate,
         monthsToDoubleInvestment,
+        totalTaxPaid,
         formattedTotalEarnings,
         formattedTotalContributions,
         formattedTotalWithdrawals,
@@ -141,5 +153,6 @@ class MatexForexCompoundCalculatorBlocResults extends FastCalculatorResults {
         formattedRateOfReturn,
         formattedEffectiveAnnualRate,
         formattedTimeToDoubleInvestment,
+        formattedTotalTaxPaid,
       ];
 }

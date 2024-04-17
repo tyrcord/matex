@@ -9,6 +9,7 @@ class MatexForexCompoundCalculatorBlocKey {
   static const String rateFrequency = 'rateFrequency';
   static const String withdrawalAmount = 'withdrawalAmount';
   static const String additionalContribution = 'additionalContribution';
+  static const String taxRate = 'taxRate';
 
   // Prevent the creation of instances of this class
   MatexForexCompoundCalculatorBlocKey._();

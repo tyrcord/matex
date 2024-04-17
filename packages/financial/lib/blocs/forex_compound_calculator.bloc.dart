@@ -77,6 +77,11 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     final period = convertMonthsToYearsAndMonths(monthsToDoubleInvestment);
 
     return MatexForexCompoundCalculatorBlocResults(
+      totalTaxPaid: results.totalTaxPaid,
+      formattedTotalTaxPaid: localizeCurrency(
+        symbol: accountCurrency,
+        value: results.totalTaxPaid,
+      ),
       monthsToDoubleInvestment: results.monthsToDoubleInvestment,
       formattedTimeToDoubleInvestment: localizePeriod(
         years: period['years'] ?? 0,
@@ -160,6 +165,16 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
             minimumFractionDigits: 2,
           ),
           formattedPeriod: localizeNumber(value: entry.period),
+          formattedTotalTaxPaid: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.totalTaxPaid,
+            minimumFractionDigits: 2,
+          ),
+          formattedTaxAmount: localizeCurrency(
+            symbol: accountCurrency,
+            value: entry.taxAmount,
+            minimumFractionDigits: 2,
+          ),
         );
       }).toList(),
     );
@@ -199,6 +214,8 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
           resetWithdrawalFrequency: true,
           resetCompoundFrequency: true,
         );
+      } else if (key == MatexForexCompoundCalculatorBlocKey.taxRate) {
+        return document.copyWithDefaults(resetTaxRate: true);
       }
     } else if (value is String) {
       if (key == MatexFiancialCalculatorBlocKey.accountCurrency) {
@@ -227,6 +244,8 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
             withdrawalFrequency: cashFlowFrequency.name,
           );
         }
+      } else if (key == MatexForexCompoundCalculatorBlocKey.taxRate) {
+        return document.copyWith(taxRate: value);
       } else {
         final frequency = MatexFinancialFrequencyX.fromName(value);
 
@@ -299,6 +318,8 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
       } else if (key ==
           MatexForexCompoundCalculatorBlocKey.additionalContribution) {
         return patchAdditionalContribution(value);
+      } else if (key == MatexForexCompoundCalculatorBlocKey.taxRate) {
+        return patchTaxRate(value);
       }
     } else if (value is MatexFinancialFrequency) {
       if (key == MatexForexCompoundCalculatorBlocKey.rateFrequency) {
@@ -326,6 +347,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     final contributionFrequency = document.contributionFrequency;
     final withdrawalFrequency = document.withdrawalFrequency;
     final dRate = parseStringToDouble(document.rate);
+    final dTaxRate = parseStringToDouble(document.taxRate);
 
     calculator.setState(MatexCompoundInterestCalculatorState(
       rateFrequency: MatexFinancialFrequencyX.fromName(rateFrequency),
@@ -335,11 +357,12 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
       withdrawalFrequency:
           MatexFinancialFrequencyX.fromName(withdrawalFrequency),
       startBalance: tryParseStringToDouble(document.startBalance),
-      rate: (dRate / 100),
+      rate: dRate / 100,
       duration: tryParseStringToInt(document.duration),
       withdrawalAmount: tryParseStringToDouble(document.withdrawalAmount),
       additionalContribution:
           tryParseStringToDouble(document.additionalContribution),
+      taxRate: dTaxRate / 100,
     ));
   }
 
@@ -367,6 +390,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
         withdrawalAmount: document.withdrawalAmount,
         additionalContribution: document.additionalContribution,
         accountCurrency: document.accountCurrency,
+        taxRate: document.taxRate,
       ),
     );
   }
@@ -389,6 +413,21 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
       formattedEndBalance: localizeCurrency(symbol: accountCurrency, value: 0),
       endBalance: 0,
     );
+  }
+
+  MatexForexCompoundCalculatorBlocState patchTaxRate(String? value) {
+    late MatexForexCompoundCalculatorBlocFields fields;
+
+    if (value == null) {
+      fields = currentState.fields.copyWithDefaults(resetTaxRate: true);
+      calculator.taxRate = 0;
+    } else {
+      final dValue = parseStringToDouble(value);
+      fields = currentState.fields.copyWith(taxRate: value);
+      calculator.taxRate = dValue / 100;
+    }
+
+    return currentState.copyWith(fields: fields);
   }
 
   MatexForexCompoundCalculatorBlocState patchAccountCurrency(String? value) {
@@ -425,15 +464,12 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     late MatexForexCompoundCalculatorBlocFields fields;
 
     if (value == null) {
-      fields = currentState.fields.copyWithDefaults(
-        resetRate: true,
-      );
-
+      fields = currentState.fields.copyWithDefaults(resetRate: true);
       calculator.rate = 0;
     } else {
       final dValue = parseStringToDouble(value);
       fields = currentState.fields.copyWith(rate: value);
-      calculator.rate = (dValue / 100);
+      calculator.rate = dValue / 100;
     }
 
     return currentState.copyWith(fields: fields);
@@ -616,6 +652,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
     final fields = currentState.fields;
     final hasContributions = fields.additionalContribution?.isNotEmpty ?? false;
     final hasWithdrawals = fields.withdrawalAmount?.isNotEmpty ?? false;
+    final hasTaxRate = fields.taxRate?.isNotEmpty ?? false;
 
     final results = await compute();
     final breakdown = results.breakdown ?? [];
@@ -625,6 +662,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
       if (hasContributions) FinanceLocaleKeys.finance_label_deposits.tr(),
       if (hasWithdrawals) FinanceLocaleKeys.finance_label_withdrawals_text.tr(),
       FinanceLocaleKeys.finance_label_earnings.tr(),
+      if (hasTaxRate) FinanceLocaleKeys.finance_label_tax_amount.tr(),
       FinanceLocaleKeys.finance_label_ending_balance.tr(),
     ];
 

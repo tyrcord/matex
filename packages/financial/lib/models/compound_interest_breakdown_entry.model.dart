@@ -13,6 +13,8 @@ class MatexCompoundInterestBreakdownEntry {
 
   late final double cashFlow;
   late final int period;
+
+  late final double taxAmount;
   late final double totalTaxPaid;
 
   // Formatted properties
@@ -27,6 +29,7 @@ class MatexCompoundInterestBreakdownEntry {
   final String? formattedCashFlow;
   final String? formattedPeriod;
   final String? formattedTotalTaxPaid;
+  final String? formattedTaxAmount;
 
   MatexCompoundInterestBreakdownEntry({
     required this.startBalance,
@@ -45,17 +48,20 @@ class MatexCompoundInterestBreakdownEntry {
     this.formattedCashFlow,
     this.formattedPeriod,
     this.formattedTotalTaxPaid,
+    this.formattedTaxAmount,
     double? totalWithdrawals,
     double? totalDeposits,
     double? withdrawal,
     double? deposit,
     double? totalTaxPaid,
+    double? taxAmount,
   }) {
     this.totalWithdrawals = totalWithdrawals ?? 0;
     this.totalDeposits = totalDeposits ?? 0;
     this.withdrawal = withdrawal ?? 0;
     this.deposit = deposit ?? 0;
     this.totalTaxPaid = totalTaxPaid ?? 0;
+    this.taxAmount = taxAmount ?? 0;
     cashFlow = this.deposit - this.withdrawal;
   }
 
@@ -81,6 +87,8 @@ class MatexCompoundInterestBreakdownEntry {
     String? formattedPeriod,
     String? formattedTotalTaxPaid,
     double? totalTaxPaid,
+    double? taxAmount,
+    String? formattedTaxAmount,
   }) {
     return MatexCompoundInterestBreakdownEntry(
       startBalance: startBalance ?? this.startBalance,
@@ -109,6 +117,8 @@ class MatexCompoundInterestBreakdownEntry {
       formattedTotalTaxPaid:
           formattedTotalTaxPaid ?? this.formattedTotalTaxPaid,
       totalTaxPaid: totalTaxPaid ?? this.totalTaxPaid,
+      taxAmount: taxAmount ?? this.taxAmount,
+      formattedTaxAmount: formattedTaxAmount ?? this.formattedTaxAmount,
     );
   }
 
@@ -138,6 +148,10 @@ class MatexCompoundInterestBreakdownEntry {
 
     if (formattedEarnings != null) {
       csv += ',${_escape(formattedEarnings!)}';
+    }
+
+    if (formattedTaxAmount != null) {
+      csv += ',${_escape(formattedTaxAmount!)}';
     }
 
     if (formattedEndBalance != null) {

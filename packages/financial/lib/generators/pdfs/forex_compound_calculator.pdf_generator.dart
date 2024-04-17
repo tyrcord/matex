@@ -51,6 +51,7 @@ class MatexForexCompoundCalculatorPdfGenerator {
   ) {
     final hasContributions = fields.additionalContribution?.isNotEmpty ?? false;
     final hasWithdrawals = fields.withdrawalAmount?.isNotEmpty ?? false;
+    final hasTaxRate = fields.taxRate?.isNotEmpty ?? false;
 
     return [
       FastReportEntry(
@@ -93,6 +94,11 @@ class MatexForexCompoundCalculatorPdfGenerator {
           value: fields.formattedWithdrawalFrequency,
         ),
       ],
+      if (hasTaxRate)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_tax_rate.tr(),
+          value: fields.formattedTaxRate,
+        ),
     ];
   }
 
@@ -103,6 +109,7 @@ class MatexForexCompoundCalculatorPdfGenerator {
   ) {
     final hasContributions = fields.additionalContribution?.isNotEmpty ?? false;
     final hasWithdrawals = fields.withdrawalAmount?.isNotEmpty ?? false;
+    final hasTaxRate = fields.taxRate?.isNotEmpty ?? false;
     final palette = ThemeHelper.getPaletteColors(context);
 
     return [
@@ -116,6 +123,12 @@ class MatexForexCompoundCalculatorPdfGenerator {
         value: results.formattedTotalEarnings!,
         color: palette.green.mid,
       ),
+      if (hasTaxRate)
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_total_tax_amount_text.tr(),
+          value: results.formattedTotalTaxPaid!,
+          color: palette.red.mid,
+        ),
       FastReportEntry(
         name: FinanceLocaleKeys.finance_label_rate_of_return_all_time.tr(),
         value: results.formattedRateOfReturn!,
