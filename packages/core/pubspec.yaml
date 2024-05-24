@@ -1,12 +1,12 @@
 dependencies:
   collection: ^1.18.0
-  easy_localization: ^3.0.4
+  easy_localization: ^3.0.7
   fastyle_calculator: ^1.62.0
   fastyle_core: ^0.0.52
   fastyle_settings: ^0.0.55
   flutter:
     sdk: flutter
-  intl: ^0.18.1
+  intl: ^0.19.0
   lingua_calculator: ^0.0.12
   lingua_core: ^0.0.40
   path_provider: ^2.1.1
@@ -24,8 +24,8 @@ dev_dependencies:
     sdk: flutter
   import_sorter: ^4.6.0
 environment:
-  flutter: '>=3.16.0'
-  sdk: '>=3.2.0 <4.0.0'
+  flutter: ">=3.16.0"
+  sdk: ">=3.2.0 <4.0.0"
 name: matex_core
 repository: https://github.com/tyrcord/matex/tree/main/packages/core
 version: 0.0.45

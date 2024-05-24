@@ -1,7 +1,7 @@
 dependencies:
   collection: ^1.18.0
   cross_file: ^0.3.3+8
-  easy_localization: ^3.0.4
+  easy_localization: ^3.0.7
   fastyle_buttons: ^0.0.29
   fastyle_calculator: ^1.62.0
   fastyle_core: ^0.0.52
@@ -32,7 +32,8 @@ dependencies:
   tlogger: ^0.0.12
   tmodel: ^0.5.15
   tstore: ^0.8.26
-description: An assortment of helpful tools and calculators specifically designed
+description:
+  An assortment of helpful tools and calculators specifically designed
   for use within the financial sector.
 dev_dependencies:
   dependency_validator: ^3.2.3
@@ -41,8 +42,8 @@ dev_dependencies:
     sdk: flutter
   import_sorter: ^4.6.0
 environment:
-  flutter: '>=3.16.0'
-  sdk: '>=3.2.0 <4.0.0'
+  flutter: ">=3.16.0"
+  sdk: ">=3.2.0 <4.0.0"
 name: matex_financial
 repository: https://github.com/tyrcord/matex/tree/main/packages/financial
 version: 0.0.55
