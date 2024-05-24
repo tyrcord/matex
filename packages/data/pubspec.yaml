@@ -1,6 +1,6 @@
 dependencies:
   collection: ^1.18.0
-  fastyle_core: ^0.0.52
+  fastyle_core: ^0.0.53
   flutter:
     sdk: flutter
   rxdart: ^0.27.7
@@ -16,11 +16,11 @@ dev_dependencies:
     sdk: flutter
   import_sorter: ^4.6.0
 environment:
-  flutter: '>=3.16.0'
-  sdk: '>=3.2.0 <4.0.0'
+  flutter: ">=3.16.0"
+  sdk: ">=3.2.0 <4.0.0"
 flutter:
   assets:
-  - assets/meta/
+    - assets/meta/
 name: matex_data
 repository: https://github.com/tyrcord/matex/tree/main/packages/data
 version: 0.0.37
