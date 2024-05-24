@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-05-24
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.46`](#matex_core---v0046)
+ - [`matex_data` - `v0.0.38`](#matex_data---v0038)
+ - [`matex_financial` - `v0.0.56`](#matex_financial---v0056)
+
+---
+
+#### `matex_core` - `v0.0.46`
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+
+#### `matex_data` - `v0.0.38`
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: update dependencies.
+
+#### `matex_financial` - `v0.0.56`
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**(MatexForexCompound): support taxe rate.
+ - **FEAT**(MatexCompoundInterestCalculator): add tax rate.
+
+
 ## 2024-03-06
 
 ### Changes

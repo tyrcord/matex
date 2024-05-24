@@ -1,3 +1,11 @@
+## 0.0.56
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**: update dependencies.
+ - **FEAT**(MatexForexCompound): support taxe rate.
+ - **FEAT**(MatexCompoundInterestCalculator): add tax rate.
+
 ## 0.0.55
 
  - **FEAT**: updated dependencies.
