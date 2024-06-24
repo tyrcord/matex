@@ -32,15 +32,13 @@ bool isEntryPriceValid(MatexStockPositionSizeCalculatorState state) {
 bool isStopLossPriceValidForPosition(
   MatexStockPositionSizeCalculatorState state,
 ) {
+  final isValid = state.stopLossPrice != null && state.stopLossPrice! >= 0;
+
   if (state.isShortPosition) {
-    return state.stopLossPrice != null &&
-        state.stopLossPrice! > 0 &&
-        state.stopLossPrice! > state.entryPrice!;
+    return isValid && state.stopLossPrice! > state.entryPrice!;
   }
 
-  return state.stopLossPrice != null &&
-      state.stopLossPrice! > 0 &&
-      state.stopLossPrice! < state.entryPrice!;
+  return isValid && state.stopLossPrice! < state.entryPrice!;
 }
 
 // Validator: Check if the risk percent or stop loss amount is valid

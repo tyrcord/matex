@@ -12,7 +12,7 @@ double getShareAmount({
   if (accountBalance <= 0 ||
       risk <= 0 ||
       entryPrice <= 0 ||
-      stopLossPrice <= 0) {
+      stopLossPrice < 0) {
     return 0.0;
   }
 

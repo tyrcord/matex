@@ -74,6 +74,26 @@ void main() {
         expect(result.stopLossPercentWithSlippage, closeTo(0.05, 0.001));
         expect(result.stopLossPercent, closeTo(0.05, 0.01));
       });
+
+      test('Calculates correct results when stopLossPrice is 0', () {
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 1
+          ..stopLossPrice = 0
+          ..riskPercent = 0.01;
+
+        final result = calculator.value();
+
+        expect(result.shares, 100);
+        expect(result.positionAmount, closeTo(100, 1e-3));
+        expect(result.effectiveRisk, closeTo(100, 1e-3));
+        expect(result.toleratedRisk, closeTo(100, 1e-3));
+        expect(result.involvedCapital, closeTo(0.01, 1e-3));
+        expect(result.entryPriceWithSlippage, closeTo(1, 0.01));
+        expect(result.stopLossPriceWithSlippage, closeTo(0, 0.01));
+        expect(result.stopLossPercentWithSlippage, closeTo(1, 0.01));
+        expect(result.stopLossPercent, closeTo(1, 0.01));
+      });
     });
 
     group('Calculation with fees', () {

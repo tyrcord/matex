@@ -76,9 +76,12 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     final stopLossAmount = (state.stopLossAmount) ?? 0.0;
     double riskPercent;
 
+    // If the risk percent is provided, use it
     if (state.riskPercent != null && state.riskPercent != 0) {
       riskPercent = (state.riskPercent) ?? 0.0;
     } else if (stopLossAmount != 0.0 && accountBalance != 0.0) {
+      // If the stop loss amount is provided, calculate the risk percent
+      // based on the account balance and stop loss amount.
       riskPercent = (stopLossAmount / accountBalance);
     } else {
       return defaultResults;
