@@ -31,6 +31,7 @@ class MatexFibonacciLevelsCalculatorBloc extends MatexCalculatorBloc<
     MatexFibonacciLevelsCalculatorBlocState? initialState,
     MatexFibonacciLevelsCalculatorDataProvider? dataProvider,
     super.debouceComputeEvents = true,
+    super.exportAlternativeAction,
     super.getExportDialog,
     super.delegate,
     super.getContext,

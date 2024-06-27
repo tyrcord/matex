@@ -25,4 +25,6 @@ typedef MatexPdfDialogCallback = void Function({
   WidgetBuilder? missingRightsBuilder,
   FastOperationStatusChanged? onCancel,
   FastOperationStatusChanged? onValid,
+  FastOperationStatusChanged? onAlternativeAction,
+  String? Function(FastOperationStatus)? onGetAlternativeText,
 });

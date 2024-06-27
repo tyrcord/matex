@@ -25,6 +25,7 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
   MatexStockPositionSizeCalculatorBloc({
     MatexStockPositionSizeCalculatorBlocState? initialState,
     MatexStockPositionSizeCalculatorDataProvider? dataProvider,
+    super.exportAlternativeAction,
     super.debouceComputeEvents = true,
     super.getExportDialog,
     super.delegate,

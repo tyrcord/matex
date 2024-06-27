@@ -71,6 +71,8 @@ abstract class MatexCalculatorBloc<
   final MatexPdfDialogCallback? Function(MatexExportDialogType)?
       getExportDialog;
 
+  final FastAction? exportAlternativeAction;
+
   /// Creates a new instance of the `MatexCalculatorBloc`.
   ///
   /// The `dataProvider` parameter is required and specifies the data provider
@@ -91,6 +93,7 @@ abstract class MatexCalculatorBloc<
     super.initialState,
     super.debugLabel,
     FastCalculatorBlocDelegate? delegate,
+    this.exportAlternativeAction,
     super.getContext,
   }) {
     this.delegate = delegate;
@@ -204,30 +207,51 @@ abstract class MatexCalculatorBloc<
 
   @override
   Future<void> exportToPdf(BuildContext context) async {
-    await exportGeneric(context, toPdfFile, MatexExportDialogType.pdf);
+    await exportGeneric(
+      context,
+      toPdfFile,
+      alternativeAction: exportAlternativeAction,
+    );
   }
 
   @override
   Future<void> exportToCsv(BuildContext context) async {
-    await exportGeneric(context, toCSVFile, MatexExportDialogType.csv);
+    await exportGeneric(
+      context,
+      toCSVFile,
+      type: MatexExportDialogType.csv,
+      alternativeAction: exportAlternativeAction,
+    );
   }
 
   @override
   Future<void> exportToExcel(BuildContext context) async {
-    await exportGeneric(context, toExcelFile, MatexExportDialogType.excel);
+    await exportGeneric(
+      context,
+      toExcelFile,
+      type: MatexExportDialogType.excel,
+      alternativeAction: exportAlternativeAction,
+    );
   }
 
   Future<void> exportGeneric(
     BuildContext context,
-    Future<XFile> Function(BuildContext) fileCreator,
-    MatexExportDialogType type,
-  ) async {
+    Future<XFile> Function(BuildContext) fileCreator, {
+    MatexExportDialogType type = MatexExportDialogType.pdf,
+    FastAction? alternativeAction,
+  }) async {
     if (calculator.isValid) {
       final exportDialog = getExportDialog?.call(type);
       XFile? file;
 
       exportDialog?.call(
         context: context,
+        onAlternativeAction: (_) {
+          alternativeAction?.action(context);
+        },
+        onGetAlternativeText: (_) {
+          return alternativeAction?.textGetter(context);
+        },
         onCreateOperation: () async {
           file = await fileCreator(context);
 

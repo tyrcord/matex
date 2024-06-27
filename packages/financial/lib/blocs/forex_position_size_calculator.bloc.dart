@@ -29,6 +29,7 @@ class MatexForexPositionSizeCalculatorBloc extends MatexFinancialCalculatorBloc<
   MatexForexPositionSizeCalculatorBloc({
     MatexForexPositionSizeCalculatorBlocState? initialState,
     MatexForexPositionSizeCalculatorDataProvider? dataProvider,
+    super.exportAlternativeAction,
     required super.exchangeProvider,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,

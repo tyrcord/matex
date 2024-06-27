@@ -26,6 +26,7 @@ class MatexDividendReinvestmentCalculatorBloc extends MatexCalculatorBloc<
   MatexDividendReinvestmentCalculatorBloc({
     MatexDividendReinvestmentCalculatorBlocState? initialState,
     MatexDividendReinvestmentCalculatorDataProvider? dataProvider,
+    super.exportAlternativeAction,
     super.debouceComputeEvents = true,
     super.getExportDialog,
     super.delegate,

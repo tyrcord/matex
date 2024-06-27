@@ -84,6 +84,7 @@ abstract class MatexFinancialCalculatorBloc<
 
   MatexFinancialCalculatorBloc({
     required super.dataProvider,
+    super.exportAlternativeAction,
     super.debouceComputeEvents = false,
     super.isAutoRefreshEnabled = false,
     super.getExportDialog,

@@ -28,6 +28,7 @@ class MatexPivotPointsCalculatorBloc extends MatexCalculatorBloc<
   MatexPivotPointsCalculatorBloc({
     MatexPivotPointsCalculatorBlocState? initialState,
     MatexPivotPointsCalculatorDataProvider? dataProvider,
+    super.exportAlternativeAction,
     super.debouceComputeEvents = true,
     super.getExportDialog,
     super.delegate,

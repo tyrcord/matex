@@ -31,6 +31,7 @@ class MatexForexStopLossTakeProfitCalculatorBloc
     MatexForexStopLossTakeProfitCalculatorBlocState? initialState,
     MatexForexStopLossTakeProfitCalculatorDataProvider? dataProvider,
     required super.exchangeProvider,
+    super.exportAlternativeAction,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,
     super.getExportDialog,

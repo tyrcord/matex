@@ -29,6 +29,7 @@ class MatexForexRequiredMarginCalculatorBloc
   MatexForexRequiredMarginCalculatorBloc({
     MatexForexRequiredMarginCalculatorBlocState? initialState,
     MatexForexRequiredMarginCalculatorDataProvider? dataProvider,
+    super.exportAlternativeAction,
     required super.exchangeProvider,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,

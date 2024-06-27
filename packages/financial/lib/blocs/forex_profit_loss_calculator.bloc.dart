@@ -28,6 +28,7 @@ class MatexForexProfitLossCalculatorBloc extends MatexFinancialCalculatorBloc<
   MatexForexProfitLossCalculatorBloc({
     MatexForexProfitLossCalculatorBlocState? initialState,
     MatexForexProfitLossCalculatorDataProvider? dataProvider,
+    super.exportAlternativeAction,
     required super.exchangeProvider,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,

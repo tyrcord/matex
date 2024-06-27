@@ -29,6 +29,7 @@ class MatexForexPipValueCalculatorBloc extends MatexFinancialCalculatorBloc<
     MatexForexPipValueCalculatorBlocState? initialState,
     MatexForexPipValueCalculatorDataProvider? dataProvider,
     required super.exchangeProvider,
+    super.exportAlternativeAction,
     super.debouceComputeEvents = true,
     super.isAutoRefreshEnabled = false,
     super.getExportDialog,

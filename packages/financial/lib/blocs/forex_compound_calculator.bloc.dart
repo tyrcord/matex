@@ -52,6 +52,7 @@ class MatexForexCompoundCalculatorBloc extends MatexCalculatorBloc<
   MatexForexCompoundCalculatorBloc({
     MatexForexCompoundCalculatorBlocState? initialState,
     MatexForexCompoundCalculatorBlocDataProvider? dataProvider,
+    super.exportAlternativeAction,
     super.debouceComputeEvents = true,
     super.getExportDialog,
     super.delegate,
