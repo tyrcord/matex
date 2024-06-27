@@ -1,3 +1,7 @@
+## 0.0.48
+
+ - **FEAT**: support exportAlternativeAction.
+
 ## 0.0.47
 
  - **FEAT**: updated dependencies.

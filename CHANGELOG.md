@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-06-27
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.48`](#matex_core---v0048)
+ - [`matex_financial` - `v0.0.58`](#matex_financial---v0058)
+
+---
+
+#### `matex_core` - `v0.0.48`
+
+ - **FEAT**: support exportAlternativeAction.
+
+#### `matex_financial` - `v0.0.58`
+
+ - **FIX**: allow to set a stop loss price at 0.
+ - **FEAT**: support exportAlternativeAction.
+
+
 ## 2024-06-14
 
 ### Changes

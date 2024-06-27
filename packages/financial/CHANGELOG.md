@@ -1,3 +1,8 @@
+## 0.0.58
+
+ - **FIX**: allow to set a stop loss price at 0.
+ - **FEAT**: support exportAlternativeAction.
+
 ## 0.0.57
 
  - **FEAT**: updated dependencies.
