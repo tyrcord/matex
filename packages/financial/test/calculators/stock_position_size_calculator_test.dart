@@ -216,6 +216,7 @@ void main() {
         expect(result.involvedCapital, closeTo(0.1414, 1e-3));
         expect(result.takeProfitAmount, closeTo(194.6, 1e-3));
         expect(result.takeProfitPrice, closeTo(114.90, 1e-3));
+        expect(result.returnOnCapital, closeTo(0.0195, 1e-4));
       });
 
       test('Calculates correct results with different risk/reward ratio', () {
@@ -275,6 +276,7 @@ void main() {
         expect(result.effectiveRisk, closeTo(97.30, 1e-3));
         expect(result.takeProfitAmount, closeTo(145.95, 1e-3));
         expect(result.riskReward, closeTo(1.50, 1e-2));
+        expect(result.returnOnCapital, closeTo(0.0146, 1e-4));
       });
 
       test('Calculates correct results with different take profit price', () {

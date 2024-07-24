@@ -72,6 +72,10 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       totalFeesForProfitPosition: results.totalFeesForProfitPosition,
       takeProfitAmountAfterFee: results.takeProfitAmountAfterFee,
       shares: results.shares,
+      returnOnCapital: results.returnOnCapital,
+      formattedReturnOnCapital: localizePercentage(
+        value: results.returnOnCapital,
+      ),
       formattedPositionAmount: localizeCurrency(value: results.positionAmount),
       formattedEntryFeeAmount: localizeCurrency(value: results.entryFeeAmount),
       formattedToleratedRisk: localizeCurrency(value: results.toleratedRisk),

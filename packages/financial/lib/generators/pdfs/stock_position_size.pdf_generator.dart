@@ -413,6 +413,14 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
       ));
     }
 
+    if (results.returnOnCapital != null && results.returnOnCapital != 0) {
+      entries.add(FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_return_on_capital.tr(),
+        value: results.formattedReturnOnCapital!,
+        color: palette.green.mid,
+      ));
+    }
+
     if (results.takeProfitFeeAmount != null &&
         results.takeProfitFeeAmount != 0) {
       entries.add(FastReportEntry(

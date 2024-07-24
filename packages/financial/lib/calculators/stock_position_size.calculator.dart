@@ -186,22 +186,28 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     final totalFeesForProfitPosition = entryFeeAmount + takeProfitFeeAmount;
     final adjustedTakeProfitAmount = takeProfitAmount - takeProfitFeeAmount;
 
+    final returnOnCapital = calculateReturnOnCapital(
+      adjustedTakeProfitAmount,
+      accountBalance,
+    );
+
     return MatexStockPositionSizeCalculatorResults(
+      totalFeesForProfitPosition: totalFeesForProfitPosition,
+      takeProfitPriceWithSlippage: adjustedTakeProfitPrice,
+      totalFeesForLossPosition: totalFeesForLossPosition,
+      takeProfitAmountAfterFee: adjustedTakeProfitAmount,
       stopLossPriceWithSlippage: adjustedStopLossPrice,
       entryPriceWithSlippage: adjustedEntryPrice,
-      takeProfitAmount: takeProfitAmount,
-      takeProfitAmountAfterFee: adjustedTakeProfitAmount,
-      takeProfitPrice: takeProfitPrice,
-      takeProfitPriceWithSlippage: adjustedTakeProfitPrice,
-      riskReward: riskReward,
-      entryFeeAmount: entryFeeAmount,
-      stopLossFeeAmount: stopLossFeeAmount,
       takeProfitFeeAmount: takeProfitFeeAmount,
-      totalFeesForLossPosition: totalFeesForLossPosition,
-      totalFeesForProfitPosition: totalFeesForProfitPosition,
+      returnOnCapital: returnOnCapital,
+      stopLossFeeAmount: stopLossFeeAmount,
+      takeProfitAmount: takeProfitAmount,
+      takeProfitPrice: takeProfitPrice,
+      entryFeeAmount: entryFeeAmount,
       positionAmount: positionAmount,
       effectiveRisk: effectiveRisk,
       riskPercent: riskPercent,
+      riskReward: riskReward,
       shares: shares,
       stopLossPercentWithSlippage: calculatePercentageDecrease(
         adjustedEntryPrice,
@@ -302,5 +308,14 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
         : takeProfitPrice - adjustedEntryPrice;
 
     return (profitPerShare * shares) / effectiveRisk;
+  }
+
+  double calculateReturnOnCapital(
+    double takeProfitAmount,
+    double accountBalance,
+  ) {
+    if (accountBalance == 0.0) return 0.0;
+
+    return takeProfitAmount / accountBalance;
   }
 }

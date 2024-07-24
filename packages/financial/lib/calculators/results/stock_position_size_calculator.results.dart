@@ -22,6 +22,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
   final double? takeProfitFeeAmount;
   final double? totalFeesForProfitPosition;
   final double? riskReward;
+  final double? returnOnCapital;
 
   const MatexStockPositionSizeCalculatorResults({
     this.shares,
@@ -44,6 +45,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     this.takeProfitAmountAfterFee,
     this.takeProfitPriceWithSlippage,
     this.riskReward,
+    this.returnOnCapital,
   });
 
   @override
@@ -72,6 +74,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
     double? takeProfitPriceWithSlippage,
     double? takeProfitAmountAfterFee,
     double? riskReward,
+    double? returnOnCapital,
   }) {
     return MatexStockPositionSizeCalculatorResults(
       shares: shares ?? this.shares,
@@ -101,6 +104,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
       takeProfitPriceWithSlippage:
           takeProfitPriceWithSlippage ?? this.takeProfitPriceWithSlippage,
       riskReward: riskReward ?? this.riskReward,
+      returnOnCapital: returnOnCapital ?? this.returnOnCapital,
     );
   }
 
@@ -129,6 +133,7 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
       takeProfitAmountWithSlippage: model.takeProfitAmountAfterFee,
       takeProfitPriceWithSlippage: model.takeProfitPriceWithSlippage,
       riskReward: model.riskReward,
+      returnOnCapital: model.returnOnCapital,
     );
   }
 
@@ -154,5 +159,6 @@ class MatexStockPositionSizeCalculatorResults extends TModel {
         takeProfitAmountAfterFee,
         takeProfitPriceWithSlippage,
         riskReward,
+        returnOnCapital,
       ];
 }
