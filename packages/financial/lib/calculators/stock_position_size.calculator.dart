@@ -54,7 +54,11 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
   }
 
   set riskReward(double? value) {
-    setState(state.copyWith(riskReward: value));
+    setState(state.copyWith(riskReward: value, takeProfitPrice: 0));
+  }
+
+  set takeProfitPrice(double? value) {
+    setState(state.copyWith(takeProfitPrice: value, riskReward: 0));
   }
 
   set isShortPosition(bool? value) {
@@ -92,7 +96,6 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
     final entryFees = (state.entryFees) ?? 0.0;
     final exitFees = (state.exitFees) ?? 0.0;
     final stopLossPrice = (state.stopLossPrice) ?? 0.0;
-    final riskReward = (state.riskReward) ?? 0.0;
 
     final adjustedEntryPrice = adjustEntryPriceForSlippage(
       entryPrice,
@@ -136,12 +139,26 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       adjustedStopLossPriceWithFees,
     );
 
-    final takeProfitPrice = calculateTakeProfitPrice(
-      adjustedEntryPrice,
-      effectiveRisk,
-      shares,
-      riskReward,
-    );
+    double takeProfitPrice = 0.0;
+    double riskReward = 0.0;
+
+    if (state.riskReward != null && state.riskReward! > 0) {
+      riskReward = state.riskReward!;
+      takeProfitPrice = calculateTakeProfitPrice(
+        adjustedEntryPrice,
+        effectiveRisk,
+        shares,
+        riskReward,
+      );
+    } else if (state.takeProfitPrice != null && state.takeProfitPrice! > 0) {
+      takeProfitPrice = state.takeProfitPrice!;
+      riskReward = calculateRiskReward(
+        adjustedEntryPrice,
+        takeProfitPrice,
+        effectiveRisk,
+        shares,
+      );
+    }
 
     final adjustedTakeProfitPrice = adjustExitPriceForFees(
       takeProfitPrice,
@@ -176,6 +193,7 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
       takeProfitAmountAfterFee: adjustedTakeProfitAmount,
       takeProfitPrice: takeProfitPrice,
       takeProfitPriceWithSlippage: adjustedTakeProfitPrice,
+      riskReward: riskReward,
       entryFeeAmount: entryFeeAmount,
       stopLossFeeAmount: stopLossFeeAmount,
       takeProfitFeeAmount: takeProfitFeeAmount,
@@ -269,5 +287,20 @@ class MatexStockPositionSizeCalculator extends MatexCalculator<
 
   double calculateTakeProfitAmount(double effectiveRisk, double riskReward) {
     return effectiveRisk * riskReward;
+  }
+
+  double calculateRiskReward(
+    double adjustedEntryPrice,
+    double takeProfitPrice,
+    double effectiveRisk,
+    double shares,
+  ) {
+    if (shares == 0.0 || effectiveRisk == 0.0) return 0.0;
+
+    final profitPerShare = isShortPosition
+        ? adjustedEntryPrice - takeProfitPrice
+        : takeProfitPrice - adjustedEntryPrice;
+
+    return (profitPerShare * shares) / effectiveRisk;
   }
 }

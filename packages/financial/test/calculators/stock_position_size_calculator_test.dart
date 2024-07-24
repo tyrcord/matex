@@ -217,6 +217,22 @@ void main() {
         expect(result.takeProfitAmount, closeTo(194.6, 1e-3));
         expect(result.takeProfitPrice, closeTo(114.90, 1e-3));
       });
+
+      test('Calculates correct results with different risk/reward ratio', () {
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..slippagePercent = 0.01
+          ..riskReward = 3;
+        final result = calculator.value();
+        expect(result.shares, 14);
+        expect(result.positionAmount, closeTo(1414, 1e-3));
+        expect(result.effectiveRisk, closeTo(97.30, 1e-3));
+        expect(result.takeProfitAmount, closeTo(291.90, 1e-3));
+        expect(result.takeProfitPrice, closeTo(121.85, 1e-3));
+      });
     });
 
     test('Calculating position size should return correct results', () {
@@ -244,7 +260,95 @@ void main() {
       expect(results.takeProfitPriceWithSlippage, closeTo(70.49, 0.01));
     });
 
+    group('Calculation with take profit', () {
+      test('Calculates correct results when take profit price is set', () {
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..slippagePercent = 0.01
+          ..takeProfitPrice = 111.425;
+        final result = calculator.value();
+        expect(result.shares, 14);
+        expect(result.positionAmount, closeTo(1414, 1e-3));
+        expect(result.effectiveRisk, closeTo(97.30, 1e-3));
+        expect(result.takeProfitAmount, closeTo(145.95, 1e-3));
+        expect(result.riskReward, closeTo(1.50, 1e-2));
+      });
+
+      test('Calculates correct results with different take profit price', () {
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..slippagePercent = 0.01
+          ..takeProfitPrice = 120;
+        final result = calculator.value();
+        expect(result.shares, 14);
+        expect(result.positionAmount, closeTo(1414, 1e-3));
+        expect(result.effectiveRisk, closeTo(97.30, 1e-3));
+        expect(result.takeProfitAmount, closeTo(266.00, 1e-3));
+        expect(result.riskReward, closeTo(2.73, 1e-2));
+      });
+    });
+
+    group('Switching between risk/reward and take profit', () {
+      test(
+          'Calculates correctly when switching from risk/reward to take profit',
+          () {
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..slippagePercent = 0.01
+          ..riskReward = 2;
+        var result = calculator.value();
+        expect(result.takeProfitPrice, closeTo(114.90, 1e-3));
+        expect(result.riskReward, 2);
+
+        calculator.takeProfitPrice = 111.425;
+        result = calculator.value();
+        expect(result.takeProfitPrice, 111.425);
+        expect(result.riskReward, closeTo(1.50, 1e-2));
+      });
+
+      test(
+          'Calculates correctly when switching from take profit to risk/reward',
+          () {
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..slippagePercent = 0.01
+          ..takeProfitPrice = 120;
+        var result = calculator.value();
+        expect(result.takeProfitPrice, 120);
+        expect(result.riskReward, closeTo(2.73, 1e-2));
+
+        calculator.riskReward = 2;
+        result = calculator.value();
+        expect(result.takeProfitPrice, closeTo(114.90, 1e-3));
+        expect(result.riskReward, 2);
+      });
+    });
+
     group('Edge cases', () {
+      test('Handles case when neither risk/reward nor take profit is set', () {
+        calculator
+          ..accountSize = 10000
+          ..entryPrice = 100
+          ..stopLossPrice = 95
+          ..riskPercent = 0.01
+          ..slippagePercent = 0.01;
+        final result = calculator.value();
+        expect(result.takeProfitPrice, 0);
+        expect(result.riskReward, 0);
+      });
+
       test('should handle zero values correctly', () {
         calculator
           ..accountSize = 0

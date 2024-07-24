@@ -11,6 +11,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
   final double? riskReward;
   final double? entryFees;
   final double? exitFees;
+  final double? takeProfitPrice;
   final bool isShortPosition;
 
   const MatexStockPositionSizeCalculatorState({
@@ -24,6 +25,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
     this.riskReward,
     this.entryFees,
     this.exitFees,
+    this.takeProfitPrice,
   });
 
   @override
@@ -41,6 +43,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
     double? entryFees,
     double? exitFees,
     bool? isShortPosition,
+    double? takeProfitPrice,
   }) {
     return MatexStockPositionSizeCalculatorState(
       accountSize: accountSize ?? this.accountSize,
@@ -53,6 +56,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
       isShortPosition: isShortPosition ?? this.isShortPosition,
+      takeProfitPrice: takeProfitPrice ?? this.takeProfitPrice,
     );
   }
 
@@ -71,6 +75,7 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
       entryFees: model.entryFees,
       exitFees: model.exitFees,
       isShortPosition: model.isShortPosition,
+      takeProfitPrice: model.takeProfitPrice,
     );
   }
 
@@ -86,5 +91,6 @@ class MatexStockPositionSizeCalculatorState extends MatexCalculatorState {
         riskReward,
         entryFees,
         exitFees,
+        takeProfitPrice,
       ];
 }
