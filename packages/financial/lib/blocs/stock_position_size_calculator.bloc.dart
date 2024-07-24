@@ -69,7 +69,8 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       effectiveRisk: results.effectiveRisk,
       riskPercent: results.riskPercent,
       riskRewardRatio: results.riskReward,
-      formattedRiskRewardRatio: localizeNumber(value: results.riskReward),
+      formattedRiskRewardRatio:
+          '1:${localizeNumber(value: results.riskReward)}',
       totalFeesForLossPosition: results.totalFeesForLossPosition,
       totalFeesForProfitPosition: results.totalFeesForProfitPosition,
       takeProfitAmountAfterFee: results.takeProfitAmountAfterFee,
@@ -257,9 +258,18 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     MatexStockPositionSizeCalculatorBlocDocument document,
   ) async {
     final slippagePercent = parseStringToDouble(document.slippagePercent);
-    final riskPercent = parseStringToDouble(document.riskPercent);
     final entryFees = parseStringToDouble(document.entryFees);
     final exitFees = parseStringToDouble(document.exitFees);
+
+    // Convert risk percent to a decimal if the field type is percent
+    final riskPercent = document.riskFieldType == 'percent'
+        ? parseStringToDouble(document.riskPercent)
+        : 0.0;
+
+    // Convert risk reward to a decimal if the field type is riskReward
+    final riskReward = document.takeProfitFieldType == 'riskReward'
+        ? parseStringToDouble(document.riskReward)
+        : 0.0;
 
     calculator.setState(MatexStockPositionSizeCalculatorState(
       isShortPosition: document.position == MatexPosition.short.name,
@@ -268,10 +278,10 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       slippagePercent: (slippagePercent / 100),
       accountSize: tryParseStringToDouble(document.accountSize),
       entryPrice: tryParseStringToDouble(document.entryPrice),
-      riskReward: tryParseStringToDouble(document.riskReward),
-      riskPercent: (riskPercent / 100),
-      entryFees: (entryFees / 100),
-      exitFees: (exitFees / 100),
+      riskPercent: riskPercent / 100,
+      entryFees: entryFees / 100,
+      exitFees: exitFees / 100,
+      riskReward: riskReward,
     ));
   }
 
