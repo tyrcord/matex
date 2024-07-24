@@ -55,6 +55,7 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
     final entryFees = parseStringToDouble(fields.entryFees);
     final exitFees = parseStringToDouble(fields.exitFees);
     final slippage = parseStringToDouble(fields.slippagePercent);
+    final takeProfitPrice = parseStringToDouble(fields.takeProfitPrice);
 
     return [
       FastReportEntry(
@@ -83,10 +84,15 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
         name: FinanceLocaleKeys.finance_label_stop_loss_at.tr(),
         value: fields.formattedStopLossPrice,
       ),
-      if (riskReward > 0)
+      if (riskReward > 0 && fields.takeProfitFieldType == 'riskReward')
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_risk_reward_ratio.tr(),
           value: fields.formattedRiskReward,
+        )
+      else if (takeProfitPrice > 0 && fields.takeProfitFieldType == 'price')
+        FastReportEntry(
+          name: FinanceLocaleKeys.finance_label_take_profit_at.tr(),
+          value: fields.formattedTakeProfitPrice,
         ),
       if (entryFees > 0)
         FastReportEntry(
@@ -406,10 +412,21 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
       ));
     }
 
-    if (results.takeProfitPrice != null && results.takeProfitPrice != 0) {
+    if (results.takeProfitPrice != null &&
+        results.takeProfitPrice != 0 &&
+        fields.takeProfitFieldType == 'riskReward') {
       entries.add(FastReportEntry(
         name: FinanceLocaleKeys.finance_label_take_profit_price_at.tr(),
         value: results.formattedTakeProfitPrice!,
+      ));
+    }
+
+    if (results.riskRewardRatio != null &&
+        results.riskRewardRatio != 0 &&
+        fields.takeProfitFieldType == 'price') {
+      entries.add(FastReportEntry(
+        name: FinanceLocaleKeys.finance_label_risk_reward_ratio.tr(),
+        value: results.formattedRiskRewardRatio!,
       ));
     }
 

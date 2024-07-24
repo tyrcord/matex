@@ -7,6 +7,7 @@ import 'package:matex_financial/financial.dart';
 class MatexStockPositionSizeCalculatorBlocDocument
     extends FastCalculatorDocument {
   static final defaultPosition = MatexPosition.long.name;
+  static const defaultTakeProfitFieldType = 'riskReward';
   static const defaultRiskFieldType = 'percent';
 
   late final String? slippagePercent;
@@ -20,6 +21,8 @@ class MatexStockPositionSizeCalculatorBlocDocument
   late final String? entryFees;
   late final String? exitFees;
   late final String position;
+  late final String? takeProfitPrice;
+  late final String? takeProfitFieldType;
 
   static MatexStockPositionSizeCalculatorBlocDocument fromJson(
     Map<String, dynamic> json,
@@ -36,6 +39,8 @@ class MatexStockPositionSizeCalculatorBlocDocument
       entryFees: json['entryFees'] as String?,
       exitFees: json['exitFees'] as String?,
       position: json['position'] as String?,
+      takeProfitPrice: json['takeProfitPrice'] as String?,
+      takeProfitFieldType: json['takeProfitFieldType'] as String?,
     );
   }
 
@@ -51,6 +56,8 @@ class MatexStockPositionSizeCalculatorBlocDocument
     String? entryFees,
     String? position,
     String? exitFees,
+    String? takeProfitPrice,
+    String? takeProfitFieldType,
   }) {
     this.riskFieldType = riskFieldType ?? defaultRiskFieldType;
     this.slippagePercent = assignValue(slippagePercent);
@@ -63,6 +70,9 @@ class MatexStockPositionSizeCalculatorBlocDocument
     this.riskReward = assignValue(riskReward);
     this.entryFees = assignValue(entryFees);
     this.exitFees = assignValue(exitFees);
+    this.takeProfitPrice = assignValue(takeProfitPrice);
+    this.takeProfitFieldType =
+        takeProfitFieldType ?? defaultTakeProfitFieldType;
   }
 
   @override
@@ -81,6 +91,8 @@ class MatexStockPositionSizeCalculatorBlocDocument
     String? entryFees,
     String? position,
     String? exitFees,
+    String? takeProfitPrice,
+    String? takeProfitFieldType,
   }) {
     return MatexStockPositionSizeCalculatorBlocDocument(
       slippagePercent: slippagePercent ?? this.slippagePercent,
@@ -94,6 +106,8 @@ class MatexStockPositionSizeCalculatorBlocDocument
       entryFees: entryFees ?? this.entryFees,
       exitFees: exitFees ?? this.exitFees,
       position: position ?? this.position,
+      takeProfitPrice: takeProfitPrice ?? this.takeProfitPrice,
+      takeProfitFieldType: takeProfitFieldType ?? this.takeProfitFieldType,
     );
   }
 
@@ -110,6 +124,8 @@ class MatexStockPositionSizeCalculatorBlocDocument
     bool resetEntryFees = false,
     bool resetExitFees = false,
     bool resetPosition = false,
+    bool resetTakeProfitPrice = false,
+    bool resetTakeProfitFieldType = false,
   }) {
     return MatexStockPositionSizeCalculatorBlocDocument(
       slippagePercent: resetSlippagePercent ? null : slippagePercent,
@@ -123,6 +139,9 @@ class MatexStockPositionSizeCalculatorBlocDocument
       entryFees: resetEntryFees ? null : entryFees,
       exitFees: resetExitFees ? null : exitFees,
       position: resetPosition ? null : position,
+      takeProfitPrice: resetTakeProfitPrice ? null : takeProfitPrice,
+      takeProfitFieldType:
+          resetTakeProfitFieldType ? null : takeProfitFieldType,
     );
   }
 
@@ -142,6 +161,8 @@ class MatexStockPositionSizeCalculatorBlocDocument
       entryFees: model.entryFees,
       exitFees: model.exitFees,
       position: model.position,
+      takeProfitPrice: model.takeProfitPrice,
+      takeProfitFieldType: model.takeProfitFieldType,
     );
   }
 
@@ -159,6 +180,8 @@ class MatexStockPositionSizeCalculatorBlocDocument
       riskReward: riskReward,
       entryFees: entryFees,
       exitFees: exitFees,
+      takeProfitPrice: takeProfitPrice,
+      takeProfitFieldType: takeProfitFieldType,
     );
   }
 
@@ -176,6 +199,8 @@ class MatexStockPositionSizeCalculatorBlocDocument
       'entryFees': entryFees,
       'exitFees': exitFees,
       'position': position,
+      'takeProfitPrice': takeProfitPrice,
+      'takeProfitFieldType': takeProfitFieldType,
       ...super.toJson(),
     };
   }
@@ -193,5 +218,18 @@ class MatexStockPositionSizeCalculatorBlocDocument
         entryFees,
         exitFees,
         position,
+        takeProfitPrice,
+        takeProfitFieldType,
       ];
+
+  String? getDefaultValue(String key) {
+    switch (key) {
+      case 'riskReward':
+        return riskReward;
+      case 'percent':
+        return riskPercent;
+      default:
+        return null;
+    }
+  }
 }

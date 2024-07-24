@@ -41,6 +41,8 @@ class MatexStockPositionSizeCalculatorBlocResults
   final String? formattedTakeProfitAmountAfterFee;
   final double? returnOnCapital;
   final String? formattedReturnOnCapital;
+  final double? riskRewardRatio;
+  final String? formattedRiskRewardRatio;
 
   const MatexStockPositionSizeCalculatorBlocResults({
     this.shares,
@@ -81,6 +83,8 @@ class MatexStockPositionSizeCalculatorBlocResults
     this.formattedTakeProfitAmountAfterFee,
     this.returnOnCapital,
     this.formattedReturnOnCapital,
+    this.riskRewardRatio,
+    this.formattedRiskRewardRatio,
   });
 
   @override
@@ -126,6 +130,8 @@ class MatexStockPositionSizeCalculatorBlocResults
     String? formattedTakeProfitAmountAfterFee,
     double? returnOnCapital,
     String? formattedReturnOnCapital,
+    double? riskRewardRatio,
+    String? formattedRiskRewardRatio,
   }) {
     return MatexStockPositionSizeCalculatorBlocResults(
       shares: shares ?? this.shares,
@@ -191,6 +197,9 @@ class MatexStockPositionSizeCalculatorBlocResults
       returnOnCapital: returnOnCapital ?? this.returnOnCapital,
       formattedReturnOnCapital:
           formattedReturnOnCapital ?? this.formattedReturnOnCapital,
+      riskRewardRatio: riskRewardRatio ?? this.riskRewardRatio,
+      formattedRiskRewardRatio:
+          formattedRiskRewardRatio ?? this.formattedRiskRewardRatio,
     );
   }
 
@@ -241,6 +250,8 @@ class MatexStockPositionSizeCalculatorBlocResults
       formattedTakeProfitAmountAfterFee:
           model.formattedTakeProfitAmountAfterFee,
       returnOnCapital: model.returnOnCapital,
+      formattedReturnOnCapital: model.formattedReturnOnCapital,
+      riskRewardRatio: model.riskRewardRatio,
     );
   }
 
@@ -284,5 +295,7 @@ class MatexStockPositionSizeCalculatorBlocResults
         formattedTakeProfitAmountAfterFee,
         returnOnCapital,
         formattedReturnOnCapital,
+        riskRewardRatio,
+        formattedRiskRewardRatio,
       ];
 }

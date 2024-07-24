@@ -8,6 +8,7 @@ import 'package:matex_financial/financial.dart';
 class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
     with MatexCalculatorFormatterMixin {
   static const MatexPosition defaultPosition = MatexPosition.long;
+  static const defaultTakeProfitFieldType = 'riskReward';
   static const String defaultRiskFieldType = 'percent';
 
   late final String? slippagePercent;
@@ -21,6 +22,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
   late final String? riskReward;
   late final String? entryFees;
   late final String? exitFees;
+  late final String? takeProfitPrice;
+  late final String? takeProfitFieldType;
 
   String get formattedAccountSize {
     final accountBalance = parseStringToDouble(accountSize);
@@ -61,7 +64,7 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
   String get formattedRiskReward {
     final riskRewardValue = parseStringToDouble(riskReward);
 
-    return '${localizeNumber(value: riskRewardValue)}:1';
+    return '1:${localizeNumber(value: riskRewardValue)}';
   }
 
   String get formattedEntryFees {
@@ -78,6 +81,12 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
 
   String get formattedPosition => position.localizedName;
 
+  String get formattedTakeProfitPrice {
+    final takeProfitPriceValue = parseStringToDouble(takeProfitPrice);
+
+    return localizeCurrency(value: takeProfitPriceValue);
+  }
+
   MatexStockPositionSizeCalculatorBlocFields({
     FastCalculatorBlocDelegate? delegate,
     String? slippagePercent,
@@ -91,6 +100,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
     String? riskReward,
     String? entryFees,
     String? exitFees,
+    String? takeProfitPrice,
+    String? takeProfitFieldType,
   }) {
     this.riskFieldType = riskFieldType ?? defaultRiskFieldType;
     this.slippagePercent = assignValue(slippagePercent);
@@ -104,6 +115,9 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
     this.entryFees = assignValue(entryFees);
     this.exitFees = assignValue(exitFees);
     this.delegate = delegate;
+    this.takeProfitPrice = assignValue(takeProfitPrice);
+    this.takeProfitFieldType =
+        takeProfitFieldType ?? defaultTakeProfitFieldType;
   }
 
   @override
@@ -123,6 +137,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
     String? riskReward,
     String? entryFees,
     String? exitFees,
+    String? takeProfitPrice,
+    String? takeProfitFieldType,
   }) {
     return MatexStockPositionSizeCalculatorBlocFields(
       slippagePercent: slippagePercent ?? this.slippagePercent,
@@ -137,6 +153,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
       exitFees: exitFees ?? this.exitFees,
       position: position ?? this.position,
       delegate: delegate,
+      takeProfitPrice: takeProfitPrice ?? this.takeProfitPrice,
+      takeProfitFieldType: takeProfitFieldType ?? this.takeProfitFieldType,
     );
   }
 
@@ -153,6 +171,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
     bool resetEntryFees = false,
     bool resetExitFees = false,
     bool resetPosition = false,
+    bool resetTakeProfitPrice = false,
+    bool resetTakeProfitFieldType = false,
   }) {
     return MatexStockPositionSizeCalculatorBlocFields(
       slippagePercent: resetSlippagePercent ? null : slippagePercent,
@@ -167,6 +187,9 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
       exitFees: resetExitFees ? null : exitFees,
       position: resetPosition ? null : position,
       delegate: delegate,
+      takeProfitPrice: resetTakeProfitPrice ? null : takeProfitPrice,
+      takeProfitFieldType:
+          resetTakeProfitFieldType ? null : takeProfitFieldType,
     );
   }
 
@@ -187,6 +210,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
       exitFees: model.exitFees,
       position: model.position,
       delegate: model.delegate,
+      takeProfitPrice: model.takeProfitPrice,
+      takeProfitFieldType: model.takeProfitFieldType,
     );
   }
 
@@ -203,6 +228,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
         entryFees,
         exitFees,
         position,
+        takeProfitPrice,
+        takeProfitFieldType,
       ];
 
   @override
@@ -219,6 +246,8 @@ class MatexStockPositionSizeCalculatorBlocFields extends FastCalculatorFields
       'entryFees': entryFees,
       'exitFees': exitFees,
       'position': position.name,
+      'takeProfitPrice': takeProfitPrice,
+      'takeProfitFieldType': takeProfitFieldType,
     };
   }
 }

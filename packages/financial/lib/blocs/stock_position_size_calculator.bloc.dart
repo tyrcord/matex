@@ -68,6 +68,8 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       toleratedRisk: results.toleratedRisk,
       effectiveRisk: results.effectiveRisk,
       riskPercent: results.riskPercent,
+      riskRewardRatio: results.riskReward,
+      formattedRiskRewardRatio: localizeNumber(value: results.riskReward),
       totalFeesForLossPosition: results.totalFeesForLossPosition,
       totalFeesForProfitPosition: results.totalFeesForProfitPosition,
       takeProfitAmountAfterFee: results.takeProfitAmountAfterFee,
@@ -127,7 +129,12 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     dynamic value,
   ) async {
     if (value == null) {
-      if (key == MatexStockPositionSizeCalculatorBlocKey.accountSize) {
+      if (key == MatexStockPositionSizeCalculatorBlocKey.takeProfitPrice) {
+        return document.copyWithDefaults(resetTakeProfitPrice: true);
+      } else if (key ==
+          MatexStockPositionSizeCalculatorBlocKey.takeProfitFieldType) {
+        return document.copyWithDefaults(resetTakeProfitFieldType: true);
+      } else if (key == MatexStockPositionSizeCalculatorBlocKey.accountSize) {
         return document.copyWithDefaults(resetAccountSize: true);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.entryPrice) {
         return document.copyWithDefaults(resetEntryPrice: true);
@@ -171,20 +178,28 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         return document.copyWith(entryFees: value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.exitFees) {
         return document.copyWith(exitFees: value);
-      } else if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
-        return document.copyWith(riskFieldType: value);
+      } else if (key ==
+          MatexStockPositionSizeCalculatorBlocKey.takeProfitPrice) {
+        return document.copyWith(takeProfitPrice: value);
       }
     } else if (value is Enum) {
       if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
         return document.copyWith(
+          riskPercent: _getDefaultValueForFieldType(value.name, 'percent'),
           riskFieldType: value.name,
           stopLossAmount: '',
-          riskPercent: '',
         );
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.position) {
         return document.copyWith(
           position: value.name,
           stopLossPrice: '',
+        );
+      } else if (key ==
+          MatexStockPositionSizeCalculatorBlocKey.takeProfitFieldType) {
+        return document.copyWith(
+          riskReward: _getDefaultValueForFieldType(value.name, 'riskReward'),
+          takeProfitFieldType: value.name,
+          takeProfitPrice: '',
         );
       }
     }
@@ -218,6 +233,9 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         return patchEntryFees(value);
       } else if (key == MatexStockPositionSizeCalculatorBlocKey.exitFees) {
         return patchExitFees(value);
+      } else if (key ==
+          MatexStockPositionSizeCalculatorBlocKey.takeProfitPrice) {
+        return patchTakeProfitPrice(value);
       }
     } else if (value is MatexPosition &&
         key == MatexStockPositionSizeCalculatorBlocKey.position) {
@@ -225,6 +243,9 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     } else if (value is Enum) {
       if (key == MatexStockPositionSizeCalculatorBlocKey.riskFieldType) {
         return patchRiskFieldType(value.name);
+      } else if (key ==
+          MatexStockPositionSizeCalculatorBlocKey.takeProfitFieldType) {
+        return patchTakeProfitFieldType(value.name);
       }
     }
 
@@ -366,21 +387,6 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     return currentState.copyWith(fields: fields);
   }
 
-  MatexStockPositionSizeCalculatorBlocState patchRiskReward(String? value) {
-    var fields = currentState.fields;
-
-    if (value == null) {
-      fields = fields.copyWithDefaults(resetRiskReward: true);
-      calculator.riskReward = 0;
-    } else {
-      final dValue = parseStringToDouble(value);
-      fields = fields.copyWith(riskReward: value);
-      calculator.riskReward = dValue;
-    }
-
-    return currentState.copyWith(fields: fields);
-  }
-
   MatexStockPositionSizeCalculatorBlocState patchEntryFees(String? value) {
     var fields = currentState.fields;
 
@@ -446,19 +452,74 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     String value,
   ) {
     final fields = currentState.fields.copyWith(
+      riskPercent: _getDefaultValueForFieldType(value, 'percent'),
       riskFieldType: value,
       stopLossAmount: '',
-      riskPercent: '',
     );
 
-    // also reset stop loss amount
-    calculator.riskPercent = 0;
+    calculator
+      ..stopLossAmount = 0
+      ..riskPercent = (parseStringToDouble(fields.riskPercent) / 100);
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexStockPositionSizeCalculatorBlocState patchTakeProfitFieldType(
+    String value,
+  ) {
+    final fields = currentState.fields.copyWith(
+      riskReward: _getDefaultValueForFieldType(value, 'riskReward'),
+      takeProfitFieldType: value,
+      takeProfitPrice: '',
+    );
+
+    calculator
+      ..takeProfitPrice = 0
+      ..riskReward = parseStringToDouble(fields.riskReward);
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexStockPositionSizeCalculatorBlocState patchTakeProfitPrice(
+    String? value,
+  ) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetTakeProfitPrice: true);
+      calculator.takeProfitPrice = 0;
+    } else {
+      final dValue = parseStringToDouble(value);
+      fields = fields.copyWith(takeProfitPrice: value, riskReward: '');
+      calculator.takeProfitPrice = dValue;
+    }
+
+    return currentState.copyWith(fields: fields);
+  }
+
+  MatexStockPositionSizeCalculatorBlocState patchRiskReward(String? value) {
+    var fields = currentState.fields;
+
+    if (value == null) {
+      fields = fields.copyWithDefaults(resetRiskReward: true);
+      calculator.riskReward = 0;
+    } else {
+      final dValue = parseStringToDouble(value);
+      fields = fields.copyWith(riskReward: value, takeProfitPrice: '');
+      calculator.riskReward = dValue;
+    }
 
     return currentState.copyWith(fields: fields);
   }
 
   @override
   String getReportFilename() => 'stock_position_size_report';
+
+  String _getDefaultValueForFieldType(String fieldType, String expectedValue) {
+    return fieldType == expectedValue
+        ? defaultDocument.getDefaultValue(expectedValue) ?? ''
+        : '';
+  }
 
   @override
   Future<Uint8List> toPdf(BuildContext context) async {
