@@ -7,7 +7,8 @@ import 'package:matex_financial/financial.dart';
 class MatexStockPositionSizeCalculatorBlocDocument
     extends FastCalculatorDocument {
   static final defaultPosition = MatexPosition.long.name;
-  static const defaultTakeProfitFieldType = 'riskReward';
+  static final defaultTakeProfitFieldType =
+      MatexTakeProfitSwitchFieldType.riskReward.name;
   static const defaultRiskFieldType = 'percent';
 
   late final String? slippagePercent;

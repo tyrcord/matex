@@ -84,12 +84,16 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
         name: FinanceLocaleKeys.finance_label_stop_loss_at.tr(),
         value: fields.formattedStopLossPrice,
       ),
-      if (riskReward > 0 && fields.takeProfitFieldType == 'riskReward')
+      if (riskReward > 0 &&
+          fields.takeProfitFieldType ==
+              MatexTakeProfitSwitchFieldType.riskReward.name)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_risk_reward_ratio.tr(),
           value: fields.formattedRiskReward,
         )
-      else if (takeProfitPrice > 0 && fields.takeProfitFieldType == 'price')
+      else if (takeProfitPrice > 0 &&
+          fields.takeProfitFieldType ==
+              MatexTakeProfitSwitchFieldType.price.name)
         FastReportEntry(
           name: FinanceLocaleKeys.finance_label_take_profit_at.tr(),
           value: fields.formattedTakeProfitPrice,
@@ -414,7 +418,8 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
 
     if (results.takeProfitPrice != null &&
         results.takeProfitPrice != 0 &&
-        fields.takeProfitFieldType == 'riskReward') {
+        fields.takeProfitFieldType! ==
+            MatexTakeProfitSwitchFieldType.riskReward.name) {
       entries.add(FastReportEntry(
         name: FinanceLocaleKeys.finance_label_take_profit_price_at.tr(),
         value: results.formattedTakeProfitPrice!,
@@ -423,7 +428,8 @@ class MatexStockPositionSizeCalculatorPdfGenerator {
 
     if (results.riskRewardRatio != null &&
         results.riskRewardRatio != 0 &&
-        fields.takeProfitFieldType == 'price') {
+        fields.takeProfitFieldType ==
+            MatexTakeProfitSwitchFieldType.price.name) {
       entries.add(FastReportEntry(
         name: FinanceLocaleKeys.finance_label_risk_reward_ratio.tr(),
         value: results.formattedRiskRewardRatio!,

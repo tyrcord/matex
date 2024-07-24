@@ -8,3 +8,4 @@ export 'select_instrument.field.dart';
 export 'select_leverage.field.dart';
 export 'select_pivot_points_methods.field.dart';
 export './settings/settings.fields.dart';
+export 'take_profit_switch.field.dart';

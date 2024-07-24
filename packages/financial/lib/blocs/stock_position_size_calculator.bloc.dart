@@ -198,7 +198,10 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
       } else if (key ==
           MatexStockPositionSizeCalculatorBlocKey.takeProfitFieldType) {
         return document.copyWith(
-          riskReward: _getDefaultValueForFieldType(value.name, 'riskReward'),
+          riskReward: _getDefaultValueForFieldType(
+            value.name,
+            MatexTakeProfitSwitchFieldType.riskReward.name,
+          ),
           takeProfitFieldType: value.name,
           takeProfitPrice: '',
         );
@@ -267,7 +270,8 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
         : 0.0;
 
     // Convert risk reward to a decimal if the field type is riskReward
-    final riskReward = document.takeProfitFieldType == 'riskReward'
+    final riskReward = document.takeProfitFieldType ==
+            MatexTakeProfitSwitchFieldType.riskReward.name
         ? parseStringToDouble(document.riskReward)
         : 0.0;
 
@@ -478,7 +482,10 @@ class MatexStockPositionSizeCalculatorBloc extends MatexCalculatorBloc<
     String value,
   ) {
     final fields = currentState.fields.copyWith(
-      riskReward: _getDefaultValueForFieldType(value, 'riskReward'),
+      riskReward: _getDefaultValueForFieldType(
+        value,
+        MatexTakeProfitSwitchFieldType.riskReward.name,
+      ),
       takeProfitFieldType: value,
       takeProfitPrice: '',
     );

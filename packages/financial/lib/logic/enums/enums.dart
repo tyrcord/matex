@@ -7,3 +7,5 @@ export 'pivot_points_methods.enum.dart';
 export 'amount_switch_field_type.enum.dart';
 export 'vat_calculation_strategy.enum.dart';
 export 'amount_switch_field_menu_option.enum.dart';
+export 'take_profit_switch_field_menu_option.enum.dart';
+export 'take_profit_switch_field_type.enum.dart';
