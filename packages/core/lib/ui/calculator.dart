@@ -21,6 +21,7 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
   final WidgetBuilder? headerBuilder;
   final WidgetBuilder? footerBuilder;
   final WidgetBuilder resultsBuilder;
+  final List<Widget> Function(BuildContext context)? actionsBuilder;
   final WidgetBuilder fieldsBuilder;
   final String? resultsTitleText;
   final String? fieldsTitleText;
@@ -69,6 +70,7 @@ class MatexCalculatorWidget<B extends MatexCalculatorBloc,
     this.dividerBuilder,
     this.footerBuilder,
     this.headerBuilder,
+    this.actionsBuilder,
     this.pageTitleText,
     this.refreshIcon,
     this.backButton,
@@ -109,8 +111,6 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
     return FastAppSettingsLanguageBuilder(
       builder: (context, state) {
         return FastCalculatorPageLayout(
-          canEnableExportToPdfInteractions:
-              widget.canEnableExportToPdfInteractions,
           calculatorBloc: widget.calculatorBloc,
           calculatorActions: widget.calculatorActions,
           resultsActions: widget.resultsActions,
@@ -119,6 +119,7 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
           footerBuilder: widget.footerBuilder,
           resultsBuilder: widget.resultsBuilder,
           fieldsBuilder: widget.fieldsBuilder,
+          actionsBuilder: widget.actionsBuilder,
           resultsTitleText:
               widget.resultsTitleText ?? CoreLocaleKeys.core_label_results.tr(),
           fieldsTitleText: widget.fieldsTitleText ??
@@ -129,7 +130,6 @@ class MatexCalculatorWidgetState extends State<MatexCalculatorWidget> {
           refreshIcon: widget.refreshIcon,
           showClearIcon: widget.showClearIcon,
           backButton: widget.backButton,
-          exportToPdfIcon: widget.exportToPdfIcon,
           clearIcon: widget.clearIcon,
           showInfoIcon: widget.showInfoIcon,
           infoIcon: widget.infoIcon,
