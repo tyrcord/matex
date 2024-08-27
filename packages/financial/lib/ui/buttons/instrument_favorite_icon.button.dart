@@ -39,7 +39,7 @@ class MatexFinancialInstrumentFavoriteIcon extends StatelessWidget {
       buildWhen: (previous, next) => _shouldRebuildIcon(previous, next),
       builder: (context, state) {
         return FastFavoriteIconButton(
-          onIconTapped: () => _onIconTapped(state),
+          onTap: () => _onTap(state),
           isFavorite: isInstrumentFavorite(
             baseMeta.code!,
             counterMeta.code!,
@@ -71,7 +71,7 @@ class MatexFinancialInstrumentFavoriteIcon extends StatelessWidget {
   /// Handles the tap event on the heart icon. Adds or removes the instrument
   /// from the list of favorite instruments in the `favoriteBloc` depending on
   /// its current state.
-  void _onIconTapped(MatexInstrumentFavoriteBlocState state) {
+  void _onTap(MatexInstrumentFavoriteBlocState state) {
     final isFavorite = isInstrumentFavorite(baseMeta.code!, counterMeta.code!);
 
     if (!isFavorite) {

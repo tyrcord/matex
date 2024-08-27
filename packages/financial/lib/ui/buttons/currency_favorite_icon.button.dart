@@ -33,7 +33,8 @@ class MatexFinancialCurrencyFavoriteIcon extends StatelessWidget {
       buildWhen: (previous, next) => _shouldRebuildIcon(previous, next),
       builder: (context, state) {
         return FastFavoriteIconButton(
-          onIconTapped: () => _onIconTapped(state),
+          size: FastButtonSize.small,
+          onTap: () => _onTap(state),
           isFavorite: isCurrencyFavorite(
             currencyCode,
             favorites: state.favorites,
@@ -60,7 +61,7 @@ class MatexFinancialCurrencyFavoriteIcon extends StatelessWidget {
   /// Handles the tap event on the heart icon. Adds or removes the currency
   /// from the list of favorite currencies in the `favoriteBloc` depending on
   /// its current state.
-  void _onIconTapped(MatexCurrencyFavoriteBlocState state) {
+  void _onTap(MatexCurrencyFavoriteBlocState state) {
     final isFavorite =
         isCurrencyFavorite(currencyCode, favorites: state.favorites);
 

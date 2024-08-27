@@ -230,10 +230,12 @@ class _MatexFinancialSelectCurrencyFieldState
         leading: Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
+            kFastHorizontalSizedBox8,
             MatexFinancialCurrencyFavoriteIcon(
               favoriteBloc: _favoriteBloc,
               currencyCode: code,
             ),
+            kFastHorizontalSizedBox8,
             if (flagIcon != null) flagIcon,
           ],
         ),
