@@ -1,3 +1,14 @@
+## 0.0.59
+
+ - **FIX**: support latest fastyle.
+ - **FIX**: missing take profit value after reset.
+ - **FIX**(StockPositionSizeCalculatorBloc): reset field according to the selected field type.
+ - **FEAT**: updated dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**(StockPositionSizeCalculatorBloc): support take profit price field.
+ - **FEAT**(StockPositionCalculator): support returnOnCapital.
+ - **FEAT**(StockPositionCalculator): support take profit input.
+
 ## 0.0.58
 
  - **FIX**: allow to set a stop loss price at 0.

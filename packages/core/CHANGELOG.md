@@ -1,3 +1,8 @@
+## 0.0.49
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: support new actionsBuilder.
+
 ## 0.0.48
 
  - **FEAT**: support exportAlternativeAction.

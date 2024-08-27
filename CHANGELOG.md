@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-08-27
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`matex_core` - `v0.0.49`](#matex_core---v0049)
+ - [`matex_data` - `v0.0.40`](#matex_data---v0040)
+ - [`matex_financial` - `v0.0.59`](#matex_financial---v0059)
+
+---
+
+#### `matex_core` - `v0.0.49`
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: support new actionsBuilder.
+
+#### `matex_data` - `v0.0.40`
+
+ - **FEAT**: updated dependencies.
+
+#### `matex_financial` - `v0.0.59`
+
+ - **FIX**: support latest fastyle.
+ - **FIX**: missing take profit value after reset.
+ - **FIX**(StockPositionSizeCalculatorBloc): reset field according to the selected field type.
+ - **FEAT**: updated dependencies.
+ - **FEAT**: minor improvements.
+ - **FEAT**(StockPositionSizeCalculatorBloc): support take profit price field.
+ - **FEAT**(StockPositionCalculator): support returnOnCapital.
+ - **FEAT**(StockPositionCalculator): support take profit input.
+
+
 ## 2024-06-27
 
 ### Changes
