@@ -270,6 +270,48 @@ void main() {
         expect(results.endingBalance, closeTo(1368.00, 0.01));
         expect(results.reports?.length, closeTo(2, 0.01));
       });
+
+      test('Should return proper results when set to weekly', () {
+        calculator
+          ..dividendPaymentFrequency = MatexFinancialFrequency.weekly
+          ..drip = true
+          ..sharePrice = 100
+          ..numberOfShares = 10
+          ..dividendYield = 0.1
+          ..yearsToGrow = 2
+          ..annualContribution = 100;
+
+        var results = calculator.value();
+        expect(results.netDividendPaid, closeTo(231.68, 0.01));
+        expect(results.numberOfShares, closeTo(14.32, 0.01));
+        expect(results.endingBalance, closeTo(1431.68, 0.01));
+        expect(results.reports?.length, closeTo(2, 0.01));
+
+        calculator.taxRate = 0.2;
+        results = calculator.value();
+        expect(results.netDividendPaid, closeTo(181.69, 0.01));
+        expect(results.numberOfShares, closeTo(13.82, 0.01));
+        expect(results.endingBalance, closeTo(1381.69, 0.01));
+        expect(results.reports?.length, closeTo(2, 0.01));
+
+        calculator
+          ..taxRate = 0
+          ..drip = false;
+        results = calculator.value();
+        expect(results.netDividendPaid, closeTo(210, 0.01));
+        expect(results.numberOfShares, closeTo(12, 0.01));
+        expect(results.endingBalance, closeTo(1410, 0.01));
+        expect(results.reports?.length, closeTo(2, 0.01));
+
+        calculator
+          ..taxRate = 0.2
+          ..drip = false;
+        results = calculator.value();
+        expect(results.netDividendPaid, closeTo(168.00, 0.01));
+        expect(results.numberOfShares, closeTo(12, 0.01));
+        expect(results.endingBalance, closeTo(1368.00, 0.01));
+        expect(results.reports?.length, closeTo(2, 0.01));
+      });
     });
 
     group('#dividendPaymentFrequency()', () {
