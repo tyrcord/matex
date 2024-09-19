@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:fastyle_buttons/fastyle_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -96,6 +97,7 @@ class _MatexFinancialSelectCurrencyFieldState
     implements
         FastFastSelectFieldDelegate<MatexFinancialCurrencytItem>,
         FastListViewLayoutDelegate<MatexFinancialCurrencytItem> {
+  static const FastButtonSize _favoriteButtonSize = FastButtonSize.small;
   final _favoriteBloc = MatexCurrencyFavoriteBloc();
   String get maleGender => LinguaLocalizationGender.male;
   late List<MatexFinancialCurrencytItem> _items;
@@ -125,19 +127,22 @@ class _MatexFinancialSelectCurrencyFieldState
     return MatexFinancialCurrencyBuilder(
       bloc: _currencyBloc,
       builder: (context, state) {
+        final spacing = ThemeHelper.spacing.getSpacing(context);
         final currencies = widget.currencies ?? state.currencies;
-        _items = _buildSelectOptions(currencies);
+        _items = _buildSelectOptions(context, currencies);
         _selection = _findSelection();
 
         return FastSelectField<MatexInstrumentMetadata>(
           allCategoryText: CoreLocaleKeys.core_label_all.tr(gender: maleGender),
-          // showHelperBoundaries: widget.showHelperBoundaries,
           onSelectionChanged: (s) => widget.onSelectionChanged?.call(s),
           searchPlaceholderText: widget.searchPlaceholderText,
           listViewEmptyContentBuilder: _buildEmptyContent,
           extraTabBuilder: () => [_buildFavoritesTab()],
           canClearSelection: widget.canClearSelection,
-          listViewContentPadding: EdgeInsets.zero,
+          itemContentPadding: EdgeInsets.only(
+            left: spacing - _favoriteButtonSize.iconSpec.iconMinPadding,
+            right: spacing,
+          ),
           placeholderText: widget.placeholderText,
           captionText: widget.captionText,
           isReadOnly: !widget.isEnabled,
@@ -153,7 +158,6 @@ class _MatexFinancialSelectCurrencyFieldState
                   .tr(),
           labelText: widget.labelText ??
               FinanceLocaleKeys.finance_label_financial_instrument.tr(),
-
           leading: _selection != null
               ? _buildFlagIcon(_selection!.value!, hasShadow: false)
               : null,
@@ -202,15 +206,21 @@ class _MatexFinancialSelectCurrencyFieldState
   }
 
   List<MatexFinancialCurrencytItem> _buildSelectOptions(
+    BuildContext context,
     List<MatexInstrumentMetadata> currencies,
   ) {
     return currencies
         .where((MatexInstrumentMetadata instrument) => instrument.code != null)
-        .map(_buildItem)
-        .toList();
+        .map((MatexInstrumentMetadata instrument) {
+      return _buildItem(context, instrument);
+    }).toList();
   }
 
-  MatexFinancialCurrencytItem _buildItem(MatexInstrumentMetadata instrument) {
+  MatexFinancialCurrencytItem _buildItem(
+    BuildContext context,
+    MatexInstrumentMetadata instrument,
+  ) {
+    final spacing = ThemeHelper.spacing.getSpacing(context);
     final flagIcon = _buildFlagIcon(instrument);
     String code = instrument.code!;
     var description = code;
@@ -230,12 +240,16 @@ class _MatexFinancialSelectCurrencyFieldState
         leading: Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            kFastHorizontalSizedBox8,
-            MatexFinancialCurrencyFavoriteIcon(
-              favoriteBloc: _favoriteBloc,
-              currencyCode: code,
+            Padding(
+              padding: EdgeInsets.only(
+                right: spacing - _favoriteButtonSize.iconSpec.iconMinPadding,
+              ),
+              child: MatexFinancialCurrencyFavoriteIcon(
+                favoriteBloc: _favoriteBloc,
+                size: FastButtonSize.small,
+                currencyCode: code,
+              ),
             ),
-            kFastHorizontalSizedBox8,
             if (flagIcon != null) flagIcon,
           ],
         ),

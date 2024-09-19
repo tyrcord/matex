@@ -19,11 +19,14 @@ class MatexFinancialCurrencyFavoriteIcon extends StatelessWidget {
   /// The currency code to be checked for favorite status.
   final String currencyCode;
 
+  final FastButtonSize? size;
+
   /// Creates a new instance of `MatexFinancialCurrencyFavoriteIcon`.
   const MatexFinancialCurrencyFavoriteIcon({
     super.key,
     required this.favoriteBloc,
     required this.currencyCode,
+    this.size = FastButtonSize.small,
   });
 
   @override
@@ -33,7 +36,7 @@ class MatexFinancialCurrencyFavoriteIcon extends StatelessWidget {
       buildWhen: (previous, next) => _shouldRebuildIcon(previous, next),
       builder: (context, state) {
         return FastFavoriteIconButton(
-          size: FastButtonSize.small,
+          size: size,
           onTap: () => _onTap(state),
           isFavorite: isCurrencyFavorite(
             currencyCode,
