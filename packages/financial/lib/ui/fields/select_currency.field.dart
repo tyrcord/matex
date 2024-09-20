@@ -1,11 +1,11 @@
 // Flutter imports:
-import 'package:fastyle_buttons/fastyle_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 // Package imports:
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fastyle_buttons/fastyle_buttons.dart';
 import 'package:fastyle_core/fastyle_core.dart';
 import 'package:fastyle_images/fastyle_images.dart';
 import 'package:lingua_core/generated/locale_keys.g.dart';
