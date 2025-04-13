@@ -1,6 +1,6 @@
 dependencies:
   collection: ^1.19.0
-  fastyle_core: ^0.0.59
+  fastyle_core: ^0.0.60
   flutter:
     sdk: flutter
   rxdart: ^0.28.0
