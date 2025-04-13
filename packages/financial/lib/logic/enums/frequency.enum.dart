@@ -47,8 +47,6 @@ extension MatexFinancialFrequencyX on MatexFinancialFrequency {
         return CoreLocaleKeys.core_label_semi_annually.tr();
       case MatexFinancialFrequency.annually:
         return CoreLocaleKeys.core_label_annually.tr();
-      default:
-        throw ArgumentError('Invalid value for MatexFinancialFrequency: $this');
     }
   }
 }

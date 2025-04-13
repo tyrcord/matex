@@ -27,8 +27,6 @@ extension MatexTrendX on MatexTrend {
         return FinanceLocaleKeys.finance_label_trend_up.tr();
       case MatexTrend.down:
         return FinanceLocaleKeys.finance_label_trend_down.tr();
-      default:
-        throw ArgumentError('Invalid value for MatexPivotPointsMethods: $this');
     }
   }
 }

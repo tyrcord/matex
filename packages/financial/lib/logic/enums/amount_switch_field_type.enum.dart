@@ -40,10 +40,6 @@ extension FastFinancialAmountSwitchFieldTypeX
         return FinanceForexLocaleKeys.forex_label_pips_text.tr();
       case FastFinancialAmountSwitchFieldType.price:
         return FinanceLocaleKeys.finance_label_price_text.tr();
-      default:
-        throw ArgumentError(
-          'Invalid value for FastFinancialAmountSwitchFieldType: $this',
-        );
     }
   }
 }

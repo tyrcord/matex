@@ -27,9 +27,6 @@ extension MatexPositionX on MatexPosition {
         return FinanceLocaleKeys.finance_label_position_long.tr();
       case MatexPosition.short:
         return FinanceLocaleKeys.finance_label_position_short.tr();
-
-      default:
-        throw ArgumentError('Invalid value for MatexPosition: $this');
     }
   }
 }

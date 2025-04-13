@@ -27,11 +27,6 @@ extension MatexVatCalculationStrategyX on MatexVatCalculationStrategy {
         return CoreLocaleKeys.core_label_excluded.tr();
       case MatexVatCalculationStrategy.included:
         return CoreLocaleKeys.core_label_included.tr();
-
-      default:
-        throw ArgumentError(
-          'Invalid value for MatexVatCalculationStrategy: $this',
-        );
     }
   }
 }

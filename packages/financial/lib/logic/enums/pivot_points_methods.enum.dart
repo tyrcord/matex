@@ -57,8 +57,6 @@ extension MatexPivotPointsMethodsX on MatexPivotPointsMethods {
         return FinanceLocaleKeys.finance_label_pivot_point_standard.tr();
       case MatexPivotPointsMethods.woodie:
         return FinanceLocaleKeys.finance_label_pivot_point_woodie.tr();
-      default:
-        throw ArgumentError('Invalid value for MatexPivotPointsMethods: $this');
     }
   }
 }

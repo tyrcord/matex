@@ -310,8 +310,6 @@ int _getPeriodsPerYear(MatexFinancialFrequency frequency) {
       return 2;
     case MatexFinancialFrequency.annually:
       return 1;
-    default:
-      return 0;
   }
 }
 
