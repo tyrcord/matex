@@ -70,6 +70,22 @@ void main() {
       expect(positionSize, equals(0));
     });
 
+    test('should return 0 if stop loss price is 0', () {
+      const accountBalance = 10000.0;
+      const risk = 0.02;
+      const entryPrice = 50.0;
+      const stopLossPrice = 0.0;
+
+      final positionSize = getShareAmount(
+        accountBalance: accountBalance,
+        stopLossPrice: stopLossPrice,
+        entryPrice: entryPrice,
+        risk: risk,
+      );
+
+      expect(positionSize, equals(0));
+    });
+
     test('should return 0 if price difference is 0', () {
       const accountBalance = 10000.0;
       const risk = 0.02;
