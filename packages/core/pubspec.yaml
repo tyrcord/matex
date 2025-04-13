@@ -1,9 +1,9 @@
 dependencies:
   collection: ^1.19.0
   easy_localization: ^3.0.7
-  fastyle_calculator: ^1.68.0
-  fastyle_core: ^0.0.61
-  fastyle_settings: ^0.0.61
+  fastyle_calculator: ^1.69.0
+  fastyle_core: ^0.0.62
+  fastyle_settings: ^0.0.62
   flutter:
     sdk: flutter
   intl: ^0.19.0
