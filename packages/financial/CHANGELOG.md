@@ -1,3 +1,9 @@
+## 0.0.60
+
+ - **FEAT**: updated dependencies.
+ - **FEAT**: updated dependencies.
+ - **FEAT**: updated dependencies.
+
 ## 0.0.59
 
  - **FIX**: support latest fastyle.
