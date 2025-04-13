@@ -1,13 +1,13 @@
 dependencies:
   collection: ^1.19.0
-  fastyle_core: ^0.0.60
+  fastyle_core: ^0.0.61
   flutter:
     sdk: flutter
   rxdart: ^0.28.0
-  t_cache: ^0.0.22
-  t_helpers: ^0.0.62
-  tbloc: ^0.25.3
-  tmodel: ^0.5.20
+  t_cache: ^0.0.23
+  t_helpers: ^0.0.63
+  tbloc: ^0.25.4
+  tmodel: ^0.5.21
 description: The data tool of the Matex packages.
 dev_dependencies:
   dependency_validator: ^4.1.0
