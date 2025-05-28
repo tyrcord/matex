@@ -6,7 +6,7 @@ dependencies:
   fastyle_settings: ^0.0.62
   flutter:
     sdk: flutter
-  intl: ^0.19.0
+  intl: '>=0.20.2 <0.21.0'
   lingua_calculator: ^0.0.18
   lingua_core: ^0.0.46
   path_provider: ^2.1.5
@@ -24,8 +24,8 @@ dev_dependencies:
     sdk: flutter
   import_sorter: ^4.6.0
 environment:
-  flutter: '>=3.24.0'
-  sdk: '>=3.5.0 <4.0.0'
+  flutter: '>=3.32.0 <4.0.0'
+  sdk: '>=3.8.0 <4.0.0'
 name: matex_core
 repository: https://github.com/tyrcord/matex/tree/main/packages/core
 version: 0.0.51
