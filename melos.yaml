@@ -41,3 +41,8 @@ scripts:
 
   update:pubspec:
     exec: python3 $PWD/scripts/update_pubspec.py
+
+command:
+  bootstrap:
+    # Packages share Git dependencies; parallel pub gets race on their checkout.
+    runPubGetInParallel: false
