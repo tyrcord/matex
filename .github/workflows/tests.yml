@@ -30,6 +30,35 @@ jobs:
           channel: "stable"
           cache: true
 
+      # Create tokens to read the private Git dependencies
+      - name: Create token for tyrcord packages
+        id: tyrcord-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.ALPINETIC_PACKAGES_APP_CLIENT_ID }}
+          private-key: ${{ secrets.ALPINETIC_PACKAGES_APP_PRIVATE_KEY }}
+          owner: tyrcord
+          repositories: fusex
+          permission-contents: read
+
+      - name: Create token for alpinetic packages
+        id: alpinetic-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.ALPINETIC_PACKAGES_APP_CLIENT_ID }}
+          private-key: ${{ secrets.ALPINETIC_PACKAGES_APP_PRIVATE_KEY }}
+          owner: alpinetic
+          repositories: font_awesome_flutter
+          permission-contents: read
+
+      # Let pub clone the private Git dependencies over HTTPS
+      - name: Configure Git for private dependencies
+        run: |
+          git config --global url."https://x-access-token:${{ steps.tyrcord-token.outputs.token }}@github.com/tyrcord/fusex".insteadOf "git@github.com:tyrcord/fusex"
+          git config --global url."https://x-access-token:${{ steps.alpinetic-token.outputs.token }}@github.com/alpinetic/font_awesome_flutter".insteadOf "git@github.com:alpinetic/font_awesome_flutter"
+          # font_awesome_flutter keeps its generator data (icons.json) in Git LFS; apps don't need it
+          echo "GIT_LFS_SKIP_SMUDGE=1" >> "$GITHUB_ENV"
+
       # Install Melos
       - name: Install and set Melos version
         uses: bluefireteam/melos-action@v3
