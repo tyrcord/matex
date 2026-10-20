@@ -1,9 +1,21 @@
 dependencies:
   collection: ^1.19.0
   easy_localization: ^3.0.7
-  fastyle_calculator: ^1.69.0
-  fastyle_core: ^0.0.62
-  fastyle_settings: ^0.0.62
+  fastyle_calculator:
+    git:
+      path: packages/calculator
+      ref: main
+      url: https://github.com/tyrcord/fastyle.git
+  fastyle_core:
+    git:
+      path: packages/core
+      ref: main
+      url: https://github.com/tyrcord/fastyle.git
+  fastyle_settings:
+    git:
+      path: packages/settings
+      ref: main
+      url: https://github.com/tyrcord/fastyle.git
   flutter:
     sdk: flutter
   intl: '>=0.20.2 <0.21.0'
@@ -24,8 +36,9 @@ dev_dependencies:
     sdk: flutter
   import_sorter: ^4.6.0
 environment:
-  flutter: '>=3.32.0 <4.0.0'
-  sdk: '>=3.8.0 <4.0.0'
+  flutter: '>=3.35.0 <4.0.0'
+  sdk: '>=3.9.0 <4.0.0'
 name: matex_core
+publish_to: none
 repository: https://github.com/tyrcord/matex/tree/main/packages/core
 version: 0.0.52
