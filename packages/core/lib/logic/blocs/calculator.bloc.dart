@@ -263,9 +263,12 @@ abstract class MatexCalculatorBloc<
               file != null) {
             final box = context.findRenderObject() as RenderBox?;
 
-            Share.shareXFiles(
-              [file!],
-              sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+            SharePlus.instance.share(
+              ShareParams(
+                files: [file!],
+                sharePositionOrigin:
+                    box!.localToGlobal(Offset.zero) & box.size,
+              ),
             );
 
             late MatexBlocAnalyticsEvent analyticEvent;

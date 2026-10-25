@@ -22,7 +22,7 @@ dependencies:
   lingua_calculator: ^0.0.18
   lingua_core: ^0.0.46
   path_provider: ^2.1.5
-  share_plus: ^10.1.4
+  share_plus: ^13.3.1
   t_helpers: ^0.0.63
   tbloc: ^0.25.4
   tenhance: ^0.0.17
